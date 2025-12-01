@@ -1,0 +1,58 @@
+{
+    "classes": [
+        {
+            "className": "WorkerSignals",
+            "lineNumber": 16,
+            "object": true,
+            "qualifiedClassName": "WorkerSignals",
+            "signals": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "image",
+                            "type": "QImage"
+                        }
+                    ],
+                    "index": 0,
+                    "name": "done",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        },
+        {
+            "className": "AsyncImageResponse",
+            "lineNumber": 24,
+            "object": true,
+            "qualifiedClassName": "AsyncImageResponse",
+            "slots": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "image",
+                            "type": "QImage"
+                        }
+                    ],
+                    "index": 0,
+                    "name": "handleDone",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QQuickImageResponse"
+                }
+            ]
+        }
+    ],
+    "inputFile": "AsyncImageProvider.h",
+    "outputRevision": 69
+}

@@ -1,0 +1,14 @@
+module SamsungGalleryTest
+typeinfo appSamsungGalleryTest.qmltypes
+prefer :/SamsungGalleryTest/
+MainSemantic 1.0 resources/qml/MainSemantic.qml
+GalleryViewSemantic 1.0 resources/qml/GalleryViewSemantic.qml
+GalleryViewTiles 1.0 resources/qml/GalleryViewTiles.qml
+DateScrubber 1.0 resources/qml/DateScrubber.qml
+PhotoViewer 1.0 resources/qml/PhotoViewer.qml
+AlbumsView 1.0 resources/qml/AlbumsView.qml
+BottomBar 1.0 resources/qml/BottomBar.qml
+StatsOverlay 1.0 resources/qml/StatsOverlay.qml
+UsageGraph 1.0 resources/qml/UsageGraph.qml
+depends QtQuick
+

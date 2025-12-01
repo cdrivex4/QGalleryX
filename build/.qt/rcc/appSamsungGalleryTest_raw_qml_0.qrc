@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="/SamsungGalleryTest/">
+    <file alias="resources/qml/MainSemantic.qml">D:/Dev/antigravity/resources/qml/MainSemantic.qml</file>
+    <file alias="resources/qml/GalleryViewSemantic.qml">D:/Dev/antigravity/resources/qml/GalleryViewSemantic.qml</file>
+    <file alias="resources/qml/GalleryViewTiles.qml">D:/Dev/antigravity/resources/qml/GalleryViewTiles.qml</file>
+    <file alias="resources/qml/DateScrubber.qml">D:/Dev/antigravity/resources/qml/DateScrubber.qml</file>
+    <file alias="resources/qml/PhotoViewer.qml">D:/Dev/antigravity/resources/qml/PhotoViewer.qml</file>
+    <file alias="resources/qml/AlbumsView.qml">D:/Dev/antigravity/resources/qml/AlbumsView.qml</file>
+    <file alias="resources/qml/BottomBar.qml">D:/Dev/antigravity/resources/qml/BottomBar.qml</file>
+    <file alias="resources/qml/StatsOverlay.qml">D:/Dev/antigravity/resources/qml/StatsOverlay.qml</file>
+    <file alias="resources/qml/UsageGraph.qml">D:/Dev/antigravity/resources/qml/UsageGraph.qml</file>
+  </qresource>
+</RCC>
+

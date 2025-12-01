@@ -1,0 +1,14 @@
+-rootPath
+D:/Dev/antigravity
+-cmake-output
+-output-file
+D:/Dev/antigravity/build/.qt/qml_imports/appSamsungGalleryTest_conf.cmake
+-importPath
+D:/Dev/antigravity/build/SamsungGalleryTest
+-importPath
+D:/Dev/antigravity/build
+-importPath
+D:/Qt/6.9.3/mingw_64/qml
+-qrcFiles
+D:/Dev/antigravity/build/.qt/rcc/qmake_SamsungGalleryTest.qrc
+D:/Dev/antigravity/build/.qt/rcc/appSamsungGalleryTest_raw_qml_0.qrc

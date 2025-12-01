@@ -1,0 +1,212 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": false,
+                        "column": 28,
+                        "durationMicroseconds": 242,
+                        "errorMessage": "Cannot generate efficient code for storing an array in a non-sequence type",
+                        "functionName": "yearData",
+                        "line": 12
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 5,
+                        "durationMicroseconds": 248,
+                        "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
+                        "functionName": "updateYearData",
+                        "line": 14
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 17,
+                        "durationMicroseconds": 35,
+                        "errorMessage": "Cannot access value for name proxyModel",
+                        "functionName": "target",
+                        "line": 21
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 9,
+                        "durationMicroseconds": 87,
+                        "errorMessage": "method updateYearData cannot be resolved.",
+                        "functionName": "onModelReset",
+                        "line": 22
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 9,
+                        "durationMicroseconds": 46,
+                        "errorMessage": "method updateYearData cannot be resolved.",
+                        "functionName": "onLayoutChanged",
+                        "line": 23
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 28,
+                        "durationMicroseconds": 82,
+                        "errorMessage": "",
+                        "functionName": "onCompleted",
+                        "line": 26
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 16,
+                        "durationMicroseconds": 21,
+                        "errorMessage": "Cannot access value for name yearData",
+                        "functionName": "model",
+                        "line": 30
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 16,
+                        "durationMicroseconds": 300,
+                        "errorMessage": "Cannot access value for name modelData",
+                        "functionName": "y",
+                        "line": 42
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 28,
+                        "durationMicroseconds": 127,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 37
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 23,
+                        "durationMicroseconds": 417,
+                        "errorMessage": "Cannot access value for name modelData",
+                        "functionName": "text",
+                        "line": 46
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 35,
+                        "durationMicroseconds": 75,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 45
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 12,
+                        "durationMicroseconds": 65,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "y",
+                        "line": 70
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 21,
+                        "durationMicroseconds": 527,
+                        "errorMessage": "",
+                        "functionName": "onYChanged",
+                        "line": 73
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 18,
+                        "durationMicroseconds": 37,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "visible",
+                        "line": 78
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 94,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 61
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 19,
+                        "durationMicroseconds": 79,
+                        "errorMessage": "",
+                        "functionName": "text",
+                        "line": 82
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 54,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 81
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 24,
+                        "durationMicroseconds": 39,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "onPressed",
+                        "line": 96
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 25,
+                        "durationMicroseconds": 33,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "onReleased",
+                        "line": 101
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 32,
+                        "durationMicroseconds": 152,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "onPositionChanged",
+                        "line": 106
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 80,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 90
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 26,
+                        "durationMicroseconds": 85,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 91
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 80,
+                        "errorMessage": "",
+                        "functionName": "axis",
+                        "line": 92
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 28,
+                        "durationMicroseconds": 144,
+                        "errorMessage": "",
+                        "functionName": "maximumY",
+                        "line": 94
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 22,
+                        "durationMicroseconds": 176,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "onTriggered",
+                        "line": 124
+                    }
+                ],
+                "filePath": "D:/Dev/antigravity/resources/qml/DateScrubber.qml"
+            }
+        ],
+        "moduleId": "SamsungGalleryTest(appSamsungGalleryTest)"
+    }
+]

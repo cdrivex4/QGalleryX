@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/SamsungGalleryTest">
+    <file alias="qmldir">D:/Dev/antigravity/build/SamsungGalleryTest/qmldir</file>
+  </qresource>
+</RCC>
+

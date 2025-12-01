@@ -1,0 +1,368 @@
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
+import Qt.labs.settings
+import Qt.labs.platform
+import SamsungGalleryTest 1.0
+
+ApplicationWindow {
+    id: window
+    width: 1280
+    height: 720
+    visible: true
+    title: qsTr("Samsung Gallery Clone (Semantic Zoom Test)")
+    color: "#000000"
+
+    property string currentPath: ""
+
+    // Persistence
+    Settings {
+        id: settings
+        property string lastFolder: ""
+        property int graphicsApi: 0
+    }
+
+    FolderDialog {
+        id: folderDialog
+        title: "Select Image Folder"
+        currentFolder: settings.lastFolder !== "" ? "file:///" + settings.lastFolder : StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+        onAccepted: {
+            var path = folderDialog.folder.toString()
+            // Robust path cleaning for Windows
+            path = path.replace(/^(file:\/{3})|(file:)/, "")
+            if (Qt.platform.os === "windows") {
+                 // Handle /C:/Users... -> C:/Users...
+                 if (path.startsWith("/") && path.indexOf(":") === 2) path = path.substring(1);
+            }
+            
+            console.log("Selected folder: " + path)
+            window.currentPath = path
+            settings.lastFolder = path // Save to settings
+            // galleryViewItem.scanFolder(path) // Handled by binding
+        }
+    }
+
+    Component.onCompleted: {
+        // Load last folder
+        if (settings.lastFolder !== "") {
+            console.log("Loading last folder: " + settings.lastFolder)
+            window.currentPath = settings.lastFolder
+            // galleryViewItem.scanFolder(settings.lastFolder) // Handled by binding
+        }
+    }
+
+    ColumnLayout {
+        anchors.fill: parent
+        spacing: 0
+
+        StackLayout {
+            id: mainLayout
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            currentIndex: bottomBar.currentIndex
+            visible: !photoViewer.visible
+
+            // Tab 0: Pictures
+            Item {
+                id: galleryTab
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                
+                property bool useTiles: false
+                
+                Loader {
+                    id: viewLoader
+                    anchors.fill: parent
+                    sourceComponent: galleryTab.useTiles ? tilesViewComponent : semanticViewComponent
+                    
+                    Binding {
+                        target: viewLoader.item
+                        property: "folderPath"
+                        value: window.currentPath
+                    }
+                }
+                
+                Component {
+                    id: semanticViewComponent
+                    GalleryViewSemantic {
+                        id: galleryViewSemantic
+                        onImageClicked: (index) => {
+                            photoViewer.model = galleryViewSemantic.model
+                            photoViewer.currentIndex = index
+                            photoViewer.visible = true
+                        }
+                        onImageLoaded: (timeMs) => statsOverlay.reportLoadTime(timeMs)
+                    }
+                }
+                
+                Component {
+                    id: tilesViewComponent
+                    GalleryViewTiles {
+                        id: galleryViewTiles
+                        onImageClicked: (index) => {
+                            photoViewer.model = galleryViewTiles.model
+                            photoViewer.currentIndex = index
+                            photoViewer.visible = true
+                        }
+                    }
+                }
+                
+                // Floating Controls
+                ColumnLayout {
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    anchors.margins: 20
+                    anchors.bottomMargin: 80 // Above bottom bar
+                    z: 99
+                    spacing: 10
+                    width: 150 // Set a fixed width for consistent sizing
+                    
+                    Button {
+                        Layout.fillWidth: true
+                        text: galleryTab.useTiles ? "View: Tiles" : "View: Semantic"
+                        onClicked: galleryTab.useTiles = !galleryTab.useTiles
+                        
+                        background: Rectangle {
+                            color: "#333"
+                            radius: 5
+                            border.color: "#666"
+                        }
+                        contentItem: Text {
+                            text: parent.text
+                            color: "white"
+                            padding: 10
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+                    }
+                    
+                    ComboBox {
+                        Layout.fillWidth: true
+                        model: ["Auto", "Day", "Week", "Month", "Year"]
+                        currentIndex: 0
+                        visible: !galleryTab.useTiles
+                        onCurrentIndexChanged: {
+                            if (viewLoader.item) {
+                                viewLoader.item.groupingMode = currentIndex
+                            }
+                        }
+                        
+                        background: Rectangle {
+                            color: "#333"
+                            radius: 5
+                            border.color: "#666"
+                        }
+                        contentItem: Text {
+                            text: parent.displayText
+                            color: "white"
+                            padding: 10
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+                        delegate: ItemDelegate {
+                            width: parent.width
+                            contentItem: Text {
+                                text: modelData
+                                color: "white"
+                                font.bold: true
+                                horizontalAlignment: Text.AlignHCenter
+                            }
+                            background: Rectangle {
+                                color: parent.highlighted ? "#555" : "#333"
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Tab 1: Albums
+            AlbumsView {
+                // Placeholder
+            }
+
+            // Tab 2: Stories
+            Item {
+                Text {
+                    anchors.centerIn: parent
+                    text: "Stories Feature Coming Soon"
+                    color: "white"
+                }
+            }
+
+            // Tab 3: Menu
+            Item {
+                ColumnLayout {
+                    anchors.centerIn: parent
+                    spacing: 20
+                    
+                    Text {
+                        text: "Menu"
+                        color: "white"
+                        font.pixelSize: 24
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+                    
+                    Button {
+                        text: "Select Folder"
+                        onClicked: {
+                            console.log("Opening folder dialog...")
+                            folderDialog.open()
+                        }
+                    }
+                    
+                    Button {
+                        text: "Rebuild Cache"
+                        onClicked: {
+                            if (window.currentPath !== "") {
+                                console.log("Rebuilding cache for: " + window.currentPath)
+                                if (viewLoader.item) {
+                                    viewLoader.item.scanFolder(window.currentPath)
+                                }
+                            } else {
+                                folderDialog.open()
+                            }
+                        }
+                    }
+                    
+                    Rectangle {
+                        height: 1
+                        width: 200
+                        color: "#444"
+                    }
+                    
+                    Text {
+                        text: "Graphics API (Requires Restart)"
+                        color: "white"
+                        font.bold: true
+                    }
+                    
+                    ComboBox {
+                        model: ["Auto", "Direct3D 11", "Vulkan", "OpenGL", "Software"]
+                        currentIndex: appSettings.selectedApi
+                        onActivated: (index) => {
+                            appSettings.selectedApi = index
+                            restartDialog.open()
+                        }
+                    }
+                    
+                    Text {
+                        text: "Current API: " + appSettings.graphicsApi
+                        color: "#aaa"
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                    Rectangle { height: 10; width: 1; color: "transparent" }
+
+                    Text {
+                        text: "Supported APIs:"
+                        color: "white"
+                        font.bold: true
+                    }
+                    
+                    Column {
+                        spacing: 5
+                        width: parent.width
+                        
+                        Repeater {
+                            model: [
+                                {name: "Direct3D 11", value: 2}, // QSGRendererInterface::Direct3D11
+                                {name: "Vulkan", value: 3},      // QSGRendererInterface::Vulkan
+                                {name: "OpenGL", value: 1},      // QSGRendererInterface::OpenGL
+                                {name: "Software", value: 5}     // QSGRendererInterface::Software
+                            ]
+                            
+                            Text {
+                                text: modelData.name + ": " + ((appSettings && appSettings.isApiSupported(modelData.value)) ? "✅" : "❌")
+                                color: (appSettings && appSettings.isApiSupported(modelData.value)) ? "#8f8" : "#f88"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+                    }
+
+                    Rectangle { height: 10; width: 1; color: "transparent" } // Spacer
+
+                    Text {
+                        text: "System Info"
+                        color: "white"
+                        font.bold: true
+                    }
+
+                    Text {
+                        text: "GPU: " + appSettings.getGpuName(window)
+                        color: "#aaa"
+                        width: parent.width
+                        wrapMode: Text.Wrap
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                    Text {
+                        id: memUsageText
+                        text: "Memory: Checking..."
+                        color: "#aaa"
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                    Timer {
+                        interval: 2000
+                        running: true
+                        repeat: true
+                        onTriggered: {
+                            memUsageText.text = "Memory: " + systemMonitor.memoryUsageMB.toFixed(1) + " MB"
+                        }
+                    }
+                    
+                    CheckBox {
+                        text: "Show Performance Stats"
+                        checked: statsOverlay.visible
+                        onCheckedChanged: statsOverlay.visible = checked
+                        contentItem: Text {
+                            text: parent.text
+                            color: "white"
+                            leftPadding: parent.indicator.width + parent.spacing
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                    }
+                }
+            }
+        }
+
+        BottomBar {
+            id: bottomBar
+            Layout.fillWidth: true
+            height: 60
+            onTabSelected: (index) => mainLayout.currentIndex = index
+        }
+    }
+    
+    MessageDialog {
+        id: restartDialog
+        title: "Restart Required"
+        text: "The application needs to restart to apply the graphics API change."
+        buttons: MessageDialog.Ok | MessageDialog.Cancel
+        onAccepted: appSettings.restartApp()
+    }
+
+    // Stats Overlay
+    StatsOverlay {
+        id: statsOverlay
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.margins: 10
+        apiName: appSettings.graphicsApi
+        z: 100
+    }
+
+    // Photo Viewer Overlay (Full Screen)
+    PhotoViewer {
+        id: photoViewer
+        anchors.fill: parent
+        visible: false
+        z: 10 // Ensure it's on top
+        onBackClicked: {
+            visible = false
+        }
+        
+        // Pass stats to overlay
+        onImageLoaded: (timeMs) => statsOverlay.reportLoadTime(timeMs)
+    }
+}

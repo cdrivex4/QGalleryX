@@ -1,0 +1,196 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": false,
+                        "column": 30,
+                        "durationMicroseconds": 472,
+                        "errorMessage": "Cannot generate efficient code for storing an array in a non-sequence type",
+                        "functionName": "dataPoints",
+                        "line": 9
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 26,
+                        "durationMicroseconds": 183,
+                        "errorMessage": "",
+                        "functionName": "onDataPointsChanged",
+                        "line": 85
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 85,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 17
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 65,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 25
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 26,
+                        "durationMicroseconds": 217,
+                        "errorMessage": "",
+                        "functionName": "strokeColor",
+                        "line": 30
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 24,
+                        "durationMicroseconds": 146,
+                        "errorMessage": "Cannot load property r from (component in D:/Dev/antigravity/resources/qml/UsageGraph.qml)::color with type QString.",
+                        "functionName": "fillColor",
+                        "line": 31
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 21,
+                        "durationMicroseconds": 83,
+                        "errorMessage": "",
+                        "functionName": "startY",
+                        "line": 33
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 33,
+                        "durationMicroseconds": 90,
+                        "errorMessage": "",
+                        "functionName": "y",
+                        "line": 35
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 18,
+                        "durationMicroseconds": 1735,
+                        "errorMessage": "Cannot load property length from (component in D:/Dev/antigravity/resources/qml/UsageGraph.qml)::dataPoints with type QVariant.",
+                        "functionName": "onPaint",
+                        "line": 48
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 92,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 45
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 15,
+                        "durationMicroseconds": 155,
+                        "errorMessage": "",
+                        "functionName": "text",
+                        "line": 92
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 22,
+                        "durationMicroseconds": 122,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 89
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 97,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 90
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 15,
+                        "durationMicroseconds": 232,
+                        "errorMessage": "Cannot load property length from (component in D:/Dev/antigravity/resources/qml/UsageGraph.qml)::dataPoints with type QVariant.",
+                        "functionName": "text",
+                        "line": 102
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 22,
+                        "durationMicroseconds": 115,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 99
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 129,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 100
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 28,
+                        "durationMicroseconds": 346,
+                        "errorMessage": "Cannot load property length from (component in D:/Dev/antigravity/resources/qml/UsageGraph.qml)::dataPoints with type QVariant.",
+                        "functionName": "onPositionChanged",
+                        "line": 113
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 28,
+                        "durationMicroseconds": 62,
+                        "errorMessage": "",
+                        "functionName": "onPositionChanged",
+                        "line": 113
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 19,
+                        "durationMicroseconds": 117,
+                        "errorMessage": "",
+                        "functionName": "onExited",
+                        "line": 123
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 59,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 110
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 16,
+                        "durationMicroseconds": 153,
+                        "errorMessage": "",
+                        "functionName": "width",
+                        "line": 128
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 17,
+                        "durationMicroseconds": 140,
+                        "errorMessage": "",
+                        "functionName": "height",
+                        "line": 129
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 57,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 137
+                    }
+                ],
+                "filePath": "D:/Dev/antigravity/resources/qml/UsageGraph.qml"
+            }
+        ],
+        "moduleId": "SamsungGallery(appSamsungGallery)"
+    }
+]

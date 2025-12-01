@@ -1,0 +1,20 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 1144,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 6
+                    }
+                ],
+                "filePath": "D:/Dev/antigravity/resources/qml/AlbumsView.qml"
+            }
+        ],
+        "moduleId": "SamsungGalleryTest(appSamsungGalleryTest)"
+    }
+]

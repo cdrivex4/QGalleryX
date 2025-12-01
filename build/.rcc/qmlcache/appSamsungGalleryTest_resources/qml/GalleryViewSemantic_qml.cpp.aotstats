@@ -1,0 +1,548 @@
+[
+    {
+        "moduleFiles": [
+            {
+                "entries": [
+                    {
+                        "codegenSuccessful": false,
+                        "column": 36,
+                        "durationMicroseconds": 543,
+                        "errorMessage": "Cannot access value for name appSettings",
+                        "functionName": "uiThumbnailSize",
+                        "line": 13
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 37,
+                        "durationMicroseconds": 340,
+                        "errorMessage": "Cannot access value for name appSettings",
+                        "functionName": "loadingResolution",
+                        "line": 14
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 26,
+                        "durationMicroseconds": 331,
+                        "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
+                        "functionName": "onFolderPathChanged",
+                        "line": 17
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 5,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Functions without type annotations won't be compiled",
+                        "functionName": "scanFolder",
+                        "line": 22
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 5,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Functions without type annotations won't be compiled",
+                        "functionName": "getSourceIndexAt",
+                        "line": 62
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 22,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"sourceModel\".",
+                        "functionName": "sourceModel",
+                        "line": 37
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 18,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"columns\".",
+                        "functionName": "columns",
+                        "line": 39
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"groupRole\".",
+                        "functionName": "groupRole",
+                        "line": 42
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 91,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 90
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 23,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: proxyModel",
+                        "functionName": "model",
+                        "line": 97
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 20,
+                        "durationMicroseconds": 114,
+                        "errorMessage": "",
+                        "functionName": "scale",
+                        "line": 100
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 30,
+                        "durationMicroseconds": 90,
+                        "errorMessage": "",
+                        "functionName": "transformOrigin",
+                        "line": 101
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 62,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 96
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 25,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Could not find property \"policy\".",
+                        "functionName": "policy",
+                        "line": 108
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 24,
+                        "durationMicroseconds": 48,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "width",
+                        "line": 115
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 25,
+                        "durationMicroseconds": 95,
+                        "errorMessage": "Cannot access value for name model",
+                        "functionName": "height",
+                        "line": 116
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 34,
+                        "durationMicroseconds": 73,
+                        "errorMessage": "Cannot access value for name model",
+                        "functionName": "sourceComponent",
+                        "line": 122
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 35,
+                        "durationMicroseconds": 89,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 125
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 88,
+                        "durationMicroseconds": 29,
+                        "errorMessage": "Cannot access value for name model",
+                        "functionName": "value",
+                        "line": 125
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 35,
+                        "durationMicroseconds": 73,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 126
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 85,
+                        "durationMicroseconds": 29,
+                        "errorMessage": "Cannot access value for name model",
+                        "functionName": "value",
+                        "line": 126
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 35,
+                        "durationMicroseconds": 85,
+                        "errorMessage": "",
+                        "functionName": "target",
+                        "line": 127
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 90,
+                        "durationMicroseconds": 27,
+                        "errorMessage": "Cannot access value for name model",
+                        "functionName": "value",
+                        "line": 127
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 26,
+                        "durationMicroseconds": 1181,
+                        "errorMessage": "Cannot access value for name appSettings",
+                        "functionName": "onActiveChanged",
+                        "line": 137
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 25,
+                        "durationMicroseconds": 0,
+                        "errorMessage": "Functions without type annotations won't be compiled",
+                        "functionName": "onScaleChanged",
+                        "line": 180
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 47,
+                        "errorMessage": "",
+                        "functionName": "onScaleChanged",
+                        "line": 180
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 26,
+                        "durationMicroseconds": 107,
+                        "errorMessage": "",
+                        "functionName": "acceptedButtons",
+                        "line": 195
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 18,
+                        "durationMicroseconds": 988,
+                        "errorMessage": "Cannot access value for name appSettings",
+                        "functionName": "onWheel",
+                        "line": 198
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 18,
+                        "durationMicroseconds": 46,
+                        "errorMessage": "",
+                        "functionName": "onWheel",
+                        "line": 198
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 23,
+                        "durationMicroseconds": 53,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 194
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 19,
+                        "durationMicroseconds": 66,
+                        "errorMessage": "",
+                        "functionName": "listView",
+                        "line": 238
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 21,
+                        "durationMicroseconds": 14,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: proxyModel",
+                        "functionName": "proxyModel",
+                        "line": 239
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 18,
+                        "durationMicroseconds": 104,
+                        "errorMessage": "",
+                        "functionName": "visible",
+                        "line": 241
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 22,
+                        "durationMicroseconds": 87,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 234
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 25,
+                        "durationMicroseconds": 86,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 235
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 79,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 236
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 31,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "width",
+                        "line": 252
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 23,
+                        "durationMicroseconds": 24,
+                        "errorMessage": "Cannot access value for name headerTitle",
+                        "functionName": "text",
+                        "line": 261
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 24,
+                        "durationMicroseconds": 103,
+                        "errorMessage": "Cannot access value for name root",
+                        "functionName": "scale",
+                        "line": 267
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 34,
+                        "durationMicroseconds": 71,
+                        "errorMessage": "",
+                        "functionName": "transformOrigin",
+                        "line": 268
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 113,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 258
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 41,
+                        "durationMicroseconds": 82,
+                        "errorMessage": "",
+                        "functionName": "verticalCenter",
+                        "line": 260
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 24,
+                        "durationMicroseconds": 64,
+                        "errorMessage": "",
+                        "functionName": "width",
+                        "line": 273
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 33,
+                        "durationMicroseconds": 86,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 272
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 37,
+                        "durationMicroseconds": 48,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "itemSize",
+                        "line": 287
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 20,
+                        "durationMicroseconds": 22,
+                        "errorMessage": "Cannot access value for name listView",
+                        "functionName": "width",
+                        "line": 289
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 21,
+                        "durationMicroseconds": 47,
+                        "errorMessage": "",
+                        "functionName": "height",
+                        "line": 290
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 31,
+                        "durationMicroseconds": 51,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 293
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 28,
+                        "durationMicroseconds": 25,
+                        "errorMessage": "Cannot access value for name rowCount",
+                        "functionName": "model",
+                        "line": 297
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 32,
+                        "durationMicroseconds": 26,
+                        "errorMessage": "Cannot access value for name itemSize",
+                        "functionName": "width",
+                        "line": 300
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 33,
+                        "durationMicroseconds": 24,
+                        "errorMessage": "Cannot access value for name itemSize",
+                        "functionName": "height",
+                        "line": 301
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 51,
+                        "durationMicroseconds": 41,
+                        "errorMessage": "Cannot access value for name rowStartIndex",
+                        "functionName": "sourceIndex",
+                        "line": 303
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 51,
+                        "durationMicroseconds": 267,
+                        "errorMessage": "Cannot access value for name root",
+                        "functionName": "filePath",
+                        "line": 306
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 47,
+                        "durationMicroseconds": 216,
+                        "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
+                        "functionName": "fileExt",
+                        "line": 307
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 48,
+                        "durationMicroseconds": 325,
+                        "errorMessage": "",
+                        "functionName": "isVideo",
+                        "line": 308
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 37,
+                        "durationMicroseconds": 228,
+                        "errorMessage": "Cannot access value for name filePath",
+                        "functionName": "source",
+                        "line": 314
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 39,
+                        "durationMicroseconds": 101,
+                        "errorMessage": "",
+                        "functionName": "fillMode",
+                        "line": 317
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 43,
+                        "durationMicroseconds": 108,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 312
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 47,
+                        "durationMicroseconds": 88,
+                        "errorMessage": "Cannot access value for name root",
+                        "functionName": "width",
+                        "line": 315
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 48,
+                        "durationMicroseconds": 33,
+                        "errorMessage": "Cannot access value for name root",
+                        "functionName": "height",
+                        "line": 316
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 42,
+                        "durationMicroseconds": 38,
+                        "errorMessage": "Cannot access value for name isVideo",
+                        "functionName": "visible",
+                        "line": 324
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 47,
+                        "durationMicroseconds": 111,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 322
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 55,
+                        "durationMicroseconds": 158,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 326
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 44,
+                        "durationMicroseconds": 73,
+                        "errorMessage": "Cannot access value for name root",
+                        "functionName": "onClicked",
+                        "line": 334
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 47,
+                        "durationMicroseconds": 120,
+                        "errorMessage": "",
+                        "functionName": "fill",
+                        "line": 333
+                    },
+                    {
+                        "codegenSuccessful": false,
+                        "column": 18,
+                        "durationMicroseconds": 42,
+                        "errorMessage": "Cannot retrieve a non-object type by ID: imageModel",
+                        "functionName": "visible",
+                        "line": 347
+                    },
+                    {
+                        "codegenSuccessful": true,
+                        "column": 27,
+                        "durationMicroseconds": 92,
+                        "errorMessage": "",
+                        "functionName": "centerIn",
+                        "line": 344
+                    }
+                ],
+                "filePath": "D:/Dev/antigravity/resources/qml/GalleryViewSemantic.qml"
+            }
+        ],
+        "moduleId": "SamsungGalleryTest(appSamsungGalleryTest)"
+    }
+]

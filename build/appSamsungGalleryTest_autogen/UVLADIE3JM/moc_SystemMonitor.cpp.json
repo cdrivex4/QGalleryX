@@ -1,0 +1,141 @@
+{
+    "classes": [
+        {
+            "className": "SystemMonitor",
+            "lineNumber": 7,
+            "methods": [
+                {
+                    "access": "public",
+                    "index": 4,
+                    "name": "getCpuUsage",
+                    "returnType": "double"
+                },
+                {
+                    "access": "public",
+                    "index": 5,
+                    "name": "getMemoryUsageMB",
+                    "returnType": "double"
+                },
+                {
+                    "access": "public",
+                    "index": 6,
+                    "name": "getGpuUsage",
+                    "returnType": "double"
+                },
+                {
+                    "access": "public",
+                    "index": 7,
+                    "name": "getGpuName",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "intervalMs",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 8,
+                    "name": "startMonitoring",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 9,
+                    "isCloned": true,
+                    "name": "startMonitoring",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 10,
+                    "name": "stopMonitoring",
+                    "returnType": "void"
+                }
+            ],
+            "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "name": "cpuUsage",
+                    "notify": "cpuUsageChanged",
+                    "read": "cpuUsage",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "double",
+                    "user": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 1,
+                    "name": "memoryUsageMB",
+                    "notify": "memoryUsageChanged",
+                    "read": "memoryUsageMB",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "double",
+                    "user": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 2,
+                    "name": "gpuUsage",
+                    "notify": "gpuUsageChanged",
+                    "read": "gpuUsage",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "double",
+                    "user": false
+                }
+            ],
+            "qualifiedClassName": "SystemMonitor",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "cpuUsageChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "memoryUsageChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "gpuUsageChanged",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "private",
+                    "index": 3,
+                    "name": "updateStats",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "SystemMonitor.h",
+    "outputRevision": 69
+}

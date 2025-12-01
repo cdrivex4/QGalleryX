@@ -1,0 +1,14 @@
+--resource
+D:/Dev/antigravity/build/.qt/rcc/qmake_SamsungGallery.qrc
+--resource
+D:/Dev/antigravity/build/.qt/rcc/appSamsungGallery_raw_qml_0.qrc
+/SamsungGallery/resources/qml/Main.qml
+/SamsungGallery/resources/qml/GalleryView.qml
+/SamsungGallery/resources/qml/GalleryViewSemantic.qml
+/SamsungGallery/resources/qml/GalleryViewTiles.qml
+/SamsungGallery/resources/qml/DateScrubber.qml
+/SamsungGallery/resources/qml/PhotoViewer.qml
+/SamsungGallery/resources/qml/AlbumsView.qml
+/SamsungGallery/resources/qml/BottomBar.qml
+/SamsungGallery/resources/qml/StatsOverlay.qml
+/SamsungGallery/resources/qml/UsageGraph.qml

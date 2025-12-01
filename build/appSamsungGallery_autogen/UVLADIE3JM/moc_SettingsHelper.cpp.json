@@ -1,0 +1,251 @@
+{
+    "classes": [
+        {
+            "className": "SettingsHelper",
+            "lineNumber": 8,
+            "methods": [
+                {
+                    "access": "public",
+                    "index": 8,
+                    "name": "restartApp",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "apiValue",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 9,
+                    "name": "isApiSupported",
+                    "returnType": "bool"
+                },
+                {
+                    "access": "public",
+                    "index": 10,
+                    "name": "getCacheStats",
+                    "returnType": "QVariantMap"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "window",
+                            "type": "QObject*"
+                        }
+                    ],
+                    "index": 11,
+                    "name": "getGpuName",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "index": 12,
+                    "isCloned": true,
+                    "name": "getGpuName",
+                    "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "window",
+                            "type": "QObject*"
+                        }
+                    ],
+                    "index": 13,
+                    "name": "refreshGraphicsInfo",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 14,
+                    "isCloned": true,
+                    "name": "refreshGraphicsInfo",
+                    "returnType": "void"
+                }
+            ],
+            "object": true,
+            "properties": [
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 0,
+                    "name": "graphicsApi",
+                    "notify": "graphicsApiChanged",
+                    "read": "graphicsApi",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 1,
+                    "name": "graphicsDriver",
+                    "notify": "graphicsDriverChanged",
+                    "read": "graphicsDriver",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 2,
+                    "name": "graphicsProfile",
+                    "notify": "graphicsProfileChanged",
+                    "read": "graphicsProfile",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "QString",
+                    "user": false
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 3,
+                    "name": "selectedApi",
+                    "notify": "selectedApiChanged",
+                    "read": "selectedApi",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setSelectedApi"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 4,
+                    "name": "thumbnailSize",
+                    "notify": "thumbnailSizeChanged",
+                    "read": "thumbnailSize",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setThumbnailSize"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 5,
+                    "name": "gridSize",
+                    "notify": "gridSizeChanged",
+                    "read": "gridSize",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setGridSize"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 6,
+                    "name": "cacheSizeMB",
+                    "notify": "cacheSizeMBChanged",
+                    "read": "cacheSizeMB",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setCacheSizeMB"
+                },
+                {
+                    "constant": false,
+                    "designable": true,
+                    "final": false,
+                    "index": 7,
+                    "name": "concurrentThreads",
+                    "notify": "concurrentThreadsChanged",
+                    "read": "concurrentThreads",
+                    "required": false,
+                    "scriptable": true,
+                    "stored": true,
+                    "type": "int",
+                    "user": false,
+                    "write": "setConcurrentThreads"
+                }
+            ],
+            "qualifiedClassName": "SettingsHelper",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "name": "graphicsApiChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 1,
+                    "name": "graphicsDriverChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 2,
+                    "name": "graphicsProfileChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 3,
+                    "name": "selectedApiChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 4,
+                    "name": "thumbnailSizeChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 5,
+                    "name": "gridSizeChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 6,
+                    "name": "cacheSizeMBChanged",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 7,
+                    "name": "concurrentThreadsChanged",
+                    "returnType": "void"
+                }
+            ],
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "SettingsHelper.h",
+    "outputRevision": 69
+}

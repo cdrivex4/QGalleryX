@@ -1,0 +1,4 @@
+SystemMonitor: Starting monitoring with interval 1000 ms
+QQmlApplicationEngine failed to load component
+qrc:/SamsungGallery/resources/qml/Main.qml:69:13: Type GalleryView unavailable
+qrc:/SamsungGallery/resources/qml/GalleryView.qml:44:9: Cannot assign to non-existent property "section"
