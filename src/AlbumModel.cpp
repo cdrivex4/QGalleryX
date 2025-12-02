@@ -44,7 +44,8 @@ void AlbumModel::scanAlbums() {
   beginResetModel();
   m_albums.clear();
 
-  QString picturesPath = "I:/MY SDCards/dir0064.chk";
+  QString picturesPath =
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
   if (!QDir(picturesPath).exists()) {
     picturesPath =
         QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);

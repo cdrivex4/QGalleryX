@@ -1,0 +1,118 @@
+Scanning directory: "I:/MY SDCards/dir0064.chk"
+qrc:/SamsungGallery/resources/qml/Main.qml:19:5: QML Settings: Failed to initialize QSettings instance. Status code is: 1
+qrc:/SamsungGallery/resources/qml/Main.qml:19:5: QML Settings: The following application identifiers have not been set: QList("organizationName", "organizationDomain")
+qrc:/SamsungGallery/resources/qml/Main.qml:19:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+qrc:/SamsungGallery/resources/qml/Main.qml:28: ReferenceError: StandardPaths is not defined
+[PERF] Thread Pool Initialized with 4 threads
+Scanned 2090 items.
+qrc:/SamsungGallery/resources/qml/AlbumsView.qml:40:21: QML QQuickImage: Error decoding: file:///D:/Dev/antigravity/test.jpg: Unsupported image format
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193211.jpg" QSize(334, 188) 62 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193211.jpg 253 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193122.jpg" QSize(334, 188) 57 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193122.jpg 312 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193202.jpg" QSize(334, 188) 142 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193202.jpg 329 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193212.jpg" QSize(334, 188) 307 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193212.jpg 344 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193208.jpg" QSize(334, 188) 155 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193208.jpg 343 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193126.jpg" QSize(334, 188) 48 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193126.jpg 362 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193127.jpg" QSize(334, 188) 36 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193127.jpg 364 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193114.jpg" QSize(334, 188) 41 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193114.jpg 379 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193109.jpg" QSize(334, 188) 31 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193109.jpg 393 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193121.jpg" QSize(334, 188) 60 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193121.jpg 398 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193111.jpg" QSize(334, 188) 36 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193111.jpg 417 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_193041.jpg" QSize(334, 188) 39 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211228_192949.jpg" QSize(334, 188) 25 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_193041.jpg 419 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211228_192949.jpg 418 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211227_205345.jpg" QSize(334, 188) 19 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211227_205345.jpg 435 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211227_205418.jpg" QSize(334, 188) 39 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211227_205339.jpg" QSize(334, 188) 22 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211227_205338.jpg" QSize(334, 188) 22 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211227_205418.jpg 441 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211227_205339.jpg 440 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211227_205338.jpg 441 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211227_101206.jpg" QSize(334, 188) 33 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211227_101206.jpg 474 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211225_235435.jpg" QSize(334, 188) 33 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211225_235435.jpg 477 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211227_205330.jpg" QSize(334, 188) 49 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211227_205330.jpg 486 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211225_235436.jpg" QSize(334, 188) 44 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211225_235436.jpg 487 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211225_234413.jpg" QSize(334, 188) 24 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211225_234413.jpg 498 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211225_205253.jpg" QSize(334, 188) 22 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211225_205253.jpg 499 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211222_204330.jpg" QSize(334, 188) 34 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211222_204344.jpg" QSize(334, 188) 45 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211222_204330.jpg 533 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211217_152628.jpg" QSize(334, 188) 35 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211222_204344.jpg 536 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211217_152628.jpg 535 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211222_204345.jpg" QSize(334, 188) 52 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211222_204345.jpg 539 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211215_123644.jpg" QSize(334, 188) 26 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211215_123644.jpg 561 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211217_152620.jpg" QSize(334, 188) 44 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211217_152620.jpg 575 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211213_153221.jpg" QSize(334, 188) 37 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211213_153221.jpg 578 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211211_140650.jpg" QSize(334, 188) 28 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211216_151633.jpg" QSize(334, 188) 55 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211211_140650.jpg 590 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211216_151633.jpg 591 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211211_085739.jpg" QSize(334, 188) 28 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211211_085739.jpg 604 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211211_085619.jpg" QSize(334, 188) 27 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211211_085619.jpg 389 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211211_085427.jpg" QSize(334, 188) 19 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211211_085427.jpg 394 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211211_085720.jpg" QSize(334, 188) 51 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211211_085720.jpg 629 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211211_085456.jpg" QSize(334, 188) 54 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211211_085456.jpg 416 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140446.jpg" QSize(334, 188) 44 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140446.jpg 434 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140447.jpg" QSize(334, 188) 41 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140447.jpg 436 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140445.jpg" QSize(334, 188) 50 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140445.jpg 448 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140436.jpg" QSize(334, 188) 25 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140435.jpg" QSize(334, 188) 24 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140436.jpg 459 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140435.jpg 459 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140443.jpg" QSize(334, 188) 48 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140443.jpg 465 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140418.jpg" QSize(334, 188) 31 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140418.jpg 480 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140417.jpg" QSize(334, 188) 25 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140417.jpg 485 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140405.jpg" QSize(334, 188) 40 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140405.jpg 501 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211208_140400.jpg" QSize(334, 188) 54 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211208_140400.jpg 521 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211206_160002.jpg" QSize(334, 188) 52 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211206_160002.jpg 533 ms
+[PERF][DECODE] "I:/MY SDCards/dir0064.chk/20211206_113626.jpg" QSize(334, 188) 65 ms
+qml: [PERF][QML_LOAD] I:/MY SDCards/dir0064.chk/20211206_113626.jpg 551 ms
+qrc:/SamsungGallery/resources/qml/Main.qml:247: TypeError: Cannot read property 'graphicsApi' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:187: TypeError: Cannot call method 'getGpuName' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:145: TypeError: Cannot read property 'graphicsApi' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:137: TypeError: Cannot read property 'selectedApi' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:171: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:172: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:171: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:172: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:171: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:172: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:171: TypeError: Cannot read property 'isApiSupported' of null
+qrc:/SamsungGallery/resources/qml/Main.qml:172: TypeError: Cannot read property 'isApiSupported' of null

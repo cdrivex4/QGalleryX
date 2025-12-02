@@ -9,9 +9,11 @@
 #include <QtConcurrent>
 #include <algorithm>
 
+
 ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   // Hardcoded default path as requested
-  QString defaultPath = "I:/MY SDCards/dir0064.chk";
+  QString defaultPath =
+      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
   if (!QDir(defaultPath).exists()) {
     defaultPath =
         QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);

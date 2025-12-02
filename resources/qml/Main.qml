@@ -271,8 +271,8 @@ ApplicationWindow {
                             ]
                             
                             Text {
-                                text: modelData.name + ": " + (appSettings.isApiSupported(modelData.value) ? "✅" : "❌")
-                                color: appSettings.isApiSupported(modelData.value) ? "#8f8" : "#f88"
+                                text: modelData.name + ": " + (appSettings && appSettings.isApiSupported(modelData.value) ? "✅" : "❌")
+                                color: (appSettings && appSettings.isApiSupported(modelData.value)) ? "#8f8" : "#f88"
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
                         }
