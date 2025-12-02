@@ -1,5 +1,0 @@
-QQmlApplicationEngine failed to load component
-qrc:/SamsungGallery/resources/qml/Main.qml:5:1: module "Qt.labs.settings" is not installed
-qrc:/SamsungGallery/resources/qml/Main.qml:4:1: module "QtQuick.Dialogs" is not installed
-qrc:/SamsungGallery/resources/qml/Main.qml:3:1: module "QtQuick.Layouts" is not installed
-qrc:/SamsungGallery/resources/qml/Main.qml: module "QtQuick.Controls.Basic" is not installed

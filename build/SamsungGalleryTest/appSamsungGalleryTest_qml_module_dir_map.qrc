@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/">
-    <file alias="/SamsungGalleryTest">D:/Dev/antigravity/build/SamsungGalleryTest</file>
-
-  </qresource>
-</RCC>

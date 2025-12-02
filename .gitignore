@@ -1,0 +1,13 @@
+build/
+deploy/
+*.obj
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.user
+*.qch
+.DS_Store
+.vscode/
