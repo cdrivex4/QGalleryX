@@ -344,9 +344,8 @@ ApplicationWindow {
     // Stats Overlay
     StatsOverlay {
         id: statsOverlay
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.margins: 10
+        x: parent.width - width - 10
+        y: 10
         apiName: appSettings.graphicsApi
         z: 100
     }

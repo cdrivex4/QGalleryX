@@ -21,6 +21,10 @@ Item {
         }
     }
     
+    DragHandler {
+        target: root
+    }
+
     Rectangle {
         anchors.fill: parent
         color: "#AA000000"
