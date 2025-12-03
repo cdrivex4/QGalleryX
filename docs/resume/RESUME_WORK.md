@@ -85,9 +85,27 @@
 
 ---
 
-## 📋 OUTSTANDING WORK (Next Steps from PROGRESS.md)
+## 📋 OUTSTANDING WORK (Prioritized by User)
 
-### Priority 1: Albums Feature Implementation
+### Priority 1: GPU Monitoring Implementation
+**Status**: ✅ Completed
+**File**: `src/SystemMonitor.cpp`
+
+**Completed Work**:
+1. Implemented real GPU detection using Windows DXGI API
+2. Added VRAM usage tracking (Used / Total MB)
+3. Added GPU Name detection
+4. Updated `StatsOverlay.qml` with new graphs and text
+
+**Files Modified**:
+- `src/SystemMonitor.cpp`
+- `src/SystemMonitor.h`
+- `resources/qml/StatsOverlay.qml`
+- `CMakeLists.txt`
+
+---
+
+### Priority 2: Albums Feature Implementation
 **Status**: Placeholder only  
 **File**: `resources/qml/AlbumsView.qml`  
 **Current State**: Empty "Coming Soon" text
@@ -98,61 +116,49 @@
 3. Implement album grid view
 4. Add album detail view (clicking album shows its images)
 5. Back navigation from detail to grid
-6. Handle empty albums gracefully
 
 **Files To Modify**:
 - `resources/qml/AlbumsView.qml` - Main implementation
-- Possibly `src/AlbumModel.cpp` - Backend enhancements
-- Possibly create `resources/qml/AlbumCard.qml` - Reusable component
+- `src/AlbumModel.cpp` - Backend enhancements
 
 **Estimated Time**: 4-6 hours  
-**Complexity**: Medium  
-**Dependencies**: AlbumModel already exists in C++
+**Complexity**: Medium
 
 ---
 
-### Priority 2: GPU Monitoring Implementation
-**Status**: Placeholder (returns "Unknown GPU")  
-**File**: `src/SystemMonitor.cpp`
-
-**What Needs To Be Done**:
-1. Implement real GPU detection using Windows DXGI API
-2. Get GPU name and memory info
-3. Optionally: Get GPU utilization percentage
-4. Update `SystemMonitor::getGpuUsage()` method
-
-**Files To Modify**:
-- `src/SystemMonitor.cpp` - GPU detection logic
-- `src/SystemMonitor.h` - If adding new methods
-- Link against `dxgi.lib` in CMakeLists.txt (if needed)
-
-**Estimated Time**: 2-3 hours  
-**Complexity**: Medium  
-**Dependencies**: Windows DXGI API
-
----
-
-### Priority 3: Video Player Implementation
+### Priority 3: Advanced Video Playback
 **Status**: Placeholder only (shows play icon but doesn't play)
 
-**Decision Point**: Implement or Remove?
-- **Option A**: Full implementation (6-8 hours, high complexity)
-- **Option B**: Remove video support entirely (keep it photo-only)
+**Goal**: Hardware-accelerated playback without slowdowns.
 
-**If Implementing**:
-1. Create `VideoPlayer.qml` component
-2. Integrate Qt6::Multimedia VideoOutput
+**What Needs To Be Done**:
+1. Create `VideoPlayer.qml` component using `QtMultimedia`
+2. Ensure `VideoOutput` uses RHI (hardware backend)
 3. Add playback controls (play/pause/seek/volume)
-4. Handle video file detection in ImageModel
-5. Generate video thumbnails
+4. Verify hardware decoding (DXVA/D3D11)
 
 **Files To Create/Modify**:
 - `resources/qml/VideoPlayer.qml` - New component
 - `resources/qml/PhotoViewer.qml` - Integration
-- `src/ImageModel.cpp` - Video handling
 - `CMakeLists.txt` - Qt6::Multimedia already linked
 
 **Estimated Time**: 6-8 hours  
+**Complexity**: High
+
+---
+
+### Priority 4: Extended Format Support
+**Status**: Basic formats only (JPG, PNG)
+
+**Goal**: Support RAW (ARW, CR2, NEF) and high-bitrate video.
+
+**What Needs To Be Done**:
+1. Verify Qt image plugins for RAW support
+2. If needed, integrate `libraw` or rely on Windows WIC codecs
+3. Update `ImageModel` to scan for these extensions
+4. Ensure async loading handles large RAW files efficiently
+
+**Estimated Time**: 4-6 hours  
 **Complexity**: High
 
 ---

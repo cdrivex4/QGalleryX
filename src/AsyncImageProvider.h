@@ -61,8 +61,9 @@ public:
   QQuickImageResponse *
   requestImageResponse(const QString &id, const QSize &requestedSize) override;
 
-  static QImage getCachedImage(const QString &id);
-  static void insertCachedImage(const QString &id, const QImage &image);
+  static QImage getCachedImage(const QString &id, const QSize &size);
+  static void insertCachedImage(const QString &id, const QImage &image,
+                                const QSize &size);
   static void setCacheMaxCost(int cost);
   static QVariantMap getCacheStats();
 

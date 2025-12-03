@@ -9,6 +9,11 @@ class SystemMonitor : public QObject {
   Q_PROPERTY(double cpuUsage READ cpuUsage NOTIFY cpuUsageChanged)
   Q_PROPERTY(double memoryUsageMB READ memoryUsageMB NOTIFY memoryUsageChanged)
   Q_PROPERTY(double gpuUsage READ gpuUsage NOTIFY gpuUsageChanged)
+  Q_PROPERTY(
+      double gpuVramUsedMB READ gpuVramUsedMB NOTIFY gpuVramUsedMBChanged)
+  Q_PROPERTY(
+      double gpuVramTotalMB READ gpuVramTotalMB NOTIFY gpuVramTotalMBChanged)
+  Q_PROPERTY(QString gpuName READ gpuName CONSTANT)
 
 public:
   explicit SystemMonitor(QObject *parent = nullptr);
@@ -17,6 +22,9 @@ public:
   double cpuUsage() const { return m_cpuUsage; }
   double memoryUsageMB() const { return m_memoryUsageMB; }
   double gpuUsage() const { return m_gpuUsage; }
+  double gpuVramUsedMB() const { return m_gpuVramUsedMB; }
+  double gpuVramTotalMB() const { return m_gpuVramTotalMB; }
+  QString gpuName() const { return m_gpuName; }
 
   // Invokable methods for one-time queries
   Q_INVOKABLE double getCpuUsage();
@@ -32,6 +40,8 @@ signals:
   void cpuUsageChanged();
   void memoryUsageChanged();
   void gpuUsageChanged();
+  void gpuVramUsedMBChanged();
+  void gpuVramTotalMBChanged();
 
 private slots:
   void updateStats();
@@ -41,6 +51,9 @@ private:
   double m_cpuUsage;
   double m_memoryUsageMB;
   double m_gpuUsage;
+  double m_gpuVramUsedMB;
+  double m_gpuVramTotalMB;
+  QString m_gpuName;
 
   // Timer for automatic updates
   QTimer *m_updateTimer;

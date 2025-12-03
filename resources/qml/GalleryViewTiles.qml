@@ -7,6 +7,7 @@ Item {
     
     // Signals
     signal imageClicked(int index)
+    signal imageLoaded(int timeMs)
     
     // Properties
     property real uiThumbnailSize: appSettings ? appSettings.gridSize : 100
@@ -76,6 +77,19 @@ Item {
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
                 cache: true
+                
+                property real startTime: 0
+                onSourceChanged: startTime = new Date().getTime()
+                
+                onStatusChanged: {
+                    if (status === Image.Ready) {
+                        var endTime = new Date().getTime()
+                        var duration = endTime - startTime
+                        if (startTime > 0) {
+                            root.imageLoaded(duration)
+                        }
+                    }
+                }
                 
                 Rectangle {
                     anchors.fill: parent

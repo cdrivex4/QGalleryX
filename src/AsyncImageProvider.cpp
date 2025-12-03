@@ -7,7 +7,6 @@
 #include <QVariant>
 #include <algorithm>
 
-
 // Initialize static members
 QCache<QString, QImage> AsyncImageProvider::m_cache;
 QMutex AsyncImageProvider::m_mutex;
@@ -106,9 +105,8 @@ void ImageLoaderRunnable::run() {
     } else {
       reader.setScaledSize(m_requestedSize);
     }
-  } else {
-    reader.setScaledSize(QSize(500, 500));
   }
+  // If requestedSize is invalid, do NOT setScaledSize. Load full resolution.
 
   if (*m_cancelled) {
     m_signals->deleteLater();
@@ -125,7 +123,7 @@ void ImageLoaderRunnable::run() {
     // << "ms";
 
     // Insert into Cache
-    AsyncImageProvider::insertCachedImage(m_id, image);
+    AsyncImageProvider::insertCachedImage(m_id, image, m_requestedSize);
   } else {
     // Return placeholder
     image = QImage(100, 100, QImage::Format_RGB32);
@@ -147,7 +145,7 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   auto *response = new AsyncImageResponse(id, requestedSize);
 
   // Check Cache Synchronously
-  QImage cached = getCachedImage(id);
+  QImage cached = getCachedImage(id, requestedSize);
   if (!cached.isNull()) {
     // Emit finished asynchronously to ensure QML has time to connect to the
     // signal
@@ -166,26 +164,43 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   QObject::connect(workerSignals, &WorkerSignals::done, response,
                    &AsyncImageResponse::handleDone, Qt::QueuedConnection);
 
+  // Use constant priority for thumbnails (FIFO)
+  // This ensures ListView's natural request order (Visible -> Buffer) is
+  // respected. We rely on cancellation to handle scrolling performance.
+  int priority = 1;
+
+  // Prioritize full-size images (PhotoViewer) over thumbnails (GalleryView)
+  // If requestedSize is invalid, it means full size is requested.
+  if (!requestedSize.isValid()) {
+    priority = 2147483647; // INT_MAX
+  }
+
   if (m_threadPool) {
-    m_threadPool->start(runnable, ++s_requestCounter);
+    m_threadPool->start(runnable, priority);
   } else {
-    QThreadPool::globalInstance()->start(runnable, ++s_requestCounter);
+    QThreadPool::globalInstance()->start(runnable, priority);
   }
   return response;
 }
 
-QImage AsyncImageProvider::getCachedImage(const QString &id) {
+QImage AsyncImageProvider::getCachedImage(const QString &id,
+                                          const QSize &size) {
   QMutexLocker locker(&m_mutex);
-  if (m_cache.contains(id)) {
-    return *m_cache.object(id);
+  QString key = id + "_" + QString::number(size.width()) + "x" +
+                QString::number(size.height());
+  if (m_cache.contains(key)) {
+    return *m_cache.object(key);
   }
   return QImage();
 }
 
 void AsyncImageProvider::insertCachedImage(const QString &id,
-                                           const QImage &image) {
+                                           const QImage &image,
+                                           const QSize &size) {
   QMutexLocker locker(&m_mutex);
-  m_cache.insert(id, new QImage(image), image.sizeInBytes() / 1024);
+  QString key = id + "_" + QString::number(size.width()) + "x" +
+                QString::number(size.height());
+  m_cache.insert(key, new QImage(image), image.sizeInBytes() / 1024);
 }
 
 void AsyncImageProvider::setCacheMaxCost(int cost) {

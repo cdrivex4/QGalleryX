@@ -58,6 +58,66 @@
 - **Cross-platform compatibility** (Windows-focused)
 
 ### 4. Performance Monitoring
+# Samsung Gallery Clone - Feature Documentation
+
+## Core Features
+
+### 1. Image Gallery
+- **Grid-based browsing** with customizable thumbnail sizes
+- **Recursive directory scanning** for image discovery
+- **Date-based grouping** (Today, Yesterday, Month Year)
+- **Video file support** with dedicated placeholders
+- **Smooth scrolling** with optimized caching
+- **Zoom functionality** via Ctrl+Wheel and pinch gestures
+
+### 2. Image Viewer
+- **Full-screen viewing** with navigation controls
+- **Multi-touch zoom** (pinch to zoom, double-tap)
+- **Keyboard navigation** (arrow keys, escape)
+- **Image editing** with basic crop functionality
+- **Performance monitoring** with load time tracking
+
+### 3. Performance Optimization
+- **Asynchronous image loading** with thread pool
+- **Memory-efficient caching** with configurable sizes
+- **GPU acceleration** with multiple API support
+- **Lazy loading** for smooth performance
+- **Background processing** for file operations
+
+### 4. Settings and Configuration
+- **Graphics API selection** (Direct3D11, Vulkan, OpenGL, Software)
+- **Performance tuning** (thumbnail size, cache size, thread count)
+- **System monitoring** (CPU usage, memory usage)
+- **Persistent settings** with automatic saving
+
+### 5. User Interface
+- **Tab-based navigation** (Pictures, Albums, Stories, Menu)
+- **Dark theme** optimized for media viewing
+- **Touch-friendly controls** for tablet/pen input
+- **Keyboard shortcuts** for power users
+- **Performance overlay** with real-time stats
+
+## Technical Features
+
+### 1. Async Image Processing
+- **Thread pool management** for concurrent loading
+- **Cancelable operations** to prevent memory leaks
+- **Cache integration** for repeated access
+- **Error handling** with fallback images
+
+### 2. Data Models
+- **ImageModel** for file-based data management
+- **AlbumModel** for folder-based organization
+- **QAbstractListModel integration** for QML compatibility
+- **Background data loading** with progress tracking
+
+### 3. System Integration
+- **Windows API integration** for system monitoring
+- **File system access** with proper path handling
+- **Memory management** with Qt's smart pointers
+- **Cross-platform compatibility** (Windows-focused)
+
+### 4. Performance Monitoring
 - **Real-time FPS counter**
 - **Load time tracking** with statistics
 - **CPU usage monitoring** (Windows only)
@@ -67,16 +127,14 @@
 ## File Format Support
 
 ### Supported Image Formats
-- JPEG (.jpg, .jpeg)
-- PNG (.png)
-- BMP (.bmp)
-- GIF (.gif)
+- **Standard**: JPEG, PNG, BMP, GIF, WEBP, TIFF
+- **RAW Formats** (Planned): ARW (Sony), CR2/CR3 (Canon), NEF (Nikon), DNG (Adobe), ORF (Olympus), RW2 (Panasonic)
+- **High Efficiency**: HEIC/HEIF (requires system codecs)
 
 ### Supported Video Formats
-- MP4 (.mp4)
-- MKV (.mkv)
-- AVI (.avi)
-- MOV (.mov)
+- **Containers**: MP4, MKV, AVI, MOV, WEBM
+- **Codecs**: H.264 (AVC), H.265 (HEVC), VP9, AV1, MPEG-2, MPEG-4
+- **Acceleration**: Hardware-accelerated decoding via GPU (DXVA/D3D11)
 
 ## User Interface Components
 
@@ -99,7 +157,7 @@
 - **Navigation buttons** for previous/next
 
 ### Performance Overlay
-- **GPU information** display
+- **GPU information** display (Usage, VRAM)
 - **Load time statistics**
 - **Cache usage monitoring**
 - **System performance graphs**
@@ -131,7 +189,7 @@
 
 ### System Requirements
 - **RAM**: Minimum 4GB, Recommended 8GB+
-- **GPU**: DirectX 11 compatible or better
+- **GPU**: DirectX 11 compatible or better (Dedicated GPU recommended for video/RAW)
 - **Storage**: SSD recommended for better performance
 - **OS**: Windows 10 or later
 
@@ -142,64 +200,42 @@
 - No actual album organization
 - No album management UI
 
-### 2. Stories Feature
-- Not implemented
-- Placeholder text only
-
-### 3. Video Playback
+### 2. Video Playback
 - No actual video player implementation
 - Static placeholders only
 
-### 4. Platform Support
+### 3. Platform Support
 - Windows-only implementation
 - No macOS or Linux support
-- Limited mobile device compatibility
 
-### 5. Image Editing
+### 4. Image Editing
 - Basic crop functionality only
 - No advanced editing features
-- No undo/redo support
 
-## Future Enhancements
+## Future Enhancements (Prioritized)
 
-### Planned Features
-1. **Video Playback Integration**
-   - Native video player using QtMultimedia
-   - Video thumbnails generation
-   - Video format transcoding support
+### 1. GPU Monitoring & Optimization
+- Real-time GPU usage tracking (DXGI)
+- VRAM usage monitoring
+- Hardware acceleration verification
 
-2. **Album Management**
-   - Create custom albums
-   - Drag-and-drop organization
-   - Album sharing functionality
+### 2. Album Management
+- Folder-based album organization
+- Custom album creation
+- Drag-and-drop sorting
 
-3. **Advanced Editing**
-   - Filters and effects
-   - Rotation and flipping
-   - Color adjustments
+### 3. Advanced Video Playback
+- Hardware-accelerated decoding (MPEG, H.264/265)
+- Native QtMultimedia integration
+- Zero-copy rendering (GPU direct)
+- Video thumbnails and scrubbing
 
-4. **Cloud Integration**
-   - Cloud storage support
-   - Automatic backup
-   - Cross-device synchronization
+### 4. Extended Format Support
+- Full RAW image support (libraw/system codecs)
+- High-bitrate video support
+- EXIF/Metadata full parsing
 
-5. **Performance Improvements**
-   - GPU-accelerated image processing
-   - Hardware video decoding
-   - Optimized memory management
-
-### Technical Improvements
-1. **Multi-threaded Processing**
-   - Parallel image processing
-   - Background indexing
-   - Smart caching strategies
-
-2. **Cross-Platform Support**
-   - macOS implementation
-   - Linux compatibility
-   - Mobile device support
-
-3. **Advanced Monitoring**
-   - Detailed performance analytics
-   - Memory leak detection
-   - GPU utilization tracking
+### 5. Image Editing (Maybe)
+- Filters and effects
+- Rotation and flipping
+- Color adjustments

@@ -35,7 +35,7 @@ qt_add_qml_module(appSamsungGallery
 )
 
 target_link_libraries(appSamsungGallery
-    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 psapi
+    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 psapi dxgi d3d11
 )
 
 # --- Test Application (Semantic Zoom) ---
@@ -65,7 +65,7 @@ qt_add_qml_module(appSamsungGalleryTest
 )
 
 target_link_libraries(appSamsungGalleryTest
-    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 psapi
+    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 psapi dxgi d3d11
 )
 
 enable_testing()

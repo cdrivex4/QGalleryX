@@ -119,7 +119,7 @@ Item {
 
                     Image {
                         id: img
-                        source: (!isVideo && filePath) ? "file:///" + filePath : ""
+                        source: (!isVideo && filePath) ? "image://async/" + filePath : ""
                         
                         // Bind size to zoom
                         width: flickable.width * flickable.zoom
@@ -132,11 +132,12 @@ Item {
                         mipmap: true 
                         autoTransform: true
                         
-                        onSourceChanged: root.startTime = new Date().getTime()
+                        property real startTime: 0
+                        onSourceChanged: startTime = new Date().getTime()
                         onStatusChanged: {
                             if (status === Image.Ready) {
                                 var endTime = new Date().getTime()
-                                root.imageLoaded(endTime - root.startTime)
+                                root.imageLoaded(endTime - startTime)
                             }
                         }
                     }
