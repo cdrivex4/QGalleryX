@@ -144,10 +144,19 @@ Item {
             UsageGraph {
                 id: gpuGraph
                 width: parent.width; height: 40
-                label: "VRAM %"
+                label: "GPU Load %"
                 color: "#FF00FF"
                 maxValue: 100
                 dataPoints: root.gpuHistory
+            }
+            
+            UsageGraph {
+                id: vramGraph
+                width: parent.width; height: 40
+                label: "VRAM %"
+                color: "#FFA500" // Orange
+                maxValue: 100
+                dataPoints: root.vramHistory
             }
         }
         
@@ -162,7 +171,7 @@ Item {
             Slider {
                 id: resSlider
                 width: parent.width
-                from: 40; to: 400
+                from: 20; to: 400
                 stepSize: 1
                 value: appSettings.thumbnailSize
                 onMoved: appSettings.thumbnailSize = Math.round(value)
@@ -173,7 +182,7 @@ Item {
             Slider {
                 id: zoomSlider
                 width: parent.width
-                from: 40; to: 400
+                from: 20; to: 400
                 stepSize: 1
                 value: appSettings.gridSize
                 onMoved: appSettings.gridSize = Math.round(value)
@@ -208,6 +217,7 @@ Item {
     property var cpuHistory: []
     property var ramHistory: []
     property var gpuHistory: []
+    property var vramHistory: []
     
     Timer {
         interval: 1000
@@ -235,6 +245,16 @@ Item {
             newGpu.push(gpu)
             if (newGpu.length > 50) newGpu.shift()
             root.gpuHistory = newGpu
+            
+            // Update VRAM History
+            var vramPct = 0
+            if (systemMonitor.gpuVramTotalMB > 0) {
+                vramPct = (systemMonitor.gpuVramUsedMB / systemMonitor.gpuVramTotalMB) * 100.0
+            }
+            var newVram = root.vramHistory.slice()
+            newVram.push(vramPct)
+            if (newVram.length > 50) newVram.shift()
+            root.vramHistory = newVram
             
             // Dynamic RAM Max
             if (ram > ramGraph.maxValue) ramGraph.maxValue = ram * 1.2

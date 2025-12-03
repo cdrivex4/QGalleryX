@@ -1,6 +1,8 @@
 #include "SystemMonitor.h"
 #include <QDebug>
 #include <QString>
+#include <pdh.h>
+#include <pdhmsg.h>
 
 #ifdef Q_OS_WIN
 #include <d3d11.h>
@@ -41,6 +43,20 @@ SystemMonitor::SystemMonitor(QObject *parent)
 
   // Initial GPU detection
   m_gpuName = getGpuName();
+
+#ifdef Q_OS_WIN
+  // PDH Init for GPU Load
+  m_pdhQuery = nullptr;
+  m_pdhCounter = nullptr;
+
+  if (PdhOpenQueryA(NULL, 0, (HQUERY *)&m_pdhQuery) == ERROR_SUCCESS) {
+    // Add wildcard counter for all GPU engines
+    PdhAddEnglishCounterA((HQUERY)m_pdhQuery,
+                          "\\GPU Engine(*)\\Utilization Percentage", 0,
+                          (HCOUNTER *)&m_pdhCounter);
+    PdhCollectQueryData((HQUERY)m_pdhQuery);
+  }
+#endif
 }
 
 void SystemMonitor::startMonitoring(int intervalMs) {
@@ -159,33 +175,52 @@ double SystemMonitor::getMemoryUsageMB() {
 
 double SystemMonitor::getGpuUsage() {
 #ifdef Q_OS_WIN
-  // Use DXGI 1.4 to get video memory budget and usage
+  // 1. Update VRAM (DXGI)
   ComPtr<IDXGIFactory4> factory;
-  if (FAILED(CreateDXGIFactory1(IID_PPV_ARGS(&factory)))) {
-    return 0.0;
-  }
-
-  ComPtr<IDXGIAdapter3> adapter;
-  if (FAILED(factory->EnumAdapters(
-          0, reinterpret_cast<IDXGIAdapter **>(adapter.GetAddressOf())))) {
-    // Fallback to older DXGI if 1.4 isn't available (e.g. Windows 7)
-    // We can't easily get "usage" on Win7 without D3D counters, so just return
-    // 0
-    return 0.0;
-  }
-
-  DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
-  if (SUCCEEDED(adapter->QueryVideoMemoryInfo(
-          0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo))) {
-    m_gpuVramUsedMB = videoMemoryInfo.CurrentUsage / (1024.0 * 1024.0);
-    m_gpuVramTotalMB = videoMemoryInfo.Budget / (1024.0 * 1024.0);
-
-    // Return percentage of budget used
-    if (videoMemoryInfo.Budget > 0) {
-      return (double)videoMemoryInfo.CurrentUsage /
-             (double)videoMemoryInfo.Budget * 100.0;
+  if (SUCCEEDED(CreateDXGIFactory1(IID_PPV_ARGS(&factory)))) {
+    ComPtr<IDXGIAdapter3> adapter;
+    if (SUCCEEDED(factory->EnumAdapters(
+            0, reinterpret_cast<IDXGIAdapter **>(adapter.GetAddressOf())))) {
+      DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
+      if (SUCCEEDED(adapter->QueryVideoMemoryInfo(
+              0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo))) {
+        m_gpuVramUsedMB = videoMemoryInfo.CurrentUsage / (1024.0 * 1024.0);
+        m_gpuVramTotalMB = videoMemoryInfo.Budget / (1024.0 * 1024.0);
+      }
     }
   }
+
+  // 2. Update GPU Load (PDH)
+  double maxUsage = 0.0;
+  if (m_pdhQuery && m_pdhCounter) {
+    PdhCollectQueryData((HQUERY)m_pdhQuery);
+
+    PDH_FMT_COUNTERVALUE_ITEM_A *pItems = NULL;
+    DWORD dwBufferSize = 0;
+    DWORD dwItemCount = 0;
+
+    PdhGetFormattedCounterArrayA((HCOUNTER)m_pdhCounter, PDH_FMT_DOUBLE,
+                                 &dwBufferSize, &dwItemCount, NULL);
+
+    if (dwBufferSize > 0) {
+      pItems = (PDH_FMT_COUNTERVALUE_ITEM_A *)malloc(dwBufferSize);
+      if (pItems) {
+        if (PdhGetFormattedCounterArrayA((HCOUNTER)m_pdhCounter, PDH_FMT_DOUBLE,
+                                         &dwBufferSize, &dwItemCount,
+                                         pItems) == ERROR_SUCCESS) {
+          for (DWORD i = 0; i < dwItemCount; i++) {
+            if (pItems[i].FmtValue.CStatus == ERROR_SUCCESS) {
+              if (pItems[i].FmtValue.doubleValue > maxUsage) {
+                maxUsage = pItems[i].FmtValue.doubleValue;
+              }
+            }
+          }
+        }
+        free(pItems);
+      }
+    }
+  }
+  return maxUsage;
 #endif
   return 0.0;
 }

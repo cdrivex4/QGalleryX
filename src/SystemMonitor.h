@@ -62,6 +62,10 @@ private:
   // Windows-specific: CPU tracking
   unsigned long long m_lastSystemTime;
   unsigned long long m_lastProcessTime;
+
+  // PDH for GPU Load
+  void *m_pdhQuery;   // HQUERY
+  void *m_pdhCounter; // HCOUNTER
 #endif
 };
 
