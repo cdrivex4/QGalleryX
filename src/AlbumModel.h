@@ -5,10 +5,10 @@
 #include <QString>
 #include <QVector>
 
-
 struct AlbumInfo {
   QString name;
-  QString coverPath;
+  QString path;
+  QStringList coverPaths;
   int count;
 };
 
@@ -16,7 +16,12 @@ class AlbumModel : public QAbstractListModel {
   Q_OBJECT
 
 public:
-  enum AlbumRoles { NameRole = Qt::UserRole + 1, CoverPathRole, CountRole };
+  enum AlbumRoles {
+    NameRole = Qt::UserRole + 1,
+    PathRole,
+    CoverPathRole,
+    CountRole
+  };
 
   explicit AlbumModel(QObject *parent = nullptr);
 
@@ -25,7 +30,10 @@ public:
                 int role = Qt::DisplayRole) const override;
   QHash<int, QByteArray> roleNames() const override;
 
-  Q_INVOKABLE void scanAlbums();
+  Q_INVOKABLE void scanAlbums(const QString &path);
+
+signals:
+  void scanFinished();
 
 private:
   QVector<AlbumInfo> m_albums;

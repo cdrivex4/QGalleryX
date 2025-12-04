@@ -1,3 +1,7 @@
+param (
+    [switch]$Clean = $false
+)
+
 $ErrorActionPreference = "Stop"
 $env:PATH = "D:\Qt\6.9.3\mingw_64\bin;D:\Qt\Tools\mingw1310_64\bin;D:\Qt\Tools\CMake_64\bin;D:\Qt\Tools\Ninja;$env:PATH"
 
@@ -16,32 +20,51 @@ Write-Host "==========================================" -ForegroundColor Cyan
 # Step 1: Kill running instances
 Write-Host "[1/4] Checking for running instances..." -ForegroundColor Yellow
 try {
-    taskkill /F /IM "appSamsungGallery.exe" 2>$null
-    taskkill /F /IM "appSamsungGalleryTest.exe" 2>$null
+    Stop-Process -Name "appSamsungGallery" -Force -ErrorAction SilentlyContinue
+    Stop-Process -Name "appSamsungGalleryTest" -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 1
 }
 catch {}
 
-# Step 2: Ensure QML/MOC freshness (Critical for UI changes)
-# We remove the autogen folder to force Qt to re-parse QML and Signals
-if (Test-Path "$BuildDir/appSamsungGallery_autogen") {
-    Remove-Item -Recurse -Force "$BuildDir/appSamsungGallery_autogen" | Out-Null
+# Step 2: Clean if requested or ensure freshness
+if ($Clean) {
+    Write-Host "[2/4] Full Clean requested. Removing build directory..." -ForegroundColor Magenta
+    if (Test-Path $BuildDir) {
+        Remove-Item -Recurse -Force $BuildDir | Out-Null
+    }
 }
-if (Test-Path "$BuildDir/appSamsungGalleryTest_autogen") {
-    Remove-Item -Recurse -Force "$BuildDir/appSamsungGalleryTest_autogen" | Out-Null
+else {
+    # We remove the autogen folder to force Qt to re-parse QML and Signals
+    if (Test-Path "$BuildDir/appSamsungGallery_autogen") {
+        Remove-Item -Recurse -Force "$BuildDir/appSamsungGallery_autogen" | Out-Null
+    }
+    if (Test-Path "$BuildDir/appSamsungGalleryTest_autogen") {
+        Remove-Item -Recurse -Force "$BuildDir/appSamsungGalleryTest_autogen" | Out-Null
+    }
+    Write-Host "[2/4] Cleaned autogen folders." -ForegroundColor Yellow
 }
-Write-Host "[2/4] Cleaned autogen folders." -ForegroundColor Yellow
 
 # Step 3: Configure & Build
 Write-Host "[3/4] Building (Release)..." -ForegroundColor Yellow
 try {
-    # Configure (creates build dir if missing)
+    # Create build dir if it doesn't exist
+    if (!(Test-Path $BuildDir)) {
+        New-Item -ItemType Directory -Path $BuildDir | Out-Null
+    }
+
+    # Configure
+    Write-Host "  -> Configuring..." -ForegroundColor Gray
     cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -S . -B $BuildDir
+    if ($LASTEXITCODE -ne 0) { throw "CMake Configuration Failed" }
     
     # Build
-    cmake --build $BuildDir -j 4
+    Write-Host "  -> Compiling..." -ForegroundColor Gray
+    cmake --build $BuildDir
+    if ($LASTEXITCODE -ne 0) { throw "Build Failed" }
 }
 catch {
     Write-Host "BUILD FAILED!" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Red
     exit 1
 }
 

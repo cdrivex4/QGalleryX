@@ -35,6 +35,7 @@ public:
 
   Q_INVOKABLE void scanDirectory(const QString &path);
   Q_INVOKABLE bool cropImage(int index, const QRectF &cropRect);
+  Q_INVOKABLE QVariantMap getMetadata(int index);
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   QVariant data(const QModelIndex &index,

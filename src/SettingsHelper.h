@@ -24,6 +24,8 @@ class SettingsHelper : public QObject {
                  cacheSizeMBChanged)
   Q_PROPERTY(int concurrentThreads READ concurrentThreads WRITE
                  setConcurrentThreads NOTIFY concurrentThreadsChanged)
+  Q_PROPERTY(
+      int logLevel READ logLevel WRITE setLogLevel NOTIFY logLevelChanged)
 
 public:
   explicit SettingsHelper(QObject *parent = nullptr);
@@ -47,6 +49,9 @@ public:
   int concurrentThreads() const;
   void setConcurrentThreads(int count);
 
+  int logLevel() const;
+  void setLogLevel(int level);
+
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
@@ -67,6 +72,7 @@ signals:
   void gridSizeChanged();
   void cacheSizeMBChanged();
   void concurrentThreadsChanged();
+  void logLevelChanged();
 
 private:
   QString m_graphicsApi;

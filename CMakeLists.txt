@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(SamsungGallery LANGUAGES CXX)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Concurrent Multimedia Gui QuickControls2)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Concurrent Multimedia Gui QuickControls2 Widgets)
 
 qt_standard_project_setup()
 
@@ -16,6 +16,7 @@ qt_add_executable(appSamsungGallery
     src/SystemMonitor.cpp src/SystemMonitor.h
     src/AsyncImageProvider.cpp src/AsyncImageProvider.h
     src/GroupedProxyModel.cpp src/GroupedProxyModel.h
+    src/DesktopHelper.cpp src/DesktopHelper.h
 )
 
 qt_add_qml_module(appSamsungGallery
@@ -34,9 +35,20 @@ qt_add_qml_module(appSamsungGallery
         resources/qml/UsageGraph.qml
 )
 
+# --- LibRaw ---
+set(LIBRAW_PATH "3rdparty/LibRaw")
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${LIBRAW_PATH}/CMakeLists.txt")
+    # Disable LibRaw examples and demos to speed up build
+    set(LIBRAW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    set(LIBRAW_BUILD_DEMOS OFF CACHE BOOL "" FORCE)
+    set(LIBRAW_INSTALL OFF CACHE BOOL "" FORCE)
+    add_subdirectory(${LIBRAW_PATH})
+endif()
+
 target_link_libraries(appSamsungGallery
-    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 psapi dxgi d3d11 pdh
+    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 Qt6::Widgets psapi dxgi d3d11 pdh libraw_static
 )
+target_include_directories(appSamsungGallery PRIVATE ${LIBRAW_PATH})
 
 # --- Test Application (Semantic Zoom) ---
 qt_add_executable(appSamsungGalleryTest
@@ -65,12 +77,14 @@ qt_add_qml_module(appSamsungGalleryTest
 )
 
 target_link_libraries(appSamsungGalleryTest
-    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 psapi dxgi d3d11 pdh
+    PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 Qt6::Widgets psapi dxgi d3d11 pdh libraw_static
 )
+target_include_directories(appSamsungGalleryTest PRIVATE ${LIBRAW_PATH})
 
 enable_testing()
 find_package(Qt6 REQUIRED COMPONENTS Test)
 
 add_executable(tst_imagemodel tests/tst_imagemodel.cpp src/ImageModel.cpp src/ImageModel.h)
-target_link_libraries(tst_imagemodel PRIVATE Qt6::Core Qt6::Test Qt6::Concurrent Qt6::Gui Qt6::Quick)
+target_link_libraries(tst_imagemodel PRIVATE Qt6::Core Qt6::Test Qt6::Concurrent Qt6::Gui Qt6::Quick libraw_static)
+target_include_directories(tst_imagemodel PRIVATE ${LIBRAW_PATH})
 add_test(NAME tst_imagemodel COMMAND tst_imagemodel)

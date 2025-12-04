@@ -8,16 +8,14 @@
 #include <QStandardPaths>
 #include <QtConcurrent>
 #include <algorithm>
-
+#include <libraw/libraw.h>
 
 ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   // Hardcoded default path as requested
   QString defaultPath =
       QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-  if (!QDir(defaultPath).exists()) {
-    defaultPath =
-        QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-  }
+
+  // Directly scan. Validation happens in the worker thread.
   scanDirectory(defaultPath);
 }
 
@@ -93,6 +91,11 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
 }
 
 void ImageModel::scanDirectory(const QString &path) {
+  // Clear current images immediately so UI updates
+  beginResetModel();
+  m_images.clear();
+  endResetModel();
+
   // Run scanning in a background thread
   QFuture<QList<ImageInfo>> future = QtConcurrent::run([path]() {
     QList<ImageInfo> images;
@@ -125,7 +128,9 @@ void ImageModel::scanDirectory(const QString &path) {
     // Recursive scan
     QDirIterator it(cleanPath,
                     QStringList() << "*.jpg" << "*.jpeg" << "*.png" << "*.mp4"
-                                  << "*.mkv" << "*.avi" << "*.mov",
+                                  << "*.mkv" << "*.avi" << "*.mov"
+                                  << "*.arw" << "*.cr2" << "*.dng" << "*.nef"
+                                  << "*.webp" << "*.heic" << "*.tiff",
                     QDir::Files, QDirIterator::Subdirectories);
 
     while (it.hasNext()) {
@@ -175,4 +180,44 @@ bool ImageModel::cropImage(int index, const QRectF &cropRect) {
 
   QImage cropped = img.copy(rect);
   return cropped.save(filePath); // Overwrite original for now (simple edit)
+}
+
+QVariantMap ImageModel::getMetadata(int index) {
+  if (index < 0 || index >= m_images.count())
+    return {};
+
+  const ImageInfo &info = m_images[index];
+  QVariantMap meta;
+  meta["Filename"] = info.fileName;
+  meta["Path"] = info.filePath;
+  meta["Date"] = info.date.toString("yyyy-MM-dd HH:mm:ss");
+  meta["Size"] = QString("%1 KB").arg(QFileInfo(info.filePath).size() / 1024);
+
+  QString ext = QFileInfo(info.filePath).suffix().toLower();
+  bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef");
+
+  if (isRaw) {
+    LibRaw RawProcessor;
+    if (RawProcessor.open_file(info.filePath.toLocal8Bit().constData()) ==
+        LIBRAW_SUCCESS) {
+      meta["Resolution"] = QString("%1x%2")
+                               .arg(RawProcessor.imgdata.sizes.width)
+                               .arg(RawProcessor.imgdata.sizes.height);
+      meta["Camera"] = QString("%1 %2")
+                           .arg(RawProcessor.imgdata.idata.make)
+                           .arg(RawProcessor.imgdata.idata.model);
+      meta["ISO"] = QString::number(RawProcessor.imgdata.other.iso_speed);
+      meta["Shutter"] = QString::number(RawProcessor.imgdata.other.shutter);
+      meta["Aperture"] = QString::number(RawProcessor.imgdata.other.aperture);
+      RawProcessor.recycle();
+    }
+  } else {
+    QImageReader reader(info.filePath);
+    if (reader.canRead()) {
+      QSize size = reader.size();
+      meta["Resolution"] =
+          QString("%1x%2").arg(size.width()).arg(size.height());
+    }
+  }
+  return meta;
 }

@@ -213,6 +213,16 @@ Item {
                 value: appSettings.concurrentThreads
                 onMoved: appSettings.concurrentThreads = value
             }
+
+            // Log Level
+            Text { text: "Log Level: " + logLevelCombo.currentText; color: "white"; font.pixelSize: 11 }
+            ComboBox {
+                id: logLevelCombo
+                width: parent.width
+                model: ["None", "Basic", "Verbose"]
+                currentIndex: appSettings.logLevel
+                onActivated: appSettings.logLevel = currentIndex
+            }
         }
     }
     

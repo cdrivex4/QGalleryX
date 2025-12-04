@@ -3,10 +3,9 @@
 #include <QDirIterator>
 #include <QMap>
 #include <QStandardPaths>
+#include <QtConcurrent>
 
-AlbumModel::AlbumModel(QObject *parent) : QAbstractListModel(parent) {
-  scanAlbums();
-}
+AlbumModel::AlbumModel(QObject *parent) : QAbstractListModel(parent) {}
 
 int AlbumModel::rowCount(const QModelIndex &parent) const {
   if (parent.isValid())
@@ -23,8 +22,10 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const {
   switch (role) {
   case NameRole:
     return album.name;
+  case PathRole:
+    return album.path;
   case CoverPathRole:
-    return album.coverPath;
+    return QVariant(album.coverPaths);
   case CountRole:
     return album.count;
   default:
@@ -35,67 +36,56 @@ QVariant AlbumModel::data(const QModelIndex &index, int role) const {
 QHash<int, QByteArray> AlbumModel::roleNames() const {
   QHash<int, QByteArray> roles;
   roles[NameRole] = "name";
+  roles[PathRole] = "path";
   roles[CoverPathRole] = "coverPath";
   roles[CountRole] = "count";
   return roles;
 }
 
-void AlbumModel::scanAlbums() {
-  beginResetModel();
-  m_albums.clear();
+void AlbumModel::scanAlbums(const QString &path) {
+  if (path.isEmpty())
+    return;
 
-  QString picturesPath =
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-  if (!QDir(picturesPath).exists()) {
-    picturesPath =
-        QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-  }
-  QStringList nameFilters;
-  nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif";
-
-  QMap<QString, AlbumInfo> albumMap;
-
-  QDirIterator it(picturesPath, nameFilters, QDir::Files,
-                  QDirIterator::Subdirectories);
-  while (it.hasNext()) {
-    it.next();
-    QFileInfo fileInfo = it.fileInfo();
-    QString dirName = fileInfo.dir().dirName();
-    QString filePath = "file:///" + fileInfo.absoluteFilePath();
-
-    if (!albumMap.contains(dirName)) {
-      AlbumInfo info;
-      info.name = dirName;
-      info.coverPath = filePath; // Use first found image as cover
-      info.count = 1;
-      albumMap.insert(dirName, info);
-    } else {
-      albumMap[dirName].count++;
+  QtConcurrent::run([this, path]() {
+    QString cleanPath = path;
+    if (cleanPath.startsWith("file:///")) {
+      cleanPath = cleanPath.mid(8);
     }
-  }
 
-  // Fallback for testing if empty
-  if (albumMap.isEmpty()) {
-    QDirIterator it2(QDir::currentPath(), nameFilters, QDir::Files,
-                     QDirIterator::Subdirectories);
-    while (it2.hasNext()) {
-      it2.next();
-      QFileInfo fileInfo = it2.fileInfo();
+    QMap<QString, AlbumInfo> albumMap;
+    QStringList nameFilters;
+    nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif";
+
+    QDirIterator it(cleanPath, nameFilters, QDir::Files,
+                    QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+      it.next();
+      QFileInfo fileInfo = it.fileInfo();
       QString dirName = fileInfo.dir().dirName();
+      QString dirPath = fileInfo.dir().absolutePath();
       QString filePath = "file:///" + fileInfo.absoluteFilePath();
 
-      if (!albumMap.contains(dirName)) {
+      if (!albumMap.contains(dirPath)) {
         AlbumInfo info;
         info.name = dirName;
-        info.coverPath = filePath;
+        info.path = dirPath;
+        info.coverPaths.append(filePath);
         info.count = 1;
-        albumMap.insert(dirName, info);
+        albumMap.insert(dirPath, info);
       } else {
-        albumMap[dirName].count++;
+        albumMap[dirPath].count++;
+        if (albumMap[dirPath].coverPaths.count() < 4) {
+          albumMap[dirPath].coverPaths.append(filePath);
+        }
       }
     }
-  }
 
-  m_albums = albumMap.values().toVector();
-  endResetModel();
+    // Update model on main thread
+    QMetaObject::invokeMethod(this, [this, albumMap]() {
+      beginResetModel();
+      m_albums = albumMap.values().toVector();
+      endResetModel();
+      emit scanFinished();
+    });
+  });
 }

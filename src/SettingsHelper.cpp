@@ -7,7 +7,9 @@
 #include <QThread>
 
 SettingsHelper::SettingsHelper(QObject *parent)
-    : QObject(parent), m_settings("SamsungClone", "Gallery") {}
+    : QObject(parent), m_settings("SamsungClone", "Gallery") {
+  AsyncImageProvider::s_logLevel = logLevel();
+}
 
 QString SettingsHelper::graphicsApi() const { return m_graphicsApi; }
 QString SettingsHelper::graphicsDriver() const { return m_graphicsDriver; }
@@ -67,6 +69,18 @@ void SettingsHelper::setGridSize(int size) {
     return;
   m_settings.setValue("gridSize", size);
   emit gridSizeChanged();
+}
+
+int SettingsHelper::logLevel() const {
+  return m_settings.value("logLevel", 0).toInt();
+}
+
+void SettingsHelper::setLogLevel(int level) {
+  if (logLevel() == level)
+    return;
+  m_settings.setValue("logLevel", level);
+  AsyncImageProvider::s_logLevel = level;
+  emit logLevelChanged();
 }
 
 void SettingsHelper::restartApp() {

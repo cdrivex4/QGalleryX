@@ -18,8 +18,11 @@ Item {
     property var startTime: 0
     
     onVisibleChanged: {
-        if (visible && currentIndex >= 0) {
-            listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
+        if (visible) {
+            forceActiveFocus()
+            if (currentIndex >= 0) {
+                listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
+            }
         }
     }
 
@@ -75,6 +78,15 @@ Item {
             property string fileName: model.fileName
             property var fileExt: filePath.split('.').pop().toLowerCase()
             property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            property bool isCurrent: index === ListView.view.currentIndex
+            onIsCurrentChanged: {
+                if (!isCurrent && isVideo) {
+                    console.log("Stopping background video:", filePath)
+                    player.stop()
+                } else if (isCurrent && isVideo) {
+                    console.log("Starting video (isCurrent):", filePath)
+                }
+            }
             
             // Unified Zoom Function
             function zoomAt(center, step) {
@@ -93,6 +105,15 @@ Item {
                 flickable.contentX = (relX * newW) - center.x
                 flickable.contentY = (relY * newH) - center.y
                 flickable.returnToBounds()
+            }
+            
+            function togglePlay() {
+                if (isVideo) {
+                    if (player.playbackState === MediaPlayer.PlayingState)
+                        player.pause()
+                    else
+                        player.play()
+                }
             }
 
             Flickable {
@@ -196,18 +217,153 @@ Item {
                 }
             }
             
-            // Video Player Placeholder
+            // Video Player
             Item {
                 anchors.fill: parent
                 visible: isVideo
-                Text {
-                    anchors.centerIn: parent
-                    text: "Video: " + fileName
-                    color: "white"
-                    font.pixelSize: 24
+                
+                MediaPlayer {
+                    id: player
+                    source: {
+                        if (!isCurrent || !visible || !filePath) return ""
+                        var lower = filePath.toLowerCase()
+                        var isVid = lower.endsWith(".mp4") || lower.endsWith(".avi") || lower.endsWith(".mkv") || lower.endsWith(".mov")
+                        if (isVid) {
+                            console.log("PhotoViewer: Loading Video", filePath)
+                            return Qt.resolvedUrl(filePath)
+                        }
+                        return ""
+                    }
+                    audioOutput: AudioOutput {}
+                    videoOutput: videoOutput
+                    autoPlay: false
+                    
+                    onErrorOccurred: (error, errorString) => {
+                        console.log("MediaPlayer Error: " + errorString + " (" + error + ")")
+                    }
                 }
+                
+                // Play Button Overlay
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: 80
+                    height: 80
+                    radius: 40
+                    color: "#80000000"
+                    visible: isVideo && player.playbackState !== MediaPlayer.PlayingState
+                    
+                    Canvas {
+                        anchors.centerIn: parent
+                        width: 40
+                        height: 40
+                        onPaint: {
+                            var ctx = getContext("2d")
+                            ctx.fillStyle = "white"
+                            ctx.beginPath()
+                            ctx.moveTo(10, 5)
+                            ctx.lineTo(35, 20)
+                            ctx.lineTo(10, 35)
+                            ctx.closePath()
+                            ctx.fill()
+                        }
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: player.play()
+                    }
+                }
+                
+                VideoOutput {
+                    id: videoOutput
+                    anchors.fill: parent
+                    fillMode: VideoOutput.PreserveAspectFit
+                }
+                
+                // Simple Play/Pause on Tap
                 TapHandler {
-                    onTapped: root.controlsVisible = !root.controlsVisible
+                    onTapped: {
+                        root.controlsVisible = !root.controlsVisible
+                    }
+                }
+                
+                // Play Icon Overlay (Center)
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: 80
+                    height: 80
+                    radius: 40
+                    color: "#80000000"
+                    visible: player.playbackState !== MediaPlayer.PlayingState && root.controlsVisible
+                    
+                    Text {
+                        anchors.centerIn: parent
+                        text: "▶"
+                        color: "white"
+                        font.pixelSize: 40
+                    }
+                    
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: player.play()
+                    }
+                }
+                
+                // Bottom Controls Bar
+                Rectangle {
+                    anchors.bottom: parent.bottom
+                    width: parent.width
+                    height: 80
+                    color: "#AA000000"
+                    visible: root.controlsVisible && isVideo
+                    
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 15
+                        spacing: 15
+                        
+                        // Play/Pause Button
+                        Text {
+                            text: player.playbackState === MediaPlayer.PlayingState ? "⏸" : "▶"
+                            color: "white"
+                            font.pixelSize: 30
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: player.playbackState === MediaPlayer.PlayingState ? player.pause() : player.play()
+                            }
+                        }
+                        
+                        // Current Time
+                        Text {
+                            text: {
+                                var m = Math.floor(player.position / 60000)
+                                var s = Math.floor((player.position % 60000) / 1000)
+                                return m + ":" + (s < 10 ? "0" + s : s)
+                            }
+                            color: "white"
+                            font.pixelSize: 14
+                        }
+                        
+                        // Slider
+                        Slider {
+                            Layout.fillWidth: true
+                            from: 0
+                            to: player.duration
+                            value: player.position
+                            onMoved: player.setPosition(value)
+                        }
+                        
+                        // Total Time
+                        Text {
+                            text: {
+                                var m = Math.floor(player.duration / 60000)
+                                var s = Math.floor((player.duration % 60000) / 1000)
+                                return m + ":" + (s < 10 ? "0" + s : s)
+                            }
+                            color: "white"
+                            font.pixelSize: 14
+                        }
+                    }
                 }
             }
         }
@@ -307,7 +463,12 @@ Item {
     // Keyboard Navigation
     focus: true
     Keys.onPressed: (event) => {
-        if (event.key === Qt.Key_Left) {
+        if (event.key === Qt.Key_Space) {
+             if (listView.currentItem && listView.currentItem.togglePlay) {
+                 listView.currentItem.togglePlay()
+             }
+             event.accepted = true
+        } else if (event.key === Qt.Key_Left) {
             if (currentIndex > 0) currentIndex--
             event.accepted = true
         } else if (event.key === Qt.Key_Right) {
@@ -335,6 +496,88 @@ Item {
         }
     }
 
+    // Info Overlay
+    Rectangle {
+        id: infoOverlay
+        anchors.fill: parent
+        color: "#CC000000"
+        visible: false
+        z: 25
+        
+        property var meta: null
+        
+        MouseArea { anchors.fill: parent; onClicked: infoOverlay.visible = false } // Click to dismiss
+        
+        Rectangle {
+            anchors.centerIn: parent
+            width: Math.min(parent.width * 0.8, 400)
+            height: Math.min(parent.height * 0.8, 500)
+            color: "#202020"
+            radius: 10
+            border.color: "#404040"
+            border.width: 1
+            
+            // Prevent clicks inside the dialog from closing it
+            MouseArea { anchors.fill: parent; onClicked: (mouse) => mouse.accepted = true }
+            
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 20
+                spacing: 10
+                
+                Text {
+                    text: "Details"
+                    color: "white"
+                    font.pixelSize: 20
+                    font.bold: true
+                    Layout.alignment: Qt.AlignHCenter
+                }
+                
+                Rectangle { height: 1; Layout.fillWidth: true; color: "#404040" }
+                
+                Repeater {
+                    model: infoOverlay.meta ? Object.keys(infoOverlay.meta) : []
+                    delegate: RowLayout {
+                        Layout.fillWidth: true
+                        Text {
+                            text: modelData + ":"
+                            color: "#AAAAAA"
+                            font.pixelSize: 14
+                            Layout.preferredWidth: 100
+                        }
+                        Text {
+                            text: infoOverlay.meta[modelData]
+                            color: "white"
+                            font.pixelSize: 14
+                            Layout.fillWidth: true
+                            wrapMode: Text.Wrap
+                        }
+                        
+                        // Folder Icon Button for "Path"
+                        Button {
+                            visible: modelData === "Path"
+                            text: "📂" // Folder icon
+                            Layout.preferredWidth: 40
+                            Layout.preferredHeight: 30
+                            onClicked: {
+                                console.log("Opening in explorer: " + infoOverlay.meta[modelData])
+                                desktopHelper.openInExplorer(infoOverlay.meta[modelData])
+                            }
+                        }
+                    }
+                }
+                
+                Item { Layout.fillHeight: true } // Spacer
+                
+                Button {
+                    text: "Close"
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: infoOverlay.visible = false
+                }
+            }
+        }
+    }
+
     // Top Bar
     Rectangle {
         id: topBar
@@ -353,12 +596,38 @@ Item {
             onClicked: root.backClicked()
         }
         
-        Button {
-            text: "Edit"
+        RowLayout {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             anchors.rightMargin: 10
-            onClicked: root.isEditing = true
+            spacing: 10
+            
+            Button {
+                text: "Info"
+                onClicked: {
+                    if (listView.currentItem.isVideo) {
+                        // Gather video metadata
+                        var m = {}
+                        m["Filename"] = listView.currentItem.fileName
+                        m["Path"] = listView.currentItem.filePath
+                        // Try to get resolution from video output or metadata
+                        // Note: accessing player directly from delegate is tricky if not exposed
+                        // But we are inside root, we can access model
+                        m["Type"] = "Video"
+                        infoOverlay.meta = m
+                    } else {
+                        // Get image metadata from C++
+                        infoOverlay.meta = root.model.getMetadata(root.currentIndex)
+                    }
+                    infoOverlay.visible = true
+                }
+            }
+
+            Button {
+                text: "Edit"
+                visible: !listView.currentItem.isVideo // Hide edit for videos
+                onClicked: root.isEditing = true
+            }
         }
     }
 }

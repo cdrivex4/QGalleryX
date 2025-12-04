@@ -34,6 +34,10 @@ Item {
     property real startPinchGridSize: 100
     property int zoomTargetIndex: -1
     
+    // Timeline State
+    property int groupingMode: 1 // 1=Day, 3=Month, 4=Year
+    property string currentSectionLabel: ""
+
     // Main Viewport
     GridView {
         id: gridView
@@ -52,6 +56,26 @@ Item {
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AlwaysOn
             active: true
+        }
+        
+        onContentYChanged: {
+            // Calculate center item index to determine current date section
+            var index = indexAt(width / 2, contentY + cellHeight / 2)
+            if (index === -1) index = indexAt(width / 2, contentY)
+            
+            if (index !== -1) {
+                // Role IDs from ImageModel.h:
+                // SectionDayRole = 260
+                // SectionMonthRole = 261
+                // SectionYearRole = 262
+                
+                var role = 260; // Day
+                if (root.groupingMode === 3) role = 261; // Month
+                if (root.groupingMode === 4) role = 262; // Year
+                
+                var section = imageModel.data(imageModel.index(index, 0), role)
+                if (section !== undefined) root.currentSectionLabel = section
+            }
         }
         
         // Animations
@@ -186,5 +210,28 @@ Item {
         color: "#888"
         visible: imageModel.count === 0
         font.pixelSize: 18
+    }
+
+    // Floating Date Header
+    Rectangle {
+        id: sectionHeader
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 10
+        width: headerText.contentWidth + 30
+        height: 30
+        color: "#AA000000"
+        radius: 15
+        visible: root.currentSectionLabel !== "" && imageModel.count > 0
+        z: 10
+        
+        Text {
+            id: headerText
+            anchors.centerIn: parent
+            text: root.currentSectionLabel
+            color: "white"
+            font.bold: true
+            font.pixelSize: 14
+        }
     }
 }

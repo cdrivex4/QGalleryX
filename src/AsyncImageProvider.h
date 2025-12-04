@@ -69,6 +69,7 @@ public:
 
   static QThreadPool *m_threadPool;
   static std::atomic<int> s_requestCounter;
+  static std::atomic<int> s_logLevel;
 
 private:
   static QCache<QString, QImage> m_cache;

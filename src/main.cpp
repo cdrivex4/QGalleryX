@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QLoggingCategory>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -7,14 +7,64 @@
 #include <QSGRendererInterface>
 #include <QUrl>
 
+#include <QDateTime>
+#include <QThread>
+#include <iostream>
+
 #include "AlbumModel.h"
 #include "AsyncImageProvider.h"
+#include "DesktopHelper.h"
 #include "GroupedProxyModel.h"
 #include "ImageModel.h"
 #include "SettingsHelper.h"
 #include "SystemMonitor.h"
 
+#include <QFile>
+#include <QTextStream>
+
+void customMessageHandler(QtMsgType type, const QMessageLogContext &context,
+                          const QString &msg) {
+  QString txt;
+  QString timeStr =
+      QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss.zzz");
+  QString threadId = QString::number((quint64)QThread::currentThreadId());
+
+  switch (type) {
+  case QtDebugMsg:
+    txt = QString("[%1] [Thread %2] Debug: %3").arg(timeStr, threadId, msg);
+    break;
+  case QtWarningMsg:
+    txt = QString("[%1] [Thread %2] Warning: %3").arg(timeStr, threadId, msg);
+    break;
+  case QtCriticalMsg:
+    txt = QString("[%1] [Thread %2] Critical: %3").arg(timeStr, threadId, msg);
+    break;
+  case QtFatalMsg:
+    txt = QString("[%1] [Thread %2] Fatal: %3").arg(timeStr, threadId, msg);
+    break;
+  case QtInfoMsg:
+    txt = QString("[%1] [Thread %2] Info: %3").arg(timeStr, threadId, msg);
+    break;
+  }
+
+  // Output to std::cout/err for immediate visibility in console/redirect
+  if (type == QtCriticalMsg || type == QtFatalMsg) {
+    std::cerr << txt.toStdString() << std::endl;
+  } else {
+    std::cout << txt.toStdString() << std::endl;
+  }
+
+  // Output to file
+  QFile outFile("application.log");
+  if (outFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
+    QTextStream ts(&outFile);
+    ts << txt << Qt::endl;
+  }
+}
+
 int main(int argc, char *argv[]) {
+  qInstallMessageHandler(customMessageHandler);
+
   // Suppress annoying JPEG warnings
   QLoggingCategory::setFilterRules("qt.gui.imageio.jpeg.warning=false");
 
@@ -38,7 +88,7 @@ int main(int argc, char *argv[]) {
   else if (api == 4)
     QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
 
-  QGuiApplication app(argc, argv);
+  QApplication app(argc, argv);
 
   qmlRegisterType<ImageModel>("SamsungGallery", 1, 0, "ImageModel");
   qmlRegisterType<AlbumModel>("SamsungGallery", 1, 0, "AlbumModel");
@@ -60,6 +110,10 @@ int main(int argc, char *argv[]) {
   SystemMonitor systemMonitor;
   systemMonitor.startMonitoring(1000); // Update every 1 second
   engine.rootContext()->setContextProperty("systemMonitor", &systemMonitor);
+
+  // Expose DesktopHelper
+  DesktopHelper desktopHelper;
+  engine.rootContext()->setContextProperty("desktopHelper", &desktopHelper);
 
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

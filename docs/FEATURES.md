@@ -58,71 +58,17 @@
 - **Cross-platform compatibility** (Windows-focused)
 
 ### 4. Performance Monitoring
-# Samsung Gallery Clone - Feature Documentation
-
-## Core Features
-
-### 1. Image Gallery
-- **Grid-based browsing** with customizable thumbnail sizes
-- **Recursive directory scanning** for image discovery
-- **Date-based grouping** (Today, Yesterday, Month Year)
-- **Video file support** with dedicated placeholders
-- **Smooth scrolling** with optimized caching
-- **Zoom functionality** via Ctrl+Wheel and pinch gestures
-
-### 2. Image Viewer
-- **Full-screen viewing** with navigation controls
-- **Multi-touch zoom** (pinch to zoom, double-tap)
-- **Keyboard navigation** (arrow keys, escape)
-- **Image editing** with basic crop functionality
-- **Performance monitoring** with load time tracking
-
-### 3. Performance Optimization
-- **Asynchronous image loading** with thread pool
-- **Memory-efficient caching** with configurable sizes
-- **GPU acceleration** with multiple API support
-- **Lazy loading** for smooth performance
-- **Background processing** for file operations
-
-### 4. Settings and Configuration
-- **Graphics API selection** (Direct3D11, Vulkan, OpenGL, Software)
-- **Performance tuning** (thumbnail size, cache size, thread count)
-- **System monitoring** (CPU usage, memory usage)
-- **Persistent settings** with automatic saving
-
-### 5. User Interface
-- **Tab-based navigation** (Pictures, Albums, Stories, Menu)
-- **Dark theme** optimized for media viewing
-- **Touch-friendly controls** for tablet/pen input
-- **Keyboard shortcuts** for power users
-- **Performance overlay** with real-time stats
-
-## Technical Features
-
-### 1. Async Image Processing
-- **Thread pool management** for concurrent loading
-- **Cancelable operations** to prevent memory leaks
-- **Cache integration** for repeated access
-- **Error handling** with fallback images
-
-### 2. Data Models
-- **ImageModel** for file-based data management
-- **AlbumModel** for folder-based organization
-- **QAbstractListModel integration** for QML compatibility
-- **Background data loading** with progress tracking
-
-### 3. System Integration
-- **Windows API integration** for system monitoring
-- **File system access** with proper path handling
-- **Memory management** with Qt's smart pointers
-- **Cross-platform compatibility** (Windows-focused)
-
-### 4. Performance Monitoring
 - **Real-time FPS counter**
 - **Load time tracking** with statistics
 - **CPU usage monitoring** (Windows only)
 - **Memory usage tracking** (Windows only)
 - **Cache usage visualization**
+- **GPU Load & VRAM usage** (via PDH/DXGI)
+
+### 5. Build System
+- **Unified Build Script**: `build.ps1` handles configuration, building, and cleaning.
+- **Stale Build Prevention**: Automatic cleaning of `*_autogen` folders.
+- **Dependency Management**: Automated checks for Qt modules and LibRaw.
 
 ## File Format Support
 

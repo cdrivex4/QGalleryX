@@ -82,11 +82,11 @@ cd Release
 
 ### Using PowerShell Scripts
 ```powershell
-# Clean build (optional)
-.\build_clean.ps1
-
 # Build the project
 .\build.ps1
+
+# Clean build
+.\build.ps1 -Clean
 
 # Deploy the application
 .\deploy.ps1
@@ -254,7 +254,8 @@ SamsungGalleryClone/
 │   ├── ImageModel.cpp/h   # Image data model
 │   ├── AlbumModel.cpp/h   # Album data model
 │   ├── SettingsHelper.cpp/h # Configuration and system info
-│   └── AsyncImageProvider.cpp/h # Async image loading
+│   ├── AsyncImageProvider.cpp/h # Async image loading
+│   └── DesktopHelper.cpp/h # Desktop integration (New)
 ├── resources/qml/          # QML user interface files
 │   ├── Main.qml           # Main application window
 │   ├── GalleryView.qml    # Grid-based image browser
@@ -274,7 +275,7 @@ SamsungGalleryClone/
 ├── CMakeLists.txt          # CMake build configuration
 ├── build.ps1              # PowerShell build script
 ├── deploy.ps1             # PowerShell deployment script
-└── build_clean/           # Build output directory
+└── build/                 # Build output directory
 ```
 
 ---

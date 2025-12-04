@@ -50,14 +50,14 @@ cd Release
 
 #### Method 2: Using PowerShell Scripts
 
-The project includes PowerShell scripts for building and deployment:
+The project includes a robust PowerShell script for building and deployment:
 
 ```powershell
-# Clean build (optional)
-.\build_clean.ps1
-
-# Build the project
+# Build the project (Incremental)
 .\build.ps1
+
+# Clean build (Removes build directory and rebuilds)
+.\build.ps1 -Clean
 
 # Deploy the application
 .\deploy.ps1

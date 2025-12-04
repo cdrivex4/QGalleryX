@@ -23,6 +23,16 @@ ApplicationWindow {
         property int graphicsApi: 0
     }
 
+    AlbumModel {
+        id: albumModel
+    }
+
+    onCurrentPathChanged: {
+        if (currentPath !== "") {
+            albumModel.scanAlbums(currentPath)
+        }
+    }
+
     FolderDialog {
         id: folderDialog
         title: "Select Image Folder"
@@ -176,8 +186,14 @@ ApplicationWindow {
 
             // Tab 1: Albums
             AlbumsView {
-                // Placeholder
+                model: albumModel
+                onImageClicked: (index, model) => {
+                    photoViewer.model = model
+                    photoViewer.currentIndex = index
+                    photoViewer.visible = true
+                }
             }
+
 
             // Tab 2: Stories
             Item {

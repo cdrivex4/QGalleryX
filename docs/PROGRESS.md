@@ -188,7 +188,7 @@ The main areas for improvement are:
 The project shows strong potential for becoming a full-featured photo gallery application with proper development resources and time investment.
 ## Session Update: System Stats & Build Fixes (2025-11-30)
 
-### ? Completed Tasks
+### ✅ Completed Tasks
 1.  **System Statistics Implementation**:
     - Created SystemMonitor class for cross-platform (Windows-focused) CPU and Memory monitoring.
     - Integrated SystemMonitor with QML StatsOverlay.
@@ -204,8 +204,47 @@ The project shows strong potential for becoming a full-featured photo gallery ap
     - **Robust Script**: Rewrote 'build.ps1' to handle directory context correctly and ensure QML/MOC freshness.
     - **QML Integration**: Fixed missing 'UsageGraph.qml' in CMakeLists.txt.
 
-### ?? Next Steps
+### 🔜 Next Steps
 1.  **Albums Feature**: Implement 'AlbumsView.qml' and backend logic to group images by folder.
 2.  **GPU Monitoring**: Implement real GPU usage stats (currently placeholder).
 3.  **Video Player**: Replace placeholder with functional player.
 
+
+## Session Update: Build System Robustness (2025-12-04)
+
+### ✅ Completed Tasks
+1.  **Build Script Overhaul**:
+    - Updated `build.ps1` to include a `-Clean` switch for full rebuilds.
+    - Implemented automatic stale build prevention by removing `*_autogen` folders.
+    - Added robust process management to kill stale instances before building.
+    - Improved error handling with explicit checks for CMake steps.
+
+2.  **Dependency Verification**:
+    - Verified `LibRaw` integration and file references.
+    - Confirmed all QML and source files are correctly referenced in `CMakeLists.txt`.
+
+### 🔜 Next Steps
+1.  **Open in Explorer**: Implement feature to open file location from Info view.
+
+
+## Session Update: Open in Explorer Feature (2025-12-04)
+
+### ✅ Completed Tasks
+1.  **Feature Implementation**:
+    - Created `DesktopHelper` C++ class to handle Windows Explorer interaction.
+    - Implemented `openInExplorer` method using `QProcess` to launch `explorer.exe` with `/select` argument.
+    - Exposed `DesktopHelper` to QML via `main.cpp`.
+
+2.  **UI Integration**:
+    - Added a folder icon button to the "Info" overlay in `PhotoViewer.qml`.
+    - Connected the button to the C++ backend.
+
+3.  **Bug Fixes & Refinements**:
+    - **LibRaw Conflict**: Resolved linker error by excluding conflicting `postprocessing_ph.cpp` from build.
+    - **Metadata Keys**: Standardized metadata keys to Capitalized Case (e.g., "Path") in `ImageModel.cpp` to match QML.
+    - **Overlay Interaction**: Added `MouseArea` to Info overlay to prevent accidental closing.
+    - **Explorer Arguments**: Fixed argument passing to `explorer.exe` using `QProcess::setNativeArguments` to handle spaces in paths correctly.
+
+### 🔜 Next Steps
+1.  **Albums Feature**: Implement full album functionality.
+2.  **Video Player**: Implement actual video playback.
