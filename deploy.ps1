@@ -1,23 +1,32 @@
-$env:PATH = "D:\Qt\6.9.3\mingw_64\bin;D:\Qt\Tools\mingw1310_64\bin;$env:PATH"
+$ErrorActionPreference = "Stop"
 
-$BuildDir = "build"
-$DeployDir = "deploy"
-$ExeName = "appSamsungGallery.exe"
+$BUILD_DIR = "build"
+$DIST_DIR = "Dist/SamsungGallery"
+$QT_BIN_DIR = "D:\Qt\6.9.3\mingw_64\bin"
+$WINDEPLOYQT = "D:\Qt\6.9.3\mingw_64\bin\windeployqt.exe"
+$FFMPEG_BIN = "3rdparty/ffmpeg/bin"
 
-if (Test-Path $DeployDir) {
-    Remove-Item -Recurse -Force $DeployDir
+Write-Host "--- Starting Deployment ---" -ForegroundColor Cyan
+
+# 1. Clean Dist Dir
+if (Test-Path $DIST_DIR) {
+    Remove-Item -Recurse -Force $DIST_DIR
 }
-mkdir $DeployDir
+New-Item -ItemType Directory -Force -Path $DIST_DIR | Out-Null
 
-# Copy executable
-Copy-Item "$BuildDir\$ExeName" "$DeployDir\$ExeName"
+# 2. Copy Executable
+Write-Host "Copying executable..."
+Copy-Item "$BUILD_DIR/appSamsungGallery.exe" -Destination $DIST_DIR
 
-# Run windeployqt
-windeployqt --qmldir resources/qml --dir $DeployDir "$DeployDir\$ExeName"
+# 3. Run windeployqt
+Write-Host "Running windeployqt..."
+& $WINDEPLOYQT --qmldir "resources/qml" --dir $DIST_DIR "$DIST_DIR/appSamsungGallery.exe" --release --no-translations --compiler-runtime
 
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "Deployment successful! Output in $DeployDir" -ForegroundColor Green
-}
-else {
-    Write-Host "Deployment failed!" -ForegroundColor Red
-}
+# 4. Copy FFmpeg DLLs
+Write-Host "Copying FFmpeg DLLs..."
+Get-ChildItem "$FFMPEG_BIN/*.dll" | Copy-Item -Destination $DIST_DIR
+
+# 5. Copy LibRaw DLLs? (Static, so no)
+
+Write-Host "--- Deployment Complete ---" -ForegroundColor Green
+Write-Host "Output: $DIST_DIR"

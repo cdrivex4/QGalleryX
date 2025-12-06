@@ -247,4 +247,24 @@ The project shows strong potential for becoming a full-featured photo gallery ap
 
 ### 🔜 Next Steps
 1.  **Albums Feature**: Implement full album functionality.
-2.  **Video Player**: Implement actual video playback.
+
+## Session Update: Video Thumbnail Improvements (2025-12-06)
+
+### ✅ Completed Tasks
+1.  **Black Frame Detection**:
+    - Implemented smart seeking logic in `VideoThumbnailer.cpp`.
+    - Detects whether a decoded frame is "mostly black" (average luma < 25).
+    - Automatically retries at 10% and 25% of the video duration if the start is dark.
+
+2.  **D3D11 Hardware Acceleration**:
+    - Fully integrated D3D11VA for video decoding in FFmpeg pipeline.
+    - Implemented robustness fixes (mutex for context creation, semaphore for concurrency limits).
+    - Added automatic software fallback if hardware decoding fails.
+
+3.  **Performance Fixes**:
+    - Resolved 100% CPU usage caused by busy loop in `TaskScheduler` worker threads.
+    - Verified memory usage is within expected limits (1.5GB total vs 500MB cache due to Qt/D3D overhead).
+
+### 🔜 Next Steps
+1.  **D3D11 Stability Monitoring**: Ensure no driver timeouts on varied hardware.
+2.  **Albums Feature**: Continue implementation of full album functionality.

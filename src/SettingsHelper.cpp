@@ -1,14 +1,17 @@
 #include "SettingsHelper.h"
 #include "AsyncImageProvider.h"
+#include "LogManager.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QProcess>
+#include <QQuickWindow>
 #include <QSGRendererInterface>
 #include <QThread>
 
 SettingsHelper::SettingsHelper(QObject *parent)
     : QObject(parent), m_settings("SamsungClone", "Gallery") {
   AsyncImageProvider::s_logLevel = logLevel();
+  AsyncImageProvider::s_accelerateRaw = rawAcceleration();
 }
 
 QString SettingsHelper::graphicsApi() const { return m_graphicsApi; }
@@ -80,7 +83,20 @@ void SettingsHelper::setLogLevel(int level) {
     return;
   m_settings.setValue("logLevel", level);
   AsyncImageProvider::s_logLevel = level;
+  LogManager::instance().setLogLevel(level); // Apply to LogManager
   emit logLevelChanged();
+}
+
+bool SettingsHelper::rawAcceleration() const {
+  return m_settings.value("rawAcceleration", true).toBool();
+}
+
+void SettingsHelper::setRawAcceleration(bool enable) {
+  if (rawAcceleration() == enable)
+    return;
+  m_settings.setValue("rawAcceleration", enable);
+  AsyncImageProvider::s_accelerateRaw = enable;
+  emit rawAccelerationChanged();
 }
 
 void SettingsHelper::restartApp() {
@@ -96,4 +112,38 @@ bool SettingsHelper::isApiSupported(int apiValue) {
 
 QVariantMap SettingsHelper::getCacheStats() {
   return AsyncImageProvider::getCacheStats();
+}
+
+void SettingsHelper::refreshGraphicsInfo(QObject *window) {
+  if (!window)
+    return;
+
+  QQuickWindow *quickWindow = qobject_cast<QQuickWindow *>(window);
+  if (quickWindow) {
+    QSGRendererInterface *rif = quickWindow->rendererInterface();
+    if (rif) {
+      QSGRendererInterface::GraphicsApi api = rif->graphicsApi();
+      switch (api) {
+      case QSGRendererInterface::Direct3D11:
+        m_graphicsApi = "Direct3D 11";
+        break;
+      case QSGRendererInterface::Vulkan:
+        m_graphicsApi = "Vulkan";
+        break;
+      case QSGRendererInterface::OpenGL:
+        m_graphicsApi = "OpenGL";
+        break;
+      case QSGRendererInterface::Software:
+        m_graphicsApi = "Software";
+        break;
+      case QSGRendererInterface::Metal:
+        m_graphicsApi = "Metal";
+        break;
+      default:
+        m_graphicsApi = "Unknown";
+        break;
+      }
+      emit graphicsApiChanged();
+    }
+  }
 }

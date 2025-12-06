@@ -18,16 +18,25 @@ This document outlines the key components of the application and their relations
 
 ### 3. `AsyncImageProvider`
 -   **Role**: Loads images asynchronously for QML `Image` components.
--   **Dependencies**: `QThreadPool`, `QImageReader`.
+-   **Dependencies**: `TaskScheduler`, `VideoThumbnailer`, `LibRaw`, `QImageReader`.
 -   **Used By**: All QML `Image` components using `image://async/` scheme.
--   **Key Features**: Caching, Prioritization, Cancellation.
+-   **Key Features**: Caching (LRU), Prioritization (Viewer > Grid), D3D11 Video Decodes, RAW Support.
 
-### 4. `SystemMonitor`
+### 4. `TaskScheduler`
+-   **Role**: Manages separate thread pools for CPU-bound (decoding) and IO-bound (scanning) tasks.
+-   **Features**: Priority Queues, Dynamic Thread Scaling (Sleep on idle).
+
+### 5. `VideoThumbnailer`
+-   **Role**: D3D11 Hardware-accelerated video thumbnail generation.
+-   **Dependencies**: `FFmpeg` (avcodec, avformat, swscale, d3d11va), `Direct3D11`.
+-   **Features**: Black Frame Detection, Smart Retry, Software Fallback.
+
+### 6. `SystemMonitor`
 -   **Role**: Monitors CPU, RAM, and GPU usage.
 -   **Dependencies**: `PDH` (Windows), `DXGI` (Windows).
 -   **Used By**: `StatsOverlay.qml`.
 
-### 5. `SettingsHelper`
+### 7. `SettingsHelper`
 -   **Role**: Persists application settings (Last Folder, Graphics API).
 -   **Dependencies**: `QSettings`.
 -   **Used By**: `Main.qml`.

@@ -1,22 +1,19 @@
 #include "ImageModel.h"
+#include "TaskScheduler.h"
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
+#include <QElapsedTimer>
 #include <QFileInfo>
 #include <QImageReader>
+#include <QRegularExpression>
 #include <QStandardPaths>
-#include <QtConcurrent>
 #include <algorithm>
 #include <libraw/libraw.h>
 
 ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
-  // Hardcoded default path as requested
-  QString defaultPath =
-      QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-
-  // Directly scan. Validation happens in the worker thread.
-  scanDirectory(defaultPath);
+  // Constructor should be lightweight. Scanning happens via scanDirectory().
 }
 
 int ImageModel::rowCount(const QModelIndex &parent) const {
@@ -72,6 +69,16 @@ QVariant ImageModel::data(const QModelIndex &index, int role) const {
     }
     return exif;
   }
+  case IsRawRole: {
+    QString ext = QFileInfo(info.filePath).suffix().toLower();
+    bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" ||
+                  ext == "nef" || ext == "sr2" || ext == "srf" ||
+                  ext == "orf" || ext == "rw2" || ext == "pef" || ext == "raf");
+    // qInfo() << "Checking RAW for" << info.filePath << ": " << isRaw; //
+    // Debugging
+    return isRaw;
+  }
+
   default:
     return QVariant();
   }
@@ -87,80 +94,141 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   roles[SectionYearRole] = "sectionYear";
   roles[SectionWeekRole] = "sectionWeek";
   roles[ExifRole] = "exif";
+  roles[IsRawRole] = "isRaw";
   return roles;
 }
 
 void ImageModel::scanDirectory(const QString &path) {
+  if (m_isLoading) {
+    return;
+  }
+
+  m_isLoading = true;
+  emit isLoadingChanged();
+
   // Clear current images immediately so UI updates
   beginResetModel();
   m_images.clear();
   endResetModel();
 
-  // Run scanning in a background thread
-  QFuture<QList<ImageInfo>> future = QtConcurrent::run([path]() {
-    QList<ImageInfo> images;
-    QString cleanPath = path;
+  // Clear previous pending tasks (e.g. thumbnails from old folder)
+  TaskScheduler::instance().clear();
 
-    // Handle file:/// prefix
-    if (cleanPath.startsWith("file:///")) {
-      cleanPath = cleanPath.mid(8);
-    } else if (cleanPath.startsWith("file:")) {
-      cleanPath = cleanPath.mid(5);
-    }
+  // Run scanning via TaskScheduler
+  TaskScheduler::instance().addTask(
+      [this, path]() {
+        QElapsedTimer timer;
+        timer.start();
 
-    // Handle Windows paths (e.g., /C:/Users...)
-    if (cleanPath.startsWith("/") && cleanPath.contains(":")) {
-      cleanPath = cleanPath.mid(1);
-    }
+        QString cleanPath;
+        QUrl url(path);
+        if (url.isValid() && url.isLocalFile()) {
+          cleanPath = url.toLocalFile();
+        } else {
+          // Fallback for raw paths (not proper URLs)
+          cleanPath = path;
+        }
 
-    // Ensure drive letter is uppercase for consistency
-    if (cleanPath.length() > 1 && cleanPath[1] == ':') {
-      cleanPath[0] = cleanPath[0].toUpper();
-    }
+        // Handle odd edge case: /C:/Users... which QUrl might return on some Qt
+        // versions/platforms
+        if (cleanPath.startsWith("/") && cleanPath.length() > 2 &&
+            cleanPath[2] == ':') {
+          cleanPath = cleanPath.mid(1);
+        }
 
-    if (!QDir(cleanPath).exists()) {
-      qWarning() << "Directory does not exist:" << cleanPath;
-      return images;
-    }
+        cleanPath = QDir::toNativeSeparators(cleanPath);
 
-    qDebug() << "Scanning directory:" << cleanPath;
+        if (cleanPath.length() > 1 && cleanPath[1] == ':') {
+          cleanPath[0] = cleanPath[0].toUpper();
+        }
 
-    // Recursive scan
-    QDirIterator it(cleanPath,
-                    QStringList() << "*.jpg" << "*.jpeg" << "*.png" << "*.mp4"
-                                  << "*.mkv" << "*.avi" << "*.mov"
-                                  << "*.arw" << "*.cr2" << "*.dng" << "*.nef"
-                                  << "*.webp" << "*.heic" << "*.tiff",
-                    QDir::Files, QDirIterator::Subdirectories);
-
-    while (it.hasNext()) {
-      it.next();
-      ImageInfo info;
-      info.filePath = it.filePath();
-      info.fileName = it.fileName();
-      info.date = it.fileInfo().birthTime(); // Use creation time
-      images.append(info);
-    }
-
-    // Sort by date (newest first)
-    std::sort(
-        images.begin(), images.end(),
-        [](const ImageInfo &a, const ImageInfo &b) { return a.date > b.date; });
-
-    return images;
-  });
-
-  auto *watcher = new QFutureWatcher<QList<ImageInfo>>(this);
-  connect(watcher, &QFutureWatcher<QList<ImageInfo>>::finished, this,
-          [this, watcher]() {
-            beginResetModel();
-            m_images = watcher->result();
-            endResetModel();
-            watcher->deleteLater();
-            qDebug() << "Scanned" << m_images.count() << "items.";
+        if (!QDir(cleanPath).exists()) {
+          qWarning() << "Directory does not exist:" << cleanPath;
+          QMetaObject::invokeMethod(this, [this]() {
+            m_isLoading = false;
+            emit isLoadingChanged();
           });
+          return;
+        }
 
-  watcher->setFuture(future);
+        qDebug() << "Scanning directory:" << cleanPath;
+
+        QDirIterator it(cleanPath,
+                        QStringList()
+                            << "*.jpg" << "*.jpeg" << "*.png" << "*.mp4"
+                            << "*.mkv" << "*.avi" << "*.mov"
+                            << "*.arw" << "*.cr2" << "*.dng" << "*.nef"
+                            << "*.webp" << "*.heic"
+                            << "*.tiff"
+                            << "*.bmp" << "*.gif" << "*.ico" << "*.tga"
+                            << "*.sr2" << "*.srf" << "*.orf" << "*.rw2"
+                            << "*.pef" << "*.raf"
+                            << "*.webm" << "*.flv" << "*.vob" << "*.ogg"
+                            << "*.ogv"
+                            << "*.mts" << "*.m2ts" << "*.ts" << "*.3gp",
+                        QDir::Files, QDirIterator::Subdirectories);
+
+        QList<ImageInfo> batch;
+        const int BATCH_SIZE = 100;
+        QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
+
+        while (it.hasNext()) {
+          it.next();
+          QFileInfo fileInfo = it.fileInfo();
+          ImageInfo info;
+          info.filePath = fileInfo.absoluteFilePath();
+          info.fileName = fileInfo.fileName();
+          info.size = fileInfo.size();
+          info.date = fileInfo.birthTime(); // Default
+
+          // Optimize: Try parsing filename for date
+          QRegularExpressionMatch match = dateRegex.match(info.fileName);
+          if (match.hasMatch()) {
+            QString dateStr = match.captured(1) + match.captured(2);
+            QDateTime dt = QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
+            if (dt.isValid())
+              info.date = dt;
+          }
+
+          batch.append(info);
+
+          if (batch.size() >= BATCH_SIZE) {
+            QMetaObject::invokeMethod(this, [this, batch]() {
+              beginInsertRows(QModelIndex(), m_images.count(),
+                              m_images.count() + batch.count() - 1);
+              m_images.append(batch);
+              endInsertRows();
+            });
+            batch.clear();
+          }
+        }
+
+        // Append remaining
+        if (!batch.isEmpty()) {
+          QMetaObject::invokeMethod(this, [this, batch]() {
+            beginInsertRows(QModelIndex(), m_images.count(),
+                            m_images.count() + batch.count() - 1);
+            m_images.append(batch);
+            endInsertRows();
+          });
+        }
+
+        // Final Sort and completion
+        QMetaObject::invokeMethod(this, [this, timer]() {
+          beginResetModel();
+          std::sort(m_images.begin(), m_images.end(),
+                    [](const ImageInfo &a, const ImageInfo &b) {
+                      return a.date > b.date;
+                    });
+          endResetModel();
+
+          m_isLoading = false;
+          emit isLoadingChanged();
+          qDebug() << "Scanning finished in" << timer.elapsed() << "ms. Found"
+                   << m_images.count() << "items.";
+        });
+      },
+      TaskScheduler::IO_BOUND, TaskScheduler::Normal);
 }
 
 bool ImageModel::cropImage(int index, const QRectF &cropRect) {
@@ -174,12 +242,11 @@ bool ImageModel::cropImage(int index, const QRectF &cropRect) {
   if (img.isNull())
     return false;
 
-  // Convert relative rect (0.0-1.0) to pixels
   QRect rect(cropRect.x() * img.width(), cropRect.y() * img.height(),
              cropRect.width() * img.width(), cropRect.height() * img.height());
 
   QImage cropped = img.copy(rect);
-  return cropped.save(filePath); // Overwrite original for now (simple edit)
+  return cropped.save(filePath);
 }
 
 QVariantMap ImageModel::getMetadata(int index) {
@@ -194,7 +261,9 @@ QVariantMap ImageModel::getMetadata(int index) {
   meta["Size"] = QString("%1 KB").arg(QFileInfo(info.filePath).size() / 1024);
 
   QString ext = QFileInfo(info.filePath).suffix().toLower();
-  bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef");
+  bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
+                ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
+                ext == "pef" || ext == "raf");
 
   if (isRaw) {
     LibRaw RawProcessor;

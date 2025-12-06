@@ -23,7 +23,11 @@ public:
     CountRole
   };
 
+  Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+
   explicit AlbumModel(QObject *parent = nullptr);
+
+  bool isLoading() const { return m_isLoading; }
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   QVariant data(const QModelIndex &index,
@@ -33,9 +37,11 @@ public:
   Q_INVOKABLE void scanAlbums(const QString &path);
 
 signals:
+  void isLoadingChanged();
   void scanFinished();
 
 private:
+  bool m_isLoading = false;
   QVector<AlbumInfo> m_albums;
 };
 

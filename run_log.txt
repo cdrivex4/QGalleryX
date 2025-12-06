@@ -1,0 +1,46 @@
+[2025-12-07 00:48:34.882] [Thread 16960] Debug: [DIAG] Supported Image Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
+[2025-12-07 00:48:35.374] [Thread 16960] Debug: SystemMonitor: Starting monitoring with interval 1000 ms
+[2025-12-07 00:48:35.655] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:20:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[2025-12-07 00:48:36.161] [Thread 16960] Debug: Loading last folder: I:/MY SDCArds/100CANON
+[2025-12-07 00:48:36.162] [Thread 16960] Debug: [TaskScheduler] Started 4 CPU threads and 2 IO threads.
+[2025-12-07 00:48:36.164] [Thread 16960] Debug: [TaskScheduler] Cleared all pending tasks.
+[2025-12-07 00:48:36.167] [Thread 32836] Debug: Scanning directory: "I:/MY SDCArds/100CANON"
+[2025-12-07 00:48:38.980] [Thread 16960] Debug: Scanning finished in 2814 ms. Found 2327 items.
+[2025-12-07 00:48:38.991] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 358.434 MB (Delta: 358.434 ) | VRAM: 34.9414 MB (Delta: 34.9414 )
+[2025-12-07 00:48:39.562] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 237.734 MB (Delta: -120.699 ) | VRAM: 35.7148 MB (Delta: 0.773438 )
+[2025-12-07 00:48:40.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 302.441 MB (Delta: 64.707 ) | VRAM: 35.0586 MB (Delta: -0.65625 )
+[2025-12-07 00:48:42.414] [Thread 31960] Info: [FFmpeg] Initialized D3D11VA Hardware Acceleration.
+[2025-12-07 00:48:43.365] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 336.074 MB (Delta: 33.6328 ) | VRAM: 107.047 MB (Delta: 71.9883 )
+[2025-12-07 00:48:45.365] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 355.465 MB (Delta: 19.3906 ) | VRAM: 232.922 MB (Delta: 125.875 )
+[2025-12-07 00:48:53.377] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 410.059 MB (Delta: 54.5938 ) | VRAM: 253.469 MB (Delta: 20.5469 )
+[2025-12-07 00:48:56.365] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 464.16 MB (Delta: 54.1016 ) | VRAM: 295.656 MB (Delta: 42.1875 )
+[2025-12-07 00:49:00.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 1026.93 MB (Delta: 562.773 ) | VRAM: 295.781 MB (Delta: 0.125 )
+[2025-12-07 00:49:01.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 1692.75 MB (Delta: 665.82 ) | VRAM: 295.781 MB (Delta: 0 )
+[2025-12-07 00:49:02.383] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 2320.91 MB (Delta: 628.156 ) | VRAM: 295.781 MB (Delta: 0 )
+[2025-12-07 00:49:08.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 2756.07 MB (Delta: 435.164 ) | VRAM: 295.875 MB (Delta: 0.09375 )
+[2025-12-07 00:49:09.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 3393.96 MB (Delta: 637.891 ) | VRAM: 295.875 MB (Delta: 0 )
+[2025-12-07 00:49:10.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 4088.6 MB (Delta: 694.633 ) | VRAM: 295.875 MB (Delta: 0 )
+[2025-12-07 00:49:11.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 4838.04 MB (Delta: 749.441 ) | VRAM: 295.875 MB (Delta: 0 )
+[2025-12-07 00:49:12.369] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 5582.08 MB (Delta: 744.043 ) | VRAM: 295.875 MB (Delta: 0 )
+[2025-12-07 00:49:13.366] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 6331.5 MB (Delta: 749.418 ) | VRAM: 295.875 MB (Delta: 0 )
+[2025-12-07 00:49:16.759] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 13647.4 MB (Delta: 7315.87 ) | VRAM: 638.125 MB (Delta: 342.25 )
+[2025-12-07 00:49:19.463] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 11648.4 MB (Delta: -1998.93 ) | VRAM: 6250.08 MB (Delta: 5611.95 )
+[2025-12-07 00:49:20.606] [Thread 16960] Debug: [SystemMonitor] Resource Update: RAM: 13081.9 MB (Delta: 1433.43 ) | VRAM: 7427.83 MB (Delta: 1177.75 )
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:143: TypeError: Cannot read property 'gpuVramUsedMB' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:135: TypeError: Cannot read property 'gpuName' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:419: TypeError: Cannot read property 'graphicsApi' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:239: TypeError: Cannot read property 'logLevel' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:224: TypeError: Cannot read property 'rawAcceleration' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:221: TypeError: Cannot read property 'rawAcceleration' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:213: TypeError: Cannot read property 'concurrentThreads' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:202: TypeError: Cannot read property 'cacheSizeMB' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:191: TypeError: Cannot read property 'gridSize' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:180: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:353: TypeError: Cannot call method 'getGpuName' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:292: TypeError: Cannot read property 'graphicsApi' of null
+[2025-12-07 00:49:20.607] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:276: TypeError: Cannot read property 'selectedApi' of null
+[2025-12-07 00:49:21.512] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:49:21.512] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:49:21.512] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:49:21.512] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:49:21.512] [Thread 16960] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null

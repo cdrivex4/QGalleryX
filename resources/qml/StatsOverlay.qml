@@ -105,7 +105,7 @@ Item {
             }
             
             Text {
-                text: "Cache: " + (root.cacheCost / 1024).toFixed(1) + " / " + (root.cacheMax / 1024).toFixed(1) + " MB"
+                text: "RAM Cache: " + (root.cacheCost / 1024).toFixed(1) + " / " + (root.cacheMax / 1024).toFixed(1) + " MB"
                 color: "white"
                 font.pixelSize: 12
             }
@@ -216,6 +216,22 @@ Item {
 
             // Log Level
             Text { text: "Log Level: " + logLevelCombo.currentText; color: "white"; font.pixelSize: 11 }
+            
+            // Raw Acceleration
+            Text { text: "RAW: " + (appSettings.rawAcceleration ? "Fast Preview" : "Full Decode"); color: "white"; font.pixelSize: 11 }
+            CheckBox {
+                text: "Use Embedded Preview"
+                checked: appSettings.rawAcceleration
+                onCheckedChanged: appSettings.rawAcceleration = checked
+                width: parent.width
+                contentItem: Text {
+                    text: parent.text
+                    color: parent.checked ? "#00FF00" : "#ccc"
+                    leftPadding: parent.indicator.width + parent.spacing
+                    verticalAlignment: Text.AlignVCenter
+                }
+            }
+
             ComboBox {
                 id: logLevelCombo
                 width: parent.width

@@ -46,6 +46,9 @@ void AlbumModel::scanAlbums(const QString &path) {
   if (path.isEmpty())
     return;
 
+  m_isLoading = true;
+  emit isLoadingChanged();
+
   QtConcurrent::run([this, path]() {
     QString cleanPath = path;
     if (cleanPath.startsWith("file:///")) {
@@ -58,6 +61,10 @@ void AlbumModel::scanAlbums(const QString &path) {
 
     QDirIterator it(cleanPath, nameFilters, QDir::Files,
                     QDirIterator::Subdirectories);
+
+    // Batch updates to avoid blocking UI
+    int batchSize = 0;
+
     while (it.hasNext()) {
       it.next();
       QFileInfo fileInfo = it.fileInfo();
@@ -65,7 +72,8 @@ void AlbumModel::scanAlbums(const QString &path) {
       QString dirPath = fileInfo.dir().absolutePath();
       QString filePath = "file:///" + fileInfo.absoluteFilePath();
 
-      if (!albumMap.contains(dirPath)) {
+      bool newAlbum = !albumMap.contains(dirPath);
+      if (newAlbum) {
         AlbumInfo info;
         info.name = dirName;
         info.path = dirPath;
@@ -78,13 +86,35 @@ void AlbumModel::scanAlbums(const QString &path) {
           albumMap[dirPath].coverPaths.append(filePath);
         }
       }
+
+      batchSize++;
+
+      // Update UI every 50 items or new album found to make it progressive
+      if (batchSize >= 50 || (newAlbum && albumMap.count() <= 5)) {
+        QVector<AlbumInfo> currentAlbums = albumMap.values().toVector();
+        QMetaObject::invokeMethod(this, [this, currentAlbums]() {
+          beginResetModel();
+          m_albums = currentAlbums;
+          endResetModel();
+          // If we have at least one album, we can consider "established" enough
+          // to hide overlay
+          if (m_albums.count() > 0 && m_isLoading) {
+            // Keep m_isLoading true, but the QML check (count === 0) will hide
+            // overlay
+          }
+        });
+        batchSize = 0;
+        QThread::msleep(10); // Yield slightly to let UI update
+      }
     }
 
-    // Update model on main thread
+    // Final Update
     QMetaObject::invokeMethod(this, [this, albumMap]() {
       beginResetModel();
       m_albums = albumMap.values().toVector();
       endResetModel();
+      m_isLoading = false;
+      emit isLoadingChanged();
       emit scanFinished();
     });
   });

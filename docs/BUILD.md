@@ -25,8 +25,25 @@ The project uses CMake as the build system with Qt 6.4 as the primary framework.
 - Qt6::Widgets
 
 #### Additional Dependencies
-- psapi.lib (Windows API for process information)
-- Windows SDK for Direct3D11/Vulkan support
+- **psapi.lib** (Windows API for process information)
+- **Windows SDK** for Direct3D11/Vulkan support
+- **FFmpeg 6.x Shared Libraries** (avcodec, avformat, avutil, swscale)
+- **LibRaw** (for RAW image support)
+
+### 3rdparty Setup (Crucial!)
+
+Before building, you must populate the `3rdparty/` directory:
+
+1.  **LibRaw** (Source Code):
+    ```bash
+    git clone https://github.com/LibRaw/LibRaw.git 3rdparty/LibRaw
+    ```
+
+2.  **FFmpeg** (Shared Binaries):
+    *   Download the **release-full-shared** build from [gyan.dev](https://www.gyan.dev/ffmpeg/builds/).
+    *   Extract the contents.
+    *   Rename the folder to `ffmpeg` and place it in `3rdparty/`.
+    *   Ensure structure is: `3rdparty/ffmpeg/bin/avcodec-60.dll` etc.
 
 ### Build Instructions
 
@@ -90,7 +107,8 @@ The `deploy.ps1` script automatically:
 - Copies the executable to the deploy directory
 - Copies all required Qt DLLs
 - Copies QML modules and plugins
-- Creates a complete standalone package
+- **Copies MinGW Compiler Runtime** (`libgcc`, `libstdc++`, etc.) to ensure portability.
+- Creates a complete standalone package capable of running from network shares.
 
 #### Manual Deployment
 1. Create a deployment directory
@@ -135,7 +153,7 @@ The `deploy.ps1` script automatically:
 
 1. **Qt Module Not Found**
    - Ensure Qt 6.4+ is properly installed and in PATH
-   - Verify CMake can find Qt using `cmake -DQt6_DIR=C:/Qt/6.4.0/msvc2019_64/lib/cmake/Qt6`
+   - Verify CMake can find Qt using `cmake -DQt6_DIR=D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6`
 
 2. **Missing psapi.lib**
    - Install Windows SDK

@@ -28,7 +28,7 @@ public:
 
   // Invokable methods for one-time queries
   Q_INVOKABLE double getCpuUsage();
-  Q_INVOKABLE double getMemoryUsageMB();
+  Q_INVOKABLE static double getMemoryUsageMB();
   Q_INVOKABLE double getGpuUsage();
   Q_INVOKABLE QString getGpuName();
 
@@ -57,6 +57,10 @@ private:
 
   // Timer for automatic updates
   QTimer *m_updateTimer;
+
+  // Logging Thresholds
+  double m_lastLogMemoryMB = 0.0;
+  double m_lastLogVramMB = 0.0;
 
 #ifdef Q_OS_WIN
   // Windows-specific: CPU tracking

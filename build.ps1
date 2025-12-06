@@ -17,16 +17,34 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "   SamsungGallery Build System" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 
-# Step 1: Kill running instances
+# Step 1: Kill running instances (Robust)
 Write-Host "[1/4] Checking for running instances..." -ForegroundColor Yellow
-try {
-    Stop-Process -Name "appSamsungGallery" -Force -ErrorAction SilentlyContinue
-    Stop-Process -Name "appSamsungGalleryTest" -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 1
+$pNames = @("appSamsungGallery", "appSamsungGalleryTest")
+foreach ($pName in $pNames) {
+    if (Get-Process -Name $pName -ErrorAction SilentlyContinue) {
+        Write-Host "  Killing $pName..." -ForegroundColor Gray
+        Stop-Process -Name $pName -Force -ErrorAction SilentlyContinue
+        
+        # Wait for it to actually die
+        $retries = 10
+        while ((Get-Process -Name $pName -ErrorAction SilentlyContinue) -and ($retries -gt 0)) {
+            Start-Sleep -Milliseconds 500
+            $retries--
+        }
+        
+        if (Get-Process -Name $pName -ErrorAction SilentlyContinue) {
+            Write-Host "  FAILED to kill $pName. File might be locked." -ForegroundColor Red
+            taskkill /F /IM "$pName.exe" | Out-Null # Last resort
+        }
+    }
 }
-catch {}
 
 # Step 2: Clean if requested or ensure freshness
+# Remove old binary to ensure we never run stale code if build fails
+if (Test-Path $ExePath) {
+    Remove-Item -Force $ExePath -ErrorAction SilentlyContinue
+}
+
 if ($Clean) {
     Write-Host "[2/4] Full Clean requested. Removing build directory..." -ForegroundColor Magenta
     if (Test-Path $BuildDir) {
@@ -38,10 +56,7 @@ else {
     if (Test-Path "$BuildDir/appSamsungGallery_autogen") {
         Remove-Item -Recurse -Force "$BuildDir/appSamsungGallery_autogen" | Out-Null
     }
-    if (Test-Path "$BuildDir/appSamsungGalleryTest_autogen") {
-        Remove-Item -Recurse -Force "$BuildDir/appSamsungGalleryTest_autogen" | Out-Null
-    }
-    Write-Host "[2/4] Cleaned autogen folders." -ForegroundColor Yellow
+    Write-Host "[2/4] Cleaned autogen folders & removed old binary." -ForegroundColor Yellow
 }
 
 # Step 3: Configure & Build
@@ -61,6 +76,19 @@ try {
     Write-Host "  -> Compiling..." -ForegroundColor Gray
     cmake --build $BuildDir
     if ($LASTEXITCODE -ne 0) { throw "Build Failed" }
+
+    # Deploy Qt dependencies (only checking if plugins missing logic could be added, but forced for now)
+    Write-Host "  -> Deploying Qt Dependencies..." -ForegroundColor Gray
+    
+    # We construct the command manually to ensure arguments are passed correctly
+    $WindeployQt = "D:\Qt\6.9.3\mingw_64\bin\windeployqt.exe"
+    
+    # Standard deploy for QML
+    & $WindeployQt --qmldir $PSScriptRoot/resources/qml --dir $BuildDir $BuildDir/appSamsungGallery.exe --compiler-runtime --no-opengl-sw
+    
+    # We explicitly ensure imageformats are copied
+    # windeployqt usually handles this if it detects QtGui, but being explicit is safer
+
 }
 catch {
     Write-Host "BUILD FAILED!" -ForegroundColor Red

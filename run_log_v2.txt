@@ -1,0 +1,144 @@
+[2025-12-07 00:55:23.919] [Thread 34740] Debug: [DIAG] Supported Image Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
+[2025-12-07 00:55:24.379] [Thread 34740] Debug: SystemMonitor: Starting monitoring with interval 1000 ms
+[2025-12-07 00:55:24.752] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:20:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[2025-12-07 00:55:25.198] [Thread 34740] Debug: Loading last folder: I:/MY SDCArds/100CANON
+[2025-12-07 00:55:25.200] [Thread 34740] Debug: [TaskScheduler] Started 4 CPU threads and 2 IO threads.
+[2025-12-07 00:55:25.200] [Thread 34740] Debug: [TaskScheduler] Cleared all pending tasks.
+[2025-12-07 00:55:25.203] [Thread 20196] Debug: Scanning directory: "I:/MY SDCArds/100CANON"
+[2025-12-07 00:55:27.765] [Thread 34740] Debug: Scanning finished in 2563 ms. Found 2327 items.
+[2025-12-07 00:55:27.784] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 356.961 MB (Delta: 356.961 ) | VRAM: 34.9414 MB (Delta: 34.9414 )
+[2025-12-07 00:55:28.387] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 223.504 MB (Delta: -133.457 ) | VRAM: 34.9023 MB (Delta: -0.0390625 )
+[2025-12-07 00:56:27.774] [Thread 34548] Info: [FFmpeg] Initialized D3D11VA Hardware Acceleration.
+[2025-12-07 00:56:28.431] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 238.137 MB (Delta: 14.6328 ) | VRAM: 165.039 MB (Delta: 130.137 )
+[2025-12-07 00:56:32.466] [Thread 34740] Info: Using Qt multimedia with FFmpeg version 7.1.1 LGPL version 2.1 or later
+[2025-12-07 00:56:33.431] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 310.484 MB (Delta: 72.3477 ) | VRAM: 165.102 MB (Delta: 0.0625 )
+[2025-12-07 00:56:34.426] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 583.906 MB (Delta: 273.422 ) | VRAM: 349.414 MB (Delta: 184.313 )
+[2025-12-07 00:56:42.431] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 517.641 MB (Delta: -66.2656 ) | VRAM: 349.852 MB (Delta: 0.4375 )
+[2025-12-07 00:56:46.432] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 631.719 MB (Delta: 114.078 ) | VRAM: 165.039 MB (Delta: -184.813 )
+[2025-12-07 00:56:47.430] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 874.266 MB (Delta: 242.547 ) | VRAM: 349.539 MB (Delta: 184.5 )
+[2025-12-07 00:56:48.432] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 878.43 MB (Delta: 4.16406 ) | VRAM: 409.352 MB (Delta: 59.8125 )
+[2025-12-07 00:56:50.425] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 1154 MB (Delta: 275.57 ) | VRAM: 409.352 MB (Delta: 0 )
+[2025-12-07 00:56:56.432] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 1099.61 MB (Delta: -54.3906 ) | VRAM: 424.82 MB (Delta: 15.4688 )
+[2025-12-07 00:57:10.432] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 2110.31 MB (Delta: 1010.7 ) | VRAM: 1259.01 MB (Delta: 834.188 )
+[2025-12-07 00:57:11.430] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 2541.77 MB (Delta: 431.465 ) | VRAM: 2012.26 MB (Delta: 753.25 )
+[2025-12-07 00:57:12.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 3805.45 MB (Delta: 1263.68 ) | VRAM: 2901.88 MB (Delta: 889.625 )
+[2025-12-07 00:57:13.624] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 5661 MB (Delta: 1855.55 ) | VRAM: 3654.01 MB (Delta: 752.125 )
+[2025-12-07 00:57:14.555] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 7594.44 MB (Delta: 1933.45 ) | VRAM: 4678.88 MB (Delta: 1024.88 )
+[2025-12-07 00:57:15.499] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 9173.16 MB (Delta: 1578.72 ) | VRAM: 5362.63 MB (Delta: 683.75 )
+[2025-12-07 00:57:16.612] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 11673.8 MB (Delta: 2500.59 ) | VRAM: 6662.51 MB (Delta: 1299.88 )
+[2025-12-07 00:57:17.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 12941.5 MB (Delta: 1267.72 ) | VRAM: 7346.63 MB (Delta: 684.125 )
+[2025-12-07 00:57:18.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 15282.3 MB (Delta: 2340.79 ) | VRAM: 8441.38 MB (Delta: 1094.75 )
+[2025-12-07 00:57:19.482] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 17329.1 MB (Delta: 2046.86 ) | VRAM: 9467.76 MB (Delta: 1026.38 )
+[2025-12-07 00:57:20.427] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 18727.7 MB (Delta: 1398.56 ) | VRAM: 10083.5 MB (Delta: 615.75 )
+[2025-12-07 00:57:21.492] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 20449.6 MB (Delta: 1721.87 ) | VRAM: 10699.3 MB (Delta: 615.75 )
+[2025-12-07 00:57:22.482] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 22285.2 MB (Delta: 1835.65 ) | VRAM: 11725.3 MB (Delta: 1026 )
+[2025-12-07 00:57:23.563] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 24359.8 MB (Delta: 2074.63 ) | VRAM: 12884.6 MB (Delta: 1159.38 )
+[2025-12-07 00:57:24.518] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 26421.9 MB (Delta: 2062.1 ) | VRAM: 14037.1 MB (Delta: 1152.5 )
+[2025-12-07 00:57:25.468] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 27920.5 MB (Delta: 1498.55 ) | VRAM: 14926 MB (Delta: 888.875 )
+[2025-12-07 00:57:26.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 29964.5 MB (Delta: 2044.04 ) | VRAM: 15883.3 MB (Delta: 957.25 )
+[2025-12-07 00:57:27.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 31832.2 MB (Delta: 1867.65 ) | VRAM: 16772.5 MB (Delta: 889.25 )
+[2025-12-07 00:57:28.653] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34183.8 MB (Delta: 2351.67 ) | VRAM: 17867.3 MB (Delta: 1094.75 )
+[2025-12-07 00:57:29.427] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34549 MB (Delta: 365.141 ) | VRAM: 17866.5 MB (Delta: -0.75 )
+[2025-12-07 00:57:30.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 35379.7 MB (Delta: 830.73 ) | VRAM: 17866.5 MB (Delta: 0 )
+[2025-12-07 00:57:31.432] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 35636.8 MB (Delta: 257.109 ) | VRAM: 17866.5 MB (Delta: 0 )
+[2025-12-07 00:57:32.426] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 35500.8 MB (Delta: -135.98 ) | VRAM: 17866.5 MB (Delta: 0 )
+[2025-12-07 00:57:35.253] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 37414.5 MB (Delta: 1913.68 ) | VRAM: 18960.5 MB (Delta: 1094 )
+[2025-12-07 00:57:36.016] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 37553.8 MB (Delta: 139.25 ) | VRAM: 19917.8 MB (Delta: 957.25 )
+[2025-12-07 00:57:36.699] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 37694.9 MB (Delta: 141.141 ) | VRAM: 19917.8 MB (Delta: 0 )
+[2025-12-07 00:57:37.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 38294.3 MB (Delta: 599.406 ) | VRAM: 20255.9 MB (Delta: 338.125 )
+[2025-12-07 00:57:38.449] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 39354.1 MB (Delta: 1059.82 ) | VRAM: 20802.1 MB (Delta: 546.188 )
+[2025-12-07 00:57:39.436] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 39785 MB (Delta: 430.836 ) | VRAM: 21007.6 MB (Delta: 205.5 )
+[2025-12-07 00:57:41.468] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 40195.4 MB (Delta: 410.465 ) | VRAM: 21212.7 MB (Delta: 205.125 )
+[2025-12-07 00:57:42.427] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 40287.2 MB (Delta: 91.7305 ) | VRAM: 21281.1 MB (Delta: 68.375 )
+[2025-12-07 00:57:45.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 37321.3 MB (Delta: -2965.86 ) | VRAM: 19087.8 MB (Delta: -2193.25 )
+[2025-12-07 00:57:46.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34382.1 MB (Delta: -2939.22 ) | VRAM: 17172.6 MB (Delta: -1915.25 )
+[2025-12-07 00:57:47.427] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34823.5 MB (Delta: 441.398 ) | VRAM: 17514.1 MB (Delta: 341.5 )
+[2025-12-07 00:57:48.454] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34930.9 MB (Delta: 107.453 ) | VRAM: 17719.2 MB (Delta: 205.125 )
+[2025-12-07 00:57:49.449] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34863.1 MB (Delta: -67.793 ) | VRAM: 17719.2 MB (Delta: 0 )
+[2025-12-07 00:57:54.427] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34659.5 MB (Delta: -203.641 ) | VRAM: 17719.2 MB (Delta: 0 )
+[2025-12-07 00:57:57.429] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34604.2 MB (Delta: -55.3164 ) | VRAM: 17719.2 MB (Delta: 0 )
+[2025-12-07 00:57:58.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34523.1 MB (Delta: -81.1289 ) | VRAM: 17719.2 MB (Delta: 0 )
+[2025-12-07 00:58:01.435] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34464.8 MB (Delta: -58.2539 ) | VRAM: 17719.2 MB (Delta: 0.0273438 )
+[2025-12-07 00:58:02.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34359.9 MB (Delta: -104.895 ) | VRAM: 17719.2 MB (Delta: 0 )
+[2025-12-07 00:58:03.449] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34439 MB (Delta: 79.0586 ) | VRAM: 17719.2 MB (Delta: 0 )
+[2025-12-07 00:58:04.430] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34729.2 MB (Delta: 290.277 ) | VRAM: 17856 MB (Delta: 136.75 )
+[2025-12-07 00:58:05.427] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34663.9 MB (Delta: -65.3555 ) | VRAM: 17856 MB (Delta: 0 )
+[2025-12-07 00:58:06.430] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34560 MB (Delta: -103.895 ) | VRAM: 17856 MB (Delta: 0 )
+[2025-12-07 00:58:07.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34456.4 MB (Delta: -103.59 ) | VRAM: 17856 MB (Delta: 0 )
+[2025-12-07 00:58:08.433] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34353.1 MB (Delta: -103.266 ) | VRAM: 17856 MB (Delta: 0 )
+[2025-12-07 00:58:10.426] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34116.4 MB (Delta: -236.75 ) | VRAM: 17856 MB (Delta: 0 )
+[2025-12-07 00:58:14.429] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34013.1 MB (Delta: -103.262 ) | VRAM: 17856 MB (Delta: 0.0546875 )
+[2025-12-07 00:58:15.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 34581.6 MB (Delta: 568.469 ) | VRAM: 18129.5 MB (Delta: 273.5 )
+[2025-12-07 00:58:16.434] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 35239 MB (Delta: 657.418 ) | VRAM: 18539.8 MB (Delta: 410.25 )
+[2025-12-07 00:58:18.431] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 35141 MB (Delta: -98.0469 ) | VRAM: 18539.8 MB (Delta: 0 )
+[2025-12-07 00:58:22.522] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 35835.6 MB (Delta: 694.664 ) | VRAM: 18881.6 MB (Delta: 341.863 )
+[2025-12-07 00:58:23.431] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 36707.9 MB (Delta: 872.246 ) | VRAM: 19360.4 MB (Delta: 478.734 )
+[2025-12-07 00:58:24.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 37552 MB (Delta: 844.129 ) | VRAM: 19770.6 MB (Delta: 410.25 )
+[2025-12-07 00:58:24.469] [Thread 34740] Warning: "Photometric tag is missing, assuming data is YCbCr"
+[2025-12-07 00:58:24.469] [Thread 34740] Warning: "SamplesPerPixel tag is missing, applying correct SamplesPerPixel value of 3"
+TIFFReadDirectory: Warning, Photometric tag is missing, assuming data is YCbCr.
+TIFFReadDirectory: Warning, SamplesPerPixel tag is missing, applying correct SamplesPerPixel value of 3.
+foo: Old-style JPEG compression support is not configured.
+MissingRequired: TIFF directory is missing required "ImageLength" field.
+[2025-12-07 00:58:24.469] [Thread 34740] Critical: "Old-style JPEG compression support is not configured"
+[2025-12-07 00:58:24.469] [Thread 34740] Critical: "Sorry, requested compression method is not configured"
+[2025-12-07 00:58:24.469] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/PhotoViewer.qml:380:9: QML QQuickImage: Error decoding: file:///I:/MY SDCArds/100CANON/IMG_0400.CR2: Unable to read image data
+[2025-12-07 00:58:25.435] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 38009.7 MB (Delta: 457.715 ) | VRAM: 19839 MB (Delta: 68.3516 )
+[2025-12-07 00:58:26.435] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 38085.2 MB (Delta: 75.5195 ) | VRAM: 19839 MB (Delta: 0 )
+[2025-12-07 00:58:30.434] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 38016.8 MB (Delta: -68.4844 ) | VRAM: 19839 MB (Delta: 0 )
+[2025-12-07 00:58:32.428] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 38786 MB (Delta: 769.25 ) | VRAM: 19839 MB (Delta: 0 )
+[2025-12-07 00:58:33.502] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 39297.8 MB (Delta: 511.754 ) | VRAM: 19839 MB (Delta: 0 )
+[2025-12-07 00:58:34.954] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42672.9 MB (Delta: 3375.14 ) | VRAM: 21275 MB (Delta: 1436 )
+[2025-12-07 00:58:35.553] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42138.5 MB (Delta: -534.453 ) | VRAM: 21617.2 MB (Delta: 342.25 )
+[2025-12-07 00:58:36.502] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42040.4 MB (Delta: -98.0625 ) | VRAM: 21754.5 MB (Delta: 137.234 )
+[2025-12-07 00:58:37.495] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42106.5 MB (Delta: 66.1367 ) | VRAM: 21754.5 MB (Delta: 0 )
+[2025-12-07 00:58:38.501] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42259.3 MB (Delta: 152.766 ) | VRAM: 21891.2 MB (Delta: 136.75 )
+[2025-12-07 00:58:39.496] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42122.9 MB (Delta: -136.398 ) | VRAM: 21891.2 MB (Delta: 0 )
+[2025-12-07 00:58:41.492] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42210.5 MB (Delta: 87.6367 ) | VRAM: 21891.2 MB (Delta: 0 )
+[2025-12-07 00:58:42.760] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 42434.4 MB (Delta: 223.898 ) | VRAM: 4532.38 MB (Delta: -17358.8 )
+[2025-12-07 00:58:43.494] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 43253.3 MB (Delta: 818.871 ) | VRAM: 4943 MB (Delta: 410.625 )
+[2025-12-07 00:58:44.491] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 43310.1 MB (Delta: 56.8359 ) | VRAM: 4943.02 MB (Delta: 0.015625 )
+[2025-12-07 00:58:45.497] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 43394.5 MB (Delta: 84.3711 ) | VRAM: 4943.02 MB (Delta: 0 )
+[2025-12-07 00:58:48.496] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 43257.6 MB (Delta: -136.902 ) | VRAM: 4943.02 MB (Delta: 0 )
+[2025-12-07 00:58:49.497] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44269.5 MB (Delta: 1011.91 ) | VRAM: 5421.64 MB (Delta: 478.625 )
+[2025-12-07 00:58:50.686] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44294.3 MB (Delta: 24.8242 ) | VRAM: 5578.89 MB (Delta: 157.246 )
+[2025-12-07 00:58:51.495] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44728.2 MB (Delta: 433.895 ) | VRAM: 5647.29 MB (Delta: 68.3945 )
+[2025-12-07 00:58:52.490] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44715 MB (Delta: -13.1992 ) | VRAM: 5587.32 MB (Delta: -59.9648 )
+[2025-12-07 00:58:54.499] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44545.7 MB (Delta: -169.363 ) | VRAM: 5584.71 MB (Delta: -2.60547 )
+[2025-12-07 00:58:55.493] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44477.9 MB (Delta: -67.7461 ) | VRAM: 5584.71 MB (Delta: 0 )
+[2025-12-07 00:58:56.500] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44576.7 MB (Delta: 98.7461 ) | VRAM: 3121.87 MB (Delta: -2462.85 )
+[2025-12-07 00:58:57.500] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44852.3 MB (Delta: 275.633 ) | VRAM: 5790.2 MB (Delta: 2668.33 )
+[2025-12-07 00:58:58.503] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44779.4 MB (Delta: -72.9336 ) | VRAM: 5926.96 MB (Delta: 136.77 )
+[2025-12-07 00:59:04.519] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44645.7 MB (Delta: -133.703 ) | VRAM: 5926.96 MB (Delta: 0 )
+[2025-12-07 00:59:08.521] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44950.9 MB (Delta: 305.273 ) | VRAM: 6063.7 MB (Delta: 136.73 )
+[2025-12-07 00:59:09.529] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44708.8 MB (Delta: -242.172 ) | VRAM: 6269.2 MB (Delta: 205.5 )
+[2025-12-07 00:59:10.506] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44881.7 MB (Delta: 172.949 ) | VRAM: 6337.59 MB (Delta: 68.3945 )
+[2025-12-07 00:59:16.514] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44809.4 MB (Delta: -72.3086 ) | VRAM: 6337.95 MB (Delta: 0.355469 )
+[2025-12-07 00:59:29.647] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 44817.6 MB (Delta: 8.21875 ) | VRAM: 20.5547 MB (Delta: -6317.39 )
+[2025-12-07 00:59:36.195] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45227.8 MB (Delta: 410.121 ) | VRAM: 5720.55 MB (Delta: 5700 )
+[2025-12-07 00:59:37.530] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45231.6 MB (Delta: 3.8125 ) | VRAM: 6337.99 MB (Delta: 617.438 )
+[2025-12-07 00:59:42.586] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45232.3 MB (Delta: 0.722656 ) | VRAM: 5993.68 MB (Delta: -344.313 )
+[2025-12-07 00:59:43.526] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45230.2 MB (Delta: -2.05859 ) | VRAM: 6338.37 MB (Delta: 344.688 )
+[2025-12-07 00:59:45.524] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45298.8 MB (Delta: 68.5586 ) | VRAM: 6398.55 MB (Delta: 60.1875 )
+[2025-12-07 00:59:46.546] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45376.4 MB (Delta: 77.5781 ) | VRAM: 6339.24 MB (Delta: -59.3125 )
+[2025-12-07 00:59:49.540] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45321.4 MB (Delta: -54.957 ) | VRAM: 6340.36 MB (Delta: 1.11328 )
+[2025-12-07 00:59:50.721] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45321.4 MB (Delta: 0.0273438 ) | VRAM: 20.5547 MB (Delta: -6319.8 )
+[2025-12-07 00:59:53.587] [Thread 34740] Debug: [SystemMonitor] Resource Update: RAM: 45322.6 MB (Delta: 1.19531 ) | VRAM: 6339.62 MB (Delta: 6319.06 )
+[2025-12-07 00:59:56.140] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:143: TypeError: Cannot read property 'gpuVramUsedMB' of null
+[2025-12-07 00:59:56.142] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:135: TypeError: Cannot read property 'gpuName' of null
+[2025-12-07 00:59:56.144] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:419: TypeError: Cannot read property 'graphicsApi' of null
+[2025-12-07 00:59:56.144] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:239: TypeError: Cannot read property 'logLevel' of null
+[2025-12-07 00:59:56.144] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:224: TypeError: Cannot read property 'rawAcceleration' of null
+[2025-12-07 00:59:56.144] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:221: TypeError: Cannot read property 'rawAcceleration' of null
+[2025-12-07 00:59:56.144] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:213: TypeError: Cannot read property 'concurrentThreads' of null
+[2025-12-07 00:59:56.145] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:202: TypeError: Cannot read property 'cacheSizeMB' of null
+[2025-12-07 00:59:56.145] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:191: TypeError: Cannot read property 'gridSize' of null
+[2025-12-07 00:59:56.145] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:180: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:59:56.145] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:353: TypeError: Cannot call method 'getGpuName' of null
+[2025-12-07 00:59:56.145] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:292: TypeError: Cannot read property 'graphicsApi' of null
+[2025-12-07 00:59:56.145] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:276: TypeError: Cannot read property 'selectedApi' of null
+[2025-12-07 00:59:59.529] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:59:59.530] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:59:59.530] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:59:59.530] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-07 00:59:59.530] [Thread 34740] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null

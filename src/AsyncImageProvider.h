@@ -12,15 +12,6 @@
 #include <atomic>
 #include <memory>
 
-// Helper to emit signals from QRunnable
-class WorkerSignals : public QObject {
-  Q_OBJECT
-public:
-  WorkerSignals() = default;
-signals:
-  void done(QImage image);
-};
-
 class AsyncImageResponse : public QQuickImageResponse {
   Q_OBJECT
 public:
@@ -40,22 +31,6 @@ private:
   std::shared_ptr<std::atomic<bool>> m_cancelled;
 };
 
-class ImageLoaderRunnable : public QRunnable {
-public:
-  ImageLoaderRunnable(const QString &id, const QSize &requestedSize,
-                      WorkerSignals *workerSignals,
-                      std::shared_ptr<std::atomic<bool>> cancelled);
-  ~ImageLoaderRunnable();
-
-  void run() override;
-
-private:
-  QString m_id;
-  QSize m_requestedSize;
-  WorkerSignals *m_signals;
-  std::shared_ptr<std::atomic<bool>> m_cancelled;
-};
-
 class AsyncImageProvider : public QQuickAsyncImageProvider {
 public:
   QQuickImageResponse *
@@ -66,10 +41,15 @@ public:
                                 const QSize &size);
   static void setCacheMaxCost(int cost);
   static QVariantMap getCacheStats();
+  static void clearCache();
 
-  static QThreadPool *m_threadPool;
-  static std::atomic<int> s_requestCounter;
+  // Internal worker for task scheduling with re-queue support
+  static void processImageTask(QString id, QSize requestedSize,
+                               std::shared_ptr<std::atomic<bool>> cancelled,
+                               AsyncImageResponse *response);
+
   static std::atomic<int> s_logLevel;
+  static std::atomic<bool> s_accelerateRaw;
 
 private:
   static QCache<QString, QImage> m_cache;

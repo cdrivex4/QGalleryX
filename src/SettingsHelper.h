@@ -26,6 +26,8 @@ class SettingsHelper : public QObject {
                  setConcurrentThreads NOTIFY concurrentThreadsChanged)
   Q_PROPERTY(
       int logLevel READ logLevel WRITE setLogLevel NOTIFY logLevelChanged)
+  Q_PROPERTY(bool rawAcceleration READ rawAcceleration WRITE setRawAcceleration
+                 NOTIFY rawAccelerationChanged)
 
 public:
   explicit SettingsHelper(QObject *parent = nullptr);
@@ -52,6 +54,9 @@ public:
   int logLevel() const;
   void setLogLevel(int level);
 
+  bool rawAcceleration() const;
+  void setRawAcceleration(bool enable);
+
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
@@ -61,7 +66,7 @@ public:
   Q_INVOKABLE QString getGpuName(QObject *window = nullptr) {
     return "GPU Detection Simplified";
   }
-  Q_INVOKABLE void refreshGraphicsInfo(QObject *window = nullptr) {}
+  Q_INVOKABLE void refreshGraphicsInfo(QObject *window = nullptr);
 
 signals:
   void graphicsApiChanged();
@@ -73,6 +78,7 @@ signals:
   void cacheSizeMBChanged();
   void concurrentThreadsChanged();
   void logLevelChanged();
+  void rawAccelerationChanged();
 
 private:
   QString m_graphicsApi;

@@ -6,39 +6,61 @@
 #include <QProcess>
 #include <QUrl>
 
+// ... keep includes ...
+
 DesktopHelper::DesktopHelper(QObject *parent) : QObject(parent) {}
 
 void DesktopHelper::openInExplorer(const QString &path) {
   if (path.isEmpty())
     return;
+  // ... (keep existing implementation or replace, I'll overwrite to be safe)
 
-  // Clean up path (remove file:/// prefix if present)
-  QString cleanPath = path;
-  if (cleanPath.startsWith("file:///")) {
-    cleanPath = cleanPath.mid(8);
-  } else if (cleanPath.startsWith("file://")) {
-    cleanPath = cleanPath.mid(7);
+  QString nativePath = QDir::toNativeSeparators(path);
+  if (nativePath.startsWith("file:")) {
+    nativePath = QUrl(path).toLocalFile();
   }
 
-  QFileInfo fileInfo(cleanPath);
-  if (!fileInfo.exists()) {
-    qWarning() << "File does not exist:" << cleanPath;
-    return;
+  // Clean up any remaining file:/// prefix or QML artifacts
+  if (nativePath.startsWith("file:///"))
+    nativePath = nativePath.mid(8);
+  else if (nativePath.startsWith("file:/"))
+    nativePath = nativePath.mid(6);
+
+  QString param;
+  if (!QFileInfo(nativePath).isDir())
+    param = QLatin1String("/select,");
+
+  QProcess::startDetached("explorer.exe", QStringList() << param << nativePath);
+}
+
+int DesktopHelper::getFileType(const QString &path) {
+  return staticGetFileType(path);
+}
+
+DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
+  QString ext = QFileInfo(path).suffix().toLower();
+
+  // Video
+  if (ext == "mp4" || ext == "mkv" || ext == "avi" || ext == "mov" ||
+      ext == "webm" || ext == "flv" || ext == "vob" || ext == "ogg" ||
+      ext == "ogv" || ext == "mts" || ext == "m2ts" || ext == "ts" ||
+      ext == "3gp") {
+    return Video;
   }
 
-  QString nativePath = QDir::toNativeSeparators(cleanPath);
+  // Raw
+  if (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
+      ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
+      ext == "pef" || ext == "raf") {
+    return Raw;
+  }
 
-#ifdef Q_OS_WIN
-  // Use explorer.exe /select, <path> to highlight the file
-  // We use setNativeArguments to avoid QProcess auto-quoting the comma argument
-  // incorrectly
-  QProcess process;
-  process.setProgram("explorer.exe");
-  QString args = "/select,\"" + nativePath + "\"";
-  process.setNativeArguments(args);
-  process.startDetached();
-#else
-  // Fallback for non-Windows (just open folder)
-  QDesktopServices::openUrl(QUrl::fromLocalFile(fileInfo.absolutePath()));
-#endif
+  // Image
+  if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif" ||
+      ext == "bmp" || ext == "webp" || ext == "heic" || ext == "tiff" ||
+      ext == "tif" || ext == "ico" || ext == "tga") {
+    return Image;
+  }
+
+  return Unknown;
 }

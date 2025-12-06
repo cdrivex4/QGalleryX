@@ -15,11 +15,13 @@ Item {
     property string folderPath: ""
     
     onFolderPathChanged: {
+        console.log("[QML_DEBUG] GalleryViewTiles folderPath changed to:", folderPath)
         if (folderPath !== "") scanFolder(folderPath)
     }
     
     // Helper to scan folder
     function scanFolder(path) {
+        console.log("[QML_DEBUG] Scanning folder in ImageModel:", path)
         imageModel.scanDirectory(path)
     }
 
@@ -28,6 +30,10 @@ Item {
         id: imageModel
     }
     property alias model: imageModel
+
+    DesktopHelper {
+        id: desktopHelper
+    }
 
     // Zoom State
     property real currentScale: 1.0
@@ -89,13 +95,21 @@ Item {
             
             // Fetch data
             property string filePath: model.filePath
-            property var fileExt: filePath.split('.').pop().toLowerCase()
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi"
+            property int fileType: desktopHelper ? desktopHelper.getFileType(filePath) : 0
+            property bool isVideo: fileType === DesktopHelper.Video
+            
+            Component.onCompleted: {
+                if (index < 5) { // Only log first 5 to avoid spam
+                     console.log("[QML_DEBUG] Index:", index, "FilePath:", filePath, 
+                                 "Helper:", desktopHelper, "Type:", fileType, 
+                                 "IsVideo:", isVideo)
+                }
+            }
             
             Image {
                 anchors.fill: parent
                 anchors.margins: 1
-                source: (filePath && !isVideo) ? "image://async/" + filePath : ""
+                source: filePath ? "image://async/" + filePath : ""
                 sourceSize.width: root.loadingResolution
                 sourceSize.height: root.loadingResolution
                 fillMode: Image.PreserveAspectCrop
@@ -117,12 +131,39 @@ Item {
                 
                 Rectangle {
                     anchors.fill: parent
-                    color: "#222"
+                    color: "transparent"
                     visible: isVideo
+                    
+                    Rectangle { 
+                         anchors.fill: parent
+                         color: "black"
+                         opacity: 0.2
+                    }
                     Text {
                         anchors.centerIn: parent
                         text: "▶️"
                         color: "white"
+                    }
+                }
+
+                Rectangle {
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.margins: 4
+                    width: 28
+                    height: 16
+                    color: "#cc000000" // Darker background
+                    radius: 3
+                    
+                    // Direct model access is safer sometimes in complex delegates
+                    visible: model.isRaw === true
+                    
+                    Text {
+                        anchors.centerIn: parent
+                        text: "RAW"
+                        color: "#FF4444" // Bright Red text for visibility check
+                        font.pixelSize: 10
+                        font.bold: true
                     }
                 }
                 
@@ -210,6 +251,8 @@ Item {
         color: "#888"
         visible: imageModel.count === 0
         font.pixelSize: 18
+        
+        onVisibleChanged: console.log("[QML_DEBUG] 'No images found' visible:", visible, "Count:", imageModel.count)
     }
 
     // Floating Date Header

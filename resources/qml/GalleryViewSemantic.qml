@@ -29,6 +29,10 @@ Item {
     }
     property alias model: imageModel
 
+    DesktopHelper {
+        id: desktopHelper
+    }
+
     // Grouping Mode: 0=Auto, 1=Day, 2=Week, 3=Month, 4=Year
     property int groupingMode: 0
 
@@ -304,14 +308,14 @@ Item {
                         
                         // Fetch data
                         property string filePath: root.model.data(root.model.index(sourceIndex, 0), ImageModel.FilePathRole)
-                        property var fileExt: filePath.split('.').pop().toLowerCase()
-                        property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi"
+                        property int fileType: desktopHelper ? desktopHelper.getFileType(filePath) : 0
+                        property bool isVideo: fileType === DesktopHelper.Video
                         
                         Image {
                             id: img
                             anchors.fill: parent
                             anchors.margins: 1
-                            source: (filePath && !isVideo) ? "image://async/" + filePath : ""
+                            source: filePath ? "image://async/" + filePath : ""
                             sourceSize.width: root.loadingResolution
                             sourceSize.height: root.loadingResolution
                             fillMode: Image.PreserveAspectCrop
@@ -333,8 +337,15 @@ Item {
                             
                             Rectangle {
                                 anchors.fill: parent
-                                color: "#222"
+                                color: "transparent"
                                 visible: isVideo
+                                
+                                // Optional: dimming for video distinctness
+                                Rectangle { 
+                                    anchors.fill: parent
+                                    color: "black"
+                                    opacity: 0.2
+                                }
                                 Text {
                                     anchors.centerIn: parent
                                     text: "▶️"

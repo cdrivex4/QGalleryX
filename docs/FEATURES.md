@@ -6,7 +6,7 @@
 - **Grid-based browsing** with customizable thumbnail sizes
 - **Recursive directory scanning** for image discovery
 - **Date-based grouping** (Today, Yesterday, Month Year)
-- **Video file support** with dedicated placeholders
+- **Video file support** with D3D11 Hardware Accelerated thumbnails
 - **Smooth scrolling** with optimized caching
 - **Zoom functionality** via Ctrl+Wheel and pinch gestures
 
@@ -74,7 +74,7 @@
 
 ### Supported Image Formats
 - **Standard**: JPEG, PNG, BMP, GIF, WEBP, TIFF
-- **RAW Formats** (Planned): ARW (Sony), CR2/CR3 (Canon), NEF (Nikon), DNG (Adobe), ORF (Olympus), RW2 (Panasonic)
+- **RAW Formats**: ARW, CR2, NEF, DNG, ORF, RW2 (via LibRaw)
 - **High Efficiency**: HEIC/HEIF (requires system codecs)
 
 ### Supported Video Formats
@@ -158,30 +158,24 @@
 - Basic crop functionality only
 - No advanced editing features
 
-## Future Enhancements (Prioritized)
+## 🔮 Roadmap (Upcoming Features)
 
-### 1. GPU Monitoring & Optimization
-- Real-time GPU usage tracking (DXGI)
-- VRAM usage monitoring
-- Hardware acceleration verification
+We are actively working on **v2.1** features to bring the app to full parity with professional tools:
 
-### 2. Album Management
-- Folder-based album organization
-- Custom album creation
-- Drag-and-drop sorting
+### 1. Batch Operations (High Priority)
+-   **Multi-Select**: Ability to select multiple images in grid view (Ctrl+Click / Shift+Click).
+-   **Batch Resize**: Output selected images to specific resolution presets (e.g., 1080p, 4K, "Email Size").
+-   **Batch Email/Share**: Prepare selected images for external sharing.
 
-### 3. Advanced Video Playback
-- Hardware-accelerated decoding (MPEG, H.264/265)
-- Native QtMultimedia integration
-- Zero-copy rendering (GPU direct)
-- Video thumbnails and scrubbing
+### 2. Live Preview & Editing
+-   **Resolution Estimator**: Show predicted file size and resolution before exporting/resizing.
+-   **Live Filters**: Apply basic adjustments (Brightness/Contrast) using GPU shaders.
+-   **Advanced Crop**: Aspect-ratio locked cropping.
 
-### 4. Extended Format Support
-- Full RAW image support (libraw/system codecs)
-- High-bitrate video support
-- EXIF/Metadata full parsing
+### 3. Workflow Improvements
+-   **Drag & Drop**: Drag images out of the app into Explorer/Email capability.
+-   **Print Support**: Native printing dialog integration.
 
-### 5. Image Editing (Maybe)
-- Filters and effects
-- Rotation and flipping
-- Color adjustments
+### 4. Advanced Video Features
+-   **Scrubbing**: Mouse-over video scrubbing in grid view.
+-   **Playback Controls**: Full playback controls (Speed, Loop, Volume) in viewer.

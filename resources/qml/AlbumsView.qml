@@ -79,7 +79,7 @@ StackView {
                         }
                         
                         Column {
-                            anchors.top: cover.bottom
+                            anchors.top: coverContainer.bottom
                             anchors.left: parent.left
                             anchors.right: parent.right
                             anchors.bottom: parent.bottom

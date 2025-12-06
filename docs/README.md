@@ -40,9 +40,10 @@ Samsung Gallery Clone is a feature-rich photo gallery application designed to pr
 ### Performance Features
 - **Asynchronous image loading** with thread pool management
 - **Memory-efficient caching** with configurable sizes
-- **GPU acceleration** with multiple API support
+- **GPU acceleration** with Direct3D 11 (D3D11VA) for video decoding
+- **Smart Video Thumbnails** with Black Frame Detection (skips dark intros)
 - **Background processing** for file operations
-- **Smart resource management**
+- **Smart resource management** with RAII-based FFmpeg handling
 
 ### User Interface
 - **Dark theme** optimized for media viewing
@@ -65,7 +66,16 @@ Samsung Gallery Clone is a feature-rich photo gallery application designed to pr
 git clone <repository-url>
 cd SamsungGalleryClone
 
-# Create build directory
+# 2. Setup Dependencies
+# Clone LibRaw
+git clone https://github.com/LibRaw/LibRaw.git 3rdparty/LibRaw
+
+# Download FFmpeg (Manual Step)
+# 1. Download "release-full-shared" from https://www.gyan.dev/ffmpeg/builds/
+# 2. Extract and rename folder to 'ffmpeg' inside '3rdparty/'
+# Structure: 3rdparty/ffmpeg/bin/avcodec-60.dll...
+
+# 3. Build Project
 mkdir build
 cd build
 
@@ -232,50 +242,53 @@ For a complete analysis of issues and recommendations, see [PROGRESS.md](PROGRES
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
+## 🏗️ Engineering Philosophy (How It Works)
+
+This project adopts modern C++ best practices to ensure stability and performance:
+
+-   **RAII (Resource Acquisition Is Initialization)**: We use RAII wrappers (e.g., `VideoThumbnailer::FFmpegCleanup`) to manage complex C-style resources like FFmpeg contexts. This ensures no memory leaks, even during exceptions or early returns.
+-   **Modular Design**: Components are loosely coupled. The `TaskScheduler` doesn't know about Images, and `AsyncImageProvider` doesn't know about the UI. This makes testing and refactoring safer.
+-   **Re-use**: We wrap standard libraries (`LibRaw`, `FFmpeg`, `DirectX`) into reusable helper classes (`VideoThumbnailer`, `DesktopHelper`) rather than scattering API calls throughout the code.
+-   **Thread Safety**: Core resources (FFmpeg HW Contexts) are protected by mutexes, and concurrent access is managed via Semaphores to prevent GPU overload.
+
 ## 🔄 Version History
 
-- **v1.0.0** - Initial release with core gallery functionality
-- **v0.9.0** - Alpha release with basic features
-- **v0.8.0** - Development version with performance optimizations
-
-## 📞 Support
-
-For support and questions:
-- Create an issue on GitHub
-- Check the [BUILD.md](BUILD.md) file for troubleshooting
-- Review [PROGRESS.md](PROGRESS.md) for known issues and solutions
+-   **v2.0.0 (Current)** - **Major "Reforged" Release**
+    -   **Engine**: Full D3D11 Hardware Acceleration for videos.
+    -   **Smart Feature**: Black Frame Detection for meaningful thumbnails.
+    -   **Core**: TaskScheduler v2 with Priority Queues (CPU/IO separation).
+    -   **Format**: Native RAW support via LibRaw.
+    -   **Performance**: Hybrid RAW loading (Embedded Preview vs Full Decode) with settings toggle.
+    -   **UI**: Semantic Zoom (Day/Month/Year) implemented.
+-   **v2.1.0 (Network & Deployment)**
+    -   **Network**: Full support for UNC paths (`\\Server\Share`).
+    -   **Deployment**: Self-contained builds with MinGW runtime included.
+    -   **Stability**: Removed aggressive memory limits to prevent UI freezes.
+-   **v1.0.0** - Initial release with core gallery functionality.
 
 ## 🗂️ File Structure
 
 ```
 SamsungGalleryClone/
-├── src/                    # C++ source files
-│   ├── main.cpp           # Application entry point
-│   ├── ImageModel.cpp/h   # Image data model
-│   ├── AlbumModel.cpp/h   # Album data model
-│   ├── SettingsHelper.cpp/h # Configuration and system info
-│   ├── AsyncImageProvider.cpp/h # Async image loading
-│   └── DesktopHelper.cpp/h # Desktop integration (New)
-├── resources/qml/          # QML user interface files
-│   ├── Main.qml           # Main application window
-│   ├── GalleryView.qml    # Grid-based image browser
-│   ├── PhotoViewer.qml    # Full-screen image viewer
-│   ├── AlbumsView.qml     # Album organization (placeholder)
-│   ├── BottomBar.qml      # Tab navigation
-│   ├── StatsOverlay.qml   # Performance monitoring
-│   └── UsageGraph.qml     # Real-time performance graphs
-├── tests/                  # Test files
-│   └── tst_imagemodel.cpp # ImageModel unit tests
-├── docs/                   # Documentation
-│   ├── README.md          # This file
-│   ├── ARCHITECTURE.md    # Architecture documentation
-│   ├── BUILD.md           # Build instructions
-│   ├── FEATURES.md        # Feature documentation
-│   └── PROGRESS.md        # Progress notes
-├── CMakeLists.txt          # CMake build configuration
-├── build.ps1              # PowerShell build script
-├── deploy.ps1             # PowerShell deployment script
-└── build/                 # Build output directory
+├── src/
+│   ├── main.cpp                 # Application Entry
+│   ├── TaskScheduler.cpp/h      # Thread Pool & Priority Queues
+│   ├── VideoThumbnailer.cpp/h   # FFmpeg D3D11 Abstraction
+│   ├── AsyncImageProvider.cpp/h # QQuickImageProvider implementation
+│   ├── ImageModel.cpp/h         # File System Logic
+│   ├── LogManager.cpp/h         # Thread-safe Logging
+│   └── ...
+├── resources/qml/
+│   ├── Main.qml
+│   ├── GalleryViewSemantic.qml  # The Smart Zoom View
+│   ├── GalleryViewTiles.qml     # The Grid View
+│   ├── StatsOverlay.qml         # Diagnostic Tools
+│   └── ...
+├── 3rdparty/
+│   ├── ffmpeg/                  # FFmpeg 6.x Shared Libs
+│   └── LibRaw/                  # LibRaw Headers/Source
+├── docs/                        # Project Documentation
+└── ...
 ```
 
 ---

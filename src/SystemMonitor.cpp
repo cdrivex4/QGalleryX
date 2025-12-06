@@ -1,8 +1,10 @@
 #include "SystemMonitor.h"
 #include <QDebug>
 #include <QString>
+#include <cmath>
 #include <pdh.h>
 #include <pdhmsg.h>
+
 
 #ifdef Q_OS_WIN
 #include <d3d11.h>
@@ -98,6 +100,22 @@ void SystemMonitor::updateStats() {
     emit gpuVramUsedMBChanged();
   if (m_gpuVramTotalMB != oldVramTotal)
     emit gpuVramTotalMBChanged();
+
+  // Logging Analysis (Granularity Check)
+  bool memChanged = std::abs(m_memoryUsageMB - m_lastLogMemoryMB) > 50.0;
+  bool vramChanged = std::abs(m_gpuVramUsedMB - m_lastLogVramMB) > 50.0;
+
+  if (memChanged || vramChanged) {
+    if (m_memoryUsageMB > 1.0) { // Avoid initial zeros
+      qDebug() << "[SystemMonitor] Resource Update:"
+               << "RAM:" << m_memoryUsageMB << "MB"
+               << "(Delta:" << (m_memoryUsageMB - m_lastLogMemoryMB) << ")"
+               << "| VRAM:" << m_gpuVramUsedMB << "MB"
+               << "(Delta:" << (m_gpuVramUsedMB - m_lastLogVramMB) << ")";
+      m_lastLogMemoryMB = m_memoryUsageMB;
+      m_lastLogVramMB = m_gpuVramUsedMB;
+    }
+  }
 }
 
 // Helper to convert FILETIME to unsigned long long

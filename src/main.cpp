@@ -22,51 +22,17 @@
 #include <QFile>
 #include <QTextStream>
 
-void customMessageHandler(QtMsgType type, const QMessageLogContext &context,
-                          const QString &msg) {
-  QString txt;
-  QString timeStr =
-      QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss.zzz");
-  QString threadId = QString::number((quint64)QThread::currentThreadId());
+#include "LogManager.h"
 
-  switch (type) {
-  case QtDebugMsg:
-    txt = QString("[%1] [Thread %2] Debug: %3").arg(timeStr, threadId, msg);
-    break;
-  case QtWarningMsg:
-    txt = QString("[%1] [Thread %2] Warning: %3").arg(timeStr, threadId, msg);
-    break;
-  case QtCriticalMsg:
-    txt = QString("[%1] [Thread %2] Critical: %3").arg(timeStr, threadId, msg);
-    break;
-  case QtFatalMsg:
-    txt = QString("[%1] [Thread %2] Fatal: %3").arg(timeStr, threadId, msg);
-    break;
-  case QtInfoMsg:
-    txt = QString("[%1] [Thread %2] Info: %3").arg(timeStr, threadId, msg);
-    break;
-  }
-
-  // Output to std::cout/err for immediate visibility in console/redirect
-  if (type == QtCriticalMsg || type == QtFatalMsg) {
-    std::cerr << txt.toStdString() << std::endl;
-  } else {
-    std::cout << txt.toStdString() << std::endl;
-  }
-
-  // Output to file
-  QFile outFile("application.log");
-  if (outFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
-    QTextStream ts(&outFile);
-    ts << txt << Qt::endl;
-  }
-}
+// Remove customMessageHandler function completely
 
 int main(int argc, char *argv[]) {
-  qInstallMessageHandler(customMessageHandler);
+  // Initialize LogManager
+  LogManager::instance().setLogFile("application.log");
+  qInstallMessageHandler(LogManager::messageHandler);
 
-  // Suppress annoying JPEG warnings
-  QLoggingCategory::setFilterRules("qt.gui.imageio.jpeg.warning=false");
+  // Suppress annoying JPEG warnings (Commented out to restore granularity)
+  // QLoggingCategory::setFilterRules("qt.gui.imageio.jpeg.warning=false");
 
   // Set style to Basic to allow customization
   QQuickStyle::setStyle("Basic");
@@ -74,6 +40,7 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationName("SamsungClone");
   QCoreApplication::setOrganizationDomain("samsungclone.com");
   QCoreApplication::setApplicationName("Gallery");
+  QCoreApplication::setApplicationVersion("2.0.0");
 
   // Set up graphics API before creating QGuiApplication
   SettingsHelper tempHelper;
@@ -96,11 +63,17 @@ int main(int argc, char *argv[]) {
                                      "GroupedProxyModel");
   qmlRegisterType<SettingsHelper>("SamsungGallery", 1, 0, "SettingsHelper");
   qmlRegisterType<SystemMonitor>("SamsungGallery", 1, 0, "SystemMonitor");
+  qmlRegisterType<DesktopHelper>("SamsungGallery", 1, 0, "DesktopHelper");
 
   QQmlApplicationEngine engine;
 
   // Register Async Image Provider
   engine.addImageProvider("async", new AsyncImageProvider);
+  AsyncImageProvider::s_logLevel.store(2); // Force Debug Log
+
+  // Verify Image Plugins
+  qDebug() << "[DIAG] Supported Image Formats:"
+           << QImageReader::supportedImageFormats();
 
   // Expose SettingsHelper instance
   SettingsHelper settingsHelper;

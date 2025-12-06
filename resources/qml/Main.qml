@@ -54,6 +54,9 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
+        // Refresh Graphics Info
+        appSettings.refreshGraphicsInfo(window)
+
         // Load last folder
         if (settings.lastFolder !== "") {
             console.log("Loading last folder: " + settings.lastFolder)
@@ -206,136 +209,187 @@ ApplicationWindow {
 
             // Tab 3: Menu
             Item {
-                ColumnLayout {
-                    anchors.centerIn: parent
-                    spacing: 20
-                    
-                    Text {
-                        text: "Menu"
-                        color: "white"
-                        font.pixelSize: 24
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-                    
-                    Button {
-                        text: "Select Folder"
-                        onClicked: {
-                            console.log("Opening folder dialog...")
-                            folderDialog.open()
+                ScrollView {
+                    anchors.fill: parent
+                    anchors.margins: 20
+                    contentWidth: availableWidth
+                    clip: true
+
+                    ColumnLayout {
+                        width: Math.min(parent.width, 400)
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        spacing: 20
+                        
+                        Item { height: 20; width: 1 } // Top Spacer
+                        
+                        Text {
+                            text: "Menu"
+                            color: "white"
+                            font.pixelSize: 28
+                            font.bold: true
+                            Layout.alignment: Qt.AlignHCenter
                         }
-                    }
-                    
-                    Button {
-                        text: "Rebuild Cache"
-                        onClicked: {
-                            if (window.currentPath !== "") {
-                                console.log("Rebuilding cache for: " + window.currentPath)
-                                if (viewLoader.item) {
-                                    viewLoader.item.scanFolder(window.currentPath)
-                                }
-                            } else {
+                        
+                        Button {
+                            Layout.fillWidth: true
+                            text: "Select Folder"
+                            onClicked: {
+                                console.log("Opening folder dialog...")
                                 folderDialog.open()
                             }
                         }
-                    }
-                    
-                    Rectangle {
-                        height: 1
-                        width: 200
-                        color: "#444"
-                    }
-                    
-                    Text {
-                        text: "Graphics API (Requires Restart)"
-                        color: "white"
-                        font.bold: true
-                    }
-                    
-                    ComboBox {
-                        model: ["Auto", "Direct3D 11", "Vulkan", "OpenGL", "Software"]
-                        currentIndex: appSettings.selectedApi
-                        onActivated: (index) => {
-                            appSettings.selectedApi = index
-                            restartDialog.open()
-                        }
-                    }
-                    
-                    Text {
-                        text: "Current API: " + appSettings.graphicsApi
-                        color: "#aaa"
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Rectangle { height: 10; width: 1; color: "transparent" }
-
-                    Text {
-                        text: "Supported APIs:"
-                        color: "white"
-                        font.bold: true
-                    }
-                    
-                    Column {
-                        spacing: 5
-                        width: parent.width
                         
-                        Repeater {
-                            model: [
-                                {name: "Direct3D 11", value: 2}, // QSGRendererInterface::Direct3D11
-                                {name: "Vulkan", value: 3},      // QSGRendererInterface::Vulkan
-                                {name: "OpenGL", value: 1},      // QSGRendererInterface::OpenGL
-                                {name: "Software", value: 5}     // QSGRendererInterface::Software
-                            ]
-                            
-                            Text {
-                                text: modelData.name + ": " + (appSettings && appSettings.isApiSupported(modelData.value) ? "✅" : "❌")
-                                color: (appSettings && appSettings.isApiSupported(modelData.value)) ? "#8f8" : "#f88"
-                                anchors.horizontalCenter: parent.horizontalCenter
+                        Button {
+                            Layout.fillWidth: true
+                            text: "Rebuild Cache"
+                            onClicked: {
+                                if (window.currentPath !== "") {
+                                    console.log("Rebuilding cache for: " + window.currentPath)
+                                    if (viewLoader.item) {
+                                        viewLoader.item.scanFolder(window.currentPath)
+                                    }
+                                } else {
+                                    folderDialog.open()
+                                }
                             }
                         }
-                    }
-
-                    Rectangle { height: 10; width: 1; color: "transparent" } // Spacer
-
-                    Text {
-                        text: "System Info"
-                        color: "white"
-                        font.bold: true
-                    }
-
-                    Text {
-                        text: "GPU: " + appSettings.getGpuName(window)
-                        color: "#aaa"
-                        width: parent.width
-                        wrapMode: Text.Wrap
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Text {
-                        id: memUsageText
-                        text: "Memory: Checking..."
-                        color: "#aaa"
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Timer {
-                        interval: 2000
-                        running: true
-                        repeat: true
-                        onTriggered: {
-                            memUsageText.text = "Memory: " + systemMonitor.memoryUsageMB.toFixed(1) + " MB"
+                        
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 1
+                            color: "#444"
+                            Layout.topMargin: 10
+                            Layout.bottomMargin: 10
                         }
-                    }
-                    
-                    CheckBox {
-                        text: "Show Performance Stats"
-                        checked: statsOverlay.visible
-                        onCheckedChanged: statsOverlay.visible = checked
-                        contentItem: Text {
-                            text: parent.text
+                        
+                        Text {
+                            text: "Graphics API (Requires Restart)"
                             color: "white"
-                            leftPadding: parent.indicator.width + parent.spacing
-                            verticalAlignment: Text.AlignVCenter
+                            font.bold: true
+                            font.pixelSize: 16
+                            Layout.alignment: Qt.AlignHCenter
                         }
+                        
+                        ComboBox {
+                            Layout.fillWidth: true
+                            model: ["Auto", "Direct3D 11", "Vulkan", "OpenGL", "Software"]
+                            currentIndex: appSettings.selectedApi
+                            onActivated: (index) => {
+                                appSettings.selectedApi = index
+                                restartDialog.open()
+                            }
+                        }
+                        
+                        RowLayout {
+                            Layout.alignment: Qt.AlignHCenter
+                            spacing: 5
+                            Text {
+                                text: "Active API:"
+                                color: "#aaa"
+                                font.pixelSize: 14
+                            }
+                            Text {
+                                text: appSettings.graphicsApi
+                                color: "#00FF00" // Green for visibility
+                                font.bold: true
+                                font.pixelSize: 14
+                            }
+                        }
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 1
+                            color: "#444"
+                            Layout.topMargin: 10
+                            Layout.bottomMargin: 10
+                        }
+
+                        Text {
+                            text: "Supported APIs:"
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: 16
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+                        
+                        Column {
+                            Layout.fillWidth: true
+                            spacing: 5
+                            
+                            Repeater {
+                                model: [
+                                    {name: "Direct3D 11", value: 2}, // QSGRendererInterface::Direct3D11
+                                    {name: "Vulkan", value: 3},      // QSGRendererInterface::Vulkan
+                                    {name: "OpenGL", value: 1},      // QSGRendererInterface::OpenGL
+                                    {name: "Software", value: 5}     // QSGRendererInterface::Software
+                                ]
+                                
+                                Text {
+                                    text: modelData.name + ": " + (appSettings && appSettings.isApiSupported(modelData.value) ? "Available" : "Not Available")
+                                    color: (appSettings && appSettings.isApiSupported(modelData.value)) ? "#8f8" : "#f88"
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    font.pixelSize: 14
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 1
+                            color: "#444"
+                            Layout.topMargin: 10
+                            Layout.bottomMargin: 10
+                        }
+
+                        Text {
+                            text: "System Info"
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: 16
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+
+                        Text {
+                            text: "GPU: " + appSettings.getGpuName(window)
+                            color: "#ccc"
+                            Layout.fillWidth: true
+                            wrapMode: Text.Wrap
+                            horizontalAlignment: Text.AlignHCenter
+                            font.pixelSize: 13
+                        }
+
+                        Text {
+                            id: memUsageText
+                            text: "Memory: Checking..."
+                            color: "#ccc"
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
+                            font.pixelSize: 13
+                        }
+
+                        Timer {
+                            interval: 2000
+                            running: true
+                            repeat: true
+                            onTriggered: {
+                                memUsageText.text = "Memory: " + systemMonitor.memoryUsageMB.toFixed(1) + " MB"
+                            }
+                        }
+                        
+                        CheckBox {
+                            text: "Show Performance Stats"
+                            checked: statsOverlay.visible
+                            onCheckedChanged: statsOverlay.visible = checked
+                            Layout.alignment: Qt.AlignHCenter
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                                leftPadding: parent.indicator.width + parent.spacing
+                                verticalAlignment: Text.AlignVCenter
+                            }
+                        }
+                        
+                        Item { height: 20; width: 1 } // Bottom Spacer
                     }
                 }
             }
@@ -378,5 +432,43 @@ ApplicationWindow {
         
         // Pass stats to overlay
         onImageLoaded: (timeMs) => statsOverlay.reportLoadTime(timeMs)
+    }
+
+    // Scanning Overlay (Restored Visuals, Non-blocking)
+    Rectangle {
+        id: scanningOverlay
+        anchors.fill: parent
+        color: "#AA000000" // Semi-transparent black
+        z: 200 // Topmost
+        visible: albumModel.isLoading && albumModel.count === 0
+
+        // Note: No MouseArea here, so clicks pass through to the UI below.
+
+        ColumnLayout {
+            anchors.centerIn: parent
+            spacing: 20
+
+            BusyIndicator {
+                Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: 64
+                Layout.preferredHeight: 64
+                running: scanningOverlay.visible
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Scanning selected folder..."
+                color: "white"
+                font.pixelSize: 20
+                font.bold: true
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Please wait, this may take a moment."
+                color: "#ccc"
+                font.pixelSize: 14
+            }
+        }
     }
 }

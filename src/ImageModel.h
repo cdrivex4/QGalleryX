@@ -13,10 +13,15 @@ struct ImageInfo {
   QString filePath;
   QString fileName;
   QDateTime date;
+  QDateTime dateTaken; // Added for sorting
+  QDateTime dateModified;
+  qint64 size = 0; // Added size member
 };
 
 class ImageModel : public QAbstractListModel {
   Q_OBJECT
+
+  Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
 
 public:
   enum ImageRoles {
@@ -27,7 +32,8 @@ public:
     SectionMonthRole,
     SectionYearRole,
     SectionWeekRole,
-    ExifRole
+    ExifRole,
+    IsRawRole
   };
   Q_ENUM(ImageRoles)
 
@@ -42,8 +48,14 @@ public:
                 int role = Qt::DisplayRole) const override;
   QHash<int, QByteArray> roleNames() const override;
 
+  bool isLoading() const { return m_isLoading; }
+
+signals:
+  void isLoadingChanged();
+
 private:
   QList<ImageInfo> m_images;
+  bool m_isLoading = false;
 };
 
 #endif // IMAGEMODEL_H
