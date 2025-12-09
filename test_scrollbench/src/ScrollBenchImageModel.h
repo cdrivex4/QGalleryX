@@ -1,0 +1,97 @@
+#ifndef SCROLLBENCHIMAGEMODEL_H
+#define SCROLLBENCHIMAGEMODEL_H
+
+#include <QAbstractListModel>
+#include <QDir>
+#include <QElapsedTimer>
+#include <QFileInfo>
+#include <QHash>
+
+class ScrollBenchImageModel : public QAbstractListModel {
+  Q_OBJECT
+  Q_PROPERTY(int visibleStartIndex READ visibleStartIndex WRITE
+                 setVisibleStartIndex NOTIFY visibleRangeChanged)
+  Q_PROPERTY(int visibleEndIndex READ visibleEndIndex WRITE setVisibleEndIndex
+                 NOTIFY visibleRangeChanged)
+  Q_PROPERTY(int pendingDecodeCount READ pendingDecodeCount NOTIFY
+                 pendingDecodeCountChanged)
+  Q_PROPERTY(int totalItems READ totalItems CONSTANT)
+  Q_PROPERTY(bool viewportCullingEnabled READ viewportCullingEnabled WRITE
+                 setViewportCullingEnabled NOTIFY viewportCullingEnabledChanged)
+  Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)
+
+public:
+  explicit ScrollBenchImageModel(QObject *parent = nullptr);
+
+  enum Roles {
+    PathRole = Qt::UserRole + 1,
+    FileNameRole,
+    IndexRole,
+    IsLoadedRole,
+    ColorRole,
+    IsSelectedRole
+  };
+
+  int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+  QVariant data(const QModelIndex &index,
+                int role = Qt::DisplayRole) const override;
+  QHash<int, QByteArray> roleNames() const override;
+
+  // Viewport culling properties
+  int visibleStartIndex() const { return m_visibleStartIndex; }
+  void setVisibleStartIndex(int index);
+
+  int visibleEndIndex() const { return m_visibleEndIndex; }
+  void setVisibleEndIndex(int index);
+
+  int pendingDecodeCount() const { return m_pendingDecodes; }
+  int totalItems() const { return m_totalItems; }
+
+  bool viewportCullingEnabled() const { return m_viewportCullingEnabled; }
+  void setViewportCullingEnabled(bool enabled);
+
+  Q_INVOKABLE void generateTestData(int count = 10000);
+  Q_INVOKABLE void clearData();
+  Q_INVOKABLE void scanDirectory(const QString &path);
+  Q_INVOKABLE void cancelScan();
+
+  // Selection methods
+  Q_INVOKABLE void toggleSelection(int index);
+  Q_INVOKABLE void selectAll();
+  Q_INVOKABLE void clearSelection();
+  Q_INVOKABLE void invertSelection();
+  Q_INVOKABLE void deleteSelected();
+  int selectedCount() const;
+
+signals:
+  void visibleRangeChanged();
+  void pendingDecodeCountChanged();
+  void viewportCullingEnabledChanged();
+  void scanProgress(int current, int total);
+  void scanComplete(int totalFound);
+  void selectedCountChanged();
+
+private:
+  struct ImageItem {
+    QString path;
+    QString fileName;
+    QString color; // For synthetic test images
+    bool isLoaded = false;
+    bool isSelected = false;
+  };
+
+  void updateVisibleRange();
+  void requestThumbnail(int index);
+  void cancelPendingRequests();
+
+  QVector<ImageItem> m_items;
+  int m_visibleStartIndex = 0;
+  int m_visibleEndIndex = 0;
+  int m_pendingDecodes = 0;
+  int m_totalItems = 0;
+  bool m_viewportCullingEnabled = true;
+  bool m_scanCancelled = false;
+  static constexpr int BUFFER_SIZE = 10; // Load 10 items ahead/behind
+};
+
+#endif // SCROLLBENCHIMAGEMODEL_H
