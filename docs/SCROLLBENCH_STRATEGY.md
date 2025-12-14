@@ -49,10 +49,10 @@ After successful integration, ScrollBench can be:
 |---------|----------|-------------|
 | **Focus** | Full-featured gallery | Performance testing |
 | **Stability** | Production-ready | Experimental |
-| **Network** | Full support | Not implemented |
+| **Network** | Full support | ✅ Async Scanning (v0.4) |
 | **RAW Files** | LibRaw integration | Planned |
 | **Video** | Basic support | Thumbnails planned |
-| **Selection** | Not yet | ✅ Implemented |
+| **Selection** | Not yet | ✅ Drag & Visual Box |
 | **Share/Resize** | Not yet | In progress |
 
 ## Commit Strategy
@@ -83,6 +83,6 @@ antigravity/
 ## Current Status (Dec 2024)
 
 **Main App**: v2.1.0 - Network & Deployment Stability
-**ScrollBench**: v0.3 - Selection System Complete
+**ScrollBench**: v0.4 - Async Scan & Drag Selection
 
 **Next**: Complete Share/Resize dialog, then begin parity assessment

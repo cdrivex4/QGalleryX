@@ -36,10 +36,8 @@ Dialog {
             Layout.fillWidth: true
             Layout.preferredHeight: 50
             onClicked: {
-                // Open advanced editor (Phase 3.3)
-                console.log("Open resize editor")
-                // TODO: Phase 3.3 - Open ResizeEditor
                 shareDialog.close()
+                resizeEditor.open()
             }
         }
         
@@ -67,5 +65,10 @@ Dialog {
             Layout.preferredHeight: 40
             onClicked: shareDialog.close()
         }
+    }
+    
+    // Resize Editor
+    ResizeEditor {
+        id: resizeEditor
     }
 }

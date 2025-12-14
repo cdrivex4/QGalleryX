@@ -268,3 +268,28 @@ The project shows strong potential for becoming a full-featured photo gallery ap
 ### 🔜 Next Steps
 1.  **D3D11 Stability Monitoring**: Ensure no driver timeouts on varied hardware.
 2.  **Albums Feature**: Continue implementation of full album functionality.
+
+## Session Update: ScrollBench Async & Visual Selection (2025-12-15)
+
+### ✅ Completed Tasks
+1.  **Async Directory Scanning**:
+    -   Implemented `TaskScheduler` integration in `ScrollBenchImageModel`.
+    -   Scanning now occurs on a background thread, preventing UI freezes on large folders or network shares (`\\quake2`).
+    -   Added batching (100 items) for smooth UI population.
+
+2.  **Critical Performance Fixes**:
+    -   **RAM Usage**: Fixed QML `Image` element unconditionally loading images. Added strict `isLoaded` binding to respect C++ `FrameBudgetScheduler`.
+    -   **Viewport Culling**: Implemented robust viewport probing with mathematical fallback. Resolved issue where thumbnails stopped loading.
+
+3.  **Visual "Rubber Band" Selection**:
+    -   Implemented 2D spatial selection (`selectVisualRect`) in C++ to handle grid logic.
+    -   Added Visual Selection Box (`Rectangle`) in `MainScrollBench.qml`.
+    -   **Interaction Fix**: Disabled `GridView.interactive` while dragging to prevent layer sliding.
+
+4.  **Structure & Deployment**:
+    -   Standardized `test_scrollbench/deploy/` as the build output.
+    -   Updated `build.ps1` to include all necessary DLLs for standalone execution.
+
+### 🔜 Next Steps
+1.  **Merge Back**: Plan migration of Async/Selection features to Main App.
+2.  **GalleryView Components**: Continue migrating complex view logic.

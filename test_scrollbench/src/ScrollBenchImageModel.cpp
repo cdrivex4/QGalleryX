@@ -1,4 +1,5 @@
 #include "ScrollBenchImageModel.h"
+#include "../src/TaskScheduler.h"
 #include <QColor>
 #include <QDebug>
 #include <QDirIterator>
@@ -121,41 +122,106 @@ void ScrollBenchImageModel::clearData() {
 }
 
 void ScrollBenchImageModel::scanDirectory(const QString &path) {
+  if (m_isLoading)
+    return;
+
+  m_isLoading = true;
+  emit isLoadingChanged();
+
   beginResetModel();
   m_items.clear();
   m_visibleStartIndex = 0;
   m_visibleEndIndex = 0;
-  cancelPendingRequests();
-
-  QStringList filters;
-  filters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif"
-          << "*.webp" << "*.cr2" << "*.nef" << "*.arw" << "*.dng";
-
-  // Recursive scan using QDirIterator
-  QDirIterator it(path, filters, QDir::Files | QDir::Readable,
-                  QDirIterator::Subdirectories);
-
-  while (it.hasNext()) {
-    QString filePath = it.next();
-    QFileInfo fileInfo(filePath);
-
-    ImageItem item;
-    item.fileName = fileInfo.fileName();
-    item.path = fileInfo.absoluteFilePath();
-    item.color = "#666666"; // Placeholder
-    item.isLoaded = false;
-    m_items.append(item);
-  }
-
-  m_totalItems = m_items.count();
+  // Clear previous data
   endResetModel();
 
-  qDebug() << "Loaded" << m_totalItems << "images from" << path
-           << "(recursive)";
+  cancelPendingRequests();
 
-  if (m_viewportCullingEnabled) {
-    updateVisibleRange();
-  }
+  // Async Scan via TaskScheduler
+  TaskScheduler::instance().addTask(
+      [this, path]() {
+        QElapsedTimer timer;
+        timer.start();
+
+        QString cleanPath = path;
+        // Basic naive URL cleaning (similar to main app but simplified for
+        // ScrollBench test)
+        if (cleanPath.startsWith("file:///")) {
+          cleanPath = cleanPath.mid(8);
+        }
+        cleanPath = QDir::toNativeSeparators(cleanPath);
+
+        if (!QDir(cleanPath).exists()) {
+          qWarning() << "Directory does not exist:" << cleanPath;
+          QMetaObject::invokeMethod(this, [this]() {
+            m_isLoading = false;
+            emit isLoadingChanged();
+          });
+          return;
+        }
+
+        QStringList filters;
+        filters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif"
+                << "*.webp" << "*.cr2" << "*.nef" << "*.arw" << "*.dng";
+
+        QDirIterator it(cleanPath, filters, QDir::Files | QDir::Readable,
+                        QDirIterator::Subdirectories);
+
+        QVector<ImageItem> batch;
+        batch.reserve(100);
+        int totalFound = 0;
+
+        while (it.hasNext() && !m_scanCancelled) {
+          QString filePath = it.next();
+          QFileInfo fileInfo(filePath);
+
+          ImageItem item;
+          item.fileName = fileInfo.fileName();
+          item.path = fileInfo.absoluteFilePath();
+          item.color = "#444444";
+          item.isLoaded = false;
+
+          batch.append(item);
+          totalFound++;
+
+          // Update UI in batches
+          if (batch.count() >= 100) {
+            QMetaObject::invokeMethod(this, [this, batch]() {
+              beginInsertRows(QModelIndex(), m_items.count(),
+                              m_items.count() + batch.count() - 1);
+              m_items.append(batch);
+              endInsertRows();
+
+              // If culling is on, we might need to trigger requests if they
+              // fall in visible range But usually updateVisibleRange() is
+              // called by QML changing scroll
+            });
+            batch.clear();
+          }
+        }
+
+        // Final batch
+        if (!batch.isEmpty()) {
+          QMetaObject::invokeMethod(this, [this, batch]() {
+            beginInsertRows(QModelIndex(), m_items.count(),
+                            m_items.count() + batch.count() - 1);
+            m_items.append(batch);
+            endInsertRows();
+          });
+        }
+
+        QMetaObject::invokeMethod(this, [this, timer, totalFound, cleanPath]() {
+          m_isLoading = false;
+          m_totalItems = m_items.count();
+          emit isLoadingChanged();
+          qDebug() << "Async Scan finished:" << totalFound << "items in"
+                   << timer.elapsed() << "ms from" << cleanPath;
+          if (m_viewportCullingEnabled) {
+            updateVisibleRange();
+          }
+        });
+      },
+      TaskScheduler::IO_BOUND, TaskScheduler::Normal);
 }
 
 void ScrollBenchImageModel::updateVisibleRange() {
@@ -249,6 +315,63 @@ void ScrollBenchImageModel::toggleSelection(int index) {
   QModelIndex modelIndex = createIndex(index, 0);
   emit dataChanged(modelIndex, modelIndex, {IsSelectedRole});
   emit selectedCountChanged();
+}
+
+void ScrollBenchImageModel::selectRange(int start, int end) {
+  if (start < 0 || end < 0 || start >= m_items.count() ||
+      end >= m_items.count()) {
+    return;
+  }
+
+  int realStart = qMin(start, end);
+  int realEnd = qMax(start, end);
+
+  bool changed = false;
+  for (int i = realStart; i <= realEnd; ++i) {
+    if (!m_items[i].isSelected) {
+      m_items[i].isSelected = true;
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    emit dataChanged(createIndex(realStart, 0), createIndex(realEnd, 0),
+                     {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ScrollBenchImageModel::selectVisualRect(int colMin, int colMax, int rowMin,
+                                             int rowMax, int columns) {
+  if (columns <= 0)
+    return;
+
+  bool changed = false;
+  int firstAffected = -1;
+  int lastAffected = -1;
+
+  for (int r = rowMin; r <= rowMax; ++r) {
+    for (int c = colMin; c <= colMax; ++c) {
+      int index = r * columns + c;
+      if (index >= 0 && index < m_items.count()) {
+        if (!m_items[index].isSelected) {
+          m_items[index].isSelected = true;
+          changed = true;
+          if (firstAffected == -1)
+            firstAffected = index;
+          lastAffected = index;
+        }
+      }
+    }
+  }
+
+  if (changed) {
+    // We emit a range covering the min/max index touched, which might include
+    // untouched items in between, but that's safe for a simple redraw hint.
+    emit dataChanged(createIndex(firstAffected, 0),
+                     createIndex(lastAffected, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
 }
 
 void ScrollBenchImageModel::selectAll() {

@@ -19,6 +19,7 @@ class ScrollBenchImageModel : public QAbstractListModel {
   Q_PROPERTY(bool viewportCullingEnabled READ viewportCullingEnabled WRITE
                  setViewportCullingEnabled NOTIFY viewportCullingEnabledChanged)
   Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)
+  Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
 
 public:
   explicit ScrollBenchImageModel(QObject *parent = nullptr);
@@ -57,11 +58,16 @@ public:
 
   // Selection methods
   Q_INVOKABLE void toggleSelection(int index);
+  Q_INVOKABLE void selectRange(int start, int end);
+  Q_INVOKABLE void selectVisualRect(int colMin, int colMax, int rowMin,
+                                    int rowMax, int columns);
   Q_INVOKABLE void selectAll();
   Q_INVOKABLE void clearSelection();
   Q_INVOKABLE void invertSelection();
   Q_INVOKABLE void deleteSelected();
   int selectedCount() const;
+
+  bool isLoading() const { return m_isLoading; }
 
 signals:
   void visibleRangeChanged();
@@ -70,6 +76,7 @@ signals:
   void scanProgress(int current, int total);
   void scanComplete(int totalFound);
   void selectedCountChanged();
+  void isLoadingChanged();
 
 private:
   struct ImageItem {
@@ -90,6 +97,7 @@ private:
   int m_pendingDecodes = 0;
   int m_totalItems = 0;
   bool m_viewportCullingEnabled = true;
+  bool m_isLoading = false;
   bool m_scanCancelled = false;
   static constexpr int BUFFER_SIZE = 10; // Load 10 items ahead/behind
 };
