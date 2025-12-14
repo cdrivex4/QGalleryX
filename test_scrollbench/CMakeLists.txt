@@ -29,6 +29,8 @@ qt_add_qml_module(appScrollBench
         qml/GalleryViewScrollBench.qml
         qml/PhotoViewerScrollBench.qml
         qml/PerformanceOverlay.qml
+        qml/ShareDialog.qml
+        qml/ResizeEditor.qml
 )
 
 # --- LibRaw (copy from main project) ---
