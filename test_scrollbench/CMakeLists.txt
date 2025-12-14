@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(ScrollBench LANGUAGES CXX)
-
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Concurrent Multimedia Gui QuickControls2 Widgets)
-
-qt_standard_project_setup()
+# Detect if we are building standalone or as a subproject
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    project(ScrollBench LANGUAGES CXX)
+    find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Concurrent Multimedia Gui QuickControls2 Widgets)
+    qt_standard_project_setup()
+endif()
 
 # ScrollBench Test Application  
 qt_add_executable(appScrollBench
@@ -12,7 +13,7 @@ qt_add_executable(appScrollBench
     src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
     src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
     src/TelemetryMonitor.cpp src/TelemetryMonitor.h
-    # Reuse from main proj ect
+    # Reuse from main project
     ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
     ../src/TaskScheduler.cpp ../src/TaskScheduler.h
     ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
@@ -31,12 +32,15 @@ qt_add_qml_module(appScrollBench
 )
 
 # --- LibRaw (copy from main project) ---
-set(LIBRAW_PATH "../3rdparty/LibRaw")
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${LIBRAW_PATH}/CMakeLists.txt")
-    set(LIBRAW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-    set(LIBRAW_BUILD_DEMOS OFF CACHE BOOL "" FORCE)
-    set(LIBRAW_INSTALL OFF CACHE BOOL "" FORCE)
-    add_subdirectory(${LIBRAW_PATH} libraw_build EXCLUDE_FROM_ALL)
+# Only add if not already defined by parent
+if(NOT TARGET libraw_static)
+    set(LIBRAW_PATH "../3rdparty/LibRaw")
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${LIBRAW_PATH}/CMakeLists.txt")
+        set(LIBRAW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+        set(LIBRAW_BUILD_DEMOS OFF CACHE BOOL "" FORCE)
+        set(LIBRAW_INSTALL OFF CACHE BOOL "" FORCE)
+        add_subdirectory(${LIBRAW_PATH} libraw_build EXCLUDE_FROM_ALL)
+    endif()
 endif()
 
 # --- FFmpeg (copy from main project) ---

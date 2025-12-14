@@ -47,6 +47,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${LIBRAW_PATH}/CMakeLists.txt")
     add_subdirectory(${LIBRAW_PATH})
 endif()
 
+# --- ScrollBench (Test App) ---
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test_scrollbench/CMakeLists.txt")
+    add_subdirectory(test_scrollbench)
+endif()
+
 # --- FFmpeg ---
 set(FFMPEG_PATH "3rdparty/ffmpeg")
 set(FFMPEG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/include")

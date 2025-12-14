@@ -103,9 +103,21 @@ $TestExePath = Join-Path $BuildDir "appSamsungGalleryTest.exe"
 if (Test-Path $ExePath) {
     Write-Host "==========================================" -ForegroundColor Green
     Write-Host " BUILD SUCCESSFUL" -ForegroundColor Green
-    Write-Host " Stable: $(Resolve-Path $ExePath)" -ForegroundColor Magenta
+    Write-Host " Stable:      $(Resolve-Path $ExePath)" -ForegroundColor Magenta
+    
+    # Check for ScrollBench
+    # It might be in build/test_scrollbench/appScrollBench.exe or build/appScrollBench.exe depending on CMake
+    $ScrollBenchExePath = Join-Path $BuildDir "appScrollBench.exe"
+    if (!(Test-Path $ScrollBenchExePath)) {
+        $ScrollBenchExePath = Join-Path $BuildDir "test_scrollbench/appScrollBench.exe"
+    }
+
+    if (Test-Path $ScrollBenchExePath) {
+        Write-Host " ScrollBench: $(Resolve-Path $ScrollBenchExePath)" -ForegroundColor Cyan
+    }
+
     if (Test-Path $TestExePath) {
-        Write-Host " Test:   $(Resolve-Path $TestExePath)" -ForegroundColor Cyan
+        Write-Host " Test:        $(Resolve-Path $TestExePath)" -ForegroundColor Cyan
     }
     Write-Host "==========================================" -ForegroundColor Green
 }
