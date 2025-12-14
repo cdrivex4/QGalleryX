@@ -23,3 +23,8 @@ This release focuses on **Deployment Stability** and **Network Support**. The ap
 -   **Qt Version**: 6.9.3 (MinGW 64-bit)
 -   **Status**: Stable
 -   **Verified**: Run `Test-Path build/appSamsungGallery.exe` -> True.
+
+### 🏗 Build System & Sync
+-   **Integrated ScrollBench**: `appScrollBench.exe` is now built automatically by the main build script, outputting to `build/test_scrollbench/`.
+-   **Dependency Verification**: `build.ps1` now explicitly checks for the presence of FFmpeg DLLs before starting compilation.
+-   **Git LFS**: Enabled Large File Storage for `avcodec-62.dll` (>100MB) to ensure seamless cloning and building on new machines.
