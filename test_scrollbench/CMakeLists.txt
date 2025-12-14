@@ -21,6 +21,8 @@ qt_add_executable(appScrollBench
     ../src/LogManager.cpp ../src/LogManager.h
 )
 
+set_target_properties(appScrollBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+
 qt_add_qml_module(appScrollBench
     URI ScrollBench
     VERSION 1.0

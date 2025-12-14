@@ -122,14 +122,14 @@ if (Test-Path $ExePath) {
     Write-Host " Stable:      $(Resolve-Path $ExePath)" -ForegroundColor Magenta
     
     # Check for ScrollBench
-    # It might be in build/test_scrollbench/appScrollBench.exe or build/appScrollBench.exe depending on CMake
-    $ScrollBenchExePath = Join-Path $BuildDir "appScrollBench.exe"
-    if (!(Test-Path $ScrollBenchExePath)) {
-        $ScrollBenchExePath = Join-Path $BuildDir "test_scrollbench/appScrollBench.exe"
-    }
+    # It SHOULD be in build/test_scrollbench/appScrollBench.exe now
+    $ScrollBenchExePath = Join-Path $BuildDir "test_scrollbench/appScrollBench.exe"
 
     if (Test-Path $ScrollBenchExePath) {
         Write-Host " ScrollBench: $(Resolve-Path $ScrollBenchExePath)" -ForegroundColor Cyan
+    }
+    else {
+        Write-Host " ScrollBench: NOT FOUND (Expected at $ScrollBenchExePath)" -ForegroundColor Yellow
     }
 
     if (Test-Path $TestExePath) {
