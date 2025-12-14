@@ -99,9 +99,17 @@ try {
     # We construct the command manually to ensure arguments are passed correctly
     $WindeployQt = "D:\Qt\6.9.3\mingw_64\bin\windeployqt.exe"
     
-    # Standard deploy for QML
+    # Standard deploy for Main App
     & $WindeployQt --qmldir $PSScriptRoot/resources/qml --dir $BuildDir $BuildDir/appSamsungGallery.exe --compiler-runtime --no-opengl-sw
     
+    # Standard deploy for ScrollBench (Segregated)
+    # Target: test_scrollbench/deploy (per docs/SCROLLBENCH_STRATEGY.md)
+    $ScrollBenchDeployDir = Join-Path $PSScriptRoot "test_scrollbench/deploy"
+    if (Test-Path "$ScrollBenchDeployDir/appScrollBench.exe") {
+        Write-Host "  -> Deploying ScrollBench to test_scrollbench/deploy..." -ForegroundColor Gray
+        & $WindeployQt --qmldir $PSScriptRoot/test_scrollbench/qml --dir $ScrollBenchDeployDir "$ScrollBenchDeployDir/appScrollBench.exe" --compiler-runtime --no-opengl-sw
+    }
+
     # We explicitly ensure imageformats are copied
     # windeployqt usually handles this if it detects QtGui, but being explicit is safer
 
@@ -122,8 +130,8 @@ if (Test-Path $ExePath) {
     Write-Host " Stable:      $(Resolve-Path $ExePath)" -ForegroundColor Magenta
     
     # Check for ScrollBench
-    # It SHOULD be in build/test_scrollbench/appScrollBench.exe now
-    $ScrollBenchExePath = Join-Path $BuildDir "test_scrollbench/appScrollBench.exe"
+    # It SHOULD be in test_scrollbench/deploy/appScrollBench.exe now
+    $ScrollBenchExePath = Join-Path $PSScriptRoot "test_scrollbench/deploy/appScrollBench.exe"
 
     if (Test-Path $ScrollBenchExePath) {
         Write-Host " ScrollBench: $(Resolve-Path $ScrollBenchExePath)" -ForegroundColor Cyan

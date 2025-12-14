@@ -293,7 +293,7 @@ Rectangle {
                     Slider {
                         id: thumbResSlider
                         Layout.fillWidth: true
-                        from: 128
+                        from: 20
                         to: 512
                         stepSize: 64
                         value: root.thumbResolution
@@ -303,7 +303,7 @@ Rectangle {
                     }
 
                     Text {
-                        text: "128px | 192px | 256px ⭐ | 320px | 384px | 448px | 512px"
+                        text: "20px | 128px | 192px | 256px ⭐ | 320px | 384px | 512px"
                         font.pixelSize: 10
                         color: "#666666"
                         wrapMode: Text.WordWrap

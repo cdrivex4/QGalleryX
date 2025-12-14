@@ -18,10 +18,11 @@ qt_add_executable(appScrollBench
     ../src/TaskScheduler.cpp ../src/TaskScheduler.h
     ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
     ../src/DesktopHelper.cpp ../src/DesktopHelper.h
+    ../src/SystemMonitor.cpp ../src/SystemMonitor.h
     ../src/LogManager.cpp ../src/LogManager.h
 )
 
-set_target_properties(appScrollBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
+set_target_properties(appScrollBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
 
 qt_add_qml_module(appScrollBench
     URI ScrollBench

@@ -123,6 +123,9 @@ void ScrollBenchImageModel::clearData() {
 void ScrollBenchImageModel::scanDirectory(const QString &path) {
   beginResetModel();
   m_items.clear();
+  m_visibleStartIndex = 0;
+  m_visibleEndIndex = 0;
+  cancelPendingRequests();
 
   QStringList filters;
   filters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif"
@@ -139,7 +142,7 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
     ImageItem item;
     item.fileName = fileInfo.fileName();
     item.path = fileInfo.absoluteFilePath();
-    item.color = "#666666";
+    item.color = "#666666"; // Placeholder
     item.isLoaded = false;
     m_items.append(item);
   }
@@ -150,7 +153,7 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
   qDebug() << "Loaded" << m_totalItems << "images from" << path
            << "(recursive)";
 
-  if (m_viewportCullingEnabled && m_visibleEndIndex > 0) {
+  if (m_viewportCullingEnabled) {
     updateVisibleRange();
   }
 }
@@ -179,8 +182,41 @@ void ScrollBenchImageModel::requestThumbnail(int index) {
     return;
   }
 
+  // If already loaded or synthetic, skip
+  if (m_items[index].isLoaded ||
+      m_items[index].path.startsWith("synthetic://")) {
+    return;
+  }
+
+  // Real image logic
+  // Check if already cached in AsyncImageProvider
+  QString cacheKey = m_items[index].path;
+  // Note: key format depends on provider implementation, typically just path
+  // for basic checks
+
+  // We simulate the "request" here by marking strict processing
+  // In a real app, the View requests the image via image:// source.
+  // BUT for "pre-loading" or budget management, we can query the provider.
+
+  // For ScrollBench, the View (ImageView) triggers the load via source binding.
+  // HOWEVER, this model method is called by updateVisibleRange() to "warm up"
+  // or track budget.
+
+  // Integrating with FrameBudgetScheduler effectively means we throttle the
+  // *notification* or the actual image request.
+
+  // To keep it simple and aligned with the "Budget" concept:
+  // We mark it as 'requesting'. The actual QImage load happens in QML.
+  // But we can check if it's *ready* to be shown.
+
   m_pendingDecodes++;
   emit pendingDecodeCountChanged();
+
+  // Simulate async delay or check cache
+  // In the full migration, we would call AsyncImageProvider::requestImage()
+  // manually if prefetching. For now, let's trust the QML Image element to
+  // drive the provider. We just update the 'isLoaded' state to true so we don't
+  // request again.
 
   QMetaObject::invokeMethod(
       this,
@@ -193,7 +229,7 @@ void ScrollBenchImageModel::requestThumbnail(int index) {
                            {IsLoadedRole});
         }
       },
-      Qt::QueuedConnection);
+      Qt::QueuedConnection); // This effectively simulates a "dispatch"
 }
 
 void ScrollBenchImageModel::cancelPendingRequests() {
