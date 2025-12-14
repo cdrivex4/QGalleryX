@@ -17,6 +17,22 @@ Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "   SamsungGallery Build System" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 
+# Step 0: Verify Dependencies
+Write-Host "[0/4] Verifying Dependencies..." -ForegroundColor Yellow
+$FFmpegBin = Join-Path $PSScriptRoot "3rdparty/ffmpeg/bin"
+$RequiredDlls = @("avcodec-62.dll", "avformat-62.dll", "avutil-60.dll", "swscale-9.dll")
+
+foreach ($dll in $RequiredDlls) {
+    if (!(Test-Path (Join-Path $FFmpegBin $dll))) {
+        Write-Host "ERROR: Missing dependency: $dll" -ForegroundColor Red
+        Write-Host "  Expected at: $(Join-Path $FFmpegBin $dll)" -ForegroundColor Red
+        Write-Host "  Please ensure all 3rdparty libraries are present." -ForegroundColor Red
+        Write-Host "  If you cloned the repo, you might need to manually download large binaries if they were excluded." -ForegroundColor Red
+        exit 1
+    }
+}
+Write-Host "  FFmpeg binaries found." -ForegroundColor Gray
+
 # Step 1: Kill running instances (Robust)
 Write-Host "[1/4] Checking for running instances..." -ForegroundColor Yellow
 $pNames = @("appSamsungGallery", "appSamsungGalleryTest")
