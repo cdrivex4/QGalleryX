@@ -1,12 +1,32 @@
 #include "ScrollBenchImageModel.h"
 #include "../src/TaskScheduler.h"
+#include "../src/FrameBudgetScheduler.h"
 #include <QColor>
 #include <QDebug>
 #include <QDirIterator>
 #include <QRandomGenerator>
+#include <QTimer>
 
 ScrollBenchImageModel::ScrollBenchImageModel(QObject *parent)
-    : QAbstractListModel(parent) {}
+    : QAbstractListModel(parent) {
+  m_updateTimer = new QTimer(this);
+  m_updateTimer->setInterval(16); // ~60fps
+  m_updateTimer->setSingleShot(true);
+  connect(m_updateTimer, &QTimer::timeout, this,
+          &ScrollBenchImageModel::processPendingUpdates);
+
+  m_forceUpdateTimer = new QTimer(this); // Initialize the new timer
+  m_forceUpdateTimer->setSingleShot(true);
+  connect(m_forceUpdateTimer, &QTimer::timeout, this, &ScrollBenchImageModel::forceUpdateGridView); // Connect to new signal
+}
+
+void ScrollBenchImageModel::forceDelayedUpdate() {
+    emit forceUpdateGridView();
+}
+
+void ScrollBenchImageModel::setFrameScheduler(FrameBudgetScheduler *scheduler) {
+  m_frameScheduler = scheduler;
+}
 
 int ScrollBenchImageModel::rowCount(const QModelIndex &parent) const {
   if (parent.isValid())
@@ -50,6 +70,7 @@ QHash<int, QByteArray> ScrollBenchImageModel::roleNames() const {
 }
 
 void ScrollBenchImageModel::setVisibleStartIndex(int index) {
+  qDebug() << "setVisibleStartIndex called with:" << index;
   if (m_visibleStartIndex != index) {
     m_visibleStartIndex = index;
     emit visibleRangeChanged();
@@ -61,6 +82,7 @@ void ScrollBenchImageModel::setVisibleStartIndex(int index) {
 }
 
 void ScrollBenchImageModel::setVisibleEndIndex(int index) {
+  qDebug() << "setVisibleEndIndex called with:" << index;
   if (m_visibleEndIndex != index) {
     m_visibleEndIndex = index;
     emit visibleRangeChanged();
@@ -214,11 +236,11 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
           m_isLoading = false;
           m_totalItems = m_items.count();
           emit isLoadingChanged();
+          emit scanComplete(totalFound); // <--- ADDED THIS LINE
           qDebug() << "Async Scan finished:" << totalFound << "items in"
                    << timer.elapsed() << "ms from" << cleanPath;
-          if (m_viewportCullingEnabled) {
-            updateVisibleRange();
-          }
+          // Trigger a delayed update of the GridView in QML
+          m_forceUpdateTimer->start(200); // 200ms delay to allow QML to layout
         });
       },
       TaskScheduler::IO_BOUND, TaskScheduler::Normal);
@@ -232,75 +254,85 @@ void ScrollBenchImageModel::updateVisibleRange() {
   int startIdx = qMax(0, m_visibleStartIndex - BUFFER_SIZE);
   int endIdx = qMin(m_items.count() - 1, m_visibleEndIndex + BUFFER_SIZE);
 
-  qDebug() << "Visible range updated:" << startIdx << "to" << endIdx
+  qDebug() << "Visible range updated in C++:" << startIdx << "to" << endIdx
            << "(viewport:" << m_visibleStartIndex << "-" << m_visibleEndIndex
-           << ")";
+           << ", total items:" << m_items.count() << ")";
 
+  int requestedCount = 0;
   for (int i = startIdx; i <= endIdx; ++i) {
     if (i >= 0 && i < m_items.count() && !m_items[i].isLoaded) {
       requestThumbnail(i);
+      requestedCount++;
     }
   }
+  qDebug() << "requestThumbnail calls initiated:" << requestedCount << "for visible range";
 }
 
 void ScrollBenchImageModel::requestThumbnail(int index) {
-  if (index < 0 || index >= m_items.count()) {
+  if (index < 0 || index >= m_items.count() || m_items[index].isLoaded) {
     return;
   }
+  qDebug() << "requestThumbnail: Attempting to request thumbnail for index:" << index << "path:" << m_items[index].path;
 
-  // If already loaded or synthetic, skip
-  if (m_items[index].isLoaded ||
-      m_items[index].path.startsWith("synthetic://")) {
-    return;
+  auto deliverTask = [this, index]() {
+    if (index >= 0 && index < m_items.count()) {
+      m_items[index].isLoaded = true;
+      if (!m_items[index].path.startsWith("synthetic://")) {
+        m_pendingDecodes = qMax(0, m_pendingDecodes - 1);
+        emit pendingDecodeCountChanged();
+      }
+
+      m_pendingLoadedIndices.insert(index);
+      if (!m_updateTimer->isActive()) {
+        m_updateTimer->start();
+      }
+    }
+  };
+
+  if (!m_items[index].path.startsWith("synthetic://")) {
+      m_pendingDecodes++;
+      emit pendingDecodeCountChanged();
   }
 
-  // Real image logic
-  // Check if already cached in AsyncImageProvider
-  QString cacheKey = m_items[index].path;
-  // Note: key format depends on provider implementation, typically just path
-  // for basic checks
+  if (m_frameScheduler) {
+    m_frameScheduler->onTaskCompleted(deliverTask);
+  } else {
+    QMetaObject::invokeMethod(this, deliverTask, Qt::QueuedConnection);
+  }
+}
 
-  // We simulate the "request" here by marking strict processing
-  // In a real app, the View requests the image via image:// source.
-  // BUT for "pre-loading" or budget management, we can query the provider.
+void ScrollBenchImageModel::processPendingUpdates() {
+    if (m_pendingLoadedIndices.isEmpty()) return;
 
-  // For ScrollBench, the View (ImageView) triggers the load via source binding.
-  // HOWEVER, this model method is called by updateVisibleRange() to "warm up"
-  // or track budget.
+    QList<int> sortedIndices = m_pendingLoadedIndices.values();
+    std::sort(sortedIndices.begin(), sortedIndices.end());
+    m_pendingLoadedIndices.clear();
 
-  // Integrating with FrameBudgetScheduler effectively means we throttle the
-  // *notification* or the actual image request.
+    if (sortedIndices.isEmpty()) return;
+    
+    int startRange = sortedIndices.first();
+    int endRange = startRange;
 
-  // To keep it simple and aligned with the "Budget" concept:
-  // We mark it as 'requesting'. The actual QImage load happens in QML.
-  // But we can check if it's *ready* to be shown.
-
-  m_pendingDecodes++;
-  emit pendingDecodeCountChanged();
-
-  // Simulate async delay or check cache
-  // In the full migration, we would call AsyncImageProvider::requestImage()
-  // manually if prefetching. For now, let's trust the QML Image element to
-  // drive the provider. We just update the 'isLoaded' state to true so we don't
-  // request again.
-
-  QMetaObject::invokeMethod(
-      this,
-      [this, index]() {
-        if (index >= 0 && index < m_items.count()) {
-          m_items[index].isLoaded = true;
-          m_pendingDecodes = qMax(0, m_pendingDecodes - 1);
-          emit pendingDecodeCountChanged();
-          emit dataChanged(createIndex(index, 0), createIndex(index, 0),
-                           {IsLoadedRole});
+    for (int i = 1; i < sortedIndices.count(); ++i) {
+        if (sortedIndices[i] == endRange + 1) {
+            endRange = sortedIndices[i];
+        } else {
+            emit dataChanged(createIndex(startRange, 0), createIndex(endRange, 0), {IsLoadedRole});
+            startRange = sortedIndices[i];
+            endRange = startRange;
         }
-      },
-      Qt::QueuedConnection); // This effectively simulates a "dispatch"
+    }
+    emit dataChanged(createIndex(startRange, 0), createIndex(endRange, 0), {IsLoadedRole});
+    qDebug() << "processPendingUpdates: Emitted dataChanged for range:" << startRange << "to" << endRange;
 }
 
 void ScrollBenchImageModel::cancelPendingRequests() {
   m_pendingDecodes = 0;
   emit pendingDecodeCountChanged();
+  m_pendingLoadedIndices.clear();
+  if(m_updateTimer && m_updateTimer->isActive()){
+      m_updateTimer->stop();
+  }
 }
 
 void ScrollBenchImageModel::cancelScan() { m_scanCancelled = true; }

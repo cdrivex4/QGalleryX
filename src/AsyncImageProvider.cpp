@@ -3,6 +3,7 @@
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
+#include <QDebug>
 #include <QDir>
 #include <QElapsedTimer>
 #include <QFileIconProvider>
@@ -21,6 +22,7 @@
 #include <QtMultimedia/QVideoFrame>
 #include <QtMultimedia/QVideoSink>
 #include <algorithm>
+#include <cstdio>
 #include <libraw/libraw.h>
 
 #ifdef Q_OS_WIN
@@ -32,13 +34,32 @@ static QSemaphore s_videoSemaphore(4);
 static QSemaphore s_rawSemaphore(2); // Limit to 2 concurrent RAW loads
 QCache<QString, QImage> AsyncImageProvider::m_cache;
 QMutex AsyncImageProvider::m_mutex;
-std::atomic<int> AsyncImageProvider::s_logLevel(0);
+// Initialize statics
+std::atomic<int> AsyncImageProvider::s_logLevel(1);
 std::atomic<bool> AsyncImageProvider::s_accelerateRaw(true);
+std::atomic<bool> AsyncImageProvider::s_disableVideo(false);
+std::atomic<bool> AsyncImageProvider::s_disableRaw(false);
+
+AsyncImageProvider::AsyncImageProvider() : QQuickAsyncImageProvider() {
+  // Ensure we have a clean start
+  s_disableVideo = false;
+  s_disableRaw = false;
+  s_logLevel = 2; // Enable TRACE logging
+}
+
+AsyncImageResponse::~AsyncImageResponse() {
+  qWarning() << "TRACE: [-TRK] Response destroyed:" << this << "for" << m_id;
+  if (m_tracker) {
+    m_tracker->response.store(nullptr);
+  }
+}
 
 AsyncImageResponse::AsyncImageResponse(const QString &id,
                                        const QSize &requestedSize)
     : m_id(id), m_requestedSize(requestedSize),
-      m_cancelled(std::make_shared<std::atomic<bool>>(false)) {
+      m_cancelled(std::make_shared<std::atomic<bool>>(false)),
+      m_tracker(std::make_shared<ResponseTracker>(this)) {
+  qWarning() << "TRACE: [+TRK] Response created:" << this << "for" << id;
 
   // Ensure cache size is initialized (lazy init)
   static bool configured = false;
@@ -67,7 +88,15 @@ QQuickTextureFactory *AsyncImageResponse::textureFactory() const {
 
 void AsyncImageResponse::cancel() { *m_cancelled = true; }
 
+void AsyncImageResponse::run() {
+  // We do NOTHING here because we manually scheduled the task to TaskScheduler
+  // in requestImageResponse to support priority and budgeting.
+  // If we also ran it here, we would have a race condition.
+}
+
 void AsyncImageResponse::handleDone(QImage image) {
+  qWarning() << "TRACE: [DONE] handleDone for" << this
+             << "(null=" << image.isNull() << ")";
   m_image = image;
   emit finished();
 }
@@ -75,7 +104,20 @@ void AsyncImageResponse::handleDone(QImage image) {
 QQuickImageResponse *
 AsyncImageProvider::requestImageResponse(const QString &id,
                                          const QSize &requestedSize) {
+  qWarning() << "TRACE: RequestImage" << id << requestedSize;
   auto *response = new AsyncImageResponse(id, requestedSize);
+
+  // Check Disable Flags
+  bool isVideo = id.endsWith(".mp4", Qt::CaseInsensitive) ||
+                 id.endsWith(".mov", Qt::CaseInsensitive) ||
+                 id.endsWith(".mkv", Qt::CaseInsensitive) ||
+                 id.endsWith(".avi", Qt::CaseInsensitive);
+  bool isRaw = id.endsWith(".arw", Qt::CaseInsensitive) ||
+               id.endsWith(".cr2", Qt::CaseInsensitive) ||
+               id.endsWith(".dng", Qt::CaseInsensitive) ||
+               id.endsWith(".nef", Qt::CaseInsensitive) ||
+               id.endsWith(".orf", Qt::CaseInsensitive) ||
+               id.endsWith(".raf", Qt::CaseInsensitive);
 
   // Check Cache Synchronously
   QImage cached = getCachedImage(id, requestedSize);
@@ -96,10 +138,12 @@ AsyncImageProvider::requestImageResponse(const QString &id,
 
   std::shared_ptr<std::atomic<bool>> cancelled = response->m_cancelled;
 
+  // Schedule task
+  auto tracker = response->m_tracker;
   TaskScheduler::instance().addTask(
-      [id, requestedSize, cancelled, response]() {
+      [id, requestedSize, cancelled, tracker]() {
         AsyncImageProvider::processImageTask(id, requestedSize, cancelled,
-                                             response);
+                                             tracker);
       },
       TaskScheduler::CPU_BOUND, priority);
 
@@ -148,11 +192,19 @@ void AsyncImageProvider::clearCache() {
 void AsyncImageProvider::processImageTask(
     QString id, QSize requestedSize,
     std::shared_ptr<std::atomic<bool>> cancelled,
-    AsyncImageResponse *response) {
+    std::shared_ptr<ResponseTracker> tracker) {
+  // Check if response still exists
+  AsyncImageResponse *response = tracker->response.load();
+  if (!response)
+    return;
 
   // 1. Check Cancellation (Early Exit)
   if (*cancelled)
     return;
+
+  if (s_logLevel > 1) {
+    qWarning() << "TRACE: processImageTask starting for" << id;
+  }
 
   // --- MEMORY LIMIT ENFORCEMENT (User Request: 2.5GB Max) ---
   // (REVERTED due to Lock Contention)
@@ -190,14 +242,26 @@ void AsyncImageProvider::processImageTask(
   bool isVideo = (type == DesktopHelper::Video);
   bool isRaw = (type == DesktopHelper::Raw);
 
+  if ((isVideo && s_disableVideo) || (isRaw && s_disableRaw)) {
+    // Disabled type - return empty image (invokes handleDone with null)
+#ifdef Q_OS_WIN
+    CoUninitialize();
+#endif
+    return;
+  }
+
   // --- Loading Logic ---
+  if (s_logLevel > 1)
+    qDebug() << "TRACE: identifies as RAW:" << path;
   if (isRaw) {
     // NON-BLOCKING CHECK
     if (!s_rawSemaphore.tryAcquire(1)) {
       // BUSY LOOP PREVENTION
       QThread::msleep(20);
       TaskScheduler::instance().addTask(
-          [=]() { processImageTask(id, requestedSize, cancelled, response); },
+          [id, requestedSize, cancelled, tracker]() {
+            processImageTask(id, requestedSize, cancelled, tracker);
+          },
           TaskScheduler::CPU_BOUND, TaskScheduler::Low);
 #ifdef Q_OS_WIN
       CoUninitialize();
@@ -294,11 +358,15 @@ void AsyncImageProvider::processImageTask(
         image = reader.read();
     }
   } else if (isVideo) {
+    if (s_logLevel > 1)
+      qDebug() << "TRACE: identifies as Video:" << path;
     // NON-BLOCKING VIDEO CHECK
     if (!s_videoSemaphore.tryAcquire(1)) {
       QThread::msleep(20);
       TaskScheduler::instance().addTask(
-          [=]() { processImageTask(id, requestedSize, cancelled, response); },
+          [id, requestedSize, cancelled, tracker]() {
+            processImageTask(id, requestedSize, cancelled, tracker);
+          },
           TaskScheduler::CPU_BOUND, TaskScheduler::Low);
 #ifdef Q_OS_WIN
       CoUninitialize();
@@ -324,6 +392,8 @@ void AsyncImageProvider::processImageTask(
     }
   } else {
     // Standard Image
+    if (s_logLevel > 1)
+      qDebug() << "TRACE: identifies as Image:" << path;
     QImageReader reader(path);
     if (requestedSize.isValid()) {
       QSize originalSize = reader.size();
@@ -376,8 +446,15 @@ void AsyncImageProvider::processImageTask(
 #endif
 
   if (!*cancelled) {
-    // Deliver result to main thread
-    QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
-                              Q_ARG(QImage, image));
+    qWarning() << "TRACE: [LOG] Delivering result for" << id;
+    // Check if response still exists before delivering
+    AsyncImageResponse *resp = tracker->response.load();
+    if (resp) {
+      // Deliver result to main thread
+      QMetaObject::invokeMethod(resp, "handleDone", Qt::QueuedConnection,
+                                Q_ARG(QImage, image));
+    } else {
+      qWarning() << "TRACE: [LOG] Response object GONE for" << id;
+    }
   }
 }

@@ -6,6 +6,10 @@
 #include <QElapsedTimer>
 #include <QFileInfo>
 #include <QHash>
+#include <QSet>
+
+class FrameBudgetScheduler;
+class QTimer;
 
 class ScrollBenchImageModel : public QAbstractListModel {
   Q_OBJECT
@@ -68,6 +72,8 @@ public:
   int selectedCount() const;
 
   bool isLoading() const { return m_isLoading; }
+  
+  void setFrameScheduler(FrameBudgetScheduler *scheduler);
 
 signals:
   void visibleRangeChanged();
@@ -77,6 +83,13 @@ signals:
   void scanComplete(int totalFound);
   void selectedCountChanged();
   void isLoadingChanged();
+  void forceUpdateGridView(); // New signal to trigger QML GridView update
+
+public slots: // New public slot
+    void forceDelayedUpdate();
+
+private slots:
+    void processPendingUpdates();
 
 private:
   struct ImageItem {
@@ -100,6 +113,12 @@ private:
   bool m_isLoading = false;
   bool m_scanCancelled = false;
   static constexpr int BUFFER_SIZE = 10; // Load 10 items ahead/behind
+
+  // Batching updates
+  QSet<int> m_pendingLoadedIndices;
+  QTimer *m_updateTimer = nullptr;
+  QTimer *m_forceUpdateTimer = nullptr; // New timer for delayed QML update
+  FrameBudgetScheduler *m_frameScheduler = nullptr;
 };
 
 #endif // SCROLLBENCHIMAGEMODEL_H

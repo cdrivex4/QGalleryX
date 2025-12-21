@@ -53,6 +53,16 @@ ApplicationWindow {
             clip: true
             interactive: root.dragSelectionStart === -1 // Disable scrolling while dragging selection box
 
+            Connections {
+                target: imageModel
+                function onForceUpdateGridView() {
+                    console.log("imageModel.forceUpdateGridView received. Calling gridView.updateVisibleRange().");
+                    gridView.updateVisibleRange();
+                }
+            }
+
+
+
             delegate: Rectangle {
                 width: gridView.cellWidth - 4
                 height: gridView.cellHeight - 4
@@ -212,43 +222,56 @@ ApplicationWindow {
 
             // Track visible range
             function updateVisibleRange() {
-                let firstVisible = indexAt(contentX + 10, contentY + 10) // Top-left with margin
-                if (firstVisible < 0) firstVisible = indexAt(contentX + width/2, contentY + 10) // Top-center fallback
+                console.log("updateVisibleRange called. gridView dimensions: width=", gridView.width, "height=", gridView.height, "cellWidth=", gridView.cellWidth, "cellHeight=", gridView.cellHeight);
+
+                let firstVisibleProbe = indexAt(contentX + 10, contentY + 10); // Top-left with margin
+                let lastVisibleProbe = indexAt(contentX + width - 10, contentY + height - 10); // Bottom-right
+                
+                console.log("Raw indexAt probes: firstVisibleProbe=", firstVisibleProbe, "lastVisibleProbe=", lastVisibleProbe);
+
+                let firstVisible = firstVisibleProbe;
+                if (firstVisible < 0) firstVisible = indexAt(contentX + width/2, contentY + 10); // Top-center fallback
                 
                 // Robust lastVisible calculation
-                let lastVisible = indexAt(contentX + width - 10, contentY + height - 10) // Bottom-right
+                let lastVisible = lastVisibleProbe;
                 if (lastVisible < 0) {
-                     lastVisible = indexAt(contentX + width/2, contentY + height - 10) // Bottom-center
+                     lastVisible = indexAt(contentX + width/2, contentY + height - 10); // Bottom-center
                 }
                 if (lastVisible < 0) {
-                     lastVisible = indexAt(contentX + 10, contentY + height - 10) // Bottom-left
+                     lastVisible = indexAt(contentX + 10, contentY + height - 10); // Bottom-left
                 }
                 
+                console.log("After fallbacks: firstVisible=", firstVisible, "lastVisible=", lastVisible);
+
                 // Mathematical fallback if probing fails completely (e.g. fast scroll or spacing)
                 if (firstVisible >= 0 && lastVisible < 0) {
-                     let approxRows = Math.ceil(height / cellHeight)
-                     let approxCols = Math.floor(width / cellWidth)
+                     let approxRows = Math.ceil(height / cellHeight);
+                     let approxCols = Math.floor(width / cellWidth);
                      // Add buffer rows to be safe
-                     let estimatedEnd = firstVisible + (approxRows + 1) * approxCols
-                     lastVisible = Math.min(count - 1, estimatedEnd)
+                     let estimatedEnd = firstVisible + (approxRows + 1) * approxCols;
+                     lastVisible = Math.min(count - 1, estimatedEnd);
+                     console.log("Mathematical fallback used. Estimated lastVisible=", lastVisible);
                 }
 
                 // Apply valid updates
                 if (firstVisible >= 0) {
-                    imageModel.visibleStartIndex = firstVisible
+                    imageModel.visibleStartIndex = firstVisible;
                 }
                 
                 // Ensure endIndex is at least started
                 if (lastVisible >= 0) {
                      // Sanity check: end must be >= start
                      if (imageModel.visibleStartIndex > lastVisible) {
-                         lastVisible = imageModel.visibleStartIndex + 20 // minimal fallback
+                         lastVisible = imageModel.visibleStartIndex + 20; // minimal fallback
+                         console.log("Sanity check adjusted lastVisible to", lastVisible);
                      }
-                     imageModel.visibleEndIndex = lastVisible
+                     imageModel.visibleEndIndex = lastVisible;
                 } else if (imageModel.visibleStartIndex >= 0) {
                      // Last ditch: if we have start but no end, assume a page
-                     imageModel.visibleEndIndex = Math.min(count - 1, imageModel.visibleStartIndex + 50)
+                     imageModel.visibleEndIndex = Math.min(count - 1, imageModel.visibleStartIndex + 50);
+                     console.log("Last ditch fallback used. Estimated lastVisible=", imageModel.visibleEndIndex);
                 }
+                console.log("Final visible range updated: " + imageModel.visibleStartIndex + " to " + imageModel.visibleEndIndex + " (count: " + count + ")");
             }
 
             onContentYChanged: updateVisibleRange()
@@ -257,6 +280,8 @@ ApplicationWindow {
             onWidthChanged: updateVisibleRange()
             onCellWidthChanged: updateVisibleRange() // Update on Zoom
         }
+
+
 
         // Ctrl+Wheel Zoom Handler
         MouseArea {

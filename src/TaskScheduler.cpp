@@ -1,7 +1,7 @@
 #include "TaskScheduler.h"
 #include "LogManager.h"
+#include <QDebug>
 #include <QSettings>
-#include <iostream>
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -61,6 +61,7 @@ void TaskScheduler::stop() {
 }
 
 void TaskScheduler::addTask(Task task, TaskType type, Priority priority) {
+  // qDebug() << "TRACE: AddTask" << (int)type << (int)priority;
   if (!m_running)
     return;
 
@@ -142,10 +143,9 @@ void TaskScheduler::cpuWorkerLoop() {
       try {
         task();
       } catch (const std::exception &e) {
-        std::cerr << "[TaskScheduler] CPU Task Exception: " << e.what()
-                  << std::endl;
+        qCritical() << "[TaskScheduler] CPU Task Exception:" << e.what();
       } catch (...) {
-        std::cerr << "[TaskScheduler] CPU Task Unknown Exception" << std::endl;
+        qCritical() << "[TaskScheduler] CPU Task Unknown Exception";
       }
     }
   }
@@ -202,10 +202,9 @@ void TaskScheduler::ioWorkerLoop() {
       try {
         task();
       } catch (const std::exception &e) {
-        std::cerr << "[TaskScheduler] IO Task Exception: " << e.what()
-                  << std::endl;
+        qCritical() << "[TaskScheduler] IO Task Exception:" << e.what();
       } catch (...) {
-        std::cerr << "[TaskScheduler] IO Task Unknown Exception" << std::endl;
+        qCritical() << "[TaskScheduler] IO Task Unknown Exception";
       }
     }
   }

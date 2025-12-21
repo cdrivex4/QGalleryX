@@ -1,0 +1,22 @@
+{
+  "project_status": "brownfield",
+  "initial_analysis_complete": true,
+  "tech_stack": [
+    "C++",
+    "Qt6",
+    "QML",
+    "CMake",
+    "LibRaw",
+    "FFmpeg"
+  ],
+  "architecture_summary": "Qt6/QML application with C++ models (ImageModel, ScrollBenchImageModel) and a custom TaskScheduler for asynchronous I/O and processing.",
+  "core_components": [
+    "ImageModel (src/ImageModel.cpp)",
+    "ScrollBenchImageModel (test_scrollbench/src/ScrollBenchImageModel.cpp)",
+    "AsyncImageProvider (src/AsyncImageProvider.cpp)",
+    "TaskScheduler (src/TaskScheduler.cpp)",
+    "MainScrollBench.qml (test_scrollbench/qml/MainScrollBench.qml)"
+  ],
+  "active_goal": "Resolve QML GridView initial loading issue (only 11 images) and optimize performance tracking.",
+  "last_updated": "2025-12-21"
+}

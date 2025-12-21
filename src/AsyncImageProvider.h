@@ -7,34 +7,48 @@
 #include <QMutex>
 #include <QObject>
 #include <QQuickAsyncImageProvider>
+#include <QQuickImageResponse>
 #include <QRunnable>
-#include <QThreadPool>
+#include <QSize>
 #include <atomic>
 #include <memory>
 
-class AsyncImageResponse : public QQuickImageResponse {
+// Safe tracker to prevent background threads from using deleted response
+// objects
+struct ResponseTracker {
+  std::atomic<class AsyncImageResponse *> response;
+  explicit ResponseTracker(AsyncImageResponse *r) : response(r) {}
+};
+
+class AsyncImageResponse : public QQuickImageResponse, public QRunnable {
   Q_OBJECT
 public:
   AsyncImageResponse(const QString &id, const QSize &requestedSize);
+  ~AsyncImageResponse() override;
+  void run() override;
   QQuickTextureFactory *textureFactory() const override;
   void cancel() override;
 
 public slots:
   void handleDone(QImage image);
 
-  friend class AsyncImageProvider;
-
-private:
+public:
   QString m_id;
   QSize m_requestedSize;
   QImage m_image;
   std::shared_ptr<std::atomic<bool>> m_cancelled;
+  std::shared_ptr<ResponseTracker> m_tracker;
 };
 
 class AsyncImageProvider : public QQuickAsyncImageProvider {
 public:
-  QQuickImageResponse *
-  requestImageResponse(const QString &id, const QSize &requestedSize) override;
+  AsyncImageProvider();
+
+  static std::atomic<bool> s_disableVideo;
+  static std::atomic<bool> s_disableRaw;
+
+  QQuickImageResponse *requestImageResponse(const QString &id,
+                                            const QSize &requestedSize);
 
   static QImage getCachedImage(const QString &id, const QSize &size);
   static void insertCachedImage(const QString &id, const QImage &image,
@@ -46,7 +60,7 @@ public:
   // Internal worker for task scheduling with re-queue support
   static void processImageTask(QString id, QSize requestedSize,
                                std::shared_ptr<std::atomic<bool>> cancelled,
-                               AsyncImageResponse *response);
+                               std::shared_ptr<ResponseTracker> tracker);
 
   static std::atomic<int> s_logLevel;
   static std::atomic<bool> s_accelerateRaw;
