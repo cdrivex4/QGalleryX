@@ -1,41 +1,7 @@
 #include "GroupedProxyModel.h"
 #include "ImageModel.h"
-
-// ... (existing includes)
-
-// ... (existing code)
-
-QVariantList GroupedProxyModel::getYearDistribution() const {
-  QVariantList list;
-  if (!m_sourceModel)
-    return list;
-
-  int lastYear = -1;
-  int yearRole = ImageModel::SectionYearRole;
-
-  for (int i = 0; i < m_index.count(); ++i) {
-    const IndexItem &item = m_index[i];
-
-    if (item.type == RowItem) {
-      int sourceIndex = item.sourceStartIndex;
-      if (sourceIndex >= 0 && sourceIndex < m_sourceModel->rowCount()) {
-        QModelIndex srcIdx = m_sourceModel->index(sourceIndex, 0);
-        QVariant yearData = m_sourceModel->data(srcIdx, yearRole);
-        int year = yearData.toInt();
-
-        if (year != lastYear && year != 0) {
-          QVariantMap map;
-          map["year"] = year;
-          map["proxyIndex"] = i;
-          list.append(map);
-          lastYear = year;
-        }
-      }
-    }
-  }
-  return list;
-}
 #include <QDebug>
+#include <QThread>
 
 GroupedProxyModel::GroupedProxyModel(QObject *parent)
     : QAbstractListModel(parent) {}
@@ -66,6 +32,8 @@ void GroupedProxyModel::setSourceModel(QAbstractListModel *model) {
             &GroupedProxyModel::onSourceModelReset);
     connect(m_sourceModel, &QAbstractListModel::rowsRemoved, this,
             &GroupedProxyModel::onSourceModelReset);
+    connect(m_sourceModel, &QAbstractListModel::dataChanged, this,
+            &GroupedProxyModel::onSourceDataChanged);
   }
 
   rebuildIndex();
@@ -142,6 +110,33 @@ GroupedProxyModel::getProxyIndexForSourceIndex(int sourceIndex) const {
 }
 
 void GroupedProxyModel::onSourceModelReset() { rebuildIndex(); }
+
+void GroupedProxyModel::onSourceDataChanged(const QModelIndex &topLeft,
+                                            const QModelIndex &bottomRight,
+                                            const QVector<int> &roles) {
+  Q_UNUSED(roles);
+  int startRow = -1;
+  int endRow = -1;
+
+  for (int i = 0; i < m_index.count(); ++i) {
+    const IndexItem &item = m_index[i];
+    if (item.type == RowItem) {
+      int itemEnd = item.sourceStartIndex + item.count - 1;
+      // Check for overlap: [item.start, item.end] intersects [topLeft.row,
+      // bottomRight.row]
+      if (!(itemEnd < topLeft.row() ||
+            item.sourceStartIndex > bottomRight.row())) {
+        if (startRow == -1)
+          startRow = i;
+        endRow = i;
+      }
+    }
+  }
+
+  if (startRow != -1) {
+    emit dataChanged(index(startRow, 0), index(endRow, 0));
+  }
+}
 
 void GroupedProxyModel::rebuildIndex() {
   beginResetModel();
@@ -232,4 +227,36 @@ QString GroupedProxyModel::getLabelForProxyIndex(int proxyIndex) const {
   }
 
   return "";
+}
+
+QVariantList GroupedProxyModel::getYearDistribution() const {
+  QVariantList list;
+  if (!m_sourceModel)
+    return list;
+
+  int lastYear = -1;
+  int yearRole = ImageModel::SectionYearRole;
+
+  for (int i = 0; i < m_index.count(); ++i) {
+    const IndexItem &item = m_index[i];
+
+    if (item.type == RowItem) {
+      int sourceIndex = item.sourceStartIndex;
+      if (sourceIndex >= 0 && sourceIndex < m_sourceModel->rowCount()) {
+        QModelIndex srcIdx = m_sourceModel->index(sourceIndex, 0);
+        QVariant yearData = m_sourceModel->data(srcIdx, yearRole);
+        int year =
+            yearData.toString().toInt(); // It's a string from SectionYearRole
+
+        if (year != lastYear && year != 0) {
+          QVariantMap map;
+          map["year"] = year;
+          map["proxyIndex"] = i;
+          list.append(map);
+          lastYear = year;
+        }
+      }
+    }
+  }
+  return list;
 }

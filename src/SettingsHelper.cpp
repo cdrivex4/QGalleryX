@@ -1,6 +1,8 @@
 #include "SettingsHelper.h"
 #include "AsyncImageProvider.h"
+#include "HardwareAccelerationManager.h"
 #include "LogManager.h"
+#include "SystemMonitor.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QProcess>
@@ -12,6 +14,11 @@ SettingsHelper::SettingsHelper(QObject *parent)
     : QObject(parent), m_settings("SamsungClone", "Gallery") {
   AsyncImageProvider::s_logLevel = logLevel();
   AsyncImageProvider::s_accelerateRaw = rawAcceleration();
+  AsyncImageProvider::s_useDiskCache = useDiskCache();
+  AsyncImageProvider::s_videoAcceleration = videoAcceleration();
+  HardwareAccelerationManager::instance().setMode(
+      static_cast<SettingsHelper::HWAccel>(
+          AsyncImageProvider::s_videoAcceleration.load()));
 }
 
 QString SettingsHelper::graphicsApi() const { return m_graphicsApi; }
@@ -99,6 +106,33 @@ void SettingsHelper::setRawAcceleration(bool enable) {
   emit rawAccelerationChanged();
 }
 
+bool SettingsHelper::useDiskCache() const {
+  return m_settings.value("useDiskCache", false).toBool();
+}
+
+void SettingsHelper::setUseDiskCache(bool enable) {
+  if (useDiskCache() == enable)
+    return;
+  m_settings.setValue("useDiskCache", enable);
+  AsyncImageProvider::s_useDiskCache = enable;
+  emit useDiskCacheChanged();
+}
+
+int SettingsHelper::videoAcceleration() const {
+  return m_settings.value("videoAcceleration", 0)
+      .toInt(); // Default to None (CPU) for safety
+}
+
+void SettingsHelper::setVideoAcceleration(int mode) {
+  if (videoAcceleration() == mode)
+    return;
+  m_settings.setValue("videoAcceleration", mode);
+  AsyncImageProvider::s_videoAcceleration = mode;
+  HardwareAccelerationManager::instance().setMode(
+      static_cast<SettingsHelper::HWAccel>(mode));
+  emit videoAccelerationChanged();
+}
+
 void SettingsHelper::restartApp() {
   qApp->quit();
   QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
@@ -112,6 +146,15 @@ bool SettingsHelper::isApiSupported(int apiValue) {
 
 QVariantMap SettingsHelper::getCacheStats() {
   return AsyncImageProvider::getCacheStats();
+}
+
+void SettingsHelper::clearDiskCache() { AsyncImageProvider::clearDiskCache(); }
+
+QString SettingsHelper::getGpuName(QObject *window) {
+  if (SystemMonitor::instance()) {
+    return SystemMonitor::instance()->gpuName();
+  }
+  return "Unknown GPU";
 }
 
 void SettingsHelper::refreshGraphicsInfo(QObject *window) {

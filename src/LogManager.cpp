@@ -1,6 +1,8 @@
 #include "LogManager.h"
 #include <QCoreApplication>
 #include <QThread>
+#include <QDir>
+#include <QFileInfo>
 #include <iostream>
 
 LogManager &LogManager::instance() {
@@ -134,6 +136,8 @@ void LogManager::writerLoop() {
 
     if (!buffer.isEmpty()) {
       if (!m_logFile.isOpen() && !m_logPath.isEmpty()) {
+        QFileInfo fileInfo(m_logPath);
+        QDir().mkpath(fileInfo.absolutePath());
         m_logFile.setFileName(m_logPath);
         m_logFile.open(QIODevice::WriteOnly | QIODevice::Append |
                        QIODevice::Text);

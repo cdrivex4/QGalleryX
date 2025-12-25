@@ -1,5 +1,6 @@
 #include "ImageModel.h"
 #include "TaskScheduler.h"
+#include "VideoThumbnailer.h"
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
@@ -12,8 +13,17 @@
 #include <algorithm>
 #include <libraw/libraw.h>
 
+extern "C" {
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+}
+
+#include "VisibleRangeManager.h"
+
 ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   // Constructor should be lightweight. Scanning happens via scanDirectory().
+  m_visibleStartIndex = -1;
+  m_visibleEndIndex = -1;
 }
 
 int ImageModel::rowCount(const QModelIndex &parent) const {
@@ -74,10 +84,12 @@ QVariant ImageModel::data(const QModelIndex &index, int role) const {
     bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" ||
                   ext == "nef" || ext == "sr2" || ext == "srf" ||
                   ext == "orf" || ext == "rw2" || ext == "pef" || ext == "raf");
-    // qInfo() << "Checking RAW for" << info.filePath << ": " << isRaw; //
-    // Debugging
     return isRaw;
   }
+  case DateTimeRole:
+    return info.date;
+  case IsBurstRole:
+    return info.isBurst;
 
   default:
     return QVariant();
@@ -95,7 +107,42 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   roles[SectionWeekRole] = "sectionWeek";
   roles[ExifRole] = "exif";
   roles[IsRawRole] = "isRaw";
+  roles[DateTimeRole] = "dateTime";
+  roles[IsBurstRole] = "isBurst";
   return roles;
+}
+
+void ImageModel::setVisibleStartIndex(int index) {
+  if (m_visibleStartIndex != index) {
+    m_visibleStartIndex = index;
+    updateVisiblePaths();
+    emit visibleRangeChanged();
+  }
+}
+
+void ImageModel::setVisibleEndIndex(int index) {
+  if (m_visibleEndIndex != index) {
+    m_visibleEndIndex = index;
+    updateVisiblePaths();
+    emit visibleRangeChanged();
+  }
+}
+
+bool ImageModel::isPathVisible(const QString &path) {
+  return VisibleRangeManager::instance().isPathVisible(path);
+}
+
+void ImageModel::updateVisiblePaths() {
+  if (m_images.isEmpty() || m_visibleStartIndex < 0 || m_visibleEndIndex < 0) {
+    return;
+  }
+
+  QSet<QString> visiblePaths;
+  int end = qMin(m_visibleEndIndex, (int)m_images.count() - 1);
+  for (int i = qMax(0, m_visibleStartIndex); i <= end; ++i) {
+    visiblePaths.insert(m_images[i].filePath);
+  }
+  VisibleRangeManager::instance().setVisiblePaths(visiblePaths);
 }
 
 void ImageModel::scanDirectory(const QString &path) {
@@ -153,20 +200,22 @@ void ImageModel::scanDirectory(const QString &path) {
 
         qDebug() << "Scanning directory:" << cleanPath;
 
-        QDirIterator it(cleanPath,
-                        QStringList()
-                            << "*.jpg" << "*.jpeg" << "*.png" << "*.mp4"
-                            << "*.mkv" << "*.avi" << "*.mov"
-                            << "*.arw" << "*.cr2" << "*.dng" << "*.nef"
-                            << "*.webp" << "*.heic"
-                            << "*.tiff"
-                            << "*.bmp" << "*.gif" << "*.ico" << "*.tga"
-                            << "*.sr2" << "*.srf" << "*.orf" << "*.rw2"
-                            << "*.pef" << "*.raf"
-                            << "*.webm" << "*.flv" << "*.vob" << "*.ogg"
-                            << "*.ogv"
-                            << "*.mts" << "*.m2ts" << "*.ts" << "*.3gp",
-                        QDir::Files, QDirIterator::Subdirectories);
+        qDebug() << "Scanning directory:" << cleanPath;
+
+        QStringList extensions = {
+            "jpg", "jpeg", "png",  "mp4",  "mkv",  "avi", "mov",  "arw", "cr2",
+            "dng", "nef",  "webp", "heic", "tiff", "bmp", "gif",  "ico", "tga",
+            "sr2", "srf",  "orf",  "rw2",  "pef",  "raf", "webm", "flv", "vob",
+            "ogg", "ogv",  "mts",  "m2ts", "ts",   "3gp"};
+
+        QStringList filters;
+        for (const QString &ext : extensions) {
+          filters << "*." + ext;
+          filters << "*." + ext.toUpper();
+        }
+
+        QDirIterator it(cleanPath, filters, QDir::Files,
+                        QDirIterator::Subdirectories);
 
         QList<ImageInfo> batch;
         const int BATCH_SIZE = 100;
@@ -191,35 +240,33 @@ void ImageModel::scanDirectory(const QString &path) {
           }
 
           batch.append(info);
-
-          if (batch.size() >= BATCH_SIZE) {
-            QMetaObject::invokeMethod(this, [this, batch]() {
-              beginInsertRows(QModelIndex(), m_images.count(),
-                              m_images.count() + batch.count() - 1);
-              m_images.append(batch);
-              endInsertRows();
-            });
-            batch.clear();
-          }
-        }
-
-        // Append remaining
-        if (!batch.isEmpty()) {
-          QMetaObject::invokeMethod(this, [this, batch]() {
-            beginInsertRows(QModelIndex(), m_images.count(),
-                            m_images.count() + batch.count() - 1);
-            m_images.append(batch);
-            endInsertRows();
-          });
         }
 
         // Final Sort and completion
-        QMetaObject::invokeMethod(this, [this, timer]() {
+        QMetaObject::invokeMethod(this, [this, batch, timer]() {
           beginResetModel();
+          m_images = batch;
           std::sort(m_images.begin(), m_images.end(),
                     [](const ImageInfo &a, const ImageInfo &b) {
                       return a.date > b.date;
                     });
+
+          // Burst Detection: Group shots within 2 seconds
+          if (m_images.size() > 1) {
+            const qint64 BURST_THRESHOLD_MS = 2000;
+            for (int i = 0; i < m_images.size(); ++i) {
+              bool prevNear =
+                  (i > 0) &&
+                  (std::abs(m_images[i].date.msecsTo(m_images[i - 1].date)) <
+                   BURST_THRESHOLD_MS);
+              bool nextNear =
+                  (i < m_images.size() - 1) &&
+                  (std::abs(m_images[i].date.msecsTo(m_images[i + 1].date)) <
+                   BURST_THRESHOLD_MS);
+              m_images[i].isBurst = (prevNear || nextNear);
+            }
+          }
+
           endResetModel();
 
           m_isLoading = false;
@@ -264,8 +311,17 @@ QVariantMap ImageModel::getMetadata(int index) {
   bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
                 ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
                 ext == "pef" || ext == "raf");
+  bool isVideo = (ext == "mp4" || ext == "mkv" || ext == "avi" ||
+                  ext == "mov" || ext == "webm");
 
-  if (isRaw) {
+  if (isVideo) {
+    VideoThumbnailer v;
+    QVariantMap vmeta = v.getMetadata(info.filePath);
+    for (auto it = vmeta.begin(); it != vmeta.end(); ++it) {
+      meta[it.key()] = it.value();
+    }
+    meta["Type"] = "Video";
+  } else if (isRaw) {
     LibRaw RawProcessor;
     if (RawProcessor.open_file(info.filePath.toLocal8Bit().constData()) ==
         LIBRAW_SUCCESS) {
@@ -276,17 +332,22 @@ QVariantMap ImageModel::getMetadata(int index) {
                            .arg(RawProcessor.imgdata.idata.make)
                            .arg(RawProcessor.imgdata.idata.model);
       meta["ISO"] = QString::number(RawProcessor.imgdata.other.iso_speed);
-      meta["Shutter"] = QString::number(RawProcessor.imgdata.other.shutter);
-      meta["Aperture"] = QString::number(RawProcessor.imgdata.other.aperture);
+      meta["Shutter"] =
+          QString("1/%1").arg(1.0 / RawProcessor.imgdata.other.shutter);
+      meta["Aperture"] =
+          QString("f/%1").arg(RawProcessor.imgdata.other.aperture);
+      meta["Type"] = "RAW Image";
       RawProcessor.recycle();
     }
   } else {
+    // Standard Image - Use QImageReader for resolution
     QImageReader reader(info.filePath);
     if (reader.canRead()) {
       QSize size = reader.size();
       meta["Resolution"] =
           QString("%1x%2").arg(size.width()).arg(size.height());
     }
+    meta["Type"] = "Image";
   }
   return meta;
 }

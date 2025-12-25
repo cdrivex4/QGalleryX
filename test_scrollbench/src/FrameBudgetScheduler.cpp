@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QTimer>
 
-
 FrameBudgetScheduler::FrameBudgetScheduler(QObject *parent) : QObject(parent) {
   m_frameTimer.start();
 
@@ -41,8 +40,28 @@ void FrameBudgetScheduler::setEnabled(bool enabled) {
   }
 }
 
+void FrameBudgetScheduler::setPaused(bool paused) {
+  if (m_paused != paused) {
+    m_paused = paused;
+    emit pausedChanged();
+    qDebug() << "Frame budget scheduler" << (paused ? "paused" : "resumed");
+
+    if (!paused) {
+      // Trigger a check to resume processing deferred tasks
+      checkFrameBoundary();
+    }
+  }
+}
+
 void FrameBudgetScheduler::onTaskCompleted(
     const std::function<void()> &callback) {
+  if (m_paused) {
+    // If paused, always defer
+    m_deferredTasks.enqueue(callback);
+    emit taskReadyDeferred();
+    return;
+  }
+
   if (!m_enabled) {
     // Budget disabled, execute immediately
     callback();
@@ -81,6 +100,9 @@ void FrameBudgetScheduler::onTaskCompleted(
 }
 
 void FrameBudgetScheduler::checkFrameBoundary() {
+  if (m_paused)
+    return;
+
   if (m_frameTimer.elapsed() >= 16) {
     // Frame boundary crossed
     int previousCount = m_completionsThisFrame;

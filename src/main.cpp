@@ -28,7 +28,7 @@
 
 int main(int argc, char *argv[]) {
   // Initialize LogManager
-  LogManager::instance().setLogFile("application.log");
+  LogManager::instance().setLogFile("logs/application.log");
   qInstallMessageHandler(LogManager::messageHandler);
 
   // Suppress annoying JPEG warnings (Commented out to restore granularity)
@@ -94,6 +94,12 @@ int main(int argc, char *argv[]) {
 
   // Load Main.qml directly from resources
   const QUrl url("qrc:/SamsungGallery/resources/qml/Main.qml");
+
+  // Exit if QML fails to load
+  QObject::connect(
+      &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
+      []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
+
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,
       [url](QObject *obj, const QUrl &objUrl) {
@@ -101,7 +107,12 @@ int main(int argc, char *argv[]) {
           QCoreApplication::exit(-1);
       },
       Qt::QueuedConnection);
+
   engine.load(url);
+
+  // Ensure app exits when all windows are closed (fixes orphaned background
+  // threads)
+  app.setQuitOnLastWindowClosed(true);
 
   return app.exec();
 }

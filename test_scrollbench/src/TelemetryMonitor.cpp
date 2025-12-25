@@ -1,6 +1,8 @@
 #include "TelemetryMonitor.h"
+#include "SystemMonitor.h"
 #include <QDateTime>
 #include <QDebug>
+#include <QTimer>
 #include <QtGlobal>
 
 #ifdef Q_OS_WIN
@@ -25,6 +27,39 @@ typedef PROCESS_MEMORY_COUNTERS *PPROCESS_MEMORY_COUNTERS;
 TelemetryMonitor::TelemetryMonitor(QObject *parent) : QObject(parent) {
   m_frameTimer.start();
   m_frameTimes.reserve(60);
+  
+  // Initialize histories with zeros so graphs aren't empty
+  for (int i=0; i<50; ++i) {
+      m_cpuHistory.append(0.0);
+      m_gpuHistory.append(0.0);
+      m_ramHistory.append(0.0);
+  }
+
+  // Synchronize with SystemMonitor updates
+  if (SystemMonitor* sys = SystemMonitor::instance()) {
+      connect(sys, &SystemMonitor::systemCpuUsageChanged, this, [this, sys]() {
+          double cpu = sys->systemCpuUsage();
+          m_cpuHistory.append(cpu);
+          if (m_cpuHistory.size() > 50) m_cpuHistory.removeFirst();
+          emit historyChanged();
+      });
+      
+      connect(sys, &SystemMonitor::gpuUsageChanged, this, [this, sys]() {
+          double gpu = sys->gpuUsage();
+          m_gpuHistory.append(gpu);
+          if (m_gpuHistory.size() > 50) m_gpuHistory.removeFirst();
+          emit historyChanged();
+      });
+
+      connect(sys, &SystemMonitor::systemMemoryChanged, this, &TelemetryMonitor::updateMemoryUsage);
+  }
+}
+
+void TelemetryMonitor::setCompletionsThisFrame(int count) {
+  if (m_completionsThisFrame != count) {
+    m_completionsThisFrame = count;
+    emit completionsThisFrameChanged();
+  }
 }
 
 int TelemetryMonitor::averageFps() const {
@@ -55,6 +90,43 @@ void TelemetryMonitor::setDelegateCount(int count) {
   }
 }
 
+static QList<int> s_loadHistory;
+
+void TelemetryMonitor::reportLoadTime(int ms) {
+  m_lastLoadTime = ms;
+  
+  // Moving average (last 20 loads)
+  static const int MAX_LOAD_HISTORY = 20;
+  s_loadHistory.append(ms);
+  if (s_loadHistory.size() > MAX_LOAD_HISTORY) s_loadHistory.removeFirst();
+  
+  qint64 sum = 0;
+  for (int val : s_loadHistory) sum += val;
+  m_totalLoadTime = sum; // Overloading member for moving sum
+  m_loadCount = s_loadHistory.size();
+  
+  if (ms < m_minLoadTime) m_minLoadTime = ms;
+  if (ms > m_maxLoadTime) m_maxLoadTime = ms;
+  emit lastLoadTimeChanged();
+}
+
+void TelemetryMonitor::resetStats() {
+    s_loadHistory.clear();
+    m_lastLoadTime = 0;
+    m_minLoadTime = 999999;
+    m_maxLoadTime = 0;
+    m_totalLoadTime = 0;
+    m_loadCount = 0;
+    emit lastLoadTimeChanged();
+}
+
+void TelemetryMonitor::reportWorkDuration(int ms) {
+  if (m_lastWorkDuration != ms) {
+    m_lastWorkDuration = ms;
+    emit lastWorkDurationChanged();
+  }
+}
+
 void TelemetryMonitor::recordFrame() {
   qint64 frameTime = m_frameTimer.restart();
 
@@ -65,6 +137,9 @@ void TelemetryMonitor::recordFrame() {
   m_frameTimes.append(frameTime);
 
   m_frameCount++;
+  if (m_frameCount % 300 == 0) {
+      qDebug() << "TelemetryMonitor: Processed 300 frames. Current FPS:" << m_currentFps;
+  }
 
   // Update FPS every 500ms
   qint64 now = QDateTime::currentMSecsSinceEpoch();
@@ -85,35 +160,23 @@ void TelemetryMonitor::recordCacheMiss() {
 }
 
 void TelemetryMonitor::updateMemoryUsage() {
-#ifdef Q_OS_WIN
-  // Use dynamic loading to avoid MinGW psapi.h issues
-  typedef BOOL(WINAPI * PGetProcessMemoryInfo)(HANDLE, PPROCESS_MEMORY_COUNTERS,
-                                               DWORD);
-  static PGetProcessMemoryInfo pGetProcessMemoryInfo = nullptr;
-
-  if (!pGetProcessMemoryInfo) {
-    HMODULE hPsapi = LoadLibraryA("psapi.dll");
-    if (hPsapi) {
-      pGetProcessMemoryInfo =
-          (PGetProcessMemoryInfo)GetProcAddress(hPsapi, "GetProcessMemoryInfo");
-    }
-  }
-
-  if (pGetProcessMemoryInfo) {
-    PROCESS_MEMORY_COUNTERS pmc;
-    pmc.cb = sizeof(pmc);
-    if (pGetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc))) {
-      qint64 memoryMB = pmc.WorkingSetSize / (1024 * 1024);
-      if (m_memoryUsageMB != memoryMB) {
-        m_memoryUsageMB = memoryMB;
-        emit memoryUsageMBChanged();
+  if (SystemMonitor* sys = SystemMonitor::instance()) {
+      double processMB = sys->memoryUsageMB();
+      if (m_memoryUsageMB != static_cast<qint64>(processMB)) {
+          m_memoryUsageMB = static_cast<qint64>(processMB);
+          emit memoryUsageMBChanged();
       }
-    }
+      
+      // Calculate System RAM Usage % for the graph
+      double total = sys->totalSystemMemoryMB();
+      double available = sys->availableSystemMemoryMB();
+      double usagePercent = (total > 0) ? ((total - available) / total * 100.0) : 0.0;
+      
+      m_ramHistory.append(usagePercent);
+      if (m_ramHistory.size() > 50) m_ramHistory.removeFirst();
+      
+      emit historyChanged();
   }
-#else
-  // Placeholder for other platforms
-  m_memoryUsageMB = 0;
-#endif
 }
 
 void TelemetryMonitor::updateFps() {

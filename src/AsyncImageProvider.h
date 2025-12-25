@@ -36,6 +36,7 @@ public:
   QString m_id;
   QSize m_requestedSize;
   QImage m_image;
+  int m_workDuration = 0; // Pure decoding time
   std::shared_ptr<std::atomic<bool>> m_cancelled;
   std::shared_ptr<ResponseTracker> m_tracker;
 };
@@ -56,18 +57,52 @@ public:
   static void setCacheMaxCost(int cost);
   static QVariantMap getCacheStats();
   static void clearCache();
+  static void clearDiskCache();
+
+  // STAGING QUEUE for "Ground Up" Prioritization
+  struct StagedRequest {
+    QString id;
+    QSize requestedSize;
+    QDateTime timestamp;
+    std::shared_ptr<std::atomic<bool>> cancelled;
+    std::shared_ptr<ResponseTracker> tracker;
+  };
+
+  static void processStagedRequests();
 
   // Internal worker for task scheduling with re-queue support
   static void processImageTask(QString id, QSize requestedSize,
                                std::shared_ptr<std::atomic<bool>> cancelled,
                                std::shared_ptr<ResponseTracker> tracker);
 
+  static bool isRequestStillNeeded(const QString &id);
+  static void deliverToPending(const QString &id, const QImage &image,
+                               int duration);
+  static void processImageTaskInternal(
+      QString id, QSize requestedSize,
+      std::shared_ptr<std::atomic<bool>> cancelled = nullptr,
+      std::shared_ptr<ResponseTracker> tracker = nullptr);
+
   static std::atomic<int> s_logLevel;
   static std::atomic<bool> s_accelerateRaw;
+  static std::atomic<bool> s_useDiskCache;
+  static std::atomic<int> s_videoAcceleration;
 
 private:
   static QCache<QString, QImage> m_cache;
   static QMutex m_mutex;
+
+  // Coalescing: Track active tasks to avoid duplicate work
+  static QMap<QString, QList<AsyncImageResponse *>> m_pendingResponses;
+  static QMutex m_pendingMutex;
+
+  // Staging Queue Members
+  static QList<StagedRequest> m_stagedRequests;
+  static QMutex m_stagingMutex;
+  static void queueRequest(const QString &id, const QSize &size,
+                           std::shared_ptr<std::atomic<bool>> c,
+                           std::shared_ptr<ResponseTracker> t);
+  static void scheduleStagingProcessing();
 };
 
 #endif // ASYNCIMAGEPROVIDER_H

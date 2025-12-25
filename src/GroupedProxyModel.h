@@ -20,7 +20,8 @@ public:
     TypeRole = Qt::UserRole + 100, // 0 = Header, 1 = Row
     HeaderTitleRole,
     RowStartIndexRole, // Index in source model of the first image in this row
-    RowCountRole       // Number of images in this row
+    RowCountRole,      // Number of images in this row
+    SourceFilePathRole // The file path of the item from the source model
   };
 
   enum ItemType { HeaderItem = 0, RowItem = 1 };
@@ -44,7 +45,6 @@ public:
   Q_INVOKABLE QModelIndex getProxyIndexForSourceIndex(int sourceIndex) const;
   Q_INVOKABLE QVariantList getYearDistribution() const;
   Q_INVOKABLE QString getLabelForProxyIndex(int proxyIndex) const;
-
 signals:
   void sourceModelChanged();
   void columnsChanged();
@@ -52,6 +52,9 @@ signals:
 
 private slots:
   void onSourceModelReset();
+  void onSourceDataChanged(const QModelIndex &topLeft,
+                           const QModelIndex &bottomRight,
+                           const QVector<int> &roles);
 
 private:
   void rebuildIndex();

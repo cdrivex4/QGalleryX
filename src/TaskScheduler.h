@@ -6,10 +6,12 @@
 #include <QObject>
 #include <QQueue>
 #include <QThread>
+#include <QTimer>
 #include <QWaitCondition>
 #include <atomic>
 #include <functional>
 #include <vector>
+
 
 /**
  * @brief The TaskScheduler class manages background work with priorities.
@@ -18,63 +20,60 @@
  */
 class TaskScheduler : public QObject {
   Q_OBJECT
+  Q_PROPERTY(
+      int activeTaskCount READ activeTaskCount NOTIFY activeTaskCountChanged)
+
 public:
-  enum TaskType {
-    CPU_BOUND, // Image Decoding, Processing
-    IO_BOUND   // Metadata read, Directory scan (Fast)
-  };
-
-  enum Priority {
-    Immediate = 0, // Currently visible on screen
-    High = 1,      // Likely to be visible soon
-    Normal = 2,    // General background work
-    Low = 3        // Prefetching far ahead
-  };
-
   using Task = std::function<void()>;
+  enum TaskType { CPU_BOUND, IO_BOUND };
+  enum Priority { Immediate = 0, Normal = 1, Low = 2, Background = 3 };
 
   static TaskScheduler &instance();
 
-  // Add a task to the queue
-  void addTask(Task task, TaskType type = CPU_BOUND,
-               Priority priority = Normal);
-
-  // Stop all threads (for shutdown)
-  void stop();
-
-  // Clear all pending tasks
-  void clear();
-
-private:
   TaskScheduler();
   ~TaskScheduler();
 
-  void cpuWorkerLoop();
-  void ioWorkerLoop();
+  int activeTaskCount() const;
+  bool isPaused() const { return m_isPaused.load(); }
+
+  void addTask(Task task, TaskType type = CPU_BOUND,
+               Priority priority = Normal);
+  void clear();
+  void clear(TaskType type);
+  void stop();
+
+  Q_INVOKABLE void togglePause(bool paused);
+  void pause();
+  void resume();
+
+signals:
+  void activeTaskCountChanged();
+
+private slots:
+  void emitCountChanged();
 
 private:
-  struct TaskEntry {
-    Task task;
-    Priority priority;
-    quint64 sequence; // To maintain FIFO within same priority
-  };
+  void cpuWorkerLoop();
+  void ioWorkerLoop();
+  void triggerCountUpdate();
 
-  // Priority Queue comparators or management
-  // We use a Map<Priority, Queue> for simplicity and strict ordering
+  std::atomic<int> m_activeTaskCount{0};
+  std::atomic<bool> m_updatePending{false};
 
   // CPU Pool
   std::vector<std::thread> m_cpuThreads;
-  QMap<Priority, QQueue<Task>> m_cpuQueue;
+  QMap<Priority, QList<Task>> m_cpuQueue;
   QMutex m_cpuMutex;
   QWaitCondition m_cpuCondition;
 
   // IO Pool (Usually 1-2 threads)
   std::vector<std::thread> m_ioThreads;
-  QMap<Priority, QQueue<Task>> m_ioQueue;
+  QMap<Priority, QList<Task>> m_ioQueue;
   QMutex m_ioMutex;
   QWaitCondition m_ioCondition;
 
   std::atomic<bool> m_running;
+  std::atomic<bool> m_isPaused{false};
   std::atomic<quint64> m_sequenceCounter;
 };
 

@@ -1,6 +1,7 @@
 #include "SystemMonitor.h"
 #include <QDebug>
 #include <QString>
+#include <QDateTime>
 #include <cmath>
 #include <pdh.h>
 #include <pdhmsg.h>
@@ -32,15 +33,21 @@ typedef PROCESS_MEMORY_COUNTERS *PPROCESS_MEMORY_COUNTERS;
 
 #endif
 
+static SystemMonitor* s_instance = nullptr;
+
+SystemMonitor* SystemMonitor::instance() { return s_instance; }
+
 SystemMonitor::SystemMonitor(QObject *parent)
     : QObject(parent), m_cpuUsage(0.0), m_memoryUsageMB(0.0), m_gpuUsage(0.0),
       m_gpuVramUsedMB(0.0), m_gpuVramTotalMB(0.0), m_gpuName("Unknown"),
       m_updateTimer(new QTimer(this))
 #ifdef Q_OS_WIN
       ,
-      m_lastSystemTime(0), m_lastProcessTime(0)
+      m_lastSystemTime(0), m_lastProcessTime(0),
+      m_lastIdleTime(0), m_lastKernelTime(0), m_lastUserTime(0)
 #endif
 {
+  s_instance = this;
   connect(m_updateTimer, &QTimer::timeout, this, &SystemMonitor::updateStats);
 
   // Initial GPU detection
@@ -52,10 +59,12 @@ SystemMonitor::SystemMonitor(QObject *parent)
   m_pdhCounter = nullptr;
 
   if (PdhOpenQueryA(NULL, 0, (HQUERY *)&m_pdhQuery) == ERROR_SUCCESS) {
-    // Add wildcard counter for all GPU engines
     PdhAddEnglishCounterA((HQUERY)m_pdhQuery,
                           "\\GPU Engine(*)\\Utilization Percentage", 0,
                           (HCOUNTER *)&m_pdhCounter);
+    // Mandatory double-collect for PDH to establish baseline
+    PdhCollectQueryData((HQUERY)m_pdhQuery);
+    Sleep(10); 
     PdhCollectQueryData((HQUERY)m_pdhQuery);
   }
 #endif
@@ -79,21 +88,37 @@ void SystemMonitor::stopMonitoring() {
 
 void SystemMonitor::updateStats() {
   double oldCpu = m_cpuUsage;
+  double oldSysCpu = m_systemCpuUsage;
   double oldMem = m_memoryUsageMB;
+  double oldTotalMem = m_totalSystemMemoryMB;
+  double oldAvailMem = m_availableSystemMemoryMB;
   double oldGpu = m_gpuUsage;
   double oldVramUsed = m_gpuVramUsedMB;
   double oldVramTotal = m_gpuVramTotalMB;
 
   m_cpuUsage = getCpuUsage();
+  m_systemCpuUsage = getSystemCpuUsage();
   m_memoryUsageMB = getMemoryUsageMB();
   m_gpuUsage =
       getGpuUsage(); // This updates m_gpuVramUsedMB and m_gpuVramTotalMB
 
+  QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
+  qDebug() << "[" << timeStr << "][SystemMonitor] Stats Update:"
+           << "CPU App:" << m_cpuUsage << "% | Sys:" << m_systemCpuUsage << "%"
+           << "| RAM App:" << m_memoryUsageMB << "MB"
+           << "| Sys Avail:" << m_availableSystemMemoryMB << "MB /" << m_totalSystemMemoryMB << "MB";
+
   // Emit signals only if values changed
   if (m_cpuUsage != oldCpu)
     emit cpuUsageChanged();
+  if (m_systemCpuUsage != oldSysCpu)
+    emit systemCpuUsageChanged();
   if (m_memoryUsageMB != oldMem)
     emit memoryUsageChanged();
+  
+  if (m_totalSystemMemoryMB != oldTotalMem || m_availableSystemMemoryMB != oldAvailMem)
+      emit systemMemoryChanged();
+
   if (m_gpuUsage != oldGpu)
     emit gpuUsageChanged();
   if (m_gpuVramUsedMB != oldVramUsed)
@@ -142,7 +167,6 @@ double SystemMonitor::getCpuUsage() {
   unsigned long long procTime =
       fileTimeToInt64(procKernel) + fileTimeToInt64(procUser);
 
-  // First call - just store values
   if (m_lastSystemTime == 0) {
     m_lastSystemTime = sysTime;
     m_lastProcessTime = procTime;
@@ -158,16 +182,52 @@ double SystemMonitor::getCpuUsage() {
   if (sysDelta == 0)
     return 0.0;
 
-  // Return CPU usage as percentage (0-100)
-  return (double)procDelta / (double)sysDelta * 100.0;
+  double usage = (double)procDelta / (double)sysDelta * 100.0;
+  
+  // TRACE: App CPU logic
+  if (usage > 0.1) {
+      // qDebug() << "[SystemMonitor] App CPU Delta:" << procDelta << "/" << sysDelta << "=" << usage << "%";
+  }
+  
+  return usage;
 #else
-  return 0.0; // Not implemented for other platforms
+  return 0.0;
 #endif
+}
+
+double SystemMonitor::getSystemCpuUsage() {
+#ifdef Q_OS_WIN
+    FILETIME idleTime, kernelTime, userTime;
+    if (GetSystemTimes(&idleTime, &kernelTime, &userTime)) {
+        unsigned long long idle = fileTimeToInt64(idleTime);
+        unsigned long long kernel = fileTimeToInt64(kernelTime);
+        unsigned long long user = fileTimeToInt64(userTime);
+        
+        if (m_lastIdleTime == 0) {
+            m_lastIdleTime = idle; m_lastKernelTime = kernel; m_lastUserTime = user;
+            return 0.0;
+        }
+        
+        unsigned long long idleDelta = idle - m_lastIdleTime;
+        unsigned long long kernelDelta = kernel - m_lastKernelTime;
+        unsigned long long userDelta = user - m_lastUserTime;
+        
+        m_lastIdleTime = idle; m_lastKernelTime = kernel; m_lastUserTime = user;
+        
+        // Kernel includes Idle
+        unsigned long long totalDelta = kernelDelta + userDelta;
+        if (totalDelta == 0) return 0.0;
+        
+        double usage = (double)(totalDelta - idleDelta) / (double)totalDelta * 100.0;
+        return std::max(0.0, std::min(100.0, usage));
+    }
+#endif
+    return 0.0;
 }
 
 double SystemMonitor::getMemoryUsageMB() {
 #ifdef Q_OS_WIN
-  // Use dynamic loading to avoid MinGW psapi.h issues
+  // 1. Process Memory
   typedef BOOL(WINAPI * PGetProcessMemoryInfo)(HANDLE, PPROCESS_MEMORY_COUNTERS,
                                                DWORD);
   static PGetProcessMemoryInfo pGetProcessMemoryInfo = nullptr;
@@ -184,9 +244,25 @@ double SystemMonitor::getMemoryUsageMB() {
     PROCESS_MEMORY_COUNTERS pmc;
     pmc.cb = sizeof(pmc);
     if (pGetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc))) {
-      return (double)pmc.WorkingSetSize / (1024.0 * 1024.0);
+      m_memoryUsageMB = (double)pmc.WorkingSetSize / (1024.0 * 1024.0);
     }
   }
+
+  // 2. System Memory
+  MEMORYSTATUSEX memInfo;
+  memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+  if (GlobalMemoryStatusEx(&memInfo)) {
+      m_totalSystemMemoryMB = (double)memInfo.ullTotalPhys / (1024.0 * 1024.0);
+      m_availableSystemMemoryMB = (double)memInfo.ullAvailPhys / (1024.0 * 1024.0);
+      
+      if (m_totalSystemMemoryMB < 1.0) {
+          qWarning() << "[SystemMonitor] GlobalMemoryStatusEx returned suspicious total memory:" << memInfo.ullTotalPhys;
+      }
+  } else {
+      qWarning() << "[SystemMonitor] GlobalMemoryStatusEx failed. Error:" << GetLastError();
+  }
+
+  return m_memoryUsageMB;
 #endif
   return 0.0;
 }
@@ -209,9 +285,12 @@ double SystemMonitor::getGpuUsage() {
   }
 
   // 2. Update GPU Load (PDH)
-  double maxUsage = 0.0;
+  double totalUsage = 0.0;
   if (m_pdhQuery && m_pdhCounter) {
-    PdhCollectQueryData((HQUERY)m_pdhQuery);
+    PDH_STATUS status = PdhCollectQueryData((HQUERY)m_pdhQuery);
+    if (status != ERROR_SUCCESS) {
+        // PdhCollectQueryData failed
+    }
 
     PDH_FMT_COUNTERVALUE_ITEM_A *pItems = NULL;
     DWORD dwBufferSize = 0;
@@ -228,8 +307,8 @@ double SystemMonitor::getGpuUsage() {
                                          pItems) == ERROR_SUCCESS) {
           for (DWORD i = 0; i < dwItemCount; i++) {
             if (pItems[i].FmtValue.CStatus == ERROR_SUCCESS) {
-              if (pItems[i].FmtValue.doubleValue > maxUsage) {
-                maxUsage = pItems[i].FmtValue.doubleValue;
+              if (pItems[i].FmtValue.doubleValue > totalUsage) {
+                totalUsage = pItems[i].FmtValue.doubleValue;
               }
             }
           }
@@ -238,7 +317,7 @@ double SystemMonitor::getGpuUsage() {
       }
     }
   }
-  return maxUsage;
+  return std::min(100.0, totalUsage);
 #endif
   return 0.0;
 }

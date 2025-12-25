@@ -36,8 +36,18 @@ Dialog {
             Layout.fillWidth: true
             Layout.preferredHeight: 50
             onClicked: {
-                shareDialog.close()
-                resizeEditor.open()
+                // Get data from model
+                let paths = imageModel.getSelectedPaths()
+                let totalSize = imageModel.getSelectedTotalSizeBytes()
+                
+                if (paths.length > 0) {
+                    resizeEditor.currentImagePath = "file:///" + paths[0] // Preview first image
+                    resizeEditor.originalSizeBytes = totalSize
+                    resizeEditor.open()
+                    shareDialog.close()
+                } else {
+                    console.warn("No images selected for resize")
+                }
             }
         }
         

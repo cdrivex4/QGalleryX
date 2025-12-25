@@ -7,7 +7,10 @@
 class SystemMonitor : public QObject {
   Q_OBJECT
   Q_PROPERTY(double cpuUsage READ cpuUsage NOTIFY cpuUsageChanged)
+  Q_PROPERTY(double systemCpuUsage READ systemCpuUsage NOTIFY systemCpuUsageChanged)
   Q_PROPERTY(double memoryUsageMB READ memoryUsageMB NOTIFY memoryUsageChanged)
+  Q_PROPERTY(double totalSystemMemoryMB READ totalSystemMemoryMB NOTIFY systemMemoryChanged)
+  Q_PROPERTY(double availableSystemMemoryMB READ availableSystemMemoryMB NOTIFY systemMemoryChanged)
   Q_PROPERTY(double gpuUsage READ gpuUsage NOTIFY gpuUsageChanged)
   Q_PROPERTY(
       double gpuVramUsedMB READ gpuVramUsedMB NOTIFY gpuVramUsedMBChanged)
@@ -17,18 +20,23 @@ class SystemMonitor : public QObject {
 
 public:
   explicit SystemMonitor(QObject *parent = nullptr);
+  static SystemMonitor* instance();
 
   // Property getters
   double cpuUsage() const { return m_cpuUsage; }
+  double systemCpuUsage() const { return m_systemCpuUsage; }
   double memoryUsageMB() const { return m_memoryUsageMB; }
+  double totalSystemMemoryMB() const { return m_totalSystemMemoryMB; }
+  double availableSystemMemoryMB() const { return m_availableSystemMemoryMB; }
   double gpuUsage() const { return m_gpuUsage; }
   double gpuVramUsedMB() const { return m_gpuVramUsedMB; }
   double gpuVramTotalMB() const { return m_gpuVramTotalMB; }
   QString gpuName() const { return m_gpuName; }
 
   // Invokable methods for one-time queries
-  Q_INVOKABLE double getCpuUsage();
-  Q_INVOKABLE static double getMemoryUsageMB();
+  double getCpuUsage();
+  double getSystemCpuUsage();
+  double getMemoryUsageMB();
   Q_INVOKABLE double getGpuUsage();
   Q_INVOKABLE QString getGpuName();
 
@@ -38,7 +46,9 @@ public:
 
 signals:
   void cpuUsageChanged();
+  void systemCpuUsageChanged();
   void memoryUsageChanged();
+  void systemMemoryChanged();
   void gpuUsageChanged();
   void gpuVramUsedMBChanged();
   void gpuVramTotalMBChanged();
@@ -49,7 +59,10 @@ private slots:
 private:
   // Current values
   double m_cpuUsage;
+  double m_systemCpuUsage;
   double m_memoryUsageMB;
+  double m_totalSystemMemoryMB = 0.0;
+  double m_availableSystemMemoryMB = 0.0;
   double m_gpuUsage;
   double m_gpuVramUsedMB;
   double m_gpuVramTotalMB;
@@ -66,6 +79,11 @@ private:
   // Windows-specific: CPU tracking
   unsigned long long m_lastSystemTime;
   unsigned long long m_lastProcessTime;
+  
+  // System-wide CPU tracking
+  unsigned long long m_lastIdleTime = 0;
+  unsigned long long m_lastKernelTime = 0;
+  unsigned long long m_lastUserTime = 0;
 
   // PDH for GPU Load
   void *m_pdhQuery;   // HQUERY

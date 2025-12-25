@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+import ScrollBenchBackend // Import ScrollBenchBackend
 
 Item {
     id: root
@@ -23,6 +24,13 @@ Item {
             if (currentIndex >= 0) {
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
             }
+            // Pause background tasks and frame budget when PhotoViewer becomes visible
+            desktopHelper.pauseBackgroundTasks();
+            if (typeof frameBudget !== "undefined") frameBudget.paused = true;
+        } else {
+            // Resume both when PhotoViewer becomes invisible
+            desktopHelper.resumeBackgroundTasks();
+            if (typeof frameBudget !== "undefined") frameBudget.paused = false;
         }
     }
 
@@ -226,13 +234,17 @@ Item {
                     id: player
                     source: {
                         if (!isCurrent || !visible || !filePath) return ""
-                        var lower = filePath.toLowerCase()
-                        var isVid = lower.endsWith(".mp4") || lower.endsWith(".avi") || lower.endsWith(".mkv") || lower.endsWith(".mov")
-                        if (isVid) {
-                            console.log("PhotoViewer: Loading Video", filePath)
-                            return Qt.resolvedUrl(filePath)
+                        
+                        var url = filePath
+                        // If it's a Windows network path (starts with \\), MediaPlayer needs file: protocol
+                        if (url.startsWith("\\\\")) {
+                            return "file:" + url.replace(/\\/g, "/")
                         }
-                        return ""
+                        // If it doesn't have a protocol and isn't a UNC path, prepend file:///
+                        if (url.indexOf("://") === -1) {
+                            return "file:///" + url.replace(/\\/g, "/")
+                        }
+                        return url
                     }
                     audioOutput: AudioOutput {}
                     videoOutput: videoOutput
@@ -602,21 +614,16 @@ Item {
             anchors.rightMargin: 10
             spacing: 10
             
-            Button {
+                    Button {
                 text: "Info"
                 onClicked: {
                     if (listView.currentItem && listView.currentItem.isVideo) {
-                        // Gather video metadata
                         var m = {}
                         m["Filename"] = listView.currentItem.fileName
                         m["Path"] = listView.currentItem.filePath
-                        // Try to get resolution from video output or metadata
-                        // Note: accessing player directly from delegate is tricky if not exposed
-                        // But we are inside root, we can access model
                         m["Type"] = "Video"
                         infoOverlay.meta = m
                     } else {
-                        // Get image metadata from C++
                         infoOverlay.meta = root.model.getMetadata(root.currentIndex)
                     }
                     infoOverlay.visible = true
@@ -624,8 +631,21 @@ Item {
             }
 
             Button {
+                text: "Crop"
+                visible: listView.currentItem && !listView.currentItem.isVideo
+                onClicked: {
+                    // Simple center crop for now to verify backend
+                    // In next step we will add a visual selector
+                    var rect = Qt.rect(0.1, 0.1, 0.8, 0.8)
+                    if (root.model.cropImage(root.currentIndex, rect)) {
+                        console.log("Image cropped successfully")
+                    }
+                }
+            }
+
+            Button {
                 text: "Edit"
-                visible: listView.currentItem && !listView.currentItem.isVideo // Hide edit for videos
+                visible: listView.currentItem && !listView.currentItem.isVideo
                 onClicked: root.isEditing = true
             }
         }

@@ -10,187 +10,76 @@ Item {
         imageModel.scanDirectory(path)
     }
 
-    // Use external imageModel from main
+    function findChildGridView() {
+        return grid
+    }
+
     property var model: imageModel
     
     // UI Grid Size (Zoom level)
-    property real uiThumbnailSize: appSettings.gridSize
+    readonly property real uiThumbnailSize: settings.gridSize
     
     // Loading Resolution (Quality/Performance setting)
-    property int loadingResolution: appSettings.thumbnailSize
+    readonly property int loadingResolution: settings.thumbnailSize
     
-    // Dynamic Section Role based on Zoom Level
-    property string currentSectionRole: {
-        if (uiThumbnailSize < 80) return "sectionYear"
-        if (uiThumbnailSize < 150) return "sectionMonth"
-        return "sectionDay"
+    // Timer to debounce viewport updates
+    Timer {
+        id: updateTimer
+        interval: 150 
+        repeat: false
+        onTriggered: grid.updateVisibleRange()
     }
+
+    property real lastRequestedY: 0
 
     GridView {
         id: grid
         anchors.fill: parent
-        cellWidth: uiThumbnailSize
-        cellHeight: uiThumbnailSize
-        model: imageModel
+        cellWidth: settings.gridSize
+        cellHeight: settings.gridSize
+        model: root.model
         clip: true
         
-        // Increased cacheBuffer to utilize available memory and improve scrolling performance
-        cacheBuffer: cellHeight * 10
-        
-        // Dynamic Section Headers (Semantic Zoom) - TEMPORARILY DISABLED FOR STABILITY
-        // section.property: root.currentSectionRole
-        // section.criteria: ViewSection.FullString
-        // section.delegate: Component {
-        //     Rectangle {
-        //         width: grid.width
-        //         height: 40
-        //         color: "#000000" // Solid background for readability
-        //         opacity: 0.9
-        //         z: 2 
-        //         
-        //         Text {
-        //             anchors.left: parent.left
-        //             anchors.leftMargin: 15
-        //             anchors.verticalCenter: parent.verticalCenter
-        //             text: section
-        //             color: "white"
-        //             font.bold: true
-        //             font.pixelSize: 18
-        //         }
-        //         
-        //         Rectangle {
-        //             anchors.bottom: parent.bottom
-        //             width: parent.width
-        //             height: 1
-        //             color: "#333"
-        //         }
-        //     }
-        // }
-        
-        ScrollBar.vertical: ScrollBar {
-            policy: ScrollBar.AlwaysOn
-            active: true
-            contentItem: Rectangle {
-                implicitWidth: 6
-                implicitHeight: 100
-                radius: 3
-                color: "#888"
-            }
-        }
+        // Expose state for debugging
+        onMovingChanged: if (!moving) updateTimer.restart()
+        onFlickingChanged: if (!flicking) updateTimer.restart()
 
-        delegate: Item {
-            width: grid.cellWidth
-            height: grid.cellHeight
+        // Robust math-based visible range calculation
+        function updateVisibleRange() {
+            if (!model || grid.count === 0) return;
+            if (grid.width <= 0 || grid.cellWidth <= 0) return;
+
+            let cols = Math.floor(grid.width / grid.cellWidth);
+            if (cols < 1) cols = 1;
+
+            let firstRow = Math.floor(grid.contentY / grid.cellHeight);
+            let lastRow = Math.ceil((grid.contentY + grid.height) / grid.cellHeight);
             
-            // Case-insensitive check
-            property var fileExt: model.path ? model.path.split('.').pop().toLowerCase() : ""
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            let firstVisible = firstRow * cols;
+            let lastVisible = (lastRow * cols) + cols;
 
-            Image {
-                id: img
-                anchors.fill: parent
-                anchors.margins: 1
-                // Use custom async provider for optimized thumbnail loading
-                source: isVideo ? "" : "image://async/" + model.path 
-                sourceSize.width: root.loadingResolution
-                sourceSize.height: root.loadingResolution
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-                cache: true
-                mipmap: true // Enable GPU mipmapping
-                
-                // Video Placeholder
-                Rectangle {
-                    anchors.fill: parent
-                    color: "#222"
-                    visible: isVideo
-                    
-                    Text {
-                        anchors.centerIn: parent
-                        text: "▶️"
-                        font.pixelSize: parent.width * 0.4
-                        color: "white"
-                    }
-                    
-                    Text {
-                        anchors.bottom: parent.bottom
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.bottomMargin: 5
-                        text: "Video"
-                        color: "#aaa"
-                        font.pixelSize: 12
-                    }
-                }
-                
-                property bool hasError: status === Image.Error
-                property real loadStartTime: 0
-                
-                Component.onCompleted: loadStartTime = new Date().getTime()
-                
-                property bool hasReported: false
-                
-                onStatusChanged: {
-                    if (status === Image.Ready && !hasReported) {
-                        hasReported = true
-                        if (loadStartTime === 0) {
-                            // Loaded instantly (cached) or before Component.onCompleted
-                            root.imageLoaded(0)
-                        } else {
-                            var timeTaken = new Date().getTime() - loadStartTime
-                            root.imageLoaded(timeTaken)
-                        }
-                    }
-                }
-                
-                Rectangle {
-                    anchors.fill: parent
-                    color: "#333"
-                    visible: !isVideo && (img.hasError || img.status === Image.Loading)
-                    
-                    Text {
-                        anchors.centerIn: parent
-                        text: img.hasError ? "⚠️" : "..."
-                        color: "#888"
-                    }
-                }
-                
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: root.imageClicked(index) // Pass index
-                }
-            }
+            // Clamp and update C++ model
+            model.visibleStartIndex = Math.max(0, firstVisible);
+            model.visibleEndIndex = Math.min(grid.count - 1, lastVisible);
+            root.lastRequestedY = grid.contentY
+            
+            console.log("Viewport settled at:", model.visibleStartIndex, "-", model.visibleEndIndex);
         }
-    }
 
-    // Zoom Grid with Ctrl + Wheel
-    // We place this inside a MouseArea that fills the parent to ensure we catch events
-    MouseArea {
-        anchors.fill: parent
-        propagateComposedEvents: true
-        hoverEnabled: true
-        acceptedButtons: Qt.NoButton // Don't block clicks
+        // Trigger debounce timer on movement or size change
+        onContentYChanged: {
+            if (Math.abs(contentY - root.lastRequestedY) > cellHeight * 3) {
+                updateVisibleRange()
+            }
+            updateTimer.restart()
+        }
+        onHeightChanged: updateTimer.restart()
+        onWidthChanged: updateTimer.restart()
         
-        onWheel: (wheel) => {
-            if (wheel.modifiers & Qt.ControlModifier) {
-                // 1. Identify Item Under Mouse
-                var oldSize = appSettings.gridSize
-                var oldCols = Math.floor(grid.width / oldSize)
-                if (oldCols < 1) oldCols = 1
-                
-                var mouseContentY = grid.contentY + wheel.y
-                var row = Math.floor(mouseContentY / oldSize)
-                var col = Math.floor(wheel.x / oldSize)
-                if (col >= oldCols) col = oldCols - 1
-                
-                var index = row * oldCols + col
-                if (index < 0) index = 0
-                if (index >= imageModel.count) index = imageModel.count - 1
-                
-                // Calculate where the mouse is relative to the top of this item
-                var itemTopY = row * oldSize
-                var relativeMouseY = mouseContentY - itemTopY
-                
-                // 2. Apply Zoom
+        WheelHandler {
+            acceptedModifiers: Qt.ControlModifier
+            onWheel: (wheel) => {
+                var oldSize = settings.gridSize
                 var newSize = oldSize
                 if (wheel.angleDelta.y > 0) {
                     newSize = Math.min(oldSize + 20, 400)
@@ -199,51 +88,108 @@ Item {
                 }
                 
                 if (newSize !== oldSize) {
-                    appSettings.gridSize = newSize
-                    
-                    // 3. Calculate New Position
-                    // We use a Timer to ensure the GridView has finished its layout update
-                    // before we force the contentY. Qt.callLater might be too early.
-                    zoomRestoreTimer.targetContentY = (() => {
-                        var newCols = Math.floor(grid.width / newSize)
-                        if (newCols < 1) newCols = 1
-                        
-                        var newRow = Math.floor(index / newCols)
-                        var newItemTopY = newRow * newSize
-                        
-                        return newItemTopY + relativeMouseY - wheel.y
-                    })()
-                    zoomRestoreTimer.restart()
+                    settings.gridSize = newSize
+                    updateTimer.restart()
+                }
+            }
+        }
+
+        Connections {
+            target: settings
+            function onGridSizeChanged() {
+                grid.forceLayout()
+                updateTimer.restart()
+            }
+        }
+
+        Connections {
+            target: root.model
+            function onForceUpdateGridView() {
+                updateTimer.restart()
+            }
+        }
+        
+        ScrollBar.vertical: ScrollBar {
+            policy: ScrollBar.AlwaysOn
+            active: true
+        }
+
+        delegate: Item {
+            width: grid.cellWidth
+            height: grid.cellHeight
+            
+            property var fileExt: model.filePath ? model.filePath.split('.').pop().toLowerCase() : ""
+            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+
+            Image {
+                id: img
+                anchors.fill: parent
+                anchors.margins: 1
+                source: model.filePath ? "image://async/" + model.filePath : ""
+                sourceSize.width: root.loadingResolution
+                sourceSize.height: root.loadingResolution
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
+                cache: true
+                mipmap: true 
+                
+                Item {
+                    anchors.fill: parent
+                    visible: isVideo
+                    Rectangle { anchors.fill: parent; color: "black"; opacity: 0.15 }
+                    Text { 
+                        anchors.centerIn: parent
+                        text: "▶️"
+                        font.pixelSize: parent.width * 0.3
+                        color: "white"
+                        style: Text.Outline; styleColor: "black"
+                    }
                 }
                 
-                wheel.accepted = true
-            } else {
-                wheel.accepted = false
+                property bool hasError: status === Image.Error
+                property real loadStartTime: 0
+                Component.onCompleted: loadStartTime = new Date().getTime()
+                property bool hasReported: false
+                
+                onStatusChanged: {
+                    if (status === Image.Ready && !hasReported) {
+                        hasReported = true
+                        var timeTaken = new Date().getTime() - (loadStartTime || new Date().getTime())
+                        telemetry.reportLoadTime(timeTaken)
+                    }
+                }
+                
+                Rectangle {
+                    anchors.fill: parent; color: "#1a1a1a"
+                    visible: img.status !== Image.Ready
+                    BusyIndicator { 
+                        anchors.centerIn: parent
+                        width: parent.width * 0.4; height: width
+                        visible: img.status === Image.Loading
+                        opacity: 0.5
+                    }
+                    Text { 
+                        anchors.centerIn: parent
+                        text: "⚠️"
+                        visible: img.status === Image.Error
+                        color: "#ff4444"
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: root.imageClicked(index)
+                }
             }
         }
     }
-    
-    Timer {
-        id: zoomRestoreTimer
-        interval: 20 // Slightly increased delay for safety
-        repeat: false
-        property real targetContentY: 0
-        onTriggered: {
-            grid.contentY = Math.max(0, targetContentY)
-        }
-    }
-    
-    // Pinch to Zoom (Touchpad/Touchscreen)
+
     PinchHandler {
-        target: grid
-        onActiveChanged: {
-            if (active) {
-                // Start pinch
-            }
-        }
-        onScaleChanged: (delta) => {
-            var newSize = appSettings.gridSize * (1 + (delta - 1) * 0.5) // Dampen sensitivity
-            appSettings.gridSize = Math.max(40, Math.min(newSize, 400))
+        property real baseSize
+        onActiveChanged: if (active) baseSize = settings.gridSize
+        onScaleChanged: if (active) {
+            settings.gridSize = Math.max(40, Math.min(baseSize * scale, 400))
+            updateTimer.restart()
         }
     }
     
@@ -252,7 +198,7 @@ Item {
         text: "No images found.\nCheck folder permissions or select a different folder."
         color: "#888"
         horizontalAlignment: Text.AlignHCenter
-        visible: imageModel.count === 0
+        visible: grid.count === 0
         font.pixelSize: 18
     }
 }

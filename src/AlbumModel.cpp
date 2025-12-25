@@ -50,59 +50,88 @@ void AlbumModel::scanAlbums(const QString &path) {
   emit isLoadingChanged();
 
   QtConcurrent::run([this, path]() {
-    QString cleanPath = path;
-    if (cleanPath.startsWith("file:///")) {
-      cleanPath = cleanPath.mid(8);
+    QString cleanPath;
+    QUrl url(path);
+    if (url.isValid() && url.isLocalFile()) {
+        cleanPath = url.toLocalFile();
+    } else {
+        cleanPath = path;
+        if (cleanPath.startsWith("file:///")) cleanPath = cleanPath.mid(8);
+        else if (cleanPath.startsWith("file://")) cleanPath = cleanPath.mid(7);
     }
+    cleanPath = QDir::toNativeSeparators(cleanPath);
+    qDebug() << "[AlbumModel] Starting scan for path:" << cleanPath; // Debug log
 
     QMap<QString, AlbumInfo> albumMap;
-    QStringList nameFilters;
-    nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif";
 
-    QDirIterator it(cleanPath, nameFilters, QDir::Files,
-                    QDirIterator::Subdirectories);
+    // First pass: Enumerate all subdirectories as albums
+    QDirIterator dirIt(cleanPath, QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks, QDirIterator::Subdirectories);
+    while (dirIt.hasNext()) {
+        dirIt.next();
+        QFileInfo dirInfo = dirIt.fileInfo();
+        QString dirName = dirInfo.fileName();
+        QString dirPath = dirInfo.absoluteFilePath();
 
-    // Batch updates to avoid blocking UI
-    int batchSize = 0;
-
-    while (it.hasNext()) {
-      it.next();
-      QFileInfo fileInfo = it.fileInfo();
-      QString dirName = fileInfo.dir().dirName();
-      QString dirPath = fileInfo.dir().absolutePath();
-      QString filePath = "file:///" + fileInfo.absoluteFilePath();
-
-      bool newAlbum = !albumMap.contains(dirPath);
-      if (newAlbum) {
         AlbumInfo info;
         info.name = dirName;
         info.path = dirPath;
-        info.coverPaths.append(filePath);
-        info.count = 1;
+        info.count = 0; // Will be populated in second pass
         albumMap.insert(dirPath, info);
-      } else {
+        qDebug() << "[AlbumModel] Added directory as album:" << dirPath;
+    }
+
+    // Always add the root path itself as an album if not already present
+    if (!albumMap.contains(cleanPath)) {
+        AlbumInfo info;
+        info.name = QFileInfo(cleanPath).fileName();
+        if (info.name.isEmpty()) info.name = QDir(cleanPath).dirName(); // Fallback for root
+        info.path = cleanPath;
+        info.count = 0;
+        albumMap.insert(cleanPath, info);
+        qDebug() << "[AlbumModel] Added root path as album:" << cleanPath;
+    }
+
+
+    // Second pass: Populate album contents with files
+    QStringList nameFilters;
+    nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif" << "*.mp4" << "*.mkv" << "*.avi" << "*.mov" << "*.webm" << "*.cr2" << "*.dng"; // Added video and raw extensions
+
+    QDirIterator fileIt(cleanPath, nameFilters, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
+
+    int batchSize = 0; // Batch updates to avoid blocking UI
+
+    while (fileIt.hasNext()) {
+      fileIt.next();
+      QFileInfo fileInfo = fileIt.fileInfo();
+      QString dirPath = fileInfo.dir().absolutePath();
+      QString filePath = "file:///" + fileInfo.absoluteFilePath();
+
+      // Ensure the album exists (it should from the first pass, or be the root)
+      if (albumMap.contains(dirPath)) {
         albumMap[dirPath].count++;
-        if (albumMap[dirPath].coverPaths.count() < 4) {
+        if (albumMap[dirPath].coverPaths.count() < 4) { // Limit to 4 covers
           albumMap[dirPath].coverPaths.append(filePath);
         }
+      } else {
+          // This should ideally not happen if first pass is correct, but as a fallback
+          qWarning() << "[AlbumModel] File found in un-enumerated directory:" << fileInfo.absoluteFilePath();
       }
 
       batchSize++;
 
-      // Update UI every 50 items or new album found to make it progressive
-      if (batchSize >= 50 || (newAlbum && albumMap.count() <= 5)) {
+      // Update UI every 50 items to make it progressive
+      if (batchSize >= 50) {
         QVector<AlbumInfo> currentAlbums = albumMap.values().toVector();
+        // Sort alphabetically for consistency in progressive updates
+        std::sort(currentAlbums.begin(), currentAlbums.end(), [](const AlbumInfo& a, const AlbumInfo& b) {
+            return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
+        });
         QMetaObject::invokeMethod(this, [this, currentAlbums]() {
           beginResetModel();
           m_albums = currentAlbums;
           endResetModel();
-          // If we have at least one album, we can consider "established" enough
-          // to hide overlay
-          if (m_albums.count() > 0 && m_isLoading) {
-            // Keep m_isLoading true, but the QML check (count === 0) will hide
-            // overlay
-          }
         });
+        qDebug() << "[AlbumModel] Batch update. Current albumMap size:" << albumMap.count(); // Debug log
         batchSize = 0;
         QThread::msleep(10); // Yield slightly to let UI update
       }
@@ -112,6 +141,10 @@ void AlbumModel::scanAlbums(const QString &path) {
     QMetaObject::invokeMethod(this, [this, albumMap]() {
       beginResetModel();
       m_albums = albumMap.values().toVector();
+      // Sort final list
+      std::sort(m_albums.begin(), m_albums.end(), [](const AlbumInfo& a, const AlbumInfo& b) {
+          return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
+      });
       endResetModel();
       m_isLoading = false;
       emit isLoadingChanged();

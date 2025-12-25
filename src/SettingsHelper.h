@@ -28,8 +28,20 @@ class SettingsHelper : public QObject {
       int logLevel READ logLevel WRITE setLogLevel NOTIFY logLevelChanged)
   Q_PROPERTY(bool rawAcceleration READ rawAcceleration WRITE setRawAcceleration
                  NOTIFY rawAccelerationChanged)
+  Q_PROPERTY(bool useDiskCache READ useDiskCache WRITE setUseDiskCache NOTIFY
+                 useDiskCacheChanged)
+  Q_PROPERTY(int videoAcceleration READ videoAcceleration WRITE setVideoAcceleration NOTIFY
+                 videoAccelerationChanged)
 
 public:
+  enum HWAccel {
+      None,
+      D3D11VA,
+      Vulkan,
+      OpenCL
+  };
+  Q_ENUM(HWAccel)
+
   explicit SettingsHelper(QObject *parent = nullptr);
 
   QString graphicsApi() const;
@@ -57,15 +69,18 @@ public:
   bool rawAcceleration() const;
   void setRawAcceleration(bool enable);
 
+  bool useDiskCache() const;
+  void setUseDiskCache(bool enable);
+
+  int videoAcceleration() const;
+  void setVideoAcceleration(int mode);
+
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
+  Q_INVOKABLE void clearDiskCache();
 
-  // Placeholder for GPU info (implementation moved to SystemMonitor or
-  // simplified)
-  Q_INVOKABLE QString getGpuName(QObject *window = nullptr) {
-    return "GPU Detection Simplified";
-  }
+  Q_INVOKABLE QString getGpuName(QObject *window = nullptr);
   Q_INVOKABLE void refreshGraphicsInfo(QObject *window = nullptr);
 
 signals:
@@ -79,6 +94,8 @@ signals:
   void concurrentThreadsChanged();
   void logLevelChanged();
   void rawAccelerationChanged();
+  void useDiskCacheChanged();
+  void videoAccelerationChanged();
 
 private:
   QString m_graphicsApi;

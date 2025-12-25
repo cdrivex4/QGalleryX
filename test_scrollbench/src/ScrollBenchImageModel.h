@@ -19,6 +19,8 @@ class ScrollBenchImageModel : public QAbstractListModel {
                  NOTIFY visibleRangeChanged)
   Q_PROPERTY(int pendingDecodeCount READ pendingDecodeCount NOTIFY
                  pendingDecodeCountChanged)
+  Q_PROPERTY(
+      int remainingItems READ remainingItems NOTIFY remainingItemsChanged)
   Q_PROPERTY(int totalItems READ totalItems CONSTANT)
   Q_PROPERTY(bool viewportCullingEnabled READ viewportCullingEnabled WRITE
                  setViewportCullingEnabled NOTIFY viewportCullingEnabledChanged)
@@ -29,12 +31,22 @@ public:
   explicit ScrollBenchImageModel(QObject *parent = nullptr);
 
   enum Roles {
-    PathRole = Qt::UserRole + 1,
+    FilePathRole = Qt::UserRole + 1,
     FileNameRole,
-    IndexRole,
+    DateSectionRole,
+    SectionDayRole,
+    SectionMonthRole,
+    SectionYearRole,
+    SectionWeekRole,
+    ExifRole,
+    IsRawRole,
+    // ScrollBench specific additions (moved to avoid collision with ProxyRoles
+    // 356-360)
+    ImageIndexRole = Qt::UserRole + 150,
     IsLoadedRole,
     ColorRole,
-    IsSelectedRole
+    IsSelectedRole,
+    IsBurstRole
   };
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -50,6 +62,7 @@ public:
   void setVisibleEndIndex(int index);
 
   int pendingDecodeCount() const { return m_pendingDecodes; }
+  int remainingItems() const { return m_remainingItems; }
   int totalItems() const { return m_totalItems; }
 
   bool viewportCullingEnabled() const { return m_viewportCullingEnabled; }
@@ -72,12 +85,13 @@ public:
   int selectedCount() const;
 
   bool isLoading() const { return m_isLoading; }
-  
+
   void setFrameScheduler(FrameBudgetScheduler *scheduler);
 
 signals:
   void visibleRangeChanged();
   void pendingDecodeCountChanged();
+  void remainingItemsChanged();
   void viewportCullingEnabledChanged();
   void scanProgress(int current, int total);
   void scanComplete(int totalFound);
@@ -86,18 +100,20 @@ signals:
   void forceUpdateGridView(); // New signal to trigger QML GridView update
 
 public slots: // New public slot
-    void forceDelayedUpdate();
+  void forceDelayedUpdate();
 
 private slots:
-    void processPendingUpdates();
+  void processPendingUpdates();
 
 private:
   struct ImageItem {
     QString path;
     QString fileName;
     QString color; // For synthetic test images
+    QDateTime date;
     bool isLoaded = false;
     bool isSelected = false;
+    bool isBurst = false;
   };
 
   void updateVisibleRange();
@@ -105,9 +121,11 @@ private:
   void cancelPendingRequests();
 
   QVector<ImageItem> m_items;
+  QSet<int> m_activelyRequesting;
   int m_visibleStartIndex = 0;
   int m_visibleEndIndex = 0;
   int m_pendingDecodes = 0;
+  int m_remainingItems = 0;
   int m_totalItems = 0;
   bool m_viewportCullingEnabled = true;
   bool m_isLoading = false;
@@ -119,6 +137,10 @@ private:
   QTimer *m_updateTimer = nullptr;
   QTimer *m_forceUpdateTimer = nullptr; // New timer for delayed QML update
   FrameBudgetScheduler *m_frameScheduler = nullptr;
+
+public:
+  Q_INVOKABLE bool cropImage(int index, const QRectF &cropRect);
+  Q_INVOKABLE QVariantMap getMetadata(int index);
 };
 
 #endif // SCROLLBENCHIMAGEMODEL_H

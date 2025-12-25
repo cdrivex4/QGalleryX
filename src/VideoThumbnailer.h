@@ -1,8 +1,10 @@
 #ifndef VIDEOTHUMBNAILER_H
 #define VIDEOTHUMBNAILER_H
 
+#include "SettingsHelper.h"
 #include <QImage>
 #include <QString>
+
 
 /**
  * @brief Handles video thumbnail extraction using FFmpeg libraries.
@@ -22,7 +24,14 @@ public:
    * @return QImage of the frame, or null QImage on failure.
    */
   QImage extractFrame(const QString &path, int timeMs = 0,
-                      const QSize &targetSize = QSize(), bool allowHW = true);
+                      const QSize &targetSize = QSize(),
+                      SettingsHelper::HWAccel accel = SettingsHelper::None,
+                      std::atomic<bool> *cancelled = nullptr);
+
+  /**
+   * @brief Extracts metadata from the video file.
+   */
+  QVariantMap getMetadata(const QString &path);
 
 private:
   void initFFmpeg();

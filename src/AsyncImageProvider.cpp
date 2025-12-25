@@ -3,6 +3,8 @@
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
+#include <QCryptographicHash>
+#include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QElapsedTimer>
@@ -11,6 +13,7 @@
 #include <QImageReader>
 #include <QPainter>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QThread>
 #include <QVariant>
 #include <QtCore/QEventLoop>
@@ -31,24 +34,66 @@
 
 // Initialize static members
 static QSemaphore s_videoSemaphore(4);
-static QSemaphore s_rawSemaphore(2); // Limit to 2 concurrent RAW loads
+static QSemaphore s_rawSemaphore(2);
 QCache<QString, QImage> AsyncImageProvider::m_cache;
 QMutex AsyncImageProvider::m_mutex;
+QMap<QString, QList<AsyncImageResponse *>>
+    AsyncImageProvider::m_pendingResponses;
+QMutex AsyncImageProvider::m_pendingMutex;
+
 // Initialize statics
 std::atomic<int> AsyncImageProvider::s_logLevel(1);
 std::atomic<bool> AsyncImageProvider::s_accelerateRaw(true);
-std::atomic<bool> AsyncImageProvider::s_disableVideo(false);
-std::atomic<bool> AsyncImageProvider::s_disableRaw(false);
+std::atomic<bool> AsyncImageProvider::s_disableVideo{false};
+std::atomic<bool> AsyncImageProvider::s_disableRaw{false};
+std::atomic<bool> AsyncImageProvider::s_useDiskCache{false};
+std::atomic<int> AsyncImageProvider::s_videoAcceleration{0}; // 0 = Auto/Default
+
+static QString normalizeId(const QString &id) {
+  QString n = id;
+  if (n.startsWith("image://async/"))
+    n = n.mid(14);
+
+  // If it's a protocol URI or synthetic path, don't clean it as a path
+  if (n.contains("://")) {
+    return n.toLower();
+  }
+
+  // Process as file path: normalize separators
+  n.replace("\\", "/");
+  if (n.startsWith("file:///"))
+    n = n.mid(8);
+  else if (n.startsWith("file://"))
+    n = n.mid(7);
+
+  // Still clean local file paths but keep lowercase consistency
+  return QDir::cleanPath(n).toLower();
+}
+
+static QString getDiskCachePath(const QString &id, const QSize &size) {
+  QString cacheDir =
+      QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+      "/thumbnails";
+  static bool dirCreated = false;
+  if (!dirCreated) {
+    QDir().mkpath(cacheDir);
+    dirCreated = true;
+  }
+  QFileInfo fi(normalizeId(id));
+  QString key =
+      normalizeId(id) + QString::number(fi.lastModified().toMSecsSinceEpoch()) +
+      QString::number(size.width()) + "x" + QString::number(size.height());
+  QString hash =
+      QCryptographicHash::hash(key.toUtf8(), QCryptographicHash::Md5).toHex();
+  return cacheDir + "/" + hash + ".jpg";
+}
 
 AsyncImageProvider::AsyncImageProvider() : QQuickAsyncImageProvider() {
-  // Ensure we have a clean start
   s_disableVideo = false;
   s_disableRaw = false;
-  s_logLevel = 2; // Enable TRACE logging
 }
 
 AsyncImageResponse::~AsyncImageResponse() {
-  qWarning() << "TRACE: [-TRK] Response destroyed:" << this << "for" << m_id;
   if (m_tracker) {
     m_tracker->response.store(nullptr);
   }
@@ -59,25 +104,11 @@ AsyncImageResponse::AsyncImageResponse(const QString &id,
     : m_id(id), m_requestedSize(requestedSize),
       m_cancelled(std::make_shared<std::atomic<bool>>(false)),
       m_tracker(std::make_shared<ResponseTracker>(this)) {
-  qWarning() << "TRACE: [+TRK] Response created:" << this << "for" << id;
-
-  // Ensure cache size is initialized (lazy init)
   static bool configured = false;
   if (!configured) {
     QSettings settings("SamsungClone", "Gallery");
-    // Reduce default cache to 256MB to be safer with RAWs
-    int cacheSizeMB = settings.value("cacheSizeMB", 256).toInt();
-    // Enforce a hard limit for stability
-    if (cacheSizeMB > 1024)
-      cacheSizeMB = 1024;
-
-    AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024 *
-                                        1024); // Size in bytes (approx)
-    // Note: Cost is sizeInBytes() / 1024. Wait, let's check insertion.
-    // Insertion says: m_cache.insert(key, new QImage(image),
-    // image.sizeInBytes() / 1024); So cost is in KB. So setCacheMaxCost should
-    // be in KB. cacheSizeMB * 1024 = KB.
-    AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024);
+    int cacheSizeMB = settings.value("cacheSizeMB", 512).toInt();
+    AsyncImageProvider::setCacheMaxCost(qBound(128, cacheSizeMB, 4096) * 1024);
     configured = true;
   }
 }
@@ -87,67 +118,351 @@ QQuickTextureFactory *AsyncImageResponse::textureFactory() const {
 }
 
 void AsyncImageResponse::cancel() { *m_cancelled = true; }
-
-void AsyncImageResponse::run() {
-  // We do NOTHING here because we manually scheduled the task to TaskScheduler
-  // in requestImageResponse to support priority and budgeting.
-  // If we also ran it here, we would have a race condition.
-}
+void AsyncImageResponse::run() {}
 
 void AsyncImageResponse::handleDone(QImage image) {
-  qWarning() << "TRACE: [DONE] handleDone for" << this
-             << "(null=" << image.isNull() << ")";
+  QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
+  if (AsyncImageProvider::s_logLevel > 1) {
+    qWarning() << "[" << timeStr << "][TRACE] handleDone for" << this
+               << "(null=" << image.isNull() << ")";
+  }
   m_image = image;
   emit finished();
 }
 
+bool AsyncImageProvider::isRequestStillNeeded(const QString &id) {
+  QMutexLocker locker(&m_pendingMutex);
+  if (!m_pendingResponses.contains(id))
+    return false;
+  for (auto *resp : m_pendingResponses[id]) {
+    if (resp && resp->m_tracker && resp->m_tracker->response.load()) {
+      if (!resp->m_cancelled->load())
+        return true;
+    }
+  }
+  return false;
+}
+
+void AsyncImageProvider::deliverToPending(const QString &id,
+                                          const QImage &image, int duration) {
+  QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
+  QMutexLocker locker(&m_pendingMutex);
+  QList<AsyncImageResponse *> listeners = m_pendingResponses.take(id);
+  locker.unlock();
+
+  if (s_logLevel > 1) {
+    qDebug() << "[" << timeStr << "][TRACE] Delivering result for" << id << "to"
+             << listeners.size() << "listeners (took" << duration << "ms)";
+  }
+
+  for (AsyncImageResponse *resp : listeners) {
+    if (resp && resp->m_tracker && resp->m_tracker->response.load()) {
+      resp->m_workDuration = duration;
+      QMetaObject::invokeMethod(resp, "handleDone", Qt::QueuedConnection,
+                                Q_ARG(QImage, image));
+    }
+  }
+}
+
+#include "VisibleRangeManager.h"
+
+QList<AsyncImageProvider::StagedRequest> AsyncImageProvider::m_stagedRequests;
+QMutex AsyncImageProvider::m_stagingMutex;
+
 QQuickImageResponse *
 AsyncImageProvider::requestImageResponse(const QString &id,
                                          const QSize &requestedSize) {
-  qWarning() << "TRACE: RequestImage" << id << requestedSize;
-  auto *response = new AsyncImageResponse(id, requestedSize);
+  QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
+  if (s_logLevel > 1) {
+    qDebug() << "[" << timeStr << "][TRACE] requestImageResponse for" << id
+             << requestedSize;
+  }
 
-  // Check Disable Flags
-  bool isVideo = id.endsWith(".mp4", Qt::CaseInsensitive) ||
-                 id.endsWith(".mov", Qt::CaseInsensitive) ||
-                 id.endsWith(".mkv", Qt::CaseInsensitive) ||
-                 id.endsWith(".avi", Qt::CaseInsensitive);
-  bool isRaw = id.endsWith(".arw", Qt::CaseInsensitive) ||
-               id.endsWith(".cr2", Qt::CaseInsensitive) ||
-               id.endsWith(".dng", Qt::CaseInsensitive) ||
-               id.endsWith(".nef", Qt::CaseInsensitive) ||
-               id.endsWith(".orf", Qt::CaseInsensitive) ||
-               id.endsWith(".raf", Qt::CaseInsensitive);
+  QString normalizedId = normalizeId(id);
+  auto *response = new AsyncImageResponse(normalizedId, requestedSize);
 
-  // Check Cache Synchronously
-  QImage cached = getCachedImage(id, requestedSize);
+  QImage cached = getCachedImage(normalizedId, requestedSize);
   if (!cached.isNull()) {
     QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
                               Q_ARG(QImage, cached));
     return response;
   }
 
-  // --- PRIORITIZATION LOGIC ---
-  // Viewer requests (invalid size or large) -> Immediate
-  // Grid requests (small size) -> Low
-  TaskScheduler::Priority priority = TaskScheduler::Low;
-  if (!requestedSize.isValid() ||
-      (requestedSize.width() > 1000 || requestedSize.height() > 1000)) {
-    priority = TaskScheduler::Immediate;
+  {
+    QMutexLocker locker(&m_pendingMutex);
+    m_pendingResponses[normalizedId].append(response);
   }
 
-  std::shared_ptr<std::atomic<bool>> cancelled = response->m_cancelled;
-
-  // Schedule task
-  auto tracker = response->m_tracker;
-  TaskScheduler::instance().addTask(
-      [id, requestedSize, cancelled, tracker]() {
-        AsyncImageProvider::processImageTask(id, requestedSize, cancelled,
-                                             tracker);
-      },
-      TaskScheduler::CPU_BOUND, priority);
-
+  queueRequest(normalizedId, requestedSize, response->m_cancelled,
+               response->m_tracker);
   return response;
+}
+
+void AsyncImageProvider::queueRequest(const QString &id, const QSize &size,
+                                      std::shared_ptr<std::atomic<bool>> c,
+                                      std::shared_ptr<ResponseTracker> t) {
+  QMutexLocker lock(&m_stagingMutex);
+  m_stagedRequests.append({id, size, QDateTime::currentDateTime(), c, t});
+  scheduleStagingProcessing();
+}
+
+void AsyncImageProvider::scheduleStagingProcessing() {
+  static qint64 lastScheduleTime = 0;
+  qint64 now = QDateTime::currentMSecsSinceEpoch();
+  if (now - lastScheduleTime > 20) {
+    QTimer::singleShot(10, []() { processStagedRequests(); });
+    lastScheduleTime = now;
+  }
+}
+
+void AsyncImageProvider::processStagedRequests() {
+  QList<StagedRequest> batch;
+  {
+    QMutexLocker lock(&m_stagingMutex);
+    if (m_stagedRequests.isEmpty())
+      return;
+    batch = m_stagedRequests;
+    m_stagedRequests.clear();
+  }
+
+  bool lowMemory = false;
+  if (auto *mon = SystemMonitor::instance()) {
+    double freeMem = mon->availableSystemMemoryMB();
+    if (freeMem > 0 && freeMem < 1000.0)
+      lowMemory = true;
+  }
+
+  QList<StagedRequest> visibleHighPriority;
+  QList<StagedRequest> offscreen;
+  auto &vrm = VisibleRangeManager::instance();
+
+  for (const auto &req : batch) {
+    if (!isRequestStillNeeded(req.id))
+      continue;
+    if (vrm.isPathVisible(req.id)) {
+      visibleHighPriority.append(req);
+    } else if (!lowMemory) {
+      offscreen.append(req);
+    }
+  }
+
+  // LIFO Sort for Visible items
+  std::sort(visibleHighPriority.begin(), visibleHighPriority.end(),
+            [](const StagedRequest &a, const StagedRequest &b) {
+              return a.timestamp > b.timestamp;
+            });
+
+  // Limit high-priority dispatch to prevent UI thread flooding
+  int dispatched = 0;
+  QList<StagedRequest> deferredVisible;
+
+  for (const auto &req : visibleHighPriority) {
+    if (dispatched < 40) {
+      TaskScheduler::instance().addTask(
+          [req]() {
+            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                 req.cancelled, req.tracker);
+          },
+          TaskScheduler::CPU_BOUND, TaskScheduler::Immediate);
+      dispatched++;
+    } else {
+      deferredVisible.append(req);
+    }
+  }
+
+  // Submit Offscreen (Throttled)
+  if (TaskScheduler::instance().activeTaskCount() < 30) {
+    for (const auto &req : offscreen) {
+      TaskScheduler::instance().addTask(
+          [req]() {
+            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                 req.cancelled, req.tracker);
+          },
+          TaskScheduler::CPU_BOUND, TaskScheduler::Normal);
+    }
+  } else {
+    // Re-queue remaining offscreen items
+    QMutexLocker lock(&m_stagingMutex);
+    for (const auto &req : offscreen) {
+      m_stagedRequests.append(req);
+    }
+  }
+
+  // Re-queue deferred visible items
+  if (!deferredVisible.isEmpty()) {
+    QMutexLocker lock(&m_stagingMutex);
+    m_stagedRequests.append(deferredVisible);
+  }
+
+  if (!m_stagedRequests.isEmpty())
+    scheduleStagingProcessing();
+}
+
+void AsyncImageProvider::processImageTaskInternal(
+    QString id, QSize requestedSize, std::shared_ptr<std::atomic<bool>> c,
+    std::shared_ptr<ResponseTracker> t) {
+
+  QString timeLogStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
+  if (s_logLevel > 0) {
+    qDebug() << "[" << timeLogStr
+             << "][Worker] processImageTaskInternal START for" << id;
+  }
+
+  if (!isRequestStillNeeded(id)) {
+    QMutexLocker locker(&m_pendingMutex);
+    m_pendingResponses.remove(id);
+    return;
+  }
+
+  auto shouldAbort = [&]() {
+    return (c && c->load()) || !isRequestStillNeeded(id) ||
+           TaskScheduler::instance().isPaused() ||
+           TaskScheduler::instance().activeTaskCount() > 2000;
+  };
+
+  // If paused, abort immediately (faster than waiting)
+  if (TaskScheduler::instance().activeTaskCount() > 0 &&
+      TaskScheduler::instance().activeTaskCount() % 10 == 0) {
+    // Just a throttle check
+  }
+
+  if (TaskScheduler::instance().activeTaskCount() > 0 &&
+      TaskScheduler::instance().activeTaskCount() % 50 == 0) {
+    qDebug() << "[AsyncImageProvider] High workload detect. Queue:"
+             << TaskScheduler::instance().activeTaskCount();
+  }
+
+  QElapsedTimer workTimer;
+  workTimer.start();
+  QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
+
+#ifdef Q_OS_WIN
+  CoInitialize(NULL);
+#endif
+
+  QString path;
+  QUrl url(id);
+  path = (url.isValid() && url.isLocalFile()) ? url.toLocalFile() : id;
+  if (path.startsWith("/") && path.length() > 2 && path[2] == ':')
+    path = path.mid(1);
+  path = QDir::toNativeSeparators(path);
+
+  QImage image;
+
+  if (id.startsWith("synthetic:")) {
+    int index = 0;
+    QRegularExpression re("test_image_([0-9]+)");
+    auto match = re.match(id);
+    if (match.hasMatch())
+      index = match.captured(1).toInt();
+
+    int w = requestedSize.width() > 0 ? requestedSize.width() : 400;
+    int h = requestedSize.height() > 0 ? requestedSize.height() : 400;
+    image = QImage(w, h, QImage::Format_RGB32);
+    image.fill(QColor::fromHsv((index * 137) % 360, 150, 200));
+    QPainter p(&image);
+    p.setPen(Qt::white);
+    p.setFont(QFont("Arial", 20, QFont::Bold));
+    p.drawText(image.rect(), Qt::AlignCenter, QString::number(index));
+  } else {
+    if (s_useDiskCache) {
+      QString dp = getDiskCachePath(id, requestedSize);
+      if (QFile::exists(dp)) {
+        image.load(dp);
+        if (!image.isNull())
+          goto deliver;
+      }
+    }
+
+    DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
+    if (type == DesktopHelper::Raw) {
+      s_rawSemaphore.acquire(1);
+      QSemaphoreReleaser releaser(s_rawSemaphore);
+      if (!shouldAbort()) {
+        try {
+          // ... (libraw remains same)
+          LibRaw RawProcessor;
+          if (RawProcessor.open_file(path.toLocal8Bit().constData()) ==
+              LIBRAW_SUCCESS) {
+            bool loaded = false;
+            if (s_accelerateRaw &&
+                RawProcessor.unpack_thumb() == LIBRAW_SUCCESS) {
+              libraw_processed_image_t *thumb =
+                  RawProcessor.dcraw_make_mem_thumb();
+              if (thumb) {
+                if (thumb->type == LIBRAW_IMAGE_JPEG)
+                  image.loadFromData((const uchar *)thumb->data,
+                                     thumb->data_size, "JPEG");
+                LibRaw::dcraw_clear_mem(thumb);
+                loaded = !image.isNull();
+              }
+            }
+            if (!loaded && !shouldAbort() &&
+                RawProcessor.unpack() == LIBRAW_SUCCESS) {
+              RawProcessor.dcraw_process();
+              libraw_processed_image_t *full =
+                  RawProcessor.dcraw_make_mem_image();
+              if (full) {
+                QImage img((const uchar *)full->data, full->width, full->height,
+                           full->width * 3, QImage::Format_RGB888);
+                image = img.copy();
+                LibRaw::dcraw_clear_mem(full);
+              }
+            }
+          }
+        } catch (...) {
+        }
+      }
+    } else if (type == DesktopHelper::Video) {
+      s_videoSemaphore.acquire(1);
+      QSemaphoreReleaser releaser(s_videoSemaphore);
+      if (!shouldAbort()) {
+        VideoThumbnailer v;
+        SettingsHelper::HWAccel accel =
+            static_cast<SettingsHelper::HWAccel>(s_videoAcceleration.load());
+        image = v.extractFrame(path, 0, requestedSize, accel,
+                               c ? c.get() : nullptr);
+      }
+    } else {
+      QImageReader reader(path);
+      if (requestedSize.isValid())
+        reader.setScaledSize(requestedSize);
+      if (reader.canRead())
+        image = reader.read();
+    }
+  }
+
+deliver:
+  if (!image.isNull() && requestedSize.isValid() &&
+      (image.width() > requestedSize.width() ||
+       image.height() > requestedSize.height())) {
+    image = image.scaled(requestedSize, Qt::KeepAspectRatio,
+                         Qt::SmoothTransformation);
+  }
+
+#ifdef Q_OS_WIN
+  CoUninitialize();
+#endif
+
+  if (!image.isNull()) {
+    insertCachedImage(id, image, requestedSize);
+    if (s_useDiskCache && !id.startsWith("synthetic:")) {
+      image.save(getDiskCachePath(id, requestedSize), "JPG", 80);
+    }
+  }
+
+  if (s_logLevel > 0) {
+    qDebug() << "[" << timeLogStr
+             << "][Worker] processImageTaskInternal DONE for" << id
+             << "(null=" << image.isNull() << ")";
+  }
+  deliverToPending(id, image, workTimer.elapsed());
+}
+
+void AsyncImageProvider::processImageTask(QString id, QSize requestedSize,
+                                          std::shared_ptr<std::atomic<bool>> c,
+                                          std::shared_ptr<ResponseTracker> t) {
+  processImageTaskInternal(id, requestedSize, c, t);
 }
 
 QImage AsyncImageProvider::getCachedImage(const QString &id,
@@ -155,10 +470,7 @@ QImage AsyncImageProvider::getCachedImage(const QString &id,
   QMutexLocker locker(&m_mutex);
   QString key = id + "_" + QString::number(size.width()) + "x" +
                 QString::number(size.height());
-  if (m_cache.contains(key)) {
-    return *m_cache.object(key);
-  }
-  return QImage();
+  return m_cache.contains(key) ? *m_cache.object(key) : QImage();
 }
 
 void AsyncImageProvider::insertCachedImage(const QString &id,
@@ -186,275 +498,13 @@ QVariantMap AsyncImageProvider::getCacheStats() {
 void AsyncImageProvider::clearCache() {
   QMutexLocker locker(&m_mutex);
   m_cache.clear();
-  qWarning() << "[ResourceControl] System Memory > 2.5GB. Cache Cleared.";
 }
 
-void AsyncImageProvider::processImageTask(
-    QString id, QSize requestedSize,
-    std::shared_ptr<std::atomic<bool>> cancelled,
-    std::shared_ptr<ResponseTracker> tracker) {
-  // Check if response still exists
-  AsyncImageResponse *response = tracker->response.load();
-  if (!response)
-    return;
-
-  // 1. Check Cancellation (Early Exit)
-  if (*cancelled)
-    return;
-
-  if (s_logLevel > 1) {
-    qWarning() << "TRACE: processImageTask starting for" << id;
-  }
-
-  // --- MEMORY LIMIT ENFORCEMENT (User Request: 2.5GB Max) ---
-  // (REVERTED due to Lock Contention)
-
-#ifdef Q_OS_WIN
-  // Required for QImageReader (WIC) on Windows
-  CoInitialize(NULL);
-#endif
-
-  // Handle "file:///" via QUrl
-  QString path;
-  QUrl url(id);
-  if (url.isValid() && url.isLocalFile()) {
-    path = url.toLocalFile();
-  } else {
-    path = id;
-  }
-
-  // Handle odd edge case: /C:/Users...
-  if (path.startsWith("/") && path.length() > 2 && path[2] == ':') {
-    path = path.mid(1);
-  }
-
-  path = QDir::toNativeSeparators(path);
-
-  if (*cancelled) {
-#ifdef Q_OS_WIN
-    CoUninitialize();
-#endif
-    return;
-  }
-
-  QImage image;
-  DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
-  bool isVideo = (type == DesktopHelper::Video);
-  bool isRaw = (type == DesktopHelper::Raw);
-
-  if ((isVideo && s_disableVideo) || (isRaw && s_disableRaw)) {
-    // Disabled type - return empty image (invokes handleDone with null)
-#ifdef Q_OS_WIN
-    CoUninitialize();
-#endif
-    return;
-  }
-
-  // --- Loading Logic ---
-  if (s_logLevel > 1)
-    qDebug() << "TRACE: identifies as RAW:" << path;
-  if (isRaw) {
-    // NON-BLOCKING CHECK
-    if (!s_rawSemaphore.tryAcquire(1)) {
-      // BUSY LOOP PREVENTION
-      QThread::msleep(20);
-      TaskScheduler::instance().addTask(
-          [id, requestedSize, cancelled, tracker]() {
-            processImageTask(id, requestedSize, cancelled, tracker);
-          },
-          TaskScheduler::CPU_BOUND, TaskScheduler::Low);
-#ifdef Q_OS_WIN
-      CoUninitialize();
-#endif
-      return;
-    }
-
-    try {
-      LibRaw RawProcessor;
-      // RAII Cleanup helper
-      struct RawCleanup {
-        LibRaw &processor;
-        ~RawCleanup() { processor.recycle(); }
-      } cleanup{RawProcessor};
-
-      // 1. Open File
-      if (RawProcessor.open_file(path.toLocal8Bit().constData()) ==
-          LIBRAW_SUCCESS) {
-
-        // 2. Try Embedded Preview (FAST)
-        bool loaded = false;
-        if (s_accelerateRaw) {
-          if (RawProcessor.unpack_thumb() == LIBRAW_SUCCESS) {
-            libraw_processed_image_t *thumb =
-                RawProcessor.dcraw_make_mem_thumb();
-            if (thumb) {
-              struct ThumbCleanup {
-                libraw_processed_image_t *t;
-                ~ThumbCleanup() {
-                  if (t)
-                    LibRaw::dcraw_clear_mem(t);
-                }
-              } tc{thumb};
-
-              if (thumb->type == LIBRAW_IMAGE_JPEG) {
-                image.loadFromData((const uchar *)thumb->data, thumb->data_size,
-                                   "JPEG");
-                loaded = !image.isNull();
-              } else if (thumb->type == LIBRAW_IMAGE_BITMAP) {
-                QImage rawImg((const uchar *)thumb->data, thumb->width,
-                              thumb->height, thumb->width * 3,
-                              QImage::Format_RGB888);
-                image = rawImg.copy();
-                loaded = !image.isNull();
-              }
-            }
-          }
-        }
-
-        // 3. Fallback: Full Decode (SLOW) or Half Decode (Medium)
-        if (!loaded) {
-          // OOM PROTECTION & PERFORMANCE
-          bool isThumbnail =
-              (requestedSize.width() > 0 && requestedSize.width() < 1000) ||
-              (requestedSize.height() > 0 && requestedSize.height() < 1000);
-
-          if (s_accelerateRaw && isThumbnail) {
-            // Enable half-size decoding for faster fallback
-            RawProcessor.imgdata.params.half_size = 1;
-          } else if (s_accelerateRaw) {
-            qWarning()
-                << "[LibRaw] Thumbnail failed, forced fallback to full decode:"
-                << path;
-          }
-
-          if (RawProcessor.unpack() == LIBRAW_SUCCESS) {
-            RawProcessor.dcraw_process();
-            libraw_processed_image_t *img = RawProcessor.dcraw_make_mem_image();
-            if (img) {
-              if (img->type == LIBRAW_IMAGE_BITMAP && img->colors == 3) {
-                if (img->width <= 12000 && img->height <= 12000) {
-                  long size = img->width * img->height * 3;
-                  if (img->data_size >= size) {
-                    QImage rawImg((const uchar *)img->data, img->width,
-                                  img->height, img->width * 3,
-                                  QImage::Format_RGB888);
-                    image = rawImg.copy();
-                  }
-                }
-              }
-              LibRaw::dcraw_clear_mem(img);
-            }
-          }
-        }
-      }
-    } catch (...) {
-      qCritical() << "[CRASH PREVENTED] LibRaw crashed on:" << path;
-    }
-    s_rawSemaphore.release(1);
-
-    if (image.isNull()) {
-      QImageReader reader(path);
-      if (reader.canRead())
-        image = reader.read();
-    }
-  } else if (isVideo) {
-    if (s_logLevel > 1)
-      qDebug() << "TRACE: identifies as Video:" << path;
-    // NON-BLOCKING VIDEO CHECK
-    if (!s_videoSemaphore.tryAcquire(1)) {
-      QThread::msleep(20);
-      TaskScheduler::instance().addTask(
-          [id, requestedSize, cancelled, tracker]() {
-            processImageTask(id, requestedSize, cancelled, tracker);
-          },
-          TaskScheduler::CPU_BOUND, TaskScheduler::Low);
-#ifdef Q_OS_WIN
-      CoUninitialize();
-#endif
-      return;
-    }
-
-    VideoThumbnailer thumbnailer;
-    image = thumbnailer.extractFrame(path, 0, requestedSize, true);
-    s_videoSemaphore.release(1);
-
-    if (image.isNull()) {
-      image = thumbnailer.extractFrame(path, 0, requestedSize, false);
-    }
-
-    if (image.isNull()) {
-      QFileIconProvider provider;
-      QIcon icon = provider.icon(QFileInfo(path));
-      if (!icon.isNull()) {
-        QSize s = requestedSize.isValid() ? requestedSize : QSize(256, 256);
-        image = icon.pixmap(s).toImage();
-      }
-    }
-  } else {
-    // Standard Image
-    if (s_logLevel > 1)
-      qDebug() << "TRACE: identifies as Image:" << path;
-    QImageReader reader(path);
-    if (requestedSize.isValid()) {
-      QSize originalSize = reader.size();
-      if (originalSize.isValid()) {
-        double scale =
-            std::max((double)requestedSize.width() / originalSize.width(),
-                     (double)requestedSize.height() / originalSize.height());
-        QSize newSize(originalSize.width() * scale,
-                      originalSize.height() * scale);
-        reader.setScaledSize(newSize);
-      } else {
-        reader.setScaledSize(requestedSize);
-      }
-    }
-    if (reader.canRead()) {
-      image = reader.read();
-      if (image.isNull()) {
-        qWarning() << "[AsyncImageProvider] QImageReader read failed:" << path
-                   << "Error:" << reader.errorString();
-      }
-    } else {
-      qWarning()
-          << "[AsyncImageProvider] QImageReader canRead() returned false:"
-          << path << "Error:" << reader.errorString()
-          << "Formats:" << QImageReader::supportedImageFormats();
-    }
-  }
-
-  // --- Post Processing & Downscaling ---
-  if (!image.isNull()) {
-    // OPTIMIZATION: Aggressive Downscaling
-    if (requestedSize.isValid() && !requestedSize.isEmpty()) {
-      if (image.width() > requestedSize.width() ||
-          image.height() > requestedSize.height()) {
-        image = image.scaled(requestedSize, Qt::KeepAspectRatio,
-                             Qt::SmoothTransformation);
-      }
-    }
-    AsyncImageProvider::insertCachedImage(id, image, requestedSize);
-  } else if (!isVideo) {
-    // Placeholder
-    image = QImage(100, 100, QImage::Format_RGB32);
-    image.fill(Qt::yellow);
-    QPainter p(&image);
-    p.drawText(image.rect(), Qt::AlignCenter, "ERR");
-  }
-
-#ifdef Q_OS_WIN
-  CoUninitialize();
-#endif
-
-  if (!*cancelled) {
-    qWarning() << "TRACE: [LOG] Delivering result for" << id;
-    // Check if response still exists before delivering
-    AsyncImageResponse *resp = tracker->response.load();
-    if (resp) {
-      // Deliver result to main thread
-      QMetaObject::invokeMethod(resp, "handleDone", Qt::QueuedConnection,
-                                Q_ARG(QImage, image));
-    } else {
-      qWarning() << "TRACE: [LOG] Response object GONE for" << id;
-    }
-  }
+void AsyncImageProvider::clearDiskCache() {
+  QString cacheDir =
+      QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
+      "/thumbnails";
+  QDir dir(cacheDir);
+  if (dir.exists())
+    dir.removeRecursively();
 }
