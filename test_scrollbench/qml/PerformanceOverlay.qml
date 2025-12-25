@@ -96,6 +96,28 @@ Rectangle {
                             font.pixelSize: 32; font.bold: true
                             color: telemetry.fps > 55 ? "#4CAF50" : "#FFC107"
                         }
+                        Text { text: "Avg: " + telemetry.averageFps + " FPS"; font.pixelSize: 11; color: "#888" }
+                    }
+
+                    // Latency Metrics
+                    ColumnLayout {
+                        Text { text: "Pipeline & Latency"; font.pixelSize: 14; font.bold: true; color: "#aaa" }
+                        RowLayout {
+                            ColumnLayout { 
+                                Text { text: "Avg Latency"; font.pixelSize: 10; color: "#888" } 
+                                Text { text: telemetry.averageLoadTime + " ms"; color: "#fff"; font.bold: true } 
+                            }
+                            Item { Layout.fillWidth: true }
+                            ColumnLayout { 
+                                Text { text: "Cache Hit"; font.pixelSize: 10; color: "#888" } 
+                                Text { text: telemetry.cacheHitRate.toFixed(1) + "%"; color: "#4CAF50"; font.bold: true } 
+                            }
+                            Item { Layout.fillWidth: true }
+                            ColumnLayout { 
+                                Text { text: "Last Load"; font.pixelSize: 10; color: "#888" } 
+                                Text { text: telemetry.lastLoadTime + " ms"; color: "#fff"; font.bold: true } 
+                            }
+                        }
                     }
 
                     // Resources
@@ -112,21 +134,21 @@ Rectangle {
                                 dataPoints: telemetry.cpuHistory
                             }
                             Text { 
-                                text: "App: " + systemMonitor.cpuUsage.toFixed(1) + "% | Sys: " + systemMonitor.systemCpuUsage.toFixed(1) + "%"
+                                text: "App: " + systemMonitor.cpuUsage.toFixed(1) + "% | Total: " + telemetry.cpuUsage.toFixed(1) + "%"
                                 font.pixelSize: 10; color: "#fff"
                             }
                         }
 
                         // RAM
                         ColumnLayout {
-                            Text { text: "RAM Usage (App)"; font.pixelSize: 11; color: "#888" }
+                            Text { text: "RAM Usage (App / System)"; font.pixelSize: 11; color: "#888" }
                             UsageGraph {
                                 Layout.fillWidth: true; height: 30
                                 color: "#2196F3"; maxValue: 100
                                 dataPoints: telemetry.ramHistory
                             }
                             Text { 
-                                text: systemMonitor.memoryUsageMB.toFixed(0) + " MB / " + systemMonitor.totalSystemMemoryMB.toFixed(0) + " MB"
+                                text: "App: " + systemMonitor.memoryUsageMB.toFixed(0) + " MB | Sys: " + (systemMonitor.totalSystemMemoryMB - systemMonitor.availableSystemMemoryMB).toFixed(0) + " / " + systemMonitor.totalSystemMemoryMB.toFixed(0) + " MB"
                                 font.pixelSize: 10; color: "#fff"
                             }
                         }
@@ -140,19 +162,44 @@ Rectangle {
                                 dataPoints: telemetry.gpuHistory
                             }
                             Text { 
-                                text: "Load: " + systemMonitor.gpuUsage.toFixed(1) + "% | VRAM: " + systemMonitor.gpuVramUsedMB.toFixed(0) + " MB"
+                                text: "Load: " + systemMonitor.gpuUsage.toFixed(1) + "% | VRAM: " + systemMonitor.gpuVramUsedMB.toFixed(0) + " / " + systemMonitor.gpuVramTotalMB.toFixed(0) + " MB"
                                 font.pixelSize: 10; color: "#fff"
                             }
                         }
                     }
 
+                    // CPU Features
+                    ColumnLayout {
+                        Text { text: "Hardware Engine"; font.pixelSize: 14; font.bold: true; color: "#aaa" }
+                        Rectangle {
+                            Layout.fillWidth: true; height: 45; color: "#111"; radius: 4
+                            Text {
+                                anchors.fill: parent; anchors.margins: 6
+                                text: hwAccel.cpuInfo()
+                                font.pixelSize: 10; color: "#8f8"; wrapMode: Text.Wrap; verticalAlignment: Text.AlignVCenter
+                            }
+                        }
+                        Text { text: "Active Mode: " + hwAccel.currentModeName(); font.pixelSize: 10; color: "#888" }
+                    }
+
                     // Task Queue
                     ColumnLayout {
-                        Text { text: "Pipeline"; font.pixelSize: 14; font.bold: true; color: "#aaa" }
+                        Text { text: "Workload Status"; font.pixelSize: 14; font.bold: true; color: "#aaa" }
                         RowLayout {
-                            ColumnLayout { Text { text: "Active"; font.pixelSize: 10; color: "#888" } Text { text: taskScheduler.activeTaskCount; color: "#fff"; font.bold: true } }
+                            ColumnLayout { 
+                                Text { text: "Active"; font.pixelSize: 10; color: "#888" } 
+                                Text { text: taskScheduler.activeTaskCount; color: "#fff"; font.bold: true } 
+                            }
                             Item { Layout.fillWidth: true }
-                            ColumnLayout { Text { text: "Pending"; font.pixelSize: 10; color: "#888" } Text { text: imageModel.remainingItems; color: "#fff"; font.bold: true } }
+                            ColumnLayout { 
+                                Text { text: "Pending"; font.pixelSize: 10; color: "#888" } 
+                                Text { text: imageModel.remainingItems; color: "#fff"; font.bold: true } 
+                            }
+                            Item { Layout.fillWidth: true }
+                            ColumnLayout { 
+                                Text { text: "Frame Comp"; font.pixelSize: 10; color: "#888" } 
+                                Text { text: telemetry.completionsThisFrame; color: "#fff"; font.bold: true } 
+                            }
                         }
                     }
 
@@ -215,9 +262,37 @@ Rectangle {
                         }
                     }
 
-                    // Options
+                    // Advanced Optimizations
                     ColumnLayout {
-                        spacing: 10
+                        spacing: 12
+                        Layout.fillWidth: true
+                        Text { text: "Optimization Engine"; font.pixelSize: 14; font.bold: true; color: "#aaa" }
+                        
+                        RowLayout {
+                            Text { text: "Viewport Culling"; color: "#fff"; Layout.fillWidth: true }
+                            Switch { checked: imageModel.viewportCullingEnabled; onToggled: imageModel.viewportCullingEnabled = checked }
+                        }
+                        
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 2
+                            RowLayout {
+                                Text { text: "Frame Budget Scheduler"; color: "#fff"; Layout.fillWidth: true }
+                                Switch { checked: frameBudget.enabled; onToggled: frameBudget.enabled = checked }
+                            }
+                            Text { 
+                                text: "Target: " + frameBudget.frameBudget + " tasks/frame"
+                                font.pixelSize: 10; color: "#888"
+                                visible: frameBudget.enabled
+                            }
+                            Slider {
+                                Layout.fillWidth: true; from: 1; to: 100; stepSize: 1
+                                value: frameBudget.frameBudget
+                                visible: frameBudget.enabled
+                                onMoved: frameBudget.frameBudget = Math.round(value)
+                            }
+                        }
+
                         RowLayout {
                             Text { text: "RAW: Fast Preview"; color: "#fff"; Layout.fillWidth: true }
                             Switch { checked: settings.rawAcceleration; onToggled: settings.rawAcceleration = checked }
@@ -226,17 +301,19 @@ Rectangle {
                             Text { text: "Use Disk Cache"; color: "#fff"; Layout.fillWidth: true }
                             Switch { checked: settings.useDiskCache; onToggled: settings.useDiskCache = checked }
                         }
+                        
+                        ComboBox {
+                            Layout.fillWidth: true
+                            model: ["Video Accel: Auto", "Video Accel: D3D11VA", "Video Accel: Vulkan", "Video Accel: OpenCL"]
+                            currentIndex: settings.videoAcceleration
+                            onActivated: (index) => settings.videoAcceleration = index
+                        }
+
                         ComboBox {
                             Layout.fillWidth: true
                             model: ["Log Level: None", "Log Level: Info", "Log Level: Debug", "Log Level: Trace"]
                             currentIndex: settings.logLevel
                             onActivated: (index) => settings.logLevel = index
-                        }
-                        ComboBox {
-                            Layout.fillWidth: true
-                            model: ["Accel: Auto", "Accel: D3D11VA", "Accel: Vulkan", "Accel: OpenCL"]
-                            currentIndex: settings.videoAcceleration
-                            onActivated: (index) => settings.videoAcceleration = index
                         }
                     }
 
@@ -244,6 +321,19 @@ Rectangle {
                         Layout.fillWidth: true
                         text: "Clear Disk Cache"
                         onClicked: settings.clearDiskCache()
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: 5
+                        Text {
+                            text: "📊 Performance metrics update every 1s"
+                            font.pixelSize: 11; color: "#666"
+                        }
+                        Text {
+                            text: "🎯 Toggle optimizations to compare rendering speed"
+                            font.pixelSize: 11; color: "#666"
+                        }
                     }
 
                     Item { height: 20; width: 1 }
