@@ -119,7 +119,26 @@ For detailed build instructions, troubleshooting, and deployment information, se
 
 ## 🏗️ Architecture
 
-The application follows a modern Qt-based architecture with clear separation of concerns:
+### Dual-Application Strategy
+
+The project uses a two-application development approach:
+
+| Application | Purpose | Status | Output |
+|-------------|---------|--------|--------|
+| **Main App** | Production gallery | ✅ Stable | `appSamsungGallery.exe` |
+| **ScrollBench** | Performance testing & feature prototyping | ✅ Feature-complete | `appScrollBench.exe` |
+
+**Development Flow:** 
+```
+Prototype in ScrollBench → Validate → Port to Main App
+```
+
+**Benefits:**
+- Risk-free experimentation without breaking production app
+- Performance testing in controlled environment
+- Proven features before main app integration
+
+### Technical Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -136,26 +155,24 @@ The application follows a modern Qt-based architecture with clear separation of 
 ┌─────────────────────────────────────────────────────────────┐
 │                   Qt Integration Layer                      │
 ├─────────────────────────────────────────────────────────────┤
-│  QML Context Properties  │  QML Type Registration  │        │
-│  (appSettings)          │  (ImageModel, etc.)     │        │
-│                         │                         │        │
-│  Image Provider         │  Signal-Slot Connections │        │
-│  (AsyncImageProvider)   │  (Backend-Frontend)     │        │
+│  QML Context Properties  │  QML Type Registration          │
+│  (appSettings)          │  (ImageModel, etc.)             │
+│                         │                                  │
+│  Image Provider         │  Signal-Slot Connections         │
+│  (AsyncImageProvider)   │  (Backend-Frontend)             │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                   C++ Backend Layer                         │
 ├─────────────────────────────────────────────────────────────┤
-│  ImageModel.cpp/h      │  AlbumModel.cpp/h      │        │
-│  (Image Data)          │  (Album Data)          │        │
-│                         │                         │        │
-│  SettingsHelper.cpp/h  │  AsyncImageProvider.cpp/h│        │
-│  (Configuration)       │  (Async Loading)       │        │
+│  ImageModel           │  FastVolumeScanner  │  TaskScheduler │
+│  AlbumModel           │  VideoThumbnailer   │  SystemMonitor │
+│  AsyncImageProvider   │  FrameBudgetScheduler │           │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-For detailed architectural information, see [ARCHITECTURE.md](ARCHITECTURE.md).
+For detailed architectural information, see [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## 📚 Documentation
 
@@ -194,22 +211,23 @@ Comprehensive documentation has been created for this project:
 
 ## ⚠️ Known Issues
 
-### Build Issues
-1. **Qt Version Mismatch**: Build scripts reference Qt 6.9.3 but project requires 6.4+
-2. **Hardcoded Paths**: PowerShell scripts contain hardcoded Qt installation paths
-3. **Platform Dependencies**: Windows-specific APIs limit cross-platform compatibility
+See [KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) for detailed list and workarounds.
 
-### Runtime Issues
-1. **Default Path**: Hardcoded path "I:/MY SDCards/dir0064.chk" may not exist
-2. **Incomplete Features**: Albums and Stories features are placeholder implementations
-3. **Video Playback**: No actual video player implementation (placeholders only)
+### Current Limitations
 
-### Code Quality Issues
-1. **Error Handling**: Some functions return generic error messages
-2. **Code Duplication**: Similar path handling in multiple files
-3. **Limited Documentation**: Missing API documentation and user guides
+**Feature Gaps:**
+- Selection/Share features require ScrollBench (porting in progress)
+- Image editing limited to basic crop (rotation/adjustments planned)
 
-For a complete analysis of issues and recommendations, see [PROGRESS.md](PROGRESS.md).
+**Performance:**
+- DNG proprietary compression has slow performance (120+ seconds)
+- Case-sensitive file extension matching (uppercase files like `.JPG` missed)
+
+**Platform:**
+- Windows-only (Linux/macOS not supported)
+- MFT scanner requires Administrator privileges for optimal performance
+
+For detailed information and workarounds, see [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md).
 
 ## 🤝 Contributing
 
@@ -253,18 +271,24 @@ This project adopts modern C++ best practices to ensure stability and performanc
 
 ## 🔄 Version History
 
--   **v2.0.0 (Current)** - **Major "Reforged" Release**
-    -   **Engine**: Full D3D11 Hardware Acceleration for videos.
-    -   **Smart Feature**: Black Frame Detection for meaningful thumbnails.
-    -   **Core**: TaskScheduler v2 with Priority Queues (CPU/IO separation).
-    -   **Format**: Native RAW support via LibRaw.
-    -   **Performance**: Hybrid RAW loading (Embedded Preview vs Full Decode) with settings toggle.
-    -   **UI**: Semantic Zoom (Day/Month/Year) implemented.
--   **v2.1.0 (Network & Deployment)**
-    -   **Network**: Full support for UNC paths (`\\Server\Share`).
-    -   **Deployment**: Self-contained builds with MinGW runtime included.
-    -   **Stability**: Removed aggressive memory limits to prevent UI freezes.
--   **v1.0.0** - Initial release with core gallery functionality.
+-   **v2.2.0 (Current)** - **MFT Scanning & Performance**
+    -   **MFT Scanner**: 10-100x faster file enumeration via Windows MFT (requires Admin)
+    -   **Frame Budget**: Prevents UI stuttering during heavy thumbnail operations
+    -   **FileTypeRouter**: Centralized detection for 170+ formats (RAW, Image, Video)
+    -   **ScrollBench**: Feature-complete test application with selection & share
+    -   **TDR Fixes**: Reduced video/RAW concurrency to prevent GPU timeout crashes
+-   **v2.1.0** - **Network & Deployment**
+    -   **Network**: Full support for UNC paths (`\\\\Server\\Share`)
+    -   **Deployment**: Self-contained builds with MinGW runtime included
+    -   **Stability**: Removed aggressive memory limits to prevent UI freezes
+-   **v2.0.0** - **Major "Reforged" Release**
+    -   **Engine**: Full D3D11 Hardware Acceleration for videos
+    -   **Smart Feature**: Black Frame Detection for meaningful thumbnails
+    -   **Core**: TaskScheduler v2 with Priority Queues (CPU/IO separation)
+    -   **Format**: Native RAW support via LibRaw
+    -   **Performance**: Hybrid RAW loading (Embedded Preview vs Full Decode)
+    -   **UI**: Semantic Zoom (Day/Month/Year) implemented
+-   **v1.0.0** - Initial release with core gallery functionality
 
 ## 🗂️ File Structure
 

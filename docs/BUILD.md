@@ -65,20 +65,39 @@ cd Release
 .\appSamsungGallery.exe
 ```
 
-#### Method 2: Using PowerShell Scripts
+#### Method 2: Using PowerShell Scripts (Recommended)
 
 The project includes a robust PowerShell script for building and deployment:
 
 ```powershell
-# Build the project (Incremental)
+# 1. Standard Dynamic Build (Development & Testing)
+# Builds appSamsungGallery.exe (Main) and appScrollBench.exe (Test) linked dynamically to Qt.
 .\build.ps1
 
-# Clean build (Removes build directory and rebuilds)
+# 2. Clean Build
+# Removes build directory and rebuilds from scratch. Recommended after major changes.
 .\build.ps1 -Clean
 
-# Deploy the application
-.\deploy.ps1
+# 3. Single Executable Portable Build (Production/Distribution)
+# Builds ScrollBenchPortable.exe sttically linked (No DLLs required).
+# REQUIRES: Static Qt Setup first (see below).
+.\build.ps1 -BuildSingleExe
 ```
+
+### Static Qt Setup (For Single Executable)
+
+To build the Single Executable, you must first setup a static build of Qt. We provide an automated script for this:
+
+```powershell
+# Download and compiles a minimal Static Qt 6.9.3 kit
+.\scripts\setup_static_qt.ps1
+```
+
+**Build Targets:**
+- **Standard Build**: Dynamic linking. Fast iteration. producing `appSamsungGallery.exe`.
+- **ScrollBench**: Use `test_scrollbench` for performance testing.
+- **Single Exe**: `ScrollBenchPortable.exe`. Native static binary. Ideal for USB drives/deployment without installers.
+  - See `single_exe/README.md` for details.
 
 #### Method 3: Visual Studio Integration
 

@@ -1,4 +1,5 @@
 #include "ImageModel.h"
+#include "FastVolumeScanner.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
 #include <QDateTime>
@@ -221,25 +222,112 @@ void ImageModel::scanDirectory(const QString &path) {
         const int BATCH_SIZE = 100;
         QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
 
-        while (it.hasNext()) {
-          it.next();
-          QFileInfo fileInfo = it.fileInfo();
-          ImageInfo info;
-          info.filePath = fileInfo.absoluteFilePath();
-          info.fileName = fileInfo.fileName();
-          info.size = fileInfo.size();
-          info.date = fileInfo.birthTime(); // Default
+        // --- Fast MFT Scan Attempt ---
+        bool fastScanSuccess = false;
 
-          // Optimize: Try parsing filename for date
-          QRegularExpressionMatch match = dateRegex.match(info.fileName);
-          if (match.hasMatch()) {
-            QString dateStr = match.captured(1) + match.captured(2);
-            QDateTime dt = QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
-            if (dt.isValid())
-              info.date = dt;
+        // Only attempt MFT scan if path is on a local NTFS drive (simplistic
+        // check for now) cleanPath is e.g. "C:/Users/..."
+        if (cleanPath.length() >= 3 && cleanPath[1] == ':' &&
+            cleanPath[2] == '/') {
+          FastVolumeScanner fastScanner;
+          if (fastScanner.scanVolume(cleanPath)) {
+            qDebug() << "FastScanner: Success! Filtering results...";
+            QVector<QString> allFiles = fastScanner.getAllFiles();
+            QString searchPrefix = cleanPath;
+            if (!searchPrefix.endsWith("/"))
+              searchPrefix += "/";
+
+            // Normalize prefix for case-insensitive check?
+            // MFT returns paths with forward slashes usually (from my
+            // implementation) My implementation resolvePath uses "/" separator.
+
+            int itemsFound = 0;
+            for (const QString &f : allFiles) {
+              // Check inclusion
+              if (f.startsWith(searchPrefix, Qt::CaseInsensitive)) {
+                // Check Extension
+                QString ext = QFileInfo(f).suffix().toLower();
+                if (extensions.contains(ext)) {
+                  // Create Info
+                  ImageInfo info;
+                  info.filePath = f;
+                  info.fileName =
+                      QFileInfo(f)
+                          .fileName(); // optimization: extract from path string
+                  info.size = 0; // MFT doesn't give size in my current struct?
+                  // Wait, USN record has FileAttributes but maybe not size?
+                  // Standard MFT scan gets size.
+                  // My FastVolumeScanner currently only extracts NAME.
+                  // FIX: I need size for sorting? Or just date?
+                  // Date is birthTime. MFT has CreationTime?
+                  // My FastVolumeScanner only gets names.
+
+                  // CRITICAL: If I don't have Date or Size, sorting will be
+                  // wrong and metadata missing until loaded. ImageModel relies
+                  // on Date for sorting. QFileInfo(f).birthTime() will access
+                  // disk -> Slows down Scanned? If I stat every file, I lose
+                  // the speed benefit of MFT!
+
+                  // WizTree gets size/date from MFT.
+                  // I should update FastVolumeScanner to extract Metadata too.
+                  // BUT for now, let's accept that we might need to QFileInfo
+                  // them or just accept QFileInfo cost is still faster than
+                  // FindNextFile recursion? Actually QFileInfo on 100k files is
+                  // slow.
+
+                  // Let's stick to QFileInfo for this iteration to match
+                  // existing logic. It is still faster than recursive directory
+                  // walking usually.
+
+                  QFileInfo fi(f);
+                  info.size = fi.size();
+                  info.date = fi.birthTime();
+
+                  QRegularExpressionMatch match =
+                      dateRegex.match(info.fileName);
+                  if (match.hasMatch()) {
+                    QString dateStr = match.captured(1) + match.captured(2);
+                    QDateTime dt =
+                        QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
+                    if (dt.isValid())
+                      info.date = dt;
+                  }
+
+                  batch.append(info);
+                  itemsFound++;
+                }
+              }
+            }
+            qDebug() << "FastScanner: Filtered" << itemsFound << "items.";
+            fastScanSuccess = true;
           }
+        }
 
-          batch.append(info);
+        if (!fastScanSuccess) {
+          // Fallback to QDirIterator
+          QDirIterator it(cleanPath, filters, QDir::Files,
+                          QDirIterator::Subdirectories);
+
+          while (it.hasNext()) {
+            it.next();
+            QFileInfo fileInfo = it.fileInfo();
+            ImageInfo info;
+            info.filePath = fileInfo.absoluteFilePath();
+            info.fileName = fileInfo.fileName();
+            info.size = fileInfo.size();
+            info.date = fileInfo.birthTime(); // Default
+
+            // Optimize: Try parsing filename for date
+            QRegularExpressionMatch match = dateRegex.match(info.fileName);
+            if (match.hasMatch()) {
+              QString dateStr = match.captured(1) + match.captured(2);
+              QDateTime dt = QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
+              if (dt.isValid())
+                info.date = dt;
+            }
+
+            batch.append(info);
+          }
         }
 
         // Final Sort and completion

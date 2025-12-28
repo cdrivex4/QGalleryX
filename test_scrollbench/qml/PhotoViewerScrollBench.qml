@@ -22,6 +22,7 @@ Item {
         if (visible) {
             forceActiveFocus()
             if (currentIndex >= 0) {
+                listView.currentIndex = currentIndex
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
             }
             // Pause background tasks and frame budget when PhotoViewer becomes visible
@@ -73,6 +74,7 @@ Item {
             target: root
             function onCurrentIndexChanged() {
                 if (listView.currentIndex !== root.currentIndex) {
+                    listView.currentIndex = root.currentIndex
                     listView.positionViewAtIndex(root.currentIndex, ListView.SnapPosition)
                 }
             }
@@ -84,8 +86,9 @@ Item {
             
             property string filePath: model.filePath
             property string fileName: model.fileName
-            property var fileExt: filePath.split('.').pop().toLowerCase()
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            // Use backend model as single source of truth for file types
+            property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
+            property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
             property bool isCurrent: index === ListView.view.currentIndex
             onIsCurrentChanged: {
                 if (!isCurrent && isVideo) {
@@ -148,7 +151,25 @@ Item {
 
                     Image {
                         id: img
-                        source: (!isVideo && filePath) ? "image://async/" + filePath : ""
+                        source: {
+                            if (isVideo || !filePath) return ""
+                            
+                            // RAW files: Use AsyncImageProvider for LibRaw embedded thumbnail extraction
+                            // (Fast ~200ms vs 120+ sec full decode)
+                            if (isRaw) {
+                                return "image://async/" + filePath
+                            }
+                            
+                            // Regular images: Direct loading for best performance
+                            var url = filePath
+                            if (url.startsWith("\\\\")) {
+                                return "file:" + url.replace(/\\/g, "/")
+                            }
+                            if (url.indexOf("://") === -1) {
+                                return "file:///" + url.replace(/\\/g, "/")
+                            }
+                            return url
+                        }
                         
                         // Bind size to zoom
                         width: flickable.width * flickable.zoom
@@ -162,11 +183,26 @@ Item {
                         autoTransform: true
                         
                         property real startTime: 0
-                        onSourceChanged: startTime = new Date().getTime()
+                        onSourceChanged: {
+                            startTime = new Date().getTime()
+                            console.log("[PhotoViewer] Image source changed to:", source)
+                            console.log("[PhotoViewer] Delegate filePath:", filePath)
+                            console.log("[PhotoViewer] Is video:", isVideo, "| Is current:", isCurrent)
+                        }
                         onStatusChanged: {
+                            console.log("[PhotoViewer] Image status:", status, "for index:", index)
                             if (status === Image.Ready) {
                                 var endTime = new Date().getTime()
                                 root.imageLoaded(endTime - startTime)
+                                console.log("[PhotoViewer] ✓ Image loaded in", (endTime - startTime), "ms")
+                                console.log("[PhotoViewer]   - Image bounds: width=", img.width, "height=", img.height)
+                                console.log("[PhotoViewer]   - Source size:", img.sourceSize.width, "x", img.sourceSize.height)
+                                console.log("[PhotoViewer]   - Implicit size:", img.implicitWidth, "x", img.implicitHeight)
+                                console.log("[PhotoViewer]   - Painted width:", img.paintedWidth, "painted height:", img.paintedHeight)
+                                console.log("[PhotoViewer]   - Visible:", img.visible, "| Opacity:", img.opacity)
+                                console.log("[PhotoViewer]   - Flickable zoom:", flickable.zoom)
+                            } else if (status === Image.Error) {
+                                console.error("[PhotoViewer] ✗ Image load FAILED for source:", source)
                             }
                         }
                     }
@@ -249,6 +285,16 @@ Item {
                     audioOutput: AudioOutput {}
                     videoOutput: videoOutput
                     autoPlay: false
+                    
+                    onPlaybackStateChanged: {
+                        console.log("[MediaPlayer] Playback state:", playbackState, "for:", filePath)
+                    }
+                    
+                    onMetaDataChanged: {
+                        console.log("[MediaPlayer] Video codec:", metaData.value(7)) // VideoCodec
+                        console.log("[MediaPlayer] Resolution:", metaData.value(12), "x", metaData.value(13)) // Resolution  
+                        console.log("[MediaPlayer] Video bitrate:", metaData.value(14), "bps") // VideoBitRate
+                    }
                     
                     onErrorOccurred: (error, errorString) => {
                         console.log("MediaPlayer Error: " + errorString + " (" + error + ")")
@@ -395,7 +441,7 @@ Item {
             width: parent.width * 0.8
             height: parent.height * 0.8
             fillMode: Image.PreserveAspectFit
-            source: (root.model && root.currentIndex >= 0 && root.model.data(root.model.index(root.currentIndex, 0), 257).toLowerCase().indexOf(".mp4") === -1) ? "file:///" + root.model.data(root.model.index(root.currentIndex, 0), 257) : "" // FilePathRole
+            source: (root.model && root.currentIndex >= 0 && root.model.data(root.model.index(root.currentIndex, 0), 257).toLowerCase().indexOf(".mp4") === -1) ? "file:///" + root.model.data(root.model.index(root.currentIndex, 0), 257) : "" // FilePathRole (257)
         }
         
         // Crop Handles (Visual)

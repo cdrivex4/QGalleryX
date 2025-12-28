@@ -13,44 +13,39 @@ Rectangle {
     RowLayout {
         anchors.fill: parent
         spacing: 0
-
+        
         Repeater {
-            model: ["Pictures", "Albums", "Stories", "Menu"]
-            
-            Item {
+            model: ["Pictures", "Albums", "Menu"]
+            delegate: Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 
-                Rectangle {
+                ColumnLayout {
+                    anchors.centerIn: parent
+                    spacing: 4
+                    
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: {
+                            if (modelData === "Pictures") return "🖼️"
+                            if (modelData === "Albums") return "📁"
+                            return "☰"
+                        }
+                        font.pixelSize: 24
+                        opacity: root.currentIndex === index ? 1.0 : 0.5
+                    }
+                    
+                    Text {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: modelData
+                        font.pixelSize: 10
+                        color: root.currentIndex === index ? "#2196F3" : "#888"
+                    }
+                }
+                
+                MouseArea {
                     anchors.fill: parent
-                    color: "transparent"
-                    
-                    ColumnLayout {
-                        anchors.centerIn: parent
-                        spacing: 4
-                        
-                        // Icon placeholder (using text for now, would replace with proper icons)
-                        Text {
-                            text: modelData === "Pictures" ? "🖼️" : 
-                                  modelData === "Albums" ? "📁" : 
-                                  modelData === "Stories" ? "📖" : "☰"
-                            font.pixelSize: 20
-                            Layout.alignment: Qt.AlignHCenter
-                            color: root.currentIndex === index ? "white" : "#888888"
-                        }
-                        
-                        Text {
-                            text: modelData
-                            color: root.currentIndex === index ? "white" : "#888888"
-                            font.pixelSize: 12
-                            Layout.alignment: Qt.AlignHCenter
-                        }
-                    }
-                    
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: root.tabSelected(index)
-                    }
+                    onClicked: root.tabSelected(index)
                 }
             }
         }

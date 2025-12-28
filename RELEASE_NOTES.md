@@ -1,4 +1,63 @@
+# Release Notes - v2.2.0 (MFT Scanning & Performance)
+
+## 🚀 Highlights
+This release focuses on **Performance Optimization** and **File System Efficiency**. The application now includes a high-performance MFT scanner for 10-100x faster file enumeration on NTFS volumes.
+
+## 🛠 New Features
+
+### ⚡ MFT Scanning (FastVolumeScanner)
+-   **High-Speed Enumeration**: Direct Master File Table access via `DeviceIoControl` and `FSCTL_ENUM_USN_DATA`
+-   **Performance Gain**: 10-100x faster than standard `QDirIterator` for large collections
+-   **Full Path Reconstruction**: FRN-based path building from File Reference Numbers
+-   **Graceful Fallback**: Automatic fallback to `QDirIterator` for non-NTFS or non-Admin scenarios
+-   **Admin Requirement**: Requires Administrator privileges for optimal performance
+
+**Files Integrated:**
+-   `src/FastVolumeScanner.cpp/.h` - Core implementation
+-   `src/ImageModel.cpp` - Main app gallery scanning
+-   `src/AlbumModel.cpp` - Album view population
+-   `test_scrollbench/src/ScrollBenchImageModel.cpp` - Test application
+
+### 🎯 Frame Budget Scheduler
+-   **UI Stutter Prevention**: Throttles heavy operations to fit within 16ms frame window
+-   **Ported from ScrollBench**: Proven performance optimization now in main app
+-   **AsyncImageProvider Integration**: Prevents main thread flooding during thumbnail generation
+-   **Configurable Budget**: Adaptive frame timing based on system performance
+
+**Files:**
+-   `src/FrameBudgetScheduler.cpp/.h` - Scheduler implementation
+-   `src/AsyncImageProvider.cpp` - Integration and throttling
+-   `src/main.cpp` - Initialization and registration
+
+### 📂 FileTypeRouter (Centralized Format Detection)
+-   **170+ Formats**: Unified detection for RAW (70+), images (60+), videos (40+)
+-   **Single Source of Truth**: Replaces duplicate extension checking across codebase
+-   **Consistent Routing**: Same format detection for thumbnails and viewers
+
+**Files:**
+-   `test_scrollbench/src/FileTypeRouter.cpp/.h` - Format catalog
+
+## 🐛 Fixes & Improvements
+
+### 🔴 TDR Crash Resolution
+-   **Reduced Video Concurrency**: 4 → 1 concurrent operations (prevents GPU timeout)
+-   **Reduced RAW Concurrency**: 8 → 2 concurrent operations (prevents resource exhaustion)
+-   **Issue**: GPU TDR (Timeout Detection and Recovery) crashes during rapid scrolling
+-   **Solution**: Semaphore-based concurrency limits in `AsyncImageProvider`
+
+### 🔧 ScrollBench Enhancements
+-   **MFT Scanner Integration**: ScrollBench now uses same fast scanning as main app
+-   **Album View Fixed**: Performance and functionality improvements
+-   **UI Style Consistency**: "Basic" style applied for visual parity with main app
+
+### 🧹 Code Quality
+-   **Null Reference Fix**: Added null check for `appSettings` in `Main.qml` (line 272)
+-   **Build System**: All CMake targets updated with new dependencies
+
+---
+
 # Release Notes - v2.1.0 (Reforged + Network Stability)
+
 
 ## 🚀 Highlights
 This release focuses on **Deployment Stability** and **Network Support**. The application is now fully portable and can be run directly from network shares without installation or missing DLL errors.

@@ -19,6 +19,9 @@ qt_add_executable(appSamsungGallery
     src/VideoThumbnailer.cpp src/VideoThumbnailer.h
     src/LogManager.cpp src/LogManager.h
     src/TaskScheduler.cpp src/TaskScheduler.h
+    src/HardwareAccelerationManager.cpp src/HardwareAccelerationManager.h
+    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
+    src/FastVolumeScanner.cpp src/FastVolumeScanner.h
 )
 
 qt_add_qml_module(appSamsungGallery
@@ -32,6 +35,7 @@ qt_add_qml_module(appSamsungGallery
         resources/qml/DateScrubber.qml
         resources/qml/PhotoViewer.qml
         resources/qml/AlbumsView.qml
+        resources/qml/AlbumCard.qml
         resources/qml/BottomBar.qml
         resources/qml/StatsOverlay.qml
         resources/qml/UsageGraph.qml
@@ -50,6 +54,16 @@ endif()
 # --- ScrollBench (Test App) ---
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/test_scrollbench/CMakeLists.txt")
     add_subdirectory(test_scrollbench)
+endif()
+
+# --- Single EXE Portable Build (Third Target) ---
+# Builds a single, portable executable of ScrollBench with static linking
+# for maximum compatibility across Windows 7-11 (x86 and x64)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/single_exe/CMakeLists.txt")
+    option(BUILD_SINGLE_EXE "Build single portable executable" OFF)
+    if(BUILD_SINGLE_EXE)
+        add_subdirectory(single_exe)
+    endif()
 endif()
 
 # --- FFmpeg ---
@@ -82,13 +96,30 @@ find_package(Qt6 REQUIRED COMPONENTS Test)
 
 add_executable(tst_imagemodel tests/tst_imagemodel.cpp 
     src/ImageModel.cpp src/ImageModel.h 
+    src/AsyncImageProvider.cpp src/AsyncImageProvider.h
+    src/DesktopHelper.cpp src/DesktopHelper.h
+    src/SystemMonitor.cpp src/SystemMonitor.h
+    src/SettingsHelper.cpp src/SettingsHelper.h
     src/TaskScheduler.cpp src/TaskScheduler.h 
     src/LogManager.cpp src/LogManager.h
+    src/VideoThumbnailer.cpp src/VideoThumbnailer.h
+    src/HardwareAccelerationManager.cpp src/HardwareAccelerationManager.h
+    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
+    src/FastVolumeScanner.cpp src/FastVolumeScanner.h
 )
-target_link_libraries(tst_imagemodel PRIVATE Qt6::Core Qt6::Test Qt6::Concurrent Qt6::Gui Qt6::Quick libraw_static)
-target_include_directories(tst_imagemodel PRIVATE ${LIBRAW_PATH})
+target_link_libraries(tst_imagemodel PRIVATE Qt6::Core Qt6::Test Qt6::Concurrent Qt6::Gui Qt6::Quick Qt6::Widgets libraw_static psapi pdh d3d11 dxgi
+    ${FFMPEG_LIB_DIR}/avcodec.lib
+    ${FFMPEG_LIB_DIR}/avformat.lib
+    ${FFMPEG_LIB_DIR}/swscale.lib
+    ${FFMPEG_LIB_DIR}/avutil.lib
+)
+target_include_directories(tst_imagemodel PRIVATE ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
 add_test(NAME tst_imagemodel COMMAND tst_imagemodel)
 
 add_executable(tst_scheduler tests/tst_scheduler.cpp src/TaskScheduler.cpp src/TaskScheduler.h src/LogManager.cpp src/LogManager.h)
 target_link_libraries(tst_scheduler PRIVATE Qt6::Core Qt6::Test Qt6::Concurrent)
 add_test(NAME tst_scheduler COMMAND tst_scheduler)
+
+add_executable(tst_mft tests/tst_mft.cpp src/FastVolumeScanner.cpp src/FastVolumeScanner.h)
+target_link_libraries(tst_mft PRIVATE Qt6::Core)
+

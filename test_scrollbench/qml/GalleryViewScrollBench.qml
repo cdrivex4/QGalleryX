@@ -118,8 +118,8 @@ Item {
             width: grid.cellWidth
             height: grid.cellHeight
             
-            property var fileExt: model.filePath ? model.filePath.split('.').pop().toLowerCase() : ""
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
+            property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
 
             Image {
                 id: img
@@ -133,6 +133,7 @@ Item {
                 cache: true
                 mipmap: true 
                 
+                // Video Play Icon
                 Item {
                     anchors.fill: parent
                     visible: isVideo
@@ -143,6 +144,21 @@ Item {
                         font.pixelSize: parent.width * 0.3
                         color: "white"
                         style: Text.Outline; styleColor: "black"
+                    }
+                }
+
+                // RAW Indicator
+                Rectangle {
+                    anchors.top: parent.top; anchors.left: parent.left
+                    anchors.margins: 4
+                    width: txtRaw.width + 6; height: txtRaw.height + 2
+                    color: "#AA000000"; radius: 2; visible: isRaw
+                    Text {
+                        id: txtRaw
+                        anchors.centerIn: parent
+                        text: "RAW"
+                        color: "#FF9800"
+                        font.pixelSize: 10; font.bold: true
                     }
                 }
                 

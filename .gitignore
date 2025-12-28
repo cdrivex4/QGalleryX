@@ -10,3 +10,8 @@ deploy/
 *.qch
 .DS_Store
 .vscode/
+logs/
+
+# Large third-party build artifacts (see 3rdparty/README.md for setup)
+3rdparty/qt_static/
+3rdparty/tools/

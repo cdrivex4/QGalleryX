@@ -16,6 +16,7 @@
 - **Keyboard navigation** (arrow keys, escape)
 - **Image editing** with basic crop functionality
 - **Performance monitoring** with load time tracking
+- **Video Playback** with basic media controls in viewer
 
 ### 3. Performance Optimization
 - **Asynchronous image loading** with thread pool
@@ -45,7 +46,12 @@
 - **Cache integration** for repeated access
 - **Error handling** with fallback images
 
-### 2. Data Models
+### 2. Broken File Overlays
+- **Visual indicators** for unhandled or corrupted image/video files
+- **Differentiates** between standard images, RAW, and video files
+- **Enhances user feedback** for problematic media
+
+### 3. Data Models
 - **ImageModel** for file-based data management
 - **AlbumModel** for folder-based organization
 - **QAbstractListModel integration** for QML compatibility
@@ -146,36 +152,108 @@
 - No actual album organization
 - No album management UI
 
-### 2. Video Playback
-- No actual video player implementation
-- Static placeholders only
-
-### 3. Platform Support
+### 2. Platform Support
 - Windows-only implementation
 - No macOS or Linux support
 
-### 4. Image Editing
+### 3. Image Editing
 - Basic crop functionality only
 - No advanced editing features
 
-## 🔮 Roadmap (Upcoming Features)
+## 🎯 ScrollBench-Exclusive Features (Awaiting Port to Main App)
 
-We are actively working on **v2.1** features to bring the app to full parity with professional tools:
+**ScrollBench** (`appScrollBench.exe`) is a feature-complete test application with advanced capabilities not yet available in the main app.
 
-### 1. Batch Operations (High Priority)
--   **Multi-Select**: Ability to select multiple images in grid view (Ctrl+Click / Shift+Click).
--   **Batch Resize**: Output selected images to specific resolution presets (e.g., 1080p, 4K, "Email Size").
--   **Batch Email/Share**: Prepare selected images for external sharing.
+### Multi-Selection System
+**Status:** ✅ Fully implemented in ScrollBench
 
-### 2. Live Preview & Editing
--   **Resolution Estimator**: Show predicted file size and resolution before exporting/resizing.
--   **Live Filters**: Apply basic adjustments (Brightness/Contrast) using GPU shaders.
--   **Advanced Crop**: Aspect-ratio locked cropping.
+-   **Single-click toggle** - Select/deselect individual images
+-   **Shift+Click range** - Select all images between two points
+-   **Drag-to-select** - Visual rectangle selection across grid
+-   **Bulk operations** - Select all, clear selection, invert selection
+-   **Visual feedback** - Selection border and count display
 
-### 3. Workflow Improvements
--   **Drag & Drop**: Drag images out of the app into Explorer/Email capability.
--   **Print Support**: Native printing dialog integration.
+**Implementation:**
+-   `test_scrollbench/src/ScrollBenchImageModel.cpp` - Complete selection API
+-   Methods: `toggleSelection()`, `selectRange()`, `selectVisualRect()`, `selectAll()`, `clearSelection()`, `invertSelection()`
 
-### 4. Advanced Video Features
--   **Scrubbing**: Mouse-over video scrubbing in grid view.
--   **Playback Controls**: Full playback controls (Speed, Loop, Volume) in viewer.
+---
+
+### Share & Resize Dialogs
+**Status:** ⚠️ UI complete, backend TODO
+
+-   **ShareDialog** - Three resize presets:
+    -   Email (Small) - 1024x768, 80% quality
+    -   Manual resize - Custom dimensions with live preview
+    -   Original size - No modifications
+-   **ResizeEditor** - Interactive resize interface:
+    -   Live preview of resized image
+    -   Quality/compression sliders
+    -   Dimension controls with aspect ratio lock
+    -   File size estimator
+
+**Implementation:**
+-   `test_scrollbench/qml/ShareDialog.qml` - Complete UI
+-   `test_scrollbench/qml/ResizeEditor.qml` - Complete UI
+-   Backend resize logic marked TODO (needs implementation)
+
+---
+
+### Advanced Performance Telemetry
+**Status:** ✅ Fully implemented
+
+-   **Frame budget tracking** - Monitors task completion within 16ms frame window
+-   **Viewport culling metrics** - Reports visible range and buffer efficiency
+-   **Real-time graphs** - FPS and frame timing visualization
+-   **Note:** CPU/GPU/RAM metrics exist in backend but not displayed in UI
+
+---
+
+## 📹 Video Playback
+
+**Status:** ✅ **Fully Implemented in Both Apps** (needs verification testing)
+
+### Current Implementation
+
+**Both Main App and ScrollBench include:**
+-   MediaPlayer with hardware-accelerated decoding (D3D11VA via FFmpeg)
+-   VideoOutput for QML integration
+-   Full playback controls (play, pause, stop)
+-   Timeline scrubbing with time display
+-   Audio output with volume control
+-   Automatic stop when switching images
+
+**Files:**
+-   `resources/qml/PhotoViewer.qml` (Main App, lines 232-390)
+-   `test_scrollbench/qml/PhotoViewerScrollBench.qml` (ScrollBench, lines 264-426)
+
+**Additional in ScrollBench:**
+-   Debug logging for codec, resolution, bitrate
+-   Playback state monitoring
+
+**Verification Needed:**
+-   Hardware acceleration confirmation
+-   Codec support testing (H.264, H.265, AV1, VP9)
+-   Audio sync validation
+-   Rotation metadata handling
+
+---
+
+## 🔮 Planned Features (v2.3.0+)
+
+### 1. Port ScrollBench Features to Main App
+-   Multi-select system
+-   Share & resize dialogs
+-   Complete backend resize implementation
+
+### 2. Image Editing Enhancements
+-   Enhanced crop with draggable/resizable rectangle
+-   90° rotation with EXIF preservation
+-   Brightness/contrast adjustments
+-   "Save As" option to preserve originals
+
+### 3. Advanced Features
+-   Drag & drop to Explorer/Email
+-   Print support
+-   Album search and filtering
+-   GPU-accelerated DNG demosaicing

@@ -82,7 +82,7 @@ Rectangle {
                 
                 ColumnLayout {
                     id: statsCol
-                    width: parent.width - 20
+                    width: parent.width - root.contentPadding
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 15
                     
@@ -215,7 +215,7 @@ Rectangle {
                 
                 ColumnLayout {
                     id: settingsCol
-                    width: parent.width - 30
+                    width: parent.width - root.contentPadding
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 18
                     
@@ -314,6 +314,51 @@ Rectangle {
                             model: ["Log Level: None", "Log Level: Info", "Log Level: Debug", "Log Level: Trace"]
                             currentIndex: settings.logLevel
                             onActivated: (index) => settings.logLevel = index
+                        }
+                    }
+
+                    // GROUPING DEBUGGER (Requested by USER)
+                    ColumnLayout {
+                        spacing: 12
+                        Layout.fillWidth: true
+                        Layout.topMargin: 10
+                        Rectangle { Layout.fillWidth: true; height: 1; color: "#333" }
+                        Text { text: "Grouping Thresholds"; font.pixelSize: 14; font.bold: true; color: "#FFEB3B" }
+                        
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            Text { text: "Year switch < " + root.thresholdYear + "px"; color: "#fff"; font.pixelSize: 11 }
+                            Slider {
+                                Layout.fillWidth: true; from: 20; to: 400; stepSize: 1
+                                value: root.thresholdYear
+                                onMoved: {
+                                    root.thresholdYear = Math.round(value)
+                                }
+                            }
+                        }
+                        
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            Text { text: "Month switch < " + root.thresholdMonth + "px"; color: "#fff"; font.pixelSize: 11 }
+                            Slider {
+                                Layout.fillWidth: true; from: 21; to: 400; stepSize: 1
+                                value: root.thresholdMonth
+                                onMoved: {
+                                    root.thresholdMonth = Math.round(value)
+                                }
+                            }
+                        }
+
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            Text { text: "Week switch < " + root.thresholdWeek + "px"; color: "#fff"; font.pixelSize: 11 }
+                            Slider {
+                                Layout.fillWidth: true; from: 22; to: 400; stepSize: 1
+                                value: root.thresholdWeek
+                                onMoved: {
+                                    root.thresholdWeek = Math.round(value)
+                                }
+                            }
                         }
                     }
 

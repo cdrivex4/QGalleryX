@@ -1,12 +1,34 @@
 param (
-    [switch]$Clean = $false
+    [switch]$Clean = $false,
+    [switch]$BuildSingleExe = $false
 )
 
 $ErrorActionPreference = "Stop"
-$env:PATH = "D:\Qt\6.9.3\mingw_64\bin;D:\Qt\Tools\mingw1310_64\bin;D:\Qt\Tools\CMake_64\bin;D:\Qt\Tools\Ninja;$env:PATH"
 
 # Ensure we are in the project root
 Set-Location $PSScriptRoot
+
+# Step 0.1: Configure Build Environment (Qt Kit Selection)
+if ($BuildSingleExe) {
+    $QtRoot = Join-Path $PSScriptRoot "3rdparty/qt_static"
+    $QtBin = Join-Path $QtRoot "bin"
+    if (-not (Test-Path $QtBin)) {
+        Write-Error "Static Qt not found at $QtRoot. Please run .\scripts\setup_static_qt.ps1 first."
+    }
+    $env:CMAKE_PREFIX_PATH = $QtRoot
+    Write-Host "=== MODE: STATIC SINGLE EXECUTABLE ===" -ForegroundColor Cyan
+    Write-Host "  -> Qt Kit: $QtRoot" -ForegroundColor Cyan
+}
+else {
+    # Default Dynamic Qt
+    $QtRoot = "D:\Qt\6.9.3\mingw_64"
+    $QtBin = Join-Path $QtRoot "bin"
+    Write-Host "=== MODE: STANDARD DYNAMIC BUILD ===" -ForegroundColor Green
+    Write-Host "  -> Qt Kit: $QtRoot" -ForegroundColor Gray
+}
+
+# Add Tools to PATH
+$env:PATH = "$QtBin;D:\Qt\Tools\mingw1310_64\bin;D:\Qt\Tools\CMake_64\bin;D:\Qt\Tools\Ninja;$env:PATH"
 
 # Configuration
 $BuildDir = "build"
@@ -35,7 +57,7 @@ Write-Host "  FFmpeg binaries found." -ForegroundColor Gray
 
 # Step 1: Kill running instances (Robust)
 Write-Host "[1/4] Checking for running instances..." -ForegroundColor Yellow
-$pNames = @("appSamsungGallery", "appSamsungGalleryTest")
+$pNames = @("appSamsungGallery", "appSamsungGalleryTest", "appScrollBench")
 foreach ($pName in $pNames) {
     if (Get-Process -Name $pName -ErrorAction SilentlyContinue) {
         Write-Host "  Killing $pName..." -ForegroundColor Gray
@@ -85,7 +107,17 @@ try {
 
     # Configure
     Write-Host "  -> Configuring..." -ForegroundColor Gray
-    cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -S . -B $BuildDir
+    
+    # Build CMake arguments
+    $cmakeConfigArgs = @("-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-S", ".", "-B", $BuildDir)
+    
+    # Add single exe flag if requested
+    if ($BuildSingleExe) {
+        $cmakeConfigArgs += "-DBUILD_SINGLE_EXE=ON"
+        Write-Host "  -> Single EXE build enabled" -ForegroundColor Cyan
+    }
+    
+    & cmake @cmakeConfigArgs
     if ($LASTEXITCODE -ne 0) { throw "CMake Configuration Failed" }
     
     # Build
@@ -110,6 +142,17 @@ try {
         & $WindeployQt --qmldir $PSScriptRoot/test_scrollbench/qml --dir $ScrollBenchDeployDir "$ScrollBenchDeployDir/appScrollBench.exe" --compiler-runtime --no-opengl-sw
     }
 
+    # Deploy for Single EXE (Native Static Build)
+    if ($BuildSingleExe) {
+        # Static builds don't typically need windeployqt, but if they do, we point to the static tool
+        # Ideally, CMake static linking handles it all.
+        
+        $SingleExePath = Join-Path $PSScriptRoot "single_exe/bin/ScrollBenchPortable.exe"
+        if (Test-Path $SingleExePath) {
+            # No WindeyploQt needed for pure static
+        }
+    }
+
     # We explicitly ensure imageformats are copied
     # windeployqt usually handles this if it detects QtGui, but being explicit is safer
 
@@ -129,21 +172,22 @@ if (Test-Path $ExePath) {
     Write-Host " BUILD SUCCESSFUL" -ForegroundColor Green
     Write-Host " Stable:      $(Resolve-Path $ExePath)" -ForegroundColor Magenta
     
-    # Check for ScrollBench
-    # It SHOULD be in test_scrollbench/deploy/appScrollBench.exe now
+    # Check for Single EXE builds
     $ScrollBenchExePath = Join-Path $PSScriptRoot "test_scrollbench/deploy/appScrollBench.exe"
-
     if (Test-Path $ScrollBenchExePath) {
         Write-Host " ScrollBench: $(Resolve-Path $ScrollBenchExePath)" -ForegroundColor Cyan
     }
-    else {
-        Write-Host " ScrollBench: NOT FOUND (Expected at $ScrollBenchExePath)" -ForegroundColor Yellow
-    }
 
-    if (Test-Path $TestExePath) {
-        Write-Host " Test:        $(Resolve-Path $TestExePath)" -ForegroundColor Cyan
+    # Check for Single EXE Native build
+    $SingleExePath = Join-Path $PSScriptRoot "single_exe/bin/ScrollBenchPortable.exe"
+    if ($BuildSingleExe -and (Test-Path $SingleExePath)) {
+        Write-Host "==========================================" -ForegroundColor Cyan
+        Write-Host " SUCCESS: NATIVE SINGLE EXECUTABLE" -ForegroundColor Cyan
+        Write-Host " File: $SingleExePath" -ForegroundColor Magenta
+        $size = (Get-Item $SingleExePath).Length / 1MB
+        Write-Host (" Size: {0:N2} MB" -f $size) -ForegroundColor Gray
+        Write-Host " This is a standalone file." -ForegroundColor DarkGray
     }
-    Write-Host "==========================================" -ForegroundColor Green
 }
 else {
     Write-Host "Build finished but binary not found!" -ForegroundColor Red

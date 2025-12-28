@@ -58,6 +58,7 @@ public:
   static QVariantMap getCacheStats();
   static void clearCache();
   static void clearDiskCache();
+  static void setFrameScheduler(class FrameBudgetScheduler *s);
 
   // STAGING QUEUE for "Ground Up" Prioritization
   struct StagedRequest {
@@ -89,6 +90,7 @@ public:
   static std::atomic<int> s_videoAcceleration;
 
 private:
+  friend class AsyncImageResponse;
   static QCache<QString, QImage> m_cache;
   static QMutex m_mutex;
 
@@ -103,6 +105,7 @@ private:
                            std::shared_ptr<std::atomic<bool>> c,
                            std::shared_ptr<ResponseTracker> t);
   static void scheduleStagingProcessing();
+  static class FrameBudgetScheduler *s_frameScheduler;
 };
 
 #endif // ASYNCIMAGEPROVIDER_H

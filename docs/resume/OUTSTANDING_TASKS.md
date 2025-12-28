@@ -1,287 +1,122 @@
-# Outstanding Tasks & Roadmap
+# Outstanding Tasks & Known Issues
 
-## 🐛 BUG FIXES (Quick Wins)
+**Last Updated:** December 25, 2024
 
-### BUG-001: Startup Null Reference Warning
-**File**: `resources/qml/Main.qml` lines 274-275  
-**Error**: `TypeError: Cannot read property 'isApiSupported' of null`  
-**Cause**: QML accesses `appSettings` before context property is fully initialized  
-**Impact**: Minor - app recovers, but console shows warnings  
-**Fix**: Add null check:
-```qml
-// Old (line 274)
-text: modelData.name + ": " + (appSettings.isApiSupported(modelData.value) ? "✅" : "❌")
+## 🔴 High Priority
 
-// New
-text: modelData.name + ": " + (appSettings && appSettings.isApiSupported(modelData.value) ? "✅" : "❌")
-```
-**Estimated Time**: 5 minutes  
-**Testing**: Launch app, check no console errors
+### DNG Proprietary Compression Support ⏸️ DEFERRED
+**Status:** Paused for future optimization  
+**Issue:** DNG files with `PhotometricInterpretation=32803` take 120+ seconds to load  
+**Root Cause:** LibRaw CPU-only processing, no GPU acceleration for Bayer demosaicing  
+**Current Workaround:** Users should use corresponding JPG files  
+**Future Solutions:**
+1. Show embedded JPEG preview immediately, background-load full RAW
+2. Implement GPU-accelerated demosaicing (custom shaders)
+3. Cache pre-processed DNG files to disk
+4. Detect problematic DNGs and skip with user notification
 
----
+**Files Involved:**
+- `src/AsyncImageProvider.cpp` (lines 378-415) - LibRaw processing
+- `test_scrollbench/qml/PhotoViewerScrollBench.qml` - RAW loading strategy
 
-### BUG-002: Hardcoded Test Paths
-**Files**: Multiple locations  
-**Issue**: References to non-existent paths like "I:/MY SDCards/dir0064.chk"  
-**Impact**: Users see errors if they don't have those paths  
-**Fix**: 
-1. Search codebase for hardcoded paths
-2. Replace with proper folder selection dialogs
-3. Save last used path in settings
-
-**Estimated Time**: 30 minutes  
-**Testing**: Fresh install, no default paths
+**Performance Impact:**
+- Current: 120+ seconds load time, FPS drops to 27
+- Target: <3 seconds (preview) + background processing
 
 ---
 
-### BUG-003: Crash Log Pollution
-**Location**: Project root directory  
-**Issue**: 28+ crash log files from development/testing  
-**Impact**: Clutters workspace, confusing  
-**Fix**: 
-- Move logs to `logs/` subdirectory
-- Update logging code to use new path
-- Add logs/ to .gitignore
+## 🟡 Medium Priority
 
-**Estimated Time**: 15 minutes  
-**Testing**: Generate new crash, verify path
+### Video Playback Polish
+**Status:** Functional but needs refinement  
+**Items:**
+- Implement hardware-accelerated decoding validation
+- Add codec support detection (H.265, AV1, VP9)
+- Test HEVC rotation metadata handling
+- Validate audio sync on all video formats
 
----
-
-## 🎨 FEATURE IMPLEMENTATION (Core)
-
-### FEAT-001: Albums View
-**Status**: Placeholder only  
-**File**: `resources/qml/AlbumsView.qml`  
-**Current**: "Albums Feature Coming Soon" text  
-**Requirements**:
-1. Display folders as albums
-2. Show album thumbnails (first 4 images in grid)
-3. Click album to view its contents
-4. Use existing AlbumModel from C++
-
-**Subtasks**:
-- [ ] Design album grid layout
-- [ ] Create AlbumCard.qml component
-- [ ] Connect to AlbumModel
-- [ ] Implement album detail view
-- [ ] Add "back to albums" navigation
-- [ ] Handle empty albums
-
-**Estimated Time**: 4-6 hours  
-**Complexity**: Medium  
-**Dependencies**: AlbumModel.cpp/h (already exists)
+### Album View Integration
+**Status:** Incomplete  
+**Files:** `test_scrollbench/qml/AlbumsViewScrollBench.qml`  
+**Needs:**
+- Wire up `ScrollBenchImageModel` correctly
+- Test grouping and filtering
+- Verify performance with large albums
 
 ---
 
-### FEAT-002: Video Playback
-**Status**: Placeholder thumbnails only  
-**Current**: Video files show play icon but don't play  
-**Requirements**:
-1. Integrate QtMultimedia VideoOutput
-2. Add video player controls (play/pause/seek)
-3. Generate video thumbnails
-4. Handle video formats (mp4, mkv, avi, mov)
+## 🟢 Low Priority / Future Enhancements
 
-**Decision Point**: Implement or Remove?
-- **Implement**: Full featured gallery (+complexity)
-- **Remove**: Keep it simple photo gallery (-scope creep)
+### Format Support Expansion
+**Items:**
+- Test all 170+ formats in compatibility matrix
+- Validate HEIC support on Windows
+- Test edge cases for exotic formats (MNG, TGA, etc.)
+- Document any unsupported format edge cases
 
-**If Implementing**:
-- [ ] Create VideoPlayer.qml component
-- [ ] Add media controls overlay
-- [ ] Integrate with PhotoViewer
-- [ ] Test video format support
-- [ ] Add video-specific settings
+### Performance Optimization
+**Items:**
+- Profile LibRaw processing pipeline
+- Investigate multi-threaded Bayer demosaicing
+- Optimize memory usage during RAW processing
+- Reduce VRAM spikes during rapid zooming
 
-**Estimated Time**: 6-8 hours  
-**Complexity**: High  
-**Dependencies**: Qt6::Multimedia
-
----
-
-### FEAT-003: Stories Feature
-**Status**: Not implemented  
-**Location**: `Main.qml` Tab 2  
-**Current**: Placeholder text  
-
-**Decision Needed**: 
-- What should "Stories" do? (Instagram-like? Timeline? Photo memories?)
-- Is this feature actually wanted?
-- Can we repurpose this tab for something else?
-
-**Recommendation**: Defer or remove until use case is clear
+### UI Polish
+**Items:**
+- Loading spinner for slow RAW files
+- Progress indicator for background processing
+- Better error messages for unsupported formats
+- "Processing..." overlay for DNG files
 
 ---
 
-## ⚡ PERFORMANCE & POLISH
+## ✅ Recently Completed
 
-### PERF-001: GPU Monitoring
-**Status**: Placeholder values  
-**File**: `src/SystemMonitor.cpp`  
-**Current**: Returns static "Unknown GPU"  
-**Fix**: Implement real GPU detection using:
-- Windows: DXGI API
-- Cross-platform: QOpenGLContext
+### Media Loading & Type Detection (Dec 25, 2024)
+- ✅ Centralized file type detection (`FileTypeRouter`)
+- ✅ Fixed video/RAW badges in grid and semantic views
+- ✅ Corrected role ID mappings across all QML views
+- ✅ Photo Viewer image loading for standard formats
+- ✅ Comprehensive format compatibility documentation (170+ formats)
 
-**Estimated Time**: 2-3 hours  
-**Complexity**: Medium
-
----
-
-### PERF-002: Memory Leak Detection
-**Issue**: Long-running sessions might leak memory  
-**Current**: No formal testing  
-**Fix**:
-- Run with memory profiler (valgrind on Linux, PerfView on Windows)
-- Check AsyncImageProvider cache eviction
-- Verify QML object destruction
-
-**Estimated Time**: 2-4 hours  
-**Complexity**: Medium-High
+### Previous Sessions
+See `SESSION_HISTORY.md` for details on earlier work.
 
 ---
 
-### POLISH-001: Build Script Consistency
-**Issue**: `build.ps1` references Qt 6.9.3, CMake requires 6.4+  
-**Impact**: Confusing for new developers  
-**Fix**: Parameterize Qt path in build.ps1, add detection logic
+## 🐛 Known Issues
 
-**Estimated Time**: 30 minutes
+### Minor Bugs
+1. **Date Scrubber year markers** - May not display for very large collections (>10k items)
+2. **Semantic view grouping** - Week grouping may show incorrect boundaries
+3. **Thumbnail memory** - Occasional VRAM spike when scrolling rapidly
 
----
-
-### POLISH-002: User Documentation
-**Status**: Missing  
-**Need**: 
-- User manual (how to use the app)
-- Installation guide
-- Troubleshooting guide
-- FAQ
-
-**Estimated Time**: 3-4 hours
+### Build Warnings
+- Qt policy QTP0004 warnings (cosmetic, can be ignored)
+- clangd lint errors on FileTypeRouter (IDE only, compiles fine)
 
 ---
 
-## 🔬 TESTING & QUALITY
+## 📋 Testing Checklist
 
-### TEST-001: Expand Unit Tests
-**Current**: Only `tst_imagemodel.cpp` exists  
-**Need**:
-- AlbumModel tests
-- GroupedProxyModel tests
-- SettingsHelper tests
-- SystemMonitor tests
-
-**Estimated Time**: 4-6 hours
-
----
-
-### TEST-002: QML Component Tests
-**Current**: No QML tests  
-**Need**: Tests for critical QML components  
-**Tools**: Qt Test QML module
-
-**Estimated Time**: 6-8 hours
+When revisiting DNG support:
+- [ ] Test standard DNG (non-proprietary) - should load in 2-3 seconds
+- [ ] Test Apple ProRAW DNG - verify preview extraction
+- [ ] Test Android mobile DNG - validate color accuracy
+- [ ] Test proprietary compression DNG - measure load time
+- [ ] Profile CPU usage during demosaicing
+- [ ] Test FPS impact on various hardware
+- [ ] Validate memory leak during repeated DNG loads
 
 ---
 
-## 🌍 CROSS-PLATFORM
+## 🔗 Related Documentation
 
-### PLATFORM-001: Linux Support
-**Current**: Windows-only (psapi.lib, Direct3D)  
-**Blockers**:
-- SystemMonitor uses Windows APIs
-- Graphics API selection assumes Windows
-
-**Estimated Time**: 8-12 hours  
-**Complexity**: High
+- **Format Compatibility:** `/docs/FORMAT_COMPATIBILITY.md`
+- **Session History:** `/docs/resume/SESSION_2024-12-25.md`
+- **Code Architecture:** `/docs/ARCHITECTURE.md`
+- **Threading Model:** `/docs/THREAD_HIERARCHY.md`
 
 ---
 
-### PLATFORM-002: macOS Support
-**Similar issues as Linux**  
-**Additional**: Need to handle macOS bundle structure
-
-**Estimated Time**: 10-15 hours  
-**Complexity**: High
-
----
-
-## 📊 PRIORITY MATRIX
-
-### Do First (High Impact, Low Effort)
-1. ✅ BUG-001: Startup null reference (5 min)
-2. ✅ BUG-002: Hardcoded paths (30 min)
-3. ✅ BUG-003: Crash log cleanup (15 min)
-4. ✅ POLISH-001: Build script consistency (30 min)
-
-### Do Next (High Impact, Medium Effort)
-5. ⏳ FEAT-001: Albums view (4-6 hours)
-6. ⏳ PERF-001: GPU monitoring (2-3 hours)
-
-### Consider Later (Medium Impact)
-7. ⏳ FEAT-002: Video playback (decide first!)
-8. ⏳ TEST-001: Expand unit tests
-9. ⏳ POLISH-002: User documentation
-
-### Future/Maybe (Low Priority)
-10. 🔮 FEAT-003: Stories feature
-11. 🔮 PLATFORM-001/002: Cross-platform
-12. 🔮 TEST-002: QML tests
-
----
-
-## 📅 SUGGESTED SPRINT PLAN
-
-### Week 1: Bug Fixes & Stability
-- [x] Verify current build works
-- [ ] Fix all BUG-xxx items
-- [ ] Polish build system
-- Result: Clean, stable baseline
-
-### Week 2: Albums Feature
-- [ ] Design album UI
-- [ ] Implement AlbumView.qml
-- [ ] Test with real data
-- Result: Core feature complete
-
-### Week 3: Polish & Performance
-- [ ] GPU monitoring
-- [ ] Memory profiling
-- [ ] Performance optimization
-- Result: Production-ready quality
-
-### Week 4: Documentation & Testing
-- [ ] Write user manual
-- [ ] Expand test coverage
-- [ ] Create demo videos/screenshots
-- Result: Shippable product
-
----
-
-## 🎯 DEFINITION OF DONE
-
-For each task to be considered complete:
-- [ ] Code implemented and committed
-- [ ] No new compiler warnings
-- [ ] No new runtime errors
-- [ ] Manual testing passed
-- [ ] Documentation updated (if user-facing)
-- [ ] Reviewed by another developer (or AI!)
-
----
-
-## 📝 NOTES FOR NEXT SESSION
-
-1. **Start Fresh**: If AI session gets sluggish, start new conversation
-2. **One Task at a Time**: Don't jump between features
-3. **Test Before Commit**: Build → Test → Commit, always
-4. **Document as You Go**: Update PROGRESS.md with each session
-5. **Respect Working Code**: If it ain't broke, don't fix it!
-
----
-
-**Last Updated**: 2025-12-02  
-**Project Status**: ✅ Stable & Functional  
-**Ready for Development**: Yes
+**Note:** This document is living - update as tasks are completed or new issues discovered.

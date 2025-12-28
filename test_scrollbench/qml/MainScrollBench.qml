@@ -21,6 +21,15 @@ ApplicationWindow {
     property var viewerModel: imageModel
     
     property alias semanticView: semanticView
+    
+    // Finalized Layout Values
+    property int overlayWidth: 390
+    property int contentPadding: 66
+
+    // Debug Grouping Thresholds
+    property int thresholdYear: 65
+    property int thresholdMonth: 105
+    property int thresholdWeek: 165
 
     FrameAnimation {
         running: true
@@ -272,7 +281,7 @@ ApplicationWindow {
     // Settings / Performance Overlay Drawer
     Rectangle {
         id: perfOverlay
-        width: 400
+        width: root.overlayWidth
         height: parent.height
         x: overlayVisible ? parent.width - width : parent.width
         y: 0

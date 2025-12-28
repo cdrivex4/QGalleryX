@@ -105,12 +105,25 @@ Item {
             transformOrigin: Item.Center // Will be updated by PinchHandler
             
             // Performance
-            cacheBuffer: 1000
+            cacheBuffer: 400 // Reduced from 1000
             
             // ScrollBar
             ScrollBar.vertical: ScrollBar {
                 policy: ScrollBar.AlwaysOn
                 active: true
+            }
+
+            onContentYChanged: {
+                // Map visible rows to source indices
+                var firstRow = itemAt(10, contentY + 10)
+                var lastRow = itemAt(width - 10, contentY + height - 10)
+                
+                if (firstRow && firstRow.item && firstRow.item.hasOwnProperty("rowStartIndex")) {
+                    imageModel.visibleStartIndex = firstRow.item.rowStartIndex
+                }
+                if (lastRow && lastRow.item && lastRow.item.hasOwnProperty("rowStartIndex")) {
+                    imageModel.visibleEndIndex = lastRow.item.rowStartIndex + lastRow.item.rowCount - 1
+                }
             }
 
             // Delegate Loader
@@ -350,6 +363,22 @@ Item {
                                     anchors.centerIn: parent
                                     text: "▶️"
                                     color: "white"
+                                }
+                            }
+
+                            // Burst Badge
+                            Rectangle {
+                                anchors.right: parent.right
+                                anchors.top: parent.top
+                                anchors.margins: 4
+                                width: 24; height: 24; radius: 4
+                                color: "#AA000000"
+                                visible: root.model.data(root.model.index(sourceIndex, 0), ImageModel.IsBurstRole)
+                                
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "📑"
+                                    font.pixelSize: 14
                                 }
                             }
                             

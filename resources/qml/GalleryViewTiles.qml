@@ -56,7 +56,7 @@ Item {
         cellHeight: root.uiThumbnailSize
         
         // Performance
-        cacheBuffer: 1000
+        cacheBuffer: 400 // Reduced from 1000
         
         // ScrollBar
         ScrollBar.vertical: ScrollBar {
@@ -65,6 +65,13 @@ Item {
         }
         
         onContentYChanged: {
+            // Report visible range to C++
+            var firstIdx = indexAt(10, contentY + 10)
+            var lastIdx = indexAt(width - 10, contentY + height - 10)
+            
+            if (firstIdx !== -1) imageModel.visibleStartIndex = firstIdx
+            if (lastIdx !== -1) imageModel.visibleEndIndex = lastIdx
+
             // Calculate center item index to determine current date section
             var index = indexAt(width / 2, contentY + cellHeight / 2)
             if (index === -1) index = indexAt(width / 2, contentY)

@@ -1,5 +1,6 @@
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
+#include "FrameBudgetScheduler.h"
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
@@ -33,8 +34,9 @@
 #endif
 
 // Initialize static members
-static QSemaphore s_videoSemaphore(4);
-static QSemaphore s_rawSemaphore(2);
+static QSemaphore
+    s_videoSemaphore(1); // Reduce to 1 to prevent GPU TDR/Driver crashes
+static QSemaphore s_rawSemaphore(2); // Reduce to 2 to prevent CPU starvation
 QCache<QString, QImage> AsyncImageProvider::m_cache;
 QMutex AsyncImageProvider::m_mutex;
 QMap<QString, QList<AsyncImageResponse *>>
@@ -48,6 +50,7 @@ std::atomic<bool> AsyncImageProvider::s_disableVideo{false};
 std::atomic<bool> AsyncImageProvider::s_disableRaw{false};
 std::atomic<bool> AsyncImageProvider::s_useDiskCache{false};
 std::atomic<int> AsyncImageProvider::s_videoAcceleration{0}; // 0 = Auto/Default
+FrameBudgetScheduler *AsyncImageProvider::s_frameScheduler = nullptr;
 
 static QString normalizeId(const QString &id) {
   QString n = id;
@@ -93,6 +96,10 @@ AsyncImageProvider::AsyncImageProvider() : QQuickAsyncImageProvider() {
   s_disableRaw = false;
 }
 
+void AsyncImageProvider::setFrameScheduler(FrameBudgetScheduler *s) {
+  s_frameScheduler = s;
+}
+
 AsyncImageResponse::~AsyncImageResponse() {
   if (m_tracker) {
     m_tracker->response.store(nullptr);
@@ -126,8 +133,17 @@ void AsyncImageResponse::handleDone(QImage image) {
     qWarning() << "[" << timeStr << "][TRACE] handleDone for" << this
                << "(null=" << image.isNull() << ")";
   }
-  m_image = image;
-  emit finished();
+
+  auto finishTask = [this, image]() {
+    m_image = image;
+    emit finished();
+  };
+
+  if (AsyncImageProvider::s_frameScheduler) {
+    AsyncImageProvider::s_frameScheduler->onTaskCompleted(finishTask);
+  } else {
+    finishTask();
+  }
 }
 
 bool AsyncImageProvider::isRequestStillNeeded(const QString &id) {

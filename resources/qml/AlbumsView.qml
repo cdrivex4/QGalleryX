@@ -21,102 +21,66 @@ StackView {
                 model: stack.model
                 
                 ScrollBar.vertical: ScrollBar {
-                    policy: ScrollBar.AlwaysOn
+                    id: scrollBar
+                    policy: ScrollBar.AsNeeded
                     active: true
                 }
                 
                 cellWidth: 220
-                cellHeight: 260
+                cellHeight: 280
                 
-                delegate: Item {
-                    width: grid.cellWidth
-                    height: grid.cellHeight
+                flow: GridView.FlowLeftToRight
+                clip: true
+                
+                delegate: AlbumCard {
+                    name: model.name
+                    path: model.path
+                    coverPaths: model.coverPath
+                    count: model.count
                     
-                    Rectangle {
-                        anchors.fill: parent
-                        anchors.margins: 10
-                        color: "#222"
-                        radius: 8
-                        
-                        Rectangle {
-                            id: coverContainer
-                            anchors.top: parent.top
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            height: width
-                            color: "#333"
-                            radius: 8
-                            clip: true
-
-                            // Single Image
-                            Image {
-                                anchors.fill: parent
-                                visible: coverPath && coverPath.length === 1
-                                source: (visible && coverPath.length > 0) ? "image://async/" + coverPath[0] : ""
-                                sourceSize: Qt.size(appSettings.thumbnailSize, appSettings.thumbnailSize)
-                                asynchronous: true
-                                fillMode: Image.PreserveAspectCrop
-                            }
-
-                            // Grid (2+ images)
-                            Grid {
-                                anchors.fill: parent
-                                columns: 2
-                                visible: coverPath && coverPath.length >= 2
-                                
-                                Repeater {
-                                    model: (coverPath && coverPath.length >= 2) ? coverPath : 0
-                                    Image {
-                                        width: coverContainer.width / 2
-                                        height: coverContainer.height / 2
-                                        source: "image://async/" + modelData
-                                        sourceSize: Qt.size(appSettings.thumbnailSize, appSettings.thumbnailSize)
-                                        asynchronous: true
-                                        fillMode: Image.PreserveAspectCrop
-                                    }
-                                }
-                            }
-                        }
-                        
-                        Column {
-                            anchors.top: coverContainer.bottom
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.bottom: parent.bottom
-                            anchors.margins: 8
-                            spacing: 4
-                            
-                            Text {
-                                text: name
-                                color: "white"
-                                font.bold: true
-                                elide: Text.ElideRight
-                                width: parent.width
-                            }
-                            
-                            Text {
-                                text: count + " items"
-                                color: "#aaa"
-                                font.pixelSize: 12
-                            }
-                        }
-                        
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                stack.push(albumDetailComponent, { folderPath: path, albumName: name })
-                            }
-                        }
+                    onClicked: {
+                        stack.push(albumDetailComponent, { 
+                            folderPath: model.path, 
+                            albumName: model.name 
+                        })
                     }
+                }
+
+                // Add animations for model changes
+                add: Transition {
+                    NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 300 }
                 }
             }
             
-            Text {
+            ColumnLayout {
                 anchors.centerIn: parent
-                text: "No Albums Found"
-                color: "#666"
-                visible: grid.count === 0
-                font.pixelSize: 20
+                visible: grid.count === 0 && !stack.model.isLoading
+                spacing: 15
+                
+                Text {
+                    text: "📁"
+                    font.pixelSize: 64
+                    Layout.alignment: Qt.AlignHCenter
+                }
+                
+                Text {
+                    text: "No Albums Found"
+                    color: "#888"
+                    font.pixelSize: 20
+                    Layout.alignment: Qt.AlignHCenter
+                }
+                
+                Text {
+                    text: "Choose a different folder to see your memories"
+                    color: "#666"
+                    font.pixelSize: 14
+                    Layout.alignment: Qt.AlignHCenter
+                }
+            }
+            
+            BusyIndicator {
+                anchors.centerIn: parent
+                running: stack.model.isLoading && grid.count === 0
             }
         }
     }
@@ -135,25 +99,43 @@ StackView {
                 // Header
                 Rectangle {
                     Layout.fillWidth: true
-                    height: 50
-                    color: "#222"
+                    height: 60
+                    color: "black"
                     
                     RowLayout {
                         anchors.fill: parent
                         anchors.margins: 10
-                        spacing: 10
+                        spacing: 15
                         
-                        Button {
-                            text: "← Back"
+                        ToolButton {
+                            text: "←"
+                            font.pixelSize: 24
                             onClicked: stack.pop()
                         }
                         
-                        Text {
-                            text: albumName
-                            color: "white"
-                            font.bold: true
-                            font.pixelSize: 18
+                        Column {
+                            Layout.fillWidth: true
+                            Text {
+                                text: detailRoot.albumName
+                                color: "white"
+                                font.bold: true
+                                font.pixelSize: 20
+                            }
+                            Text {
+                                text: detailRoot.folderPath
+                                color: "#888"
+                                font.pixelSize: 11
+                                elide: Text.ElideMiddle
+                                width: parent.width - 100
+                            }
                         }
+                    }
+                    
+                    Rectangle {
+                        anchors.bottom: parent.bottom
+                        width: parent.width
+                        height: 1
+                        color: "#333"
                     }
                 }
                 

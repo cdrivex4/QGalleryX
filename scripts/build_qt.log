@@ -1,0 +1,366 @@
+**********************
+PowerShell transcript start
+Start time: 20251227125654
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\curtis\AppData\Roaming\Antigravity\logs\20251227T020121\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\curtis\AppData\Roaming\Antigravity\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-28848-709747.json' -FeatureFlags @() 
+Process ID: 35464
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== Qt Static Build Setup (Robust) ===
+PS>TerminatingError(Add-Content): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The process cannot access the file 'D:\Dev\antigravity\scripts\build_qt.log' because it is being used by another process."
+>> TerminatingError(Add-Content): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The process cannot access the file 'D:\Dev\antigravity\scripts\build_qt.log' because it is being used by another process."
+>> TerminatingError(Add-Content): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The process cannot access the file 'D:\Dev\antigravity\scripts\build_qt.log' because it is being used by another process."
+>> TerminatingError(Add-Content): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The process cannot access the file 'D:\Dev\antigravity\scripts\build_qt.log' because it is being used by another process."
+The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: The process cannot access the file 'D:\Dev\antigravity\scripts\build_qt.log' because it is being used by another process.
+Add-Content: D:\Dev\antigravity\scripts\setup_static_qt.ps1:20:5
+Line |
+  20 |      Add-Content -Path $LogFile -Value $LogLine
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The process cannot access the file 'D:\Dev\antigravity\scripts\build_qt.log' because it is
+     | being used by another process.
+
+]633;D;1]633;A]633;P;Cwd=D:\x5cDev\x5cantigravity\x5cscriptsPS D:\Dev\antigravity\scripts> ]633;B
+PS>$global:__psEditorServices_userInput = $args[0]
+PS>$global:__psEditorServices_userInput = ""
+PS>.\setup_static_qt.ps1
+**********************
+PowerShell transcript end
+End time: 20251227125837
+**********************
+**********************
+PowerShell transcript start
+Start time: 20251227125838
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\curtis\AppData\Roaming\Antigravity\logs\20251227T020121\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\curtis\AppData\Roaming\Antigravity\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-28848-709747.json' -FeatureFlags @() 
+Process ID: 35464
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[2025-12-27 12:58:38] === Qt Static Build Setup (Robust) ===
+[2025-12-27 12:58:38] Target: D:\Dev\antigravity\3rdparty\qt_static
+[2025-12-27 12:58:38] Checking disk space on D...
+[2025-12-27 12:58:38] 
+[1/5] Checking Dependencies...
+[2025-12-27 12:58:38]   -> Downloading Strawberry Perl Portable...
+[2025-12-27 13:01:16]   -> Extracting Perl...
+[2025-12-27 13:02:05]   -> Perl verified.
+[2025-12-27 13:02:06] 
+[2/5] Downloading Qt Source (Minimal)...
+[2025-12-27 13:02:06]   -> Cloning qtbase...
+
+[2025-12-27 13:03:03]   -> Cloning qtdeclarative...
+
+[2025-12-27 13:03:43]   -> Cloning qtmultimedia...
+
+[2025-12-27 13:03:56]   -> Cloning qtimageformats...
+
+[2025-12-27 13:04:02]   -> Cloning qtshadertools...
+
+[2025-12-27 13:04:07]   -> Cloning qtsvg...
+
+[2025-12-27 13:04:12] 
+[3/5] Configuring Build...
+[2025-12-27 13:04:12] Exec: D:\Qt\Src_6.9.3\qtbase\configure.bat
+PS>TerminatingError(): "Command failed with exit code 1: D:\Qt\Src_6.9.3\qtbase\configure.bat"
+[2025-12-27 13:07:05] 
+!!! FATAL ERROR !!!
+[2025-12-27 13:07:05] Command failed with exit code 1: D:\Qt\Src_6.9.3\qtbase\configure.bat
+[2025-12-27 13:07:05] Check log file: D:\Dev\antigravity\scripts\build_qt.log
+**********************
+PowerShell transcript end
+End time: 20251227130706
+**********************
+**********************
+PowerShell transcript start
+Start time: 20251227131254
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\curtis\AppData\Roaming\Antigravity\logs\20251227T020121\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\curtis\AppData\Roaming\Antigravity\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-28848-709747.json' -FeatureFlags @() 
+Process ID: 35464
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[2025-12-27 13:12:54] === Qt Static Build Setup (Robust) ===
+[2025-12-27 13:12:54] Target: D:\Dev\antigravity\3rdparty\qt_static
+[2025-12-27 13:12:54] Checking disk space on D...
+[2025-12-27 13:12:55] 
+[1/5] Checking Dependencies...
+[2025-12-27 13:12:55]   -> Downloading Strawberry Perl Portable...
+[2025-12-27 13:15:34]   -> Extracting Perl...
+[2025-12-27 13:16:37]   -> Perl verified.
+[2025-12-27 13:16:37] 
+[2/5] Downloading Qt Source (Minimal)...
+[2025-12-27 13:16:37]   -> qtbase already exists.
+[2025-12-27 13:16:37]   -> qtdeclarative already exists.
+[2025-12-27 13:16:37]   -> qtmultimedia already exists.
+[2025-12-27 13:16:37]   -> qtimageformats already exists.
+[2025-12-27 13:16:37]   -> qtshadertools already exists.
+[2025-12-27 13:16:37]   -> qtsvg already exists.
+[2025-12-27 13:16:37] 
+[3/5] Configuring Build...
+[2025-12-27 13:16:37]   -> Cleaning build directory...
+[2025-12-27 13:16:37]   -> Compilers set to: D:\Qt\Tools\mingw1310_64\bin\gcc.exe / D:\Qt\Tools\mingw1310_64\bin\g++.exe
+[2025-12-27 13:16:37] Exec: D:\Qt\Src_6.9.3\qtbase\configure.bat
+[2025-12-27 13:18:46] 
+[4/5] Building (Using Ninja/CMake)...
+[2025-12-27 13:18:46] Exec: cmake
+[2025-12-27 13:18:47] 
+[5/5] Installing to Project...
+[2025-12-27 13:18:47] Exec: cmake
+[2025-12-27 13:18:48] 
+=== SUCCESS: Static Qt Ready at D:\Dev\antigravity\3rdparty\qt_static ===
+**********************
+PowerShell transcript end
+End time: 20251227131848
+**********************
+**********************
+PowerShell transcript start
+Start time: 20251227132021
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\curtis\AppData\Roaming\Antigravity\logs\20251227T020121\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\curtis\AppData\Roaming\Antigravity\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-28848-709747.json' -FeatureFlags @() 
+Process ID: 35464
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[2025-12-27 13:20:21] === Qt Static Build Setup (Robust) ===
+[2025-12-27 13:20:21] Target: D:\Dev\antigravity\3rdparty\qt_static
+[2025-12-27 13:20:21] Checking disk space on D...
+[2025-12-27 13:20:21] 
+[1/5] Checking Dependencies...
+[2025-12-27 13:20:21]   -> Downloading Strawberry Perl Portable...
+PS>TerminatingError(): "The pipeline has been stopped."
+**********************
+PowerShell transcript end
+End time: 20251227132126
+**********************
+**********************
+PowerShell transcript start
+Start time: 20251227132307
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\curtis\AppData\Roaming\Antigravity\logs\20251227T020121\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\curtis\AppData\Roaming\Antigravity\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-28848-709747.json' -FeatureFlags @() 
+Process ID: 35464
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[2025-12-27 13:23:07] === Qt Static Build Setup (Robust) ===
+[2025-12-27 13:23:07] Target: D:\Dev\antigravity\3rdparty\qt_static
+[2025-12-27 13:23:07] Checking disk space on D...
+[2025-12-27 13:23:07] 
+[1/5] Checking Dependencies...
+[2025-12-27 13:23:07]   -> Downloading Strawberry Perl Portable...
+[2025-12-27 13:26:42]   -> Extracting Perl...
+[2025-12-27 13:27:50]   -> Perl verified.
+[2025-12-27 13:27:50] 
+[2/5] Downloading Qt Source (Minimal)...
+[2025-12-27 13:27:50]   -> qtbase already exists (Verified).
+[2025-12-27 13:27:50]   -> qtdeclarative already exists (Verified).
+[2025-12-27 13:27:50]   -> qtmultimedia already exists (Verified).
+[2025-12-27 13:27:50]   -> qtimageformats already exists (Verified).
+[2025-12-27 13:27:50]   -> qtshadertools already exists (Verified).
+[2025-12-27 13:27:50]   -> qtsvg already exists (Verified).
+[2025-12-27 13:27:50] 
+[3/5] Configuring Build...
+[2025-12-27 13:27:50]   -> Cleaning build directory...
+[2025-12-27 13:27:50]   -> Compilers set to: D:\Qt\Tools\mingw1310_64\bin\gcc.exe / D:\Qt\Tools\mingw1310_64\bin\g++.exe
+[2025-12-27 13:27:50] Exec: D:\Qt\Src_6.9.3\qtbase\configure.bat -static -release -optimize-size -prefix D:\Dev\antigravity\3rdparty\qt_static -confirm-license -opensource -nomake examples -nomake tests -DQT_BUILD_TESTS=OFF -DQT_BUILD_EXAMPLES=OFF -no-pch -- -fresh
+
+PS>TerminatingError(): "Command failed with exit code 1: D:\Qt\Src_6.9.3\qtbase\configure.bat"
+[2025-12-27 13:27:51] 
+!!! FATAL ERROR !!!
+[2025-12-27 13:27:51] Command failed with exit code 1: D:\Qt\Src_6.9.3\qtbase\configure.bat
+[2025-12-27 13:27:51] Check log file: D:\Dev\antigravity\scripts\build_qt.log
+**********************
+PowerShell transcript end
+End time: 20251227132751
+**********************
+**********************
+PowerShell transcript start
+Start time: 20251227134507
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\WindowsApps\Microsoft.PowerShell_7.5.4.0_x64__8wekyb3d8bbwe\pwsh.dll -NoProfile -ExecutionPolicy Bypass -Command Import-Module 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules\PowerShellEditorServices\PowerShellEditorServices.psd1'; Start-EditorServices -HostName 'Visual Studio Code Host' -HostProfileId 'Microsoft.VSCode' -HostVersion '2025.4.0' -BundledModulesPath 'c:\Users\curtis\.antigravity\extensions\ms-vscode.powershell-2025.4.0-universal\modules' -EnableConsoleRepl -StartupBanner "PowerShell Extension v2025.4.0
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/vscode-powershell
+Type 'help' to get help.
+" -LogLevel 'Warning' -LogPath 'c:\Users\curtis\AppData\Roaming\Antigravity\logs\20251227T020121\window1\exthost\ms-vscode.powershell' -SessionDetailsPath 'c:\Users\curtis\AppData\Roaming\Antigravity\User\globalStorage\ms-vscode.powershell\sessions\PSES-VSCode-28848-709747.json' -FeatureFlags @() 
+Process ID: 35464
+PSVersion: 7.5.4
+PSEdition: Core
+GitCommitId: 7.5.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[2025-12-27 13:45:07] === Qt Static Build Setup (Robust) ===
+[2025-12-27 13:45:07] Target: D:\Dev\antigravity\3rdparty\qt_static
+[2025-12-27 13:45:07] Checking disk space on D...
+[2025-12-27 13:45:08] 
+[1/5] Checking Dependencies...
+[2025-12-27 13:45:08]   -> Downloading Strawberry Perl Portable...
+[2025-12-27 13:47:46]   -> Extracting Perl...
+[2025-12-27 13:48:47]   -> Perl verified.
+[2025-12-27 13:48:47] 
+[2/5] Downloading Qt Source (Minimal)...
+[2025-12-27 13:48:47]   -> qtbase already exists (Verified).
+[2025-12-27 13:48:47]   -> qtdeclarative already exists (Verified).
+[2025-12-27 13:48:47]   -> qtmultimedia already exists (Verified).
+[2025-12-27 13:48:47]   -> qtimageformats already exists (Verified).
+[2025-12-27 13:48:47]   -> qtshadertools already exists (Verified).
+[2025-12-27 13:48:47]   -> qtsvg already exists (Verified).
+[2025-12-27 13:48:47] 
+[3/5] Configuring Build...
+[2025-12-27 13:48:47]   -> Cleaning build directory...
+[2025-12-27 13:48:47]   -> Compilers set to: D:\Qt\Tools\mingw1310_64\bin\gcc.exe / D:\Qt\Tools\mingw1310_64\bin\g++.exe
+[2025-12-27 13:48:47] Exec: D:\Qt\Src_6.9.3\qtbase\configure.bat -static -release -optimize-size -prefix D:\Dev\antigravity\3rdparty\qt_static -confirm-license -opensource -nomake examples -nomake tests -DQT_BUILD_TESTS=OFF -DQT_BUILD_EXAMPLES=OFF -no-pch
+
+[2025-12-27 13:50:37] 
+[4/5] Building (Using Ninja/CMake)...
+[2025-12-27 13:50:37] Exec: cmake --build . --parallel
+
+[2025-12-27 14:18:24] 
+[5/5] Installing to Project...
+[2025-12-27 14:18:24] Exec: cmake --install .
+
+[2025-12-27 14:18:36] 
+[6/6] Verifying Installation...
+[2025-12-27 14:18:36] 
+=== 🌟 SUCCESS: Static Qt Verified at D:\Dev\antigravity\3rdparty\qt_static ===
+[2025-12-27 14:18:36]   qmake: Found
+[2025-12-27 14:18:36]   Static Core: Found (26.44 MB)
+[2025-12-27 14:18:36] 
+You can now update build.ps1 to point to this directory.
+**********************
+PowerShell transcript end
+End time: 20251227141836
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20251227142553
+Username: QUAKE2\curtis
+RunAs User: QUAKE2\curtis
+Configuration Name: 
+Machine: QUAKE2 (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -Command .\setup_static_qt.ps1
+Process ID: 22272
+PSVersion: 5.1.19041.6456
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.19041.6456
+BuildVersion: 10.0.19041.6456
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+[2025-12-27 14:25:53] === Qt Static Build Setup (Robust) ===
+[2025-12-27 14:25:53] Target: D:\Dev\antigravity\3rdparty\qt_static
+[2025-12-27 14:25:53] Checking disk space on D...
+[2025-12-27 14:25:55] 
+[1/5] Checking Dependencies...
+[2025-12-27 14:25:55]   -> Downloading Strawberry Perl Portable...
+[2025-12-27 14:30:17]   -> Extracting Perl...
+[2025-12-27 14:35:24]   -> Perl verified.
+[2025-12-27 14:35:24] 
+[2/5] Downloading Qt Source (Minimal)...
+[2025-12-27 14:35:24]   -> qtbase already exists (Verified).
+[2025-12-27 14:35:24]   -> qtdeclarative already exists (Verified).
+[2025-12-27 14:35:24]   -> qtmultimedia already exists (Verified).
+[2025-12-27 14:35:24]   -> qtimageformats already exists (Verified).
+[2025-12-27 14:35:24]   -> qtshadertools already exists (Verified).
+[2025-12-27 14:35:24]   -> qtsvg already exists (Verified).
+[2025-12-27 14:35:24] 
+[3-5] Base Qt (qtbase) already installed. Skipping...
+[2025-12-27 14:35:24] 
+[5.1] Building Module: qtdeclarative ...
+[2025-12-27 14:35:24]   -> Configuring qtdeclarative...
+[2025-12-27 14:35:24] Exec: D:\Dev\antigravity\3rdparty\qt_static\bin\qt-configure-module.bat D:\Qt\Src_6.9.3\qtdeclarative
+
+PS>TerminatingError(): "Command failed with exit code 1: D:\Dev\antigravity\3rdparty\qt_static\bin\qt-configure-module.bat"
+[2025-12-27 14:35:25] 
+!!! FATAL ERROR !!!
+[2025-12-27 14:35:25] Command failed with exit code 1: D:\Dev\antigravity\3rdparty\qt_static\bin\qt-configure-module.bat
+[2025-12-27 14:35:25] Check log file: D:\Dev\antigravity\scripts\build_qt.log
+**********************
+Windows PowerShell transcript end
+End time: 20251227143525
+**********************

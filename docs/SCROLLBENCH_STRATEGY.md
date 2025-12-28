@@ -24,11 +24,11 @@ ScrollBench is being built up with:
 - [x] Viewport culling & frame budget system
 - [x] Grid zoom & thumbnail controls
 - [x] Long-press selection mode
-- [/] Share/Resize dialog (in progress)
-- [ ] PhotoViewer integration
-- [ ] Video thumbnail support
-- [ ] RAW format support
-- [ ] Settings persistence
+- [x] PhotoViewer integration
+- [x] Video thumbnail support
+- [x] RAW format support
+- [x] Settings persistence
+- [/] Share/Resize dialog (UI placeholder)
 
 ### Phase 2: Merge Features Back
 Once ScrollBench reaches feature parity and proves stable:

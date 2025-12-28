@@ -1,48 +1,38 @@
 #include <QApplication>
+#include <QDateTime>
 #include <QLoggingCategory>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QSGRendererInterface>
-#include <QUrl>
-
-#include <QDateTime>
 #include <QThread>
+#include <QUrl>
 #include <iostream>
+
 
 #include "AlbumModel.h"
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
+#include "FrameBudgetScheduler.h"
 #include "GroupedProxyModel.h"
 #include "ImageModel.h"
+#include "LogManager.h"
 #include "SettingsHelper.h"
 #include "SystemMonitor.h"
 
-#include <QFile>
-#include <QTextStream>
-
-#include "LogManager.h"
-
-// Remove customMessageHandler function completely
 
 int main(int argc, char *argv[]) {
   // Initialize LogManager
   LogManager::instance().setLogFile("logs/application.log");
   qInstallMessageHandler(LogManager::messageHandler);
 
-  // Suppress annoying JPEG warnings (Commented out to restore granularity)
-  // QLoggingCategory::setFilterRules("qt.gui.imageio.jpeg.warning=false");
-
-  // Set style to Basic to allow customization
   QQuickStyle::setStyle("Basic");
-
   QCoreApplication::setOrganizationName("SamsungClone");
   QCoreApplication::setOrganizationDomain("samsungclone.com");
   QCoreApplication::setApplicationName("Gallery");
   QCoreApplication::setApplicationVersion("2.0.0");
 
-  // Set up graphics API before creating QGuiApplication
   SettingsHelper tempHelper;
   int api = tempHelper.selectedApi();
 
@@ -57,7 +47,18 @@ int main(int argc, char *argv[]) {
 
   QApplication app(argc, argv);
 
+  // Initialize Frame Budget Scheduler for Robustness (Prevents TDR/Main Thread
+  // Flooding)
+  auto frameScheduler = new FrameBudgetScheduler(&app);
+  frameScheduler->setFrameBudget(
+      4); // Conservative budget (4 tasks per 16ms frame)
+  frameScheduler->setEnabled(true);
+
+  // Register with AsyncImageProvider (Static)
+  AsyncImageProvider::setFrameScheduler(frameScheduler);
+
   qmlRegisterType<ImageModel>("SamsungGallery", 1, 0, "ImageModel");
+  // ...
   qmlRegisterType<AlbumModel>("SamsungGallery", 1, 0, "AlbumModel");
   qmlRegisterType<GroupedProxyModel>("SamsungGallery", 1, 0,
                                      "GroupedProxyModel");

@@ -66592,3 +66592,1205 @@ K.mkv.jpg" QSize(92, 50) 2 ms
 [2025-12-07 02:01:48.691] [Thread 33180] Warning: [FFmpeg Warn] "Format mov,mp4,m4a,3gp,3g2,mj2 detected only with low score of 1, misdetection possible!"
 [2025-12-07 02:01:48.691] [Thread 33180] Critical: [FFmpeg Error] "moov atom not found"
 [2025-12-07 02:01:48.692] [Thread 33180] Warning: [FFmpeg] Failed to open file: "I:/torrentz/Software/[ DevCourseWeb.com ] Udemy - Fast and Realistic Rendering - SketchUp to D5 Render Workflow/~Get Your Files Here !/2 -Effective Window Drawing Logic for all projects.mp4"
+[2025-12-21 04:27:04.647] [Thread 18412] Debug: [DIAG] Supported Image Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
+[2025-12-21 04:27:05.042] [Thread 18412] Debug: SystemMonitor: Starting monitoring with interval 1000 ms
+[2025-12-21 04:27:05.238] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:20:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[2025-12-21 04:27:05.404] [Thread 18412] Debug: Loading last folder: J:/MY SDCArds/dir0064.chk
+[2025-12-21 04:27:05.405] [Thread 18412] Debug: [TaskScheduler] Started 2 CPU threads and 2 IO threads.
+[2025-12-21 04:27:05.405] [Thread 18412] Debug: [TaskScheduler] Cleared all pending tasks.
+[2025-12-21 04:27:05.406] [Thread 36328] Debug: Scanning directory: "J:\\MY SDCArds\\dir0064.chk"
+[2025-12-21 04:27:05.627] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg" QSize(60, 60)
+[2025-12-21 04:27:05.628] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197418ac880) for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:05.629] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg" QSize(60, 60)
+[2025-12-21 04:27:05.630] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197418ad080) for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:05.630] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg" QSize(60, 60)
+[2025-12-21 04:27:05.631] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197418ada80) for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:05.632] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg" QSize(60, 60)
+[2025-12-21 04:27:05.634] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197418adb00) for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:05.646] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:05.647] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197418ac880) (null= false )
+[2025-12-21 04:27:05.647] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197418ac880) for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:05.647] [Thread 33044] Warning: Invalid SOS parameters for sequential JPEG
+[2025-12-21 04:27:05.648] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:05.649] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197418ad080) (null= false )
+[2025-12-21 04:27:05.649] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197418ad080) for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:05.687] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:05.688] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197418ada80) (null= false )
+[2025-12-21 04:27:05.688] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197418ada80) for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:05.689] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:05.689] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197418adb00) (null= false )
+[2025-12-21 04:27:05.690] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197418adb00) for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:06.095] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 148.273 MB (Delta: 148.273 ) | VRAM: 28.6797 MB (Delta: 28.6797 )
+[2025-12-21 04:27:07.297] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 247.293 MB (Delta: 99.0195 ) | VRAM: 35.7539 MB (Delta: 7.07422 )
+[2025-12-21 04:27:07.515] [Thread 18412] Debug: Scanning finished in 2109 ms. Found 2074 items.
+[2025-12-21 04:27:14.723] [Thread 18412] Debug: Opening folder dialog...
+[2025-12-21 04:27:18.629] [Thread 18412] Debug: Selected folder: J:/MY SDCArds/dir0064.chk
+[2025-12-21 04:27:30.355] [Thread 18412] Debug: Opening folder dialog...
+[2025-12-21 04:27:33.805] [Thread 18412] Debug: Selected folder: J:/MY SDCArds
+[2025-12-21 04:27:33.815] [Thread 18412] Debug: [TaskScheduler] Cleared all pending tasks.
+[2025-12-21 04:27:33.816] [Thread 35024] Debug: Scanning directory: "J:\\MY SDCArds"
+[2025-12-21 04:27:33.838] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG" QSize(60, 60)
+[2025-12-21 04:27:33.839] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf8550) for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:33.839] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG" QSize(60, 60)
+[2025-12-21 04:27:33.840] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf91d0) for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:33.841] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG" QSize(60, 60)
+[2025-12-21 04:27:33.841] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf9950) for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:33.844] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG" QSize(60, 60)
+[2025-12-21 04:27:33.845] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf96d0) for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:33.896] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:33.897] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf8550) (null= false )
+[2025-12-21 04:27:33.902] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf8550) for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:33.914] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:33.915] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf91d0) (null= false )
+[2025-12-21 04:27:33.916] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf91d0) for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:33.953] [Thread 33044] Warning: Corrupt JPEG data: premature end of data segment
+[2025-12-21 04:27:33.955] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:33.956] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf9950) (null= false )
+[2025-12-21 04:27:33.957] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf9950) for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:33.973] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:33.973] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf96d0) (null= false )
+[2025-12-21 04:27:33.974] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf96d0) for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:35.452] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 335.496 MB (Delta: 88.2031 ) | VRAM: 37.168 MB (Delta: 1.41406 )
+[2025-12-21 04:27:36.805] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG" QSize(60, 60)
+[2025-12-21 04:27:36.806] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf94d0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:36.807] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG" QSize(60, 60)
+[2025-12-21 04:27:36.807] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf9ed0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:36.808] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG" QSize(60, 60)
+[2025-12-21 04:27:36.809] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf96d0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:36.809] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG" QSize(60, 60)
+[2025-12-21 04:27:36.810] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19741cf8850) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:36.937] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:36.937] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf94d0) (null= false )
+[2025-12-21 04:27:36.938] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf94d0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:36.963] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:36.964] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf9ed0) (null= false )
+[2025-12-21 04:27:36.965] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf9ed0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:37.024] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:37.025] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf96d0) (null= false )
+[2025-12-21 04:27:37.026] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf96d0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:37.047] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:37.047] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19741cf8850) (null= false )
+[2025-12-21 04:27:37.048] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19741cf8850) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:38.148] [Thread 18412] Debug: Scanning finished in 4332 ms. Found 4691 items.
+[2025-12-21 04:27:38.161] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(60, 60)
+[2025-12-21 04:27:38.162] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19743f73210) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:38.163] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(60, 60)
+[2025-12-21 04:27:38.163] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19743f73310) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:38.164] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(60, 60)
+[2025-12-21 04:27:38.165] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19743f73510) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:38.165] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(60, 60)
+[2025-12-21 04:27:38.166] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19743f73290) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:38.203] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:38.203] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:38.204] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19743f73310) (null= false )
+[2025-12-21 04:27:38.205] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19743f73210) (null= false )
+[2025-12-21 04:27:38.206] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19743f73310) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:38.207] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19743f73210) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:38.237] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:38.238] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19743f73510) (null= false )
+[2025-12-21 04:27:38.239] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19743f73510) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:38.253] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:38.254] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19743f73290) (null= false )
+[2025-12-21 04:27:38.254] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 518.906 MB (Delta: 183.41 ) | VRAM: 37.168 MB (Delta: 0 )
+[2025-12-21 04:27:38.254] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19743f73290) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:39.050] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 352.871 MB (Delta: -166.035 ) | VRAM: 36.7305 MB (Delta: -0.4375 )
+[2025-12-21 04:27:48.053] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 406.031 MB (Delta: 53.1602 ) | VRAM: 42.5859 MB (Delta: 5.85547 )
+[2025-12-21 04:27:58.273] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.274] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974a49d790) for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:58.274] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(56, 56)
+[2025-12-21 04:27:58.275] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197443616f0) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.276] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(56, 56)
+[2025-12-21 04:27:58.276] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744360570) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:58.277] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(56, 56)
+[2025-12-21 04:27:58.278] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355f70) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:58.278] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(56, 56)
+[2025-12-21 04:27:58.278] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744354cf0) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:58.279] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg" QSize(56, 56)
+[2025-12-21 04:27:58.279] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355870) for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:58.280] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg" QSize(56, 56)
+[2025-12-21 04:27:58.280] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197443558f0) for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:58.281] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg" QSize(56, 56)
+[2025-12-21 04:27:58.281] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355c70) for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:58.281] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg" QSize(56, 56)
+[2025-12-21 04:27:58.282] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355cf0) for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:58.282] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.283] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355ef0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:58.284] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.284] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744354bf0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:58.284] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.285] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744354d70) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:58.285] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.287] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355e70) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:58.287] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.288] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744355ff0) for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:58.288] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.289] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19744354a70) for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:58.289] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG" QSize(56, 56)
+[2025-12-21 04:27:58.290] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197443540f0) for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:58.300] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.301] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197443616f0) (null= false )
+[2025-12-21 04:27:58.301] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197443616f0) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.307] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG" QSize(50, 50)
+[2025-12-21 04:27:58.308] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b7f0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:58.311] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(50, 50)
+[2025-12-21 04:27:58.311] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8ba70) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.312] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(50, 50)
+[2025-12-21 04:27:58.313] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b9f0) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:58.313] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(50, 50)
+[2025-12-21 04:27:58.314] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8abf0) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:58.314] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(50, 50)
+[2025-12-21 04:27:58.314] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b4f0) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:58.315] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg" QSize(48, 48)
+[2025-12-21 04:27:58.316] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b270) for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:58.317] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(48, 48)
+[2025-12-21 04:27:58.318] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a0f0) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.319] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(48, 48)
+[2025-12-21 04:27:58.320] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a6f0) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:58.320] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(48, 48)
+[2025-12-21 04:27:58.321] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8baf0) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:58.321] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(48, 48)
+[2025-12-21 04:27:58.322] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8bef0) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:58.322] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg" QSize(48, 48)
+[2025-12-21 04:27:58.323] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8bcf0) for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:58.324] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg" QSize(48, 48)
+[2025-12-21 04:27:58.324] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b870) for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:58.325] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg" QSize(48, 48)
+[2025-12-21 04:27:58.325] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8aef0) for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:58.326] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.326] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8be70) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:58.327] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.327] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b6f0) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:58.328] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.328] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a270) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:58.330] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.330] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b170) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:58.330] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.331] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e1d10) for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:58.331] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.332] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e3410) for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:58.332] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.333] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2310) for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:58.333] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG" QSize(48, 48)
+[2025-12-21 04:27:58.333] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e1a10) for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:58.339] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.340] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e3490) for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:58.341] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(25, 25)
+[2025-12-21 04:27:58.342] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2210) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.342] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(25, 25)
+[2025-12-21 04:27:58.343] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e3690) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:58.344] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(25, 25)
+[2025-12-21 04:27:58.344] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2810) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:58.344] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(25, 25)
+[2025-12-21 04:27:58.345] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2010) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:58.346] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg" QSize(25, 25)
+[2025-12-21 04:27:58.346] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e1f10) for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:58.347] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg" QSize(25, 25)
+[2025-12-21 04:27:58.347] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2090) for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:58.348] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg" QSize(25, 25)
+[2025-12-21 04:27:58.348] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2e90) for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:58.349] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg" QSize(25, 25)
+[2025-12-21 04:27:58.349] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2890) for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:58.350] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.350] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2790) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:58.350] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.351] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e3810) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:58.351] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.353] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e3710) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:58.354] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.354] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2490) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:58.355] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.356] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2290) for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:58.356] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.357] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e1990) for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:58.357] [Thread 33872] Warning: TRACE: RequestImage "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG" QSize(25, 25)
+[2025-12-21 04:27:58.357] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430e2110) for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:58.380] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.381] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2210) (null= false )
+[2025-12-21 04:27:58.382] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2210) for "file:///J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:58.402] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:58.402] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e3490) (null= false )
+[2025-12-21 04:27:58.403] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e3490) for "file:///J:/MY SDCArds/100CANON/IMG_0010.JPG"
+[2025-12-21 04:27:58.406] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:58.407] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e3690) (null= false )
+[2025-12-21 04:27:58.408] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e3690) for "file:///J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:58.429] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:58.429] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:58.429] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2810) (null= false )
+[2025-12-21 04:27:58.430] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2010) (null= false )
+[2025-12-21 04:27:58.431] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2810) for "file:///J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:58.431] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2010) for "file:///J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:58.444] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:58.444] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e1f10) (null= false )
+[2025-12-21 04:27:58.445] [Thread 33044] Warning: Invalid SOS parameters for sequential JPEG
+[2025-12-21 04:27:58.445] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e1f10) for "file:///J:/MY SDCArds/dir0064.chk/20200820_184051.jpg"
+[2025-12-21 04:27:58.445] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:58.446] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2090) (null= false )
+[2025-12-21 04:27:58.446] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2090) for "file:///J:/MY SDCArds/dir0064.chk/20200820_150046.jpg"
+[2025-12-21 04:27:58.479] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:58.480] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2e90) (null= false )
+[2025-12-21 04:27:58.480] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2e90) for "file:///J:/MY SDCArds/dir0064.chk/20200815_113554.jpg"
+[2025-12-21 04:27:58.485] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:58.486] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2890) (null= false )
+[2025-12-21 04:27:58.487] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2890) for "file:///J:/MY SDCArds/dir0064.chk/20200810_165146.jpg"
+[2025-12-21 04:27:58.545] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:58.546] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2790) (null= false )
+[2025-12-21 04:27:58.546] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2790) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1879.JPG"
+[2025-12-21 04:27:58.551] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:58.552] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e3810) (null= false )
+[2025-12-21 04:27:58.554] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e3810) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1878.JPG"
+[2025-12-21 04:27:58.614] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:58.615] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e3710) (null= false )
+[2025-12-21 04:27:58.616] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e3710) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1875.JPG"
+[2025-12-21 04:27:58.617] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:58.618] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2490) (null= false )
+[2025-12-21 04:27:58.620] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2490) for "file:///J:/MY SDCArds/dir0063.chk/IMG_1874.JPG"
+[2025-12-21 04:27:58.672] [Thread 35820] Warning: Corrupt JPEG data: premature end of data segment
+[2025-12-21 04:27:58.675] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:58.676] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e1990) (null= false )
+[2025-12-21 04:27:58.676] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e1990) for "file:///J:/MY SDCArds/100CANON/IMG_0011.JPG"
+[2025-12-21 04:27:58.691] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:58.691] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2290) (null= false )
+[2025-12-21 04:27:58.692] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2290) for "file:///J:/MY SDCArds/100CANON/IMG_0012.JPG"
+[2025-12-21 04:27:58.730] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:58.731] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430e2110) (null= false )
+[2025-12-21 04:27:58.731] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430e2110) for "file:///J:/MY SDCArds/100CANON/IMG_0009.JPG"
+[2025-12-21 04:27:59.709] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2166.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.710] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97260) for "J:/MY SDCArds/100CANON/IMG_2166.JPG"
+[2025-12-21 04:27:59.711] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2164.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.711] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a96560) for "J:/MY SDCArds/100CANON/IMG_2164.JPG"
+[2025-12-21 04:27:59.712] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2159.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.712] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a96360) for "J:/MY SDCArds/100CANON/IMG_2159.JPG"
+[2025-12-21 04:27:59.713] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2146.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.714] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a976e0) for "J:/MY SDCArds/100CANON/IMG_2146.JPG"
+[2025-12-21 04:27:59.714] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2126.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.715] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a96ae0) for "J:/MY SDCArds/100CANON/IMG_2126.JPG"
+[2025-12-21 04:27:59.716] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2122.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.716] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97560) for "J:/MY SDCArds/100CANON/IMG_2122.JPG"
+[2025-12-21 04:27:59.716] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2119.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.717] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a971e0) for "J:/MY SDCArds/100CANON/IMG_2119.JPG"
+[2025-12-21 04:27:59.718] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2114.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.718] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97ae0) for "J:/MY SDCArds/100CANON/IMG_2114.JPG"
+[2025-12-21 04:27:59.719] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2112.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.720] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8bdf0) for "J:/MY SDCArds/100CANON/IMG_2112.JPG"
+[2025-12-21 04:27:59.720] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2109.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.721] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a070) for "J:/MY SDCArds/100CANON/IMG_2109.JPG"
+[2025-12-21 04:27:59.721] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2107.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.721] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b770) for "J:/MY SDCArds/100CANON/IMG_2107.JPG"
+[2025-12-21 04:27:59.722] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2105.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.722] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8ac70) for "J:/MY SDCArds/100CANON/IMG_2105.JPG"
+[2025-12-21 04:27:59.723] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2102.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.723] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a170) for "J:/MY SDCArds/100CANON/IMG_2102.JPG"
+[2025-12-21 04:27:59.724] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2100.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.724] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a2f0) for "J:/MY SDCArds/100CANON/IMG_2100.JPG"
+[2025-12-21 04:27:59.724] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2098.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.725] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a1f0) for "J:/MY SDCArds/100CANON/IMG_2098.JPG"
+[2025-12-21 04:27:59.726] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2095.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.726] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a770) for "J:/MY SDCArds/100CANON/IMG_2095.JPG"
+[2025-12-21 04:27:59.727] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2092.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.727] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a970) for "J:/MY SDCArds/100CANON/IMG_2092.JPG"
+[2025-12-21 04:27:59.728] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2089.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.729] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8acf0) for "J:/MY SDCArds/100CANON/IMG_2089.JPG"
+[2025-12-21 04:27:59.729] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2086.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.730] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a370) for "J:/MY SDCArds/100CANON/IMG_2086.JPG"
+[2025-12-21 04:27:59.730] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2082.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.731] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b8f0) for "J:/MY SDCArds/100CANON/IMG_2082.JPG"
+[2025-12-21 04:27:59.732] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2079.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.732] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a8f0) for "J:/MY SDCArds/100CANON/IMG_2079.JPG"
+[2025-12-21 04:27:59.733] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2077.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.733] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b970) for "J:/MY SDCArds/100CANON/IMG_2077.JPG"
+[2025-12-21 04:27:59.734] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2074.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.736] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a7f0) for "J:/MY SDCArds/100CANON/IMG_2074.JPG"
+[2025-12-21 04:27:59.738] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2064.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.738] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8af70) for "J:/MY SDCArds/100CANON/IMG_2064.JPG"
+[2025-12-21 04:27:59.739] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2060.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.740] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b570) for "J:/MY SDCArds/100CANON/IMG_2060.JPG"
+[2025-12-21 04:27:59.741] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2056.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.741] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a870) for "J:/MY SDCArds/100CANON/IMG_2056.JPG"
+[2025-12-21 04:27:59.742] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2049.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.742] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b1f0) for "J:/MY SDCArds/100CANON/IMG_2049.JPG"
+[2025-12-21 04:27:59.743] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2037.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.744] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a3f0) for "J:/MY SDCArds/100CANON/IMG_2037.JPG"
+[2025-12-21 04:27:59.744] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000156].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.746] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a4f0) for "J:/MY SDCArds/dir0067.chk/[000156].jpg"
+[2025-12-21 04:27:59.747] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000133].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.757] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a570) for "J:/MY SDCArds/dir0067.chk/[000133].jpg"
+[2025-12-21 04:27:59.757] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000116].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.758] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8aff0) for "J:/MY SDCArds/dir0067.chk/[000116].jpg"
+[2025-12-21 04:27:59.758] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000099].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.759] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a5f0) for "J:/MY SDCArds/dir0067.chk/[000099].jpg"
+[2025-12-21 04:27:59.759] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.760] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a670) for "J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:27:59.760] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.761] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8a9f0) for "J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:27:59.762] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.762] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8ad70) for "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg"
+[2025-12-21 04:27:59.762] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193202.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.763] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b070) for "J:/MY SDCArds/dir0064.chk/20211228_193202.jpg"
+[2025-12-21 04:27:59.763] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193127.dng" QSize(25, 25)
+[2025-12-21 04:27:59.764] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8aa70) for "J:/MY SDCArds/dir0064.chk/20211228_193127.dng"
+[2025-12-21 04:27:59.764] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193126.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.765] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8adf0) for "J:/MY SDCArds/dir0064.chk/20211228_193126.jpg"
+[2025-12-21 04:27:59.765] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193121.dng" QSize(25, 25)
+[2025-12-21 04:27:59.766] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8aaf0) for "J:/MY SDCArds/dir0064.chk/20211228_193121.dng"
+[2025-12-21 04:27:59.766] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193114.dng" QSize(25, 25)
+[2025-12-21 04:27:59.767] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b3f0) for "J:/MY SDCArds/dir0064.chk/20211228_193114.dng"
+[2025-12-21 04:27:59.767] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.768] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8ae70) for "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg"
+[2025-12-21 04:27:59.768] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193109.dng" QSize(25, 25)
+[2025-12-21 04:27:59.769] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8ab70) for "J:/MY SDCArds/dir0064.chk/20211228_193109.dng"
+[2025-12-21 04:27:59.770] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193111.dng" QSize(25, 25)
+[2025-12-21 04:27:59.771] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b0f0) for "J:/MY SDCArds/dir0064.chk/20211228_193111.dng"
+[2025-12-21 04:27:59.771] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193114.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.773] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b2f0) for "J:/MY SDCArds/dir0064.chk/20211228_193114.jpg"
+[2025-12-21 04:27:59.774] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193121.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.774] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc8b470) for "J:/MY SDCArds/dir0064.chk/20211228_193121.jpg"
+[2025-12-21 04:27:59.774] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193122.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.775] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88970) for "J:/MY SDCArds/dir0064.chk/20211228_193122.jpg"
+[2025-12-21 04:27:59.775] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193122.dng" QSize(25, 25)
+[2025-12-21 04:27:59.776] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89070) for "J:/MY SDCArds/dir0064.chk/20211228_193122.dng"
+[2025-12-21 04:27:59.776] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193126.dng" QSize(25, 25)
+[2025-12-21 04:27:59.777] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc891f0) for "J:/MY SDCArds/dir0064.chk/20211228_193126.dng"
+[2025-12-21 04:27:59.778] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193127.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.780] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89270) for "J:/MY SDCArds/dir0064.chk/20211228_193127.jpg"
+[2025-12-21 04:27:59.781] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193202.dng" QSize(25, 25)
+[2025-12-21 04:27:59.782] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88d70) for "J:/MY SDCArds/dir0064.chk/20211228_193202.dng"
+[2025-12-21 04:27:59.790] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2166.JPG"
+[2025-12-21 04:27:59.783] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193208.dng" QSize(25, 25)
+[2025-12-21 04:27:59.791] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430841b0) for "J:/MY SDCArds/dir0064.chk/20211228_193208.dng"
+[2025-12-21 04:27:59.793] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193208.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.797] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x197430844b0) for "J:/MY SDCArds/dir0064.chk/20211228_193208.jpg"
+[2025-12-21 04:27:59.806] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2164.JPG"
+[2025-12-21 04:27:59.801] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193211.dng" QSize(25, 25)
+[2025-12-21 04:27:59.807] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a979e0) for "J:/MY SDCArds/dir0064.chk/20211228_193211.dng"
+[2025-12-21 04:27:59.808] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193212.jpg" QSize(25, 25)
+[2025-12-21 04:27:59.809] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97c60) for "J:/MY SDCArds/dir0064.chk/20211228_193212.jpg"
+[2025-12-21 04:27:59.810] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193212.dng" QSize(25, 25)
+[2025-12-21 04:27:59.813] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a975e0) for "J:/MY SDCArds/dir0064.chk/20211228_193212.dng"
+[2025-12-21 04:27:59.813] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.815] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a977e0) for "J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:27:59.820] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.827] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a96fe0) for "J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:27:59.829] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000098].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.830] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a972e0) for "J:/MY SDCArds/dir0067.chk/[000098].jpg"
+[2025-12-21 04:27:59.830] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000101].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.831] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97760) for "J:/MY SDCArds/dir0067.chk/[000101].jpg"
+[2025-12-21 04:27:59.831] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000102].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.832] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97b60) for "J:/MY SDCArds/dir0067.chk/[000102].jpg"
+[2025-12-21 04:27:59.832] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000115].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.832] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a964e0) for "J:/MY SDCArds/dir0067.chk/[000115].jpg"
+[2025-12-21 04:27:59.833] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000114].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.833] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97ce0) for "J:/MY SDCArds/dir0067.chk/[000114].jpg"
+[2025-12-21 04:27:59.834] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000105].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.834] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97d60) for "J:/MY SDCArds/dir0067.chk/[000105].jpg"
+[2025-12-21 04:27:59.835] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000106].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.835] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x19746a97de0) for "J:/MY SDCArds/dir0067.chk/[000106].jpg"
+[2025-12-21 04:27:59.836] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000107].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.837] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc883f0) for "J:/MY SDCArds/dir0067.chk/[000107].jpg"
+[2025-12-21 04:27:59.838] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000108].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.838] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc880f0) for "J:/MY SDCArds/dir0067.chk/[000108].jpg"
+[2025-12-21 04:27:59.838] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000109].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.839] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89870) for "J:/MY SDCArds/dir0067.chk/[000109].jpg"
+[2025-12-21 04:27:59.840] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000110].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.840] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89af0) for "J:/MY SDCArds/dir0067.chk/[000110].jpg"
+[2025-12-21 04:27:59.841] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000111].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.841] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc892f0) for "J:/MY SDCArds/dir0067.chk/[000111].jpg"
+[2025-12-21 04:27:59.842] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000113].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.842] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc893f0) for "J:/MY SDCArds/dir0067.chk/[000113].jpg"
+[2025-12-21 04:27:59.842] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000117].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.844] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88af0) for "J:/MY SDCArds/dir0067.chk/[000117].jpg"
+[2025-12-21 04:27:59.844] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000112].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.845] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89a70) for "J:/MY SDCArds/dir0067.chk/[000112].jpg"
+[2025-12-21 04:27:59.845] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000120].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.846] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc894f0) for "J:/MY SDCArds/dir0067.chk/[000120].jpg"
+[2025-12-21 04:27:59.847] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000119].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.847] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89670) for "J:/MY SDCArds/dir0067.chk/[000119].jpg"
+[2025-12-21 04:27:59.848] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000118].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.848] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89d70) for "J:/MY SDCArds/dir0067.chk/[000118].jpg"
+[2025-12-21 04:27:59.848] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000123].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.849] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc896f0) for "J:/MY SDCArds/dir0067.chk/[000123].jpg"
+[2025-12-21 04:27:59.849] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000127].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.850] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88270) for "J:/MY SDCArds/dir0067.chk/[000127].jpg"
+[2025-12-21 04:27:59.850] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000126].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.851] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc886f0) for "J:/MY SDCArds/dir0067.chk/[000126].jpg"
+[2025-12-21 04:27:59.851] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000128].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.853] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88e70) for "J:/MY SDCArds/dir0067.chk/[000128].jpg"
+[2025-12-21 04:27:59.854] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000129].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.854] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89570) for "J:/MY SDCArds/dir0067.chk/[000129].jpg"
+[2025-12-21 04:27:59.855] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000130].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.856] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88470) for "J:/MY SDCArds/dir0067.chk/[000130].jpg"
+[2025-12-21 04:27:59.856] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000131].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.857] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc895f0) for "J:/MY SDCArds/dir0067.chk/[000131].jpg"
+[2025-12-21 04:27:59.857] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000132].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.857] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89c70) for "J:/MY SDCArds/dir0067.chk/[000132].jpg"
+[2025-12-21 04:27:59.858] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000134].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.858] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88070) for "J:/MY SDCArds/dir0067.chk/[000134].jpg"
+[2025-12-21 04:27:59.859] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000135].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.859] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88570) for "J:/MY SDCArds/dir0067.chk/[000135].jpg"
+[2025-12-21 04:27:59.862] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000136].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.869] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc898f0) for "J:/MY SDCArds/dir0067.chk/[000136].jpg"
+[2025-12-21 04:27:59.870] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000137].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.871] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88df0) for "J:/MY SDCArds/dir0067.chk/[000137].jpg"
+[2025-12-21 04:27:59.871] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000138].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.871] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89770) for "J:/MY SDCArds/dir0067.chk/[000138].jpg"
+[2025-12-21 04:27:59.872] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000141].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.872] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89970) for "J:/MY SDCArds/dir0067.chk/[000141].jpg"
+[2025-12-21 04:27:59.873] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000142].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.873] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc890f0) for "J:/MY SDCArds/dir0067.chk/[000142].jpg"
+[2025-12-21 04:27:59.874] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000143].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.874] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc899f0) for "J:/MY SDCArds/dir0067.chk/[000143].jpg"
+[2025-12-21 04:27:59.874] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000147].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.875] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89170) for "J:/MY SDCArds/dir0067.chk/[000147].jpg"
+[2025-12-21 04:27:59.876] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000154].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.876] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88770) for "J:/MY SDCArds/dir0067.chk/[000154].jpg"
+[2025-12-21 04:27:59.877] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000155].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.877] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88170) for "J:/MY SDCArds/dir0067.chk/[000155].jpg"
+[2025-12-21 04:27:59.878] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000159].jpg" QSize(25, 25)
+[2025-12-21 04:27:59.878] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89b70) for "J:/MY SDCArds/dir0067.chk/[000159].jpg"
+[2025-12-21 04:27:59.879] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2035.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.879] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88ef0) for "J:/MY SDCArds/100CANON/IMG_2035.JPG"
+[2025-12-21 04:27:59.880] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2036.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.880] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2146.JPG"
+[2025-12-21 04:27:59.880] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89bf0) for "J:/MY SDCArds/100CANON/IMG_2036.JPG"
+[2025-12-21 04:27:59.881] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2038.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.881] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89470) for "J:/MY SDCArds/100CANON/IMG_2038.JPG"
+[2025-12-21 04:27:59.882] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2039.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.882] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc887f0) for "J:/MY SDCArds/100CANON/IMG_2039.JPG"
+[2025-12-21 04:27:59.882] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2054.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.883] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89cf0) for "J:/MY SDCArds/100CANON/IMG_2054.JPG"
+[2025-12-21 04:27:59.883] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2055.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.883] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88bf0) for "J:/MY SDCArds/100CANON/IMG_2055.JPG"
+[2025-12-21 04:27:59.884] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2057.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.884] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89df0) for "J:/MY SDCArds/100CANON/IMG_2057.JPG"
+[2025-12-21 04:27:59.885] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2159.JPG"
+[2025-12-21 04:27:59.885] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2058.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.886] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88f70) for "J:/MY SDCArds/100CANON/IMG_2058.JPG"
+[2025-12-21 04:27:59.887] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2059.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.887] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc88370) for "J:/MY SDCArds/100CANON/IMG_2059.JPG"
+[2025-12-21 04:27:59.887] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2061.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.888] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89e70) for "J:/MY SDCArds/100CANON/IMG_2061.JPG"
+[2025-12-21 04:27:59.889] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2062.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.889] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89ef0) for "J:/MY SDCArds/100CANON/IMG_2062.JPG"
+[2025-12-21 04:27:59.890] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2063.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.891] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89f70) for "J:/MY SDCArds/100CANON/IMG_2063.JPG"
+[2025-12-21 04:27:59.891] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2065.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.892] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc89ff0) for "J:/MY SDCArds/100CANON/IMG_2065.JPG"
+[2025-12-21 04:27:59.892] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2066.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.893] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc881f0) for "J:/MY SDCArds/100CANON/IMG_2066.JPG"
+[2025-12-21 04:27:59.893] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2067.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.894] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc882f0) for "J:/MY SDCArds/100CANON/IMG_2067.JPG"
+[2025-12-21 04:27:59.894] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2068.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.896] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974cc884f0) for "J:/MY SDCArds/100CANON/IMG_2068.JPG"
+[2025-12-21 04:27:59.905] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2069.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.921] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231baf0) for "J:/MY SDCArds/100CANON/IMG_2069.JPG"
+[2025-12-21 04:27:59.927] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2070.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.933] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231ac70) for "J:/MY SDCArds/100CANON/IMG_2070.JPG"
+[2025-12-21 04:27:59.933] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2071.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.934] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b270) for "J:/MY SDCArds/100CANON/IMG_2071.JPG"
+[2025-12-21 04:27:59.945] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2072.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.945] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231aef0) for "J:/MY SDCArds/100CANON/IMG_2072.JPG"
+[2025-12-21 04:27:59.947] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2073.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.947] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a3f0) for "J:/MY SDCArds/100CANON/IMG_2073.JPG"
+[2025-12-21 04:27:59.948] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2075.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.948] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b2f0) for "J:/MY SDCArds/100CANON/IMG_2075.JPG"
+[2025-12-21 04:27:59.949] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2076.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.949] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231ba70) for "J:/MY SDCArds/100CANON/IMG_2076.JPG"
+[2025-12-21 04:27:59.950] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2078.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.951] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a4f0) for "J:/MY SDCArds/100CANON/IMG_2078.JPG"
+[2025-12-21 04:27:59.953] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2080.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.954] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231ad70) for "J:/MY SDCArds/100CANON/IMG_2080.JPG"
+[2025-12-21 04:27:59.955] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2081.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.956] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a870) for "J:/MY SDCArds/100CANON/IMG_2081.JPG"
+[2025-12-21 04:27:59.956] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2083.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.957] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a470) for "J:/MY SDCArds/100CANON/IMG_2083.JPG"
+[2025-12-21 04:27:59.957] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2084.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.973] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2122.JPG"
+[2025-12-21 04:27:59.958] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a5f0) for "J:/MY SDCArds/100CANON/IMG_2084.JPG"
+[2025-12-21 04:27:59.973] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2085.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.974] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b370) for "J:/MY SDCArds/100CANON/IMG_2085.JPG"
+[2025-12-21 04:27:59.975] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2087.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.975] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a670) for "J:/MY SDCArds/100CANON/IMG_2087.JPG"
+[2025-12-21 04:27:59.975] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2088.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.976] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231aa70) for "J:/MY SDCArds/100CANON/IMG_2088.JPG"
+[2025-12-21 04:27:59.976] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2090.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.977] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b5f0) for "J:/MY SDCArds/100CANON/IMG_2090.JPG"
+[2025-12-21 04:27:59.977] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2091.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.978] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b670) for "J:/MY SDCArds/100CANON/IMG_2091.JPG"
+[2025-12-21 04:27:59.978] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2093.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.979] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bd70) for "J:/MY SDCArds/100CANON/IMG_2093.JPG"
+[2025-12-21 04:27:59.980] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2094.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.980] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b8f0) for "J:/MY SDCArds/100CANON/IMG_2094.JPG"
+[2025-12-21 04:27:59.980] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2096.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.981] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b7f0) for "J:/MY SDCArds/100CANON/IMG_2096.JPG"
+[2025-12-21 04:27:59.981] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2097.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.982] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b870) for "J:/MY SDCArds/100CANON/IMG_2097.JPG"
+[2025-12-21 04:27:59.982] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2099.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.982] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a6f0) for "J:/MY SDCArds/100CANON/IMG_2099.JPG"
+[2025-12-21 04:27:59.983] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2101.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.983] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a970) for "J:/MY SDCArds/100CANON/IMG_2101.JPG"
+[2025-12-21 04:27:59.984] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2103.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.984] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a9f0) for "J:/MY SDCArds/100CANON/IMG_2103.JPG"
+[2025-12-21 04:27:59.986] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2104.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.986] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b970) for "J:/MY SDCArds/100CANON/IMG_2104.JPG"
+[2025-12-21 04:27:59.987] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2106.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.987] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231acf0) for "J:/MY SDCArds/100CANON/IMG_2106.JPG"
+[2025-12-21 04:27:59.988] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2108.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.988] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bbf0) for "J:/MY SDCArds/100CANON/IMG_2108.JPG"
+[2025-12-21 04:27:59.989] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2110.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.989] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231adf0) for "J:/MY SDCArds/100CANON/IMG_2110.JPG"
+[2025-12-21 04:27:59.990] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2111.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.990] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231a170) for "J:/MY SDCArds/100CANON/IMG_2111.JPG"
+[2025-12-21 04:27:59.991] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2113.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.991] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231aff0) for "J:/MY SDCArds/100CANON/IMG_2113.JPG"
+[2025-12-21 04:27:59.991] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2115.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.992] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bc70) for "J:/MY SDCArds/100CANON/IMG_2115.JPG"
+[2025-12-21 04:27:59.992] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2116.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.993] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b070) for "J:/MY SDCArds/100CANON/IMG_2116.JPG"
+[2025-12-21 04:27:59.993] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2117.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.993] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bdf0) for "J:/MY SDCArds/100CANON/IMG_2117.JPG"
+[2025-12-21 04:27:59.994] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2118.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.994] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b0f0) for "J:/MY SDCArds/100CANON/IMG_2118.JPG"
+[2025-12-21 04:27:59.995] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2120.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.995] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b9f0) for "J:/MY SDCArds/100CANON/IMG_2120.JPG"
+[2025-12-21 04:27:59.995] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2121.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.996] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bb70) for "J:/MY SDCArds/100CANON/IMG_2121.JPG"
+[2025-12-21 04:27:59.996] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2123.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.996] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231b170) for "J:/MY SDCArds/100CANON/IMG_2123.JPG"
+[2025-12-21 04:27:59.997] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2124.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.997] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231be70) for "J:/MY SDCArds/100CANON/IMG_2124.JPG"
+[2025-12-21 04:27:59.998] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2125.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.998] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bef0) for "J:/MY SDCArds/100CANON/IMG_2125.JPG"
+[2025-12-21 04:27:59.998] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2127.JPG" QSize(25, 25)
+[2025-12-21 04:27:59.999] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bf70) for "J:/MY SDCArds/100CANON/IMG_2127.JPG"
+[2025-12-21 04:27:59.999] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2128.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.000] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231bff0) for "J:/MY SDCArds/100CANON/IMG_2128.JPG"
+[2025-12-21 04:28:00.000] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2129.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.000] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231d970) for "J:/MY SDCArds/100CANON/IMG_2129.JPG"
+[2025-12-21 04:28:00.001] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2153.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.001] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231d9f0) for "J:/MY SDCArds/100CANON/IMG_2153.JPG"
+[2025-12-21 04:28:00.002] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2158.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.002] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231c670) for "J:/MY SDCArds/100CANON/IMG_2158.JPG"
+[2025-12-21 04:28:00.003] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2160.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.004] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231c7f0) for "J:/MY SDCArds/100CANON/IMG_2160.JPG"
+[2025-12-21 04:28:00.005] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2161.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.005] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231da70) for "J:/MY SDCArds/100CANON/IMG_2161.JPG"
+[2025-12-21 04:28:00.006] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2162.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.007] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231d870) for "J:/MY SDCArds/100CANON/IMG_2162.JPG"
+[2025-12-21 04:28:00.008] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2165.JPG" QSize(25, 25)
+[2025-12-21 04:28:00.008] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1976231d1f0) for "J:/MY SDCArds/100CANON/IMG_2165.JPG"
+[2025-12-21 04:28:00.009] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97260) (null= false )
+[2025-12-21 04:28:00.010] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a96560) (null= false )
+[2025-12-21 04:28:00.010] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a976e0) (null= false )
+[2025-12-21 04:28:00.011] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a96360) (null= false )
+[2025-12-21 04:28:00.011] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97560) (null= false )
+[2025-12-21 04:28:00.012] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97260) for "J:/MY SDCArds/100CANON/IMG_2166.JPG"
+[2025-12-21 04:28:00.014] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a96560) for "J:/MY SDCArds/100CANON/IMG_2164.JPG"
+[2025-12-21 04:28:00.014] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a976e0) for "J:/MY SDCArds/100CANON/IMG_2146.JPG"
+[2025-12-21 04:28:00.015] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a96360) for "J:/MY SDCArds/100CANON/IMG_2159.JPG"
+[2025-12-21 04:28:00.015] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97560) for "J:/MY SDCArds/100CANON/IMG_2122.JPG"
+[2025-12-21 04:28:00.016] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2126.JPG"
+[2025-12-21 04:28:00.017] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a96ae0) (null= false )
+[2025-12-21 04:28:00.017] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a96ae0) for "J:/MY SDCArds/100CANON/IMG_2126.JPG"
+[2025-12-21 04:28:00.186] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2119.JPG"
+[2025-12-21 04:28:00.187] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a971e0) (null= false )
+[2025-12-21 04:28:00.188] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a971e0) for "J:/MY SDCArds/100CANON/IMG_2119.JPG"
+[2025-12-21 04:28:00.222] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2114.JPG"
+[2025-12-21 04:28:00.222] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97ae0) (null= false )
+[2025-12-21 04:28:00.223] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97ae0) for "J:/MY SDCArds/100CANON/IMG_2114.JPG"
+[2025-12-21 04:28:00.293] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2109.JPG"
+[2025-12-21 04:28:00.293] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a070) (null= false )
+[2025-12-21 04:28:00.294] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a070) for "J:/MY SDCArds/100CANON/IMG_2109.JPG"
+[2025-12-21 04:28:00.298] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2112.JPG"
+[2025-12-21 04:28:00.299] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8bdf0) (null= false )
+[2025-12-21 04:28:00.299] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8bdf0) for "J:/MY SDCArds/100CANON/IMG_2112.JPG"
+[2025-12-21 04:28:00.375] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2107.JPG"
+[2025-12-21 04:28:00.376] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b770) (null= false )
+[2025-12-21 04:28:00.376] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b770) for "J:/MY SDCArds/100CANON/IMG_2107.JPG"
+[2025-12-21 04:28:00.436] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2105.JPG"
+[2025-12-21 04:28:00.437] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8ac70) (null= false )
+[2025-12-21 04:28:00.438] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8ac70) for "J:/MY SDCArds/100CANON/IMG_2105.JPG"
+[2025-12-21 04:28:00.477] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2102.JPG"
+[2025-12-21 04:28:00.479] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a170) (null= false )
+[2025-12-21 04:28:00.479] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a170) for "J:/MY SDCArds/100CANON/IMG_2102.JPG"
+[2025-12-21 04:28:00.566] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2100.JPG"
+[2025-12-21 04:28:00.566] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a2f0) (null= false )
+[2025-12-21 04:28:00.567] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a2f0) for "J:/MY SDCArds/100CANON/IMG_2100.JPG"
+[2025-12-21 04:28:00.582] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2098.JPG"
+[2025-12-21 04:28:00.583] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a1f0) (null= false )
+[2025-12-21 04:28:00.583] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a1f0) for "J:/MY SDCArds/100CANON/IMG_2098.JPG"
+[2025-12-21 04:28:00.664] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2095.JPG"
+[2025-12-21 04:28:00.665] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a770) (null= false )
+[2025-12-21 04:28:00.665] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a770) for "J:/MY SDCArds/100CANON/IMG_2095.JPG"
+[2025-12-21 04:28:00.672] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2092.JPG"
+[2025-12-21 04:28:00.673] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a970) (null= false )
+[2025-12-21 04:28:00.673] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a970) for "J:/MY SDCArds/100CANON/IMG_2092.JPG"
+[2025-12-21 04:28:00.760] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2089.JPG"
+[2025-12-21 04:28:00.761] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8acf0) (null= false )
+[2025-12-21 04:28:00.761] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8acf0) for "J:/MY SDCArds/100CANON/IMG_2089.JPG"
+[2025-12-21 04:28:00.785] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2086.JPG"
+[2025-12-21 04:28:00.786] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a370) (null= false )
+[2025-12-21 04:28:00.787] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a370) for "J:/MY SDCArds/100CANON/IMG_2086.JPG"
+[2025-12-21 04:28:00.848] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2082.JPG"
+[2025-12-21 04:28:00.849] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b8f0) (null= false )
+[2025-12-21 04:28:00.849] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b8f0) for "J:/MY SDCArds/100CANON/IMG_2082.JPG"
+[2025-12-21 04:28:00.875] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2079.JPG"
+[2025-12-21 04:28:00.876] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a8f0) (null= false )
+[2025-12-21 04:28:00.876] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a8f0) for "J:/MY SDCArds/100CANON/IMG_2079.JPG"
+[2025-12-21 04:28:00.948] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2077.JPG"
+[2025-12-21 04:28:00.949] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b970) (null= false )
+[2025-12-21 04:28:00.949] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b970) for "J:/MY SDCArds/100CANON/IMG_2077.JPG"
+[2025-12-21 04:28:00.989] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2074.JPG"
+[2025-12-21 04:28:00.990] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a7f0) (null= false )
+[2025-12-21 04:28:00.990] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a7f0) for "J:/MY SDCArds/100CANON/IMG_2074.JPG"
+[2025-12-21 04:28:01.074] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 491.313 MB (Delta: 85.2813 ) | VRAM: 85.1719 MB (Delta: 42.5859 )
+[2025-12-21 04:28:01.073] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2064.JPG"
+[2025-12-21 04:28:01.100] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8af70) (null= false )
+[2025-12-21 04:28:01.100] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8af70) for "J:/MY SDCArds/100CANON/IMG_2064.JPG"
+[2025-12-21 04:28:01.111] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2060.JPG"
+[2025-12-21 04:28:01.112] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b570) (null= false )
+[2025-12-21 04:28:01.112] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b570) for "J:/MY SDCArds/100CANON/IMG_2060.JPG"
+[2025-12-21 04:28:01.220] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2056.JPG"
+[2025-12-21 04:28:01.221] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a870) (null= false )
+[2025-12-21 04:28:01.223] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a870) for "J:/MY SDCArds/100CANON/IMG_2056.JPG"
+[2025-12-21 04:28:01.240] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2049.JPG"
+[2025-12-21 04:28:01.240] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b1f0) (null= false )
+[2025-12-21 04:28:01.241] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b1f0) for "J:/MY SDCArds/100CANON/IMG_2049.JPG"
+[2025-12-21 04:28:01.323] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2037.JPG"
+[2025-12-21 04:28:01.336] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a3f0) (null= false )
+[2025-12-21 04:28:01.338] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a3f0) for "J:/MY SDCArds/100CANON/IMG_2037.JPG"
+[2025-12-21 04:28:01.344] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000156].jpg"
+[2025-12-21 04:28:01.345] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a4f0) (null= false )
+[2025-12-21 04:28:01.346] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a4f0) for "J:/MY SDCArds/dir0067.chk/[000156].jpg"
+[2025-12-21 04:28:01.371] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000133].jpg"
+[2025-12-21 04:28:01.375] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a570) (null= false )
+[2025-12-21 04:28:01.376] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a570) for "J:/MY SDCArds/dir0067.chk/[000133].jpg"
+[2025-12-21 04:28:01.386] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000116].jpg"
+[2025-12-21 04:28:01.390] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8aff0) (null= false )
+[2025-12-21 04:28:01.400] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8aff0) for "J:/MY SDCArds/dir0067.chk/[000116].jpg"
+[2025-12-21 04:28:01.413] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:28:01.414] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a670) (null= false )
+[2025-12-21 04:28:01.414] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a670) for "J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:28:01.437] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:28:01.437] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a9f0) (null= false )
+[2025-12-21 04:28:01.438] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a9f0) for "J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:28:01.480] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg"
+[2025-12-21 04:28:01.481] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8ad70) (null= false )
+[2025-12-21 04:28:01.481] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8ad70) for "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg"
+[2025-12-21 04:28:01.517] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000099].jpg"
+[2025-12-21 04:28:01.518] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8a5f0) (null= false )
+[2025-12-21 04:28:01.518] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8a5f0) for "J:/MY SDCArds/dir0067.chk/[000099].jpg"
+[2025-12-21 04:28:01.553] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193202.jpg"
+[2025-12-21 04:28:01.554] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b070) (null= false )
+[2025-12-21 04:28:01.555] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b070) for "J:/MY SDCArds/dir0064.chk/20211228_193202.jpg"
+[2025-12-21 04:28:01.633] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193126.jpg"
+[2025-12-21 04:28:01.634] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8adf0) (null= false )
+[2025-12-21 04:28:01.634] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8adf0) for "J:/MY SDCArds/dir0064.chk/20211228_193126.jpg"
+[2025-12-21 04:28:01.810] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193127.dng"
+[2025-12-21 04:28:01.811] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8aa70) (null= false )
+[2025-12-21 04:28:01.812] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8aa70) for "J:/MY SDCArds/dir0064.chk/20211228_193127.dng"
+[2025-12-21 04:28:01.915] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193121.dng"
+[2025-12-21 04:28:01.918] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8aaf0) (null= false )
+[2025-12-21 04:28:01.919] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8aaf0) for "J:/MY SDCArds/dir0064.chk/20211228_193121.dng"
+[2025-12-21 04:28:01.954] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg"
+[2025-12-21 04:28:01.955] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8ae70) (null= false )
+[2025-12-21 04:28:01.955] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8ae70) for "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg"
+[2025-12-21 04:28:02.027] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193114.dng"
+[2025-12-21 04:28:02.028] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b3f0) (null= false )
+[2025-12-21 04:28:02.029] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b3f0) for "J:/MY SDCArds/dir0064.chk/20211228_193114.dng"
+[2025-12-21 04:28:02.232] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193109.dng"
+[2025-12-21 04:28:02.256] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8ab70) (null= false )
+[2025-12-21 04:28:02.256] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8ab70) for "J:/MY SDCArds/dir0064.chk/20211228_193109.dng"
+[2025-12-21 04:28:02.292] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193114.jpg"
+[2025-12-21 04:28:02.293] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b2f0) (null= false )
+[2025-12-21 04:28:02.303] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b2f0) for "J:/MY SDCArds/dir0064.chk/20211228_193114.jpg"
+[2025-12-21 04:28:02.335] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193121.jpg"
+[2025-12-21 04:28:02.336] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b470) (null= false )
+[2025-12-21 04:28:02.336] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b470) for "J:/MY SDCArds/dir0064.chk/20211228_193121.jpg"
+[2025-12-21 04:28:02.369] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193111.dng"
+[2025-12-21 04:28:02.370] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc8b0f0) (null= false )
+[2025-12-21 04:28:02.372] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc8b0f0) for "J:/MY SDCArds/dir0064.chk/20211228_193111.dng"
+[2025-12-21 04:28:02.398] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193122.jpg"
+[2025-12-21 04:28:02.399] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88970) (null= false )
+[2025-12-21 04:28:02.399] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88970) for "J:/MY SDCArds/dir0064.chk/20211228_193122.jpg"
+[2025-12-21 04:28:02.576] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193122.dng"
+[2025-12-21 04:28:02.577] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89070) (null= false )
+[2025-12-21 04:28:02.577] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89070) for "J:/MY SDCArds/dir0064.chk/20211228_193122.dng"
+[2025-12-21 04:28:02.621] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193127.jpg"
+[2025-12-21 04:28:02.622] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89270) (null= false )
+[2025-12-21 04:28:02.624] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89270) for "J:/MY SDCArds/dir0064.chk/20211228_193127.jpg"
+[2025-12-21 04:28:02.692] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193126.dng"
+[2025-12-21 04:28:02.693] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc891f0) (null= false )
+[2025-12-21 04:28:02.694] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc891f0) for "J:/MY SDCArds/dir0064.chk/20211228_193126.dng"
+[2025-12-21 04:28:02.948] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193208.dng"
+[2025-12-21 04:28:02.949] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430841b0) (null= false )
+[2025-12-21 04:28:02.950] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430841b0) for "J:/MY SDCArds/dir0064.chk/20211228_193208.dng"
+[2025-12-21 04:28:02.964] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193202.dng"
+[2025-12-21 04:28:02.965] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88d70) (null= false )
+[2025-12-21 04:28:02.965] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88d70) for "J:/MY SDCArds/dir0064.chk/20211228_193202.dng"
+[2025-12-21 04:28:02.981] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193208.jpg"
+[2025-12-21 04:28:02.981] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x197430844b0) (null= false )
+[2025-12-21 04:28:02.982] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x197430844b0) for "J:/MY SDCArds/dir0064.chk/20211228_193208.jpg"
+[2025-12-21 04:28:03.075] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 621.789 MB (Delta: 130.477 ) | VRAM: 106.215 MB (Delta: 21.043 )
+[2025-12-21 04:28:03.136] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193212.jpg"
+[2025-12-21 04:28:03.137] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97c60) (null= false )
+[2025-12-21 04:28:03.137] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97c60) for "J:/MY SDCArds/dir0064.chk/20211228_193212.jpg"
+[2025-12-21 04:28:03.182] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193211.dng"
+[2025-12-21 04:28:03.185] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a979e0) (null= false )
+[2025-12-21 04:28:03.186] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a979e0) for "J:/MY SDCArds/dir0064.chk/20211228_193211.dng"
+[2025-12-21 04:28:03.215] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:28:03.216] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a977e0) (null= false )
+[2025-12-21 04:28:03.217] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a977e0) for "J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:28:03.242] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:28:03.242] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a96fe0) (null= false )
+[2025-12-21 04:28:03.243] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a96fe0) for "J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:28:03.342] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000098].jpg"
+[2025-12-21 04:28:03.347] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a972e0) (null= false )
+[2025-12-21 04:28:03.347] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193212.dng"
+[2025-12-21 04:28:03.347] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a972e0) for "J:/MY SDCArds/dir0067.chk/[000098].jpg"
+[2025-12-21 04:28:03.348] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a975e0) (null= false )
+[2025-12-21 04:28:03.348] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a975e0) for "J:/MY SDCArds/dir0064.chk/20211228_193212.dng"
+[2025-12-21 04:28:03.394] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000101].jpg"
+[2025-12-21 04:28:03.394] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97760) (null= false )
+[2025-12-21 04:28:03.395] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97760) for "J:/MY SDCArds/dir0067.chk/[000101].jpg"
+[2025-12-21 04:28:03.397] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000102].jpg"
+[2025-12-21 04:28:03.398] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97b60) (null= false )
+[2025-12-21 04:28:03.398] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97b60) for "J:/MY SDCArds/dir0067.chk/[000102].jpg"
+[2025-12-21 04:28:03.419] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000115].jpg"
+[2025-12-21 04:28:03.420] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a964e0) (null= false )
+[2025-12-21 04:28:03.420] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a964e0) for "J:/MY SDCArds/dir0067.chk/[000115].jpg"
+[2025-12-21 04:28:03.441] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000114].jpg"
+[2025-12-21 04:28:03.442] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97ce0) (null= false )
+[2025-12-21 04:28:03.442] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97ce0) for "J:/MY SDCArds/dir0067.chk/[000114].jpg"
+[2025-12-21 04:28:03.485] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000105].jpg"
+[2025-12-21 04:28:03.487] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97d60) (null= false )
+[2025-12-21 04:28:03.487] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97d60) for "J:/MY SDCArds/dir0067.chk/[000105].jpg"
+[2025-12-21 04:28:03.499] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000107].jpg"
+[2025-12-21 04:28:03.500] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc883f0) (null= false )
+[2025-12-21 04:28:03.501] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc883f0) for "J:/MY SDCArds/dir0067.chk/[000107].jpg"
+[2025-12-21 04:28:03.513] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000106].jpg"
+[2025-12-21 04:28:03.513] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x19746a97de0) (null= false )
+[2025-12-21 04:28:03.514] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x19746a97de0) for "J:/MY SDCArds/dir0067.chk/[000106].jpg"
+[2025-12-21 04:28:03.526] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000108].jpg"
+[2025-12-21 04:28:03.527] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc880f0) (null= false )
+[2025-12-21 04:28:03.528] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc880f0) for "J:/MY SDCArds/dir0067.chk/[000108].jpg"
+[2025-12-21 04:28:03.531] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000109].jpg"
+[2025-12-21 04:28:03.532] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89870) (null= false )
+[2025-12-21 04:28:03.532] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89870) for "J:/MY SDCArds/dir0067.chk/[000109].jpg"
+[2025-12-21 04:28:03.605] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000110].jpg"
+[2025-12-21 04:28:03.606] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89af0) (null= false )
+[2025-12-21 04:28:03.606] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89af0) for "J:/MY SDCArds/dir0067.chk/[000110].jpg"
+[2025-12-21 04:28:03.617] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000111].jpg"
+[2025-12-21 04:28:03.617] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc892f0) (null= false )
+[2025-12-21 04:28:03.618] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc892f0) for "J:/MY SDCArds/dir0067.chk/[000111].jpg"
+[2025-12-21 04:28:03.639] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000113].jpg"
+[2025-12-21 04:28:03.640] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc893f0) (null= false )
+[2025-12-21 04:28:03.640] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc893f0) for "J:/MY SDCArds/dir0067.chk/[000113].jpg"
+[2025-12-21 04:28:03.657] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000117].jpg"
+[2025-12-21 04:28:03.658] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88af0) (null= false )
+[2025-12-21 04:28:03.658] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88af0) for "J:/MY SDCArds/dir0067.chk/[000117].jpg"
+[2025-12-21 04:28:03.669] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000120].jpg"
+[2025-12-21 04:28:03.670] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc894f0) (null= false )
+[2025-12-21 04:28:03.670] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc894f0) for "J:/MY SDCArds/dir0067.chk/[000120].jpg"
+[2025-12-21 04:28:03.720] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000119].jpg"
+[2025-12-21 04:28:03.724] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89670) (null= false )
+[2025-12-21 04:28:03.725] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89670) for "J:/MY SDCArds/dir0067.chk/[000119].jpg"
+[2025-12-21 04:28:03.737] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000112].jpg"
+[2025-12-21 04:28:03.738] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89a70) (null= false )
+[2025-12-21 04:28:03.738] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89a70) for "J:/MY SDCArds/dir0067.chk/[000112].jpg"
+[2025-12-21 04:28:11.802] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000118].jpg"
+[2025-12-21 04:28:11.803] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89d70) (null= false )
+[2025-12-21 04:28:11.803] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89d70) for "J:/MY SDCArds/dir0067.chk/[000118].jpg"
+[2025-12-21 04:28:11.849] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000123].jpg"
+[2025-12-21 04:28:11.850] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc896f0) (null= false )
+[2025-12-21 04:28:11.850] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc896f0) for "J:/MY SDCArds/dir0067.chk/[000123].jpg"
+[2025-12-21 04:28:11.901] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000127].jpg"
+[2025-12-21 04:28:11.902] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88270) (null= false )
+[2025-12-21 04:28:11.906] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000126].jpg"
+[2025-12-21 04:28:11.907] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88270) for "J:/MY SDCArds/dir0067.chk/[000127].jpg"
+[2025-12-21 04:28:11.908] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc886f0) (null= false )
+[2025-12-21 04:28:11.909] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc886f0) for "J:/MY SDCArds/dir0067.chk/[000126].jpg"
+[2025-12-21 04:28:11.979] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000128].jpg"
+[2025-12-21 04:28:11.980] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88e70) (null= false )
+[2025-12-21 04:28:11.980] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88e70) for "J:/MY SDCArds/dir0067.chk/[000128].jpg"
+[2025-12-21 04:28:11.993] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000129].jpg"
+[2025-12-21 04:28:11.994] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89570) (null= false )
+[2025-12-21 04:28:11.994] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89570) for "J:/MY SDCArds/dir0067.chk/[000129].jpg"
+[2025-12-21 04:28:12.079] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000131].jpg"
+[2025-12-21 04:28:12.080] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc895f0) (null= false )
+[2025-12-21 04:28:12.080] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc895f0) for "J:/MY SDCArds/dir0067.chk/[000131].jpg"
+[2025-12-21 04:28:12.086] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000130].jpg"
+[2025-12-21 04:28:12.087] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88470) (null= false )
+[2025-12-21 04:28:12.087] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88470) for "J:/MY SDCArds/dir0067.chk/[000130].jpg"
+[2025-12-21 04:28:12.128] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000132].jpg"
+[2025-12-21 04:28:12.129] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89c70) (null= false )
+[2025-12-21 04:28:12.129] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89c70) for "J:/MY SDCArds/dir0067.chk/[000132].jpg"
+[2025-12-21 04:28:12.195] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000134].jpg"
+[2025-12-21 04:28:12.196] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88070) (null= false )
+[2025-12-21 04:28:12.196] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88070) for "J:/MY SDCArds/dir0067.chk/[000134].jpg"
+[2025-12-21 04:28:12.206] [Thread 35820] Warning: [AsyncImageProvider] QImageReader canRead() returned false: "J:\\MY SDCArds\\dir0067.chk\\[000136].jpg" Error: "Unsupported image format" Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
+[2025-12-21 04:28:12.212] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000136].jpg"
+[2025-12-21 04:28:12.212] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc898f0) (null= false )
+[2025-12-21 04:28:12.213] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc898f0) for "J:/MY SDCArds/dir0067.chk/[000136].jpg"
+[2025-12-21 04:28:12.228] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000135].jpg"
+[2025-12-21 04:28:12.228] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88570) (null= false )
+[2025-12-21 04:28:12.228] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88570) for "J:/MY SDCArds/dir0067.chk/[000135].jpg"
+[2025-12-21 04:28:12.300] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000138].jpg"
+[2025-12-21 04:28:12.300] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89770) (null= false )
+[2025-12-21 04:28:12.301] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89770) for "J:/MY SDCArds/dir0067.chk/[000138].jpg"
+[2025-12-21 04:28:12.302] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000137].jpg"
+[2025-12-21 04:28:12.303] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88df0) (null= false )
+[2025-12-21 04:28:12.303] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88df0) for "J:/MY SDCArds/dir0067.chk/[000137].jpg"
+[2025-12-21 04:28:12.332] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000141].jpg"
+[2025-12-21 04:28:12.333] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89970) (null= false )
+[2025-12-21 04:28:12.334] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89970) for "J:/MY SDCArds/dir0067.chk/[000141].jpg"
+[2025-12-21 04:28:12.353] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000142].jpg"
+[2025-12-21 04:28:12.354] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc890f0) (null= false )
+[2025-12-21 04:28:12.355] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc890f0) for "J:/MY SDCArds/dir0067.chk/[000142].jpg"
+[2025-12-21 04:28:12.376] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000143].jpg"
+[2025-12-21 04:28:12.377] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc899f0) (null= false )
+[2025-12-21 04:28:12.377] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc899f0) for "J:/MY SDCArds/dir0067.chk/[000143].jpg"
+[2025-12-21 04:28:12.399] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000147].jpg"
+[2025-12-21 04:28:12.399] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89170) (null= false )
+[2025-12-21 04:28:12.399] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89170) for "J:/MY SDCArds/dir0067.chk/[000147].jpg"
+[2025-12-21 04:28:12.449] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000154].jpg"
+[2025-12-21 04:28:12.449] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88770) (null= false )
+[2025-12-21 04:28:12.450] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88770) for "J:/MY SDCArds/dir0067.chk/[000154].jpg"
+[2025-12-21 04:28:12.459] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000155].jpg"
+[2025-12-21 04:28:12.460] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88170) (null= false )
+[2025-12-21 04:28:12.461] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88170) for "J:/MY SDCArds/dir0067.chk/[000155].jpg"
+[2025-12-21 04:28:12.523] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0067.chk/[000159].jpg"
+[2025-12-21 04:28:12.524] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89b70) (null= false )
+[2025-12-21 04:28:12.524] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89b70) for "J:/MY SDCArds/dir0067.chk/[000159].jpg"
+[2025-12-21 04:28:12.665] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2035.JPG"
+[2025-12-21 04:28:12.666] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88ef0) (null= false )
+[2025-12-21 04:28:12.666] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88ef0) for "J:/MY SDCArds/100CANON/IMG_2035.JPG"
+[2025-12-21 04:28:12.751] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2036.JPG"
+[2025-12-21 04:28:12.752] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89bf0) (null= false )
+[2025-12-21 04:28:12.753] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89bf0) for "J:/MY SDCArds/100CANON/IMG_2036.JPG"
+[2025-12-21 04:28:12.824] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2038.JPG"
+[2025-12-21 04:28:12.824] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89470) (null= false )
+[2025-12-21 04:28:12.825] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89470) for "J:/MY SDCArds/100CANON/IMG_2038.JPG"
+[2025-12-21 04:28:12.863] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2039.JPG"
+[2025-12-21 04:28:12.864] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc887f0) (null= false )
+[2025-12-21 04:28:12.865] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc887f0) for "J:/MY SDCArds/100CANON/IMG_2039.JPG"
+[2025-12-21 04:28:12.926] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2054.JPG"
+[2025-12-21 04:28:12.927] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89cf0) (null= false )
+[2025-12-21 04:28:12.927] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89cf0) for "J:/MY SDCArds/100CANON/IMG_2054.JPG"
+[2025-12-21 04:28:12.953] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2055.JPG"
+[2025-12-21 04:28:12.953] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88bf0) (null= false )
+[2025-12-21 04:28:12.954] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88bf0) for "J:/MY SDCArds/100CANON/IMG_2055.JPG"
+[2025-12-21 04:28:13.039] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2057.JPG"
+[2025-12-21 04:28:13.040] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89df0) (null= false )
+[2025-12-21 04:28:13.041] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89df0) for "J:/MY SDCArds/100CANON/IMG_2057.JPG"
+[2025-12-21 04:28:13.069] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2058.JPG"
+[2025-12-21 04:28:13.070] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88f70) (null= false )
+[2025-12-21 04:28:13.071] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88f70) for "J:/MY SDCArds/100CANON/IMG_2058.JPG"
+[2025-12-21 04:28:13.126] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2059.JPG"
+[2025-12-21 04:28:13.127] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc88370) (null= false )
+[2025-12-21 04:28:13.128] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc88370) for "J:/MY SDCArds/100CANON/IMG_2059.JPG"
+[2025-12-21 04:28:13.173] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2061.JPG"
+[2025-12-21 04:28:13.173] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89e70) (null= false )
+[2025-12-21 04:28:13.174] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89e70) for "J:/MY SDCArds/100CANON/IMG_2061.JPG"
+[2025-12-21 04:28:13.250] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2062.JPG"
+[2025-12-21 04:28:13.251] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89ef0) (null= false )
+[2025-12-21 04:28:13.251] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89ef0) for "J:/MY SDCArds/100CANON/IMG_2062.JPG"
+[2025-12-21 04:28:13.276] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2063.JPG"
+[2025-12-21 04:28:13.278] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89f70) (null= false )
+[2025-12-21 04:28:13.279] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89f70) for "J:/MY SDCArds/100CANON/IMG_2063.JPG"
+[2025-12-21 04:28:13.330] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2065.JPG"
+[2025-12-21 04:28:13.346] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc89ff0) (null= false )
+[2025-12-21 04:28:13.347] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc89ff0) for "J:/MY SDCArds/100CANON/IMG_2065.JPG"
+[2025-12-21 04:28:13.369] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2066.JPG"
+[2025-12-21 04:28:13.370] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc881f0) (null= false )
+[2025-12-21 04:28:13.370] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc881f0) for "J:/MY SDCArds/100CANON/IMG_2066.JPG"
+[2025-12-21 04:28:13.439] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2067.JPG"
+[2025-12-21 04:28:13.439] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2068.JPG"
+[2025-12-21 04:28:13.439] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc882f0) (null= false )
+[2025-12-21 04:28:13.440] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974cc884f0) (null= false )
+[2025-12-21 04:28:13.441] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc882f0) for "J:/MY SDCArds/100CANON/IMG_2067.JPG"
+[2025-12-21 04:28:13.442] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974cc884f0) for "J:/MY SDCArds/100CANON/IMG_2068.JPG"
+[2025-12-21 04:28:13.523] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2069.JPG"
+[2025-12-21 04:28:13.525] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231baf0) (null= false )
+[2025-12-21 04:28:13.526] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231baf0) for "J:/MY SDCArds/100CANON/IMG_2069.JPG"
+[2025-12-21 04:28:13.563] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2070.JPG"
+[2025-12-21 04:28:13.564] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231ac70) (null= false )
+[2025-12-21 04:28:13.564] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231ac70) for "J:/MY SDCArds/100CANON/IMG_2070.JPG"
+[2025-12-21 04:28:13.634] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2072.JPG"
+[2025-12-21 04:28:13.635] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231aef0) (null= false )
+[2025-12-21 04:28:13.635] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231aef0) for "J:/MY SDCArds/100CANON/IMG_2072.JPG"
+[2025-12-21 04:28:13.638] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2071.JPG"
+[2025-12-21 04:28:13.639] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b270) (null= false )
+[2025-12-21 04:28:13.639] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b270) for "J:/MY SDCArds/100CANON/IMG_2071.JPG"
+[2025-12-21 04:28:13.727] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2073.JPG"
+[2025-12-21 04:28:13.728] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a3f0) (null= false )
+[2025-12-21 04:28:13.728] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a3f0) for "J:/MY SDCArds/100CANON/IMG_2073.JPG"
+[2025-12-21 04:28:13.748] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2075.JPG"
+[2025-12-21 04:28:13.749] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b2f0) (null= false )
+[2025-12-21 04:28:13.750] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b2f0) for "J:/MY SDCArds/100CANON/IMG_2075.JPG"
+[2025-12-21 04:28:13.809] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2076.JPG"
+[2025-12-21 04:28:13.809] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231ba70) (null= false )
+[2025-12-21 04:28:13.810] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231ba70) for "J:/MY SDCArds/100CANON/IMG_2076.JPG"
+[2025-12-21 04:28:13.856] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2078.JPG"
+[2025-12-21 04:28:13.857] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a4f0) (null= false )
+[2025-12-21 04:28:13.858] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a4f0) for "J:/MY SDCArds/100CANON/IMG_2078.JPG"
+[2025-12-21 04:28:13.913] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2080.JPG"
+[2025-12-21 04:28:13.914] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231ad70) (null= false )
+[2025-12-21 04:28:13.914] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231ad70) for "J:/MY SDCArds/100CANON/IMG_2080.JPG"
+[2025-12-21 04:28:13.940] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2081.JPG"
+[2025-12-21 04:28:13.941] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a870) (null= false )
+[2025-12-21 04:28:13.942] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a870) for "J:/MY SDCArds/100CANON/IMG_2081.JPG"
+[2025-12-21 04:28:14.005] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2083.JPG"
+[2025-12-21 04:28:14.006] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a470) (null= false )
+[2025-12-21 04:28:14.006] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a470) for "J:/MY SDCArds/100CANON/IMG_2083.JPG"
+[2025-12-21 04:28:14.020] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2084.JPG"
+[2025-12-21 04:28:14.021] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a5f0) (null= false )
+[2025-12-21 04:28:14.021] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a5f0) for "J:/MY SDCArds/100CANON/IMG_2084.JPG"
+[2025-12-21 04:28:14.217] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2087.JPG"
+[2025-12-21 04:28:14.217] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a670) (null= false )
+[2025-12-21 04:28:14.218] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a670) for "J:/MY SDCArds/100CANON/IMG_2087.JPG"
+[2025-12-21 04:28:14.238] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2085.JPG"
+[2025-12-21 04:28:14.239] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b370) (null= false )
+[2025-12-21 04:28:14.239] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b370) for "J:/MY SDCArds/100CANON/IMG_2085.JPG"
+[2025-12-21 04:28:14.295] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2088.JPG"
+[2025-12-21 04:28:14.295] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231aa70) (null= false )
+[2025-12-21 04:28:14.296] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231aa70) for "J:/MY SDCArds/100CANON/IMG_2088.JPG"
+[2025-12-21 04:28:14.337] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2090.JPG"
+[2025-12-21 04:28:14.342] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b5f0) (null= false )
+[2025-12-21 04:28:14.343] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b5f0) for "J:/MY SDCArds/100CANON/IMG_2090.JPG"
+[2025-12-21 04:28:14.366] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2091.JPG"
+[2025-12-21 04:28:14.367] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b670) (null= false )
+[2025-12-21 04:28:14.367] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b670) for "J:/MY SDCArds/100CANON/IMG_2091.JPG"
+[2025-12-21 04:28:17.039] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 554.699 MB (Delta: -67.0898 ) | VRAM: 72.2734 MB (Delta: -33.9414 )
+[2025-12-21 04:28:17.672] [Thread 18412] Debug: Opening folder dialog...
+[2025-12-21 04:28:20.098] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2093.JPG"
+[2025-12-21 04:28:20.099] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bd70) (null= false )
+[2025-12-21 04:28:20.099] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bd70) for "J:/MY SDCArds/100CANON/IMG_2093.JPG"
+[2025-12-21 04:28:20.167] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2094.JPG"
+[2025-12-21 04:28:20.168] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b8f0) (null= false )
+[2025-12-21 04:28:20.169] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b8f0) for "J:/MY SDCArds/100CANON/IMG_2094.JPG"
+[2025-12-21 04:28:20.217] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2096.JPG"
+[2025-12-21 04:28:20.218] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b7f0) (null= false )
+[2025-12-21 04:28:20.219] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b7f0) for "J:/MY SDCArds/100CANON/IMG_2096.JPG"
+[2025-12-21 04:28:20.260] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2097.JPG"
+[2025-12-21 04:28:20.262] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b870) (null= false )
+[2025-12-21 04:28:20.262] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b870) for "J:/MY SDCArds/100CANON/IMG_2097.JPG"
+[2025-12-21 04:28:20.289] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2099.JPG"
+[2025-12-21 04:28:20.294] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a6f0) (null= false )
+[2025-12-21 04:28:20.294] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a6f0) for "J:/MY SDCArds/100CANON/IMG_2099.JPG"
+[2025-12-21 04:28:20.352] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2101.JPG"
+[2025-12-21 04:28:20.353] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a970) (null= false )
+[2025-12-21 04:28:20.354] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a970) for "J:/MY SDCArds/100CANON/IMG_2101.JPG"
+[2025-12-21 04:28:20.355] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2103.JPG"
+[2025-12-21 04:28:20.356] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a9f0) (null= false )
+[2025-12-21 04:28:20.356] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a9f0) for "J:/MY SDCArds/100CANON/IMG_2103.JPG"
+[2025-12-21 04:28:20.416] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2104.JPG"
+[2025-12-21 04:28:20.417] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b970) (null= false )
+[2025-12-21 04:28:20.417] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b970) for "J:/MY SDCArds/100CANON/IMG_2104.JPG"
+[2025-12-21 04:28:20.426] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2106.JPG"
+[2025-12-21 04:28:20.427] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231acf0) (null= false )
+[2025-12-21 04:28:20.427] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231acf0) for "J:/MY SDCArds/100CANON/IMG_2106.JPG"
+[2025-12-21 04:28:20.493] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2110.JPG"
+[2025-12-21 04:28:20.494] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231adf0) (null= false )
+[2025-12-21 04:28:20.495] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231adf0) for "J:/MY SDCArds/100CANON/IMG_2110.JPG"
+[2025-12-21 04:28:20.495] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2108.JPG"
+[2025-12-21 04:28:20.495] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bbf0) (null= false )
+[2025-12-21 04:28:20.496] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bbf0) for "J:/MY SDCArds/100CANON/IMG_2108.JPG"
+[2025-12-21 04:28:20.586] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2111.JPG"
+[2025-12-21 04:28:20.587] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231a170) (null= false )
+[2025-12-21 04:28:20.588] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231a170) for "J:/MY SDCArds/100CANON/IMG_2111.JPG"
+[2025-12-21 04:28:20.603] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2113.JPG"
+[2025-12-21 04:28:20.603] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231aff0) (null= false )
+[2025-12-21 04:28:20.604] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231aff0) for "J:/MY SDCArds/100CANON/IMG_2113.JPG"
+[2025-12-21 04:28:20.672] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2115.JPG"
+[2025-12-21 04:28:20.673] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bc70) (null= false )
+[2025-12-21 04:28:20.673] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bc70) for "J:/MY SDCArds/100CANON/IMG_2115.JPG"
+[2025-12-21 04:28:20.688] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2116.JPG"
+[2025-12-21 04:28:20.688] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b070) (null= false )
+[2025-12-21 04:28:20.688] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b070) for "J:/MY SDCArds/100CANON/IMG_2116.JPG"
+[2025-12-21 04:28:20.762] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2117.JPG"
+[2025-12-21 04:28:20.763] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bdf0) (null= false )
+[2025-12-21 04:28:20.763] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bdf0) for "J:/MY SDCArds/100CANON/IMG_2117.JPG"
+[2025-12-21 04:28:20.770] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2118.JPG"
+[2025-12-21 04:28:20.771] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b0f0) (null= false )
+[2025-12-21 04:28:20.771] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b0f0) for "J:/MY SDCArds/100CANON/IMG_2118.JPG"
+[2025-12-21 04:28:20.849] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2120.JPG"
+[2025-12-21 04:28:20.849] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b9f0) (null= false )
+[2025-12-21 04:28:20.849] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b9f0) for "J:/MY SDCArds/100CANON/IMG_2120.JPG"
+[2025-12-21 04:28:20.852] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2121.JPG"
+[2025-12-21 04:28:20.853] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bb70) (null= false )
+[2025-12-21 04:28:20.853] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bb70) for "J:/MY SDCArds/100CANON/IMG_2121.JPG"
+[2025-12-21 04:28:20.941] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2123.JPG"
+[2025-12-21 04:28:20.943] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231b170) (null= false )
+[2025-12-21 04:28:20.944] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231b170) for "J:/MY SDCArds/100CANON/IMG_2123.JPG"
+[2025-12-21 04:28:20.961] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2124.JPG"
+[2025-12-21 04:28:20.962] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231be70) (null= false )
+[2025-12-21 04:28:20.962] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231be70) for "J:/MY SDCArds/100CANON/IMG_2124.JPG"
+[2025-12-21 04:28:21.038] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2125.JPG"
+[2025-12-21 04:28:21.039] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bef0) (null= false )
+[2025-12-21 04:28:21.039] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bef0) for "J:/MY SDCArds/100CANON/IMG_2125.JPG"
+[2025-12-21 04:28:21.049] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2127.JPG"
+[2025-12-21 04:28:21.049] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bf70) (null= false )
+[2025-12-21 04:28:21.050] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bf70) for "J:/MY SDCArds/100CANON/IMG_2127.JPG"
+[2025-12-21 04:28:21.116] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2128.JPG"
+[2025-12-21 04:28:21.117] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231bff0) (null= false )
+[2025-12-21 04:28:21.117] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231bff0) for "J:/MY SDCArds/100CANON/IMG_2128.JPG"
+[2025-12-21 04:28:21.127] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2129.JPG"
+[2025-12-21 04:28:21.127] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231d970) (null= false )
+[2025-12-21 04:28:21.127] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231d970) for "J:/MY SDCArds/100CANON/IMG_2129.JPG"
+[2025-12-21 04:28:21.212] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2153.JPG"
+[2025-12-21 04:28:21.213] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231d9f0) (null= false )
+[2025-12-21 04:28:21.213] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231d9f0) for "J:/MY SDCArds/100CANON/IMG_2153.JPG"
+[2025-12-21 04:28:21.222] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2158.JPG"
+[2025-12-21 04:28:21.222] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231c670) (null= false )
+[2025-12-21 04:28:21.223] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231c670) for "J:/MY SDCArds/100CANON/IMG_2158.JPG"
+[2025-12-21 04:28:21.316] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2161.JPG"
+[2025-12-21 04:28:21.317] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231da70) (null= false )
+[2025-12-21 04:28:21.317] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231da70) for "J:/MY SDCArds/100CANON/IMG_2161.JPG"
+[2025-12-21 04:28:21.330] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2160.JPG"
+[2025-12-21 04:28:21.330] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231c7f0) (null= false )
+[2025-12-21 04:28:21.331] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231c7f0) for "J:/MY SDCArds/100CANON/IMG_2160.JPG"
+[2025-12-21 04:28:21.386] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2165.JPG"
+[2025-12-21 04:28:21.388] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231d1f0) (null= false )
+[2025-12-21 04:28:21.389] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231d1f0) for "J:/MY SDCArds/100CANON/IMG_2165.JPG"
+[2025-12-21 04:28:21.406] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2162.JPG"
+[2025-12-21 04:28:21.407] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1976231d870) (null= false )
+[2025-12-21 04:28:21.407] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1976231d870) for "J:/MY SDCArds/100CANON/IMG_2162.JPG"
+[2025-12-21 04:28:24.038] [Thread 18412] Debug: [SystemMonitor] Resource Update: RAM: 502.145 MB (Delta: -52.5547 ) | VRAM: 36.7148 MB (Delta: -35.5586 )
+[2025-12-21 04:29:09.608] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:143: TypeError: Cannot read property 'gpuVramUsedMB' of null
+[2025-12-21 04:29:09.609] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:135: TypeError: Cannot read property 'gpuName' of null
+[2025-12-21 04:29:09.610] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:419: TypeError: Cannot read property 'graphicsApi' of null
+[2025-12-21 04:29:09.610] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:239: TypeError: Cannot read property 'logLevel' of null
+[2025-12-21 04:29:09.610] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:224: TypeError: Cannot read property 'rawAcceleration' of null
+[2025-12-21 04:29:09.611] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:221: TypeError: Cannot read property 'rawAcceleration' of null
+[2025-12-21 04:29:09.611] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:213: TypeError: Cannot read property 'concurrentThreads' of null
+[2025-12-21 04:29:09.612] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:202: TypeError: Cannot read property 'cacheSizeMB' of null
+[2025-12-21 04:29:09.612] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:191: TypeError: Cannot read property 'gridSize' of null
+[2025-12-21 04:29:09.613] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/StatsOverlay.qml:180: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.613] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:353: TypeError: Cannot call method 'getGpuName' of null
+[2025-12-21 04:29:09.614] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:292: TypeError: Cannot read property 'graphicsApi' of null
+[2025-12-21 04:29:09.614] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:276: TypeError: Cannot read property 'selectedApi' of null
+[2025-12-21 04:29:09.702] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2160.JPG" QSize(250, 25)
+[2025-12-21 04:29:09.703] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974a4a5790) for "J:/MY SDCArds/100CANON/IMG_2160.JPG"
+[2025-12-21 04:29:09.703] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/100CANON/IMG_2068.JPG" QSize(250, 250)
+[2025-12-21 04:29:09.703] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1974a4a4b10) for "J:/MY SDCArds/100CANON/IMG_2068.JPG"
+[2025-12-21 04:29:09.705] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193109.dng" QSize(250, 250)
+[2025-12-21 04:29:09.712] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3600) for "J:/MY SDCArds/dir0064.chk/20211228_193109.dng"
+[2025-12-21 04:29:09.732] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.733] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.734] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.734] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.734] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.735] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.735] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.735] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.736] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.737] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.738] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.739] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.739] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.741] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.741] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.741] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.742] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:56: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.742] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.743] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.743] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.743] [Thread 18412] Warning: qrc:/SamsungGallery/resources/qml/AlbumsView.qml:73: TypeError: Cannot read property 'thumbnailSize' of null
+[2025-12-21 04:29:09.733] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.761] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3480) for "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg"
+[2025-12-21 04:29:09.765] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193111.dng" QSize(250, 250)
+[2025-12-21 04:29:09.766] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2580) for "J:/MY SDCArds/dir0064.chk/20211228_193111.dng"
+[2025-12-21 04:29:09.766] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193114.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.767] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2200) for "J:/MY SDCArds/dir0064.chk/20211228_193114.jpg"
+[2025-12-21 04:29:09.767] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193114.dng" QSize(250, 250)
+[2025-12-21 04:29:09.782] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2068.JPG"
+[2025-12-21 04:29:09.782] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2880) for "J:/MY SDCArds/dir0064.chk/20211228_193114.dng"
+[2025-12-21 04:29:09.796] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193121.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.802] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3f80) for "J:/MY SDCArds/dir0064.chk/20211228_193121.jpg"
+[2025-12-21 04:29:09.822] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193121.dng" QSize(250, 250)
+[2025-12-21 04:29:09.823] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2e00) for "J:/MY SDCArds/dir0064.chk/20211228_193121.dng"
+[2025-12-21 04:29:09.823] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193122.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.824] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3580) for "J:/MY SDCArds/dir0064.chk/20211228_193122.jpg"
+[2025-12-21 04:29:09.824] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193122.dng" QSize(250, 250)
+[2025-12-21 04:29:09.825] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3980) for "J:/MY SDCArds/dir0064.chk/20211228_193122.dng"
+[2025-12-21 04:29:09.825] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193126.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.826] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3680) for "J:/MY SDCArds/dir0064.chk/20211228_193126.jpg"
+[2025-12-21 04:29:09.827] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193126.dng" QSize(250, 250)
+[2025-12-21 04:29:09.827] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3000) for "J:/MY SDCArds/dir0064.chk/20211228_193126.dng"
+[2025-12-21 04:29:09.828] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193127.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.828] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2180) for "J:/MY SDCArds/dir0064.chk/20211228_193127.jpg"
+[2025-12-21 04:29:09.829] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193127.dng" QSize(250, 250)
+[2025-12-21 04:29:09.829] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3300) for "J:/MY SDCArds/dir0064.chk/20211228_193127.dng"
+[2025-12-21 04:29:09.830] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193202.dng" QSize(250, 250)
+[2025-12-21 04:29:09.830] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3380) for "J:/MY SDCArds/dir0064.chk/20211228_193202.dng"
+[2025-12-21 04:29:09.831] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193202.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.831] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3a80) for "J:/MY SDCArds/dir0064.chk/20211228_193202.jpg"
+[2025-12-21 04:29:09.832] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193208.dng" QSize(250, 250)
+[2025-12-21 04:29:09.832] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2c00) for "J:/MY SDCArds/dir0064.chk/20211228_193208.dng"
+[2025-12-21 04:29:09.833] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193208.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.833] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3700) for "J:/MY SDCArds/dir0064.chk/20211228_193208.jpg"
+[2025-12-21 04:29:09.834] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.834] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2c80) for "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg"
+[2025-12-21 04:29:09.835] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193211.dng" QSize(250, 250)
+[2025-12-21 04:29:09.835] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3080) for "J:/MY SDCArds/dir0064.chk/20211228_193211.dng"
+[2025-12-21 04:29:09.836] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193212.jpg" QSize(250, 250)
+[2025-12-21 04:29:09.838] [Thread 35820] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg"
+[2025-12-21 04:29:09.836] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2600) for "J:/MY SDCArds/dir0064.chk/20211228_193212.jpg"
+[2025-12-21 04:29:09.839] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0064.chk/20211228_193212.dng" QSize(250, 250)
+[2025-12-21 04:29:09.839] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3200) for "J:/MY SDCArds/dir0064.chk/20211228_193212.dng"
+[2025-12-21 04:29:09.839] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000033].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.840] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3b00) for "J:/MY SDCArds/dir0067.chk/[000033].jpg"
+[2025-12-21 04:29:09.840] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000095].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.841] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3d00) for "J:/MY SDCArds/dir0067.chk/[000095].jpg"
+[2025-12-21 04:29:09.841] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000093].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.842] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3d80) for "J:/MY SDCArds/dir0067.chk/[000093].jpg"
+[2025-12-21 04:29:09.842] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000096].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.843] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f3e80) for "J:/MY SDCArds/dir0067.chk/[000096].jpg"
+[2025-12-21 04:29:09.843] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000098].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.847] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4000) for "J:/MY SDCArds/dir0067.chk/[000098].jpg"
+[2025-12-21 04:29:09.858] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000099].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.859] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2680) for "J:/MY SDCArds/dir0067.chk/[000099].jpg"
+[2025-12-21 04:29:09.860] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000101].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.860] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2780) for "J:/MY SDCArds/dir0067.chk/[000101].jpg"
+[2025-12-21 04:29:09.861] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000102].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.861] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2900) for "J:/MY SDCArds/dir0067.chk/[000102].jpg"
+[2025-12-21 04:29:09.862] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000116].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.862] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2980) for "J:/MY SDCArds/dir0067.chk/[000116].jpg"
+[2025-12-21 04:29:09.863] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000115].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.863] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2a80) for "J:/MY SDCArds/dir0067.chk/[000115].jpg"
+[2025-12-21 04:29:09.864] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000114].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.864] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f2b00) for "J:/MY SDCArds/dir0067.chk/[000114].jpg"
+[2025-12-21 04:29:09.865] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000105].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.866] [Thread 33044] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/dir0064.chk/20211228_193109.dng"
+[2025-12-21 04:29:09.866] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4b00) for "J:/MY SDCArds/dir0067.chk/[000105].jpg"
+[2025-12-21 04:29:09.867] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000106].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.867] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4a80) for "J:/MY SDCArds/dir0067.chk/[000106].jpg"
+[2025-12-21 04:29:09.868] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000107].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.868] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4680) for "J:/MY SDCArds/dir0067.chk/[000107].jpg"
+[2025-12-21 04:29:09.869] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000108].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.869] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4b80) for "J:/MY SDCArds/dir0067.chk/[000108].jpg"
+[2025-12-21 04:29:09.869] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000109].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.870] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f5800) for "J:/MY SDCArds/dir0067.chk/[000109].jpg"
+[2025-12-21 04:29:09.871] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000110].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.871] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4c00) for "J:/MY SDCArds/dir0067.chk/[000110].jpg"
+[2025-12-21 04:29:09.871] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000111].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.872] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4f80) for "J:/MY SDCArds/dir0067.chk/[000111].jpg"
+[2025-12-21 04:29:09.872] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000113].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.872] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f5600) for "J:/MY SDCArds/dir0067.chk/[000113].jpg"
+[2025-12-21 04:29:09.873] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000117].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.876] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f5280) for "J:/MY SDCArds/dir0067.chk/[000117].jpg"
+[2025-12-21 04:29:09.878] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000112].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.878] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f6080) for "J:/MY SDCArds/dir0067.chk/[000112].jpg"
+[2025-12-21 04:29:09.882] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000120].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.882] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f5c00) for "J:/MY SDCArds/dir0067.chk/[000120].jpg"
+[2025-12-21 04:29:09.883] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000119].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.883] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f5300) for "J:/MY SDCArds/dir0067.chk/[000119].jpg"
+[2025-12-21 04:29:09.884] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000118].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.884] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4c80) for "J:/MY SDCArds/dir0067.chk/[000118].jpg"
+[2025-12-21 04:29:09.885] [Thread 33872] Warning: TRACE: RequestImage "J:/MY SDCArds/dir0067.chk/[000123].jpg" QSize(250, 250)
+[2025-12-21 04:29:09.885] [Thread 33872] Warning: TRACE: [+TRK] Response created: AsyncImageResponse(0x1975e0f4200) for "J:/MY SDCArds/dir0067.chk/[000123].jpg"
+[2025-12-21 04:29:09.885] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1974a4a4b10) (null= false )
+[2025-12-21 04:29:09.886] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1975e0f3480) (null= false )
+[2025-12-21 04:29:09.886] [Thread 33872] Warning: TRACE: [DONE] handleDone for AsyncImageResponse(0x1975e0f3600) (null= false )
+[2025-12-21 04:29:09.887] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1974a4a4b10) for "J:/MY SDCArds/100CANON/IMG_2068.JPG"
+[2025-12-21 04:29:09.887] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1975e0f3480) for "J:/MY SDCArds/dir0064.chk/20211228_193111.jpg"
+[2025-12-21 04:29:09.888] [Thread 33872] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1975e0f3600) for "J:/MY SDCArds/dir0064.chk/20211228_193109.dng"

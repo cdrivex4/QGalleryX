@@ -1,7 +1,9 @@
 #include "ScrollBenchImageModel.h"
 #include "../../src/VisibleRangeManager.h"
+#include "../src/FastVolumeScanner.h"
 #include "../src/FrameBudgetScheduler.h"
 #include "../src/TaskScheduler.h"
+#include "FileTypeRouter.h"
 #include <QColor>
 #include <QDebug>
 #include <QDirIterator>
@@ -83,9 +85,11 @@ QVariant ScrollBenchImageModel::data(const QModelIndex &index, int role) const {
   }
   case IsRawRole: {
     QString ext = QFileInfo(item.path).suffix().toLower();
-    return (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
-            ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
-            ext == "pef" || ext == "raf");
+    return FileTypeRouter::isRaw(ext);
+  }
+  case IsVideoRole: {
+    QString ext = QFileInfo(item.path).suffix().toLower();
+    return FileTypeRouter::isVideo(ext);
   }
   default:
     return QVariant();
@@ -106,6 +110,7 @@ QHash<int, QByteArray> ScrollBenchImageModel::roleNames() const {
   roles[SectionYearRole] = "sectionYear";
   roles[SectionWeekRole] = "sectionWeek";
   roles[IsRawRole] = "isRaw";
+  roles[IsVideoRole] = "isVideo";
   return roles;
 }
 
@@ -216,81 +221,136 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
 
   cancelPendingRequests();
 
-  TaskScheduler::instance().addTask(
-      [this, path]() {
-        QElapsedTimer timer;
-        timer.start();
+  auto task = [this, path]() {
+    QElapsedTimer timer;
+    timer.start();
 
-        // Use QUrl to robustly parse file:// URIs and UNC paths
-        QString cleanPath;
-        QUrl url(path);
-        if (url.isValid() && url.isLocalFile()) {
-          cleanPath = url.toLocalFile();
-        } else {
-          cleanPath = path;
-          if (cleanPath.startsWith("file:///"))
-            cleanPath = cleanPath.mid(8);
-          else if (cleanPath.startsWith("file://"))
-            cleanPath = cleanPath.mid(7);
-        }
+    QString cleanPath;
+    QUrl url(path);
+    if (url.isValid() && url.isLocalFile()) {
+      cleanPath = url.toLocalFile();
+    } else {
+      cleanPath = path;
+      if (cleanPath.startsWith("file:///"))
+        cleanPath = cleanPath.mid(8);
+      else if (cleanPath.startsWith("file://"))
+        cleanPath = cleanPath.mid(7);
+    }
 
-        cleanPath = QDir::toNativeSeparators(cleanPath);
+    cleanPath = QDir::toNativeSeparators(cleanPath);
 
-        if (!QDir(cleanPath).exists()) {
-          qWarning() << "Directory does not exist:" << cleanPath;
-          QMetaObject::invokeMethod(this, [this]() {
-            m_isLoading = false;
-            emit isLoadingChanged();
-          });
-          return;
-        }
+    if (!QDir(cleanPath).exists()) {
+      qWarning() << "Directory does not exist:" << cleanPath;
+      QMetaObject::invokeMethod(this, [this]() {
+        m_isLoading = false;
+        emit isLoadingChanged();
+      });
+      return;
+    }
 
-        QStringList extensions = {
-            "jpg", "jpeg", "png",  "mp4",  "mkv",  "avi", "mov",  "arw", "cr2",
-            "dng", "nef",  "webp", "heic", "tiff", "bmp", "gif",  "ico", "tga",
-            "sr2", "srf",  "orf",  "rw2",  "pef",  "raf", "webm", "flv", "vob",
-            "ogg", "ogv",  "mts",  "m2ts", "ts",   "3gp"};
+    QStringList extensions = {
+        "jpg", "jpeg", "png",  "mp4",  "mkv",  "avi", "mov",  "arw", "cr2",
+        "dng", "nef",  "webp", "heic", "tiff", "bmp", "gif",  "ico", "tga",
+        "sr2", "srf",  "orf",  "rw2",  "pef",  "raf", "webm", "flv", "vob",
+        "ogg", "ogv",  "mts",  "m2ts", "ts",   "3gp"};
 
-        QStringList filters;
-        for (const QString &ext : extensions) {
-          filters << "*." + ext;
-          filters << "*." + ext.toUpper();
-        }
+    QStringList filters;
+    for (const QString &ext : extensions) {
+      filters << "*." + ext;
+      filters << "*." + ext.toUpper();
+    }
 
-        QDirIterator it(cleanPath, filters, QDir::Files | QDir::Readable,
-                        QDirIterator::Subdirectories);
+    QVector<ImageItem> batch;
+    batch.reserve(100);
+    int totalFound = 0;
+    QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
 
-        QVector<ImageItem> batch;
-        batch.reserve(100);
-        int totalFound = 0;
-        QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
+    // --- Fast MFT Scan Attempt ---
+    bool fastScanSuccess = false;
+    if (cleanPath.length() >= 3 && cleanPath[1] == ':' && cleanPath[2] == '/') {
+      FastVolumeScanner fastScanner;
+      if (fastScanner.scanVolume(cleanPath)) {
+        qDebug() << "ScrollBench FastScanner: Success! Filtering results...";
+        QVector<QString> allFiles = fastScanner.getAllFiles();
+        QString searchPrefix = cleanPath;
+        if (!searchPrefix.endsWith("/"))
+          searchPrefix += "/";
 
-        while (it.hasNext() && !m_scanCancelled) {
-          QString filePath = it.next();
-          QFileInfo fileInfo(filePath);
+        for (const QString &f : allFiles) {
+          if (m_scanCancelled)
+            break;
+          if (f.startsWith(searchPrefix, Qt::CaseInsensitive)) {
+            QString ext = QFileInfo(f).suffix().toLower();
+            if (extensions.contains(ext)) {
+              ImageItem item;
+              item.path = f;
+              item.fileName = QFileInfo(f).fileName();
+              item.color = "#444444";
+              item.isLoaded = false;
 
-          ImageItem item;
-          item.fileName = fileInfo.fileName();
-          item.path = fileInfo.absoluteFilePath();
-          item.color = "#444444";
-          item.isLoaded = false;
-          item.date = fileInfo.birthTime();
+              QRegularExpressionMatch match = dateRegex.match(item.fileName);
+              if (match.hasMatch()) {
+                QString dateStr = match.captured(1) + match.captured(2);
+                QDateTime dt = QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
+                if (dt.isValid()) {
+                  item.date = dt;
+                } else {
+                  item.date = QFileInfo(f).birthTime();
+                }
+              } else {
+                item.date = QFileInfo(f).birthTime();
+              }
 
-          QRegularExpressionMatch match = dateRegex.match(item.fileName);
-          if (match.hasMatch()) {
-            QString dateStr = match.captured(1) + match.captured(2);
-            QDateTime dt = QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
-            if (dt.isValid())
-              item.date = dt;
+              if (!item.date.isValid())
+                item.date = QDateTime::currentDateTime();
+
+              batch.append(item);
+              totalFound++;
+            }
           }
+        }
+        fastScanSuccess = true;
+      }
+    }
 
-          batch.append(item);
-          totalFound++;
+    if (!fastScanSuccess) {
+      // Fallback
+      QDirIterator it(cleanPath, filters, QDir::Files | QDir::Readable,
+                      QDirIterator::Subdirectories);
+
+      while (it.hasNext() && !m_scanCancelled) {
+        QString filePath = it.next();
+        QFileInfo fileInfo(filePath);
+
+        ImageItem item;
+        item.fileName = fileInfo.fileName();
+        item.path = fileInfo.absoluteFilePath();
+        item.color = "#444444";
+        item.isLoaded = false;
+        item.date = fileInfo.birthTime();
+        if (!item.date.isValid()) {
+          item.date = fileInfo.lastModified();
+        }
+        if (!item.date.isValid()) {
+          item.date = QDateTime::currentDateTime();
         }
 
-        if (!batch.isEmpty()) {
-          QMetaObject::invokeMethod(this, [this, batch, timer, totalFound,
-                                           cleanPath]() {
+        QRegularExpressionMatch match = dateRegex.match(item.fileName);
+        if (match.hasMatch()) {
+          QString dateStr = match.captured(1) + match.captured(2);
+          QDateTime dt = QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
+          if (dt.isValid())
+            item.date = dt;
+        }
+
+        batch.append(item);
+        totalFound++;
+      }
+    }
+
+    if (!batch.isEmpty()) {
+      QMetaObject::invokeMethod(
+          this, [this, batch, timer, totalFound, cleanPath]() {
             beginResetModel();
             m_items = batch;
             std::sort(m_items.begin(), m_items.end(),
@@ -326,9 +386,11 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
                      << timer.elapsed() << "ms from" << cleanPath;
             m_forceUpdateTimer->start(200);
           });
-        }
-      },
-      TaskScheduler::IO_BOUND, TaskScheduler::Normal);
+    }
+  };
+
+  TaskScheduler::instance().addTask(task, TaskScheduler::IO_BOUND,
+                                    TaskScheduler::Normal);
 }
 
 void ScrollBenchImageModel::updateVisibleRange() {

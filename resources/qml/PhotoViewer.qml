@@ -22,7 +22,12 @@ Item {
             forceActiveFocus()
             if (currentIndex >= 0) {
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
+                // Also force ListView's own currentIndex to sync immediately
+                listView.currentIndex = currentIndex
             }
+        } else {
+            // Force reset to catch same-index clicks in different folders
+            currentIndex = -1
         }
     }
 
@@ -76,20 +81,20 @@ Item {
             
             property string filePath: model.filePath
             property string fileName: model.fileName
-            property var fileExt: filePath.split('.').pop().toLowerCase()
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            property bool isVideo: desktopHelper.getFileType(filePath) === DesktopHelper.Video
             property bool isCurrent: index === ListView.view.currentIndex
             onIsCurrentChanged: {
                 if (!isCurrent && isVideo) {
                     console.log("Stopping background video:", filePath)
                     player.stop()
-                } else if (isCurrent && isVideo) {
+                } else if (isCurrent && isVideo && root.visible) {
                     console.log("Starting video (isCurrent):", filePath)
                 }
             }
             
             // Unified Zoom Function
             function zoomAt(center, step) {
+                if (isVideo) return; // Disable zoom for videos for now
                 var newZoom = Math.max(1.0, Math.min(flickable.zoom + step, 10.0))
                 if (newZoom === flickable.zoom) return;
 
@@ -217,6 +222,13 @@ Item {
                 }
             }
             
+            onFilePathChanged: {
+                if (isVideo && player) {
+                    console.log("File path changed in delegate, stopping playback:", filePath)
+                    player.stop()
+                }
+            }
+            
             // Video Player
             Item {
                 anchors.fill: parent
@@ -225,14 +237,24 @@ Item {
                 MediaPlayer {
                     id: player
                     source: {
-                        if (!isCurrent || !visible || !filePath) return ""
-                        var lower = filePath.toLowerCase()
-                        var isVid = lower.endsWith(".mp4") || lower.endsWith(".avi") || lower.endsWith(".mkv") || lower.endsWith(".mov")
-                        if (isVid) {
-                            console.log("PhotoViewer: Loading Video", filePath)
-                            return Qt.resolvedUrl(filePath)
+                        var target = ""
+                        if (isCurrent && root.visible && filePath && isVideo) {
+                           var url = filePath
+                            // If it's a Windows network path (starts with \\), MediaPlayer needs file: protocol
+                            if (url.startsWith("\\\\")) {
+                                target = "file:" + url.replace(/\\/g, "/")
+                            } else if (url.indexOf("://") === -1) {
+                                // If it doesn't have a protocol and isn't a UNC path, prepend file:///
+                                target = "file:///" + url.replace(/\\/g, "/")
+                            } else {
+                                target = url
+                            }
                         }
-                        return ""
+                        
+                        if (target !== "") {
+                            console.log("Updating MediaPlayer source to:", target)
+                        }
+                        return target
                     }
                     audioOutput: AudioOutput {}
                     videoOutput: videoOutput

@@ -4,11 +4,20 @@ This document outlines the key components of the application and their relations
 
 ## Core Components (C++)
 
-### 1. `ImageModel`
--   **Role**: Scans directories for images/videos and provides a list model for QML.
+### 1. Image Models
+
+#### 1a. `ImageModel` (Main Application)
+-   **Role**: Scans directories for images/videos and provides a list model for QML in the main `SamsungGallery` application.
 -   **Dependencies**: `QtConcurrent` (for async scanning), `QImageReader`.
 -   **Used By**: `GalleryViewTiles.qml`, `GalleryViewSemantic.qml`.
 -   **Key Methods**: `scanDirectory(path)`, `cropImage`.
+
+#### 1b. `ScrollBenchImageModel` (Test Bench)
+-   **Role**: A specialized version of the `ImageModel` used exclusively in the `test_scrollbench` performance testing application. It contains experimental performance features.
+-   **Key Features**:
+    - Implements **viewport-aware prioritization**, reporting its visible item range to the `VisibleRangeManager`.
+    - Designed to test and validate performance concepts before they are merged into the main `ImageModel`.
+-   **Dependencies**: `VisibleRangeManager`.
 
 ### 2. `AlbumModel`
 -   **Role**: Scans directories for sub-folders (albums) and provides a list model.
@@ -54,12 +63,12 @@ This document outlines the key components of the application and their relations
 
 ### 2. `GalleryViewTiles.qml`
 -   **Role**: Grid view of images.
--   **Model**: Has its own internal `ImageModel`.
+-   **Model**: Has its own internal `ImageModel` (or `ScrollBenchImageModel` in the test app).
 -   **Input**: `folderPath` property triggers scanning.
 
 ### 3. `GalleryViewSemantic.qml`
 -   **Role**: Semantic zoom view (grouped by date).
--   **Model**: Uses `GroupedProxyModel` (C++) wrapping `ImageModel`.
+-   **Model**: Uses `GroupedProxyModel` (C++) wrapping an `ImageModel` (or `ScrollBenchImageModel` in the test app).
 
 ### 4. `AlbumsView.qml`
 -   **Role**: Grid view of albums (folders).

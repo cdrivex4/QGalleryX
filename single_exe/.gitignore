@@ -1,0 +1,10 @@
+# Build outputs
+bin/
+build_single_x64/
+build_single_x86/
+
+# Backup files
+*.backup
+
+# Logs
+*.log

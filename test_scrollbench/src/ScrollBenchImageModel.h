@@ -40,8 +40,8 @@ public:
     SectionWeekRole,
     ExifRole,
     IsRawRole,
+    IsVideoRole, // Added for video detection
     // ScrollBench specific additions (moved to avoid collision with ProxyRoles
-    // 356-360)
     ImageIndexRole = Qt::UserRole + 150,
     IsLoadedRole,
     ColorRole,

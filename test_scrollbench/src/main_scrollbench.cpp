@@ -15,6 +15,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QQuickStyle>
 #include <QTextStream>
 #include <QTimer>
 #include <QtGlobal>
@@ -44,6 +45,7 @@ int main(int argc, char *argv[]) {
 
   QGuiApplication app(argc, argv);
 
+  QQuickStyle::setStyle("Basic");
   QQmlApplicationEngine engine;
 
   // Register types for QML

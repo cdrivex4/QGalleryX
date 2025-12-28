@@ -11,6 +11,7 @@ endif()
 qt_add_executable(appScrollBench
     src/main_scrollbench.cpp
     src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
+    src/FileTypeRouter.cpp src/FileTypeRouter.h
     src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
     src/TelemetryMonitor.cpp src/TelemetryMonitor.h
     # Reuse from main project
@@ -20,6 +21,12 @@ qt_add_executable(appScrollBench
     ../src/DesktopHelper.cpp ../src/DesktopHelper.h
     ../src/SystemMonitor.cpp ../src/SystemMonitor.h
     ../src/LogManager.cpp ../src/LogManager.h
+    ../src/SettingsHelper.cpp ../src/SettingsHelper.h
+    ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
+    ../src/AlbumModel.cpp ../src/AlbumModel.h
+    ../src/ImageProcessor.cpp ../src/ImageProcessor.h
+    ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
+    ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
 )
 
 set_target_properties(appScrollBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
@@ -30,8 +37,12 @@ qt_add_qml_module(appScrollBench
     QML_FILES
         qml/MainScrollBench.qml
         qml/GalleryViewScrollBench.qml
+        qml/GalleryViewSemanticScrollBench.qml
         qml/PhotoViewerScrollBench.qml
+        qml/AlbumsViewScrollBench.qml
         qml/PerformanceOverlay.qml
+        qml/DateScrubber.qml
+        qml/UsageGraph.qml
         qml/ShareDialog.qml
         qml/ResizeEditor.qml
 )

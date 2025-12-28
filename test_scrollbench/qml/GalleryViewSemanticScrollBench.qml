@@ -17,12 +17,12 @@ Item {
 
     function findChildListView() { return list }
     
-    // Auto-link grouping mode to grid size
+    // Auto-link grouping mode to grid size using root thresholds
     onGridSizeChanged: {
         if (groupingAuto) {
-            if (gridSize < 65) groupingMode = 4 // Year
-            else if (gridSize < 105) groupingMode = 3 // Month
-            else if (gridSize < 165) groupingMode = 2 // Week
+            if (gridSize < root.thresholdYear) groupingMode = 4 // Year
+            else if (gridSize < root.thresholdMonth) groupingMode = 3 // Month
+            else if (gridSize < root.thresholdWeek) groupingMode = 2 // Week
             else groupingMode = 1 // Day
         }
     }
@@ -34,10 +34,10 @@ Item {
         columns: Math.max(1, Math.floor((semanticRoot.width - 40) / (settings.gridSize + 10)))
         
         groupRole: {
-            if (groupingMode === 1) return 260 // Day
-            if (groupingMode === 2) return 263 // Week
-            if (groupingMode === 3) return 261 // Month
-            if (groupingMode === 4) return 262 // Year
+            if (groupingMode === 1) return 260 // SectionDayRole (UserRole + 4)
+            if (groupingMode === 2) return 263 // SectionWeekRole (UserRole + 7)
+            if (groupingMode === 3) return 261 // SectionMonthRole (UserRole + 5)
+            if (groupingMode === 4) return 262 // SectionYearRole (UserRole + 6)
             return 260
         }
     }
@@ -136,7 +136,7 @@ Item {
                             id: thumb
                             anchors.fill: parent
                             source: {
-                                var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
+                                var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257) // FilePathRole (Qt::UserRole + 1)
                                 return path ? "image://async/" + path : ""
                             }
                             sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
@@ -148,6 +148,30 @@ Item {
                                 anchors.fill: parent; color: "#222"
                                 visible: thumb.status !== Image.Ready
                                 BusyIndicator { anchors.centerIn: parent; width: parent.width * 0.4; height: width; opacity: 0.5 }
+                            }
+
+                            // Video Icon Overlay
+                            Item {
+                                anchors.fill: parent
+                                visible: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 266) // isVideo (Qt::UserRole + 10)
+                                Rectangle { anchors.fill: parent; color: "black"; opacity: 0.15 }
+                                Text { 
+                                    anchors.centerIn: parent
+                                    text: "▶️"
+                                    font.pixelSize: parent.width * 0.3
+                                    color: "white"
+                                    style: Text.Outline; styleColor: "black"
+                                }
+                            }
+
+                            // RAW Indicator Overlay
+                            Rectangle {
+                                anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 4
+                                property bool isRaw: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 265) // isRaw (Qt::UserRole + 9)
+                                visible: isRaw
+                                width: txtRawS.width + 6; height: txtRawS.height + 2
+                                color: "#AA000000"; radius: 2
+                                Text { id: txtRawS; anchors.centerIn: parent; text: "RAW"; color: "#FF9800"; font.pixelSize: 10; font.bold: true }
                             }
 
                             // Selection States

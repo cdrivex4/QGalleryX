@@ -18,7 +18,7 @@ Item {
             var list = []
             var count = rawModel.rowCount()
             // Sample start, mid, end
-            var firstYear = rawModel.data(rawModel.index(0, 0), 262)
+            var firstYear = rawModel.data(rawModel.index(0, 0), 262) // SectionYearRole
             if (firstYear) list.push({ year: firstYear, proxyIndex: 0 })
             
             if (count > 1000) {
@@ -47,7 +47,7 @@ Item {
             if (proxyModel) {
                 root.currentDateString = proxyModel.getLabelForProxyIndex(idx)
             } else if (rawModel) {
-                root.currentDateString = rawModel.data(rawModel.index(idx, 0), 260)
+                root.currentDateString = rawModel.data(rawModel.index(idx, 0), 260) // SectionDayRole
             }
         }
     }

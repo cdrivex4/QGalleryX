@@ -197,17 +197,7 @@ ApplicationWindow {
                 }
             }
 
-
-            // Tab 2: Stories
-            Item {
-                Text {
-                    anchors.centerIn: parent
-                    text: "Stories Feature Coming Soon"
-                    color: "white"
-                }
-            }
-
-            // Tab 3: Menu
+            // Tab 2: Menu
             Item {
                 ScrollView {
                     anchors.fill: parent
@@ -253,6 +243,12 @@ ApplicationWindow {
                                 }
                             }
                         }
+
+                        Button {
+                            Layout.fillWidth: true
+                            text: "Clear Disk Cache"
+                            onClicked: appSettings.clearDiskCache()
+                        }
                         
                         Rectangle {
                             Layout.fillWidth: true
@@ -273,7 +269,7 @@ ApplicationWindow {
                         ComboBox {
                             Layout.fillWidth: true
                             model: ["Auto", "Direct3D 11", "Vulkan", "OpenGL", "Software"]
-                            currentIndex: appSettings.selectedApi
+                            currentIndex: appSettings ? appSettings.selectedApi : 0
                             onActivated: (index) => {
                                 appSettings.selectedApi = index
                                 restartDialog.open()
@@ -376,6 +372,19 @@ ApplicationWindow {
                             }
                         }
                         
+                        CheckBox {
+                            text: "Enable Persistent Disk Cache"
+                            checked: appSettings.useDiskCache
+                            onCheckedChanged: appSettings.useDiskCache = checked
+                            Layout.alignment: Qt.AlignHCenter
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                                leftPadding: parent.indicator.width + parent.spacing
+                                verticalAlignment: Text.AlignVCenter
+                            }
+                        }
+
                         CheckBox {
                             text: "Show Performance Stats"
                             checked: statsOverlay.visible
