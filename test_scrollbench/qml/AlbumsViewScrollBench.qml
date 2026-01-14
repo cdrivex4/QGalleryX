@@ -166,16 +166,8 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     
-                    // We reuse the main ScrollBenchImageModel but scoped to this folder?
-                    // Actually, ScrollBenchImageModel::scanDirectory(path) will wipe the global state.
-                    // For a true "Album View" that is a filter, we should use a Proxy Model.
-                    // But if we want to "Reuse existing code", AlbumModel scans separately.
-                    
-                    // Let's create a local image model for this album view to avoid wiping the main one.
-                    // Wait, I can't easily instantiate ScrollBenchImageModel in QML if it's not registered.
-                    // I'll register it.
-                    
                     GalleryViewScrollBench {
+                        id: albumGallery
                         anchors.fill: parent
                         model: albumImageModel
                         onImageClicked: (index) => root.imageClicked(index, albumImageModel)
@@ -183,10 +175,42 @@ Item {
                         Component.onCompleted: albumImageModel.scanDirectory(detailRoot.folderPath)
                     }
                     
+                    DateScrubber {
+                        id: albumScrubber
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.topMargin: 50
+                        anchors.bottomMargin: 50
+                        width: 150
+                        z: 60
+                        
+                        listView: albumGallery.findChildGridView()
+                        rawModel: albumImageModel
+                        proxyModel: null // No semantic zoom in album detail yet
+                    }
+                    
                     ScrollBenchImageModel {
                         id: albumImageModel
-                        // Connect to frame budget if we want culling
+                        // Connect to frame budget for consistent performance
                         Component.onCompleted: setFrameScheduler(frameBudget)
+                    }
+                    
+                    SelectionActionBar {
+                        anchors.bottom: parent.bottom
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        model: albumImageModel
+                        
+                        onClearClicked: model.clearSelection()
+                        onShareClicked: albumShareDialog.open()
+                    }
+                    
+                    ShareDialog {
+                        id: albumShareDialog
+                        anchors.centerIn: parent
+                        // Bind to local model? ShareDialog uses global imageModel by default?
+                        // ShareDialog.qml needs modification to support injected model or we use property binding alias
                     }
                 }
             }

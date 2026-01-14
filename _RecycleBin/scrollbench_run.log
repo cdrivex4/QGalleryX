@@ -1,3 +1,7 @@
+﻿# ORIGINAL LOCATION: D:\Dev\antigravity\scrollbench_run.log
+# MOVED ON: 2026-01-03
+# REASON: Cleanup
+
 SystemMonitor: Starting monitoring with interval 1000 ms
 [SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 28.9258 MB | Sys Avail: 36825.3 MB / 65466.5 MB
 Generated 10000 test items
@@ -34322,3 +34326,4 @@ TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x268b0837980) for "J:/MY S
 TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_0263.JPG" took 82 ms
 TRACE: [DONE] handleDone for AsyncImageResponse(0x268b0838310) (null= false )
 TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x268b0838310) for "J:/MY SDCArds/100CANON/IMG_0263.JPG"
+

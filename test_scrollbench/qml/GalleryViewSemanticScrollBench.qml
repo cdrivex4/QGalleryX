@@ -7,6 +7,15 @@ Item {
     signal imageClicked(int index)
     
     property var model: imageModel
+    property int lastSelectedIndex: -1  // Track for Shift+Click
+    
+    function toggleItemSelection(idx) {
+        semanticRoot.model.toggleSelection(idx)
+        semanticRoot.lastSelectedIndex = idx
+    }
+    
+    // Enable keyboard focus
+    focus: true
     
     // Grouping Mode: 1=Day, 2=Week, 3=Month, 4=Year
     property int groupingMode: 1
@@ -42,6 +51,46 @@ Item {
         }
     }
 
+    // Centralized Action Handler
+    function performAction(action, payload) {
+        if (action === "ToggleSelect") {
+            semanticRoot.model.toggleSelection(payload.index)
+            semanticRoot.lastSelectedIndex = payload.index
+            
+        } else if (action === "RangeSelect") {
+            if (semanticRoot.lastSelectedIndex >= 0) {
+                semanticRoot.model.selectRange(semanticRoot.lastSelectedIndex, payload.index)
+            } else {
+                semanticRoot.model.toggleSelection(payload.index)
+            }
+            semanticRoot.lastSelectedIndex = payload.index
+            
+        } else if (action === "Open") {
+            semanticRoot.imageClicked(payload.index)
+            semanticRoot.lastSelectedIndex = payload.index
+            
+        } else if (action === "Zoom") {
+            settings.gridSize = Math.max(30, Math.min(settings.gridSize + payload.delta, 400))
+        }
+    }
+
+    // Keyboard Shortcuts
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_A && event.modifiers & Qt.ControlModifier) {
+             semanticRoot.model.selectAll()
+             event.accepted = true
+        } else if (event.key === Qt.Key_Escape) {
+             semanticRoot.model.clearSelection()
+             event.accepted = true
+        } else if (event.key === Qt.Key_Plus || event.key === Qt.Key_Equal) {
+             performAction("Zoom", { delta: 20 })
+             event.accepted = true
+        } else if (event.key === Qt.Key_Minus) {
+             performAction("Zoom", { delta: -20 })
+             event.accepted = true
+        }
+    }
+    
     // Robust Visibility Tracking using itemAt (Delegate peering)
     function updateVisibleRange() {
         if (!model || list.count === 0) return;
@@ -81,6 +130,8 @@ Item {
         clip: true
         spacing: 12
         cacheBuffer: 1500
+        z: 1
+        interactive: !dragSelect.active
         
         onContentYChanged: rangeTimer.restart()
         onHeightChanged: rangeTimer.restart()
@@ -178,7 +229,7 @@ Item {
                             Rectangle {
                                 anchors.fill: parent; color: "#2196F3"
                                 // IsSelectedRole is 409
-                                property bool isSelected: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 409)
+                                property bool isSelected: semanticRoot.model.selectedCount !== -1 && semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 409)
                                 opacity: isSelected ? 0.4 : 0
                                 border.color: "#2196F3"; border.width: isSelected ? 2 : 0
                                 
@@ -194,9 +245,18 @@ Item {
                         
                         MouseArea {
                             anchors.fill: parent
+                            acceptedButtons: Qt.LeftButton
                             onClicked: (mouse) => {
-                                if (mouse.modifiers & Qt.ControlModifier) semanticRoot.model.toggleSelection(sourceIdx)
-                                else semanticRoot.imageClicked(sourceIdx)
+                                if (mouse.modifiers & Qt.ControlModifier) {
+                                    semanticRoot.performAction("ToggleSelect", { index: sourceIdx })
+                                } else if (mouse.modifiers & Qt.ShiftModifier) {
+                                    semanticRoot.performAction("RangeSelect", { index: sourceIdx })
+                                } else {
+                                    semanticRoot.performAction("Open", { index: sourceIdx })
+                                }
+                            }
+                            onPressAndHold: (mouse) => {
+                                semanticRoot.performAction("ToggleSelect", { index: sourceIdx })
                             }
                         }
                     }
@@ -218,6 +278,78 @@ Item {
             property real baseSize
             onActiveChanged: if (active) baseSize = settings.gridSize
             onScaleChanged: if (active) settings.gridSize = Math.max(30, Math.min(baseSize * scale, 400))
+        }
+
+        // Semantic Drag Selection Logic
+        DragHandler {
+            id: dragSelect
+            target: null // Do not move any items
+            enabled: !list.moving && !list.flicking
+            
+            property point startPos
+            property bool isDragging: false
+            
+            onActiveChanged: {
+                if (active) {
+                    startPos = centroid.position
+                    isDragging = true
+                } else if (isDragging) {
+                    isDragging = false
+                    // Perform Selection
+                    let x1 = Math.min(startPos.x, centroid.position.x)
+                    let y1 = Math.min(startPos.y, centroid.position.y)
+                    let x2 = Math.max(startPos.x, centroid.position.x)
+                    let y2 = Math.max(startPos.y, centroid.position.y)
+                    
+                    semanticRoot.selectByRect(x1, y1, x2, y2)
+                }
+            }
+        }
+
+        Rectangle {
+            id: selectionRect
+            visible: dragSelect.active
+            color: "#442196F3"; border.color: "#2196F3"; border.width: 2; z: 100
+            
+            x: Math.min(dragSelect.startPos.x, dragSelect.centroid.position.x)
+            y: Math.min(dragSelect.startPos.y, dragSelect.centroid.position.y)
+            width: Math.abs(dragSelect.centroid.position.x - dragSelect.startPos.x)
+            height: Math.abs(dragSelect.centroid.position.y - dragSelect.startPos.y)
+        }
+    }
+    
+    // Helper functionality to map visual rect to grouped items
+    function selectByRect(x1, y1, x2, y2) {
+        // Adjust for contentY
+        let contentY1 = y1 + list.contentY
+        let contentY2 = y2 + list.contentY
+        
+        let children = list.contentItem.children
+        for (let i = 0; i < children.length; i++) {
+            let item = children[i]
+            if (!item || !item.hasOwnProperty("capturedType")) continue
+            if (item.y + item.height < contentY1 || item.y > contentY2) continue
+            
+            if (item.capturedType === 1) { // Row
+                let cellTotal = settings.gridSize + 10 // size + spacing
+                let startCol = Math.floor((x1 - 20) / cellTotal)
+                let endCol = Math.floor((x2 - 20) / cellTotal)
+                
+                if (startCol < 0) startCol = 0
+                
+                for (let c = startCol; c <= endCol; c++) {
+                    if (c >= item.capturedCount) break;
+                    let cellX = 20 + c * cellTotal
+                    let cellRight = cellX + settings.gridSize
+                    
+                    if (cellRight > x1 && cellX < x2) {
+                        let sourceIdx = item.capturedStart + c
+                        if (!semanticRoot.model.data(semanticRoot.model.index(sourceIdx,0), 409)) {
+                             semanticRoot.model.toggleSelection(sourceIdx)
+                        }
+                    }
+                }
+            }
         }
     }
 

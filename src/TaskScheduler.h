@@ -12,7 +12,6 @@
 #include <functional>
 #include <vector>
 
-
 /**
  * @brief The TaskScheduler class manages background work with priorities.
  * It strictly separates IO-bound work (metadata, file access) from
@@ -24,11 +23,13 @@ class TaskScheduler : public QObject {
       int activeTaskCount READ activeTaskCount NOTIFY activeTaskCountChanged)
 
 public:
+  static TaskScheduler &instance();
+  void pause();
+  void resume();
+
   using Task = std::function<void()>;
   enum TaskType { CPU_BOUND, IO_BOUND };
   enum Priority { Immediate = 0, Normal = 1, Low = 2, Background = 3 };
-
-  static TaskScheduler &instance();
 
   TaskScheduler();
   ~TaskScheduler();
@@ -43,8 +44,6 @@ public:
   void stop();
 
   Q_INVOKABLE void togglePause(bool paused);
-  void pause();
-  void resume();
 
 signals:
   void activeTaskCountChanged();

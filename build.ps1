@@ -193,3 +193,17 @@ else {
     Write-Host "Build finished but binary not found!" -ForegroundColor Red
     exit 1
 }
+
+# Step 3.5: Run Linkage Verification (Safety Check)
+Write-Host "[3.5/4] Verifying Module Linkage..." -ForegroundColor Yellow
+$LinkageTool = Join-Path $PSScriptRoot "test_scrollbench/deploy/tst_linkage.exe"
+if (Test-Path $LinkageTool) {
+    & $LinkageTool
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Module linkage verification FAILED! Please check backend integration."
+        exit 1
+    }
+} else {
+    Write-Warning "Linkage verification tool not found at $LinkageTool. Skipping."
+}
+

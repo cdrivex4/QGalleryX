@@ -1,3 +1,7 @@
+﻿# ORIGINAL LOCATION: D:\Dev\antigravity\test_scrollbench\scrollbench.log
+# MOVED ON: 2026-01-03
+# REASON: Cleanup
+
 [2025-12-15 15:09:05.322] [Thread 16988] Debug: Generated 10000 test items
 [2025-12-15 15:09:05.716] [Thread 16988] Debug: Setting Visible Range: 0 to 2752 (H: 720 )
 [2025-12-15 15:09:05.716] [Thread 16988] Debug: Visible range updated: 0 to 2762 (viewport: 0 - 2752 )
@@ -40,3 +44,4 @@
 [2025-12-15 15:13:45.221] [Thread 7972] Debug: Async Scan finished: 17 items in 109 ms from "C:\\Users\\curtis\\.gemini\\antigravity\\brain\\b4794c20-9def-408c-bfce-3f177584f172"
 [2025-12-15 15:13:45.522] [Thread 7972] Debug: Setting Visible Range: 0 to 17 (H: 680 )
 [2025-12-15 15:13:45.526] [Thread 7972] Debug: Visible range updated: 0 to 16 (viewport: 0 - 17 )
+

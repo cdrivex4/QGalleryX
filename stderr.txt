@@ -1,0 +1,10 @@
+[ "14:23:33.599" ][HWAccel] Requested mode: SettingsHelper::None
+[ "14:23:33.599" ][HWAccel] CPU decoding selected (no acceleration).
+[ "14:23:33.599" ][HWAccel] CPU Features: "SSE, SSE2, SSE3"
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "14:23:34.685" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 29.6328 MB | Sys Avail: 35244.6 MB / 65466.5 MB
+Generated 10000 test items
+[TaskScheduler] Started 2 CPU threads and 2 IO threads.
+QQmlApplicationEngine failed to load component
+qrc:/ScrollBench/qml/MainScrollBench.qml:54:17: Type GalleryViewScrollBench unavailable
+qrc:/ScrollBench/qml/GalleryViewScrollBench.qml:84:9: Cannot assign to non-existent default property

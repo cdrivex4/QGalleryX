@@ -5,6 +5,12 @@ Item {
     id: root
     signal imageClicked(int index)
     signal imageLoaded(int timeMs)
+    
+    // Selection state tracking
+    property int lastSelectedIndex: -1
+    
+    // Enable keyboard focus for shortcuts
+    focus: true
 
     function scanFolder(path) {
         imageModel.scanDirectory(path)
@@ -32,15 +38,114 @@ Item {
 
     property real lastRequestedY: 0
 
+    // Centralized Action Handler
+    // Unifies Mouse, Keyboard, and Touch interactions into a single logic flow
+    function performAction(action, payload) {
+        // action: "ToggleSelect", "RangeSelect", "Open", "Zoom", "Navigate"
+        
+        if (action === "ToggleSelect") {
+            root.model.toggleSelection(payload.index)
+            root.lastSelectedIndex = payload.index
+            
+        } else if (action === "RangeSelect") {
+            if (root.lastSelectedIndex >= 0) {
+                root.model.selectRange(root.lastSelectedIndex, payload.index)
+            } else {
+                root.model.toggleSelection(payload.index)
+            }
+            root.lastSelectedIndex = payload.index
+            
+        } else if (action === "Open") {
+            // Removed clearSelection to solve "forgotten selection" issue
+            root.imageClicked(payload.index)
+            root.lastSelectedIndex = payload.index // Track last focused item
+            
+        } else if (action === "Navigate") {
+            // payload: { direction: int } (-1 prev, +1 next)
+            // Logic handled by view focus, but could be extended here
+            
+        } else if (action === "Zoom") {
+            // payload: { delta: real }
+            settings.gridSize = Math.max(40, Math.min(settings.gridSize + payload.delta, 400))
+            updateTimer.restart()
+        }
+    }
+
+    // Keyboard Shortcuts routed through centralized handler
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_A && event.modifiers & Qt.ControlModifier) {
+             imageModel.selectAll()
+             event.accepted = true
+        } else if (event.key === Qt.Key_Escape) {
+             imageModel.clearSelection()
+             event.accepted = true
+        } else if (event.key === Qt.Key_Plus || event.key === Qt.Key_Equal) {
+             performAction("Zoom", { delta: 20 })
+             event.accepted = true
+        } else if (event.key === Qt.Key_Minus) {
+             performAction("Zoom", { delta: -20 })
+             event.accepted = true
+        }
+    }
+
+    // Drag-to-Select Handler
+    DragHandler {
+        id: dragSelect
+        target: null
+        enabled: !grid.moving && !grid.flicking
+        
+        property point startPos
+        property bool isDragging: false
+        
+        onActiveChanged: {
+            if (active) {
+                startPos = centroid.position
+                isDragging = true
+            } else if (isDragging) {
+                isDragging = false
+                // Calculate grid selection rectangle
+                let x1 = Math.min(startPos.x, centroid.position.x)
+                let y1 = Math.min(startPos.y, centroid.position.y)
+                let x2 = Math.max(startPos.x, centroid.position.x)
+                let y2 = Math.max(startPos.y, centroid.position.y)
+                
+                let cols = Math.max(1, Math.floor(grid.width / grid.cellWidth))
+                let colMin = Math.floor(x1 / grid.cellWidth)
+                let colMax = Math.floor(x2 / grid.cellWidth)
+                let rowMin = Math.floor((y1 + grid.contentY) / grid.cellHeight)
+                let rowMax = Math.floor((y2 + grid.contentY) / grid.cellHeight)
+                
+                imageModel.selectVisualRect(colMin, colMax, rowMin, rowMax, cols)
+            }
+        }
+        
+    }
+
+    // Visual drag feedback
+    Rectangle {
+        id: selectionRect
+        visible: dragSelect.active
+        color: "#442196F3"
+        border.color: "#2196F3"
+        border.width: 2
+        z: 100
+        
+        // Use DragHandler's internal points for stability
+        x: Math.min(dragSelect.startPos.x, dragSelect.centroid.position.x)
+        y: Math.min(dragSelect.startPos.y, dragSelect.centroid.position.y)
+        width: Math.abs(dragSelect.centroid.position.x - dragSelect.startPos.x)
+        height: Math.abs(dragSelect.centroid.position.y - dragSelect.startPos.y)
+    }
+
     GridView {
         id: grid
         anchors.fill: parent
         cellWidth: settings.gridSize
         cellHeight: settings.gridSize
-        model: root.model
+        model: imageModel
         clip: true
+        interactive: !dragSelect.active
         
-        // Expose state for debugging
         onMovingChanged: if (!moving) updateTimer.restart()
         onFlickingChanged: if (!flicking) updateTimer.restart()
 
@@ -120,6 +225,7 @@ Item {
             
             property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
             property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
+            property bool isSelected: model.isSelected !== undefined ? model.isSelected : false
 
             Image {
                 id: img
@@ -191,10 +297,54 @@ Item {
                         color: "#ff4444"
                     }
                 }
+                
+                // Selection Visual Feedback
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#2196F3"
+                    opacity: isSelected ? 0.4 : 0
+                    border.color: "#2196F3"
+                    border.width: isSelected ? 3 : 0
+                    
+                    // Checkmark
+                    Rectangle {
+                        width: Math.max(16, parent.width * 0.25)
+                        height: width
+                        radius: width/2
+                        color: "#2196F3"
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        anchors.margins: 4
+                        visible: isSelected
+                        border.color: "white"
+                        border.width: 2
+                        
+                        Text {
+                            anchors.centerIn: parent
+                            text: "✓"
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: parent.width * 0.6
+                        }
+                    }
+                }
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: root.imageClicked(index)
+                    acceptedButtons: Qt.LeftButton
+                    // Propagate composition events if needed, but usually not for selection
+                    onClicked: (mouse) => {
+                        if (mouse.modifiers & Qt.ControlModifier) {
+                            root.performAction("ToggleSelect", { index: index })
+                        } else if (mouse.modifiers & Qt.ShiftModifier) {
+                            root.performAction("RangeSelect", { index: index })
+                        } else {
+                            root.performAction("Open", { index: index })
+                        }
+                    }
+                    onPressAndHold: (mouse) => {
+                        root.performAction("ToggleSelect", { index: index })
+                    }
                 }
             }
         }

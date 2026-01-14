@@ -4,7 +4,11 @@ import QtQuick.Layouts
 
 Dialog {
     id: shareDialog
-    title: "Share " + (imageModel ? imageModel.selectedCount : 0) + " images"
+    
+    // Support injected model
+    property var model: imageModel // Default to global, can be overridden
+    
+    title: "Share " + (model ? model.selectedCount : 0) + " images"
     modal: true
     anchors.centerIn: parent
     
@@ -13,42 +17,49 @@ Dialog {
         width: 300
         
         Text {
-            text: "Choose resize option:"
+            text: "Choose validation action:" // "share functionality ... takes you to another screen where you can decide"
             font.pixelSize: 14
             color: "#FFFFFF"
             Layout.fillWidth: true
         }
-        
+
+        // Edit
         Button {
-            text: "Resize for Email (Small)"
+            text: "Edit"
             Layout.fillWidth: true
             Layout.preferredHeight: 50
             onClicked: {
-                // Apply preset: 1024x768, 80% quality
-                console.log("Email small preset - 1024x768, 80% quality")
-                // TODO: Phase 3.4 - Apply resize
+                console.log("Edit action triggered")
+                // Logic to open editor (maybe rotation for batch?)
                 shareDialog.close()
             }
         }
         
+        // Export
         Button {
-            text: "Resize for Email (Manual)"
+            text: "Export"
             Layout.fillWidth: true
             Layout.preferredHeight: 50
             onClicked: {
-                // Get data from model
-                let paths = imageModel.getSelectedPaths()
-                let totalSize = imageModel.getSelectedTotalSizeBytes()
-                
-                if (paths.length > 0) {
-                    resizeEditor.currentImagePath = "file:///" + paths[0] // Preview first image
-                    resizeEditor.originalSizeBytes = totalSize
-                    resizeEditor.open()
-                    shareDialog.close()
-                } else {
-                    console.warn("No images selected for resize")
-                }
+                console.log("Export action triggered")
+                // Logic to open export dialog
+                shareDialog.close()
             }
+        }
+        
+        // Resize (Existing)
+        Button {
+            text: "Resize"
+            Layout.fillWidth: true
+            Layout.preferredHeight: 50
+            onClicked: {
+                 // Expand to show resize sub-options or open resize tool directly
+                 // "decide between edit, export, resize" -> implies resize is a top level choice
+                 shareDialog.close()
+                 resizeEditor.currentImagePath = "file:///" + model.getSelectedPaths()[0]
+                 resizeEditor.originalSizeBytes = model.getSelectedTotalSizeBytes()
+                 resizeEditor.open()
+        }
         }
         
         Button {

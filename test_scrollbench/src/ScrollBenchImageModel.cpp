@@ -198,9 +198,20 @@ void ScrollBenchImageModel::generateTestData(int count) {
 
 void ScrollBenchImageModel::clearData() {
   beginResetModel();
+  cancelPendingRequests();
   m_items.clear();
   m_totalItems = 0;
+  m_remainingItems = 0;
+  m_visibleStartIndex = 0;
+  m_visibleEndIndex = 0;
+  m_activelyRequesting.clear();
+  m_pendingLoadedIndices.clear();
+  if (m_updateTimer)
+    m_updateTimer->stop();
+  if (m_forceUpdateTimer)
+    m_forceUpdateTimer->stop();
   endResetModel();
+  emit remainingItemsChanged();
 }
 
 void ScrollBenchImageModel::scanDirectory(const QString &path) {
@@ -211,13 +222,21 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
   emit isLoadingChanged();
 
   beginResetModel();
+  cancelPendingRequests();
   m_items.clear();
   m_totalItems = 0;
   m_remainingItems = 0;
-  emit remainingItemsChanged();
   m_visibleStartIndex = 0;
   m_visibleEndIndex = 0;
+  m_activelyRequesting.clear();
+  m_pendingLoadedIndices.clear();
+  if (m_updateTimer)
+    m_updateTimer->stop();
+  if (m_forceUpdateTimer)
+    m_forceUpdateTimer->stop();
   endResetModel();
+  emit remainingItemsChanged();
+  emit isLoadingChanged();
 
   cancelPendingRequests();
 
@@ -664,6 +683,7 @@ QVariantMap ScrollBenchImageModel::getMetadata(int index) {
   meta["Path"] = item.path;
   meta["Date"] = item.date.toString("yyyy-MM-dd HH:mm:ss");
   meta["Size"] = QString("%1 KB").arg(QFileInfo(item.path).size() / 1024);
+  meta["Type"] = QFileInfo(item.path).suffix().toUpper();
 
   QString ext = QFileInfo(item.path).suffix().toLower();
   bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||

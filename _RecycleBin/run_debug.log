@@ -1,3 +1,7 @@
+﻿# ORIGINAL LOCATION: D:\Dev\antigravity\run_debug.log
+# MOVED ON: 2026-01-03
+# REASON: Cleanup
+
 [2025-12-22 16:30:56.681] [Thread 27380] Debug: [DIAG] Supported Image Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
 [2025-12-22 16:30:57.075] [Thread 27380] Debug: SystemMonitor: Starting monitoring with interval 1000 ms
 [2025-12-22 16:30:57.260] [Thread 27380] Warning: qrc:/SamsungGallery/resources/qml/Main.qml:20:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
@@ -7506,3 +7510,4 @@
 [2025-12-22 16:31:15.137] [Thread 36344] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1e7dcc63810) for "J:/MY SDCArds/dir0067.chk/[000033].jpg"
 [2025-12-22 16:31:15.137] [Thread 36344] Warning: TRACE: [-TRK] Response destroyed: AsyncImageResponse(0x1e7dcc63010) for "J:/MY SDCArds/dir0064.chk/20211228_193211.jpg"
 [2025-12-22 16:31:15.231] [Thread 6444] Warning: TRACE: [LOG] Delivering result for "J:/MY SDCArds/100CANON/IMG_2066.JPG"
+

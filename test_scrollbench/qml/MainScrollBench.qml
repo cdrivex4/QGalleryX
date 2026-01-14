@@ -198,6 +198,25 @@ ApplicationWindow {
             }
         }
     }
+    
+    // Global Selection Action Bar (For Pictures Tab)
+    SelectionActionBar {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        z: 100 // Above bottom bar
+        
+        model: imageModel
+        visible: model.selectedCount > 0 && root.currentTab === 0 && !root.viewerVisible
+        
+        onClearClicked: model.clearSelection()
+        onShareClicked: shareDialog.open()
+    }
+    
+    ShareDialog {
+        id: shareDialog
+        anchors.centerIn: parent
+    }
 
     // Date Scrubber Overlay
     DateScrubber {
@@ -306,9 +325,16 @@ ApplicationWindow {
         visible: root.viewerVisible
         model: root.viewerModel
         currentIndex: root.viewerIndex
-        onBackClicked: root.viewerVisible = false
+        onBackClicked: {
+            root.viewerIndex = -1 // Reset local tracking
+            root.viewerVisible = false
+        }
         onVisibleChanged: { if (visible) photoViewer.forceActiveFocus() }
-        onCurrentIndexChanged: root.viewerIndex = currentIndex
+        onCurrentIndexChanged: {
+            if (visible && currentIndex >= 0) {
+                root.viewerIndex = currentIndex
+            }
+        }
         z: 200
     }
 }

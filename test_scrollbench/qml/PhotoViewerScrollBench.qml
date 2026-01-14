@@ -99,6 +99,14 @@ Item {
                 }
             }
             
+            property int rotation: 0
+            property double zoom: 1.0
+            
+            // Rotation animation
+            Behavior on rotation {
+                RotationAnimation { duration: 250; easing.type: Easing.OutCubic; direction: RotationAnimation.Shortest }
+            }
+            
             // Unified Zoom Function
             function zoomAt(center, step) {
                 var newZoom = Math.max(1.0, Math.min(flickable.zoom + step, 10.0))
@@ -174,6 +182,7 @@ Item {
                         // Bind size to zoom
                         width: flickable.width * flickable.zoom
                         height: flickable.height * flickable.zoom
+                        rotation: root.rotation
                         
                         anchors.centerIn: parent
                         fillMode: Image.PreserveAspectFit

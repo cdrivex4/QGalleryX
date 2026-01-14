@@ -401,11 +401,10 @@ Rectangle {
                 Button {
                     Layout.fillWidth: true
                     Layout.preferredHeight: 40
-                    text: root.currentView === 2 ? "View: Semantic" : "View: Standard Grid"
+                    text: root.useSemanticView ? "View: Semantic" : "View: Standard Grid"
                     highlighted: true
                     onClicked: {
-                        if (root.currentView === 0) root.currentView = 2
-                        else root.currentView = 0
+                        root.useSemanticView = !root.useSemanticView
                     }
                 }
                 
@@ -421,7 +420,7 @@ Rectangle {
                         if (root.semanticView.groupingMode === 4) return "Grouping: Year"
                         return "Grouping: Manual"
                     }
-                    visible: root.currentView === 2
+                    visible: root.useSemanticView
                     onClicked: {
                         if (!root.semanticView) return
                         var sv = root.semanticView

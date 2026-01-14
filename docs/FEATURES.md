@@ -9,6 +9,10 @@
 - **Video file support** with D3D11 Hardware Accelerated thumbnails
 - **Smooth scrolling** with optimized caching
 - **Zoom functionality** via Ctrl+Wheel and pinch gestures
+- **Robust Selection System**:
+  - **Mouse**: `Ctrl+Click` (Toggle), `Shift+Click` (Range)
+  - **Touch**: Long-press to enter selection mode
+  - **Keyboard**: `Ctrl+A` (Select All), `Esc` (Clear)
 
 ### 2. Image Viewer
 - **Full-screen viewing** with navigation controls
@@ -73,6 +77,7 @@
 
 ### 5. Build System
 - **Unified Build Script**: `build.ps1` handles configuration, building, and cleaning.
+- **Linkage Verification**: `tst_linkage.exe` ensures core module integrity before deployment.
 - **Stale Build Prevention**: Automatic cleaning of `*_autogen` folders.
 - **Dependency Management**: Automated checks for Qt modules and LibRaw.
 

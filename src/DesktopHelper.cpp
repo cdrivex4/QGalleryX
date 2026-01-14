@@ -7,7 +7,6 @@
 #include <QProcess>
 #include <QUrl>
 
-
 // ... keep includes ...
 
 DesktopHelper::DesktopHelper(QObject *parent) : QObject(parent) {}
@@ -28,11 +27,8 @@ void DesktopHelper::openInExplorer(const QString &path) {
   else if (nativePath.startsWith("file:/"))
     nativePath = nativePath.mid(6);
 
-  QString param;
-  if (!QFileInfo(nativePath).isDir())
-    param = QLatin1String("/select,");
-
-  QProcess::startDetached("explorer.exe", QStringList() << param << nativePath);
+  QString param = QLatin1String("/select,") + nativePath;
+  QProcess::startDetached("explorer.exe", QStringList() << param);
 }
 
 void DesktopHelper::pauseBackgroundTasks() {

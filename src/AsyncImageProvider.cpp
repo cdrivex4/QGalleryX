@@ -34,9 +34,10 @@
 #endif
 
 // Initialize static members
+static QSemaphore s_videoSemaphore(
+    2); // Increased to 2 for better throughput, but shielded by TDR logic
 static QSemaphore
-    s_videoSemaphore(1); // Reduce to 1 to prevent GPU TDR/Driver crashes
-static QSemaphore s_rawSemaphore(2); // Reduce to 2 to prevent CPU starvation
+    s_rawSemaphore(3); // Increased to 3 to improve high-res loading speed
 QCache<QString, QImage> AsyncImageProvider::m_cache;
 QMutex AsyncImageProvider::m_mutex;
 QMap<QString, QList<AsyncImageResponse *>>
@@ -272,8 +273,9 @@ void AsyncImageProvider::processStagedRequests() {
   int dispatched = 0;
   QList<StagedRequest> deferredVisible;
 
+  // Submit Visible High Priority first
   for (const auto &req : visibleHighPriority) {
-    if (dispatched < 40) {
+    if (dispatched < 60) { // Increased batch size for visible items
       TaskScheduler::instance().addTask(
           [req]() {
             AsyncImageProvider::processImageTask(req.id, req.requestedSize,
@@ -286,28 +288,41 @@ void AsyncImageProvider::processStagedRequests() {
     }
   }
 
-  // Submit Offscreen (Throttled)
-  if (TaskScheduler::instance().activeTaskCount() < 30) {
+  // Submit Offscreen (Only if no visible items were deferred and scheduler
+  // isn't busy)
+  if (deferredVisible.isEmpty() &&
+      TaskScheduler::instance().activeTaskCount() < 24) {
+    int offscreenDispatched = 0;
     for (const auto &req : offscreen) {
-      TaskScheduler::instance().addTask(
-          [req]() {
-            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
-                                                 req.cancelled, req.tracker);
-          },
-          TaskScheduler::CPU_BOUND, TaskScheduler::Normal);
+      if (offscreenDispatched < 20) { // Limit offscreen burst
+        TaskScheduler::instance().addTask(
+            [req]() {
+              AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                   req.cancelled, req.tracker);
+            },
+            TaskScheduler::CPU_BOUND, TaskScheduler::Normal);
+        offscreenDispatched++;
+      } else {
+        // Re-queue remaining offscreen
+        QMutexLocker lock(&m_stagingMutex);
+        m_stagedRequests.append(req);
+      }
     }
-  } else {
-    // Re-queue remaining offscreen items
+  } else if (!offscreen.isEmpty()) {
+    // Re-queue all offscreen items if we're busy with visible ones
     QMutexLocker lock(&m_stagingMutex);
     for (const auto &req : offscreen) {
       m_stagedRequests.append(req);
     }
   }
 
-  // Re-queue deferred visible items
+  // Re-queue deferred visible items to the FRONT of the staging list
   if (!deferredVisible.isEmpty()) {
     QMutexLocker lock(&m_stagingMutex);
-    m_stagedRequests.append(deferredVisible);
+    // Move existing staged requests to temp and prepend deferred
+    QList<StagedRequest> remaining = m_stagedRequests;
+    m_stagedRequests = deferredVisible;
+    m_stagedRequests.append(remaining);
   }
 
   if (!m_stagedRequests.isEmpty())

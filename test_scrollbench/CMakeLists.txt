@@ -45,6 +45,7 @@ qt_add_qml_module(appScrollBench
         qml/UsageGraph.qml
         qml/ShareDialog.qml
         qml/ResizeEditor.qml
+        qml/SelectionActionBar.qml
 )
 
 # --- LibRaw (copy from main project) ---
@@ -92,3 +93,16 @@ if (FFMPEG_DLLS)
         $<TARGET_FILE_DIR:appScrollBench>
     )
 endif()
+# --- Verification Tool ---
+qt_add_executable(tst_linkage src/tst_linkage.cpp
+    src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
+    src/FileTypeRouter.cpp src/FileTypeRouter.h
+    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
+    ../src/TaskScheduler.cpp ../src/TaskScheduler.h
+    ../src/DesktopHelper.cpp ../src/DesktopHelper.h
+    ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
+    ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
+)
+target_link_libraries(tst_linkage PRIVATE Qt6::Core Qt6::Gui Qt6::Concurrent Qt6::Multimedia libraw_static)
+target_include_directories(tst_linkage PRIVATE ../src ${LIBRAW_PATH})
+set_target_properties(tst_linkage PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")

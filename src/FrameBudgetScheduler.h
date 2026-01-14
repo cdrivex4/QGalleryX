@@ -44,7 +44,8 @@ private slots:
   void checkFrameBoundary();
 
 private:
-  int m_frameBudget = 10; // Max completions per 16ms frame
+  int m_frameBudget =
+      40; // Increased from 10 to 40 to prevent artificial throttling at 60fps
   bool m_enabled = true;
   bool m_paused = false;
   int m_completionsThisFrame = 0;
