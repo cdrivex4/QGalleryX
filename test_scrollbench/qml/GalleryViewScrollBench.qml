@@ -231,12 +231,18 @@ Item {
                 id: img
                 anchors.fill: parent
                 anchors.margins: 1
-                source: model.filePath ? "image://async/" + model.filePath : ""
+                // CRITICAL: Reset source on delegate reuse to force fresh load
+                source: {
+                    if (!model.filePath) return "";
+                    // Force reevaluation by including index
+                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
+                }
                 sourceSize.width: root.loadingResolution
                 sourceSize.height: root.loadingResolution
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
-                cache: true
+                visible: status === Image.Ready // Hide recycled content
+                cache: false  // FORCE FRESH LOADS - NOT USING QML CACHE
                 mipmap: true 
                 
                 // Video Play Icon

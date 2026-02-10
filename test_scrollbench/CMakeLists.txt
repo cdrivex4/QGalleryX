@@ -27,9 +27,17 @@ qt_add_executable(appScrollBench
     ../src/ImageProcessor.cpp ../src/ImageProcessor.h
     ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
     ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
+    src/DiagnosticsMonitor.cpp src/DiagnosticsMonitor.h
 )
 
 set_target_properties(appScrollBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
+
+# appScrollBenchNet - Network Diagnostic Watchdog
+add_executable(appScrollBenchNet src/main_net_watchdog.cpp)
+set_target_properties(appScrollBenchNet PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
+# No Qt needed for the watchdog to ensure it runs even if Qt is broken
+target_link_libraries(appScrollBenchNet PRIVATE kernel32 user32)
+
 
 qt_add_qml_module(appScrollBench
     URI ScrollBench
@@ -46,6 +54,11 @@ qt_add_qml_module(appScrollBench
         qml/ShareDialog.qml
         qml/ResizeEditor.qml
         qml/SelectionActionBar.qml
+        qml/VideoFeedbackOverlay.qml
+        qml/BenchmarkRunner.qml
+        qml/DiagnosticsOverlay.qml
+        qml/DiagnosticRow.qml
+        qml/DebugTuner.qml
 )
 
 # --- LibRaw (copy from main project) ---
@@ -93,7 +106,7 @@ if (FFMPEG_DLLS)
         $<TARGET_FILE_DIR:appScrollBench>
     )
 endif()
-# --- Verification Tool ---
+# --- Verification & Automation Tools ---
 qt_add_executable(tst_linkage src/tst_linkage.cpp
     src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
     src/FileTypeRouter.cpp src/FileTypeRouter.h
@@ -101,8 +114,53 @@ qt_add_executable(tst_linkage src/tst_linkage.cpp
     ../src/TaskScheduler.cpp ../src/TaskScheduler.h
     ../src/DesktopHelper.cpp ../src/DesktopHelper.h
     ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
+    ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
+    ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
+    ../src/SystemMonitor.cpp ../src/SystemMonitor.h
+    ../src/SettingsHelper.cpp ../src/SettingsHelper.h
+    ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
     ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
+    ../src/ImageProcessor.cpp ../src/ImageProcessor.h
+    ../src/LogManager.cpp ../src/LogManager.h
 )
-target_link_libraries(tst_linkage PRIVATE Qt6::Core Qt6::Gui Qt6::Concurrent Qt6::Multimedia libraw_static)
-target_include_directories(tst_linkage PRIVATE ../src ${LIBRAW_PATH})
+
+qt_add_executable(tst_automation src/tst_automation.cpp
+    src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
+    src/FileTypeRouter.cpp src/FileTypeRouter.h
+    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
+    ../src/TaskScheduler.cpp ../src/TaskScheduler.h
+    ../src/DesktopHelper.cpp ../src/DesktopHelper.h
+    ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
+    ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
+    ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
+    ../src/SystemMonitor.cpp ../src/SystemMonitor.h
+    ../src/SettingsHelper.cpp ../src/SettingsHelper.h
+    ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
+    ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
+    ../src/ImageProcessor.cpp ../src/ImageProcessor.h
+    ../src/LogManager.cpp ../src/LogManager.h
+)
+
+target_link_libraries(tst_linkage PRIVATE 
+    Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Quick Qt6::Concurrent Qt6::Multimedia 
+    libraw_static
+    pdh
+    ${FFMPEG_LIB_DIR}/avcodec.lib
+    ${FFMPEG_LIB_DIR}/avformat.lib
+    ${FFMPEG_LIB_DIR}/swscale.lib
+    ${FFMPEG_LIB_DIR}/avutil.lib
+)
+target_include_directories(tst_linkage PRIVATE ../src ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
 set_target_properties(tst_linkage PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
+
+target_link_libraries(tst_automation PRIVATE 
+    Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Quick Qt6::Concurrent Qt6::Multimedia 
+    libraw_static
+    pdh
+    ${FFMPEG_LIB_DIR}/avcodec.lib
+    ${FFMPEG_LIB_DIR}/avformat.lib
+    ${FFMPEG_LIB_DIR}/swscale.lib
+    ${FFMPEG_LIB_DIR}/avutil.lib
+)
+target_include_directories(tst_automation PRIVATE ../src ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
+set_target_properties(tst_automation PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")

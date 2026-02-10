@@ -43,6 +43,16 @@ public:
    */
   static bool isStandardImage(const QString &extension);
 
+  /**
+   * @brief Verify file type by inspecting content (magic bytes)
+   * @param path Absolute file path
+   * @param outIsImage Set to true if detected as image
+   * @param outIsVideo Set to true if detected as video
+   * @param outIsRaw Set to true if detected as RAW
+   */
+  static void verifyFileType(const QString &path, bool &outIsImage,
+                             bool &outIsVideo, bool &outIsRaw);
+
 private:
   // ===== Qt Native Image Formats =====
   // Supported by QImageReader (Qt 6.x with standard plugins)

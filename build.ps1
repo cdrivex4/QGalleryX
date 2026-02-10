@@ -28,7 +28,7 @@ else {
 }
 
 # Add Tools to PATH
-$env:PATH = "$QtBin;D:\Qt\Tools\mingw1310_64\bin;D:\Qt\Tools\CMake_64\bin;D:\Qt\Tools\Ninja;$env:PATH"
+$env:PATH = "$QtBin;D:\\Qt\\Tools\\mingw1310_64\\bin;D:\\Qt\\Tools\\CMake_64\\bin;D:\\Qt\\Tools\\Ninja;$env:PATH"
 
 # Configuration
 $BuildDir = "build"
@@ -38,6 +38,9 @@ $ExePath = Join-Path $BuildDir $ExeName
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host "   SamsungGallery Build System" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
+
+# Increment Build Number
+& "$PSScriptRoot\increment_build.ps1"
 
 # Step 0: Verify Dependencies
 Write-Host "[0/4] Verifying Dependencies..." -ForegroundColor Yellow
@@ -72,15 +75,47 @@ foreach ($pName in $pNames) {
         
         if (Get-Process -Name $pName -ErrorAction SilentlyContinue) {
             Write-Host "  FAILED to kill $pName. File might be locked." -ForegroundColor Red
-            taskkill /F /IM "$pName.exe" | Out-Null # Last resort
+            taskkill /F /IM "$pName.exe" 2>$null | Out-Null # Last resort
         }
+    }
+}
+
+# Step 1.5: Verify File Locks & Record Initial Hashes
+Write-Host "[1.5/4] Verifying File Locks & Recording Hashes..." -ForegroundColor Yellow
+$CheckFiles = @($ExePath, (Join-Path $PSScriptRoot "test_scrollbench/deploy/appScrollBench.exe"))
+$InitialHashes = @{}
+
+foreach ($file in $CheckFiles) {
+    if (Test-Path $file) {
+        # Check for Lock
+        try {
+            $fileStream = [System.IO.File]::Open($file, 'Open', 'Read', 'None')
+            $fileStream.Close()
+            $fileStream.Dispose()
+        }
+        catch {
+            Write-Host "CRITICAL ERROR: File is LOCKED by another process: $file" -ForegroundColor Red
+            Write-Host "  Please close any applications using this file and try again." -ForegroundColor Yellow
+            exit 1
+        }
+        
+        # Record Hash
+        $hash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+        $InitialHashes[$file] = $hash
+        Write-Host "  Current Hash ($($file | Split-Path -Leaf)): $hash" -ForegroundColor Gray
     }
 }
 
 # Step 2: Clean if requested or ensure freshness
 # Remove old binary to ensure we never run stale code if build fails
 if (Test-Path $ExePath) {
-    Remove-Item -Force $ExePath -ErrorAction SilentlyContinue
+    try {
+        Remove-Item -Force $ExePath -ErrorAction Stop
+    }
+    catch {
+        Write-Host "Could not remove old binary (still locked?): $ExePath" -ForegroundColor Red
+        exit 1
+    }
 }
 
 if ($Clean) {
@@ -125,37 +160,19 @@ try {
     cmake --build $BuildDir
     if ($LASTEXITCODE -ne 0) { throw "Build Failed" }
 
-    # Deploy Qt dependencies (only checking if plugins missing logic could be added, but forced for now)
+    # Deploy Qt dependencies
     Write-Host "  -> Deploying Qt Dependencies..." -ForegroundColor Gray
-    
-    # We construct the command manually to ensure arguments are passed correctly
     $WindeployQt = "D:\Qt\6.9.3\mingw_64\bin\windeployqt.exe"
     
     # Standard deploy for Main App
     & $WindeployQt --qmldir $PSScriptRoot/resources/qml --dir $BuildDir $BuildDir/appSamsungGallery.exe --compiler-runtime --no-opengl-sw
     
     # Standard deploy for ScrollBench (Segregated)
-    # Target: test_scrollbench/deploy (per docs/SCROLLBENCH_STRATEGY.md)
     $ScrollBenchDeployDir = Join-Path $PSScriptRoot "test_scrollbench/deploy"
     if (Test-Path "$ScrollBenchDeployDir/appScrollBench.exe") {
         Write-Host "  -> Deploying ScrollBench to test_scrollbench/deploy..." -ForegroundColor Gray
         & $WindeployQt --qmldir $PSScriptRoot/test_scrollbench/qml --dir $ScrollBenchDeployDir "$ScrollBenchDeployDir/appScrollBench.exe" --compiler-runtime --no-opengl-sw
     }
-
-    # Deploy for Single EXE (Native Static Build)
-    if ($BuildSingleExe) {
-        # Static builds don't typically need windeployqt, but if they do, we point to the static tool
-        # Ideally, CMake static linking handles it all.
-        
-        $SingleExePath = Join-Path $PSScriptRoot "single_exe/bin/ScrollBenchPortable.exe"
-        if (Test-Path $SingleExePath) {
-            # No WindeyploQt needed for pure static
-        }
-    }
-
-    # We explicitly ensure imageformats are copied
-    # windeployqt usually handles this if it detects QtGui, but being explicit is safer
-
 }
 catch {
     Write-Host "BUILD FAILED!" -ForegroundColor Red
@@ -163,30 +180,37 @@ catch {
     exit 1
 }
 
-# Step 4: Report
-$ExePath = Join-Path $BuildDir "appSamsungGallery.exe"
-$TestExePath = Join-Path $BuildDir "appSamsungGalleryTest.exe"
+# Step 4: Report and Freshness Verification
+Write-Host "[4/4] Finalizing and Verifying Freshness..." -ForegroundColor Yellow
+
+$FreshnessMet = $true
+foreach ($file in $CheckFiles) {
+    if (Test-Path $file) {
+        $finalHash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+        if ($InitialHashes.ContainsKey($file)) {
+            if ($finalHash -eq $InitialHashes[$file]) {
+                Write-Host "  WARNING: Binary is STALE (Hash unchanged): $($file | Split-Path -Leaf)" -ForegroundColor Red
+                $FreshnessMet = $false
+            }
+            else {
+                Write-Host "  Binary is FRESH: $($file | Split-Path -Leaf)" -ForegroundColor Green
+            }
+        }
+        else {
+            Write-Host "  Binary is NEW: $($file | Split-Path -Leaf)" -ForegroundColor Cyan
+        }
+    }
+}
 
 if (Test-Path $ExePath) {
     Write-Host "==========================================" -ForegroundColor Green
-    Write-Host " BUILD SUCCESSFUL" -ForegroundColor Green
+    Write-Host " BUILD SUCCESS" -ForegroundColor Green
+    Write-Host " Status:      $(if ($FreshnessMet) { "Binary is FRESH" } else { "Binary is STALE" })" -ForegroundColor $(if ($FreshnessMet) { "Green" } else { "Yellow" })
     Write-Host " Stable:      $(Resolve-Path $ExePath)" -ForegroundColor Magenta
     
-    # Check for Single EXE builds
     $ScrollBenchExePath = Join-Path $PSScriptRoot "test_scrollbench/deploy/appScrollBench.exe"
     if (Test-Path $ScrollBenchExePath) {
         Write-Host " ScrollBench: $(Resolve-Path $ScrollBenchExePath)" -ForegroundColor Cyan
-    }
-
-    # Check for Single EXE Native build
-    $SingleExePath = Join-Path $PSScriptRoot "single_exe/bin/ScrollBenchPortable.exe"
-    if ($BuildSingleExe -and (Test-Path $SingleExePath)) {
-        Write-Host "==========================================" -ForegroundColor Cyan
-        Write-Host " SUCCESS: NATIVE SINGLE EXECUTABLE" -ForegroundColor Cyan
-        Write-Host " File: $SingleExePath" -ForegroundColor Magenta
-        $size = (Get-Item $SingleExePath).Length / 1MB
-        Write-Host (" Size: {0:N2} MB" -f $size) -ForegroundColor Gray
-        Write-Host " This is a standalone file." -ForegroundColor DarkGray
     }
 }
 else {
@@ -194,8 +218,8 @@ else {
     exit 1
 }
 
-# Step 3.5: Run Linkage Verification (Safety Check)
-Write-Host "[3.5/4] Verifying Module Linkage..." -ForegroundColor Yellow
+# Run Linkage Verification (Safety Check)
+Write-Host " Verifying Module Linkage..." -ForegroundColor Yellow
 $LinkageTool = Join-Path $PSScriptRoot "test_scrollbench/deploy/tst_linkage.exe"
 if (Test-Path $LinkageTool) {
     & $LinkageTool
@@ -203,7 +227,5 @@ if (Test-Path $LinkageTool) {
         Write-Error "Module linkage verification FAILED! Please check backend integration."
         exit 1
     }
-} else {
-    Write-Warning "Linkage verification tool not found at $LinkageTool. Skipping."
 }
 

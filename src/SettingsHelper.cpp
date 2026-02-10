@@ -133,6 +133,18 @@ void SettingsHelper::setVideoAcceleration(int mode) {
   emit videoAccelerationChanged();
 }
 
+bool SettingsHelper::showWatermark() const {
+  return m_settings.value("showWatermark", true)
+      .toBool(); // Default enabled for debugging
+}
+
+void SettingsHelper::setShowWatermark(bool show) {
+  if (showWatermark() == show)
+    return;
+  m_settings.setValue("showWatermark", show);
+  emit showWatermarkChanged();
+}
+
 void SettingsHelper::restartApp() {
   qApp->quit();
   QProcess::startDetached(qApp->arguments()[0], qApp->arguments());

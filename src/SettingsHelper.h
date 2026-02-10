@@ -30,16 +30,13 @@ class SettingsHelper : public QObject {
                  NOTIFY rawAccelerationChanged)
   Q_PROPERTY(bool useDiskCache READ useDiskCache WRITE setUseDiskCache NOTIFY
                  useDiskCacheChanged)
-  Q_PROPERTY(int videoAcceleration READ videoAcceleration WRITE setVideoAcceleration NOTIFY
-                 videoAccelerationChanged)
+  Q_PROPERTY(int videoAcceleration READ videoAcceleration WRITE
+                 setVideoAcceleration NOTIFY videoAccelerationChanged)
+  Q_PROPERTY(bool showWatermark READ showWatermark WRITE setShowWatermark NOTIFY
+                 showWatermarkChanged)
 
 public:
-  enum HWAccel {
-      None,
-      D3D11VA,
-      Vulkan,
-      OpenCL
-  };
+  enum HWAccel { None, D3D11VA, Vulkan, OpenCL };
   Q_ENUM(HWAccel)
 
   explicit SettingsHelper(QObject *parent = nullptr);
@@ -75,6 +72,9 @@ public:
   int videoAcceleration() const;
   void setVideoAcceleration(int mode);
 
+  bool showWatermark() const;
+  void setShowWatermark(bool show);
+
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
@@ -96,6 +96,7 @@ signals:
   void rawAccelerationChanged();
   void useDiskCacheChanged();
   void videoAccelerationChanged();
+  void showWatermarkChanged();
 
 private:
   QString m_graphicsApi;

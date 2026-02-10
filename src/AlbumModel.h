@@ -4,6 +4,7 @@
 #include <QAbstractListModel>
 #include <QString>
 #include <QVector>
+#include <atomic>
 
 struct AlbumInfo {
   QString name;
@@ -43,6 +44,7 @@ signals:
 private:
   bool m_isLoading = false;
   QVector<AlbumInfo> m_albums;
+  std::atomic<int> m_scanGeneration{0};
 };
 
 #endif // ALBUMMODEL_H

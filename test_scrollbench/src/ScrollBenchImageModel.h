@@ -10,6 +10,7 @@
 
 class FrameBudgetScheduler;
 class QTimer;
+class ImageProcessor; // Forward declaration
 
 class ScrollBenchImageModel : public QAbstractListModel {
   Q_OBJECT
@@ -22,10 +23,13 @@ class ScrollBenchImageModel : public QAbstractListModel {
   Q_PROPERTY(
       int remainingItems READ remainingItems NOTIFY remainingItemsChanged)
   Q_PROPERTY(int totalItems READ totalItems CONSTANT)
+  Q_PROPERTY(int stagedRequestCount READ stagedRequestCount NOTIFY
+                 stagedRequestCountChanged)
   Q_PROPERTY(bool viewportCullingEnabled READ viewportCullingEnabled WRITE
                  setViewportCullingEnabled NOTIFY viewportCullingEnabledChanged)
-  Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)
+  Q_PROPERTY(int loadedCount READ loadedCount NOTIFY loadedCountChanged)
   Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+  Q_PROPERTY(int scannedCount READ scannedCount NOTIFY scannedCountChanged)
 
 public:
   explicit ScrollBenchImageModel(QObject *parent = nullptr);
@@ -46,7 +50,8 @@ public:
     IsLoadedRole,
     ColorRole,
     IsSelectedRole,
-    IsBurstRole
+    IsBurstRole,
+    VersionRole // For cache busting
   };
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -62,8 +67,10 @@ public:
   void setVisibleEndIndex(int index);
 
   int pendingDecodeCount() const { return m_pendingDecodes; }
+  int loadedCount() const { return m_loadedCount; }
   int remainingItems() const { return m_remainingItems; }
   int totalItems() const { return m_totalItems; }
+  int scannedCount() const { return m_scannedCount; }
 
   bool viewportCullingEnabled() const { return m_viewportCullingEnabled; }
   void setViewportCullingEnabled(bool enabled);
@@ -71,6 +78,7 @@ public:
   Q_INVOKABLE void generateTestData(int count = 10000);
   Q_INVOKABLE void clearData();
   Q_INVOKABLE void scanDirectory(const QString &path);
+  Q_INVOKABLE int stagedRequestCount() const;
   Q_INVOKABLE void cancelScan();
 
   // Selection methods
@@ -82,6 +90,9 @@ public:
   Q_INVOKABLE void clearSelection();
   Q_INVOKABLE void invertSelection();
   Q_INVOKABLE void deleteSelected();
+  Q_INVOKABLE QStringList getSelectedPaths() const;
+  Q_INVOKABLE qint64 getSelectedTotalSizeBytes() const;
+  Q_INVOKABLE void rotateSelected(int degrees);
   int selectedCount() const;
 
   bool isLoading() const { return m_isLoading; }
@@ -97,6 +108,9 @@ signals:
   void scanComplete(int totalFound);
   void selectedCountChanged();
   void isLoadingChanged();
+  void scannedCountChanged();
+  void loadedCountChanged();
+  void stagedRequestCountChanged();
   void forceUpdateGridView(); // New signal to trigger QML GridView update
 
 public slots: // New public slot
@@ -114,6 +128,9 @@ private:
     bool isLoaded = false;
     bool isSelected = false;
     bool isBurst = false;
+    bool isRaw = false;
+    bool isVideo = false;
+    int version = 0;
   };
 
   void updateVisibleRange();
@@ -124,13 +141,17 @@ private:
   QSet<int> m_activelyRequesting;
   int m_visibleStartIndex = 0;
   int m_visibleEndIndex = 0;
+  QTimer *m_loadAllTimer = nullptr;
+  int m_loadAllIndex = 0;
+  int m_loadedCount = 0;
   int m_pendingDecodes = 0;
   int m_remainingItems = 0;
   int m_totalItems = 0;
   bool m_viewportCullingEnabled = true;
   bool m_isLoading = false;
+  int m_scannedCount = 0;
   bool m_scanCancelled = false;
-  static constexpr int BUFFER_SIZE = 10; // Load 10 items ahead/behind
+  std::atomic<int> m_scanGeneration{0};
 
   // Batching updates
   QSet<int> m_pendingLoadedIndices;
@@ -140,7 +161,11 @@ private:
 
 public:
   Q_INVOKABLE bool cropImage(int index, const QRectF &cropRect);
+  Q_INVOKABLE bool rotateImage(int index, int degrees);
   Q_INVOKABLE QVariantMap getMetadata(int index);
+
+private:
+  ImageProcessor *m_imageProcessor = nullptr;
 };
 
 #endif // SCROLLBENCHIMAGEMODEL_H

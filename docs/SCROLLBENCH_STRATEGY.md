@@ -37,52 +37,35 @@ Once ScrollBench reaches feature parity and proves stable:
 3. Share/Resize → Main app
 4. Verified optimizations → Main app
 
-### Phase 3: Deprecate ScrollBench
-After successful integration, ScrollBench can be:
-- Archived as reference implementation
-- Kept as performance test harness
-- Removed if no longer needed
+### Phase 3: Long-Term Strategy (Jan 2026)
+ScrollBench is now the **primary development platform**.
+- **Main App**: Maintained as a legacy reference implementation (`v2.1` frozen).
+- **ScrollBench**: All new features (MFT, Selection, Verify Tool) live here.
 
 ## Key Differences
 
-| Feature | Main App | ScrollBench |
-|---------|----------|-------------|
-| **Focus** | Full-featured gallery | Performance testing |
-| **Stability** | Production-ready | Experimental |
-| **Network** | Full support | ✅ Async Scanning (v0.4) |
-| **RAW Files** | LibRaw integration | Planned |
-| **Video** | Basic support | Thumbnails planned |
-| **Selection** | Not yet | ✅ Drag & Visual Box |
-| **Share/Resize** | Not yet | In progress |
-
-## Commit Strategy
-
-**Main App**:
-- Stable features only
-- Full testing required
-- Tagged releases
-
-**ScrollBench**:
-- Rapid iteration
-- Breaking changes OK
-- Experimental features
+| Feature | Main App (Legacy) | ScrollBench (Primary) |
+|---------|-------------------|-----------------------|
+| **Focus** | Reference Impl. | Production Dev |
+| **Stability** | Frozen | Active Dev |
+| **Scanner** | Recursive (Slow) | **MFT / FastVolumeScanner** |
+| **Selection** | Basic | **Unified (Mouse/Touch/Key)** |
+| **Build** | Standard | **+ Linkage Verification** |
 
 ## Files Layout
 
 ```
 antigravity/
-├── src/              # Main app C++
-├── resources/qml/    # Main app UI
-├── test_scrollbench/ # ScrollBench (separate)
-│   ├── src/          # Test app C++
-│   ├── qml/          # Test app UI
-│   └── deploy/       # Isolated binary
+├── src/              # Common Backend & Legacy App
+├── resources/qml/    # Legacy UI
+├── test_scrollbench/ # PRIMARY DEVELOPMENT (ScrollBench)
+│   ├── src/          # ScrollBench C++
+│   ├── qml/          # ScrollBench UI
+│   └── deploy/       # Deployment Target
 └── docs/             # Shared docs
 ```
 
-## Current Status (Dec 2024)
+## Current Status (Jan 2026)
 
-**Main App**: v2.1.0 - Network & Deployment Stability
-**ScrollBench**: v0.4 - Async Scan & Drag Selection
-
-**Next**: Complete Share/Resize dialog, then begin parity assessment
+**ScrollBench**: v1.0 - Full MFT Integration, Robust Selection, Verification Tooling.
+**Main App**: v2.1 (Legacy) - Reference only.

@@ -26,8 +26,13 @@
 - **Asynchronous image loading** with thread pool
 - **Memory-efficient caching** with configurable sizes
 - **GPU acceleration** with multiple API support
-- **Lazy loading** for smooth performance
-- **Background processing** for file operations
+- **Optimization Strategy**:
+    - **Adaptive Task Throttling**: Background tasks automatically pause during video playback.
+    - **Visible-First Loading**: Viewport items strictly prioritized over pre-fetch.
+    - **LIFO Queue**: Most recent user actions handled first.
+- **Resilient Video Handling**:
+    - **Smart Retry**: Automatically seeks to different timestamps if initial decode fails or returns a black frame.
+    - **Software Fallback**: Degrades to CPU decoding if GPU acceleration fails repeatedly.
 
 ### 4. Settings and Configuration
 - **Graphics API selection** (Direct3D11, Vulkan, OpenGL, Software)
@@ -67,7 +72,12 @@
 - **Memory management** with Qt's smart pointers
 - **Cross-platform compatibility** (Windows-focused)
 
-### 4. Performance Monitoring
+### 4. Scanner Speed (MFT)
+- **FastVolumeScanner**: Direct NTFS MFT enumeration for millisecond-speed file discovery.
+- **Robust Fallback**: Automatically degrades to `QDirIterator` for network drives/non-NTFS volumes.
+- **Smart Filtering**: Pre-filters extensions at the scanner level.
+
+### 5. Performance Monitoring
 - **Real-time FPS counter**
 - **Load time tracking** with statistics
 - **CPU usage monitoring** (Windows only)

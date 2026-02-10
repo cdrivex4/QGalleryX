@@ -25,13 +25,6 @@ Item {
                 listView.currentIndex = currentIndex
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
             }
-            // Pause background tasks and frame budget when PhotoViewer becomes visible
-            desktopHelper.pauseBackgroundTasks();
-            if (typeof frameBudget !== "undefined") frameBudget.paused = true;
-        } else {
-            // Resume both when PhotoViewer becomes invisible
-            desktopHelper.resumeBackgroundTasks();
-            if (typeof frameBudget !== "undefined") frameBudget.paused = false;
         }
     }
 
@@ -86,6 +79,7 @@ Item {
             
             property string filePath: model.filePath
             property string fileName: model.fileName
+            property int imageVersion: model.version !== undefined ? model.version : 0
             // Use backend model as single source of truth for file types
             property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
             property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
@@ -162,21 +156,23 @@ Item {
                         source: {
                             if (isVideo || !filePath) return ""
                             
+                            var versionSuffix = "?v=" + parent.parent.parent.imageVersion
+                            
                             // RAW files: Use AsyncImageProvider for LibRaw embedded thumbnail extraction
                             // (Fast ~200ms vs 120+ sec full decode)
                             if (isRaw) {
-                                return "image://async/" + filePath
+                                return "image://async/" + filePath + versionSuffix
                             }
                             
                             // Regular images: Direct loading for best performance
                             var url = filePath
                             if (url.startsWith("\\\\")) {
-                                return "file:" + url.replace(/\\/g, "/")
+                                return "file:" + url.replace(/\\/g, "/") // No suffix for filesystem
                             }
                             if (url.indexOf("://") === -1) {
-                                return "file:///" + url.replace(/\\/g, "/")
+                                return "file:///" + url.replace(/\\/g, "/") // No suffix for filesystem
                             }
-                            return url
+                            return url + versionSuffix
                         }
                         
                         // Bind size to zoom
@@ -192,24 +188,19 @@ Item {
                         autoTransform: true
                         
                         property real startTime: 0
+                        
+                        // Hide stale image content while loading new source
+                        visible: status === Image.Ready
+                        
                         onSourceChanged: {
                             startTime = new Date().getTime()
                             console.log("[PhotoViewer] Image source changed to:", source)
-                            console.log("[PhotoViewer] Delegate filePath:", filePath)
-                            console.log("[PhotoViewer] Is video:", isVideo, "| Is current:", isCurrent)
                         }
                         onStatusChanged: {
                             console.log("[PhotoViewer] Image status:", status, "for index:", index)
                             if (status === Image.Ready) {
                                 var endTime = new Date().getTime()
                                 root.imageLoaded(endTime - startTime)
-                                console.log("[PhotoViewer] ✓ Image loaded in", (endTime - startTime), "ms")
-                                console.log("[PhotoViewer]   - Image bounds: width=", img.width, "height=", img.height)
-                                console.log("[PhotoViewer]   - Source size:", img.sourceSize.width, "x", img.sourceSize.height)
-                                console.log("[PhotoViewer]   - Implicit size:", img.implicitWidth, "x", img.implicitHeight)
-                                console.log("[PhotoViewer]   - Painted width:", img.paintedWidth, "painted height:", img.paintedHeight)
-                                console.log("[PhotoViewer]   - Visible:", img.visible, "| Opacity:", img.opacity)
-                                console.log("[PhotoViewer]   - Flickable zoom:", flickable.zoom)
                             } else if (status === Image.Error) {
                                 console.error("[PhotoViewer] ✗ Image load FAILED for source:", source)
                             }
@@ -297,6 +288,13 @@ Item {
                     
                     onPlaybackStateChanged: {
                         console.log("[MediaPlayer] Playback state:", playbackState, "for:", filePath)
+                        if (playbackState === MediaPlayer.PlayingState) {
+                            desktopHelper.pauseBackgroundTasks()
+                            if (typeof frameBudget !== "undefined") frameBudget.paused = true
+                        } else {
+                            desktopHelper.resumeBackgroundTasks()
+                            if (typeof frameBudget !== "undefined") frameBudget.paused = false
+                        }
                     }
                     
                     onMetaDataChanged: {
@@ -345,6 +343,7 @@ Item {
                     id: videoOutput
                     anchors.fill: parent
                     fillMode: VideoOutput.PreserveAspectFit
+                    visible: player.hasVideo
                 }
                 
                 // Simple Play/Pause on Tap
@@ -450,7 +449,15 @@ Item {
             width: parent.width * 0.8
             height: parent.height * 0.8
             fillMode: Image.PreserveAspectFit
-            source: (root.model && root.currentIndex >= 0 && root.model.data(root.model.index(root.currentIndex, 0), 257).toLowerCase().indexOf(".mp4") === -1) ? "file:///" + root.model.data(root.model.index(root.currentIndex, 0), 257) : "" // FilePathRole (257)
+            source: {
+                if (!root.model || root.currentIndex < 0) return "";
+                var idx = root.model.index(root.currentIndex, 0);
+                if (!idx.valid) return "";
+                var path = root.model.data(idx, 257); // FilePathRole (257)
+                if (!path || typeof path !== 'string') return "";
+                
+                return (path.toLowerCase().indexOf(".mp4") === -1) ? "file:///" + path : "";
+            }
         }
         
         // Crop Handles (Visual)
@@ -669,7 +676,13 @@ Item {
             anchors.rightMargin: 10
             spacing: 10
             
-                    Button {
+            Button {
+                text: "⚠ Report"
+                visible: listView.currentItem && listView.currentItem.isVideo
+                onClicked: feedbackOverlay.visible = true
+            }
+
+            Button {
                 text: "Info"
                 onClicked: {
                     if (listView.currentItem && listView.currentItem.isVideo) {
@@ -682,6 +695,36 @@ Item {
                         infoOverlay.meta = root.model.getMetadata(root.currentIndex)
                     }
                     infoOverlay.visible = true
+                }
+            }
+
+            Button {
+                text: "📤 Share"
+                visible: listView.currentItem && !listView.currentItem.isVideo
+                onClicked: {
+                    var currentPath = listView.currentItem.filePath
+                    shareDialog.targetPaths = [currentPath]
+                    shareDialog.open()
+                }
+            }
+
+            Button {
+                text: "↺"
+                visible: listView.currentItem && !listView.currentItem.isVideo
+                onClicked: {
+                    if (root.model.rotateImage(root.currentIndex, -90)) {
+                        console.log("Rotated Left")
+                    }
+                }
+            }
+
+            Button {
+                text: "↻"
+                visible: listView.currentItem && !listView.currentItem.isVideo
+                onClicked: {
+                    if (root.model.rotateImage(root.currentIndex, 90)) {
+                        console.log("Rotated Right")
+                    }
                 }
             }
 
@@ -703,6 +746,21 @@ Item {
                 visible: listView.currentItem && !listView.currentItem.isVideo
                 onClicked: root.isEditing = true
             }
+        }
+    }
+
+
+    VideoFeedbackOverlay {
+        id: feedbackOverlay
+        anchors.centerIn: parent
+        visible: false
+        z: 30
+        
+        onCloseClicked: visible = false
+        onFeedbackSubmitted: (issue, comment) => {
+            var item = listView.currentItem
+            console.log("[VIDEO_FEEDBACK] Issue:", issue, "File:", item.filePath, "Codec:", item.children[1].children[0].metaData.value(7))
+            visible = false
         }
     }
 }

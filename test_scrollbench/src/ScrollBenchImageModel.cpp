@@ -1,4 +1,7 @@
 #include "ScrollBenchImageModel.h"
+#include "../../src/AsyncImageProvider.h"
+#include "../../src/DesktopHelper.h"
+#include "../../src/ImageProcessor.h"
 #include "../../src/VisibleRangeManager.h"
 #include "../src/FastVolumeScanner.h"
 #include "../src/FrameBudgetScheduler.h"
@@ -11,6 +14,7 @@
 #include <QImageReader>
 #include <QRandomGenerator>
 #include <QRegularExpression>
+#include <QStorageInfo>
 #include <QTimer>
 #include <libraw/libraw.h>
 
@@ -26,6 +30,34 @@ ScrollBenchImageModel::ScrollBenchImageModel(QObject *parent)
   m_forceUpdateTimer->setSingleShot(true);
   connect(m_forceUpdateTimer, &QTimer::timeout, this,
           &ScrollBenchImageModel::forceUpdateGridView); // Connect to new signal
+
+  m_loadAllTimer = new QTimer(this);
+  m_loadAllTimer->setInterval(30); // ~33fps batching
+  connect(m_loadAllTimer, &QTimer::timeout, this, [this]() {
+    if (m_viewportCullingEnabled) {
+      m_loadAllTimer->stop();
+      return;
+    }
+
+    int batchSize = 100;
+    int itemsCount = m_items.count();
+
+    for (int i = 0; i < batchSize; ++i) {
+      if (m_loadAllIndex >= itemsCount) {
+        m_loadAllTimer->stop();
+        qDebug() << "[ViewportCulling] Load ALL Complete.";
+        break;
+      }
+
+      // Skip if already loaded
+      if (!m_items[m_loadAllIndex].isLoaded &&
+          !m_activelyRequesting.contains(m_loadAllIndex)) {
+        requestThumbnail(m_loadAllIndex);
+      }
+      m_loadAllIndex++;
+    }
+    // Update progress log occasionally?
+  });
 }
 
 void ScrollBenchImageModel::forceDelayedUpdate() { emit forceUpdateGridView(); }
@@ -43,6 +75,23 @@ int ScrollBenchImageModel::rowCount(const QModelIndex &parent) const {
 QVariant ScrollBenchImageModel::data(const QModelIndex &index, int role) const {
   if (!index.isValid() || index.row() >= m_items.count())
     return QVariant();
+
+  // AGGRESSIVE VIEWPORT CULLING: Return early for off-screen items to prevent
+  // QML overhead. However, we MUST NOT cull essential metadata roles
+  // (FilePath, TYPE, etc.) because the PhotoViewer needs these even when
+  // the item is off-screen in the grid.
+  if (m_viewportCullingEnabled) {
+    bool isEssentialRole =
+        (role == FilePathRole || role == FileNameRole || role == IsVideoRole ||
+         role == IsRawRole || role == ImageIndexRole ||
+         role == IsSelectedRole || role == VersionRole);
+    if (!isEssentialRole) {
+      if (index.row() < m_visibleStartIndex - 12 ||
+          index.row() > m_visibleEndIndex + 12) {
+        return QVariant();
+      }
+    }
+  }
 
   const ImageItem &item = m_items[index.row()];
 
@@ -105,6 +154,7 @@ QHash<int, QByteArray> ScrollBenchImageModel::roleNames() const {
   roles[ColorRole] = "testColor";
   roles[IsSelectedRole] = "isSelected";
   roles[IsBurstRole] = "isBurst";
+  roles[VersionRole] = "version";
   roles[SectionDayRole] = "sectionDay";
   roles[SectionMonthRole] = "sectionMonth";
   roles[SectionYearRole] = "sectionYear";
@@ -143,16 +193,20 @@ void ScrollBenchImageModel::setVisibleEndIndex(int index) {
 
 void ScrollBenchImageModel::setViewportCullingEnabled(bool enabled) {
   if (m_viewportCullingEnabled != enabled) {
+    qCritical() << "[ViewportCulling] TOGGLE:" << (enabled ? "ON" : "OFF")
+                << "Total items:" << m_items.count();
     m_viewportCullingEnabled = enabled;
     emit viewportCullingEnabledChanged();
 
     if (enabled) {
+      qCritical() << "[ViewportCulling] Canceling pending requests and "
+                     "updating visible range";
       cancelPendingRequests();
       updateVisibleRange();
     } else {
-      for (int i = 0; i < m_items.count(); ++i) {
-        requestThumbnail(i);
-      }
+      qCritical() << "[ViewportCulling] Loading ALL items (Throttled)";
+      m_loadAllIndex = 0;
+      m_loadAllTimer->start();
     }
   }
 }
@@ -210,37 +264,28 @@ void ScrollBenchImageModel::clearData() {
     m_updateTimer->stop();
   if (m_forceUpdateTimer)
     m_forceUpdateTimer->stop();
+  m_scannedCount = 0;
+  m_loadedCount = 0;
+  m_isLoading = false;
   endResetModel();
   emit remainingItemsChanged();
+  emit scannedCountChanged();
+  emit isLoadingChanged();
 }
 
 void ScrollBenchImageModel::scanDirectory(const QString &path) {
-  if (m_isLoading)
-    return;
+  clearData(); // Call clearData() to reset model state
+
+  // Always allow new scan, cancelling previous one via Generation ID
+  int myGen = ++m_scanGeneration;
 
   m_isLoading = true;
-  emit isLoadingChanged();
+  emit isLoadingChanged(); // Re-emit to ensure UI knows we are loading
 
-  beginResetModel();
-  cancelPendingRequests();
-  m_items.clear();
-  m_totalItems = 0;
-  m_remainingItems = 0;
-  m_visibleStartIndex = 0;
-  m_visibleEndIndex = 0;
-  m_activelyRequesting.clear();
-  m_pendingLoadedIndices.clear();
-  if (m_updateTimer)
-    m_updateTimer->stop();
-  if (m_forceUpdateTimer)
-    m_forceUpdateTimer->stop();
-  endResetModel();
-  emit remainingItemsChanged();
-  emit isLoadingChanged();
+  auto task = [this, path, myGen]() {
+    if (myGen != m_scanGeneration.load())
+      return;
 
-  cancelPendingRequests();
-
-  auto task = [this, path]() {
     QElapsedTimer timer;
     timer.start();
 
@@ -260,11 +305,48 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
 
     if (!QDir(cleanPath).exists()) {
       qWarning() << "Directory does not exist:" << cleanPath;
-      QMetaObject::invokeMethod(this, [this]() {
+      QMetaObject::invokeMethod(this, [this, myGen]() {
+        if (myGen != m_scanGeneration.load())
+          return;
         m_isLoading = false;
         emit isLoadingChanged();
       });
       return;
+    }
+
+    // === NETWORK PATH DETECTION ===
+    // Network shares have fundamentally different performance characteristics:
+    // - Local MFT scan: microseconds
+    // - Network SMB enumeration: seconds/minutes
+    // For network paths: disable incremental updates to avoid UI thrashing and
+    // race conditions
+    bool isNetworkPath = false;
+
+    // Check for UNC path (\\server\share)
+    if (cleanPath.startsWith("\\\\")) {
+      isNetworkPath = true;
+      qDebug() << "[NetworkScan] Detected UNC path:" << cleanPath;
+    } else if (cleanPath.length() >= 3 && cleanPath[1] == ':') {
+      // Check if drive letter is a network drive
+      QStorageInfo storage(cleanPath);
+      if (storage.isValid()) {
+        // On Windows, network drives show up differently in QStorageInfo
+        // Check if the device path suggests network storage
+        QString device = storage.device();
+        if (device.startsWith("\\\\")) {
+          isNetworkPath = true;
+          qDebug() << "[NetworkScan] Detected mapped network drive:"
+                   << cleanPath << "Device:" << device;
+        }
+      }
+    }
+
+    if (isNetworkPath) {
+      qDebug() << "[NetworkScan] Using non-incremental scan strategy for "
+                  "network path";
+    } else {
+      qDebug()
+          << "[NetworkScan] Using incremental scan strategy for local path";
     }
 
     QStringList extensions = {
@@ -280,32 +362,53 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
     }
 
     QVector<ImageItem> batch;
-    batch.reserve(100);
+    batch.reserve(1000);
     int totalFound = 0;
     QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
 
-    // --- Fast MFT Scan Attempt ---
+    // --- Fast MFT Scan Attempt (Local drives only) ---
     bool fastScanSuccess = false;
     if (cleanPath.length() >= 3 && cleanPath[1] == ':' && cleanPath[2] == '/') {
       FastVolumeScanner fastScanner;
       if (fastScanner.scanVolume(cleanPath)) {
+        if (myGen != m_scanGeneration.load())
+          return;
+
         qDebug() << "ScrollBench FastScanner: Success! Filtering results...";
         QVector<QString> allFiles = fastScanner.getAllFiles();
         QString searchPrefix = cleanPath;
         if (!searchPrefix.endsWith("/"))
           searchPrefix += "/";
 
+        int fastBatchCount = 0;
+
         for (const QString &f : allFiles) {
-          if (m_scanCancelled)
-            break;
-          if (f.startsWith(searchPrefix, Qt::CaseInsensitive)) {
+          if (myGen != m_scanGeneration.load())
+            return;
+
+          QString normalizedF = QDir::fromNativeSeparators(f);
+          if (normalizedF.startsWith(searchPrefix, Qt::CaseInsensitive)) {
             QString ext = QFileInfo(f).suffix().toLower();
             if (extensions.contains(ext)) {
               ImageItem item;
-              item.path = f;
+              item.path = QUrl::fromLocalFile(f).toString();
               item.fileName = QFileInfo(f).fileName();
               item.color = "#444444";
               item.isLoaded = false;
+
+              // Basic type detection for Fast Scan (extension only for speed?)
+              // VerifyFileType might be too slow for MFT loop if we want
+              // blazing start? But user demanded verification. Let's use
+              // verifyFileType but with fallback.
+              bool isImg = false, isVid = false, isRaw = false;
+              FileTypeRouter::verifyFileType(item.path, isImg, isVid, isRaw);
+
+              if (!isImg && !isVid && !isRaw) {
+                isVid = FileTypeRouter::isVideo(ext);
+                isRaw = FileTypeRouter::isRaw(ext);
+              }
+              item.isRaw = isRaw;
+              item.isVideo = isVid;
 
               QRegularExpressionMatch match = dateRegex.match(item.fileName);
               if (match.hasMatch()) {
@@ -325,6 +428,42 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
 
               batch.append(item);
               totalFound++;
+
+              // Update scannedCount for feedback (both local and network)
+              if (totalFound % 100 == 0 || totalFound < 100) {
+                QMetaObject::invokeMethod(this, [this, totalFound, myGen]() {
+                  if (myGen != m_scanGeneration.load())
+                    return;
+                  m_scannedCount = totalFound;
+                  emit scannedCountChanged();
+                });
+              }
+
+              // Incremental UI updates for Fast Scan (Local paths only)
+              if (!isNetworkPath) {
+                fastBatchCount++;
+                bool shouldUpdate =
+                    (fastBatchCount >= 50 && totalFound < 200) ||
+                    (fastBatchCount >= 200 && totalFound < 1000) ||
+                    (fastBatchCount >= 1000);
+
+                if (shouldUpdate) {
+                  QList<ImageItem> safeBatch = batch; // Copy
+                  QMetaObject::invokeMethod(this, [this, safeBatch, myGen]() {
+                    if (myGen != m_scanGeneration.load())
+                      return;
+                    beginResetModel();
+                    m_items = safeBatch; // Replace
+                    std::sort(m_items.begin(), m_items.end(),
+                              [](const ImageItem &a, const ImageItem &b) {
+                                return a.date > b.date; // Descending
+                              });
+                    endResetModel();
+                    emit layoutChanged();
+                  });
+                  fastBatchCount = 0;
+                }
+              }
             }
           }
         }
@@ -332,20 +471,40 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
       }
     }
 
+    if (myGen != m_scanGeneration.load())
+      return;
+
     if (!fastScanSuccess) {
       // Fallback
       QDirIterator it(cleanPath, filters, QDir::Files | QDir::Readable,
                       QDirIterator::Subdirectories);
 
-      while (it.hasNext() && !m_scanCancelled) {
-        QString filePath = it.next();
-        QFileInfo fileInfo(filePath);
+      while (it.hasNext()) {
+        if (myGen != m_scanGeneration.load())
+          return;
+
+        it.next();                          // Advance iterator
+        QFileInfo fileInfo = it.fileInfo(); // Use cached info
 
         ImageItem item;
         item.fileName = fileInfo.fileName();
-        item.path = fileInfo.absoluteFilePath();
+        item.path = QUrl::fromLocalFile(fileInfo.absoluteFilePath()).toString();
         item.color = "#444444";
         item.isLoaded = false;
+
+        bool isImg = false, isVid = false, isRaw = false;
+        FileTypeRouter::verifyFileType(item.path, isImg, isVid, isRaw);
+
+        // Fallback: If verification failed/indeterminate, trust extension
+        if (!isImg && !isVid && !isRaw) {
+          QString ext = fileInfo.suffix().toLower();
+          isVid = FileTypeRouter::isVideo(ext);
+          isRaw = FileTypeRouter::isRaw(ext);
+        }
+
+        item.isRaw = isRaw;
+        item.isVideo = isVid;
+
         item.date = fileInfo.birthTime();
         if (!item.date.isValid()) {
           item.date = fileInfo.lastModified();
@@ -364,14 +523,60 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
 
         batch.append(item);
         totalFound++;
+
+        // Update scannedCount for feedback (both local and network)
+        if (totalFound % 100 == 0 || totalFound < 100) {
+          QMetaObject::invokeMethod(this, [this, totalFound, myGen]() {
+            if (myGen != m_scanGeneration.load())
+              return;
+            m_scannedCount = totalFound;
+            emit scannedCountChanged();
+          });
+        }
+
+        // Incremental UI updates for feedback (Local paths only)
+        // Network paths: collect all items first, then single update
+        if (!isNetworkPath) {
+          // Update at 10, 50, 200, 1000 items, then every 2000.
+          bool shouldUpdate =
+              (totalFound == 10 || totalFound == 50 || totalFound == 200 ||
+               totalFound == 1000 || (totalFound % 2000 == 0));
+
+          if (shouldUpdate) {
+            // Dispatch update to main thread
+            QList<ImageItem> safeBatch =
+                batch; // Copy-on-write, relatively cheap
+            QMetaObject::invokeMethod(this, [this, safeBatch, myGen]() {
+              if (myGen != m_scanGeneration.load())
+                return;
+              beginResetModel();
+              m_items = safeBatch;
+              // Sort by Date Descending
+              std::sort(m_items.begin(), m_items.end(),
+                        [](const ImageItem &a, const ImageItem &b) {
+                          return a.date > b.date;
+                        });
+              endResetModel();
+              // Force viewport update
+              emit layoutChanged();
+            });
+          }
+        }
       }
     }
 
+    if (myGen != m_scanGeneration.load())
+      return;
+
     if (!batch.isEmpty()) {
       QMetaObject::invokeMethod(
-          this, [this, batch, timer, totalFound, cleanPath]() {
+          this, [this, batch, myGen, totalFound, cleanPath]() {
+            if (myGen != m_scanGeneration.load())
+              return;
+
             beginResetModel();
             m_items = batch;
+            m_loadedCount = 0; // Fresh scan
             std::sort(m_items.begin(), m_items.end(),
                       [](const ImageItem &a, const ImageItem &b) {
                         return a.date > b.date;
@@ -394,16 +599,16 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
             }
 
             endResetModel();
+            emit forceUpdateGridView();
 
             m_isLoading = false;
+            m_scannedCount = totalFound;
             m_totalItems = m_items.count();
             m_remainingItems = m_totalItems;
             emit remainingItemsChanged();
             emit isLoadingChanged();
+            emit scannedCountChanged();
             emit scanComplete(totalFound);
-            qDebug() << "Async Scan finished:" << totalFound << "items in"
-                     << timer.elapsed() << "ms from" << cleanPath;
-            m_forceUpdateTimer->start(200);
           });
     }
   };
@@ -413,16 +618,27 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
 }
 
 void ScrollBenchImageModel::updateVisibleRange() {
+  static constexpr int BUFFER_SIZE =
+      50; // Load 50 items ahead/behind for better coverage
   if (!m_viewportCullingEnabled) {
+    qDebug() << "[ViewportCulling] DISABLED - skipping range update";
     return;
   }
 
+  qDebug() << "[ViewportCulling] Current settings: m_viewportCullingEnabled="
+           << m_viewportCullingEnabled << ", BUFFER_SIZE=" << BUFFER_SIZE;
+
   int startIdx = qMax(0, m_visibleStartIndex - BUFFER_SIZE);
   int endIdx = qMin(m_items.count() - 1, m_visibleEndIndex + BUFFER_SIZE);
+  int rangeSize = endIdx - startIdx + 1;
 
-  qDebug() << "Visible range updated in C++:" << startIdx << "to" << endIdx
-           << "(viewport:" << m_visibleStartIndex << "-" << m_visibleEndIndex
-           << ", total items:" << m_items.count() << ")";
+  qCritical() << "[ViewportCulling] RANGE UPDATE:"
+              << "\n  Viewport indices:" << m_visibleStartIndex << "to"
+              << m_visibleEndIndex << "("
+              << (m_visibleEndIndex - m_visibleStartIndex + 1) << "items)"
+              << "\n  Buffered range:" << startIdx << "to" << endIdx << "("
+              << rangeSize << "items with BUFFER_SIZE=" << BUFFER_SIZE << ")"
+              << "\n  Total items in model:" << m_items.count();
 
   QSet<QString> visiblePaths;
   for (int i = startIdx; i <= endIdx; ++i) {
@@ -430,18 +646,25 @@ void ScrollBenchImageModel::updateVisibleRange() {
       visiblePaths.insert(m_items[i].path);
     }
   }
-  qDebug() << "[Model] Setting visible paths:" << visiblePaths.size();
+  qCritical() << "[ViewportCulling] Setting" << visiblePaths.size()
+              << "visible paths in VRM";
   VisibleRangeManager::instance().setVisiblePaths(visiblePaths);
 
   int requestedCount = 0;
+  int alreadyLoaded = 0;
   for (int i = startIdx; i <= endIdx; ++i) {
-    if (i >= 0 && i < m_items.count() && !m_items[i].isLoaded) {
-      requestThumbnail(i);
-      requestedCount++;
+    if (i >= 0 && i < m_items.count()) {
+      if (!m_items[i].isLoaded) {
+        requestThumbnail(i);
+        requestedCount++;
+      } else {
+        alreadyLoaded++;
+      }
     }
   }
-  qDebug() << "requestThumbnail calls initiated:" << requestedCount
-           << "for visible range";
+  qCritical() << "[ViewportCulling] Requested:" << requestedCount
+              << "| Already loaded:" << alreadyLoaded
+              << "| Total in range:" << rangeSize;
 }
 
 void ScrollBenchImageModel::requestThumbnail(int index) {
@@ -453,13 +676,21 @@ void ScrollBenchImageModel::requestThumbnail(int index) {
     return;
   m_activelyRequesting.insert(index);
 
-  auto deliverTask = [this, index]() {
+  int myGen = m_scanGeneration.load();
+  auto deliverTask = [this, index, myGen]() {
     m_activelyRequesting.remove(index);
+    // Generation Check: Ensure this simulator task belongs to the current scan
+    if (myGen != m_scanGeneration.load()) {
+      return;
+    }
+
     if (index >= 0 && index < m_items.count()) {
       if (!m_items[index].isLoaded) {
         m_items[index].isLoaded = true;
+        m_loadedCount++;
         m_remainingItems = qMax(0, m_remainingItems - 1);
         emit remainingItemsChanged();
+        emit loadedCountChanged();
       }
 
       m_pendingDecodes = qMax(0, m_pendingDecodes - 1);
@@ -527,7 +758,10 @@ void ScrollBenchImageModel::cancelPendingRequests() {
   }
 }
 
-void ScrollBenchImageModel::cancelScan() { m_scanCancelled = true; }
+void ScrollBenchImageModel::cancelScan() {
+  m_scanCancelled = true;
+  m_scanGeneration++;
+}
 
 // Selection methods
 void ScrollBenchImageModel::toggleSelection(int index) {
@@ -657,6 +891,27 @@ int ScrollBenchImageModel::selectedCount() const {
   return count;
 }
 
+QStringList ScrollBenchImageModel::getSelectedPaths() const {
+  QStringList paths;
+  for (const auto &item : m_items) {
+    if (item.isSelected) {
+      paths.append(item.path);
+    }
+  }
+  return paths;
+}
+
+qint64 ScrollBenchImageModel::getSelectedTotalSizeBytes() const {
+  qint64 totalBytes = 0;
+  for (const auto &item : m_items) {
+    if (item.isSelected) {
+      QFileInfo fi(item.path);
+      totalBytes += fi.size();
+    }
+  }
+  return totalBytes;
+}
+
 bool ScrollBenchImageModel::cropImage(int index, const QRectF &cropRect) {
   if (index < 0 || index >= m_items.count())
     return false;
@@ -671,6 +926,45 @@ bool ScrollBenchImageModel::cropImage(int index, const QRectF &cropRect) {
 
   QImage cropped = img.copy(rect);
   return cropped.save(filePath);
+}
+
+bool ScrollBenchImageModel::rotateImage(int index, int degrees) {
+  if (index < 0 || index >= m_items.count())
+    return false;
+
+  const ImageItem &item = m_items[index];
+  if (!m_imageProcessor) {
+    m_imageProcessor = new ImageProcessor(this);
+  }
+
+  if (m_imageProcessor->rotateImage(item.path, degrees)) {
+    // Increment version
+    m_items[index].version++;
+
+    // Force refresh by emitting dataChanged
+    QModelIndex modelIndex = createIndex(index, 0);
+    emit dataChanged(modelIndex, modelIndex,
+                     {Qt::DisplayRole, ColorRole, VersionRole});
+    return true;
+  }
+  return false;
+}
+
+void ScrollBenchImageModel::rotateSelected(int degrees) {
+  if (!m_imageProcessor) {
+    m_imageProcessor = new ImageProcessor(this);
+  }
+
+  for (int i = 0; i < m_items.count(); ++i) {
+    if (m_items[i].isSelected && !m_items[i].isVideo) {
+      if (m_imageProcessor->rotateImage(m_items[i].path, degrees)) {
+        m_items[i].version++;
+        QModelIndex modelIndex = createIndex(i, 0);
+        emit dataChanged(modelIndex, modelIndex,
+                         {Qt::DisplayRole, ColorRole, VersionRole});
+      }
+    }
+  }
 }
 
 QVariantMap ScrollBenchImageModel::getMetadata(int index) {
@@ -714,4 +1008,8 @@ QVariantMap ScrollBenchImageModel::getMetadata(int index) {
     }
   }
   return meta;
+}
+
+int ScrollBenchImageModel::stagedRequestCount() const {
+  return AsyncImageProvider::stagedRequestCount();
 }

@@ -29,7 +29,7 @@ TaskScheduler::TaskScheduler() : m_running(true), m_sequenceCounter(0) {
     cpuWorkerCount = std::clamp(cpuCores - 1, 2, 8);
   }
 
-  int ioWorkerCount = 2; // Dedicated IO threads
+  int ioWorkerCount = 4; // Increased from 2 to allow better burst handling
 
   // Start CPU Workers
   for (int i = 0; i < cpuWorkerCount; ++i) {
@@ -61,6 +61,18 @@ void TaskScheduler::stop() {
     if (t.joinable())
       t.join();
   }
+}
+
+void TaskScheduler::expandIOPool(int count) {
+  if (!m_running)
+    return;
+  // Note: m_ioThreads modification is not mutex protected against stop(),
+  // but stop() is only called on shutdown.
+  for (int i = 0; i < count; ++i) {
+    m_ioThreads.emplace_back(&TaskScheduler::ioWorkerLoop, this);
+  }
+  qInfo() << "[TaskScheduler] Expanded IO pool by" << count
+          << "threads. New Total:" << m_ioThreads.size();
 }
 
 void TaskScheduler::pause() {
@@ -116,8 +128,9 @@ void TaskScheduler::addTask(Task task, TaskType type, Priority priority) {
     m_cpuCondition.wakeOne();
   } else {
     QMutexLocker lock(&m_ioMutex);
-    // Use append (FIFO) for IO tasks to maintain scan order
-    m_ioQueue[priority].append(task);
+    // Use prepend (LIFO) for IO tasks as well to prioritize most recent
+    // viewport
+    m_ioQueue[priority].prepend(task);
     m_ioCondition.wakeOne();
   }
 }

@@ -39,7 +39,7 @@ public:
   /**
    * @brief Gets the name of the current acceleration type.
    */
-  QString currentModeName() const;
+  Q_INVOKABLE QString currentModeName() const;
 
   /**
    * @brief Gets detailed information about the CPU instruction sets.

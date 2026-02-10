@@ -2,19 +2,21 @@
 #define IMAGEPROCESSOR_H
 
 #include <QObject>
-#include <QString>
 #include <QSize>
+#include <QString>
 
-class ImageProcessor : public QObject
-{
-    Q_OBJECT
+class ImageProcessor : public QObject {
+  Q_OBJECT
 public:
-    explicit ImageProcessor(QObject *parent = nullptr);
+  explicit ImageProcessor(QObject *parent = nullptr);
 
-    Q_INVOKABLE bool resizeImage(const QString &sourcePath, const QString &destinationPath, const QSize &targetSize);
+  Q_INVOKABLE bool resizeImage(const QString &sourcePath,
+                               const QString &destinationPath,
+                               const QSize &targetSize);
+  Q_INVOKABLE bool rotateImage(const QString &sourcePath, int degrees);
 
 signals:
-    void imageProcessingError(const QString &message);
+  void imageProcessingError(const QString &message);
 
 private:
 };

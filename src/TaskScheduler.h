@@ -42,6 +42,7 @@ public:
   void clear();
   void clear(TaskType type);
   void stop();
+  void expandIOPool(int count = 1);
 
   Q_INVOKABLE void togglePause(bool paused);
 

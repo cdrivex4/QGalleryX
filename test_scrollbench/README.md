@@ -55,6 +55,13 @@ cmake --build . --config Release
 .\Release\appScrollBench.exe
 ```
 
+### Network Diagnostics (Watchdog)
+If running over a network share where execution is unstable or silent crashes occur:
+```powershell
+.\Release\appScrollBenchNet.exe
+```
+**Note:** `appScrollBenchNet.exe` is a temporary debug watchdog. It launches the main app, captures exit codes, holds the terminal open on crash, and dumps `logs/crash.log` contents. This is NOT the main application and should be cleaned up after network diagnostics are completed.
+
 ## Testing Methodology
 
 ### Baseline Test (No Optimizations)

@@ -30,7 +30,7 @@ public:
   void cancel() override;
 
 public slots:
-  void handleDone(QImage image);
+  void handleDone(QImage image, int duration);
 
 public:
   QString m_id;
@@ -60,6 +60,30 @@ public:
   static void clearDiskCache();
   static void setFrameScheduler(class FrameBudgetScheduler *s);
 
+  // ADAPTIVE I/O THROTTLING state
+  struct DriveStats {
+    int activeWeight = 0;     // Cumulative weight of active tasks
+    int concurrencyLimit = 2; // Start conservative
+    double avgLoadTimeMs = 0;
+    int sampleCount = 0;
+    bool isNetwork = false;
+    bool initialized = false;
+    QElapsedTimer lastAdjustment;
+
+    // Stats helpers
+    void update(const QString &drive, int loadTimeMs);
+    bool canAdmit(int weight) const {
+      // Allow higher burst for network drives
+      int limit = isNetwork ? (concurrencyLimit + 4) : concurrencyLimit;
+      return activeWeight + weight <=
+             limit + (isNetwork ? 12 : 6); // Simplified burst check
+    }
+  };
+  static int getTaskWeight(const QString &id);
+  static QMap<QString, DriveStats> m_driveStats; // Key: Drive Root (e.g. "C:/")
+  static QMutex m_driveStatsMutex;
+  static QString getDriveRoot(const QString &path);
+
   // STAGING QUEUE for "Ground Up" Prioritization
   struct StagedRequest {
     QString id;
@@ -79,11 +103,14 @@ public:
   static bool isRequestStillNeeded(const QString &id);
   static void deliverToPending(const QString &id, const QImage &image,
                                int duration);
+  static QStringList getActiveTaskIds();
   static void processImageTaskInternal(
       QString id, QSize requestedSize,
       std::shared_ptr<std::atomic<bool>> cancelled = nullptr,
       std::shared_ptr<ResponseTracker> tracker = nullptr);
 
+  static void checkStalls();
+  static int stagedRequestCount();
   static std::atomic<int> s_logLevel;
   static std::atomic<bool> s_accelerateRaw;
   static std::atomic<bool> s_useDiskCache;
@@ -95,7 +122,9 @@ private:
   static QMutex m_mutex;
 
   // Coalescing: Track active tasks to avoid duplicate work
-  static QMap<QString, QList<AsyncImageResponse *>> m_pendingResponses;
+  // Store trackers instead of raw pointers to avoid dangling pointer races
+  static QMap<QString, QList<std::shared_ptr<ResponseTracker>>>
+      m_pendingResponses;
   static QMutex m_pendingMutex;
 
   // Staging Queue Members

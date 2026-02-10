@@ -1,6 +1,6 @@
 # Known Issues & Workarounds
 
-**Last Updated:** December 28, 2024
+**Last Updated:** February 10, 2026
 
 ---
 
@@ -26,18 +26,18 @@
 - **Status**: Easy fix, low priority
 - **Fix**: See implementation code in `docs/SYSTEM_MONITORING_STATUS.md`
 
----
+---## 🔴 High Priority
 
-### 3. DNG Proprietary Compression Performance
-- **Issue**: DNG files with proprietary compression (`PhotometricInterpretation=32803`) require 120+ seconds to load
-- **Root Cause**: LibRaw performs CPU-only Bayer demosaicing with no GPU acceleration
-- **Impact**: Severe performance degradation for certain manufacturer-specific DNG files
-- **Workaround**: 
-  - Use embedded JPEG preview extraction (faster but lower quality)
-  - Use corresponding JPG file if available
-  - Avoid opening these files in full-resolution mode
-- **Status**: Deferred (requires custom GPU-accelerated demosaicing shaders)
-- **Files**: `src/AsyncImageProvider.cpp` (lines 378-415)
+### Concurrency Leak & Stall Recovery (Feb 10, 2026)
+**Status:** Identified, pending implementation  
+**Issue:** `AsyncImageProvider` has a double-increment bug in `activeWeight` and lacks a timer to trigger `checkStalls()`.  
+**Impact:** UI may freeze or starve when loading from slow/stalled network shares.  
+**Files:** `src/AsyncImageProvider.cpp`
+
+### DNG Proprietary Compression Support ⏸️ DEFERRED
+- **Issue**: DNG files with proprietary compression require long load times.
+- **Status**: Partially mitigated in v2.2.1 via Task Weighting (prevents system saturation).
+- **Files**: `src/AsyncImageProvider.cpp`
 
 ---
 
@@ -52,23 +52,27 @@
 
 ---
 
-## 🟡 Minor Issues
+### 7. AsyncImageProvider Concurrency Leak
+- **Issue**: `activeWeight` is incremented twice per task (admission + guard constructor)
+- **Impact**: Concurrency slots are consumed 2x faster than intended, causing starvation
+- **Status**: Identified, fix planned for next session
+- **File**: `src/AsyncImageProvider.cpp`
 
-### 5. Hardcoded Test Paths in Code
-- **Issue**: Some files reference non-existent test paths (e.g., `I:/`)
-- **Impact**: Warnings in debug logs, no functional impact
-- **Status**: Cleanup task tracked in task checklist
-
----
-
-### 6. Excessive Crash Log Files
-- **Issue**: 28+ crash log files accumulated in project root directory
-- **Impact**: Repository clutter
-- **Recommended:** Move to `logs/` subdirectory or delete historical logs
+### 8. Stall Recovery Timer Missing
+- **Issue**: `checkStalls()` is implemented but never called by any timer
+- **Impact**: Stalled I/O tasks (e.g., on offline network shares) never recover their weight
+- **Status**: Identified, fix planned for next session
+- **File**: `src/AsyncImageProvider.cpp`
 
 ---
 
 ## ✅ Previously Reported Issues (Now Resolved)
+
+### Fixed in v2.2.1 (Feb 10, 2026)
+- ✅ **1 FPS UI Slowdown** → RESOLVED: Replaced O(N) loops with O(1) counters in `ScrollBenchImageModel`
+- ✅ **Viewport Culling Broken** → RESOLVED: Fixed path normalization in `VisibleRangeManager`
+- ✅ **Build Failures** → RESOLVED: Implemented process killing and hash verification in `build.ps1`
+- ✅ **CPU Overload** → RESOLVED: Added task weighting and CPU-aware backoff throttling
 
 ### Fixed in v2.2.0 (MFT Scanning & Frame Budget Release)
 - ✅ **Missing Static Qt Build** → RESOLVED: `scripts/setup_static_qt.ps1` implemented and working

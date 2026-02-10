@@ -46,16 +46,13 @@ int DesktopHelper::getFileType(const QString &path) {
 }
 
 DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
-  qDebug() << "[DesktopHelper] staticGetFileType for path:" << path;
   QString ext = QFileInfo(path).suffix().toLower();
-  qDebug() << "[DesktopHelper] Extracted extension:" << ext;
 
   // Video
   if (ext == "mp4" || ext == "mkv" || ext == "avi" || ext == "mov" ||
       ext == "webm" || ext == "flv" || ext == "vob" || ext == "ogg" ||
       ext == "ogv" || ext == "mts" || ext == "m2ts" || ext == "ts" ||
       ext == "3gp") {
-    qDebug() << "[DesktopHelper] Identified as Video.";
     return Video;
   }
 
@@ -63,7 +60,6 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
   if (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
       ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
       ext == "pef" || ext == "raf") {
-    qDebug() << "[DesktopHelper] Identified as Raw.";
     return Raw;
   }
 
@@ -71,10 +67,8 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
   if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif" ||
       ext == "bmp" || ext == "webp" || ext == "heic" || ext == "tiff" ||
       ext == "tif" || ext == "ico" || ext == "tga") {
-    qDebug() << "[DesktopHelper] Identified as Image.";
     return Image;
   }
 
-  qDebug() << "[DesktopHelper] Identified as Unknown.";
   return Unknown;
 }

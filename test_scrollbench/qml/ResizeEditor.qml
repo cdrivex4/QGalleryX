@@ -4,7 +4,10 @@ import QtQuick.Layouts
 
 Dialog {
     id: resizeEditor
-    title: "Resize Images - " + (imageModel ? imageModel.selectedCount : 0) + " selected"
+    // List of images to resize
+    property var targetPaths: []
+    
+    title: "Resize " + (targetPaths.length === 1 ? "Image" : targetPaths.length + " Images")
     modal: true
     width: parent ? parent.width * 0.9 : 1000
     height: parent ? parent.height * 0.9 : 700
@@ -35,8 +38,163 @@ Dialog {
         newSizeMB = originalSizeMB * qualityFactor * compressionFactor
     }
     
-    onOpened: {
-        updateSizeEstimate()
+    contentItem: Rectangle {
+        color: "#2b2b2b"
+        implicitWidth: 900
+        implicitHeight: 600
+        
+        RowLayout {
+            anchors.fill: parent
+            anchors.margins: 20
+            spacing: 20
+            
+            // Left: Preview
+            Rectangle {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.preferredWidth: 2
+                color: "#1a1a1a"
+                border.color: "#3d3d3d"
+                radius: 4
+                
+                Image {
+                    id: previewImage
+                    anchors.fill: parent
+                    anchors.margins: 2
+                    fillMode: Image.PreserveAspectFit
+                    source: resizeEditor.currentImagePath
+                    asynchronous: true
+                }
+                
+                Text {
+                    anchors.bottom: parent.bottom
+                    anchors.margins: 10
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: resizeEditor.currentImagePath ? resizeEditor.currentImagePath.substring(resizeEditor.currentImagePath.lastIndexOf('/') + 1) : "No Selection"
+                    color: "#888"
+                    font.pixelSize: 12
+                }
+            }
+            
+            // Right: Controls
+            ColumnLayout {
+                Layout.fillHeight: true
+                Layout.preferredWidth: 320
+                spacing: 15
+                
+                Text {
+                    text: "Resize Settings"
+                    color: "white"
+                    font.pixelSize: 20
+                    font.bold: true
+                    Layout.bottomMargin: 10
+                }
+                
+                // Dimensions
+                GroupBox {
+                    title: "Dimensions"
+                    Layout.fillWidth: true
+                    label: Text { text: parent.title; color: "#ccc"; font.bold: true }
+                    background: Rectangle { color: "#333"; radius: 4; border.color: "#555" }
+                    
+                    ColumnLayout {
+                        width: parent.width
+                        RowLayout {
+                            Text { text: "Width:"; color: "white"; Layout.preferredWidth: 70 }
+                            SpinBox {
+                                id: widthSpin
+                                from: 100; to: 8000
+                                value: resizeEditor.targetWidth
+                                editable: true
+                                onValueChanged: {
+                                    if (value !== resizeEditor.targetWidth) {
+                                        resizeEditor.targetWidth = value
+                                        updateSizeEstimate()
+                                    }
+                                }
+                                Layout.fillWidth: true
+                            }
+                        }
+                        RowLayout {
+                            Text { text: "Height:"; color: "white"; Layout.preferredWidth: 70 }
+                            SpinBox {
+                                id: heightSpin
+                                from: 100; to: 8000
+                                value: resizeEditor.targetHeight
+                                editable: true
+                                onValueChanged: {
+                                    if (value !== resizeEditor.targetHeight) {
+                                        resizeEditor.targetHeight = value
+                                        updateSizeEstimate()
+                                    }
+                                }
+                                Layout.fillWidth: true
+                            }
+                        }
+                        
+                        CheckBox {
+                            text: "Preserve Aspect Ratio"
+                            checked: true
+                            enabled: false // Logic implementation needed for true lock
+                            contentItem: Text { text: parent.text; color: "#aaa"; leftPadding: 26; verticalAlignment: Text.AlignVCenter }
+                        }
+                    }
+                }
+                
+                // Quality
+                GroupBox {
+                    title: "Quality & Compression"
+                    Layout.fillWidth: true
+                    label: Text { text: parent.title; color: "#ccc"; font.bold: true }
+                    background: Rectangle { color: "#333"; radius: 4; border.color: "#555" }
+                    
+                    ColumnLayout {
+                        width: parent.width
+                        
+                        Text { text: "Quality: " + resizeEditor.quality + "%"; color: "white" }
+                        Slider {
+                            id: qualitySlider
+                            from: 10; to: 100
+                            value: resizeEditor.quality
+                            stepSize: 5
+                            Layout.fillWidth: true
+                            onMoved: {
+                                resizeEditor.quality = value
+                                updateSizeEstimate()
+                            }
+                        }
+                    }
+                }
+                
+                // File Info
+                GroupBox {
+                    title: "Output Estimate"
+                    Layout.fillWidth: true
+                    label: Text { text: parent.title; color: "#ccc"; font.bold: true }
+                    background: Rectangle { color: "#333"; radius: 4; border.color: "#555" }
+                    
+                    GridLayout {
+                        columns: 2
+                        width: parent.width
+                        columnSpacing: 20
+                        
+                        Text { text: "Original:"; color: "#aaa" }
+                        Text { text: resizeEditor.originalSizeMB.toFixed(2) + " MB"; color: "white" }
+                        
+                        Text { text: "Estimated:"; color: "#aaa" }
+                        Text { text: resizeEditor.newSizeMB.toFixed(2) + " MB"; color: "#4CAF50"; font.bold: true }
+                        
+                        Text { text: "Reduction:"; color: "#aaa" }
+                        Text { 
+                            text: Math.round((1 - resizeEditor.newSizeMB/resizeEditor.originalSizeMB)*100) + "%"
+                            color: "#2196F3" 
+                        }
+                    }
+                }
+                
+                Item { Layout.fillHeight: true } // Spacer
+            }
+        }
     }
 
     footer: DialogButtonBox {
@@ -44,21 +202,31 @@ Dialog {
         standardButtons: DialogButtonBox.Save | DialogButtonBox.Cancel
 
         onAccepted: {
-            // "Save" button clicked
-            if (imageModel && imageModel.selectedItem && imageModel.selectedItem.path) {
-                let sourcePath = imageModel.selectedItem.path;
-                let fileName = sourcePath.substring(sourcePath.lastIndexOf('/') + 1);
-                let fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
-                let baseName = fileName.substring(0, fileName.lastIndexOf('.'));
-                let destinationPath = "file:///" + Qt.platform.homePath + "/Desktop/" + baseName + "_resized." + fileExtension; // Save to desktop for now
-
+            // "Save" button clicked - Batch or Single
+            if (resizeEditor.targetPaths.length > 0) {
                 let size = Qt.size(resizeEditor.targetWidth, resizeEditor.targetHeight);
-                console.log("Resizing image:", sourcePath, "to", size, "saving to", destinationPath);
                 
-                imageProcessor.resizeImage(sourcePath, destinationPath, size);
+                for (let i = 0; i < resizeEditor.targetPaths.length; i++) {
+                    let sourcePath = resizeEditor.targetPaths[i];
+                    // Strip file:/// if present for backend
+                    let cleanPath = sourcePath.replace("file:///", "").replace("file:", "");
+                    
+                    let fileName = cleanPath.substring(cleanPath.lastIndexOf('/') + 1);
+                    if (fileName === "") fileName = cleanPath.substring(cleanPath.lastIndexOf('\\') + 1);
+                    
+                    let lastDot = fileName.lastIndexOf('.');
+                    let fileExtension = lastDot !== -1 ? fileName.substring(lastDot + 1) : "jpg";
+                    let baseName = lastDot !== -1 ? fileName.substring(0, lastDot) : fileName;
+                    
+                    let desktopPath = Qt.platform.homePath + "/Desktop/" + baseName + "_resized." + fileExtension;
+                    
+                    console.log("[RESIZE] Processing (" + (i+1) + "/" + resizeEditor.targetPaths.length + "):", cleanPath);
+                    imageProcessor.resizeImage(cleanPath, desktopPath, size);
+                }
+                
                 resizeEditor.close();
             } else {
-                console.warn("No image selected for resizing.");
+                console.warn("No images in targetPaths for resizing.");
             }
         }
 

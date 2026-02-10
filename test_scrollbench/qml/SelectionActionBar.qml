@@ -93,15 +93,14 @@ Rectangle {
         
         Rectangle { width: 1; height: 30; color: "#FFFFFF"; opacity: 0.3 } // Separator
         
-        /* TODO: Implement Rotate in Model first
         Button {
+            id: rotateBtn
             text: "Rotate"
             flat: true
             onClicked: root.rotateClicked()
             contentItem: Text { text: "Rotate"; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
             background: Rectangle { color: parent.pressed ? "#22FFFFFF" : "transparent"; radius: 4 }
         }
-        */
         
         Button {
             text: "Share"

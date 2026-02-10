@@ -3,6 +3,8 @@
 
 #include <QElapsedTimer>
 #include <QObject>
+#include <QString>
+#include <QTimer>
 #include <QVariant>
 #include <QVector>
 
@@ -21,21 +23,28 @@ class TelemetryMonitor : public QObject {
   Q_PROPERTY(int completionsThisFrame READ completionsThisFrame WRITE
                  setCompletionsThisFrame NOTIFY completionsThisFrameChanged)
   Q_PROPERTY(int lastLoadTime READ lastLoadTime NOTIFY lastLoadTimeChanged)
-  Q_PROPERTY(int lastWorkDuration READ lastWorkDuration NOTIFY lastWorkDurationChanged)
+  Q_PROPERTY(
+      int lastWorkDuration READ lastWorkDuration NOTIFY lastWorkDurationChanged)
   Q_PROPERTY(int minLoadTime READ minLoadTime NOTIFY lastLoadTimeChanged)
   Q_PROPERTY(int maxLoadTime READ maxLoadTime NOTIFY lastLoadTimeChanged)
-  Q_PROPERTY(int averageLoadTime READ averageLoadTime NOTIFY lastLoadTimeChanged)
-  
+  Q_PROPERTY(
+      int averageLoadTime READ averageLoadTime NOTIFY lastLoadTimeChanged)
+
   Q_PROPERTY(QVariantList cpuHistory READ cpuHistory NOTIFY historyChanged)
   Q_PROPERTY(QVariantList ramHistory READ ramHistory NOTIFY historyChanged)
   Q_PROPERTY(QVariantList gpuHistory READ gpuHistory NOTIFY historyChanged)
+  Q_PROPERTY(
+      bool isBenchmarking READ isBenchmarking NOTIFY isBenchmarkingChanged)
 
 public:
   explicit TelemetryMonitor(QObject *parent = nullptr);
+  ~TelemetryMonitor();
 
   int fps() const { return m_currentFps; }
   int averageFps() const;
-  double cpuUsage() const { return m_cpuHistory.isEmpty() ? 0.0 : m_cpuHistory.last().toDouble(); }
+  double cpuUsage() const {
+    return m_cpuHistory.isEmpty() ? 0.0 : m_cpuHistory.last().toDouble();
+  }
   int pendingDecodes() const { return m_pendingDecodes; }
   qreal cacheHitRate() const { return m_cacheHitRate; }
   int delegateCount() const { return m_delegateCount; }
@@ -45,7 +54,11 @@ public:
   int lastWorkDuration() const { return m_lastWorkDuration; }
   int minLoadTime() const { return m_minLoadTime; }
   int maxLoadTime() const { return m_maxLoadTime; }
-  int averageLoadTime() const { return m_loadCount > 0 ? static_cast<int>(m_totalLoadTime / m_loadCount) : 0; } // This line was modified in the original replace, but it should be kept as is.
+  int averageLoadTime() const {
+    return m_loadCount > 0 ? static_cast<int>(m_totalLoadTime / m_loadCount)
+                           : 0;
+  } // This line was modified in the original replace, but it should be kept as
+    // is.
 
   QVariantList cpuHistory() const { return m_cpuHistory; }
   QVariantList ramHistory() const { return m_ramHistory; }
@@ -54,10 +67,13 @@ public:
   void setPendingDecodes(int count);
   void setDelegateCount(int count);
   void setCompletionsThisFrame(int count);
-  
+
   Q_INVOKABLE void reportLoadTime(int ms);
   Q_INVOKABLE void reportWorkDuration(int ms);
   Q_INVOKABLE void resetStats();
+  Q_INVOKABLE void startBenchmarking(const QString &sessionName);
+  Q_INVOKABLE void stopBenchmarking();
+  bool isBenchmarking() const { return m_isBenchmarking; }
 
   Q_INVOKABLE void recordFrame();
   Q_INVOKABLE void recordCacheHit();
@@ -75,6 +91,7 @@ signals:
   void lastLoadTimeChanged();
   void lastWorkDurationChanged();
   void historyChanged();
+  void isBenchmarkingChanged();
 
 private:
   void updateFps();
@@ -95,7 +112,7 @@ private:
 
   qint64 m_memoryUsageMB = 0;
   int m_completionsThisFrame = 0;
-  
+
   int m_lastLoadTime = 0;
   int m_lastWorkDuration = 0;
   int m_minLoadTime = 999999;
@@ -106,6 +123,11 @@ private:
   QVariantList m_cpuHistory;
   QVariantList m_ramHistory;
   QVariantList m_gpuHistory;
+
+  bool m_isBenchmarking = false;
+  QString m_benchmarkFile;
+  QTimer *m_logTimer = nullptr;
+  void logStats();
 };
 
 #endif // TELEMETRYMONITOR_H

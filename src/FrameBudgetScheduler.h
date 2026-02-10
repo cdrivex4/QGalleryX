@@ -45,7 +45,7 @@ private slots:
 
 private:
   int m_frameBudget =
-      40; // Increased from 10 to 40 to prevent artificial throttling at 60fps
+      12; // Reduced from 40 to 12 to ensure < 16ms UI thread impact
   bool m_enabled = true;
   bool m_paused = false;
   int m_completionsThisFrame = 0;

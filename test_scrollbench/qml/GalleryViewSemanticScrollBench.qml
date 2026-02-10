@@ -91,35 +91,42 @@ Item {
         }
     }
     
-    // Robust Visibility Tracking using itemAt (Delegate peering)
+    // Robust Visibility Tracking - Scan multiple points to find actual image rows
     function updateVisibleRange() {
         if (!model || list.count === 0) return;
         
-        // Peek at delegates at top and bottom of viewport
-        // itemAt uses coordinates relative to the contentItem if we call it on contentItem,
-        // but ListView.itemAt uses coordinates relative to the viewport.
-        var topRow = list.itemAt(25, 20)
-        var bottomRow = list.itemAt(25, list.height - 20)
+        var sourceStart = -1;
+        var sourceEnd = -1;
         
-        var sourceStart = -1
-        var sourceEnd = -1
+        // Scan from top to bottom at multiple Y positions to find first and last image rows
+        // Skip headers (type === 0) and only count actual image rows (type === 1)
+        var scanPoints = 10; // Number of vertical scan points
+        var stepY = list.height / scanPoints;
         
-        if (topRow && topRow.hasOwnProperty("capturedStart")) {
-            sourceStart = topRow.capturedStart
-        } else {
-            // Fallback if top is a header or empty space
-            sourceStart = 0
+        for (var i = 0; i < scanPoints; i++) {
+            var y = i * stepY + 20; // Offset from edge
+            var item = list.itemAt(25, y);
+            
+            if (item && item.hasOwnProperty("capturedType") && item.capturedType === 1) {
+                // This is an image row, not a header
+                if (sourceStart === -1) {
+                    sourceStart = item.capturedStart;
+                }
+                // Always update end to capture the last visible row
+                sourceEnd = item.capturedStart + item.capturedCount - 1;
+            }
         }
         
-        if (bottomRow && bottomRow.hasOwnProperty("capturedStart")) {
-            sourceEnd = bottomRow.capturedStart + bottomRow.capturedCount - 1
-        } else {
-            sourceEnd = model.totalItems - 1
-        }
+        // Fallback: if we didn't find any rows, assume we're at the edges
+        if (sourceStart === -1) sourceStart = 0;
+        if (sourceEnd === -1) sourceEnd = model.totalItems - 1;
+        
+        console.log("[QML ViewportRange] Detected range:", sourceStart, "to", sourceEnd, 
+                    "(" + (sourceEnd - sourceStart + 1) + " items)");
         
         if (sourceStart !== -1 && sourceEnd !== -1) {
-            model.visibleStartIndex = Math.max(0, sourceStart)
-            model.visibleEndIndex = Math.min(model.totalItems - 1, sourceEnd)
+            model.visibleStartIndex = Math.max(0, sourceStart);
+            model.visibleEndIndex = Math.min(model.totalItems - 1, sourceEnd);
         }
     }
 

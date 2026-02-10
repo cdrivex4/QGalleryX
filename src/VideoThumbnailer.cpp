@@ -66,6 +66,23 @@ static enum AVPixelFormat get_hw_format(AVCodecContext *ctx,
   return AV_PIX_FMT_NONE;
 }
 
+struct TimeoutData {
+  QElapsedTimer timer;
+  std::atomic<bool> *cancelled;
+  int timeoutMs;
+};
+
+static int interrupt_cb(void *ctx) {
+  if (!ctx)
+    return 0;
+  auto *data = (TimeoutData *)ctx;
+  if (data->timer.elapsed() > data->timeoutMs)
+    return 1;
+  if (data->cancelled && data->cancelled->load())
+    return 1;
+  return 0;
+}
+
 static std::atomic<int> s_consecutiveHwFailures(0);
 static const int MAX_HW_FAILURES = 3;
 
@@ -123,9 +140,17 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   std::string pathStr = path.toStdString();
 
+  TimeoutData timeoutData = {QElapsedTimer(), cancelled, 5000}; // 5s timeout
+  timeoutData.timer.start();
+
+  cleanup.fmtCtx = avformat_alloc_context();
+  cleanup.fmtCtx->interrupt_callback.callback = interrupt_cb;
+  cleanup.fmtCtx->interrupt_callback.opaque = &timeoutData;
+
   if (avformat_open_input(&cleanup.fmtCtx, pathStr.c_str(), nullptr, nullptr) !=
       0) {
-    qWarning() << "[" << timeLogStr << "][FFmpeg] Failed to open file:" << path;
+    qWarning() << "[" << timeLogStr
+               << "][FFmpeg] Failed to open file (or timeout):" << path;
     return QImage();
   }
 

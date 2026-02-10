@@ -1,41 +1,77 @@
 #include "AlbumModel.h"
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
+#include "DiagnosticsMonitor.h"
 #include "FrameBudgetScheduler.h"
 #include "GroupedProxyModel.h"
 #include "HardwareAccelerationManager.h"
-#include "ImageProcessor.h" // Include ImageProcessor header
+#include "ImageProcessor.h"
 #include "ScrollBenchImageModel.h"
 #include "SettingsHelper.h"
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "TelemetryMonitor.h"
-#include <QDateTime> // Added for QDateTime
+#include <QDateTime>
 #include <QDir>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QString>
 #include <QTextStream>
 #include <QTimer>
 #include <QtGlobal>
-
+#include <csignal>
 #include <cstdio>
 
-void crashHandler(QtMsgType type, const QMessageLogContext &,
+#ifdef Q_OS_WIN
+#include <windows.h>
+
+LONG WINAPI GlobalExceptionHandler(EXCEPTION_POINTERS *ExceptionInfo) {
+  QString errorMsg =
+      QString("CRITICAL CRASH: Exception Code 0x%1")
+          .arg(ExceptionInfo->ExceptionRecord->ExceptionCode, 0, 16);
+  MessageBoxA(NULL, errorMsg.toUtf8().constData(),
+              "ScrollBench - Crash Detected", MB_ICONERROR | MB_OK);
+  return EXCEPTION_CONTINUE_SEARCH;
+}
+#endif
+
+void signalHandler(int signum) {
+  QString msg =
+      QString("FATAL SIGNAL %1 (SIGSEGV/SIGABRT) received.").arg(signum);
+#ifdef Q_OS_WIN
+  MessageBoxA(NULL, msg.toUtf8().constData(), "ScrollBench - Crash Detected",
+              MB_ICONERROR | MB_OK);
+#endif
+  qFatal("%s", msg.toUtf8().constData());
+}
+
+void crashHandler(QtMsgType type, const QMessageLogContext &context,
                   const QString &msg) {
   QTextStream ts(stderr);
   ts << msg << "\n";
-  QDir().mkpath("logs");
-  FILE *f = fopen("logs/crash.log", "a");
-  if (f) {
-    fprintf(f, "%s\n", msg.toUtf8().constData());
-    fflush(f);
-    fclose(f);
+
+  // Force flush relevant performance logs to disk
+  if (type == QtFatalMsg || type == QtCriticalMsg ||
+      msg.contains("[AdaptiveIO]") || msg.contains("[Performance]")) {
+    QDir().mkpath("logs");
+    FILE *f = fopen("logs/crash.log", "a");
+    if (f) {
+      fprintf(f, "%s\n", msg.toUtf8().constData());
+      fflush(f);
+      fclose(f);
+    }
   }
 }
 
 int main(int argc, char *argv[]) {
+#ifdef Q_OS_WIN
+  SetUnhandledExceptionFilter(GlobalExceptionHandler);
+#endif
+  std::signal(SIGSEGV, signalHandler);
+  std::signal(SIGABRT, signalHandler);
+
   qInstallMessageHandler(crashHandler);
   // Clear previous log
   QDir().mkpath("logs");
@@ -56,6 +92,7 @@ int main(int argc, char *argv[]) {
 
   // Register async image provider for real images
   engine.addImageProvider(QLatin1String("async"), new AsyncImageProvider());
+  AsyncImageProvider::s_logLevel.store(2); // MAXIMUM DEBUG LOGGING
 
   // Create core components on heap for safer destruction
   auto *imageModel = new ScrollBenchImageModel();
@@ -66,13 +103,19 @@ int main(int argc, char *argv[]) {
   auto *albumModel = new AlbumModel();
   auto *systemMonitor = new SystemMonitor();
   auto *imageProcessor = new ImageProcessor(); // Create ImageProcessor instance
+  auto *diagnostics = new DiagnosticsMonitor(); // Create diagnostics monitor
   systemMonitor->startMonitoring(1000);
 
   // Connect model and frame budget
   imageModel->setFrameScheduler(frameBudget);
 
+  // Attach diagnostics to components for monitoring
+  diagnostics->attachModel(imageModel);
+  diagnostics->attachSettings(settings);
+
   // Generate 10,000 test items by default
-  imageModel->generateTestData(10000);
+  // imageModel->generateTestData(10000); // Disabled for clean performance
+  // monitoring
 
   // Connect model to telemetry
   QObject::connect(
@@ -96,6 +139,8 @@ int main(int argc, char *argv[]) {
   engine.rootContext()->setContextProperty("desktopHelper", desktopHelper);
   engine.rootContext()->setContextProperty("albumModel", albumModel);
   engine.rootContext()->setContextProperty("systemMonitor", systemMonitor);
+  engine.rootContext()->setContextProperty("diagnostics",
+                                           diagnostics); // Expose diagnostics
   engine.rootContext()->setContextProperty("taskScheduler",
                                            &TaskScheduler::instance());
   engine.rootContext()->setContextProperty(
@@ -125,9 +170,13 @@ int main(int argc, char *argv[]) {
 
   engine.load(url);
 
-  // Ensure app exits when all windows are closed (fixes orphaned background
-  // threads)
-  app.setQuitOnLastWindowClosed(true);
+  // Handle auto-scan if path provided in CLI arguments
+  QStringList args = QCoreApplication::arguments();
+  if (args.count() >= 3 && args.at(1) == "--scan") {
+    QString scanPath = args.at(2);
+    qDebug() << "[AUTO-SCAN] Triggering for:" << scanPath;
+    imageModel->scanDirectory(scanPath);
+  }
 
   return app.exec();
 }

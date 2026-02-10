@@ -1,4 +1,9 @@
 #include "FileTypeRouter.h"
+#include <QByteArray>
+#include <QFile>
+#include <QFileInfo>
+#include <QImageReader>
+
 
 // ===== Qt Native Image Formats =====
 // QImageReader supported formats (Qt 6.x with standard plugins)
@@ -184,4 +189,113 @@ bool FileTypeRouter::isRaw(const QString &extension) {
 
 bool FileTypeRouter::isStandardImage(const QString &extension) {
   return s_qtNativeFormats.contains(extension.toLower().trimmed());
+}
+
+void FileTypeRouter::verifyFileType(const QString &path, bool &outIsImage,
+                                    bool &outIsVideo, bool &outIsRaw) {
+  outIsImage = false;
+  outIsVideo = false;
+  outIsRaw = false;
+
+  QFile file(path);
+  if (!file.open(QIODevice::ReadOnly)) {
+    return;
+  }
+
+  // Read header for magic bytes
+  QByteArray header = file.read(32); // Read 32 bytes to be safe
+  if (header.size() < 4) {
+    return;
+  }
+
+  // --- Video Detection (Magic Bytes) ---
+  // MP4/MOV/3GP: ftyp atom at offset 4
+  if (header.size() >= 12 && header.mid(4, 4) == "ftyp") {
+    outIsVideo = true;
+    return;
+  }
+  // MKV/WebM: EBML ID 1A 45 DF A3
+  if (header.startsWith("\x1A\x45\xDF\xA3")) {
+    outIsVideo = true;
+    return;
+  }
+  // AVI: RIFF .... AVI
+  if (header.startsWith("RIFF") && header.size() >= 12 &&
+      header.mid(8, 4) == "AVI ") {
+    outIsVideo = true;
+    return;
+  }
+  // MPEG-TS: Sync byte 0x47 (every 188 bytes, but checks first one)
+  if (header[0] == 0x47) {
+    // Weak check, assume video if extension also matches?
+    // Let's rely on extension fallback for TS if this simple check isn't
+    // enough. Or check if path ends with .ts
+    QString ext = QFileInfo(path).suffix().toLower();
+    if (isVideo(ext)) {
+      outIsVideo = true;
+      return;
+    }
+  }
+
+  // --- Image/RAW Detection ---
+  // Use QImageReader to check if Qt recognizes it (JPG, PNG, TIFF, etc.)
+  file.seek(0);
+  QImageReader reader(&file);
+  reader.setDecideFormatFromContent(true);
+  QByteArray fmt = reader.format();
+
+  QString ext = QFileInfo(path).suffix().toLower(); // Fallback extension
+
+  if (!fmt.isEmpty()) {
+    QString fmtStr = QString::fromLatin1(fmt).toLower();
+
+    // Check if detected format implies RAW (TIFF-based)
+    if (fmtStr == "tiff" || fmtStr == "tif") {
+      // TIFF structure is common for RAW (CR2, NEF, ARW, etc.)
+      // Distinguish by extension
+      if (isRaw(ext)) {
+        outIsRaw = true;
+      } else {
+        outIsImage = true; // Standard TIFF
+      }
+    } else {
+      // Known format (jpg, png, webp, etc.)
+      outIsImage = true;
+
+      // Some RAW formats might be detected as something else by plugins?
+      if (s_rawFormats.contains(fmtStr) || isRaw(ext)) {
+        outIsRaw = true; // Trust extension if QImageReader confirms it's a
+                         // valid image file
+      }
+    }
+  } else {
+    // QImageReader failed. Could be unsupported RAW format (e.g. some CR3).
+    // Start crude signature check for common RAWs that libraw supports but Qt
+    // might not.
+
+    // TIFF-like headers (II/MM) are used by CR2, NEF, ARW, ORF, PEF...
+    bool isTiffHeader = (header.startsWith("\x49\x49\x2A\x00") ||
+                         header.startsWith("\x4D\x4D\x00\x2A"));
+
+    if (isTiffHeader) {
+      if (isRaw(ext)) {
+        outIsRaw = true;
+      } else {
+        // Maybe a TIFF that Qt failed to read? Treat as image.
+        outIsImage = true;
+      }
+    } else {
+      // Panasonic RW2 (II + 55 00) or similar?
+      // RAF (Fuji) start with "FUJIFILM"
+      if (header.startsWith("FUJIFILM")) {
+        outIsRaw = true;
+      }
+
+      // If we still don't know, but extension claims RAW, we TRUST extension
+      // ONLY IF file is large? No, just trust it if it has bytes.
+      // But user wants "corruption check".
+      // If header is garbage, maybe it's corrupted.
+      // We will leave outIsImage/Raw as false.
+    }
+  }
 }

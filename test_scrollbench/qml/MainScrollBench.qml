@@ -210,7 +210,11 @@ ApplicationWindow {
         visible: model.selectedCount > 0 && root.currentTab === 0 && !root.viewerVisible
         
         onClearClicked: model.clearSelection()
-        onShareClicked: shareDialog.open()
+        onRotateClicked: model.rotateSelected(90)
+        onShareClicked: {
+            shareDialog.targetPaths = []
+            shareDialog.open()
+        }
     }
     
     ShareDialog {
@@ -286,6 +290,13 @@ ApplicationWindow {
         contentItem: Text { text: parent.text; color: "white"; padding: 8 }
     }
 
+    BenchmarkRunner {
+        id: benchmarkRunner
+        onFinished: {
+            console.log("BENCHMARK: Done. Check logs/ directory for results.");
+        }
+    }
+
     FolderDialog {
         id: folderDialog
         title: "Select Image Folder"
@@ -295,6 +306,21 @@ ApplicationWindow {
             imageModel.scanDirectory(rawPath)
             albumModel.scanAlbums(rawPath)
         }
+    }
+
+    // Benchmark Trigger
+    Button {
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.rightMargin: 150
+        anchors.topMargin: 20
+        text: benchmarkRunner.active ? "⏳ Running..." : "🚀 Run Benchmark"
+        z: 50
+        onClicked: benchmarkRunner.start()
+        visible: !root.viewerVisible && !overlayVisible
+        
+        background: Rectangle { color: benchmarkRunner.active ? "#442196F3" : "#2196F3"; radius: 5 }
+        contentItem: Text { text: parent.text; color: "white"; padding: 8; font.bold: true }
     }
 
     // Settings / Performance Overlay Drawer
@@ -337,4 +363,58 @@ ApplicationWindow {
         }
         z: 200
     }
+    
+    // Real-time Diagnostics Overlay
+    DiagnosticsOverlay {
+        id: diagnosticsOverlay
+        visible: true
+        
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 10 // Base margin
+        
+        anchors.topMargin: 134
+        anchors.leftMargin: 22
+        
+        popupPadding: 22
+        popupWidth: 400
+        
+        width: expanded ? 450 : 300
+        height: expanded ? 500 : 45
+        z: 300
+    }
+
+    // SCANNING PROGRESS INDICATOR (Especially for Network Folders)
+    Rectangle {
+        id: scanIndicator
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 100
+        height: 40
+        width: scanInfoRow.width + 40
+        color: "#AA000000"
+        radius: 20
+        border.color: "#444"
+        visible: imageModel.isLoading
+        z: 150
+
+        Row {
+            id: scanInfoRow
+            anchors.centerIn: parent
+            spacing: 12
+
+            BusyIndicator {
+                width: 24; height: 24
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Text {
+                text: "Scanning folder: <b>" + imageModel.scannedCount + "</b> items discovered..."
+                color: "white"
+                font.pixelSize: 13
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+    }
 }
+

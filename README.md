@@ -16,6 +16,7 @@ A modern Qt-based photo gallery application that replicates the functionality an
 - [Documentation](#documentation)
 - [Requirements](#requirements)
 - [Known Issues](#known-issues)
+- [Handover & Future Work](#-handover--future-work)
 - [Contributing](#contributing)
 
 ## 🎯 Project Overview
@@ -184,10 +185,12 @@ For detailed architectural information, see [ARCHITECTURE.md](docs/ARCHITECTURE.
 
 Comprehensive documentation has been created for this project:
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Detailed system architecture and component relationships
-- **[BUILD.md](BUILD.md)** - Complete build instructions, troubleshooting, and deployment guide
-- **[FEATURES.md](FEATURES.md)** - Comprehensive feature documentation and technical specifications
-- **[PROGRESS.md](PROGRESS.md)** - Analysis notes, findings, and recommendations
+- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Detailed system architecture and component relationships
+- **[BUILD.md](docs/BUILD.md)** - Complete build instructions, troubleshooting, and deployment guide
+- **[FEATURES.md](docs/FEATURES.md)** - Comprehensive feature documentation and technical specifications
+- **[KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md)** - Tracked bugs and their current status
+- **[OUTSTANDING_TASKS.md](docs/resume/OUTSTANDING_TASKS.md)** - Active backlog and next steps for development
+- **[PROGRESS.md](docs/PROGRESS.md)** - Analysis notes, findings, and recommendations
 
 ## 🔧 Requirements
 
@@ -235,6 +238,22 @@ See [KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) for detailed list and workarounds.
 
 For detailed information and workarounds, see [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md).
 
+---
+
+## 🤖 Handover & Future Work
+
+This section is designed for the next AI or developer taking over this project.
+
+### 📍 Entry Points
+- **Current Backlog**: [docs/resume/OUTSTANDING_TASKS.md](docs/resume/OUTSTANDING_TASKS.md) (Contains the latest bugs identified: Concurrency Leak & Stall Timer).
+- **Known Issues**: [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) (Comprehensive list of UI, Performance, and Platform bugs).
+- **Build System**: Use [build.ps1](build.ps1) for all compilation and deployment tasks. It includes built-in diagnostics for file locks.
+
+### 🎯 Immediate Next Steps
+1.  **Fix AsyncImageProvider Leak**: Remove the double-increment of `activeWeight` in `DriveConcurrencyGuard`.
+2.  **Implement Stall Recovery Timer**: Add a periodic timer to `AsyncImageProvider` to trigger `checkStalls()`.
+3.  **Port ScrollBench Features**: Continue porting selection and share dialogs to the main `appSamsungGallery`.
+
 ## 🤝 Contributing
 
 ### Development Setup
@@ -277,12 +296,13 @@ This project adopts modern C++ best practices to ensure stability and performanc
 
 ## 🔄 Version History
 
--   **v2.2.0 (Current)** - **MFT Scanning & Performance**
-    -   **MFT Scanner**: 10-100x faster file enumeration via Windows MFT (requires Admin)
-    -   **Frame Budget**: Prevents UI stuttering during heavy thumbnail operations
-    -   **FileTypeRouter**: Centralized detection for 170+ formats (RAW, Image, Video)
-    -   **ScrollBench**: Feature-complete test application with selection & share
-    -   **TDR Fixes**: Reduced video/RAW concurrency to prevent GPU timeout crashes
+-   **v2.2.1 (Current)** - **Performance & Robustness**
+    -   **GUI Optimization**: O(1) counters in `ScrollBenchImageModel` to prevent UI thread lockups.
+    -   **Task Weighting**: Intelligent concurrency management for RAW/Video decodes.
+    -   **CPU Backoff**: Dynamic throttling of I/O when system CPU usage is high (>70%).
+    -   **Culling Fix**: Restored viewport culling by aligning path normalization in `VisibleRangeManager`.
+    -   **Build Robustness**: `build.ps1` now handles file locks and verifies binary freshness via SHA256 hashes.
+-   **v2.2.0** - **MFT Scanning & Performance**
 -   **v2.1.0** - **Network & Deployment**
     -   **Network**: Full support for UNC paths (`\\\\Server\\Share`)
     -   **Deployment**: Self-contained builds with MinGW runtime included

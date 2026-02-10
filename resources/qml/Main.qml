@@ -397,6 +397,19 @@ ApplicationWindow {
                                 verticalAlignment: Text.AlignVCenter
                             }
                         }
+
+                        CheckBox {
+                            text: "Show Build Watermark"
+                            checked: appSettings.showWatermark
+                            onCheckedChanged: appSettings.showWatermark = checked
+                            Layout.alignment: Qt.AlignHCenter
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                                leftPadding: parent.indicator.width + parent.spacing
+                                verticalAlignment: Text.AlignVCenter
+                            }
+                        }
                         
                         Item { height: 20; width: 1 } // Bottom Spacer
                     }
@@ -479,5 +492,14 @@ ApplicationWindow {
                 font.pixelSize: 14
             }
         }
+    }
+
+    WatermarkOverlay {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+        anchors.bottomMargin: 70 // Above bottom bar (60px) + margin
+        z: 201 // Always on top
+        visible: appSettings.showWatermark
     }
 }

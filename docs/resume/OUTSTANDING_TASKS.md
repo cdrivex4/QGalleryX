@@ -1,8 +1,14 @@
 # Outstanding Tasks & Known Issues
 
-**Last Updated:** December 25, 2024
+**Last Updated:** February 10, 2026
 
 ## 🔴 High Priority
+
+### Concurrency Leak & Stall Recovery (Feb 10, 2026)
+**Status:** Identified, pending implementation  
+**Issue:** `AsyncImageProvider` has a double-increment bug in `activeWeight` and lacks a timer to trigger `checkStalls()`.  
+**Impact:** UI may freeze or starve when loading from slow/stalled network shares.  
+**Files:** `src/AsyncImageProvider.cpp`
 
 ### DNG Proprietary Compression Support ⏸️ DEFERRED
 **Status:** Paused for future optimization  
