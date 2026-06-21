@@ -266,45 +266,12 @@ Item {
                             opacity: isSelected ? 0.4 : 0
                             border.color: "#2196F3"; border.width: isSelected ? 2 : 0
                             
-                            // Video Icon Overlay
-                            Item {
-                                anchors.fill: parent
-                                visible: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 266) // isVideo (Qt::UserRole + 10)
-                                Rectangle { anchors.fill: parent; color: "black"; opacity: 0.15 }
-                                Text { 
-                                    anchors.centerIn: parent
-                                    text: "▶️"
-                                    font.pixelSize: parent.width * 0.3
-                                    color: "white"
-                                    style: Text.Outline; styleColor: "black"
-                                }
-                            }
-
-                            // RAW Indicator Overlay
+                            // Scaled Checkmark
                             Rectangle {
-                                anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 4
-                                property bool isRaw: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 265) // isRaw (Qt::UserRole + 9)
-                                visible: isRaw
-                                width: txtRawS.width + 6; height: txtRawS.height + 2
-                                color: "#AA000000"; radius: 2
-                                Text { id: txtRawS; anchors.centerIn: parent; text: "RAW"; color: "#FF9800"; font.pixelSize: 10; font.bold: true }
-                            }
-
-                            // Selection States
-                            Rectangle {
-                                anchors.fill: parent; color: "#2196F3"
-                                // IsSelectedRole is 409
-                                property bool isSelected: semanticRoot.model.selectedCount !== -1 && semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 409)
-                                opacity: isSelected ? 0.4 : 0
-                                border.color: "#2196F3"; border.width: isSelected ? 2 : 0
-                                
-                                // Scaled Checkmark
-                                Rectangle {
-                                    width: Math.max(10, parent.width * 0.25); height: width; radius: width/2
-                                    color: "#2196F3"; anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 2
-                                    visible: parent.isSelected
-                                    Text { anchors.centerIn: parent; text: "✓"; color: "white"; font.bold: true; font.pixelSize: parent.width * 0.7 }
-                                }
+                                width: Math.max(10, parent.width * 0.25); height: width; radius: width/2
+                                color: "#2196F3"; anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 2
+                                visible: parent.isSelected
+                                Text { anchors.centerIn: parent; text: "✓"; color: "white"; font.bold: true; font.pixelSize: parent.width * 0.7 }
                             }
                         }
                         
