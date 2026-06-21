@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import ScrollBenchBackend
 import ScrollBenchBackend 1.0
 
 Item {
