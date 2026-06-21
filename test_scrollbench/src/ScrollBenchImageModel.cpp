@@ -84,7 +84,8 @@ QVariant ScrollBenchImageModel::data(const QModelIndex &index, int role) const {
     bool isEssentialRole =
         (role == FilePathRole || role == FileNameRole || role == IsVideoRole ||
          role == IsRawRole || role == ImageIndexRole ||
-         role == IsSelectedRole || role == VersionRole);
+         role == IsSelectedRole || role == VersionRole || role == SectionDayRole ||
+         role == SectionMonthRole || role == SectionYearRole || role == SectionWeekRole);
     if (!isEssentialRole) {
       if (index.row() < m_visibleStartIndex - 12 ||
           index.row() > m_visibleEndIndex + 12) {

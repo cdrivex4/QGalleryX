@@ -240,9 +240,6 @@ Item {
                 visible: settings.useFastImage
                 source: {
                     if (!settings.useFastImage) return "";
-                    if (isSynthetic) {
-                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
-                    }
                     return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
                 }
                 sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
@@ -256,9 +253,6 @@ Item {
                 visible: !settings.useFastImage
                 source: {
                     if (settings.useFastImage) return "";
-                    if (isSynthetic) {
-                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
-                    }
                     return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
                 }
                 sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
