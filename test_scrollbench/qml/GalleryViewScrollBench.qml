@@ -247,7 +247,6 @@ Item {
                 }
                 sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
                 fillMode: 1 // PreserveAspectCrop
-                mipmap: true 
             }
             
             Image {

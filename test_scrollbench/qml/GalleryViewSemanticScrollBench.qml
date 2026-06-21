@@ -207,7 +207,7 @@ Item {
                                 var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
                                 return path ? "image://async/" + path : ""
                             }
-                            sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                            sourceSize: Qt.size(semanticRoot.loadingResolution, semanticRoot.loadingResolution)
                             fillMode: 1 // PreserveAspectCrop
                         }
                         
