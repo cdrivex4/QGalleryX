@@ -320,7 +320,7 @@ Item {
                                 }
                             }
                             onPressAndHold: (mouse) => {
-                                semanticRoot.performAction("ToggleSelect", { index: sourceIdx })
+                                root.performAction("ToggleSelect", { index: sourceIdx })
                             }
                         }
                     }

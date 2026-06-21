@@ -377,7 +377,6 @@ Item {
                 }
             }
         }
-    }
 
     PinchHandler {
         property real baseSize
