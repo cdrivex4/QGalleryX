@@ -111,15 +111,7 @@ QVariant ScrollBenchImageModel::data(const QModelIndex &index, int role) const {
   case IsBurstRole:
     return item.isBurst;
   case SectionDayRole: {
-    QDate date = item.date.date();
-    QDate today = QDate::currentDate();
-    if (date == today)
-      return "Today";
-    if (date == today.addDays(-1))
-      return "Yesterday";
-    if (date.year() == today.year())
-      return date.toString("MMM d");
-    return date.toString("MMM d, yyyy");
+    return item.sectionDay;
   }
   case SectionMonthRole: {
     return item.date.date().toString("MMMM yyyy");
@@ -133,12 +125,10 @@ QVariant ScrollBenchImageModel::data(const QModelIndex &index, int role) const {
     return QString("%1 - Week %2").arg(year).arg(week);
   }
   case IsRawRole: {
-    QString ext = QFileInfo(item.path).suffix().toLower();
-    return FileTypeRouter::isRaw(ext);
+    return item.isRaw;
   }
   case IsVideoRole: {
-    QString ext = QFileInfo(item.path).suffix().toLower();
-    return FileTypeRouter::isVideo(ext);
+    return item.isVideo;
   }
   default:
     return QVariant();
@@ -254,6 +244,7 @@ void ScrollBenchImageModel::clearData() {
   beginResetModel();
   cancelPendingRequests();
   m_items.clear();
+  m_allItems.clear();
   m_totalItems = 0;
   m_remainingItems = 0;
   m_visibleStartIndex = 0;
@@ -426,6 +417,13 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
               if (!item.date.isValid())
                 item.date = QDateTime::currentDateTime();
 
+              QDate dt = item.date.date();
+              QDate today = QDate::currentDate();
+              if (dt == today) item.sectionDay = "Today";
+              else if (dt == today.addDays(-1)) item.sectionDay = "Yesterday";
+              else if (dt.year() == today.year()) item.sectionDay = dt.toString("MMM d");
+              else item.sectionDay = dt.toString("MMM d, yyyy");
+
               batch.append(item);
               totalFound++;
 
@@ -452,14 +450,14 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
                   QMetaObject::invokeMethod(this, [this, safeBatch, myGen]() {
                     if (myGen != m_scanGeneration.load())
                       return;
-                    beginResetModel();
-                    m_items = safeBatch; // Replace
-                    std::sort(m_items.begin(), m_items.end(),
+                    
+                    m_allItems = safeBatch; // Replace
+                    std::sort(m_allItems.begin(), m_allItems.end(),
                               [](const ImageItem &a, const ImageItem &b) {
                                 return a.date > b.date; // Descending
                               });
-                    endResetModel();
-                    emit layoutChanged();
+                    
+                    applyFilter(); // This calls beginResetModel/endResetModel
                   });
                   fastBatchCount = 0;
                 }
@@ -521,6 +519,13 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
             item.date = dt;
         }
 
+        QDate dt = item.date.date();
+        QDate today = QDate::currentDate();
+        if (dt == today) item.sectionDay = "Today";
+        else if (dt == today.addDays(-1)) item.sectionDay = "Yesterday";
+        else if (dt.year() == today.year()) item.sectionDay = dt.toString("MMM d");
+        else item.sectionDay = dt.toString("MMM d, yyyy");
+
         batch.append(item);
         totalFound++;
 
@@ -574,32 +579,30 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
             if (myGen != m_scanGeneration.load())
               return;
 
-            beginResetModel();
-            m_items = batch;
+            m_allItems = batch;
             m_loadedCount = 0; // Fresh scan
-            std::sort(m_items.begin(), m_items.end(),
+            std::sort(m_allItems.begin(), m_allItems.end(),
                       [](const ImageItem &a, const ImageItem &b) {
                         return a.date > b.date;
                       });
 
             // Burst Detection
-            if (m_items.size() > 1) {
+            if (m_allItems.size() > 1) {
               const qint64 BURST_THRESHOLD_MS = 2000;
-              for (int i = 0; i < m_items.size(); ++i) {
+              for (int i = 0; i < m_allItems.size(); ++i) {
                 bool prevNear =
                     (i > 0) &&
-                    (std::abs(m_items[i].date.msecsTo(m_items[i - 1].date)) <
+                    (std::abs(m_allItems[i].date.msecsTo(m_allItems[i - 1].date)) <
                      BURST_THRESHOLD_MS);
                 bool nextNear =
-                    (i < m_items.size() - 1) &&
-                    (std::abs(m_items[i].date.msecsTo(m_items[i + 1].date)) <
+                    (i < m_allItems.size() - 1) &&
+                    (std::abs(m_allItems[i].date.msecsTo(m_allItems[i + 1].date)) <
                      BURST_THRESHOLD_MS);
-                m_items[i].isBurst = (prevNear || nextNear);
+                m_allItems[i].isBurst = (prevNear || nextNear);
               }
             }
 
-            endResetModel();
-            emit forceUpdateGridView();
+            applyFilter(); // This calls beginResetModel/endResetModel
 
             m_isLoading = false;
             m_scannedCount = totalFound;
@@ -1012,4 +1015,45 @@ QVariantMap ScrollBenchImageModel::getMetadata(int index) {
 
 int ScrollBenchImageModel::stagedRequestCount() const {
   return AsyncImageProvider::stagedRequestCount();
+}
+
+void ScrollBenchImageModel::setFilterQuery(const QString &query) {
+  if (m_filterQuery != query) {
+    m_filterQuery = query;
+    emit filterQueryChanged();
+    applyFilter();
+  }
+}
+
+QStringList ScrollBenchImageModel::getActiveDirectories() const {
+  QSet<QString> dirs;
+  for (const auto &item : m_items) {
+    QString dirPath = QFileInfo(item.path).absolutePath();
+    dirs.insert(QDir::fromNativeSeparators(dirPath).toLower());
+  }
+  return dirs.values();
+}
+
+void ScrollBenchImageModel::applyFilter() {
+  beginResetModel();
+  m_items.clear();
+  
+  if (m_filterQuery.isEmpty()) {
+    m_items = m_allItems;
+  } else {
+    // Case insensitive substring matching
+    QString q = m_filterQuery.toLower();
+    for (const auto &item : m_allItems) {
+      if (item.fileName.toLower().contains(q) || item.path.toLower().contains(q)) {
+        m_items.append(item);
+      }
+    }
+  }
+  
+  m_totalItems = m_items.count();
+  m_remainingItems = m_totalItems;
+  endResetModel();
+  emit layoutChanged();
+  emit forceUpdateGridView();
+  emit remainingItemsChanged();
 }

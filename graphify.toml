@@ -1,0 +1,4 @@
+[llm]
+backend = "openai"
+base_url = "http://127.0.0.1:8666/v1"
+model = "google/gemma-3-12b"

@@ -273,6 +273,11 @@ Rectangle {
                             Switch { checked: imageModel.viewportCullingEnabled; onToggled: imageModel.viewportCullingEnabled = checked }
                         }
                         
+                        RowLayout {
+                            Text { text: "Use FastImage (Bypass GC)"; color: "#fff"; Layout.fillWidth: true }
+                            Switch { checked: settings.useFastImage; onToggled: settings.useFastImage = checked }
+                        }
+                        
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 2
@@ -300,6 +305,10 @@ Rectangle {
                         RowLayout {
                             Text { text: "Use Disk Cache"; color: "#fff"; Layout.fillWidth: true }
                             Switch { checked: settings.useDiskCache; onToggled: settings.useDiskCache = checked }
+                        }
+                        RowLayout {
+                            Text { text: "Show Diagnostics Overlay"; color: "#fff"; Layout.fillWidth: true }
+                            Switch { checked: settings.showDiagnostics; onToggled: settings.showDiagnostics = checked }
                         }
                         
                         ComboBox {

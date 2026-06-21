@@ -121,7 +121,12 @@ Item {
         
         // Fallback if only headers or nothing found
         if (sourceStart === -1) sourceStart = 0;
-        if (sourceEnd === -1) sourceEnd = model.totalItems - 1;
+        if (sourceEnd === -1) sourceEnd = Math.min(model.totalItems - 1, sourceStart + 800);
+        
+        // Failsafe clamp to prevent layout bugs from requesting thousands of thumbnails
+        if (sourceEnd - sourceStart > 800) {
+            sourceEnd = sourceStart + 800;
+        }
         
         console.log("[QML ViewportRange] Precise detected range:", sourceStart, "to", sourceEnd, 
                     "(" + (sourceEnd - sourceStart + 1) + " items)");
@@ -192,24 +197,74 @@ Item {
                         
                         property int sourceIdx: rowDelegate.capturedStart + index
                         
-                        Image {
-                            id: thumb
+                        FastImage {
+                            id: thumbFast
                             anchors.fill: parent
+                            visible: settings.useFastImage
                             source: {
-                                var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257) // FilePathRole (Qt::UserRole + 1)
+                                if (!settings.useFastImage) return "";
+                                var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
+                                return path ? "image://async/" + path : ""
+                            }
+                            sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                            fillMode: 1 // PreserveAspectCrop
+                        }
+                        
+                        Image {
+                            id: thumbStd
+                            anchors.fill: parent
+                            visible: !settings.useFastImage
+                            source: {
+                                if (settings.useFastImage) return "";
+                                var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
                                 return path ? "image://async/" + path : ""
                             }
                             sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
                             cache: true
-                            
-                            Rectangle {
-                                anchors.fill: parent; color: "#222"
-                                visible: thumb.status !== Image.Ready
-                                BusyIndicator { anchors.centerIn: parent; width: parent.width * 0.4; height: width; opacity: 0.5 }
-                            }
+                        }
+                        
+                        property bool isLoading: settings.useFastImage ? thumbFast.isLoading : (thumbStd.status === Image.Loading)
+                        property string activeSource: settings.useFastImage ? thumbFast.source : thumbStd.source    
+                        Rectangle {
+                            anchors.fill: parent; color: "#222"
+                            visible: activeSource === "" || isLoading
+                            BusyIndicator { anchors.centerIn: parent; width: parent.width * 0.4; height: width; opacity: 0.5 }
+                        }
 
+                        // Video Icon Overlay
+                        Item {
+                            anchors.fill: parent
+                            visible: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 266) // isVideo (Qt::UserRole + 10)
+                            Rectangle { anchors.fill: parent; color: "black"; opacity: 0.15 }
+                            Text { 
+                                anchors.centerIn: parent
+                                text: "▶️"
+                                font.pixelSize: parent.width * 0.3
+                                color: "white"
+                                style: Text.Outline; styleColor: "black"
+                            }
+                        }
+
+                        // RAW Indicator Overlay
+                        Rectangle {
+                            anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 4
+                            property bool isRaw: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 265) // isRaw (Qt::UserRole + 9)
+                            visible: isRaw
+                            width: txtRawS.width + 6; height: txtRawS.height + 2
+                            color: "#AA000000"; radius: 2
+                            Text { id: txtRawS; anchors.centerIn: parent; text: "RAW"; color: "#FF9800"; font.pixelSize: 10; font.bold: true }
+                        }
+
+                        // Selection States
+                        Rectangle {
+                            anchors.fill: parent; color: "#2196F3"
+                            // IsSelectedRole is 409
+                            property bool isSelected: semanticRoot.model.selectedCount !== -1 && semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 409)
+                            opacity: isSelected ? 0.4 : 0
+                            border.color: "#2196F3"; border.width: isSelected ? 2 : 0
+                            
                             // Video Icon Overlay
                             Item {
                                 anchors.fill: parent

@@ -94,7 +94,7 @@ void DiagnosticsMonitor::checkViewportCulling() {
       addWarning(
           QString("Viewport only showing %1 items - possible detection issue")
               .arg(m_viewportRangeSize));
-    } else if (m_bufferedRangeSize < EXPECTED_MIN_RANGE_SIZE) {
+    } else if (m_bufferedRangeSize < EXPECTED_MIN_RANGE_SIZE && m_model->totalItems() >= EXPECTED_MIN_RANGE_SIZE) {
       m_viewportStatus =
           QString("⚠️ Small buffered range: %1 items (expected >%2)")
               .arg(m_bufferedRangeSize)
@@ -137,6 +137,9 @@ void DiagnosticsMonitor::checkLoadProgress() {
 
   m_totalItems = m_model->totalItems();
 
+  // Save previous loaded items to check for progress
+  int prevLoaded = m_loadedItems;
+
   // Count loaded items
   m_loadedItems = m_model->loadedCount();
 
@@ -152,6 +155,11 @@ void DiagnosticsMonitor::checkLoadProgress() {
   // Check for stalls
   AsyncImageProvider::checkStalls();
   if (m_pendingRequests > 0 || m_stagedRequests > 0) {
+    // If progress was made or the scheduler is paused (intentional suspension), reset the stall timer
+    if (m_loadedItems != prevLoaded || TaskScheduler::instance().isPaused()) {
+      m_lastLoadTimestamp = QDateTime::currentDateTime();
+    }
+
     qint64 stallDuration =
         m_lastLoadTimestamp.msecsTo(QDateTime::currentDateTime());
     if (stallDuration > CRITICAL_STALL_THRESHOLD_MS) {

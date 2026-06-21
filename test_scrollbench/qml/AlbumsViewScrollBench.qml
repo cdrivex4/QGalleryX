@@ -166,10 +166,24 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     
+                    // Album Setting State
+                    property bool useSemanticView: true
+                    
                     GalleryViewScrollBench {
                         id: albumGallery
                         anchors.fill: parent
                         model: albumImageModel
+                        visible: !parent.useSemanticView
+                        onImageClicked: (index) => root.imageClicked(index, albumImageModel)
+                        
+                        Component.onCompleted: albumImageModel.scanDirectory(detailRoot.folderPath)
+                    }
+                    
+                    GalleryViewSemanticScrollBench {
+                        id: albumSemanticGallery
+                        anchors.fill: parent
+                        model: albumImageModel
+                        visible: parent.useSemanticView
                         onImageClicked: (index) => root.imageClicked(index, albumImageModel)
                         
                         Component.onCompleted: albumImageModel.scanDirectory(detailRoot.folderPath)
@@ -185,13 +199,17 @@ Item {
                         width: 150
                         z: 60
                         
-                        listView: albumGallery.findChildGridView()
-                        rawModel: albumImageModel
-                        proxyModel: null // No semantic zoom in album detail yet
+                        listView: {
+                            if (parent.useSemanticView) return albumSemanticGallery.findChildListView()
+                            return albumGallery.findChildGridView()
+                        }
+                        rawModel: !parent.useSemanticView ? albumImageModel : null
+                        proxyModel: parent.useSemanticView ? albumSemanticGallery.proxyModel : null
                     }
                     
                     ScrollBenchImageModel {
                         id: albumImageModel
+                        filterQuery: imageModel.filterQuery
                         // Connect to frame budget for consistent performance
                         Component.onCompleted: setFrameScheduler(frameBudget)
                     }
@@ -201,6 +219,7 @@ Item {
                         anchors.left: parent.left
                         anchors.right: parent.right
                         model: albumImageModel
+                        visible: model.selectedCount > 0
                         
                         onClearClicked: model.clearSelection()
                         onShareClicked: albumShareDialog.open()
@@ -209,8 +228,73 @@ Item {
                     ShareDialog {
                         id: albumShareDialog
                         anchors.centerIn: parent
-                        // Bind to local model? ShareDialog uses global imageModel by default?
-                        // ShareDialog.qml needs modification to support injected model or we use property binding alias
+                    }
+
+                    // Floating Controls (Bottom Right)
+                    ColumnLayout {
+                        anchors.bottom: parent.bottom
+                        anchors.right: parent.right
+                        anchors.margins: 25
+                        anchors.rightMargin: 180 // Avoid scrubber
+                        anchors.bottomMargin: 80 // Avoid action bar
+                        spacing: 12
+                        
+                        Button {
+                            Layout.preferredWidth: 160
+                            Layout.preferredHeight: 45
+                            text: parent.parent.useSemanticView ? "View: Semantic" : "View: Standard Grid"
+                            onClicked: parent.parent.useSemanticView = !parent.parent.useSemanticView
+                            
+                            background: Rectangle {
+                                color: "#333333"; radius: 25
+                                border.color: "#444444"; border.width: 1
+                                opacity: parent.pressed ? 0.7 : 0.9
+                            }
+                            contentItem: Text {
+                                text: parent.text; color: "white"; font.bold: true
+                                horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                            }
+                        }
+                        
+                        Button {
+                            Layout.preferredWidth: 160
+                            Layout.preferredHeight: 45
+                            text: {
+                                if (!albumSemanticGallery) return ""
+                                if (albumSemanticGallery.groupingAuto) return "Grouping: Auto"
+                                if (albumSemanticGallery.groupingMode === 1) return "Grouping: Day"
+                                if (albumSemanticGallery.groupingMode === 2) return "Grouping: Week"
+                                if (albumSemanticGallery.groupingMode === 3) return "Grouping: Month"
+                                if (albumSemanticGallery.groupingMode === 4) return "Grouping: Year"
+                                return "Grouping"
+                            }
+                            visible: parent.parent.useSemanticView
+                            onClicked: {
+                                if (!albumSemanticGallery) return
+                                if (albumSemanticGallery.groupingAuto) {
+                                    albumSemanticGallery.groupingAuto = false
+                                    albumSemanticGallery.groupingMode = 1 // Start at Day
+                                } else if (albumSemanticGallery.groupingMode === 1) {
+                                    albumSemanticGallery.groupingMode = 2 // Week
+                                } else if (albumSemanticGallery.groupingMode === 2) {
+                                    albumSemanticGallery.groupingMode = 3 // Month
+                                } else if (albumSemanticGallery.groupingMode === 3) {
+                                    albumSemanticGallery.groupingMode = 4 // Year
+                                } else {
+                                    albumSemanticGallery.groupingAuto = true // Return to Auto
+                                }
+                            }
+                            
+                            background: Rectangle {
+                                color: "#333333"; radius: 25
+                                border.color: "#444444"; border.width: 1
+                                opacity: parent.pressed ? 0.7 : 0.9
+                            }
+                            contentItem: Text {
+                                text: parent.text; color: "white"; font.bold: true
+                                horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                            }
+                        }
                     }
                 }
             }

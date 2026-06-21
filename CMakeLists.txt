@@ -39,6 +39,8 @@ qt_add_qml_module(appSamsungGallery
         resources/qml/BottomBar.qml
         resources/qml/StatsOverlay.qml
         resources/qml/UsageGraph.qml
+        resources/qml/BuildInfo.qml
+        resources/qml/WatermarkOverlay.qml
 )
 
 # --- LibRaw ---

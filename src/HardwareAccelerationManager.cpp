@@ -7,74 +7,54 @@
 
 #ifdef _MSC_VER
 #include <intrin.h>
+#elif defined(__GNUC__) || defined(__clang__)
+#include <cpuid.h>
 #endif
 
-// CPU feature detection
+// Comprehensive runtime feature detection
 static QString detectCPUFeatures() {
   QStringList features;
+  int cpuInfo[4] = {0, 0, 0, 0};
 
-#ifdef _MSC_VER
-  int cpuInfo[4];
+#if defined(_MSC_VER)
   __cpuid(cpuInfo, 1);
-
-  if (cpuInfo[3] & (1 << 25))
-    features << "SSE";
-  if (cpuInfo[3] & (1 << 26))
-    features << "SSE2";
-  if (cpuInfo[2] & (1 << 0))
-    features << "SSE3";
-  if (cpuInfo[2] & (1 << 9))
-    features << "SSSE3";
-  if (cpuInfo[2] & (1 << 19))
-    features << "SSE4.1";
-  if (cpuInfo[2] & (1 << 20))
-    features << "SSE4.2";
-  if (cpuInfo[2] & (1 << 28))
-    features << "AVX";
-
-  // Check AVX2
-  __cpuid(cpuInfo, 7);
-  if (cpuInfo[1] & (1 << 5))
-    features << "AVX2";
-
-  // Check AVX512 (F, BW, DQ, VL)
-  if (cpuInfo[1] & (1 << 16))
-    features << "AVX512F";
-  if (cpuInfo[1] & (1 << 30))
-    features << "AVX512BW";
-  if (cpuInfo[1] & (1 << 17))
-    features << "AVX512DQ";
-  if (cpuInfo[1] & (1 << 31))
-    features << "AVX512VL";
 #elif defined(__GNUC__) || defined(__clang__)
-#if defined(__SSE__)
-  features << "SSE";
+  __cpuid(1, cpuInfo[0], cpuInfo[1], cpuInfo[2], cpuInfo[3]);
 #endif
-#if defined(__SSE2__)
-  features << "SSE2";
+
+  if (cpuInfo[3] & (1 << 25)) features << "SSE";
+  if (cpuInfo[3] & (1 << 26)) features << "SSE2";
+  if (cpuInfo[2] & (1 << 0))  features << "SSE3";
+  if (cpuInfo[2] & (1 << 9))  features << "SSSE3";
+  if (cpuInfo[2] & (1 << 19)) features << "SSE4.1";
+  if (cpuInfo[2] & (1 << 20)) features << "SSE4.2";
+  if (cpuInfo[2] & (1 << 28)) features << "AVX";
+
+#if defined(_MSC_VER)
+  __cpuid(cpuInfo, 7);
+#elif defined(__GNUC__) || defined(__clang__)
+  __cpuid_count(7, 0, cpuInfo[0], cpuInfo[1], cpuInfo[2], cpuInfo[3]);
 #endif
-#if defined(__SSE3__)
-  features << "SSE3";
-#endif
-#if defined(__SSSE3__)
-  features << "SSSE3";
-#endif
-#if defined(__SSE4_1__)
-  features << "SSE4.1";
-#endif
-#if defined(__SSE4_2__)
-  features << "SSE4.2";
-#endif
-#if defined(__AVX__)
-  features << "AVX";
-#endif
-#if defined(__AVX2__)
-  features << "AVX2";
-#endif
-#if defined(__AVX512F__)
-  features << "AVX512F";
-#endif
-#endif
+
+  if (cpuInfo[1] & (1 << 5))  features << "AVX2";
+  if (cpuInfo[1] & (1 << 16)) features << "AVX512F";
+  if (cpuInfo[1] & (1 << 30)) features << "AVX512BW";
+  if (cpuInfo[1] & (1 << 17)) features << "AVX512DQ";
+  if (cpuInfo[1] & (1 << 31)) features << "AVX512VL";
+
+  // Combine with available GPU media engines from FFmpeg
+  QStringList gpuFeatures;
+  AVHWDeviceType type = AV_HWDEVICE_TYPE_NONE;
+  while ((type = av_hwdevice_iterate_types(type)) != AV_HWDEVICE_TYPE_NONE) {
+    const char *name = av_hwdevice_get_type_name(type);
+    if (name) {
+      gpuFeatures << QString::fromUtf8(name).toUpper();
+    }
+  }
+
+  if (!gpuFeatures.isEmpty()) {
+    features << gpuFeatures;
+  }
 
   return features.isEmpty() ? "None detected" : features.join(", ");
 }
@@ -104,17 +84,30 @@ bool HardwareAccelerationManager::tryInitialize(SettingsHelper::HWAccel mode,
   AVPixelFormat targetPixFmt = AV_PIX_FMT_NONE;
 
   switch (mode) {
+  case SettingsHelper::CUDA:
+    typeName = "cuda";
+    targetPixFmt = AV_PIX_FMT_CUDA;
+    break;
+  case SettingsHelper::QSV:
+    typeName = "qsv";
+    targetPixFmt = AV_PIX_FMT_QSV;
+    break;
   case SettingsHelper::D3D11VA:
     typeName = "d3d11va";
     targetPixFmt = AV_PIX_FMT_D3D11;
+    break;
+  case SettingsHelper::DXVA2:
+    typeName = "dxva2";
+    targetPixFmt = AV_PIX_FMT_DXVA2_VLD;
     break;
   case SettingsHelper::OpenCL:
     typeName = "opencl";
     targetPixFmt = AV_PIX_FMT_OPENCL;
     break;
+  case SettingsHelper::Auto:
   case SettingsHelper::None:
   default:
-    return false; // Can't "initialize" None
+    return false; // Can't "initialize" None or Auto directly
   }
 
   AVHWDeviceType type = av_hwdevice_find_type_by_name(typeName);
@@ -173,26 +166,18 @@ void HardwareAccelerationManager::setMode(SettingsHelper::HWAccel mode) {
     return;
   }
 
-  // Fall back sequence: requested -> D3D11VA -> OpenCL -> None (CPU)
-  if (tryInitialize(mode, timeStr)) {
-    return; // Success!
+  // Fall back sequence: requested -> Auto chain -> None (CPU)
+  if (mode != SettingsHelper::Auto && tryInitialize(mode, timeStr)) {
+    return; // Success on explicitly requested mode!
   }
 
-  // Try D3D11 if not already tried
-  if (mode != SettingsHelper::D3D11VA) {
-    qInfo() << "[" << timeStr << "][HWAccel] Falling back to D3D11VA...";
-    if (tryInitialize(SettingsHelper::D3D11VA, timeStr)) {
-      return;
-    }
-  }
-
-  // Try OpenCL as last GPU option
-  if (mode != SettingsHelper::OpenCL) {
-    qInfo() << "[" << timeStr << "][HWAccel] Falling back to OpenCL...";
-    if (tryInitialize(SettingsHelper::OpenCL, timeStr)) {
-      return;
-    }
-  }
+  // Auto Fallback Chain: CUDA -> QSV -> D3D11VA -> DXVA2
+  qInfo() << "[" << timeStr << "][HWAccel] Initiating Auto Fallback Chain...";
+  
+  if (tryInitialize(SettingsHelper::CUDA, timeStr)) return;
+  if (tryInitialize(SettingsHelper::QSV, timeStr)) return;
+  if (tryInitialize(SettingsHelper::D3D11VA, timeStr)) return;
+  if (tryInitialize(SettingsHelper::DXVA2, timeStr)) return;
 
   // Fall back to CPU (None)
   m_currentMode = SettingsHelper::None;
@@ -217,8 +202,16 @@ AVPixelFormat HardwareAccelerationManager::pixelFormat() const {
 QString HardwareAccelerationManager::currentModeName() const {
   QMutexLocker locker(&m_mutex);
   switch (m_currentMode) {
+  case SettingsHelper::Auto:
+    return "Auto";
+  case SettingsHelper::CUDA:
+    return "CUDA (NVIDIA)";
+  case SettingsHelper::QSV:
+    return "QSV (Intel QuickSync)";
   case SettingsHelper::D3D11VA:
     return "D3D11VA";
+  case SettingsHelper::DXVA2:
+    return "DXVA2";
   case SettingsHelper::Vulkan:
     return "Vulkan";
   case SettingsHelper::OpenCL:

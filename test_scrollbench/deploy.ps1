@@ -28,7 +28,13 @@ if (-not (Test-Path $DeployDir)) {
 
 # Copy executable
 Write-Host "Copying executable..." -ForegroundColor Cyan
-Copy-Item "$BuildDir\appScrollBench.exe" $DeployDir -Force
+if (Test-Path "$BuildDir\appScrollBench.exe") {
+    Copy-Item "$BuildDir\appScrollBench.exe" $DeployDir -Force
+} elseif (Test-Path "$DeployDir\appScrollBench.exe") {
+    Write-Host "Executable already in deploy folder." -ForegroundColor Gray
+} else {
+    throw "appScrollBench.exe not found!"
+}
 
 # Deploy Qt dependencies
 Write-Host "Deploying Qt dependencies..." -ForegroundColor Cyan

@@ -11,6 +11,7 @@
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "TelemetryMonitor.h"
+#include "FastImageItem.h"
 #include <QDateTime>
 #include <QDir>
 #include <QGuiApplication>
@@ -89,6 +90,7 @@ int main(int argc, char *argv[]) {
                                      "GroupedProxyModel");
   qmlRegisterType<ScrollBenchImageModel>("ScrollBenchBackend", 1, 0,
                                          "ScrollBenchImageModel");
+  qmlRegisterType<FastImageItem>("ScrollBenchBackend", 1, 0, "FastImage");
 
   // Register async image provider for real images
   engine.addImageProvider(QLatin1String("async"), new AsyncImageProvider());
@@ -97,11 +99,11 @@ int main(int argc, char *argv[]) {
   // Create core components on heap for safer destruction
   auto *imageModel = new ScrollBenchImageModel();
   auto *frameBudget = new FrameBudgetScheduler();
+  auto *systemMonitor = new SystemMonitor();
   auto *telemetry = new TelemetryMonitor();
   auto *settings = new SettingsHelper();
   auto *desktopHelper = new DesktopHelper();
   auto *albumModel = new AlbumModel();
-  auto *systemMonitor = new SystemMonitor();
   auto *imageProcessor = new ImageProcessor(); // Create ImageProcessor instance
   auto *diagnostics = new DiagnosticsMonitor(); // Create diagnostics monitor
   systemMonitor->startMonitoring(1000);

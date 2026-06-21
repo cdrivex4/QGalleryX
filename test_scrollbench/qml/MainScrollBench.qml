@@ -20,6 +20,13 @@ ApplicationWindow {
     property int viewerIndex: 0
     property var viewerModel: imageModel
     
+    function openViewer(index, model) {
+        root.viewerModel = model
+        root.viewerIndex = index
+        photoViewer.currentIndex = index
+        root.viewerVisible = true
+    }
+    
     property alias semanticView: semanticView
     
     // Finalized Layout Values
@@ -56,9 +63,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     visible: !root.useSemanticView
                     onImageClicked: (index) => {
-                        root.viewerModel = imageModel
-                        root.viewerIndex = index
-                        root.viewerVisible = true
+                        root.openViewer(index, imageModel)
                     }
                 }
 
@@ -67,9 +72,7 @@ ApplicationWindow {
                     anchors.fill: parent
                     visible: root.useSemanticView
                     onImageClicked: (index) => {
-                        root.viewerModel = imageModel
-                        root.viewerIndex = index
-                        root.viewerVisible = true
+                        root.openViewer(index, imageModel)
                     }
                 }
                 
@@ -145,9 +148,7 @@ ApplicationWindow {
             AlbumsViewScrollBench {
                 id: albumsView
                 onImageClicked: (index, model) => {
-                    root.viewerModel = model
-                    root.viewerIndex = index
-                    root.viewerVisible = true
+                    root.openViewer(index, model)
                 }
             }
         }
@@ -243,57 +244,79 @@ ApplicationWindow {
         rawModel: !root.useSemanticView ? imageModel : null
     }
 
-    // Floating Performance Stats (Top Left)
-    Rectangle {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.margins: 20
-        width: 220
-        height: 100
-        color: "#AA000000"
-        radius: 8
-        z: 50
-        visible: !root.viewerVisible && !overlayVisible
-
-        ColumnLayout {
-            anchors.centerIn: parent
-            Text {
-                color: "#ffffff"; font.pixelSize: 13; font.bold: true
-                text: "FPS: " + telemetry.fps + " | Mem: " + systemMonitor.memoryUsageMB.toFixed(0) + "MB"
-            }
-            Text {
-                color: "#aaa"; font.pixelSize: 11
-                text: "Range: " + imageModel.visibleStartIndex + "-" + imageModel.visibleEndIndex
-            }
-            Text {
-                color: "#aaa"; font.pixelSize: 11
-                text: "Queue: " + (taskScheduler ? taskScheduler.activeTaskCount : "0")
-            }
-            Text {
-                color: "#ccc"; font.pixelSize: 11; font.bold: true
-                text: "Zoom: " + settings.gridSize + "px | Res: " + settings.thumbnailSize + "px"
-            }
-        }
-    }
-
-    // Scan Folder Button (Top Right)
-    Button {
+    // Top Right Controls (Search & Scan)
+    RowLayout {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: 20
-        text: "📁 Scan Folder"
+        spacing: 15
         z: 50
-        onClicked: folderDialog.open()
         visible: !root.viewerVisible && !overlayVisible
-        
-        background: Rectangle { color: "#222"; radius: 5; border.color: "#444" }
-        contentItem: Text { text: parent.text; color: "white"; padding: 8 }
-    }
 
-    BenchmarkRunner {
-        id: benchmarkRunner
-        onFinished: {
-            console.log("BENCHMARK: Done. Check logs/ directory for results.");
+        // Global Search Bar
+        TextField {
+            id: searchField
+            Layout.preferredWidth: 250
+            Layout.preferredHeight: 35
+            placeholderText: "🔍 Filter filenames or folders..."
+            color: "white"
+            placeholderTextColor: "#888888"
+            
+            background: Rectangle {
+                color: "#222222"
+                radius: 4
+                border.color: parent.activeFocus ? "#4A90E2" : "#444444"
+                border.width: 1
+            }
+            
+            Button {
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                anchors.verticalCenter: parent.verticalCenter
+                width: 25; height: 25
+                text: "✕"
+                flat: true
+                visible: searchField.text.length > 0
+                onClicked: searchField.text = ""
+                contentItem: Text {
+                    text: parent.text
+                    color: parent.hovered ? "#ff5252" : "#888"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pixelSize: 14
+                    font.bold: true
+                }
+            }
+            
+            onTextChanged: {
+                imageModel.filterQuery = text
+                albumModel.setFilterQuery(text)
+                if (text.length > 0) {
+                    albumModel.applyFilterFromPaths(imageModel.getActiveDirectories())
+                }
+            }
+        }
+
+        // Scan Folder Button
+        Button {
+            Layout.preferredWidth: 140
+            Layout.preferredHeight: 35
+            text: "📁 Scan Folder"
+            
+            background: Rectangle {
+                color: "#2A2A2A"
+                radius: 4
+                border.color: "#444444"
+            }
+            contentItem: Text {
+                text: parent.text
+                color: "white"
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+            
+            onClicked: folderDialog.open()
         }
     }
 
@@ -308,20 +331,7 @@ ApplicationWindow {
         }
     }
 
-    // Benchmark Trigger
-    Button {
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.rightMargin: 150
-        anchors.topMargin: 20
-        text: benchmarkRunner.active ? "⏳ Running..." : "🚀 Run Benchmark"
-        z: 50
-        onClicked: benchmarkRunner.start()
-        visible: !root.viewerVisible && !overlayVisible
-        
-        background: Rectangle { color: benchmarkRunner.active ? "#442196F3" : "#2196F3"; radius: 5 }
-        contentItem: Text { text: parent.text; color: "white"; padding: 8; font.bold: true }
-    }
+
 
     // Settings / Performance Overlay Drawer
     Rectangle {
@@ -350,7 +360,7 @@ ApplicationWindow {
         anchors.fill: parent
         visible: root.viewerVisible
         model: root.viewerModel
-        currentIndex: root.viewerIndex
+        // Removed currentIndex binding to prevent destruction on swipe
         onBackClicked: {
             root.viewerIndex = -1 // Reset local tracking
             root.viewerVisible = false
@@ -367,7 +377,7 @@ ApplicationWindow {
     // Real-time Diagnostics Overlay
     DiagnosticsOverlay {
         id: diagnosticsOverlay
-        visible: true
+        visible: settings.showDiagnostics
         
         anchors.top: parent.top
         anchors.left: parent.left

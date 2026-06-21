@@ -30,6 +30,11 @@ class ScrollBenchImageModel : public QAbstractListModel {
   Q_PROPERTY(int loadedCount READ loadedCount NOTIFY loadedCountChanged)
   Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
   Q_PROPERTY(int scannedCount READ scannedCount NOTIFY scannedCountChanged)
+  Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY filterQueryChanged)
+  Q_PROPERTY(int roleSectionDay READ roleSectionDay CONSTANT)
+  Q_PROPERTY(int roleSectionWeek READ roleSectionWeek CONSTANT)
+  Q_PROPERTY(int roleSectionMonth READ roleSectionMonth CONSTANT)
+  Q_PROPERTY(int roleSectionYear READ roleSectionYear CONSTANT)
 
 public:
   explicit ScrollBenchImageModel(QObject *parent = nullptr);
@@ -75,6 +80,16 @@ public:
   bool viewportCullingEnabled() const { return m_viewportCullingEnabled; }
   void setViewportCullingEnabled(bool enabled);
 
+  QString filterQuery() const { return m_filterQuery; }
+  void setFilterQuery(const QString &query);
+
+  int roleSectionDay() const { return SectionDayRole; }
+  int roleSectionWeek() const { return SectionWeekRole; }
+  int roleSectionMonth() const { return SectionMonthRole; }
+  int roleSectionYear() const { return SectionYearRole; }
+
+  Q_INVOKABLE QStringList getActiveDirectories() const;
+
   Q_INVOKABLE void generateTestData(int count = 10000);
   Q_INVOKABLE void clearData();
   Q_INVOKABLE void scanDirectory(const QString &path);
@@ -111,6 +126,7 @@ signals:
   void scannedCountChanged();
   void loadedCountChanged();
   void stagedRequestCountChanged();
+  void filterQueryChanged();
   void forceUpdateGridView(); // New signal to trigger QML GridView update
 
 public slots: // New public slot
@@ -125,6 +141,7 @@ private:
     QString fileName;
     QString color; // For synthetic test images
     QDateTime date;
+    QString sectionDay;
     bool isLoaded = false;
     bool isSelected = false;
     bool isBurst = false;
@@ -136,8 +153,12 @@ private:
   void updateVisibleRange();
   void requestThumbnail(int index);
   void cancelPendingRequests();
+  void applyFilter();
 
-  QVector<ImageItem> m_items;
+  QVector<ImageItem> m_allItems; // Backup of all scanned items
+  QVector<ImageItem> m_items;    // Currently visible (filtered) items
+  QString m_filterQuery;
+  
   QSet<int> m_activelyRequesting;
   int m_visibleStartIndex = 0;
   int m_visibleEndIndex = 0;

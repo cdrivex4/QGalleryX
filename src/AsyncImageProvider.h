@@ -47,6 +47,10 @@ public:
 
   static std::atomic<bool> s_disableVideo;
   static std::atomic<bool> s_disableRaw;
+  static std::atomic<int> s_cacheHits;
+  static std::atomic<int> s_cacheMisses;
+  static std::atomic<int> s_totalWorkDuration;
+  static std::atomic<int> s_workCount;
 
   QQuickImageResponse *requestImageResponse(const QString &id,
                                             const QSize &requestedSize);

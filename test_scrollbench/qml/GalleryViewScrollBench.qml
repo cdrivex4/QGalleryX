@@ -163,6 +163,11 @@ Item {
             let firstVisible = firstRow * cols;
             let lastVisible = (lastRow * cols) + cols;
 
+            // Failsafe clamp to prevent layout initialization bugs from requesting thousands of thumbnails
+            if (lastVisible - firstVisible > 800) {
+                lastVisible = firstVisible + 800;
+            }
+
             // Clamp and update C++ model
             model.visibleStartIndex = Math.max(0, firstVisible);
             model.visibleEndIndex = Math.min(grid.count - 1, lastVisible);
@@ -227,24 +232,45 @@ Item {
             property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
             property bool isSelected: model.isSelected !== undefined ? model.isSelected : false
 
-            Image {
-                id: img
+            FastImage {
+                id: imgFast
                 anchors.fill: parent
                 anchors.margins: 1
-                // CRITICAL: Reset source on delegate reuse to force fresh load
+                visible: settings.useFastImage
                 source: {
-                    if (!model.filePath) return "";
-                    // Force reevaluation by including index
+                    if (!settings.useFastImage) return "";
+                    if (isSynthetic) {
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
+                    }
                     return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
                 }
-                sourceSize.width: root.loadingResolution
-                sourceSize.height: root.loadingResolution
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-                visible: status === Image.Ready // Hide recycled content
-                cache: false  // FORCE FRESH LOADS - NOT USING QML CACHE
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                fillMode: 1 // PreserveAspectCrop
                 mipmap: true 
-                
+            }
+            
+            Image {
+                id: imgStd
+                anchors.fill: parent
+                anchors.margins: 1
+                visible: !settings.useFastImage
+                source: {
+                    if (settings.useFastImage) return "";
+                    if (isSynthetic) {
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
+                    }
+                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
+                }
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                fillMode: Image.PreserveAspectCrop
+                mipmap: true 
+                asynchronous: true
+                cache: true
+            }
+            
+            // Unified property for fallback logic
+            property bool isLoading: settings.useFastImage ? imgFast.isLoading : (imgStd.status === Image.Loading)
+            property string activeSource: settings.useFastImage ? imgFast.source : imgStd.source                
                 // Video Play Icon
                 Item {
                     anchors.fill: parent
@@ -274,32 +300,29 @@ Item {
                     }
                 }
                 
-                property bool hasError: status === Image.Error
-                property real loadStartTime: 0
-                Component.onCompleted: loadStartTime = new Date().getTime()
-                property bool hasReported: false
-                
-                onStatusChanged: {
-                    if (status === Image.Ready && !hasReported) {
-                        hasReported = true
-                        var timeTaken = new Date().getTime() - (loadStartTime || new Date().getTime())
-                        telemetry.reportLoadTime(timeTaken)
-                    }
-                }
-                
                 Rectangle {
                     anchors.fill: parent; color: "#1a1a1a"
-                    visible: img.status !== Image.Ready
+                    visible: activeSource === "" || isLoading // Fallback for unloaded
+                    
                     BusyIndicator { 
                         anchors.centerIn: parent
                         width: parent.width * 0.4; height: width
-                        visible: img.status === Image.Loading
                         opacity: 0.5
+                        visible: isLoading && !isRaw
+                    }
+                    
+                    Text {
+                        anchors.centerIn: parent
+                        text: "Decoding RAW..."
+                        color: "#FF9800"
+                        font.pixelSize: 10
+                        font.bold: true
+                        visible: isRaw && isLoading
                     }
                     Text { 
                         anchors.centerIn: parent
                         text: "⚠️"
-                        visible: img.status === Image.Error
+                        visible: !settings.useFastImage && imgStd.status === Image.Error
                         color: "#ff4444"
                     }
                 }

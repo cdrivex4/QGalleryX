@@ -43,7 +43,7 @@ Rectangle {
             
             Text {
                 Layout.fillWidth: true
-                text: diagnostics.healthStatus
+                text: "FPS: " + telemetry.fps + " | Mem: " + systemMonitor.memoryUsageMB.toFixed(0) + "MB\n" + diagnostics.healthStatus
                 color: "white"
                 font.bold: true
                 font.pixelSize: 13

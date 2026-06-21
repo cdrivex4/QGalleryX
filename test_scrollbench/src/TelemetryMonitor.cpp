@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QTimer>
 #include <QtGlobal>
+#include "../../src/AsyncImageProvider.h"
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -208,6 +209,21 @@ void TelemetryMonitor::updateFps() {
       emit fpsChanged();
       emit averageFpsChanged();
     }
+  }
+
+  int hits = AsyncImageProvider::s_cacheHits.exchange(0);
+  int misses = AsyncImageProvider::s_cacheMisses.exchange(0);
+  if (hits > 0 || misses > 0) {
+    m_cacheHits += hits;
+    m_cacheMisses += misses;
+    updateCacheHitRate();
+  }
+  
+  int durationSum = AsyncImageProvider::s_totalWorkDuration.exchange(0);
+  int count = AsyncImageProvider::s_workCount.exchange(0);
+  if (count > 0) {
+    int avgFetch = durationSum / count;
+    reportLoadTime(avgFetch);
   }
 }
 

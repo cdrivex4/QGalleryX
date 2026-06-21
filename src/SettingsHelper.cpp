@@ -19,6 +19,9 @@ SettingsHelper::SettingsHelper(QObject *parent)
   HardwareAccelerationManager::instance().setMode(
       static_cast<SettingsHelper::HWAccel>(
           AsyncImageProvider::s_videoAcceleration.load()));
+  m_showWatermark = m_settings.value("showWatermark", true).toBool();
+  m_showDiagnostics = m_settings.value("showDiagnostics", false).toBool();
+  m_useFastImage = m_settings.value("useFastImage", true).toBool();
 }
 
 QString SettingsHelper::graphicsApi() const { return m_graphicsApi; }
@@ -119,8 +122,8 @@ void SettingsHelper::setUseDiskCache(bool enable) {
 }
 
 int SettingsHelper::videoAcceleration() const {
-  return m_settings.value("videoAcceleration", 0)
-      .toInt(); // Default to None (CPU) for safety
+  return m_settings.value("videoAcceleration", 1)
+      .toInt(); // Default to 1 (Auto) for GPU fallback chain
 }
 
 void SettingsHelper::setVideoAcceleration(int mode) {
@@ -134,8 +137,7 @@ void SettingsHelper::setVideoAcceleration(int mode) {
 }
 
 bool SettingsHelper::showWatermark() const {
-  return m_settings.value("showWatermark", true)
-      .toBool(); // Default enabled for debugging
+  return m_settings.value("showWatermark", false).toBool();
 }
 
 void SettingsHelper::setShowWatermark(bool show) {
@@ -143,6 +145,30 @@ void SettingsHelper::setShowWatermark(bool show) {
     return;
   m_settings.setValue("showWatermark", show);
   emit showWatermarkChanged();
+}
+
+bool SettingsHelper::showDiagnostics() const {
+  return m_showDiagnostics;
+}
+
+void SettingsHelper::setShowDiagnostics(bool show) {
+  if (m_showDiagnostics != show) {
+    m_showDiagnostics = show;
+    m_settings.setValue("showDiagnostics", show);
+    emit showDiagnosticsChanged();
+  }
+}
+
+bool SettingsHelper::useFastImage() const {
+  return m_useFastImage;
+}
+
+void SettingsHelper::setUseFastImage(bool use) {
+  if (m_useFastImage != use) {
+    m_useFastImage = use;
+    m_settings.setValue("useFastImage", use);
+    emit useFastImageChanged();
+  }
 }
 
 void SettingsHelper::restartApp() {

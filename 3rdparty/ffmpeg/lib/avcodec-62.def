@@ -150,6 +150,7 @@ EXPORTS
     avcodec_pix_fmt_to_codec_tag
     avcodec_profile_name
     avcodec_receive_frame
+    avcodec_receive_frame_flags
     avcodec_receive_packet
     avcodec_send_frame
     avcodec_send_packet

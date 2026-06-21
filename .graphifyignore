@@ -1,0 +1,7 @@
+3rdparty/**/Changelog*
+3rdparty/**/CHANGELOG*
+3rdparty/**/doc/
+3rdparty/**/docs/
+3rdparty/**/*.html
+3rdparty/**/*.txt
+3rdparty/**/*.md

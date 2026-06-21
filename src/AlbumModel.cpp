@@ -241,8 +241,13 @@ void AlbumModel::scanAlbums(const QString &path) {
           filtered.append(info);
       }
       beginResetModel();
-      m_albums = filtered;
+      m_allAlbums = filtered;
+      m_albums = m_allAlbums;
       std::sort(m_albums.begin(), m_albums.end(),
+                [](const AlbumInfo &a, const AlbumInfo &b) {
+                  return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
+                });
+      std::sort(m_allAlbums.begin(), m_allAlbums.end(),
                 [](const AlbumInfo &a, const AlbumInfo &b) {
                   return a.name.compare(b.name, Qt::CaseInsensitive) < 0;
                 });
@@ -252,4 +257,49 @@ void AlbumModel::scanAlbums(const QString &path) {
       emit scanFinished();
     });
   });
+}
+
+void AlbumModel::setFilterQuery(const QString &query) {
+  if (m_filterQuery != query) {
+    m_filterQuery = query;
+    emit filterQueryChanged();
+    // Normal filtering if not using active paths
+    if (query.isEmpty()) {
+      beginResetModel();
+      m_albums = m_allAlbums;
+      endResetModel();
+    }
+  }
+}
+
+void AlbumModel::applyFilterFromPaths(const QStringList &activePaths) {
+  if (m_filterQuery.isEmpty()) {
+    beginResetModel();
+    m_albums = m_allAlbums;
+    endResetModel();
+    return;
+  }
+
+  QSet<QString> allowedPaths;
+  for (const QString &p : activePaths) {
+    allowedPaths.insert(p.toLower());
+  }
+
+  beginResetModel();
+  m_albums.clear();
+  for (const auto &album : m_allAlbums) {
+    // If the album's path (or its subdirectories) are in allowedPaths, include it
+    QString albumPath = QDir::fromNativeSeparators(album.path).toLower();
+    bool match = false;
+    for (const QString &allowed : allowedPaths) {
+      if (allowed.startsWith(albumPath) || album.name.toLower().contains(m_filterQuery.toLower())) {
+        match = true;
+        break;
+      }
+    }
+    if (match) {
+      m_albums.append(album);
+    }
+  }
+  endResetModel();
 }

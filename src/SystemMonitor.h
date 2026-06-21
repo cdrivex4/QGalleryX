@@ -39,6 +39,7 @@ public:
   double getMemoryUsageMB();
   Q_INVOKABLE double getGpuUsage();
   Q_INVOKABLE QString getGpuName();
+  Q_INVOKABLE void logEnvironmentSnapshot();
 
   // Control monitoring
   Q_INVOKABLE void startMonitoring(int intervalMs = 1000);

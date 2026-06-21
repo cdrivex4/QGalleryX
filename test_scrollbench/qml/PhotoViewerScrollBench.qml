@@ -272,8 +272,8 @@ Item {
                         if (!isCurrent || !visible || !filePath) return ""
                         
                         var url = filePath
-                        // If it's a Windows network path (starts with \\), MediaPlayer needs file: protocol
-                        if (url.startsWith("\\\\")) {
+                        // If it's a Windows network path (starts with \\ or //), MediaPlayer needs file: protocol
+                        if (url.startsWith("\\\\") || url.startsWith("//")) {
                             return "file:" + url.replace(/\\/g, "/")
                         }
                         // If it doesn't have a protocol and isn't a UNC path, prepend file:///

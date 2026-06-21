@@ -4,11 +4,7 @@
 
 ## 🔴 High Priority
 
-### Concurrency Leak & Stall Recovery (Feb 10, 2026)
-**Status:** Identified, pending implementation  
-**Issue:** `AsyncImageProvider` has a double-increment bug in `activeWeight` and lacks a timer to trigger `checkStalls()`.  
-**Impact:** UI may freeze or starve when loading from slow/stalled network shares.  
-**Files:** `src/AsyncImageProvider.cpp`
+
 
 ### DNG Proprietary Compression Support ⏸️ DEFERRED
 **Status:** Paused for future optimization  
@@ -41,13 +37,13 @@
 - Test HEVC rotation metadata handling
 - Validate audio sync on all video formats
 
-### Album View Integration
-**Status:** Incomplete  
-**Files:** `test_scrollbench/qml/AlbumsViewScrollBench.qml`  
+### Global Text-Based Filtering
+**Status:** Planned  
+**Files:** `test_scrollbench/qml/MainScrollBench.qml`, `test_scrollbench/src/ScrollBenchImageModel.cpp`  
 **Needs:**
-- Wire up `ScrollBenchImageModel` correctly
-- Test grouping and filtering
-- Verify performance with large albums
+- Add search bar to UI (Main View & Album View)
+- Implement efficient substring filtering on backend (Filename/Folder name)
+- Ensure filter works across both Standard Grid and Semantic Views
 
 ---
 
@@ -78,12 +74,28 @@
 
 ## ✅ Recently Completed
 
+### UI Telemetry, Texture Cache Bypass, & RAW Feedback (June 2026)
+- ✅ **Bespoke `FastImageItem` (Garbage Collector Bypass):** Implemented a custom `QQuickItem` that manually instantiates `QSGTexture` directly from `AsyncImageProvider` cache hits to circumvent QML's `QQuickPixmapCache` scavenging logic, completely eradicating the "No Date" layout corruption when viewport culling is disabled.
+- ✅ **Hardware Capabilities Matrix:** Rewrote `detectCPUFeatures()` using runtime `__cpuid()` (GCC/MinGW) instead of compile-time macros, and iteratively appended FFmpeg hardware enumerations to accurately list available instruction sets and GPU media engines (e.g., SSE3, AVX2, QSV, CUDA, D3D11VA).
+- ✅ **True IO Latency Polling:** Stripped `Component.onCompleted` from QML delegates and wired `AsyncImageProvider::s_totalWorkDuration` atomic counters directly into the `TelemetryMonitor` to ensure UI metrics bypass staging queues and accurately report pure disk read/decode execution time.
+- ✅ **RAW Specific UI Feedback:** Added a glowing "Decoding RAW..." badge bound to `FastImageItem.isLoading` to explicitly signal high-cost LibRaw decodes compared to standard IO waits.
+- ✅ **Full-Resolution Caching Fix:** Explicitly bound `sourceSize` on delegates in the Normal grid view to strictly cache 3KB thumbnails instead of memory-crushing 48MB full-resolution JPEG matrices.
+
 ### Media Loading & Type Detection (Dec 25, 2024)
 - ✅ Centralized file type detection (`FileTypeRouter`)
 - ✅ Fixed video/RAW badges in grid and semantic views
 - ✅ Corrected role ID mappings across all QML views
 - ✅ Photo Viewer image loading for standard formats
 - ✅ Comprehensive format compatibility documentation (170+ formats)
+
+### Performance & Security Architecture (June 2026)
+- ✅ **FFmpeg Core Security Update:** Updated embedded FFmpeg libraries to resolve CVEs.
+- ✅ **Concurrency Leak & Stall Recovery:** Implemented `QueueGuardState` atomic flags to prevent double-increments and wired up `checkStalls()` to rescue IO locks.
+- ✅ **Video Thumbnail Threading:** Re-routed heavy FFmpeg decodes to the `CPU_BOUND` dynamically scaling thread pool to prevent `IO_BOUND` pool starvation.
+- ✅ **Dynamic Hardware Accel:** Scaled `s_videoSemaphore` dynamically based on system hardware_concurrency and active GPU pixel formats.
+- ✅ **Video Smart Seek:** Replaced brutal 3x CPU-intensive black-frame retry loops with an intelligent 15% Smart Seek offset for representative video thumbnails.
+- ✅ **QML Viewport Failsafe:** Clamped QML layout math to prevent -1 or massive visible range requests during initialization, preventing `AsyncImageProvider` thread exhaustion.
+- ✅ **Album View Integration:** Wired up Album detail view with Semantic Zoom, Date Scrubber, and dynamically scaling `ScrollBenchImageModel` instances.
 
 ### Previous Sessions
 See `SESSION_HISTORY.md` for details on earlier work.

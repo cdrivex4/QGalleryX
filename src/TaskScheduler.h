@@ -29,6 +29,7 @@ public:
 
   using Task = std::function<void()>;
   enum TaskType { CPU_BOUND, IO_BOUND };
+  enum TaskCategory { ImageTask = 0, VideoTask = 1 };
   enum Priority { Immediate = 0, Normal = 1, Low = 2, Background = 3 };
 
   TaskScheduler();
@@ -38,7 +39,7 @@ public:
   bool isPaused() const { return m_isPaused.load(); }
 
   void addTask(Task task, TaskType type = CPU_BOUND,
-               Priority priority = Normal);
+               Priority priority = Normal, TaskCategory category = ImageTask);
   void clear();
   void clear(TaskType type);
   void stop();
@@ -62,15 +63,17 @@ private:
 
   // CPU Pool
   std::vector<std::thread> m_cpuThreads;
-  QMap<Priority, QList<Task>> m_cpuQueue;
+  QMap<Priority, QList<Task>> m_cpuQueues[2]; // 0: Image, 1: Video
   QMutex m_cpuMutex;
   QWaitCondition m_cpuCondition;
+  std::atomic<int> m_cpuRatioCounter{0};
 
   // IO Pool (Usually 1-2 threads)
   std::vector<std::thread> m_ioThreads;
-  QMap<Priority, QList<Task>> m_ioQueue;
+  QMap<Priority, QList<Task>> m_ioQueues[2]; // 0: Image, 1: Video
   QMutex m_ioMutex;
   QWaitCondition m_ioCondition;
+  std::atomic<int> m_ioRatioCounter{0};
 
   std::atomic<bool> m_running;
   std::atomic<bool> m_isPaused{false};

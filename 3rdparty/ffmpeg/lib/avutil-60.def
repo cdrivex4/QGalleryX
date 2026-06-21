@@ -20,6 +20,11 @@ EXPORTS
     av_alpha_mode_name
     av_ambient_viewing_environment_alloc
     av_ambient_viewing_environment_create_side_data
+    av_amf_attach_hdr_metadata
+    av_amf_display_mastering_meta_to_hdrmeta
+    av_amf_extract_hdr_metadata
+    av_amf_get_color_profile
+    av_amf_light_metadata_to_hdrmeta
     av_amf_to_av_format
     av_append_path_component
     av_asprintf
@@ -177,6 +182,10 @@ EXPORTS
     av_dynamic_hdr_plus_create_side_data
     av_dynamic_hdr_plus_from_t35
     av_dynamic_hdr_plus_to_t35
+    av_dynamic_hdr_smpte2094_app5_alloc
+    av_dynamic_hdr_smpte2094_app5_create_side_data
+    av_dynamic_hdr_smpte2094_app5_from_t35
+    av_dynamic_hdr_smpte2094_app5_to_t35
     av_dynamic_hdr_vivid_alloc
     av_dynamic_hdr_vivid_create_side_data
     av_dynarray2_add
@@ -461,6 +470,8 @@ EXPORTS
     av_pixelutils_get_sad_fn
     av_q2intfloat
     av_random_bytes
+    av_raw_color_params_alloc
+    av_raw_color_params_create_side_data
     av_rc4_alloc
     av_rc4_crypt
     av_rc4_init
@@ -596,6 +607,8 @@ EXPORTS
     av_video_hint_alloc
     av_video_hint_create_side_data
     av_vk_frame_alloc
+    av_vk_get_optional_device_extensions
+    av_vk_get_optional_instance_extensions
     av_vkfmt_from_pixfmt
     av_vlog
     av_write_image_line

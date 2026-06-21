@@ -14,6 +14,7 @@ qt_add_executable(appScrollBench
     src/FileTypeRouter.cpp src/FileTypeRouter.h
     src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
     src/TelemetryMonitor.cpp src/TelemetryMonitor.h
+    src/FastImageItem.cpp src/FastImageItem.h
     # Reuse from main project
     ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
     ../src/TaskScheduler.cpp ../src/TaskScheduler.h

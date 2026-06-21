@@ -282,6 +282,9 @@ void ImageModel::scanDirectory(const QString &path) {
                   QFileInfo fi(f);
                   info.size = fi.size();
                   info.date = fi.birthTime();
+                  if (!info.date.isValid() || info.date.date().year() < 1980) {
+                      info.date = fi.lastModified();
+                  }
 
                   QRegularExpressionMatch match =
                       dateRegex.match(info.fileName);
@@ -316,6 +319,9 @@ void ImageModel::scanDirectory(const QString &path) {
             info.fileName = fileInfo.fileName();
             info.size = fileInfo.size();
             info.date = fileInfo.birthTime(); // Default
+            if (!info.date.isValid() || info.date.date().year() < 1980) {
+                info.date = fileInfo.lastModified();
+            }
 
             // Optimize: Try parsing filename for date
             QRegularExpressionMatch match = dateRegex.match(info.fileName);

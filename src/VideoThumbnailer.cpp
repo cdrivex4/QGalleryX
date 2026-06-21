@@ -172,6 +172,9 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   cleanup.codecCtx = avcodec_alloc_context3(decoder);
   avcodec_parameters_to_context(cleanup.codecCtx, stream->codecpar);
+  
+  // RESTRICT THREADS TO PREVENT CPU DEATH ON MULTIPLE CONCURRENT VIDEOS
+  cleanup.codecCtx->thread_count = 1;
 
   if (accel != SettingsHelper::None &&
       s_consecutiveHwFailures <= MAX_HW_FAILURES) {
@@ -199,9 +202,14 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   }
 
   int retryCount = 0;
-  while (retryCount < 3) {
+  while (retryCount < 1) { // Removed 3x retry on black frames to stop CPU overloading
     if (cancelled && cancelled->load())
       return QImage();
+
+    // Smart seek to skip fade-ins and guarantee a representative frame instantly
+    if (timeMs <= 0 && cleanup.fmtCtx->duration != AV_NOPTS_VALUE) {
+      timeMs = (cleanup.fmtCtx->duration / 1000) * 0.15;
+    }
 
     if (timeMs > 0) {
       int64_t timestamp = (int64_t)timeMs * 1000;
@@ -219,7 +227,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
     avcodec_flush_buffers(cleanup.codecCtx);
 
     bool frameFound = false;
-    int maxPackets = 2000;
+    int maxPackets = 150; // Massively reduced from 2000 to prevent 6s network stalls on bad files
 
     while (maxPackets > 0 &&
            av_read_frame(cleanup.fmtCtx, cleanup.packet) >= 0) {
@@ -310,21 +318,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
       QImage tmp((const uchar *)cleanup.rgbFrame->data[0], dstW, dstH,
                  cleanup.rgbFrame->linesize[0], QImage::Format_RGB888);
-      resultImage = tmp.copy();
-
-      // Simple black check
-      uint64_t lumaSum = 0;
-      for (int i = 0; i < 100; ++i) {
-        int x = (i * 137) % dstW;
-        int y = (i * 139) % dstH;
-        QRgb p = resultImage.pixel(x, y);
-        lumaSum += (qRed(p) * 299 + qGreen(p) * 587 + qBlue(p) * 114) / 1000;
-      }
-      if ((lumaSum / 100) > 10)
-        return resultImage;
-
-      qDebug() << "[" << timeLogStr << "][VideoThumbnailer] Black frame at"
-               << timeMs << "ms, retrying...";
+      return tmp.copy();
     }
 
     retryCount++;

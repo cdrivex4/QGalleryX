@@ -5,6 +5,8 @@
 #include <cmath>
 #include <pdh.h>
 #include <pdhmsg.h>
+#include <QSysInfo>
+#include <QThread>
 
 
 #ifdef Q_OS_WIN
@@ -53,6 +55,8 @@ SystemMonitor::SystemMonitor(QObject *parent)
   // Initial GPU detection
   m_gpuName = getGpuName();
 
+  logEnvironmentSnapshot();
+
 #ifdef Q_OS_WIN
   // PDH Init for GPU Load
   m_pdhQuery = nullptr;
@@ -84,6 +88,21 @@ void SystemMonitor::stopMonitoring() {
     qDebug() << "SystemMonitor: Stopping monitoring";
     m_updateTimer->stop();
   }
+}
+
+void SystemMonitor::logEnvironmentSnapshot() {
+    getMemoryUsageMB(); // Populates m_totalSystemMemoryMB
+
+    QString os = QSysInfo::prettyProductName();
+    QString cpuArch = QSysInfo::currentCpuArchitecture();
+    int threads = QThread::idealThreadCount();
+
+    qInfo() << "================ ENVIRONMENT SNAPSHOT ================";
+    qInfo() << "OS              :" << os;
+    qInfo() << "CPU Arch        :" << cpuArch << "(" << threads << "logical threads)";
+    qInfo() << "Total System RAM:" << m_totalSystemMemoryMB << "MB";
+    qInfo() << "GPU detected    :" << m_gpuName << "(" << m_gpuVramTotalMB << "MB VRAM)";
+    qInfo() << "======================================================";
 }
 
 void SystemMonitor::updateStats() {

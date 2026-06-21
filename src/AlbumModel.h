@@ -25,10 +25,13 @@ public:
   };
 
   Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+  Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY filterQueryChanged)
 
   explicit AlbumModel(QObject *parent = nullptr);
 
   bool isLoading() const { return m_isLoading; }
+  QString filterQuery() const { return m_filterQuery; }
+  void setFilterQuery(const QString &query);
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   QVariant data(const QModelIndex &index,
@@ -40,10 +43,16 @@ public:
 signals:
   void isLoadingChanged();
   void scanFinished();
+  void filterQueryChanged();
+
+public slots:
+  void applyFilterFromPaths(const QStringList &activePaths);
 
 private:
   bool m_isLoading = false;
+  QString m_filterQuery;
   QVector<AlbumInfo> m_albums;
+  QVector<AlbumInfo> m_allAlbums;
   std::atomic<int> m_scanGeneration{0};
 };
 

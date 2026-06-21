@@ -25,8 +25,8 @@ TaskScheduler::TaskScheduler() : m_running(true), m_sequenceCounter(0) {
   if (settingsThreads > 0) {
     cpuWorkerCount = settingsThreads;
   } else {
-    // Cap at 8 threads to prevent saturating memory bus and causing lag
-    cpuWorkerCount = std::clamp(cpuCores - 1, 2, 8);
+    // Scale CPU workers to 80% of available cores to keep UI stable
+    cpuWorkerCount = std::max(2, static_cast<int>(cpuCores * 0.8));
   }
 
   int ioWorkerCount = 4; // Increased from 2 to allow better burst handling
@@ -109,7 +109,7 @@ void TaskScheduler::emitCountChanged() {
   emit activeTaskCountChanged();
 }
 
-void TaskScheduler::addTask(Task task, TaskType type, Priority priority) {
+void TaskScheduler::addTask(Task task, TaskType type, Priority priority, TaskCategory category) {
   if (!m_running)
     return;
 
@@ -121,16 +121,15 @@ void TaskScheduler::addTask(Task task, TaskType type, Priority priority) {
              << m_activeTaskCount.load();
   }
 
+  int catIdx = static_cast<int>(category);
+
   if (type == CPU_BOUND) {
     QMutexLocker lock(&m_cpuMutex);
-    // Use prepend (LIFO) for CPU tasks to prioritize most recent viewport
-    m_cpuQueue[priority].prepend(task);
+    m_cpuQueues[catIdx][priority].prepend(task);
     m_cpuCondition.wakeOne();
   } else {
     QMutexLocker lock(&m_ioMutex);
-    // Use prepend (LIFO) for IO tasks as well to prioritize most recent
-    // viewport
-    m_ioQueue[priority].prepend(task);
+    m_ioQueues[catIdx][priority].prepend(task);
     m_ioCondition.wakeOne();
   }
 }
@@ -144,14 +143,18 @@ void TaskScheduler::clear(TaskType type) {
   int removedCount = 0;
   if (type == CPU_BOUND) {
     QMutexLocker lock(&m_cpuMutex);
-    for (const auto &queue : m_cpuQueue)
-      removedCount += queue.size();
-    m_cpuQueue.clear();
+    for (int i = 0; i < 2; ++i) {
+      for (const auto &queue : m_cpuQueues[i])
+        removedCount += queue.size();
+      m_cpuQueues[i].clear();
+    }
   } else {
     QMutexLocker lock(&m_ioMutex);
-    for (const auto &queue : m_ioQueue)
-      removedCount += queue.size();
-    m_ioQueue.clear();
+    for (int i = 0; i < 2; ++i) {
+      for (const auto &queue : m_ioQueues[i])
+        removedCount += queue.size();
+      m_ioQueues[i].clear();
+    }
   }
 
   // Decrement counter by the number of tasks that will now never run
@@ -172,26 +175,22 @@ void TaskScheduler::cpuWorkerLoop() {
     Task task;
     bool found = false;
 
-    {
+      {
       QMutexLocker lock(&m_cpuMutex);
       bool hasWork = false;
-      for (const auto &queue : m_cpuQueue) {
-        if (!queue.isEmpty()) {
-          hasWork = true;
-          break;
+      for (int i = 0; i < 2; ++i) {
+        for (const auto &queue : m_cpuQueues[i]) {
+          if (!queue.isEmpty()) { hasWork = true; break; }
         }
       }
 
       while ((!hasWork || m_isPaused) && m_running) {
         m_cpuCondition.wait(&m_cpuMutex);
-
-        // Re-check after waking up
         hasWork = false;
         if (m_running && !m_isPaused) {
-          for (const auto &queue : m_cpuQueue) {
-            if (!queue.isEmpty()) {
-              hasWork = true;
-              break;
+          for (int i = 0; i < 2; ++i) {
+            for (const auto &queue : m_cpuQueues[i]) {
+              if (!queue.isEmpty()) { hasWork = true; break; }
             }
           }
         }
@@ -200,17 +199,25 @@ void TaskScheduler::cpuWorkerLoop() {
       if (!m_running)
         break;
 
-      // Find highest priority task
-      // Keys are sorted: 0 (Immediate) ... 3 (Low)
-      // Iterate map keys in ascending order
-      auto it = m_cpuQueue.begin();
-      while (it != m_cpuQueue.end()) {
-        if (!it.value().isEmpty()) {
-          task = it.value().takeFirst();
-          found = true;
-          break;
+      int turn = m_cpuRatioCounter.fetch_add(1) % 6;
+      int preferredCategory = (turn < 5) ? 0 : 1;
+      int fallbackCategory = (preferredCategory == 0) ? 1 : 0;
+
+      auto tryPop = [&](int cat) -> bool {
+        auto it = m_cpuQueues[cat].begin();
+        while (it != m_cpuQueues[cat].end()) {
+          if (!it.value().isEmpty()) {
+            task = it.value().takeFirst();
+            found = true;
+            return true;
+          }
+          ++it;
         }
-        ++it;
+        return false;
+      };
+
+      if (!tryPop(preferredCategory)) {
+        tryPop(fallbackCategory);
       }
     }
 
@@ -236,26 +243,22 @@ void TaskScheduler::ioWorkerLoop() {
     Task task;
     bool found = false;
 
-    {
+      {
       QMutexLocker lock(&m_ioMutex);
       bool hasWork = false;
-      for (const auto &queue : m_ioQueue) {
-        if (!queue.isEmpty()) {
-          hasWork = true;
-          break;
+      for (int i = 0; i < 2; ++i) {
+        for (const auto &queue : m_ioQueues[i]) {
+          if (!queue.isEmpty()) { hasWork = true; break; }
         }
       }
 
       while ((!hasWork || m_isPaused) && m_running) {
         m_ioCondition.wait(&m_ioMutex);
-
-        // Re-check
         hasWork = false;
         if (m_running && !m_isPaused) {
-          for (const auto &queue : m_ioQueue) {
-            if (!queue.isEmpty()) {
-              hasWork = true;
-              break;
+          for (int i = 0; i < 2; ++i) {
+            for (const auto &queue : m_ioQueues[i]) {
+              if (!queue.isEmpty()) { hasWork = true; break; }
             }
           }
         }
@@ -264,14 +267,25 @@ void TaskScheduler::ioWorkerLoop() {
       if (!m_running)
         break;
 
-      auto it = m_ioQueue.begin();
-      while (it != m_ioQueue.end()) {
-        if (!it.value().isEmpty()) {
-          task = it.value().takeFirst();
-          found = true;
-          break;
+      int turn = m_ioRatioCounter.fetch_add(1) % 6;
+      int preferredCategory = (turn < 5) ? 0 : 1;
+      int fallbackCategory = (preferredCategory == 0) ? 1 : 0;
+
+      auto tryPop = [&](int cat) -> bool {
+        auto it = m_ioQueues[cat].begin();
+        while (it != m_ioQueues[cat].end()) {
+          if (!it.value().isEmpty()) {
+            task = it.value().takeFirst();
+            found = true;
+            return true;
+          }
+          ++it;
         }
-        ++it;
+        return false;
+      };
+
+      if (!tryPop(preferredCategory)) {
+        tryPop(fallbackCategory);
       }
     }
 
