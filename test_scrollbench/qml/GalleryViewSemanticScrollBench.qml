@@ -91,37 +91,39 @@ Item {
         }
     }
     
-    // Robust Visibility Tracking - Scan multiple points to find actual image rows
     function updateVisibleRange() {
-        if (!model || list.count === 0) return;
+        if (!model || list.count === 0 || !list.contentItem) return;
         
         var sourceStart = -1;
         var sourceEnd = -1;
         
-        // Scan from top to bottom at multiple Y positions to find first and last image rows
-        // Skip headers (type === 0) and only count actual image rows (type === 1)
-        var scanPoints = 10; // Number of vertical scan points
-        var stepY = list.height / scanPoints;
+        var viewTop = list.contentY;
+        var viewBottom = list.contentY + list.height;
+        var children = list.contentItem.children;
         
-        for (var i = 0; i < scanPoints; i++) {
-            var y = i * stepY + 20; // Offset from edge
-            var item = list.itemAt(25, y);
+        for (var i = 0; i < children.length; i++) {
+            var item = children[i];
+            if (!item || !item.hasOwnProperty("capturedType")) continue;
             
-            if (item && item.hasOwnProperty("capturedType") && item.capturedType === 1) {
-                // This is an image row, not a header
-                if (sourceStart === -1) {
+            // Fast vertical overlap check
+            if (item.y + item.height < viewTop || item.y > viewBottom) continue;
+            
+            if (item.capturedType === 1) { // Image row
+                if (sourceStart === -1 || item.capturedStart < sourceStart) {
                     sourceStart = item.capturedStart;
                 }
-                // Always update end to capture the last visible row
-                sourceEnd = item.capturedStart + item.capturedCount - 1;
+                var rowEnd = item.capturedStart + item.capturedCount - 1;
+                if (sourceEnd === -1 || rowEnd > sourceEnd) {
+                    sourceEnd = rowEnd;
+                }
             }
         }
         
-        // Fallback: if we didn't find any rows, assume we're at the edges
+        // Fallback if only headers or nothing found
         if (sourceStart === -1) sourceStart = 0;
         if (sourceEnd === -1) sourceEnd = model.totalItems - 1;
         
-        console.log("[QML ViewportRange] Detected range:", sourceStart, "to", sourceEnd, 
+        console.log("[QML ViewportRange] Precise detected range:", sourceStart, "to", sourceEnd, 
                     "(" + (sourceEnd - sourceStart + 1) + " items)");
         
         if (sourceStart !== -1 && sourceEnd !== -1) {

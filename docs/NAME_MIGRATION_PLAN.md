@@ -1,73 +1,40 @@
-# Hyper-Granular Migration Plan: QGalleryX
+# Hyper-Granular Migration Plan: QGalleryX (SAFE PHASED APPROACH)
 
-This document provides a comprehensive, file-by-file roadmap for renaming the project from "antigravity" and "Samsung Gallery Clone" to its new official name: **QGalleryX**.
+This document provides a comprehensive roadmap for safely renaming the project from "antigravity" and "Samsung Gallery Clone" to its new official name: **QGalleryX**.
 
-## 1. Staging Phase (Safety First)
-Before any code changes are made:
-1.  **Commit the Plan**: This document will be saved to `docs/NAME_MIGRATION_PLAN.md` and pushed to GitHub.
-2.  **Tag the Current State**: A git tag `pre-rename-antigravity` has been created.
-3.  **AI Context Link**: We will create a `docs/AI_RESUME_TICKET.md` that contains the current Brain ID and Conversation ID. This ensures that even if the folder is renamed, future AI sessions can "find" the old history.
+> **CRITICAL LESSON LEARNED**: We must **NEVER** use global find-and-replace scripts (like PowerShell `-replace` over all files) to blindly rename paths like `src` to `src_QGalleryX_Core`. Doing so destroys relative C++ `#include` directives (e.g. `../../src/`) and breaks the build. We must also **always** use `git mv` instead of OS-level folder renames to preserve Git history.
 
-## 2. GitHub Migration
-1.  **Rename Repository**: Rename to `QGalleryX`.
-2.  **Update Remote URL**: After renaming, the local git remote must be updated:
-    `git remote set-url origin https://github.com/cdrivex4/QGalleryX.git`
+## Phase 1: Target Renames (Executables Only)
+The goal is to safely rename the output executables without touching any folders or C++ variables.
+1. **`CMakeLists.txt` (Main)**
+   - Update `project(SamsungGallery)` -> `project(QGalleryX)`
+   - Update `qt_add_executable(appSamsungGallery)` -> `qt_add_executable(QGalleryX)`
+   - Update URI from `SamsungGallery` to `QGalleryX`
+2. **`test_scrollbench/CMakeLists.txt`**
+   - Update `project(ScrollBench)` -> `project(QGalleryX-Bench)`
+   - Update `add_executable(appScrollBench)` -> `add_executable(QGalleryX-Bench)`
+3. **`test_scrollbench/src/main_scrollbench.cpp`**
+   - Update the UI crash title strings only.
+4. **`build.ps1` and `deploy.ps1`**
+   - Safely update hardcoded executable names expected by `windeployqt` and `taskkill` (`appSamsungGallery.exe` and `appScrollBench.exe`) to match the new targets.
+5. **VERIFICATION**: Run `.\build.ps1` and verify the new `QGalleryX.exe` works.
 
-## 3. Global Find-and-Replace Mappings
-To ensure consistency across the codebase, we will perform the following mappings:
-- `antigravity` → `QGalleryX` (Case-insensitive where appropriate)
-- `Samsung Gallery Clone` → `QGalleryX`
-- `appSamsungGallery` → `QGalleryX` (For binaries and target names)
-- `appScrollBench` → `QGalleryX-Bench` (For performance binaries)
+## Phase 2: Folder Renames (Preserving Git History)
+1. Use `git mv src src_QGalleryX_Core`
+2. Use `git mv test_scrollbench test_QGalleryX-Bench`
+3. Use `git mv single_exe single_QGalleryX_Standalone`
+4. Use `git mv resources resources_QGalleryX`
+5. Carefully manual-update `CMakeLists.txt` `add_subdirectory()` paths.
+6. Use targeted code editing to update C++ `#include` paths.
+7. **VERIFICATION**: Run `.\build.ps1` and verify.
 
-## 4. Comprehensive File List & Planned Changes
+## Phase 3: Internal String and C++ Variable Updates
+1. Rename `ScrollBenchImageModel` -> `QGalleryXBenchImageModel` directly via code edits in header/cpp files and QML types.
+2. Update QML imports (`import SamsungGallery 1.0` -> `import QGalleryX 1.0`).
+3. Update specific strings (`"Samsung Gallery"` -> `"QGalleryX"`) in UI files.
+4. **VERIFICATION**: Run `.\build.ps1`.
 
-| Category | File Path | Old Value | New Value |
-| :--- | :--- | :--- | :--- |
-| **Build System** | `CMakeLists.txt` | `project(SamsungGallery)` | `project(QGalleryX)` |
-| | `CMakeLists.txt` | `add_executable(appSamsungGallery ...)` | `add_executable(QGalleryX ...)` |
-| | `CMakeLists.txt` | `URI SamsungGallery` | `URI QGalleryX` |
-| | `test_scrollbench/CMakeLists.txt` | `project(ScrollBench)` | `project(QGalleryX-Bench)` |
-| | `test_scrollbench/CMakeLists.txt" | `add_executable(appScrollBench ...)` | `add_executable(QGalleryX-Bench ...)` |
-| | `test_scrollbench/CMakeLists.txt" | `add_executable(appScrollBenchNet ...)` | `add_executable(QGalleryX-NetWatch ...)` |
-| | `test_scrollbench/CMakeLists.txt" | `URI ScrollBench` | `URI QGalleryX-Bench` |
-| | `build.ps1` | `$ExeName = "appSamsungGallery.exe"` | `$ExeName = "QGalleryX.exe"` |
-| | `deploy.ps1` | `SamsungGallery` | `QGalleryX` |
-| **Source Code** | `src/main.cpp` | `setApplicationName("SamsungGallery")` | `setApplicationName("QGalleryX")` |
-| | `src/main_test.cpp` | `SamsungGalleryTest` | `QGalleryX-Test` |
-| | `resources/qml/Main.qml` | `title: "Samsung Gallery Clone"` | `title: "QGalleryX"` |
-| | `resources/qml/MainSemantic.qml` | `Samsung Gallery` | `QGalleryX` |
-| **Tests & Utils** | `CMakeLists.txt` | `tst_imagemodel` | `verify-imagemodel` |
-| | `CMakeLists.txt` | `tst_scheduler` | `verify-scheduler` |
-| | `test_scrollbench/...` | `tst_linkage` | `verify-linkage` |
-| | `test_scrollbench/...` | `tst_automation` | `verify-automation` |
-| **Documentation** | `README.md` | `Samsung Gallery Clone` | `QGalleryX` |
-| | `RELEASE_NOTES.md` | `v2.x` | `v3.0 (QGalleryX Migration)` |
-| | `docs/README.md` | `antigravity` | `QGalleryX` |
-| | `docs/resume/*.md` | `antigravity` | `QGalleryX` |
-| **Scripts** | `scripts/dev_watcher.ps1` | `antigravity` | `QGalleryX` |
-| | `scripts/run_automation_suite.ps1` | `antigravity` | `QGalleryX` |
-| | `scripts/verify_folder.ps1` | `antigravity` | `QGalleryX` |
-| | `run_test_2min.ps1` | `antigravity` | `QGalleryX` |
-
-## 5. Reversion Strategy (Rollback)
+## Reversion Strategy (Rollback)
 In case of a failure:
-1.  **Immediate Git Reset**: `git reset --hard pre-rename-antigravity` (Restores all files).
-2.  **GitHub Reversion**: Rename the repo back to `antigravity`.
-3.  **URL Reversion**: `git remote set-url origin https://github.com/cdrivex4/antigravity.git`
-
-## 6. AI Context Preservation (CRITICAL)
-To prevent "Google Antigravity" (this AI) from losing context when the folder is renamed:
-1.  **Stay in current session**: Do not start a new chat until the re-link is verified.
-2.  **The Resume Ticket**: I will create `docs/AI_RESUME_TICKET.md` with:
-    - **Brain ID**: `84bcdcfa-db43-4495-9499-8c61a3eafd31`
-    - **Project Origin**: `antigravity`
-    - **Target Name**: `QGalleryX`
-3.  **Manual Re-hydrate**: If you start a new chat in the renamed folder, simply say: *"Read docs/AI_RESUME_TICKET.md and load that brain ID."*
-
-## 7. Verification Checklist
-- [ ] `.\build.ps1` produces `QGalleryX.exe`.
-- [ ] `.\test_scrollbench\build.ps1` produces `QGalleryX-Bench.exe`.
-- [ ] All 20+ documentation files updated correctly.
-- [ ] App window title shows "QGalleryX".
-- [ ] `docs/AI_RESUME_TICKET.md` created and verified.
+1.  **Immediate Git Reset**: `git reset --hard HEAD` and `git clean -fd`
+2.  **Verify Status**: Run `.\build.ps1` to prove the baseline works before attempting changes again.
