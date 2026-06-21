@@ -19,9 +19,6 @@ SettingsHelper::SettingsHelper(QObject *parent)
   HardwareAccelerationManager::instance().setMode(
       static_cast<SettingsHelper::HWAccel>(
           AsyncImageProvider::s_videoAcceleration.load()));
-  m_showWatermark = m_settings.value("showWatermark", true).toBool();
-  m_showDiagnostics = m_settings.value("showDiagnostics", false).toBool();
-  m_useFastImage = m_settings.value("useFastImage", true).toBool();
 }
 
 QString SettingsHelper::graphicsApi() const { return m_graphicsApi; }
@@ -148,27 +145,23 @@ void SettingsHelper::setShowWatermark(bool show) {
 }
 
 bool SettingsHelper::showDiagnostics() const {
-  return m_showDiagnostics;
+  return m_settings.value("showDiagnostics", false).toBool();
 }
 
 void SettingsHelper::setShowDiagnostics(bool show) {
-  if (m_showDiagnostics != show) {
-    m_showDiagnostics = show;
-    m_settings.setValue("showDiagnostics", show);
-    emit showDiagnosticsChanged();
-  }
+  if (showDiagnostics() == show) return;
+  m_settings.setValue("showDiagnostics", show);
+  emit showDiagnosticsChanged();
 }
 
 bool SettingsHelper::useFastImage() const {
-  return m_useFastImage;
+  return m_settings.value("useFastImage", true).toBool();
 }
 
 void SettingsHelper::setUseFastImage(bool use) {
-  if (m_useFastImage != use) {
-    m_useFastImage = use;
-    m_settings.setValue("useFastImage", use);
-    emit useFastImageChanged();
-  }
+  if (useFastImage() == use) return;
+  m_settings.setValue("useFastImage", use);
+  emit useFastImageChanged();
 }
 
 void SettingsHelper::restartApp() {
