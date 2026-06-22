@@ -18,11 +18,15 @@ Item {
     // Enable keyboard focus
     focus: true
     
-    // Grouping Mode: 1=Day, 2=Week, 3=Month, 4=Year
+    // Grouping Mode: 1=Day, 2=Week, 3=Month, 4=Year, 5=Type
     property int groupingMode: 1
+    onGroupingModeChanged: {
+        semanticRoot.model.setSortMode(groupingMode)
+    }
     property bool groupingAuto: true
     
     readonly property real gridSize: settings.gridSize
+    readonly property int loadingResolution: settings.thumbnailSize
     readonly property alias proxyModel: proxyModel
 
     function findChildListView() { return list }
@@ -48,6 +52,7 @@ Item {
             if (groupingMode === 2) return 263 // SectionWeekRole (UserRole + 7)
             if (groupingMode === 3) return 261 // SectionMonthRole (UserRole + 5)
             if (groupingMode === 4) return 262 // SectionYearRole (UserRole + 6)
+            if (groupingMode === 5) return 264 // SectionTypeRole (UserRole + 8)
             return 260
         }
     }
@@ -237,7 +242,7 @@ Item {
                         // Video Icon Overlay
                         Item {
                             anchors.fill: parent
-                            visible: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 266) // isVideo (Qt::UserRole + 10)
+                            visible: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 267) // isVideo (Qt::UserRole + 11)
                             Rectangle { anchors.fill: parent; color: "black"; opacity: 0.15 }
                             Text { 
                                 anchors.centerIn: parent
@@ -251,7 +256,7 @@ Item {
                         // RAW Indicator Overlay
                         Rectangle {
                             anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 4
-                            property bool isRaw: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 265) // isRaw (Qt::UserRole + 9)
+                            property bool isRaw: semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 266) // isRaw (Qt::UserRole + 10)
                             visible: isRaw
                             width: txtRawS.width + 6; height: txtRawS.height + 2
                             color: "#AA000000"; radius: 2

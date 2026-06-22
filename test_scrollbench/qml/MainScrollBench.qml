@@ -112,6 +112,7 @@ ApplicationWindow {
                             if (semanticView.groupingMode === 2) return "Grouping: Week"
                             if (semanticView.groupingMode === 3) return "Grouping: Month"
                             if (semanticView.groupingMode === 4) return "Grouping: Year"
+                            if (semanticView.groupingMode === 5) return "Grouping: Type"
                             return "Grouping"
                         }
                         visible: root.useSemanticView
@@ -126,6 +127,8 @@ ApplicationWindow {
                                 semanticView.groupingMode = 3 // Month
                             } else if (semanticView.groupingMode === 3) {
                                 semanticView.groupingMode = 4 // Year
+                            } else if (semanticView.groupingMode === 4) {
+                                semanticView.groupingMode = 5 // Type
                             } else {
                                 semanticView.groupingAuto = true // Return to Auto
                             }
@@ -252,6 +255,16 @@ ApplicationWindow {
         spacing: 15
         z: 50
         visible: !root.viewerVisible && !overlayVisible
+
+        // Legacy vs New Rendering Toggle
+        RowLayout {
+            spacing: 5
+            Text { text: "Use FastImage:"; color: "#fff"; font.bold: true; font.pixelSize: 12 }
+            Switch {
+                checked: settings.useFastImage
+                onToggled: settings.useFastImage = checked
+            }
+        }
 
         // Global Search Bar
         TextField {

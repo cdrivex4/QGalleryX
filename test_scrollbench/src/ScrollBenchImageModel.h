@@ -35,6 +35,7 @@ class ScrollBenchImageModel : public QAbstractListModel {
   Q_PROPERTY(int roleSectionWeek READ roleSectionWeek CONSTANT)
   Q_PROPERTY(int roleSectionMonth READ roleSectionMonth CONSTANT)
   Q_PROPERTY(int roleSectionYear READ roleSectionYear CONSTANT)
+  Q_PROPERTY(int roleSectionType READ roleSectionType CONSTANT)
 
 public:
   explicit ScrollBenchImageModel(QObject *parent = nullptr);
@@ -47,6 +48,7 @@ public:
     SectionMonthRole,
     SectionYearRole,
     SectionWeekRole,
+    SectionTypeRole,
     ExifRole,
     IsRawRole,
     IsVideoRole, // Added for video detection
@@ -87,10 +89,13 @@ public:
   int roleSectionWeek() const { return SectionWeekRole; }
   int roleSectionMonth() const { return SectionMonthRole; }
   int roleSectionYear() const { return SectionYearRole; }
+  int roleSectionType() const { return SectionTypeRole; }
 
   Q_INVOKABLE QStringList getActiveDirectories() const;
-
   Q_INVOKABLE void generateTestData(int count = 10000);
+
+
+  Q_INVOKABLE void setSortMode(int mode); // 1-4=Date, 5=Type
   Q_INVOKABLE void clearData();
   Q_INVOKABLE void scanDirectory(const QString &path);
   Q_INVOKABLE int stagedRequestCount() const;
@@ -154,6 +159,8 @@ private:
   void requestThumbnail(int index);
   void cancelPendingRequests();
   void applyFilter();
+  int m_sortMode = 1;
+  void resortItems();
 
   QVector<ImageItem> m_allItems; // Backup of all scanned items
   QVector<ImageItem> m_items;    // Currently visible (filtered) items

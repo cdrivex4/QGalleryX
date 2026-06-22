@@ -87,7 +87,12 @@ void FastImageItem::setSourceSize(const QSize &size) {
   if (m_sourceSize == size) return;
   m_sourceSize = size;
   emit sourceSizeChanged();
-  // We could reload here, but usually it's set before source
+  
+  if (!m_source.isEmpty()) {
+    QString tmp = m_source;
+    m_source.clear(); // Force a reload
+    setSource(tmp);
+  }
 }
 
 QSGNode *FastImageItem::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *) {
@@ -120,16 +125,16 @@ QSGNode *FastImageItem::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
       double itemAspect = width() / height();
       double imageAspect = (double)m_image.width() / m_image.height();
       
-      QRectF sourceRect(0, 0, 1, 1);
+      QRectF sourceRect(0, 0, m_image.width(), m_image.height());
       if (imageAspect > itemAspect) {
         // Image is wider, crop sides
-        double cropWidth = itemAspect / imageAspect;
-        sourceRect.setX((1.0 - cropWidth) / 2.0);
+        double cropWidth = m_image.height() * itemAspect;
+        sourceRect.setX((m_image.width() - cropWidth) / 2.0);
         sourceRect.setWidth(cropWidth);
       } else {
         // Image is taller, crop top/bottom
-        double cropHeight = imageAspect / itemAspect;
-        sourceRect.setY((1.0 - cropHeight) / 2.0);
+        double cropHeight = m_image.width() / itemAspect;
+        sourceRect.setY((m_image.height() - cropHeight) / 2.0);
         sourceRect.setHeight(cropHeight);
       }
       node->setSourceRect(sourceRect);

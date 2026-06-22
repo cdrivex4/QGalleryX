@@ -160,7 +160,7 @@ Item {
                             
                             // RAW files: Use AsyncImageProvider for LibRaw embedded thumbnail extraction
                             // (Fast ~200ms vs 120+ sec full decode)
-                            if (isRaw) {
+                            if (isRaw || filePath.toLowerCase().endsWith(".heic") || filePath.toLowerCase().endsWith(".heif")) {
                                 return "image://async/" + filePath + versionSuffix
                             }
                             

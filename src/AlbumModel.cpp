@@ -288,13 +288,14 @@ void AlbumModel::applyFilterFromPaths(const QStringList &activePaths) {
   beginResetModel();
   m_albums.clear();
   for (const auto &album : m_allAlbums) {
-    // If the album's path (or its subdirectories) are in allowedPaths, include it
     QString albumPath = QDir::fromNativeSeparators(album.path).toLower();
-    bool match = false;
-    for (const QString &allowed : allowedPaths) {
-      if (allowed.startsWith(albumPath) || album.name.toLower().contains(m_filterQuery.toLower())) {
-        match = true;
-        break;
+    bool match = album.name.toLower().contains(m_filterQuery.toLower());
+    if (!match) {
+      for (const QString &allowed : allowedPaths) {
+        if (allowed.startsWith(albumPath)) {
+          match = true;
+          break;
+        }
       }
     }
     if (match) {

@@ -125,6 +125,13 @@ QVariant ScrollBenchImageModel::data(const QModelIndex &index, int role) const {
     int week = item.date.date().weekNumber();
     return QString("%1 - Week %2").arg(year).arg(week);
   }
+  case SectionTypeRole: {
+    if (item.isVideo) return "Videos";
+    if (item.isRaw) return "RAW Images";
+    return "Images";
+  }
+  case ExifRole:
+    return "EXIF data placeholder";
   case IsRawRole: {
     return item.isRaw;
   }
@@ -150,6 +157,7 @@ QHash<int, QByteArray> ScrollBenchImageModel::roleNames() const {
   roles[SectionMonthRole] = "sectionMonth";
   roles[SectionYearRole] = "sectionYear";
   roles[SectionWeekRole] = "sectionWeek";
+  roles[SectionTypeRole] = "sectionType";
   roles[IsRawRole] = "isRaw";
   roles[IsVideoRole] = "isVideo";
   return roles;
@@ -557,11 +565,7 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
                 return;
               beginResetModel();
               m_items = safeBatch;
-              // Sort by Date Descending
-              std::sort(m_items.begin(), m_items.end(),
-                        [](const ImageItem &a, const ImageItem &b) {
-                          return a.date > b.date;
-                        });
+              resortItems();
               endResetModel();
               // Force viewport update
               emit layoutChanged();
@@ -1051,6 +1055,8 @@ void ScrollBenchImageModel::applyFilter() {
     }
   }
   
+  resortItems();
+  
   m_totalItems = m_items.count();
   m_remainingItems = m_totalItems;
   endResetModel();
@@ -1058,3 +1064,25 @@ void ScrollBenchImageModel::applyFilter() {
   emit forceUpdateGridView();
   emit remainingItemsChanged();
 }
+
+void ScrollBenchImageModel::setSortMode(int mode) {
+  if (m_sortMode == mode) return;
+  m_sortMode = mode;
+  beginResetModel();
+  resortItems();
+  endResetModel();
+}
+
+void ScrollBenchImageModel::resortItems() {
+  std::sort(m_items.begin(), m_items.end(), [this](const ImageItem &a, const ImageItem &b) {
+    if (m_sortMode == 5) {
+      // Sort by Type first: Videos -> RAW -> Images
+      int typeA = a.isVideo ? 0 : (a.isRaw ? 1 : 2);
+      int typeB = b.isVideo ? 0 : (b.isRaw ? 1 : 2);
+      if (typeA != typeB) return typeA < typeB;
+    }
+    // Fallback to Date
+    return a.date > b.date;
+  });
+}
+
