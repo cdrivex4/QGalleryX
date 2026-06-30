@@ -305,7 +305,19 @@ ApplicationWindow {
                 imageModel.filterQuery = text
                 albumModel.setFilterQuery(text)
                 if (text.length > 0) {
-                    albumModel.applyFilterFromPaths(imageModel.getActiveDirectories())
+                    var dirs = imageModel.getActiveDirectories();
+                    console.log("[QML Filter] text: '" + text + "', activeDirs: " + dirs);
+                    albumModel.applyFilterFromPaths(dirs)
+                }
+            }
+        }
+
+        Connections {
+            target: albumModel
+            function onFilterNeedsReapply() {
+                if (searchField.text.length > 0) {
+                    var dirs = imageModel.getActiveDirectories();
+                    albumModel.applyFilterFromPaths(dirs)
                 }
             }
         }

@@ -30,6 +30,7 @@ class SettingsHelper : public QObject {
                  NOTIFY rawAccelerationChanged)
   Q_PROPERTY(bool useDiskCache READ useDiskCache WRITE setUseDiskCache NOTIFY
                  useDiskCacheChanged)
+  Q_PROPERTY(QString diskCachePath READ diskCachePath CONSTANT)
   Q_PROPERTY(int videoAcceleration READ videoAcceleration WRITE
                  setVideoAcceleration NOTIFY videoAccelerationChanged)
   Q_PROPERTY(bool showWatermark READ showWatermark WRITE setShowWatermark NOTIFY
@@ -38,6 +39,8 @@ class SettingsHelper : public QObject {
                  showDiagnosticsChanged)
   Q_PROPERTY(bool useFastImage READ useFastImage WRITE setUseFastImage NOTIFY
                  useFastImageChanged)
+  Q_PROPERTY(int diskCacheDatabaseType READ diskCacheDatabaseType WRITE setDiskCacheDatabaseType NOTIFY
+                 diskCacheDatabaseTypeChanged)
 
 public:
   enum HWAccel { None, Auto, CUDA, QSV, D3D11VA, DXVA2, Vulkan, OpenCL };
@@ -73,6 +76,11 @@ public:
   bool useDiskCache() const;
   void setUseDiskCache(bool enable);
 
+  QString diskCachePath() const;
+
+  int diskCacheDatabaseType() const;
+  void setDiskCacheDatabaseType(int type);
+
   int videoAcceleration() const;
   void setVideoAcceleration(int mode);
 
@@ -89,6 +97,7 @@ public:
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
   Q_INVOKABLE void clearDiskCache();
+  Q_INVOKABLE QString getDiskCacheLocation() const;
 
   Q_INVOKABLE QString getGpuName(QObject *window = nullptr);
   Q_INVOKABLE void refreshGraphicsInfo(QObject *window = nullptr);
@@ -109,6 +118,7 @@ signals:
   void showWatermarkChanged();
   void showDiagnosticsChanged();
   void useFastImageChanged();
+  void diskCacheDatabaseTypeChanged();
 
 private:
   QString m_graphicsApi;

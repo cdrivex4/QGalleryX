@@ -44,6 +44,7 @@ signals:
   void isLoadingChanged();
   void scanFinished();
   void filterQueryChanged();
+  void filterNeedsReapply();
 
 public slots:
   void applyFilterFromPaths(const QStringList &activePaths);

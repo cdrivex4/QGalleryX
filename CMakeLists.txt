@@ -8,39 +8,33 @@ qt_standard_project_setup()
 
 # --- Main Application (Stable) ---
 qt_add_executable(appSamsungGallery
-    src/main.cpp
-    src/ImageModel.cpp src/ImageModel.h
-    src/AlbumModel.cpp src/AlbumModel.h
-    src/SettingsHelper.cpp src/SettingsHelper.h
-    src/SystemMonitor.cpp src/SystemMonitor.h
-    src/AsyncImageProvider.cpp src/AsyncImageProvider.h
-    src/GroupedProxyModel.cpp src/GroupedProxyModel.h
-    src/DesktopHelper.cpp src/DesktopHelper.h
-    src/VideoThumbnailer.cpp src/VideoThumbnailer.h
-    src/LogManager.cpp src/LogManager.h
-    src/TaskScheduler.cpp src/TaskScheduler.h
-    src/HardwareAccelerationManager.cpp src/HardwareAccelerationManager.h
-    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
-    src/FastVolumeScanner.cpp src/FastVolumeScanner.h
+    src_legacy/main.cpp
+    src_legacy/ImageModel.cpp src_legacy/ImageModel.h
+    src_legacy/AlbumModel.cpp src_legacy/AlbumModel.h
+    src_legacy/SettingsHelper.cpp src_legacy/SettingsHelper.h
+    src_legacy/SystemMonitor.cpp src_legacy/SystemMonitor.h
+    src_legacy/AsyncImageProvider.cpp src_legacy/AsyncImageProvider.h
+    src_legacy/GroupedProxyModel.cpp src_legacy/GroupedProxyModel.h
+    src_legacy/DesktopHelper.cpp src_legacy/DesktopHelper.h
+    src_legacy/VideoThumbnailer.cpp src_legacy/VideoThumbnailer.h
+    src_legacy/LogManager.cpp src_legacy/LogManager.h
+    src_legacy/TaskScheduler.cpp src_legacy/TaskScheduler.h
 )
 
 qt_add_qml_module(appSamsungGallery
     URI SamsungGallery
     VERSION 2.0
     QML_FILES
-        resources/qml/Main.qml
-        resources/qml/GalleryView.qml
-        resources/qml/GalleryViewSemantic.qml
-        resources/qml/GalleryViewTiles.qml
-        resources/qml/DateScrubber.qml
-        resources/qml/PhotoViewer.qml
-        resources/qml/AlbumsView.qml
-        resources/qml/AlbumCard.qml
-        resources/qml/BottomBar.qml
-        resources/qml/StatsOverlay.qml
-        resources/qml/UsageGraph.qml
-        resources/qml/BuildInfo.qml
-        resources/qml/WatermarkOverlay.qml
+        resources/qml_legacy/Main.qml
+        resources/qml_legacy/GalleryView.qml
+        resources/qml_legacy/GalleryViewSemantic.qml
+        resources/qml_legacy/GalleryViewTiles.qml
+        resources/qml_legacy/DateScrubber.qml
+        resources/qml_legacy/PhotoViewer.qml
+        resources/qml_legacy/AlbumsView.qml
+        resources/qml_legacy/BottomBar.qml
+        resources/qml_legacy/StatsOverlay.qml
+        resources/qml_legacy/UsageGraph.qml
 )
 
 # --- LibRaw ---
@@ -81,7 +75,7 @@ target_link_libraries(appSamsungGallery
     ${FFMPEG_LIB_DIR}/swscale.lib
     ${FFMPEG_LIB_DIR}/avutil.lib
 )
-target_include_directories(appSamsungGallery PRIVATE ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
+target_include_directories(appSamsungGallery PRIVATE src_legacy ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
 
 # Copy FFmpeg DLLs post-build
 file(GLOB FFMPEG_DLLS "${FFMPEG_BIN_DIR}/*.dll")
@@ -99,6 +93,7 @@ find_package(Qt6 REQUIRED COMPONENTS Test)
 add_executable(tst_imagemodel tests/tst_imagemodel.cpp 
     src/ImageModel.cpp src/ImageModel.h 
     src/AsyncImageProvider.cpp src/AsyncImageProvider.h
+    src/FileCacheManager.cpp src/FileCacheManager.h
     src/DesktopHelper.cpp src/DesktopHelper.h
     src/SystemMonitor.cpp src/SystemMonitor.h
     src/SettingsHelper.cpp src/SettingsHelper.h
@@ -124,4 +119,6 @@ add_test(NAME tst_scheduler COMMAND tst_scheduler)
 
 add_executable(tst_mft tests/tst_mft.cpp src/FastVolumeScanner.cpp src/FastVolumeScanner.h)
 target_link_libraries(tst_mft PRIVATE Qt6::Core)
+target_include_directories(tst_mft PRIVATE src)
+add_test(NAME tst_mft COMMAND tst_mft)
 

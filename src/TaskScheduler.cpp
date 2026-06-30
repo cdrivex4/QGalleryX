@@ -206,8 +206,13 @@ void TaskScheduler::cpuWorkerLoop() {
       auto tryPop = [&](int cat) -> bool {
         auto it = m_cpuQueues[cat].begin();
         while (it != m_cpuQueues[cat].end()) {
-          if (!it.value().isEmpty()) {
+          while (!it.value().isEmpty()) {
             task = it.value().takeFirst();
+            if (task.isNeeded && !task.isNeeded()) {
+              m_activeTaskCount--;
+              triggerCountUpdate();
+              continue;
+            }
             found = true;
             return true;
           }
@@ -274,8 +279,13 @@ void TaskScheduler::ioWorkerLoop() {
       auto tryPop = [&](int cat) -> bool {
         auto it = m_ioQueues[cat].begin();
         while (it != m_ioQueues[cat].end()) {
-          if (!it.value().isEmpty()) {
+          while (!it.value().isEmpty()) {
             task = it.value().takeFirst();
+            if (task.isNeeded && !task.isNeeded()) {
+              m_activeTaskCount--;
+              triggerCountUpdate();
+              continue;
+            }
             found = true;
             return true;
           }

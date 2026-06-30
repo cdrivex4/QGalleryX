@@ -1,5 +1,6 @@
 #include "DesktopHelper.h"
 #include "TaskScheduler.h" // Include TaskScheduler.h
+#include <QCoreApplication>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QDir>
@@ -12,23 +13,24 @@
 DesktopHelper::DesktopHelper(QObject *parent) : QObject(parent) {}
 
 void DesktopHelper::openInExplorer(const QString &path) {
-  if (path.isEmpty())
+  if (path.isEmpty() || path.startsWith("synthetic:"))
     return;
-  // ... (keep existing implementation or replace, I'll overwrite to be safe)
 
-  QString nativePath = QDir::toNativeSeparators(path);
-  if (nativePath.startsWith("file:")) {
-    nativePath = QUrl(path).toLocalFile();
+  QString cleanPath = path;
+  if (cleanPath.startsWith("file:///")) {
+    cleanPath = cleanPath.mid(8);
+  } else if (cleanPath.startsWith("file://")) {
+    cleanPath = cleanPath.mid(7);
+  } else if (cleanPath.startsWith("file:/")) {
+    cleanPath = cleanPath.mid(6);
   }
 
-  // Clean up any remaining file:/// prefix or QML artifacts
-  if (nativePath.startsWith("file:///"))
-    nativePath = nativePath.mid(8);
-  else if (nativePath.startsWith("file:/"))
-    nativePath = nativePath.mid(6);
+  QString nativePath = QDir::toNativeSeparators(cleanPath);
 
-  QString param = QLatin1String("/select,") + nativePath;
-  QProcess::startDetached("explorer.exe", QStringList() << param);
+  QProcess process;
+  process.setProgram("explorer.exe");
+  process.setNativeArguments("/select,\"" + nativePath + "\"");
+  process.startDetached();
 }
 
 void DesktopHelper::pauseBackgroundTasks() {
@@ -39,6 +41,12 @@ void DesktopHelper::pauseBackgroundTasks() {
 void DesktopHelper::resumeBackgroundTasks() {
   TaskScheduler::instance().resume();
   qDebug() << "DesktopHelper: Resumed background tasks.";
+}
+
+void DesktopHelper::requestRestart() {
+  qDebug() << "DesktopHelper: Restarting application...";
+  QProcess::startDetached(QCoreApplication::applicationFilePath(), QCoreApplication::arguments());
+  QCoreApplication::quit();
 }
 
 int DesktopHelper::getFileType(const QString &path) {

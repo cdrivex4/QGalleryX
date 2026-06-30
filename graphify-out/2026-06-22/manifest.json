@@ -1455,14 +1455,14 @@
     "semantic_hash": ""
   },
   "src/AsyncImageProvider.cpp": {
-    "mtime": 1782071163.372643,
-    "ast_hash": "fcafb725b7c524ece666d4afeaf30356",
+    "mtime": 1782075465.727648,
+    "ast_hash": "a64697462bbdfbc0cef6e09acde2bc31",
     "semantic_hash": ""
   },
   "src/AsyncImageProvider.h": {
-    "mtime": 1774299696.6823554,
-    "ast_hash": "f99663ab1b2583cefa977088e2dc0111",
-    "semantic_hash": "f99663ab1b2583cefa977088e2dc0111"
+    "mtime": 1782075456.4811876,
+    "ast_hash": "221d3db2dc4fc42fa2f7298ef4675f5a",
+    "semantic_hash": ""
   },
   "src/BuildInfo.h": {
     "mtime": 1782024528.0201478,
@@ -1510,8 +1510,8 @@
     "semantic_hash": "28763a7f13b36354e9fd20abb70821cf"
   },
   "src/HardwareAccelerationManager.cpp": {
-    "mtime": 1782030717.193239,
-    "ast_hash": "dfeab3cb3c032f6bde3effdecc73c12e",
+    "mtime": 1782074465.1788874,
+    "ast_hash": "fddd6cceaacd40a76e84367ae1796556",
     "semantic_hash": ""
   },
   "src/HardwareAccelerationManager.h": {
@@ -1550,13 +1550,13 @@
     "semantic_hash": "e652aee510ef833e6413d001625712c0"
   },
   "src/SettingsHelper.cpp": {
-    "mtime": 1782039804.7660768,
-    "ast_hash": "bf94a8f7a247f4a64bedd0824eab044b",
+    "mtime": 1782076258.9529233,
+    "ast_hash": "6743e9319a324fd358802065fa5e5978",
     "semantic_hash": ""
   },
   "src/SettingsHelper.h": {
-    "mtime": 1782039781.493114,
-    "ast_hash": "a5e9d80a8dd6002c167cef5478d249ec",
+    "mtime": 1782076252.0579786,
+    "ast_hash": "6dea46512beb731116b25d0f65e51314",
     "semantic_hash": ""
   },
   "src/SystemMonitor.cpp": {
@@ -1660,9 +1660,9 @@
     "semantic_hash": ""
   },
   "test_scrollbench/src/TelemetryMonitor.cpp": {
-    "mtime": 1770333078.7535245,
-    "ast_hash": "6bfbb5fb6c9d521496e751b653b887f1",
-    "semantic_hash": "6bfbb5fb6c9d521496e751b653b887f1"
+    "mtime": 1782075467.794195,
+    "ast_hash": "55dbb74ac1d99651e4e12cd31218399f",
+    "semantic_hash": ""
   },
   "test_scrollbench/src/TelemetryMonitor.h": {
     "mtime": 1770331994.0307615,
@@ -1675,9 +1675,9 @@
     "semantic_hash": "0186b57ab242ffad20fcd3adaad984ce"
   },
   "test_scrollbench/src/main_scrollbench.cpp": {
-    "mtime": 1774299696.706867,
-    "ast_hash": "6c3ecc3f5c96493351f24fa82d37299a",
-    "semantic_hash": "6c3ecc3f5c96493351f24fa82d37299a"
+    "mtime": 1782076032.8445027,
+    "ast_hash": "7901793f03e054b00b73085b971966bb",
+    "semantic_hash": ""
   },
   "test_scrollbench/src/tst_automation.cpp": {
     "mtime": 1774299696.7078674,
@@ -1955,8 +1955,8 @@
     "semantic_hash": ""
   },
   "docs/resume/OUTSTANDING_TASKS.md": {
-    "mtime": 1782034963.410461,
-    "ast_hash": "0160d5c7a3a372e36528d24f22a42da9",
+    "mtime": 1782076329.673532,
+    "ast_hash": "813ec680bcbd3f987fa8352e47b30d98",
     "semantic_hash": ""
   },
   "docs/resume/QUICK_START.md": {
@@ -2045,8 +2045,8 @@
     "semantic_hash": ""
   },
   "test_scrollbench/CMakeLists.txt": {
-    "mtime": 1774299696.6965587,
-    "ast_hash": "ef3ae18bd56c12d013d8746e29023b86",
+    "mtime": 1782076026.2578747,
+    "ast_hash": "23b5183fbff94599164379f8b4560036",
     "semantic_hash": ""
   },
   "test_scrollbench/README.md": {
@@ -10077,6 +10077,26 @@
   "docs/20260621 1447.JPG": {
     "mtime": 1782038862.0527887,
     "ast_hash": "d80c1ee43247c3959f2a8285f7410c33",
+    "semantic_hash": ""
+  },
+  "test_scrollbench/src/FastImageItem.cpp": {
+    "mtime": 1782076146.983319,
+    "ast_hash": "5d93875c0635377d958632be730aa514",
+    "semantic_hash": ""
+  },
+  "test_scrollbench/src/FastImageItem.h": {
+    "mtime": 1782076144.9568777,
+    "ast_hash": "7bea0ef4231d0c876355c28b2840d8a7",
+    "semantic_hash": ""
+  },
+  "docs/20260622 1210.JPG": {
+    "mtime": 1782072667.6914682,
+    "ast_hash": "a74cbc41f1bdc41b567f091b4389b80c",
+    "semantic_hash": ""
+  },
+  "docs/20260622 1213.JPG": {
+    "mtime": 1782072801.3854563,
+    "ast_hash": "84e6bca12ad9604a0402d723076b52ea",
     "semantic_hash": ""
   }
 }

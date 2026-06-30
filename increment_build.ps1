@@ -53,6 +53,8 @@ namespace BuildInfo {
 
 $headerPath = "$PSScriptRoot\src\BuildInfo.h"
 $headerContent | Out-File -FilePath $headerPath -Encoding UTF8
+$headerPathLegacy = "$PSScriptRoot\src_legacy\BuildInfo.h"
+$headerContent | Out-File -FilePath $headerPathLegacy -Encoding UTF8
 
 # Generate BuildInfo.qml singleton
 $qmlContent = @"
@@ -73,8 +75,10 @@ QtObject {
 }
 "@
 
-$qmlPath = "$PSScriptRoot\resources\qml\BuildInfo.qml"
-$qmlContent | Out-File -FilePath $qmlPath -Encoding UTF8
+$qmlPathLegacy = "$PSScriptRoot\resources\qml_legacy\BuildInfo.qml"
+$qmlContent | Out-File -FilePath $qmlPathLegacy -Encoding UTF8
+$qmlPathScrollBench = "$PSScriptRoot\test_scrollbench\qml\BuildInfo.qml"
+$qmlContent | Out-File -FilePath $qmlPathScrollBench -Encoding UTF8
 
 Write-Host "Build Version: $versionString" -ForegroundColor Green
 Write-Host "Timestamp: $timestamp" -ForegroundColor Cyan

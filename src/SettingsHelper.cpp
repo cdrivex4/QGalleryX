@@ -3,6 +3,7 @@
 #include "HardwareAccelerationManager.h"
 #include "LogManager.h"
 #include "SystemMonitor.h"
+#include "FileCacheManager.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QProcess>
@@ -118,6 +119,21 @@ void SettingsHelper::setUseDiskCache(bool enable) {
   emit useDiskCacheChanged();
 }
 
+QString SettingsHelper::diskCachePath() const {
+  return FileCacheManager::instance().getDbPath();
+}
+
+int SettingsHelper::diskCacheDatabaseType() const {
+  return m_settings.value("diskCacheDatabaseType", 0).toInt();
+}
+
+void SettingsHelper::setDiskCacheDatabaseType(int type) {
+  if (diskCacheDatabaseType() == type)
+    return;
+  m_settings.setValue("diskCacheDatabaseType", type);
+  emit diskCacheDatabaseTypeChanged();
+}
+
 int SettingsHelper::videoAcceleration() const {
   return m_settings.value("videoAcceleration", 1)
       .toInt(); // Default to 1 (Auto) for GPU fallback chain
@@ -180,6 +196,10 @@ QVariantMap SettingsHelper::getCacheStats() {
 }
 
 void SettingsHelper::clearDiskCache() { AsyncImageProvider::clearDiskCache(); }
+
+QString SettingsHelper::getDiskCacheLocation() const {
+  return FileCacheManager::instance().getDbPath();
+}
 
 QString SettingsHelper::getGpuName(QObject *window) {
   if (SystemMonitor::instance()) {

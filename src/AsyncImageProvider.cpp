@@ -4,6 +4,7 @@
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
+#include "FileCacheManager.h"
 #include <QCryptographicHash>
 #include <QDateTime>
 #include <QDebug>
@@ -410,7 +411,8 @@ void AsyncImageProvider::setFrameScheduler(FrameBudgetScheduler *s) {
 
 AsyncImageResponse::~AsyncImageResponse() {
   if (m_tracker) {
-    m_tracker->response.store(nullptr);
+    QMutexLocker lock(&m_tracker->mutex);
+    m_tracker->response = nullptr;
   }
 }
 
@@ -424,6 +426,7 @@ AsyncImageResponse::AsyncImageResponse(const QString &id,
     QSettings settings("SamsungClone", "Gallery");
     int cacheSizeMB = settings.value("cacheSizeMB", 512).toInt();
     AsyncImageProvider::setCacheMaxCost(qBound(128, cacheSizeMB, 4096) * 1024);
+    FileCacheManager::instance().initialize();
     configured = true;
   }
 }
@@ -468,9 +471,9 @@ bool AsyncImageProvider::isRequestStillNeeded(const QString &coalesceKey) {
   if (!m_pendingResponses.contains(coalesceKey))
     return false;
   for (const auto &tracker : m_pendingResponses[coalesceKey]) {
-    if (tracker && tracker->response.load()) {
-      auto *resp = tracker->response.load();
-      if (resp && !resp->m_cancelled->load())
+    if (tracker) {
+      QMutexLocker tLocker(&tracker->mutex);
+      if (tracker->response && !tracker->response->m_cancelled->load())
         return true;
     }
   }
@@ -492,9 +495,9 @@ void AsyncImageProvider::deliverToPending(const QString &coalesceKey,
   }
 
   for (const auto &tracker : listeners) {
-    auto *resp = tracker->response.load(); // THREAD-SAFE LOAD
-    if (resp) {
-      QMetaObject::invokeMethod(resp, "handleDone", Qt::QueuedConnection,
+    QMutexLocker tLocker(&tracker->mutex);
+    if (tracker->response) {
+      QMetaObject::invokeMethod(tracker->response, "handleDone", Qt::QueuedConnection,
                                 Q_ARG(QImage, image), Q_ARG(int, duration));
     }
   }
@@ -725,12 +728,16 @@ void AsyncImageProvider::processStagedRequests() {
     bool isVideo = (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" || ext == "wmv");
     TaskScheduler::TaskCategory cat = isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
 
+    QString cKey = getCoalesceKey(req.id, req.requestedSize);
     TaskScheduler::instance().addTask(
-        [req, guard]() {
-          guard->executed.store(true);
-          AsyncImageProvider::processImageTask(req.id, req.requestedSize,
-                                               req.cancelled, req.tracker);
-        },
+        TaskScheduler::Task(
+          [req, guard]() {
+            guard->executed.store(true);
+            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                 req.cancelled, req.tracker);
+          },
+          [cKey]() { return isRequestStillNeeded(cKey); }
+        ),
         targetPool, TaskScheduler::Immediate, cat);
   }
 
@@ -743,12 +750,16 @@ void AsyncImageProvider::processStagedRequests() {
     bool isVideo = (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" || ext == "wmv");
     TaskScheduler::TaskCategory cat = isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
 
+    QString cKey = getCoalesceKey(req.id, req.requestedSize);
     TaskScheduler::instance().addTask(
-        [req, guard]() {
-          guard->executed.store(true);
-          AsyncImageProvider::processImageTask(req.id, req.requestedSize,
-                                               req.cancelled, req.tracker);
-        },
+        TaskScheduler::Task(
+          [req, guard]() {
+            guard->executed.store(true);
+            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                 req.cancelled, req.tracker);
+          },
+          [cKey]() { return isRequestStillNeeded(cKey); }
+        ),
         targetPool, TaskScheduler::Normal, cat);
   }
 
@@ -807,6 +818,8 @@ void AsyncImageProvider::processImageTaskInternal(
     // Because requests are coalesced, the FIRST caller (c) might have been 
     // cancelled (scrolled off screen), but a NEW caller (scrolled back on screen) 
     // might be actively waiting for this exact coalesceKey!
+    // Note: The scheduler already checks this before admitting the task, but we 
+    // check it one last time just in case it was cancelled during lock acquisition.
     if (!isRequestStillNeeded(cKey))
       return true;
       
@@ -878,8 +891,8 @@ void AsyncImageProvider::processImageTaskInternal(
 
     // 1. Worker-side Disk Cache check (Optimized hit)
     if (s_useDiskCache && !id.startsWith("synthetic:")) {
-      QString dp = getDiskCachePath(id, requestedSize);
-      if (QFile::exists(dp)) {
+      QString dp = FileCacheManager::instance().getCachedPath(id, requestedSize);
+      if (!dp.isEmpty()) {
         if (image.load(dp)) {
           // Update RAM cache with consistent key
           insertCachedImage(id, image, requestedSize);
@@ -1066,7 +1079,10 @@ deliver:
   if (!image.isNull()) {
     insertCachedImage(id, image, requestedSize);
     if (s_useDiskCache && !id.startsWith("synthetic:")) {
-      image.save(getDiskCachePath(id, requestedSize), "JPG", 80);
+      QString dp = getDiskCachePath(id, requestedSize);
+      if (image.save(dp, "JPG", 80)) {
+        FileCacheManager::instance().registerCacheFile(id, requestedSize, dp, QFile(dp).size());
+      }
     }
   }
 
@@ -1140,10 +1156,5 @@ void AsyncImageProvider::clearCache() {
 }
 
 void AsyncImageProvider::clearDiskCache() {
-  QString cacheDir =
-      QStandardPaths::writableLocation(QStandardPaths::CacheLocation) +
-      "/thumbnails";
-  QDir dir(cacheDir);
-  if (dir.exists())
-    dir.removeRecursively();
+  FileCacheManager::instance().clearCache();
 }

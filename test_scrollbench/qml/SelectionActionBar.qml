@@ -14,7 +14,7 @@ Rectangle {
     
     // Model binding
     property var model: null
-    property int selectedCount: model ? model.selectedCount : 0
+    property int selectedCount: (model !== null && model.selectedCount !== undefined) ? model.selectedCount : 0
     
     // Animation properties
     Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }

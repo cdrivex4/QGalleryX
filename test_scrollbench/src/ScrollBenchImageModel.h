@@ -165,6 +165,7 @@ private:
   QVector<ImageItem> m_allItems; // Backup of all scanned items
   QVector<ImageItem> m_items;    // Currently visible (filtered) items
   QString m_filterQuery;
+  QString m_scanRoot;
   
   QSet<int> m_activelyRequesting;
   int m_visibleStartIndex = 0;

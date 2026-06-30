@@ -13,10 +13,13 @@
 #include <atomic>
 #include <memory>
 
+#include <QMutex>
+
 // Safe tracker to prevent background threads from using deleted response
 // objects
 struct ResponseTracker {
-  std::atomic<class AsyncImageResponse *> response;
+  class AsyncImageResponse *response;
+  QMutex mutex;
   explicit ResponseTracker(AsyncImageResponse *r) : response(r) {}
 };
 

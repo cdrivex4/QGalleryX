@@ -88,15 +88,26 @@ $InitialHashes = @{}
 foreach ($file in $CheckFiles) {
     if (Test-Path $file) {
         # Check for Lock
-        try {
-            $fileStream = [System.IO.File]::Open($file, 'Open', 'Read', 'None')
-            $fileStream.Close()
-            $fileStream.Dispose()
-        }
-        catch {
-            Write-Host "CRITICAL ERROR: File is LOCKED by another process: $file" -ForegroundColor Red
-            Write-Host "  Please close any applications using this file and try again." -ForegroundColor Yellow
-            exit 1
+        $locked = $true
+        $waitCount = 0
+        while ($locked) {
+            try {
+                $fileStream = [System.IO.File]::Open($file, 'Open', 'Read', 'None')
+                $fileStream.Close()
+                $fileStream.Dispose()
+                $locked = $false
+                if ($waitCount -gt 0) {
+                    Write-Host "  Lock released! Continuing..." -ForegroundColor Green
+                }
+            }
+            catch {
+                if ($waitCount -eq 0) {
+                    Write-Host "File is LOCKED by another process: $file" -ForegroundColor Red
+                    Write-Host "  Waiting for remote instances to be closed..." -ForegroundColor Yellow
+                }
+                Start-Sleep -Seconds 2
+                $waitCount++
+            }
         }
         
         # Record Hash

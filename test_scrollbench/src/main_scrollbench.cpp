@@ -80,9 +80,15 @@ int main(int argc, char *argv[]) {
   if (f)
     fclose(f);
 
+  QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+
+  qputenv("QT_QUICK_CONTROLS_MATERIAL_THEME", "Dark");
+  qputenv("QT_QUICK_CONTROLS_MATERIAL_ACCENT", "Blue");
+
   QGuiApplication app(argc, argv);
 
-  QQuickStyle::setStyle("Basic");
+  // Use Material style for better visual feedback on toggles/sliders
+  QQuickStyle::setStyle("Material");
   QQmlApplicationEngine engine;
 
   // Register types for QML

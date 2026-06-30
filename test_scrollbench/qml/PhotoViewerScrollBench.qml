@@ -630,8 +630,8 @@ Item {
                         // Folder Icon Button for "Path"
                         Button {
                             visible: modelData === "Path"
-                            text: "📂" // Folder icon
-                            Layout.preferredWidth: 40
+                            text: "Open"
+                            Layout.preferredWidth: 50
                             Layout.preferredHeight: 30
                             onClicked: {
                                 console.log("Opening in explorer: " + infoOverlay.meta[modelData])

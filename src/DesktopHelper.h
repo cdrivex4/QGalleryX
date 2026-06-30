@@ -16,6 +16,7 @@ public:
   Q_INVOKABLE int getFileType(const QString &path);
   Q_INVOKABLE void pauseBackgroundTasks();
   Q_INVOKABLE void resumeBackgroundTasks();
+  Q_INVOKABLE void requestRestart();
 
   // Static helper for C++ usage
   static FileType staticGetFileType(const QString &path);

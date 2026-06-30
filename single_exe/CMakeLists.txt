@@ -58,6 +58,7 @@ set(PORTABLE_SOURCES
     
     # Shared from main project
     ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
+    ../src/FileCacheManager.cpp ../src/FileCacheManager.h
     ../src/TaskScheduler.cpp ../src/TaskScheduler.h
     ../src/DesktopHelper.cpp ../src/DesktopHelper.h
     ../src/SystemMonitor.cpp ../src/SystemMonitor.h

@@ -258,7 +258,14 @@ Rectangle {
                         Slider {
                             Layout.fillWidth: true; from: 1; to: 32; stepSize: 1
                             value: settings.concurrentThreads
-                            onMoved: settings.concurrentThreads = Math.round(value)
+                            onMoved: {
+                                let oldVal = settings.concurrentThreads
+                                let newVal = Math.round(value)
+                                if (oldVal === newVal) return
+                                settings.concurrentThreads = newVal
+                                restartDialog.revertAction = function() { settings.concurrentThreads = oldVal }
+                                restartDialog.open()
+                            }
                         }
                     }
 
@@ -269,20 +276,25 @@ Rectangle {
                         Text { text: "Optimization Engine"; font.pixelSize: 14; font.bold: true; color: "#aaa" }
                         
                         RowLayout {
-                            Text { text: "Viewport Culling"; color: "#fff"; Layout.fillWidth: true }
+                            Text { text: "Viewport Culling: " + (imageModel.viewportCullingEnabled ? "ON" : "OFF"); color: imageModel.viewportCullingEnabled ? "#4CAF50" : "#fff"; font.bold: imageModel.viewportCullingEnabled; Layout.fillWidth: true }
                             Switch { checked: imageModel.viewportCullingEnabled; onToggled: imageModel.viewportCullingEnabled = checked }
                         }
                         
                         RowLayout {
-                            Text { text: "Use FastImage (Bypass GC)"; color: "#fff"; Layout.fillWidth: true }
-                            Switch { checked: settings.useFastImage; onToggled: settings.useFastImage = checked }
+                            Text { text: "Image Engine: " + (settings.useFastImage ? "FastImage (Bypass GC)" : "Standard Image"); color: settings.useFastImage ? "#4CAF50" : "#fff"; font.bold: settings.useFastImage; Layout.fillWidth: true }
+                            Switch { checked: settings.useFastImage; onToggled: {
+                                let oldVal = !checked
+                                settings.useFastImage = checked
+                                restartDialog.revertAction = function() { settings.useFastImage = oldVal }
+                                restartDialog.open()
+                            } }
                         }
                         
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 2
                             RowLayout {
-                                Text { text: "Frame Budget Scheduler"; color: "#fff"; Layout.fillWidth: true }
+                                Text { text: "Frame Budget Scheduler: " + (frameBudget.enabled ? "ON" : "OFF"); color: frameBudget.enabled ? "#4CAF50" : "#fff"; font.bold: frameBudget.enabled; Layout.fillWidth: true }
                                 Switch { checked: frameBudget.enabled; onToggled: frameBudget.enabled = checked }
                             }
                             Text { 
@@ -299,15 +311,63 @@ Rectangle {
                         }
 
                         RowLayout {
-                            Text { text: "RAW: Fast Preview"; color: "#fff"; Layout.fillWidth: true }
+                            Text { text: "RAW Preview: " + (settings.rawAcceleration ? "Fast" : "Standard"); color: settings.rawAcceleration ? "#4CAF50" : "#fff"; font.bold: settings.rawAcceleration; Layout.fillWidth: true }
                             Switch { checked: settings.rawAcceleration; onToggled: settings.rawAcceleration = checked }
                         }
                         RowLayout {
-                            Text { text: "Use Disk Cache"; color: "#fff"; Layout.fillWidth: true }
-                            Switch { checked: settings.useDiskCache; onToggled: settings.useDiskCache = checked }
+                            Text { text: "Disk Cache: " + (settings.useDiskCache ? "ON" : "OFF"); color: settings.useDiskCache ? "#4CAF50" : "#fff"; font.bold: settings.useDiskCache; Layout.fillWidth: true }
+                            Switch { checked: settings.useDiskCache; onToggled: {
+                                let oldVal = !checked
+                                settings.useDiskCache = checked
+                                restartDialog.revertAction = function() { settings.useDiskCache = oldVal }
+                                restartDialog.open()
+                            } }
+                        }
+                        Text {
+                            text: "Path: " + settings.diskCachePath
+                            font.pixelSize: 10
+                            color: "#888"
+                            Layout.fillWidth: true
+                            wrapMode: Text.Wrap
+                        }
+                        ComboBox {
+                            Layout.fillWidth: true
+                            model: ["Disk Cache: Native QHash", "Disk Cache: LMDB"]
+                            currentIndex: settings.diskCacheDatabaseType
+                            onActivated: (index) => {
+                                let oldVal = settings.diskCacheDatabaseType
+                                if (oldVal === index) return
+                                settings.diskCacheDatabaseType = index
+                                restartDialog.revertAction = function() { settings.diskCacheDatabaseType = oldVal }
+                                restartDialog.open()
+                            }
+                        }
+                        Dialog {
+                            id: restartDialog
+                            title: "Restart Required"
+                            modal: true
+                            standardButtons: Dialog.Ok | Dialog.Cancel
+                            anchors.centerIn: parent
+                            
+                            property var revertAction: null
+                            Text {
+                                text: "These changes require an application restart.\nRestart now?"
+                                color: "#fff"
+                            }
+    
+                            onAccepted: {
+                                desktopHelper.requestRestart()
+                            }
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            text: "Location: " + settings.getDiskCacheLocation()
+                            color: "#888"
+                            font.pixelSize: 10
+                            wrapMode: Text.WrapAnywhere
                         }
                         RowLayout {
-                            Text { text: "Show Diagnostics Overlay"; color: "#fff"; Layout.fillWidth: true }
+                            Text { text: "Show Diagnostics Overlay: " + (settings.showDiagnostics ? "ON" : "OFF"); color: settings.showDiagnostics ? "#4CAF50" : "#fff"; font.bold: settings.showDiagnostics; Layout.fillWidth: true }
                             Switch { checked: settings.showDiagnostics; onToggled: settings.showDiagnostics = checked }
                         }
                         

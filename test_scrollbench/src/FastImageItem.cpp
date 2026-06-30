@@ -99,12 +99,17 @@ QSGNode *FastImageItem::updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *)
   QSGSimpleTextureNode *node = static_cast<QSGSimpleTextureNode *>(oldNode);
 
   if (m_image.isNull()) {
-    delete node;
+    if (m_texture && oldNode == nullptr) {
+        delete m_texture;
+    }
+    delete oldNode; // QSGNode destructor will delete the texture if setOwnsTexture(true)
+    m_texture = nullptr;
     return nullptr;
   }
 
   if (!node) {
     node = new QSGSimpleTextureNode();
+    node->setOwnsTexture(true); // Delegate VRAM cleanup to the SceneGraph if item is destroyed
   }
 
   if (m_dirtyTexture) {

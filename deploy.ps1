@@ -20,7 +20,7 @@ Copy-Item "$BUILD_DIR/appSamsungGallery.exe" -Destination $DIST_DIR
 
 # 3. Run windeployqt
 Write-Host "Running windeployqt..."
-& $WINDEPLOYQT --qmldir "resources/qml" --dir $DIST_DIR "$DIST_DIR/appSamsungGallery.exe" --release --no-translations --compiler-runtime
+& $WINDEPLOYQT --qmldir "resources/qml_legacy" --dir $DIST_DIR "$DIST_DIR/appSamsungGallery.exe" --release --no-translations --compiler-runtime
 
 # 4. Copy FFmpeg DLLs
 Write-Host "Copying FFmpeg DLLs..."

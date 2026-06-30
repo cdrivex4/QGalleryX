@@ -27,7 +27,17 @@ public:
   void pause();
   void resume();
 
-  using Task = std::function<void()>;
+  struct Task {
+      std::function<void()> run;
+      std::function<bool()> isNeeded;
+      Task() = default;
+      template <typename Callable>
+      Task(Callable r) : run(std::move(r)), isNeeded(nullptr) {}
+      template <typename Callable1, typename Callable2>
+      Task(Callable1 r, Callable2 i) : run(std::move(r)), isNeeded(std::move(i)) {}
+      operator bool() const { return run != nullptr; }
+      void operator()() const { if (run) run(); }
+  };
   enum TaskType { CPU_BOUND, IO_BOUND };
   enum TaskCategory { ImageTask = 0, VideoTask = 1 };
   enum Priority { Immediate = 0, Normal = 1, Low = 2, Background = 3 };

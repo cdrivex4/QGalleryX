@@ -1,11 +1,11 @@
 # Graph Report - antigravity  (2026-06-22)
 
 ## Corpus Check
-- 400 files · ~787,683 words
+- 402 files · ~796,879 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3316 nodes · 5027 edges · 279 communities (244 shown, 35 thin omitted)
+- 3333 nodes · 5046 edges · 286 communities (250 shown, 36 thin omitted)
 - Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 455 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -208,6 +208,13 @@
 - [[_COMMUNITY_Community 276|Community 276]]
 - [[_COMMUNITY_Community 277|Community 277]]
 - [[_COMMUNITY_Community 278|Community 278]]
+- [[_COMMUNITY_Community 279|Community 279]]
+- [[_COMMUNITY_Community 280|Community 280]]
+- [[_COMMUNITY_Community 281|Community 281]]
+- [[_COMMUNITY_Community 282|Community 282]]
+- [[_COMMUNITY_Community 283|Community 283]]
+- [[_COMMUNITY_Community 284|Community 284]]
+- [[_COMMUNITY_Community 285|Community 285]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `libraw_data_t` - 52 edges
@@ -226,21 +233,21 @@
   test_scrollbench/src/FrameBudgetScheduler.cpp → src/TaskScheduler.cpp
 - `sony_arw2_load_raw()` --calls--> `checkCancel()`  [INFERRED]
   3rdparty/LibRaw/src/decoders/decoders_dcraw.cpp → 3rdparty/LibRaw/src/utils/utils_libraw.cpp
+- `hasselblad_full_load_raw()` --calls--> `read_shorts()`  [INFERRED]
+  3rdparty/LibRaw/src/decoders/decoders_libraw.cpp → 3rdparty/LibRaw/src/utils/read_utils.cpp
 - `nikon_load_padded_packed_raw()` --calls--> `checkCancel()`  [INFERRED]
   3rdparty/LibRaw/src/decoders/decoders_libraw.cpp → 3rdparty/LibRaw/src/utils/utils_libraw.cpp
-- `nikon_load_sraw()` --calls--> `checkCancel()`  [INFERRED]
-  3rdparty/LibRaw/src/decoders/decoders_libraw.cpp → 3rdparty/LibRaw/src/utils/utils_libraw.cpp
-- `phase_one_correct()` --calls--> `cubic_spline()`  [INFERRED]
-  3rdparty/LibRaw/src/decoders/load_mfbacks.cpp → 3rdparty/LibRaw/src/utils/curves.cpp
+- `unpacked_load_raw_fuji_f700s20()` --calls--> `read_shorts()`  [INFERRED]
+  3rdparty/LibRaw/src/decoders/decoders_libraw.cpp → 3rdparty/LibRaw/src/utils/read_utils.cpp
 
 ## Import Cycles
 - None detected.
 
-## Communities (279 total, 35 thin omitted)
+## Communities (286 total, 36 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.06
-Nodes (104): LibRaw_abstract_datastream, uchar, bit_state_t, camf_entry_t, matrix_type_t, utf16_t, x3f_camf_t, x3f_directory_entry_t (+96 more)
+Nodes (105): LibRaw_abstract_datastream, uchar, bit_state_t, camf_entry_t, matrix_type_t, utf16_t, x3f_camf_t, x3f_directory_entry_t (+97 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.06
@@ -255,12 +262,12 @@ Cohesion: 0.06
 Nodes (46): LibRaw, ushort, AAHD, channel_maximum, channel_minimum, channels_max, combine_image, evaluate_ahd (+38 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.17
-Nodes (10): INT64, decode_S_type(), iiq_bitstream_t, curr, input, used, p1_row_info_t, offset (+2 more)
+Cohesion: 0.09
+Nodes (25): INT64, ushort, decode_S_type(), fuji_14bit_load_raw(), hasselblad_full_load_raw(), iiq_bitstream_t, curr, input (+17 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.07
-Nodes (45): class, class, class, class, class, class, INT64, uchar (+37 more)
+Cohesion: 0.26
+Nodes (22): INT64, uchar, ushort, bcd2dec(), my_roundf(), parseSonyLensFeatures(), parseSonyLensType2(), parseSonyMakernotes() (+14 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.11
@@ -288,18 +295,18 @@ Nodes (22): INT64, LibRaw_abstract_datastream, uchar, ushort, libraw_custom_came
 
 ### Community 12 - "Community 12"
 Cohesion: 0.13
-Nodes (32): uchar, ushort, canon_has_lowbits(), canon_load_raw(), canon_sraw_load_raw(), crw_init_tables(), getbithuff(), ljpeg_diff() (+24 more)
+Nodes (33): uchar, ushort, canon_has_lowbits(), canon_load_raw(), canon_sraw_load_raw(), crw_init_tables(), getbithuff(), ljpeg_diff() (+25 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.22
-Nodes (15): INT64, uchar, ushort, convertFloatToInt(), DecodeDeltaBytes(), DecodeFPDelta(), deflate_dng_load_raw(), __DNG_FP24ToFloat() (+7 more)
+Cohesion: 0.08
+Nodes (34): INT64, LibRaw_abstract_datastream, uchar, ushort, vector, convertFloatToInt(), DecodeDeltaBytes(), DecodeFPDelta() (+26 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.09
 Nodes (28): Priority, function, QObject, checkFrameBoundary(), FrameBudgetScheduler(), onTaskCompleted(), setEnabled(), setPaused() (+20 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.09
+Cohesion: 0.08
 Nodes (32): cacheSizeMB(), concurrentThreads(), QObject, QString, QVariantMap, getCacheStats(), getGpuName(), graphicsApi() (+24 more)
 
 ### Community 16 - "Community 16"
@@ -307,20 +314,20 @@ Cohesion: 0.10
 Nodes (28): INT64, LibRaw_abstract_datastream, wchar_t, boolean, HANDLE, j_decompress_ptr, f_init_source(), fillBufferAt() (+20 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.14
-Nodes (12): averageFps(), logStats(), recordCacheHit(), recordCacheMiss(), recordFrame(), startBenchmarking(), stopBenchmarking(), updateCacheHitRate() (+4 more)
+Cohesion: 0.17
+Nodes (11): averageFps(), logStats(), recordCacheHit(), recordCacheMiss(), recordFrame(), reportLoadTime(), stopBenchmarking(), updateCacheHitRate() (+3 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.15
-Nodes (17): HassyRawFormat_idx2HR(), parseHassyModel(), process_Hassy_Lens(), simplify_make_model(), find_green(), remove_caseSubstr(), remove_trailing_spaces(), removeExcessiveSpaces() (+9 more)
+Cohesion: 0.26
+Nodes (11): HassyRawFormat_idx2HR(), parseHassyModel(), process_Hassy_Lens(), simplify_make_model(), remove_caseSubstr(), remove_trailing_spaces(), removeExcessiveSpaces(), trimSpaces() (+3 more)
 
 ### Community 19 - "Community 19"
 Cohesion: 0.14
 Nodes (30): DWORD, _BitScanReverse(), CrxBandParam, bitStream, curLine, kParam, lineBuf0, lineBuf1 (+22 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.11
-Nodes (21): border_interpolate(), lin_interpolate(), lin_interpolate_loop(), ppg_interpolate(), pre_interpolate(), vng_interpolate(), xtrans_interpolate(), stretch() (+13 more)
+Cohesion: 0.12
+Nodes (19): border_interpolate(), lin_interpolate(), lin_interpolate_loop(), ppg_interpolate(), pre_interpolate(), vng_interpolate(), xtrans_interpolate(), stretch() (+11 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.10
@@ -331,16 +338,16 @@ Cohesion: 0.10
 Nodes (9): av_always_inline, av_mod_uintp2_c(), av_sat_add32_c(), av_sat_add64_c(), av_sat_dadd32_c(), av_sat_dsub32_c(), av_sat_sub32_c(), av_sat_sub64_c() (+1 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.15
-Nodes (22): ushort, nikon_coolscan_load_raw(), hasselblad_full_load_raw(), sony_arq_load_raw(), unpacked_load_raw_fuji_f700s20(), abs32(), constain32(), imacon_full_load_raw() (+14 more)
+Cohesion: 0.18
+Nodes (20): ushort, unpacked_load_raw(), abs32(), constain32(), imacon_full_load_raw(), leaf_hdr_load_raw(), max32(), min32() (+12 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.15
-Nodes (18): INT64, INT64, INT64, ushort, INT64, setCanonBodyFeatures(), parseEpsonMakernote(), parseFujiMakernotes() (+10 more)
+Cohesion: 0.25
+Nodes (18): INT64, INT64, INT64, INT64, setCanonBodyFeatures(), parseCR3(), parseEpsonMakernote(), parse_exif() (+10 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.14
-Nodes (25): INT64, INT64, identify(), identify_finetune_by_filesize(), identify_finetune_dcr(), identify_finetune_pentax(), setMakeFromIndex(), guess_byte_order() (+17 more)
+Cohesion: 0.13
+Nodes (26): INT64, INT64, identify(), identify_finetune_by_filesize(), identify_finetune_dcr(), identify_finetune_pentax(), setMakeFromIndex(), find_green() (+18 more)
 
 ### Community 26 - "Community 26"
 Cohesion: 0.11
@@ -367,8 +374,8 @@ Cohesion: 0.09
 Nodes (22): INT64, uchar, crxParseImageHeader(), CrxSubband, bandBuf, bandParam, bandSize, colEndAddOn (+14 more)
 
 ### Community 32 - "Community 32"
-Cohesion: 0.20
-Nodes (17): INT64, libraw_area_t, uchar, INT64, INT64, parseCR3(), parseCR3_CTMD(), parseCR3_Free() (+9 more)
+Cohesion: 0.28
+Nodes (8): INT64, libraw_area_t, uchar, parseCR3_CTMD(), parseCR3_Free(), selectCRXFrame(), selectCRXTrack(), sget_CanonArea()
 
 ### Community 33 - "Community 33"
 Cohesion: 0.10
@@ -383,8 +390,8 @@ Cohesion: 0.10
 Nodes (11): qint64, cropImage(), getActiveDirectories(), getSelectedPaths(), getSelectedTotalSizeBytes(), rotateImage(), rotateSelected(), setFrameScheduler() (+3 more)
 
 ### Community 36 - "Community 36"
-Cohesion: 0.13
-Nodes (21): QVariantList, QByteArray, QHash, QModelIndex, QObject, QString, QVariant, QVector (+13 more)
+Cohesion: 0.16
+Nodes (18): QVariantList, QModelIndex, QObject, QString, QVariant, QVector, data(), getLabelForProxyIndex() (+10 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.17
@@ -403,28 +410,28 @@ Cohesion: 0.23
 Nodes (18): crxConvertPlaneLine(), crxConvertPlaneLineDf(), crxDecodeLineWithIQuantization(), crxDecodePlane(), crxFreeImageData(), crxFreeSubbandData(), crxIdwt53FilterDecode(), crxIdwt53FilterGetLine() (+10 more)
 
 ### Community 42 - "Community 42"
-Cohesion: 0.13
-Nodes (21): j_common_ptr, INT64, eight_bit_load_raw(), packed_load_raw(), unpacked_load_raw(), jpegErrorExit_k(), kodak_65000_decode(), kodak_65000_load_raw() (+13 more)
+Cohesion: 0.25
+Nodes (14): j_common_ptr, jpegErrorExit_k(), kodak_65000_decode(), kodak_65000_load_raw(), kodak_c330_load_raw(), kodak_c603_load_raw(), kodak_dc120_load_raw(), kodak_jpeg_load_raw() (+6 more)
 
 ### Community 43 - "Community 43"
 Cohesion: 0.19
 Nodes (3): av_always_inline, AVIAMFParamDefinition, av_iamf_param_definition_get_subblock()
 
 ### Community 44 - "Community 44"
-Cohesion: 0.18
-Nodes (15): ushort, vector, is_floating_point(), unpack(), dng_ifd, dng_info, dng_stream, clear_dng_image() (+7 more)
+Cohesion: 0.22
+Nodes (13): ushort, vector, is_floating_point(), unpack(), dng_ifd, dng_info, dng_stream, search_for_ifd() (+5 more)
 
 ### Community 45 - "Community 45"
 Cohesion: 0.15
 Nodes (12): main(), MatrixRunner, m_targetFolder, TestScenario, diskCache, name, rawAcc, threads (+4 more)
 
 ### Community 46 - "Community 46"
-Cohesion: 0.17
-Nodes (12): clear_camera_metadata(), clear_rawspeed_decoder(), fix_after_rawspeed(), make_camera_metadata(), try_rawspeed(), libraw_gps_info_t, RawDecoder, cleargps() (+4 more)
+Cohesion: 0.27
+Nodes (9): clear_dng_image(), clear_dng_negative(), clear_camera_metadata(), make_camera_metadata(), libraw_gps_info_t, cleargps(), LibRaw(), recycle() (+1 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.38
-Nodes (12): DllDef, decodefile(), rawspeed3_clearresult(), rawspeed3_close(), rawspeed3_decodefile(), rawspeed3_init(), rawspeed3_initdefault(), rawspeed3_release() (+4 more)
+Cohesion: 0.29
+Nodes (14): DllDef, vector, decodefile(), rawspeed3_clearresult(), rawspeed3_close(), rawspeed3_decodefile(), rawspeed3_init(), rawspeed3_initdefault() (+6 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.35
@@ -459,8 +466,8 @@ Cohesion: 0.22
 Nodes (14): AVBufferRef, AVPixelFormat, cleanup(), HWAccel, QObject, QString, HardwareAccelerationManager(), cpuInfo() (+6 more)
 
 ### Community 57 - "Community 57"
-Cohesion: 0.22
-Nodes (12): sony_load_raw(), android_loose_load_raw(), android_tight_load_raw(), broadcom_load_raw(), rpi_load_raw12(), rpi_load_raw14(), rpi_load_raw16(), rpi_load_raw8() (+4 more)
+Cohesion: 0.21
+Nodes (12): android_loose_load_raw(), android_tight_load_raw(), broadcom_load_raw(), nikon_coolscan_load_raw(), rpi_load_raw12(), rpi_load_raw14(), rpi_load_raw16(), rpi_load_raw8() (+4 more)
 
 ### Community 58 - "Community 58"
 Cohesion: 0.24
@@ -503,8 +510,8 @@ Cohesion: 0.15
 Nodes (9): LibRaw, LibRaw, main(), main(), process_once(), main(), main(), libraw_strerror() (+1 more)
 
 ### Community 70 - "Community 70"
-Cohesion: 0.25
-Nodes (8): j_common_ptr, jpegErrorExit(), jpegErrorManager, pub, setjmp_buffer, unpack_thumb(), unpack_thumb_ex(), jmp_buf
+Cohesion: 0.15
+Nodes (11): j_common_ptr, INT64, jpegErrorExit(), jpegErrorManager, pub, setjmp_buffer, unpack_thumb(), unpack_thumb_ex() (+3 more)
 
 ### Community 71 - "Community 71"
 Cohesion: 0.53
@@ -539,8 +546,8 @@ Cohesion: 0.25
 Nodes (3): libraw_processed_image_t, dcraw_make_mem_image(), dcraw_make_mem_thumb()
 
 ### Community 81 - "Community 81"
-Cohesion: 0.17
-Nodes (11): CameraMetaData, CameraMetaDataLR, RawParser, CameraMetaDataFromMem, rawspeed3_handle_data, cameraMeta, decodefile, rawDecoder (+3 more)
+Cohesion: 0.13
+Nodes (15): CameraMetaData, CameraMetaDataLR, clear_rawspeed_decoder(), fix_after_rawspeed(), try_rawspeed(), RawDecoder, RawParser, CameraMetaDataFromMem (+7 more)
 
 ### Community 82 - "Community 82"
 Cohesion: 0.46
@@ -551,8 +558,8 @@ Cohesion: 0.43
 Nodes (7): ushort, gamma_curve(), main(), tiff_head(), tiff_set(), write_ppm(), write_tiff()
 
 ### Community 84 - "Community 84"
-Cohesion: 0.10
-Nodes (10): INT64, INT64, LibRaw_internal_thumbnail_formats, parse_minolta(), ifd_size_t, databits, ifdi, jhead (+2 more)
+Cohesion: 0.17
+Nodes (7): INT64, LibRaw_internal_thumbnail_formats, ifd_size_t, databits, ifdi, jhead, tiff2thumbformat()
 
 ### Community 85 - "Community 85"
 Cohesion: 0.50
@@ -647,8 +654,8 @@ Cohesion: 0.05
 Nodes (43): 1. RAII (Resource Acquisition Is Initialization), 2. Modular Design & Separation of Concerns, 3. Code Reusability & Library Wrapping, 4. Memory Safety, 5. Thread Safety & Concurrency, 6. Clean Room Code & Documentation, 🏗️ Architectural Patterns, Asynchronous Processing Pipeline (+35 more)
 
 ### Community 120 - "Community 120"
-Cohesion: 0.14
-Nodes (13): vector, tile_stripe_data_t, init, maxBytesInTile, striped, tBytes, tileCnt, tiled (+5 more)
+Cohesion: 0.10
+Nodes (13): INT64, INT64, parse_minolta(), parseSamsungMakernotes(), convert_to_rgb(), adobe_coeff(), simple_coeff(), aRGB_coeff() (+5 more)
 
 ### Community 122 - "Community 122"
 Cohesion: 0.67
@@ -695,8 +702,8 @@ Cohesion: 0.06
 Nodes (32): 3rdparty Setup (Crucial!), Additional Dependencies, Automatic Deployment, Build Artifacts, Build Configuration, Build Instructions, Build Issues and Known Problems, Build Optimization (+24 more)
 
 ### Community 225 - "Community 225"
-Cohesion: 0.08
-Nodes (26): ushort, fuji_14bit_load_raw(), nikon_14bit_load_raw(), nikon_load_padded_packed_raw(), nikon_load_sraw(), nikon_load_striped_packed_raw(), pana_cs6_page_decoder, buffer (+18 more)
+Cohesion: 0.17
+Nodes (10): pana_cs6_page_decoder, buffer, current, lastoffset, maxoffset, pixelbuffer, read_page, read_page12 (+2 more)
 
 ### Community 226 - "Community 226"
 Cohesion: 0.07
@@ -744,7 +751,7 @@ Nodes (20): Architecture, Baseline Test (No Optimizations), Both Optimizations, 
 
 ### Community 237 - "Community 237"
 Cohesion: 0.10
-Nodes (19): Build Warnings, DNG Proprietary Compression Support ⏸️ DEFERRED, Format Support Expansion, Global Text-Based Filtering, 🔴 High Priority, 🐛 Known Issues, 🟢 Low Priority / Future Enhancements, Media Loading & Type Detection (Dec 25, 2024) (+11 more)
+Nodes (20): Build Warnings, DNG Proprietary Compression Support ⏸️ DEFERRED, Format Support Expansion, Global Text-Based Filtering, 🔴 High Priority, 🐛 Known Issues, 🟢 Low Priority / Future Enhancements, Media Loading & Type Detection (Dec 25, 2024) (+12 more)
 
 ### Community 238 - "Community 238"
 Cohesion: 0.11
@@ -867,13 +874,37 @@ Cohesion: 0.50
 Nodes (3): QQuickImageResponse, class, QQuickAsyncImageProvider()
 
 ### Community 277 - "Community 277"
-Cohesion: 0.40
-Nodes (6): LibRaw_abstract_datastream, init(), static_get4(), libraw_image_sizes_t, tiff_ifd_t, unpacker_data_t
+Cohesion: 0.15
+Nodes (11): QQuickItem, QSGNode, setSource(), setSourceSize(), updatePaintNode(), QSize, QString, FastImageItem() (+3 more)
+
+### Community 278 - "Community 278"
+Cohesion: 0.27
+Nodes (10): class, buffer_t(), buffering_off(), buffering_on(), get_char(), is_buffered(), LibRaw_abstract_datastream(), libraw_dng_stream() (+2 more)
+
+### Community 279 - "Community 279"
+Cohesion: 0.19
+Nodes (7): class, class, class, LibRaw_constants(), LibRaw_TLS(), LibRaw(), libraw_static_table_t()
+
+### Community 280 - "Community 280"
+Cohesion: 0.36
+Nodes (6): class, calloc(), cleanup(), free(), libraw_memmgr(), malloc()
+
+### Community 281 - "Community 281"
+Cohesion: 0.36
+Nodes (6): INT64, ushort, parsePentaxMakernotes(), parseRicohMakernotes(), PentaxISO(), setPentaxBodyFeatures()
+
+### Community 282 - "Community 282"
+Cohesion: 0.50
+Nodes (4): read_page12(), tag2wb_t, tag, wb
+
+### Community 284 - "Community 284"
+Cohesion: 0.67
+Nodes (3): QByteArray, QHash, roleNames()
 
 ## Knowledge Gaps
-- **1173 isolated node(s):** `release`, `decodefile`, `unique_ptr`, `cameraMeta`, `rawParser` (+1168 more)
+- **1179 isolated node(s):** `release`, `decodefile`, `unique_ptr`, `cameraMeta`, `rawParser` (+1174 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -887,8 +918,8 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 43 inferred relationships involving `derror()` (e.g. with `canon_600_load_raw()` and `crxLoadDecodeLoop()`) actually correct?**
   _`derror()` has 43 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `release`, `decodefile`, `unique_ptr` to the rest of the system?**
-  _1173 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1179 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.05589843061188503 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05520941502249913 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.05672926447574335 - nodes in this community are weakly interconnected._
