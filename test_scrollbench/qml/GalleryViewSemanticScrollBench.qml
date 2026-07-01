@@ -26,7 +26,20 @@ Item {
     property bool groupingAuto: true
     
     readonly property real gridSize: settings.gridSize
-    readonly property int loadingResolution: settings.thumbnailSize
+    // DEBOUNCED loading resolution — propagates to delegates only 400ms
+    // after the slider stops, preventing a flood of 500+ simultaneous
+    // re-requests that crash the thread pool.
+    property int loadingResolution: settings.thumbnailSize
+    Timer {
+        id: resolutionDebounce
+        interval: 400
+        repeat: false
+        onTriggered: semanticRoot.loadingResolution = settings.thumbnailSize
+    }
+    Connections {
+        target: settings
+        function onThumbnailSizeChanged() { resolutionDebounce.restart() }
+    }
     readonly property alias proxyModel: proxyModel
 
     function findChildListView() { return list }
@@ -225,7 +238,7 @@ Item {
                                 var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
                                 return path ? "image://async/" + path : ""
                             }
-                            sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                            sourceSize: Qt.size(semanticRoot.loadingResolution, semanticRoot.loadingResolution)
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
                             cache: true

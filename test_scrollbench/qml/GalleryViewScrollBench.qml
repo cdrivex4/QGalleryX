@@ -27,8 +27,24 @@ Item {
     readonly property real uiThumbnailSize: settings.gridSize
     
     // Loading Resolution (Quality/Performance setting)
-    readonly property int loadingResolution: settings.thumbnailSize
+    // IMPORTANT: This is DEBOUNCED to prevent the slider from blasting
+    // hundreds of simultaneous re-requests into the thread pool.
+    // It only propagates to delegates 400ms after the value settles.
+    property int loadingResolution: settings.thumbnailSize
     
+    Timer {
+        id: resolutionDebounce
+        interval: 400
+        repeat: false
+        onTriggered: root.loadingResolution = settings.thumbnailSize
+    }
+    Connections {
+        target: settings
+        function onThumbnailSizeChanged() {
+            resolutionDebounce.restart()
+        }
+    }
+
     // Timer to debounce viewport updates
     Timer {
         id: updateTimer
