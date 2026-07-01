@@ -450,9 +450,12 @@ void AsyncImageResponse::handleDone(QImage image, int duration) {
 
   m_workDuration = duration;
 
-  auto finishTask = [this, image]() {
-    m_image = image;
-    emit finished();
+  QPointer<AsyncImageResponse> self(this);
+  auto finishTask = [self, image]() {
+    if (!self) return;
+    if (self->m_cancelled->load()) return;
+    self->m_image = image;
+    emit self->finished();
   };
 
   if (AsyncImageProvider::s_frameScheduler) {

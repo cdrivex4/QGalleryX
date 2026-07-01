@@ -62,8 +62,8 @@ void FastImageItem::setSource(const QString &source) {
   m_response = static_cast<AsyncImageResponse *>(provider.requestImageResponse(id, m_sourceSize));
   
   // Direct connection ensures immediate handling without event loop delays
-  connect(m_response, &QQuickImageResponse::finished, this, [this]() {
-    if (m_response) {
+  connect(m_response, &QQuickImageResponse::finished, this, [this, response = m_response]() {
+    if (m_response == response) {
         // We modified AsyncImageResponse to expose m_image
         m_image = m_response->m_image;
         m_dirtyTexture = true;

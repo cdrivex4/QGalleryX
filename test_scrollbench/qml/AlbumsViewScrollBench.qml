@@ -9,6 +9,19 @@ Item {
     
     property var model: albumModel
     
+    // DEBOUNCED loading resolution
+    property int loadingResolution: settings.thumbnailSize
+    Timer {
+        id: resolutionDebounce
+        interval: 400
+        repeat: false
+        onTriggered: root.loadingResolution = settings.thumbnailSize
+    }
+    Connections {
+        target: settings
+        function onThumbnailSizeChanged() { resolutionDebounce.restart() }
+    }
+
     StackView {
         id: stack
         anchors.fill: parent
@@ -57,7 +70,7 @@ Item {
                                 anchors.fill: parent
                                 visible: coverPath && coverPath.length === 1
                                 source: (visible && coverPath.length > 0) ? "image://async/" + coverPath[0] : ""
-                                sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
                                 asynchronous: true
                                 fillMode: Image.PreserveAspectCrop
                             }
@@ -74,7 +87,7 @@ Item {
                                         width: coverContainer.width / 2
                                         height: coverContainer.height / 2
                                         source: "image://async/" + modelData
-                                        sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                                        sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
                                         asynchronous: true
                                         fillMode: Image.PreserveAspectCrop
                                     }
