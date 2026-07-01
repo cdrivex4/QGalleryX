@@ -3,415 +3,865 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Feature & Verification Tracker</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Gallery Dev — Verification Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d0e12;
-            --card-bg: rgba(22, 24, 30, 0.7);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --text-color: #e2e8f0;
-            --text-muted: #94a3b8;
+            --bg: #0a0b0f;
+            --surface: #111218;
+            --card: rgba(20, 22, 30, 0.85);
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(59,130,246,0.35);
+            --text: #e2e8f0;
+            --muted: #6b7280;
             --primary: #3b82f6;
             --success: #10b981;
+            --warn: #f59e0b;
             --danger: #ef4444;
-            --accent: #8b5cf6;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-            background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 400px),
-                              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.05), transparent 400px);
-            background-attachment: fixed;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0 0 6rem;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+        /* ─────── STICKY NAV ─────── */
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10, 11, 15, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
+        .nav-brand { font-weight: 700; font-size: 1.1rem; color: #fff; white-space: nowrap; }
+        .nav-brand span { color: var(--primary); }
+        .nav-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; flex: 1; }
+        .pill {
+            padding: 0.3rem 0.85rem; border-radius: 999px; font-size: 0.8rem;
+            font-weight: 600; cursor: pointer; border: 1px solid var(--border);
+            background: transparent; color: var(--muted); transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .pill.active, .pill:hover { background: rgba(59,130,246,0.15); border-color: var(--primary); color: #fff; }
+        .nav-actions { display: flex; gap: 0.5rem; margin-left: auto; }
+        .btn {
+            padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; border: none; transition: all 0.2s; white-space: nowrap;
+        }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: #2563eb; box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+        .btn-ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid var(--border); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+        .btn-success { background: var(--success); color: #fff; }
+        .btn-success:hover { background: #059669; }
 
-        header {
+        /* ─────── HEADER ─────── */
+        .header {
             text-align: center;
-            margin-bottom: 3rem;
+            padding: 3.5rem 2rem 2.5rem;
+            background: radial-gradient(ellipse at center top, rgba(59,130,246,0.06) 0%, transparent 60%);
         }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .header h1 {
+            font-size: 2.5rem; font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--purple) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
         }
+        .header p { color: var(--muted); font-size: 1rem; font-weight: 300; }
 
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 300;
+        /* ─────── SUMMARY BAR ─────── */
+        .summary-bar {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            padding: 0 2rem; margin-bottom: 2.5rem; justify-content: center;
         }
+        .stat-chip {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 0.6rem 1.1rem;
+            font-size: 0.9rem; font-weight: 500;
+            backdrop-filter: blur(8px);
+        }
+        .stat-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot-done { background: var(--success); box-shadow: 0 0 8px var(--success); }
+        .dot-fail { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+        .dot-pending { background: var(--muted); }
+        .stat-chip .num { font-weight: 700; font-size: 1.1rem; }
 
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+        /* ─────── CONTAINER ─────── */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* ─────── CATEGORY HEADER ─────── */
+        .category-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1rem; margin-top: 2.5rem;
+        }
+        .category-header:first-of-type { margin-top: 0; }
+        .cat-icon { font-size: 1.2rem; }
+        .cat-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
+        .cat-count {
+            font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem;
+            border-radius: 999px; background: rgba(255,255,255,0.07); color: var(--muted);
+            margin-left: auto;
+        }
+        .cat-divider { flex: 1; height: 1px; background: var(--border); }
+
+        /* ─────── FEATURE CARD ─────── */
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 0.85rem;
             backdrop-filter: blur(12px);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            overflow: hidden;
         }
+        .feature-card:hover { border-color: var(--border-hover); }
+        .feature-card.is-done { border-left: 3px solid var(--success); }
+        .feature-card.is-fail { border-left: 3px solid var(--danger); }
+        .feature-card.is-pending { border-left: 3px solid transparent; }
+        .feature-card.hidden { display: none; }
 
-        .card:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.05);
-            transform: translateY(-2px);
+        .card-head {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.2rem; cursor: pointer; user-select: none;
         }
-
-        .feature-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            gap: 1rem;
+        .card-head:hover .card-toggle-icon { color: var(--primary); }
+        .card-priority {
+            font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.5rem;
+            border-radius: 5px; text-transform: uppercase; letter-spacing: 0.05em;
+            white-space: nowrap;
         }
+        .priority-high { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+        .priority-med { background: rgba(245,158,11,0.15); color: var(--warn); border: 1px solid rgba(245,158,11,0.3); }
+        .priority-low { background: rgba(107,114,128,0.15); color: var(--muted); border: 1px solid rgba(107,114,128,0.3); }
+        .priority-bug { background: rgba(239,68,68,0.15); color: #f97316; border: 1px solid rgba(249,115,22,0.3); }
 
-        .feature-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #fff;
+        .card-title { font-weight: 600; font-size: 0.95rem; flex: 1; color: #fff; }
+        .card-status-badge {
+            font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 6px;
+            white-space: nowrap; transition: all 0.2s;
         }
+        .badge-done { background: rgba(16,185,129,0.15); color: var(--success); border: 1px solid rgba(16,185,129,0.3); }
+        .badge-fail { background: rgba(239,68,68,0.15); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+        .badge-pending { background: rgba(107,114,128,0.1); color: var(--muted); border: 1px solid var(--border); }
+        .card-toggle-icon { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s, color 0.2s; }
+        .card-toggle-icon.open { transform: rotate(180deg); }
 
-        .status-toggles {
-            display: flex;
-            gap: 0.5rem;
+        .card-body { padding: 0 1.2rem 1.2rem; display: none; }
+        .card-body.open { display: block; }
+
+        .card-desc { color: var(--muted); font-size: 0.88rem; margin-bottom: 1rem; font-weight: 300; line-height: 1.6; }
+
+        /* Docs link */
+        .docs-link {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            font-size: 0.8rem; color: var(--cyan); text-decoration: none; font-weight: 500;
+            padding: 0.25rem 0.6rem; border-radius: 6px;
+            background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2);
+            margin-bottom: 1rem; transition: all 0.2s;
         }
+        .docs-link:hover { background: rgba(6,182,212,0.15); }
 
+        /* Status toggles */
+        .status-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+        .status-row label { font-size: 0.8rem; color: var(--muted); font-weight: 500; margin-right: 0.25rem; }
         .toggle-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            transition: all 0.2s ease;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+            color: var(--muted); padding: 0.35rem 0.9rem; border-radius: 7px;
+            cursor: pointer; font-weight: 600; font-size: 0.82rem;
+            transition: all 0.15s;
         }
+        .toggle-btn:hover.btn-d { background: rgba(16,185,129,0.12); border-color: var(--success); color: var(--success); }
+        .toggle-btn:hover.btn-f { background: rgba(239,68,68,0.12); border-color: var(--danger); color: var(--danger); }
+        .toggle-btn:hover.btn-p { background: rgba(107,114,128,0.12); }
+        .toggle-btn.active-d { background: rgba(16,185,129,0.15); border-color: var(--success); color: var(--success); }
+        .toggle-btn.active-f { background: rgba(239,68,68,0.15); border-color: var(--danger); color: var(--danger); }
 
-        .toggle-btn.btn-done:hover, .toggle-btn.btn-done.active {
-            background: rgba(16, 185, 129, 0.15);
-            border-color: var(--success);
-            color: var(--success);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
-        }
-
-        .toggle-btn.btn-fail:hover, .toggle-btn.btn-fail.active {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: var(--danger);
-            color: var(--danger);
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
-        }
-
-        .feature-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-
+        /* Notes */
+        .notes-label { font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
         .notes-area {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-color);
-            padding: 0.75rem;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 80px;
-            margin-bottom: 1rem;
-            transition: border-color 0.2s ease;
+            width: 100%; background: rgba(0,0,0,0.25); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--text); padding: 0.65rem 0.85rem;
+            font-family: inherit; font-size: 0.88rem; resize: vertical; min-height: 70px;
+            margin-bottom: 1rem; transition: border-color 0.2s;
         }
+        .notes-area:focus { outline: none; border-color: var(--primary); }
 
-        .notes-area:focus {
-            outline: none;
-            border-color: var(--primary);
+        /* Screenshots */
+        .ss-zone {
+            border: 1.5px dashed var(--border); border-radius: 8px;
+            padding: 0.75rem 1rem; position: relative; cursor: pointer;
+            text-align: center; transition: border-color 0.2s;
         }
+        .ss-zone:hover { border-color: var(--primary); }
+        .ss-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+        .ss-zone-label { font-size: 0.82rem; color: var(--primary); font-weight: 500; pointer-events: none; }
+        .ss-previews { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+        .ss-thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
 
-        .screenshot-section {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-            position: relative;
+        /* ─────── ADD ITEM FORM ─────── */
+        .add-form {
+            background: var(--card); border: 1.5px dashed rgba(59,130,246,0.3);
+            border-radius: 14px; padding: 1.5rem; margin-top: 3rem;
+            backdrop-filter: blur(12px);
         }
-
-        .screenshot-input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
+        .add-form h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .form-grid.single { grid-template-columns: 1fr; }
+        .form-input, .form-select, .form-textarea {
+            background: rgba(0,0,0,0.25); border: 1px solid var(--border);
+            border-radius: 8px; color: var(--text); padding: 0.6rem 0.85rem;
+            font-family: inherit; font-size: 0.88rem; width: 100%; transition: border-color 0.2s;
         }
+        .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--primary); }
+        .form-select option { background: #1a1b24; }
+        .form-textarea { resize: vertical; min-height: 70px; }
+        .form-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; display: block; }
+        .form-field { display: flex; flex-direction: column; }
 
-        .screenshot-label {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            pointer-events: none;
+        /* ─────── DOCS PANEL ─────── */
+        .docs-panel {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.5rem; margin-top: 2rem;
+            backdrop-filter: blur(12px);
         }
-
-        .screenshot-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .docs-panel h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+        .docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; }
+        .doc-link {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.6rem 0.85rem;
+            font-size: 0.82rem; color: var(--text); text-decoration: none;
+            transition: all 0.2s; font-weight: 400;
         }
+        .doc-link:hover { background: rgba(59,130,246,0.1); border-color: var(--primary); color: #fff; }
+        .doc-icon { font-size: 0.9rem; }
 
-        .screenshot-preview {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .submit-section {
-            text-align: center;
-            margin-top: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #fff;
-            border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            transition: all 0.2s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Alert Toast */
+        /* ─────── TOAST ─────── */
         .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--success);
-            color: #fff;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateY(100px);
-            opacity: 0;
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: #1a2433; border: 1px solid var(--primary);
+            color: var(--text); padding: 0.85rem 1.5rem; border-radius: 10px;
+            font-weight: 500; font-size: 0.9rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transform: translateY(80px); opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
+            z-index: 9999; max-width: 300px;
         }
+        .toast.show { transform: translateY(0); opacity: 1; }
 
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
+        /* ─────── RESPONSIVE ─────── */
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .nav { padding: 0.75rem 1rem; }
+            .container { padding: 0 1rem; }
+            .summary-bar { padding: 0 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Feature Verification Dashboard</h1>
-            <p>Track testing, record validation details, and attach screenshots to sync back with the developer agent.</p>
-        </header>
 
-        <div id="features-container"></div>
+<nav class="nav">
+    <span class="nav-brand">Gallery <span>Dev</span> Tracker</span>
+    <div class="nav-pills" id="cat-pills"></div>
+    <div class="nav-actions">
+        <button class="btn btn-ghost" onclick="collapseAll()">Collapse All</button>
+        <button class="btn btn-success" onclick="exportReport()">⬇ Export Report</button>
+    </div>
+</nav>
 
-        <div class="submit-section">
-            <button class="submit-btn" onclick="exportData()">Submit & Generate Report</button>
+<div class="header">
+    <h1>Feature & Verification Tracker</h1>
+    <p>Track testing progress, attach screenshots, add notes — generate a full developer report when ready.</p>
+</div>
+
+<div class="summary-bar" id="summary-bar">
+    <div class="stat-chip"><span class="dot dot-done"></span><span class="num" id="count-done">0</span> Verified</div>
+    <div class="stat-chip"><span class="dot dot-fail"></span><span class="num" id="count-fail">0</span> Failed</div>
+    <div class="stat-chip"><span class="dot dot-pending"></span><span class="num" id="count-pending">0</span> Pending</div>
+    <div class="stat-chip"><span style="font-size:0.9rem">📋</span><span class="num" id="count-total">0</span> Total Items</div>
+</div>
+
+<div class="container">
+    <div id="features-container"></div>
+
+    <!-- ── ADD CUSTOM ITEM ── -->
+    <div class="add-form">
+        <h3>➕ Add Custom Item</h3>
+        <div class="form-grid">
+            <div class="form-field">
+                <label class="form-label">Title *</label>
+                <input class="form-input" id="add-title" placeholder="Feature or bug title" />
+            </div>
+            <div class="form-field">
+                <label class="form-label">Category</label>
+                <select class="form-select" id="add-category"></select>
+            </div>
         </div>
+        <div class="form-grid">
+            <div class="form-field">
+                <label class="form-label">Priority</label>
+                <select class="form-select" id="add-priority">
+                    <option value="high">🔴 High</option>
+                    <option value="med" selected>🟡 Medium</option>
+                    <option value="low">🟢 Low</option>
+                    <option value="bug">🐛 Bug</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label class="form-label">Linked Docs</label>
+                <input class="form-input" id="add-docs" placeholder="e.g. KNOWN_ISSUES.md" />
+            </div>
+        </div>
+        <div class="form-grid single">
+            <div class="form-field">
+                <label class="form-label">Description</label>
+                <textarea class="form-textarea" id="add-desc" placeholder="Describe what needs testing or fixing..."></textarea>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="addCustomItem()">Add Item</button>
     </div>
 
-    <div id="toast" class="toast">Report Saved! Placed in docs directory.</div>
+    <!-- ── DOCS PANEL ── -->
+    <div class="docs-panel">
+        <h3>📚 Project Documentation</h3>
+        <div class="docs-grid">
+            <a class="doc-link" href="FEATURES.md" target="_blank"><span class="doc-icon">📋</span> FEATURES.md</a>
+            <a class="doc-link" href="KNOWN_ISSUES.md" target="_blank"><span class="doc-icon">🐛</span> KNOWN_ISSUES.md</a>
+            <a class="doc-link" href="resume/OUTSTANDING_TASKS.md" target="_blank"><span class="doc-icon">✅</span> OUTSTANDING_TASKS.md</a>
+            <a class="doc-link" href="ARCHITECTURE.md" target="_blank"><span class="doc-icon">🏗</span> ARCHITECTURE.md</a>
+            <a class="doc-link" href="resume/SESSION_HISTORY.md" target="_blank"><span class="doc-icon">📅</span> SESSION_HISTORY.md</a>
+            <a class="doc-link" href="FORMAT_COMPATIBILITY.md" target="_blank"><span class="doc-icon">🎞</span> FORMAT_COMPATIBILITY.md</a>
+            <a class="doc-link" href="GPU_ACCELERATION_STATUS.md" target="_blank"><span class="doc-icon">⚡</span> GPU_ACCELERATION_STATUS.md</a>
+            <a class="doc-link" href="SYSTEM_ARCHITECTURE.md" target="_blank"><span class="doc-icon">🖧</span> SYSTEM_ARCHITECTURE.md</a>
+            <a class="doc-link" href="BUILD.md" target="_blank"><span class="doc-icon">🔨</span> BUILD.md</a>
+            <a class="doc-link" href="SCROLLBENCH_STRATEGY.md" target="_blank"><span class="doc-icon">📊</span> SCROLLBENCH_STRATEGY.md</a>
+        </div>
+    </div>
+</div>
 
-    <script>
-        const features = [
-            {
-                id: "settings_toggle",
-                title: "Settings Toggle & Dialog Cancel Behavior",
-                desc: "Switching a setting requiring restart prompts with a dialog. Cancelling the dialog reverts the switch to its previous setting state, and resets the Menu Tab/drawer focus."
-            },
-            {
-                id: "geometry_persistence",
-                title: "Window Size & Position Memory",
-                desc: "Window dimensions (width/height) and screen coordinates (x/y) are persisted across application restarts for both the main app and ScrollBench."
-            },
-            {
-                id: "folder_persistence",
-                title: "Scanned Folder Persistence",
-                desc: "ScrollBench successfully remembers the last scanned directory path and automatically re-scans it upon boot."
-            },
-            {
-                id: "cat_filtering",
-                title: "'cat' Search Path Filtering Bug",
-                desc: "Searching for 'cat' filters files relatively, stripping the scan root directory so username paths like 'C:/Users/cathy' do not falsely match all scanned images."
-            },
-            {
-                id: "header_cleanup",
-                title: "Remove Switch from Main View",
-                desc: "The 'Use FastImage' rendering engine toggle is removed from the ScrollBench main header and resides solely in the settings panel."
-            },
-            {
-                id: "locate_folder_icon",
-                title: "Folder Details Locate Button",
-                desc: "The missing locate file icon next to file path inside the Details Overlay is replaced by a flat folder button ('📂') with a tooltip."
-            },
-            {
-                id: "0kb_size_bug",
-                title: "File Details 0KB Size Bug",
-                desc: "Metadata reader parses file path URLs properly using local file paths so QFileInfo size queries report actual sizes instead of 0KB."
-            },
-            {
-                id: "resolution_slider_crash",
-                title: "Resolution Slider Drag Crash Fix",
-                desc: "Dragging the Thumb Resolution slider dynamically updates the value text but only triggers settings writes and texture reconstruction on mouse release, preventing thread overloading crashes."
+<div id="toast" class="toast"></div>
+
+<script>
+// ────────────────────────────────────────────────────────────────────────────
+// DATA: categories + features
+// ────────────────────────────────────────────────────────────────────────────
+const categories = [
+    { id: 'session6', icon: '🎯', label: 'Session 6 — Milestones' },
+    { id: 'bugs',     icon: '🐛', label: 'Known Bugs' },
+    { id: 'scroll',   icon: '📊', label: 'ScrollBench Features' },
+    { id: 'main',     icon: '🖼',  label: 'Main App Features' },
+    { id: 'media',    icon: '🎬', label: 'Media & Formats' },
+    { id: 'perf',     icon: '⚡', label: 'Performance' },
+    { id: 'planned',  icon: '🔮', label: 'Planned / Future' },
+];
+
+const features = [
+    // ── Session 6 milestones ──
+    {
+        id: 'toggle_revert', cat: 'session6', priority: 'high',
+        title: 'Settings Toggle Cancel Reverts State',
+        desc: 'When a restart-required setting is changed but the dialog is cancelled, the switch must revert to its previous value and the settings drawer/tab must close automatically.',
+        docs: 'resume/SESSION_HISTORY.md'
+    },
+    {
+        id: 'geometry_persist', cat: 'session6', priority: 'med',
+        title: 'Window Geometry Persistence',
+        desc: 'Window size (width/height) and screen position (x/y) are saved using Qt.labs.settings and restored identically on the next app launch, for both ScrollBench and main app.',
+        docs: 'resume/SESSION_HISTORY.md'
+    },
+    {
+        id: 'folder_persist', cat: 'session6', priority: 'med',
+        title: 'Last Folder Restored on Boot',
+        desc: 'ScrollBench remembers the last scanned directory and auto-rescans it on startup without requiring the user to select a folder again.',
+        docs: 'resume/SESSION_HISTORY.md'
+    },
+    {
+        id: 'cat_filter', cat: 'session6', priority: 'high',
+        title: '"cat" Search Filter — Albums View',
+        desc: 'Searching for "cat" must return only albums whose path or files contain the literal substring "cat", stripping the scan root prefix so parent paths like C:/Users/cathy are ignored.',
+        docs: 'KNOWN_ISSUES.md'
+    },
+    {
+        id: 'header_toggle', cat: 'session6', priority: 'med',
+        title: 'FastImage Toggle Removed from Header',
+        desc: 'The "Use FastImage" switch is no longer visible in the main ScrollBench header bar and is only accessible inside the Settings overlay panel.',
+        docs: null
+    },
+    {
+        id: 'locate_icon', cat: 'session6', priority: 'low',
+        title: 'Locate File Button (📂 icon)',
+        desc: 'In the image Details panel, the button that opens the containing folder in Explorer now shows a 📂 icon with a "Locate image in folder" tooltip instead of the broken placeholder text.',
+        docs: null
+    },
+    {
+        id: 'size_0kb', cat: 'session6', priority: 'high',
+        title: 'File Size Shows 0KB in Details',
+        desc: 'File sizes in the Details overlay should show real sizes (e.g. "3,412 KB"), not "0 KB". Root cause: QFileInfo received a file:// URL string instead of a local path.',
+        docs: 'KNOWN_ISSUES.md'
+    },
+    {
+        id: 'slider_crash', cat: 'session6', priority: 'bug',
+        title: 'Resolution Slider Crash During Loading',
+        desc: 'Dragging the "Thumb Resolution" slider while thumbnails are actively loading crashed the app by flooding the thread pool. Fix: settings update only fires on mouse release (onPressedChanged).',
+        docs: 'KNOWN_ISSUES.md'
+    },
+
+    // ── Known bugs ──
+    {
+        id: 'case_ext', cat: 'bugs', priority: 'med',
+        title: 'Uppercase File Extensions Not Scanned',
+        desc: 'Files with extensions like .JPG, .PNG, .MP4 are not found during directory scanning because QDirIterator only looks for lowercase patterns. Documented fix available.',
+        docs: 'FOLDER_SCANNING_DIAGNOSTIC.md'
+    },
+    {
+        id: 'concurrency_leak', cat: 'bugs', priority: 'high',
+        title: 'AsyncImageProvider Concurrency Leak',
+        desc: 'activeWeight is incremented twice per task (admission + guard constructor), causing concurrency slots to deplete twice as fast as intended leading to UI starvation.',
+        docs: 'KNOWN_ISSUES.md'
+    },
+    {
+        id: 'stall_timer', cat: 'bugs', priority: 'high',
+        title: 'Stall Recovery Timer Missing',
+        desc: 'checkStalls() is implemented but never called by any timer, so stalled I/O tasks on network shares or slow drives never automatically release their concurrency weight.',
+        docs: 'KNOWN_ISSUES.md'
+    },
+    {
+        id: 'sysmon_scroll', cat: 'bugs', priority: 'low',
+        title: 'CPU/GPU/RAM Not Shown in ScrollBench Overlay',
+        desc: 'The PerformanceOverlay in ScrollBench displays FPS and frame timing but is not wired to SystemMonitor, so CPU/GPU/RAM metrics are missing.',
+        docs: 'KNOWN_ISSUES.md'
+    },
+
+    // ── ScrollBench features ──
+    {
+        id: 'multi_select', cat: 'scroll', priority: 'high',
+        title: 'Multi-Selection System',
+        desc: 'Single-click toggle, Shift+Click range, drag-to-select rectangle, Ctrl+A select all, Esc clear. Visual selection border and count badge.',
+        docs: 'FEATURES.md'
+    },
+    {
+        id: 'share_dialog', cat: 'scroll', priority: 'med',
+        title: 'Share & Resize Dialogs (UI only)',
+        desc: 'ShareDialog and ResizeEditor QML are complete. Backend resize logic is TODO and needs implementation before this can be used end-to-end.',
+        docs: 'FEATURES.md'
+    },
+    {
+        id: 'telemetry', cat: 'scroll', priority: 'low',
+        title: 'Advanced Performance Telemetry',
+        desc: 'Frame budget tracking (16ms window), viewport culling metrics, real-time FPS/frame-time graphs. CPU/GPU/RAM backend exists but is not yet displayed in the overlay.',
+        docs: 'FEATURES.md'
+    },
+
+    // ── Main App features ──
+    {
+        id: 'port_multiselect', cat: 'main', priority: 'high',
+        title: 'Port Multi-Select to Main App',
+        desc: 'The full selection system (multi-select, range, invert, clear, selection count) that exists in ScrollBench needs to be ported to the main Samsung Gallery clone.',
+        docs: 'resume/OUTSTANDING_TASKS.md'
+    },
+    {
+        id: 'edit_enhancements', cat: 'main', priority: 'med',
+        title: 'Image Editing Enhancements',
+        desc: 'Planned: draggable/resizable crop rectangle, 90° rotation with EXIF preservation, brightness/contrast sliders, Save As option to keep originals.',
+        docs: 'resume/OUTSTANDING_TASKS.md'
+    },
+    {
+        id: 'album_search', cat: 'main', priority: 'med',
+        title: 'Album Search & Filtering',
+        desc: 'Main app albums view needs a search/filter system equivalent to the one in ScrollBench (filename and folder name substring matching).',
+        docs: 'resume/OUTSTANDING_TASKS.md'
+    },
+
+    // ── Media & Formats ──
+    {
+        id: 'video_playback', cat: 'media', priority: 'high',
+        title: 'Video Playback Verification',
+        desc: 'Full playback controls exist in both apps. Needs verification: H.264, H.265, AV1, VP9 codec support, hardware acceleration (D3D11VA), audio sync, rotation metadata handling.',
+        docs: 'FEATURES.md'
+    },
+    {
+        id: 'heic_support', cat: 'media', priority: 'med',
+        title: 'HEIC/HEIF Support',
+        desc: 'HEIC files require system codecs (Windows 11 or codec pack). Verify loading works and fallback placeholder renders correctly when codec is missing.',
+        docs: 'FORMAT_COMPATIBILITY.md'
+    },
+    {
+        id: 'dng_slow', cat: 'media', priority: 'high',
+        title: 'DNG Proprietary Compression (120s+ Load)',
+        desc: 'DNG files with PhotometricInterpretation=32803 take 120+ seconds via LibRaw CPU-only processing. Planned fix: show embedded JPEG immediately, background-decode full RAW.',
+        docs: 'resume/OUTSTANDING_TASKS.md'
+    },
+    {
+        id: 'raw_formats', cat: 'media', priority: 'low',
+        title: 'RAW Format Matrix Verification',
+        desc: 'Verify ARW, CR2, NEF, DNG, ORF, RW2, PEF, RAF all load correctly via LibRaw. Check thumbnail extraction vs full unpack path.',
+        docs: 'FORMAT_COMPATIBILITY.md'
+    },
+
+    // ── Performance ──
+    {
+        id: 'adaptive_throttle', cat: 'perf', priority: 'med',
+        title: 'Adaptive I/O Throttling',
+        desc: 'Per-drive concurrency limits (DriveStats) dynamically adjust based on actual load times. Verify this correctly backs off on slow SD cards and network shares.',
+        docs: 'SYSTEM_ARCHITECTURE.md'
+    },
+    {
+        id: 'viewport_culling', cat: 'perf', priority: 'med',
+        title: 'Viewport-First Loading',
+        desc: 'Only images in the visible viewport should be high-priority; off-screen images should be lower-priority or deferred. Verify scrolling does not cause full-library decodes.',
+        docs: 'SYSTEM_ARCHITECTURE.md'
+    },
+    {
+        id: 'fastimage_item', cat: 'perf', priority: 'low',
+        title: 'FastImageItem Texture Bypass',
+        desc: 'Custom QQuickItem that bypasses QML pixel cache to prevent "No Date" layout corruption when viewport culling is disabled. Verify toggle works without crash.',
+        docs: 'FEATURES.md'
+    },
+
+    // ── Planned ──
+    {
+        id: 'drag_drop', cat: 'planned', priority: 'low',
+        title: 'Drag & Drop to Explorer/Email',
+        desc: 'Allow users to drag images from the gallery directly to Windows Explorer or email client. Requires native MIME data handling in Qt.',
+        docs: 'resume/OUTSTANDING_TASKS.md'
+    },
+    {
+        id: 'print_support', cat: 'planned', priority: 'low',
+        title: 'Print Support',
+        desc: 'Basic print dialog integration for single or batch image printing.',
+        docs: 'resume/OUTSTANDING_TASKS.md'
+    },
+    {
+        id: 'gpu_dng', cat: 'planned', priority: 'low',
+        title: 'GPU-Accelerated DNG Demosaicing',
+        desc: 'Long-term: implement custom GPU shaders to demosaic Bayer patterns, reducing DNG load time from 120s+ to under 3 seconds.',
+        docs: 'FEASIBILITY_GPU_APIS.md'
+    },
+];
+
+// ────────────────────────────────────────────────────────────────────────────
+// STATE
+// ────────────────────────────────────────────────────────────────────────────
+let state = {};
+let customItems = [];
+let activeFilter = 'all';
+
+function initState() {
+    features.forEach(f => {
+        state[f.id] = { status: 'pending', notes: '', screenshots: [] };
+    });
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// RENDER
+// ────────────────────────────────────────────────────────────────────────────
+function render() {
+    renderPills();
+    renderCards();
+    populateCategorySelect();
+    updateSummary();
+}
+
+function renderPills() {
+    const container = document.getElementById('cat-pills');
+    container.innerHTML = '';
+
+    // All pill
+    const allPill = document.createElement('button');
+    allPill.className = 'pill' + (activeFilter === 'all' ? ' active' : '');
+    allPill.textContent = 'All';
+    allPill.onclick = () => setFilter('all', allPill);
+    container.appendChild(allPill);
+
+    // Status filter pills
+    ['done', 'fail', 'pending'].forEach(s => {
+        const p = document.createElement('button');
+        p.className = 'pill' + (activeFilter === s ? ' active' : '');
+        const labels = { done: '✓ Verified', fail: '✗ Failed', pending: '⏳ Pending' };
+        p.textContent = labels[s];
+        p.onclick = () => setFilter(s, p);
+        container.appendChild(p);
+    });
+
+    // Category pills
+    categories.forEach(cat => {
+        const p = document.createElement('button');
+        p.className = 'pill' + (activeFilter === cat.id ? ' active' : '');
+        p.textContent = cat.icon + ' ' + cat.label;
+        p.onclick = () => setFilter(cat.id, p);
+        container.appendChild(p);
+    });
+}
+
+function renderCards() {
+    const container = document.getElementById('features-container');
+    container.innerHTML = '';
+
+    const allItems = [...features, ...customItems];
+    const filteredByStatus = activeFilter === 'done' || activeFilter === 'fail' || activeFilter === 'pending';
+    const filteredByCat = categories.find(c => c.id === activeFilter);
+
+    categories.forEach(cat => {
+        const catItems = allItems.filter(f => {
+            if (filteredByStatus) {
+                return f.cat === cat.id && state[f.id]?.status === activeFilter;
             }
-        ];
-
-        // Store for state
-        const state = {};
-
-        function renderFeatures() {
-            const container = document.getElementById('features-container');
-            container.innerHTML = '';
-
-            features.forEach(f => {
-                state[f.id] = {
-                    status: 'pending',
-                    notes: '',
-                    screenshots: []
-                };
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="feature-header">
-                        <div class="feature-title">${f.title}</div>
-                        <div class="status-toggles">
-                            <button class="toggle-btn btn-done" id="${f.id}-btn-done" onclick="setStatus('${f.id}', 'done')">
-                                ✓ Done
-                            </button>
-                            <button class="toggle-btn btn-fail" id="${f.id}-btn-fail" onclick="setStatus('${f.id}', 'fail')">
-                                ✗ Fail
-                            </button>
-                        </div>
-                    </div>
-                    <div class="feature-desc">${f.desc}</div>
-                    <textarea class="notes-area" placeholder="Enter notes or observations here..." oninput="updateNotes('${f.id}', this.value)"></textarea>
-                    
-                    <div class="screenshot-section">
-                        <input type="file" class="screenshot-input" accept="image/*" multiple onchange="handleScreenshots('${f.id}', this)">
-                        <div class="screenshot-label">📎 Click to add screenshot(s)</div>
-                        <div class="screenshot-preview-container" id="${f.id}-previews"></div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function setStatus(id, status) {
-            state[id].status = status;
-            
-            const doneBtn = document.getElementById(`${id}-btn-done`);
-            const failBtn = document.getElementById(`${id}-btn-fail`);
-
-            doneBtn.classList.remove('active');
-            failBtn.classList.remove('active');
-
-            if (status === 'done') {
-                doneBtn.classList.add('active');
-            } else if (status === 'fail') {
-                failBtn.classList.add('active');
+            if (filteredByCat) {
+                return f.cat === cat.id && f.cat === activeFilter;
             }
-        }
+            return f.cat === cat.id;
+        });
 
-        function updateNotes(id, value) {
-            state[id].notes = value;
-        }
+        if (catItems.length === 0) return;
 
-        function handleScreenshots(id, input) {
-            const container = document.getElementById(`${id}-previews`);
-            container.innerHTML = '';
-            state[id].screenshots = [];
+        // Category header
+        const header = document.createElement('div');
+        header.className = 'category-header';
+        header.innerHTML = `
+            <span class="cat-icon">${cat.icon}</span>
+            <span class="cat-title">${cat.label}</span>
+            <div class="cat-divider"></div>
+            <span class="cat-count">${catItems.length} item${catItems.length !== 1 ? 's' : ''}</span>
+        `;
+        container.appendChild(header);
 
-            if (input.files) {
-                Array.from(input.files).forEach(file => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        state[id].screenshots.push(e.target.result);
-                        
-                        const img = document.createElement('img');
-                        img.className = 'screenshot-preview';
-                        img.src = e.target.result;
-                        container.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-        }
+        catItems.forEach(f => {
+            if (!state[f.id]) state[f.id] = { status: 'pending', notes: '', screenshots: [] };
+            container.appendChild(buildCard(f));
+        });
+    });
+}
 
-        function exportData() {
-            const report = {
-                timestamp: new Date().toISOString(),
-                summary: {
-                    total: features.length,
-                    done: Object.values(state).filter(s => s.status === 'done').length,
-                    fail: Object.values(state).filter(s => s.status === 'fail').length,
-                    pending: Object.values(state).filter(s => s.status === 'pending').length
-                },
-                features: state
+function buildCard(f) {
+    const s = state[f.id];
+    const card = document.createElement('div');
+    card.id = 'card-' + f.id;
+    card.className = `feature-card is-${s.status}`;
+
+    const priorityClass = { high: 'priority-high', med: 'priority-med', low: 'priority-low', bug: 'priority-bug' }[f.priority] || 'priority-low';
+    const priorityLabel = { high: '🔴 High', med: '🟡 Medium', low: '🟢 Low', bug: '🐛 Bug' }[f.priority] || '🟢 Low';
+    const badgeClass = { done: 'badge-done', fail: 'badge-fail', pending: 'badge-pending' }[s.status];
+    const badgeLabel = { done: '✓ Verified', fail: '✗ Failed', pending: '⏳ Pending' }[s.status];
+
+    const docsHtml = f.docs ? `<a class="docs-link" href="${f.docs}" target="_blank">📄 ${f.docs}</a><br>` : '';
+
+    card.innerHTML = `
+        <div class="card-head" onclick="toggleCard('${f.id}')">
+            <span class="card-priority ${priorityClass}">${priorityLabel}</span>
+            <span class="card-title">${f.title}</span>
+            <span class="card-status-badge ${badgeClass}" id="badge-${f.id}">${badgeLabel}</span>
+            <span class="card-toggle-icon" id="chevron-${f.id}">▼</span>
+        </div>
+        <div class="card-body" id="body-${f.id}">
+            <p class="card-desc">${f.desc}</p>
+            ${docsHtml}
+            <div class="status-row">
+                <label>Status:</label>
+                <button class="toggle-btn btn-d ${s.status === 'done' ? 'active-d' : ''}" id="btn-d-${f.id}" onclick="setStatus('${f.id}', 'done')">✓ Done</button>
+                <button class="toggle-btn btn-f ${s.status === 'fail' ? 'active-f' : ''}" id="btn-f-${f.id}" onclick="setStatus('${f.id}', 'fail')">✗ Fail</button>
+                <button class="toggle-btn btn-p" onclick="setStatus('${f.id}', 'pending')">↺ Reset</button>
+            </div>
+            <div class="notes-label">Notes / Observations</div>
+            <textarea class="notes-area" id="notes-${f.id}" placeholder="Enter testing notes, reproduction steps, or observations..." oninput="updateNotes('${f.id}', this.value)">${s.notes}</textarea>
+            <div class="notes-label">Screenshots</div>
+            <div class="ss-zone">
+                <input type="file" accept="image/*" multiple onchange="handleScreenshots('${f.id}', this)">
+                <div class="ss-zone-label">📎 Click to attach screenshots</div>
+                <div class="ss-previews" id="ss-${f.id}"></div>
+            </div>
+        </div>
+    `;
+    return card;
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// INTERACTIONS
+// ────────────────────────────────────────────────────────────────────────────
+function setFilter(id, btn) {
+    activeFilter = id;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards();
+    updateSummary();
+}
+
+function toggleCard(id) {
+    const body = document.getElementById('body-' + id);
+    const chevron = document.getElementById('chevron-' + id);
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    chevron.classList.toggle('open', !isOpen);
+}
+
+function collapseAll() {
+    document.querySelectorAll('.card-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.card-toggle-icon').forEach(c => c.classList.remove('open'));
+}
+
+function setStatus(id, status) {
+    state[id].status = status;
+
+    // Update badge
+    const badge = document.getElementById('badge-' + id);
+    const badgeMap = { done: ['badge-done', '✓ Verified'], fail: ['badge-fail', '✗ Failed'], pending: ['badge-pending', '⏳ Pending'] };
+    badge.className = 'card-status-badge ' + badgeMap[status][0];
+    badge.textContent = badgeMap[status][1];
+
+    // Update card border
+    const card = document.getElementById('card-' + id);
+    card.className = `feature-card is-${status}`;
+
+    // Update button highlights
+    ['done', 'fail'].forEach(s => {
+        const btn = document.getElementById('btn-' + s[0] + '-' + id);
+        if (btn) { btn.classList.remove('active-' + s[0]); }
+    });
+    if (status === 'done') document.getElementById('btn-d-' + id)?.classList.add('active-d');
+    if (status === 'fail') document.getElementById('btn-f-' + id)?.classList.add('active-f');
+
+    updateSummary();
+}
+
+function updateNotes(id, value) {
+    state[id].notes = value;
+}
+
+function handleScreenshots(id, input) {
+    const container = document.getElementById('ss-' + id);
+    if (!state[id].screenshots) state[id].screenshots = [];
+    if (input.files) {
+        Array.from(input.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = e => {
+                state[id].screenshots.push({ name: file.name, data: e.target.result });
+                const img = document.createElement('img');
+                img.className = 'ss-thumb';
+                img.src = e.target.result;
+                img.title = file.name;
+                container.appendChild(img);
             };
+            reader.readAsDataURL(file);
+        });
+    }
+}
 
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(report, null, 4));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", "feature_tracker_report.json");
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
+function updateSummary() {
+    const allIds = [...features, ...customItems].map(f => f.id);
+    const counts = { done: 0, fail: 0, pending: 0 };
+    allIds.forEach(id => { if (state[id]) counts[state[id].status]++; });
+    document.getElementById('count-done').textContent = counts.done;
+    document.getElementById('count-fail').textContent = counts.fail;
+    document.getElementById('count-pending').textContent = counts.pending;
+    document.getElementById('count-total').textContent = allIds.length;
+}
 
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
-        }
+// ────────────────────────────────────────────────────────────────────────────
+// ADD CUSTOM ITEM
+// ────────────────────────────────────────────────────────────────────────────
+function populateCategorySelect() {
+    const sel = document.getElementById('add-category');
+    if (!sel) return;
+    sel.innerHTML = '';
+    categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.textContent = cat.icon + ' ' + cat.label;
+        sel.appendChild(opt);
+    });
+}
 
-        // Initialize
-        renderFeatures();
-    </script>
+function addCustomItem() {
+    const title = document.getElementById('add-title').value.trim();
+    const cat = document.getElementById('add-category').value;
+    const priority = document.getElementById('add-priority').value;
+    const docs = document.getElementById('add-docs').value.trim();
+    const desc = document.getElementById('add-desc').value.trim();
+
+    if (!title) { showToast('⚠ Please enter a title.', true); return; }
+
+    const id = 'custom_' + Date.now();
+    customItems.push({ id, cat, priority, title, desc: desc || 'Custom item added by user.', docs: docs || null });
+    state[id] = { status: 'pending', notes: '', screenshots: [] };
+
+    // Clear form
+    document.getElementById('add-title').value = '';
+    document.getElementById('add-docs').value = '';
+    document.getElementById('add-desc').value = '';
+
+    renderCards();
+    updateSummary();
+    showToast('✓ Item added successfully.');
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// EXPORT REPORT
+// ────────────────────────────────────────────────────────────────────────────
+function exportReport() {
+    const allItems = [...features, ...customItems];
+    const report = {
+        generated: new Date().toISOString(),
+        tool: 'Gallery Dev Verification Tracker',
+        summary: {
+            total: allItems.length,
+            verified: Object.values(state).filter(s => s.status === 'done').length,
+            failed: Object.values(state).filter(s => s.status === 'fail').length,
+            pending: Object.values(state).filter(s => s.status === 'pending').length,
+        },
+        categories: categories.map(cat => ({
+            id: cat.id,
+            label: cat.label,
+            items: allItems.filter(f => f.cat === cat.id).map(f => ({
+                id: f.id,
+                title: f.title,
+                priority: f.priority,
+                status: state[f.id]?.status || 'pending',
+                notes: state[f.id]?.notes || '',
+                screenshotCount: (state[f.id]?.screenshots || []).length,
+                linkedDoc: f.docs || null,
+            }))
+        })),
+        screenshotsEmbedded: Object.fromEntries(
+            Object.entries(state)
+                .filter(([, s]) => s.screenshots && s.screenshots.length > 0)
+                .map(([id, s]) => [id, s.screenshots])
+        )
+    };
+
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(report, null, 2));
+    const anchor = document.createElement('a');
+    anchor.setAttribute("href", dataStr);
+    anchor.setAttribute("download", `gallery_tracker_report_${new Date().toISOString().split('T')[0]}.json`);
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+
+    showToast('📋 Report exported successfully!');
+}
+
+function showToast(msg, warn = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.borderColor = warn ? '#f59e0b' : 'var(--primary)';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// INIT
+// ────────────────────────────────────────────────────────────────────────────
+initState();
+render();
+</script>
 </body>
 </html>
