@@ -224,11 +224,16 @@ Rectangle {
                     // Sliders
                     ColumnLayout {
                         Layout.fillWidth: true
-                        Text { text: "Thumb Resolution: " + settings.thumbnailSize + "px"; color: "#fff"; font.pixelSize: 12 }
+                        Text { text: "Thumb Resolution: " + Math.round(thumbSlider.value) + "px"; color: "#fff"; font.pixelSize: 12 }
                         Slider {
+                            id: thumbSlider
                             Layout.fillWidth: true; from: 16; to: 512; stepSize: 4
                             value: settings.thumbnailSize
-                            onMoved: settings.thumbnailSize = Math.round(value)
+                            onPressedChanged: {
+                                if (!pressed) {
+                                    settings.thumbnailSize = Math.round(value)
+                                }
+                            }
                         }
                     }
 

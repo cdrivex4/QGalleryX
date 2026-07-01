@@ -178,7 +178,11 @@ Item {
                 from: 20; to: 400
                 stepSize: 1
                 value: appSettings.thumbnailSize
-                onMoved: appSettings.thumbnailSize = Math.round(value)
+                onPressedChanged: {
+                    if (!pressed) {
+                        appSettings.thumbnailSize = Math.round(value)
+                    }
+                }
             }
 
             // Grid Zoom

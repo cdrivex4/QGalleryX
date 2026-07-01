@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Feature & Verification Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --card-bg: rgba(22, 24, 30, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --accent: #8b5cf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.05), transparent 400px),
+                              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.05), transparent 400px);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .status-toggles {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.btn-done:hover, .toggle-btn.btn-done.active {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--success);
+            color: var(--success);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.1);
+        }
+
+        .toggle-btn.btn-fail:hover, .toggle-btn.btn-fail.active {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: var(--danger);
+            color: var(--danger);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .notes-area {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            padding: 0.75rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .notes-area:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .screenshot-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .screenshot-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .screenshot-label {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        .screenshot-preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .screenshot-preview {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Alert Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Feature Verification Dashboard</h1>
+            <p>Track testing, record validation details, and attach screenshots to sync back with the developer agent.</p>
+        </header>
+
+        <div id="features-container"></div>
+
+        <div class="submit-section">
+            <button class="submit-btn" onclick="exportData()">Submit & Generate Report</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Report Saved! Placed in docs directory.</div>
+
+    <script>
+        const features = [
+            {
+                id: "settings_toggle",
+                title: "Settings Toggle & Dialog Cancel Behavior",
+                desc: "Switching a setting requiring restart prompts with a dialog. Cancelling the dialog reverts the switch to its previous setting state, and resets the Menu Tab/drawer focus."
+            },
+            {
+                id: "geometry_persistence",
+                title: "Window Size & Position Memory",
+                desc: "Window dimensions (width/height) and screen coordinates (x/y) are persisted across application restarts for both the main app and ScrollBench."
+            },
+            {
+                id: "folder_persistence",
+                title: "Scanned Folder Persistence",
+                desc: "ScrollBench successfully remembers the last scanned directory path and automatically re-scans it upon boot."
+            },
+            {
+                id: "cat_filtering",
+                title: "'cat' Search Path Filtering Bug",
+                desc: "Searching for 'cat' filters files relatively, stripping the scan root directory so username paths like 'C:/Users/cathy' do not falsely match all scanned images."
+            },
+            {
+                id: "header_cleanup",
+                title: "Remove Switch from Main View",
+                desc: "The 'Use FastImage' rendering engine toggle is removed from the ScrollBench main header and resides solely in the settings panel."
+            },
+            {
+                id: "locate_folder_icon",
+                title: "Folder Details Locate Button",
+                desc: "The missing locate file icon next to file path inside the Details Overlay is replaced by a flat folder button ('📂') with a tooltip."
+            },
+            {
+                id: "0kb_size_bug",
+                title: "File Details 0KB Size Bug",
+                desc: "Metadata reader parses file path URLs properly using local file paths so QFileInfo size queries report actual sizes instead of 0KB."
+            },
+            {
+                id: "resolution_slider_crash",
+                title: "Resolution Slider Drag Crash Fix",
+                desc: "Dragging the Thumb Resolution slider dynamically updates the value text but only triggers settings writes and texture reconstruction on mouse release, preventing thread overloading crashes."
+            }
+        ];
+
+        // Store for state
+        const state = {};
+
+        function renderFeatures() {
+            const container = document.getElementById('features-container');
+            container.innerHTML = '';
+
+            features.forEach(f => {
+                state[f.id] = {
+                    status: 'pending',
+                    notes: '',
+                    screenshots: []
+                };
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="feature-header">
+                        <div class="feature-title">${f.title}</div>
+                        <div class="status-toggles">
+                            <button class="toggle-btn btn-done" id="${f.id}-btn-done" onclick="setStatus('${f.id}', 'done')">
+                                ✓ Done
+                            </button>
+                            <button class="toggle-btn btn-fail" id="${f.id}-btn-fail" onclick="setStatus('${f.id}', 'fail')">
+                                ✗ Fail
+                            </button>
+                        </div>
+                    </div>
+                    <div class="feature-desc">${f.desc}</div>
+                    <textarea class="notes-area" placeholder="Enter notes or observations here..." oninput="updateNotes('${f.id}', this.value)"></textarea>
+                    
+                    <div class="screenshot-section">
+                        <input type="file" class="screenshot-input" accept="image/*" multiple onchange="handleScreenshots('${f.id}', this)">
+                        <div class="screenshot-label">📎 Click to add screenshot(s)</div>
+                        <div class="screenshot-preview-container" id="${f.id}-previews"></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setStatus(id, status) {
+            state[id].status = status;
+            
+            const doneBtn = document.getElementById(`${id}-btn-done`);
+            const failBtn = document.getElementById(`${id}-btn-fail`);
+
+            doneBtn.classList.remove('active');
+            failBtn.classList.remove('active');
+
+            if (status === 'done') {
+                doneBtn.classList.add('active');
+            } else if (status === 'fail') {
+                failBtn.classList.add('active');
+            }
+        }
+
+        function updateNotes(id, value) {
+            state[id].notes = value;
+        }
+
+        function handleScreenshots(id, input) {
+            const container = document.getElementById(`${id}-previews`);
+            container.innerHTML = '';
+            state[id].screenshots = [];
+
+            if (input.files) {
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        state[id].screenshots.push(e.target.result);
+                        
+                        const img = document.createElement('img');
+                        img.className = 'screenshot-preview';
+                        img.src = e.target.result;
+                        container.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        function exportData() {
+            const report = {
+                timestamp: new Date().toISOString(),
+                summary: {
+                    total: features.length,
+                    done: Object.values(state).filter(s => s.status === 'done').length,
+                    fail: Object.values(state).filter(s => s.status === 'fail').length,
+                    pending: Object.values(state).filter(s => s.status === 'pending').length
+                },
+                features: state
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(report, null, 4));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "feature_tracker_report.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // Initialize
+        renderFeatures();
+    </script>
+</body>
+</html>
