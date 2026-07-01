@@ -630,9 +630,12 @@ Item {
                         // Folder Icon Button for "Path"
                         Button {
                             visible: modelData === "Path"
-                            text: "Open"
-                            Layout.preferredWidth: 50
+                            text: "📂"
+                            Layout.preferredWidth: 40
                             Layout.preferredHeight: 30
+                            flat: true
+                            ToolTip.visible: hovered
+                            ToolTip.text: "Locate image in folder"
                             onClicked: {
                                 console.log("Opening in explorer: " + infoOverlay.meta[modelData])
                                 desktopHelper.openInExplorer(infoOverlay.meta[modelData])

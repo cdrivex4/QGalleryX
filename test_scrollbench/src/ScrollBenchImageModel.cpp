@@ -302,6 +302,7 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
     }
 
     cleanPath = QDir::toNativeSeparators(cleanPath);
+    m_scanRoot = cleanPath;
 
     if (!QDir(cleanPath).exists()) {
       qWarning() << "Directory does not exist:" << cleanPath;
@@ -980,14 +981,17 @@ QVariantMap ScrollBenchImageModel::getMetadata(int index) {
     return {};
 
   const ImageItem &item = m_items[index];
+  QUrl url(item.path);
+  QString localPath = url.isLocalFile() ? url.toLocalFile() : item.path;
+
   QVariantMap meta;
   meta["Filename"] = item.fileName;
-  meta["Path"] = item.path;
+  meta["Path"] = localPath;
   meta["Date"] = item.date.toString("yyyy-MM-dd HH:mm:ss");
-  meta["Size"] = QString("%1 KB").arg(QFileInfo(item.path).size() / 1024);
-  meta["Type"] = QFileInfo(item.path).suffix().toUpper();
+  meta["Size"] = QString("%1 KB").arg(QFileInfo(localPath).size() / 1024);
+  meta["Type"] = QFileInfo(localPath).suffix().toUpper();
 
-  QString ext = QFileInfo(item.path).suffix().toLower();
+  QString ext = QFileInfo(localPath).suffix().toLower();
   bool isRaw = (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
                 ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
                 ext == "pef" || ext == "raf");
@@ -1033,7 +1037,9 @@ void ScrollBenchImageModel::setFilterQuery(const QString &query) {
 QStringList ScrollBenchImageModel::getActiveDirectories() const {
   QSet<QString> dirs;
   for (const auto &item : m_items) {
-    QString dirPath = QFileInfo(item.path).absolutePath();
+    QUrl url(item.path);
+    QString localPath = url.isLocalFile() ? url.toLocalFile() : item.path;
+    QString dirPath = QFileInfo(localPath).absolutePath();
     dirs.insert(QDir::fromNativeSeparators(dirPath).toLower());
   }
   return dirs.values();
@@ -1049,7 +1055,15 @@ void ScrollBenchImageModel::applyFilter() {
     // Case insensitive substring matching
     QString q = m_filterQuery.toLower();
     for (const auto &item : m_allItems) {
-      if (item.fileName.toLower().contains(q) || item.path.toLower().contains(q)) {
+      QString localPath = QUrl(item.path).toLocalFile();
+      if (localPath.isEmpty()) {
+        localPath = item.path;
+      }
+      QString searchablePath = localPath;
+      if (!m_scanRoot.isEmpty() && searchablePath.startsWith(m_scanRoot, Qt::CaseInsensitive)) {
+        searchablePath = searchablePath.mid(m_scanRoot.length());
+      }
+      if (item.fileName.toLower().contains(q) || searchablePath.toLower().contains(q)) {
         m_items.append(item);
       }
     }

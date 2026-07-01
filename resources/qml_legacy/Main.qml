@@ -8,20 +8,33 @@ import SamsungGallery 1.0
 
 ApplicationWindow {
     id: window
-    width: 1280
-    height: 720
     visible: true
     title: qsTr("Samsung Gallery Clone")
     color: "#000000"
 
     property string currentPath: ""
+    property int previousTab: 0
 
     // Persistence
     Settings {
         id: settings
         property string lastFolder: ""
         property int graphicsApi: 0
+        property int windowWidth: 1280
+        property int windowHeight: 720
+        property int windowX: 100
+        property int windowY: 100
     }
+    
+    width: settings.windowWidth
+    height: settings.windowHeight
+    x: settings.windowX
+    y: settings.windowY
+    
+    onWidthChanged: if (visible) settings.windowWidth = width
+    onHeightChanged: if (visible) settings.windowHeight = height
+    onXChanged: if (visible) settings.windowX = x
+    onYChanged: if (visible) settings.windowY = y
 
     AlbumModel {
         id: albumModel
@@ -275,7 +288,10 @@ ApplicationWindow {
                             model: ["Auto", "Direct3D 11", "Vulkan", "OpenGL", "Software"]
                             currentIndex: appSettings.selectedApi
                             onActivated: (index) => {
+                                let oldVal = appSettings.selectedApi
+                                if (oldVal === index) return
                                 appSettings.selectedApi = index
+                                restartDialog.revertAction = function() { appSettings.selectedApi = oldVal }
                                 restartDialog.open()
                             }
                         }
@@ -399,7 +415,13 @@ ApplicationWindow {
             id: bottomBar
             Layout.fillWidth: true
             height: 60
-            onTabSelected: (index) => mainLayout.currentIndex = index
+            currentIndex: mainLayout.currentIndex
+            onTabSelected: (index) => {
+                if (mainLayout.currentIndex !== 3) {
+                    window.previousTab = mainLayout.currentIndex
+                }
+                mainLayout.currentIndex = index
+            }
         }
     }
     
@@ -408,7 +430,15 @@ ApplicationWindow {
         title: "Restart Required"
         text: "The application needs to restart to apply the graphics API change."
         buttons: MessageDialog.Ok | MessageDialog.Cancel
+        
+        property var revertAction: null
         onAccepted: appSettings.restartApp()
+        onRejected: {
+            if (revertAction) {
+                revertAction()
+            }
+            mainLayout.currentIndex = window.previousTab
+        }
     }
 
     // Stats Overlay

@@ -289,3 +289,20 @@ Watch for these warning signs:
 * verified `tst_linkage.exe` passed, showing backend systems are healthy.
 
 **Action**: All changes committed and pushed to remote repository.
+
+---
+
+### Session 6 (Milestone): UI, Persistence & Filter Fixes
+**Date**: 2026-07-01  
+**Objectives**:
+1. Fix critical settings toggle behaviour (revert switch state and restore tab state / close settings overlay drawer if restart warning is cancelled).
+2. Remember window size, position, and last folder scanned on restart across both main and ScrollBench applications.
+3. Fix `"cat"` search filter behaviour in ScrollBench (normalize file paths to native directories to strip the scan root accurately and resolve folder-level filtering).
+4. Remove `Use FastImage` toggle from the main header area (leaving it strictly in the Settings panel).
+5. Fix file details panel bugs (replace missing locate folder icon with a clean Unicode `📂` button + flat tooltip, and resolve the `0 KB` size calculation bug by resolving QUrl strings to local file paths before querying `QFileInfo`).
+
+**Code State Verified**:
+* verified compilation of both `appSamsungGallery.exe` and `appScrollBench.exe`.
+* verified `tst_linkage.exe` passed, showing backend systems are healthy.
+
+**Action**: Completed successfully, AST code graph regenerated, and code committed and pushed to GitHub.

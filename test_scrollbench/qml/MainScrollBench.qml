@@ -2,11 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
+import Qt.labs.settings
 
 ApplicationWindow {
     id: root
-    width: 1280
-    height: 800
     visible: true
     title: "ScrollBench Lead Development Environment"
     color: "#121212"
@@ -19,6 +18,26 @@ ApplicationWindow {
     property bool viewerVisible: false
     property int viewerIndex: 0
     property var viewerModel: imageModel
+    
+    Settings {
+        id: localSettings
+        category: "ScrollBench"
+        property string lastFolder: ""
+        property int windowWidth: 1280
+        property int windowHeight: 800
+        property int windowX: 100
+        property int windowY: 100
+    }
+    
+    width: localSettings.windowWidth
+    height: localSettings.windowHeight
+    x: localSettings.windowX
+    y: localSettings.windowY
+    
+    onWidthChanged: if (visible) localSettings.windowWidth = width
+    onHeightChanged: if (visible) localSettings.windowHeight = height
+    onXChanged: if (visible) localSettings.windowX = x
+    onYChanged: if (visible) localSettings.windowY = y
     
     function openViewer(index, model) {
         root.viewerModel = model
@@ -41,6 +60,14 @@ ApplicationWindow {
     FrameAnimation {
         running: true
         onTriggered: telemetry.recordFrame()
+    }
+
+    Component.onCompleted: {
+        if (localSettings.lastFolder !== "") {
+            console.log("[ScrollBench] Restoring last folder:", localSettings.lastFolder)
+            imageModel.scanDirectory(localSettings.lastFolder)
+            albumModel.scanAlbums(localSettings.lastFolder)
+        }
     }
 
     ColumnLayout {
@@ -256,15 +283,7 @@ ApplicationWindow {
         z: 50
         visible: !root.viewerVisible && !overlayVisible
 
-        // Legacy vs New Rendering Toggle
-        RowLayout {
-            spacing: 5
-            Text { text: "Use FastImage:"; color: "#fff"; font.bold: true; font.pixelSize: 12 }
-            Switch {
-                checked: settings.useFastImage
-                onToggled: settings.useFastImage = checked
-            }
-        }
+        // Legacy vs New Rendering Toggle Removed from Header
 
         // Global Search Bar
         TextField {
@@ -303,7 +322,7 @@ ApplicationWindow {
             
             onTextChanged: {
                 imageModel.filterQuery = text
-                albumModel.setFilterQuery(text)
+                albumModel.filterQuery = text
                 if (text.length > 0) {
                     var dirs = imageModel.getActiveDirectories();
                     console.log("[QML Filter] text: '" + text + "', activeDirs: " + dirs);
@@ -353,6 +372,12 @@ ApplicationWindow {
             imageModel.clearData()
             imageModel.scanDirectory(rawPath)
             albumModel.scanAlbums(rawPath)
+            
+            var path = rawPath.replace(/^(file:\/{3})|(file:)/, "")
+            if (Qt.platform.os === "windows") {
+                if (path.startsWith("/") && path.indexOf(":") === 2) path = path.substring(1);
+            }
+            localSettings.lastFolder = path
         }
     }
 

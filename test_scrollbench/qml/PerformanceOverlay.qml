@@ -358,6 +358,13 @@ Rectangle {
                             onAccepted: {
                                 desktopHelper.requestRestart()
                             }
+                            
+                            onRejected: {
+                                if (revertAction) {
+                                    revertAction()
+                                }
+                                outerFrame.closeRequested()
+                            }
                         }
                         Text {
                             Layout.fillWidth: true
