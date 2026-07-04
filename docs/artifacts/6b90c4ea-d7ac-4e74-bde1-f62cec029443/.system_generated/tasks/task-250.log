@@ -1,0 +1,20 @@
+Collecting gradio==4.44.0
+  Using cached gradio-4.44.0-py3-none-any.whl.metadata (15 kB)
+Collecting scipy==1.13.0
+  Using cached scipy-1.13.0-cp312-cp312-win_amd64.whl.metadata (60 kB)
+Using cached gradio-4.44.0-py3-none-any.whl (18.1 MB)
+Using cached scipy-1.13.0-cp312-cp312-win_amd64.whl (45.9 MB)
+Installing collected packages: scipy, gradio
+  Attempting uninstall: scipy
+    Found existing installation: scipy 1.17.1
+    Uninstalling scipy-1.17.1:
+      Successfully uninstalled scipy-1.17.1
+  Attempting uninstall: gradio
+    Found existing installation: gradio 6.11.0
+    Uninstalling gradio-6.11.0:
+      Successfully uninstalled gradio-6.11.0
+
+Successfully installed gradio-4.44.0 scipy-1.13.0
+
+[notice] A new release of pip is available: 26.0.1 -> 26.1.2
+[notice] To update, run: C:\just-dub-it2\env\Scripts\python.exe -m pip install --upgrade pip

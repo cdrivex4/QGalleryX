@@ -1,0 +1,145 @@
+# Phase 2: Selection System Implementation
+
+## Goal
+
+Add multi-select capability to ScrollBench with checkboxes on thumbnails and a selection bar for batch operations.
+
+## Proposed Changes
+
+### ScrollBenchImageModel (C++)
+
+#### [MODIFY] [ScrollBenchImageModel.h](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h)
+
+**Add to ImageItem struct:**
+- `bool isSelected = false;`
+
+**Add role:**
+- `IsSelectedRole` to enum
+
+**Add properties:**
+- [Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h#16-18)
+
+**Add methods:**
+```cpp
+Q_INVOKABLE void toggleSelection(int index);
+Q_INVOKABLE void selectAll();
+Q_INVOKABLE void clearSelection();
+Q_INVOKABLE void deleteSelected();
+int selectedCount() const;
+```
+
+**Add signals:**
+```cpp
+void selectedCountChanged();
+```
+
+---
+
+#### [MODIFY] [ScrollBenchImageModel.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp)
+
+**Implement methods:**
+- `toggleSelection()` - Toggle selection state, emit dataChanged
+- `selectAll()` - Set all items selected
+- `clearSelection()` - Clear all selections
+- `deleteSelected()` - Remove selected items from model
+- `selectedCount()` - Count selected items
+
+**Update roleNames():**
+- Add `IsSelectedRole = "isSelected"`
+
+---
+
+### MainScrollBench.qml
+
+#### [MODIFY] [MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml)
+
+**Add to delegate:**
+```qml
+// Checkbox (top-left corner)
+Rectangle {
+    width: Math.max(16, Math.min(32, gridView.cellWidth / 8))
+    height: width
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.margins: 2
+    color: model.isSelected ? "#2196F3" : "#80000000"
+    border.color: "#FFFFFF"
+    border.width: 1
+    radius: 2
+    z: 10
+    
+    Text {
+        anchors.centerIn: parent
+        text: "✓"
+        color: "#FFFFFF"
+        visible: model.isSelected
+        font.pixelSize: parent.width * 0.6
+    }
+    
+    MouseArea {
+        anchors.fill: parent
+        anchors.margins: -5  // Larger hit area
+        onClicked: {
+            imageModel.toggleSelection(model.imageIndex)
+            mouse.accepted = true
+        }
+    }
+}
+```
+
+**Add SelectionBar:**
+```qml
+// Selection Bar (bottom)
+Rectangle {
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+    anchors.right: parent.right
+    height: 60
+    color: "#2196F3"
+    visible: imageModel.selectedCount > 0
+    z: 200
+    
+    RowLayout {
+        anchors.fill: parent
+        anchors.margins: 10
+        
+        Text {
+            text: imageModel.selectedCount + " selected"
+            color: "#FFFFFF"
+            font.pixelSize: 16
+        }
+        
+        Item { Layout.fillWidth: true }
+        
+        Button {
+            text: "Delete"
+            onClicked: imageModel.deleteSelected()
+        }
+        
+        Button {
+            text: "Deselect All"
+            onClicked: imageModel.clearSelection()
+        }
+    }
+}
+```
+
+---
+
+## Verification Plan
+
+### Manual Testing
+1. Load folder with images
+2. Click checkboxes at various zoom levels (20px to 400px)
+3. Verify checkbox scales appropriately
+4. Select multiple images
+5. Verify selection bar appears with correct count
+6. Click "Delete" and verify images removed
+7. Click "Deselect All" and verify selections cleared
+8. Test Ctrl+Click on image (should select, not open)
+
+### Edge Cases
+- Selection at minimum zoom (20px)
+- Selection at maximum zoom (400px)
+- Delete all images
+- Select/deselect during scroll

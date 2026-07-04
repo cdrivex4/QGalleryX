@@ -1,0 +1,363 @@
+
+[1/4] Killing lingering FFmpeg workers...
+[2/4] Waiting for process handles to release...
+[3/4] Freeing port 7860...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 57252 on port 7860. Killing tree...
+Found process 0 on port 7860. Killing tree...
+Found process 57252 on port 7860. Killing tree...
+Found process 59000 on port 7860. Killing tree...
+Found process 59000 on port 7860. Killing tree...
+[3/3] Starting just-dub-it2 Dashboard...
+
+➔ Local URL: http://127.0.0.1:7860
+➔ Network URL: Exposed on LAN (0.0.0.0)
+
+2026-06-01 23:51:46,560 | INFO | BOOT | >>> BOOTSTRAP: PROVISIONAL ENVIRONMENT LOCK ACTIVE <<
+2026-06-01 23:51:50,083 | INFO | PIPE | [PIPEWORKER] Background Thread Online.
+2026-06-01 23:51:50,083 | INFO | PIPE | PipelineManager initialized. Worker thread active.
+2026-06-01 23:51:50,530 | INFO | PIPE | Enqueued job 1776007462. Queue size: 1
+2026-06-01 23:51:50,530 | INFO | PIPE | [PIPEWORKER] Dequeued Job: 1776007462
+* Running on local URL:  http://0.0.0.0:7860
+2026-06-01 23:51:51,560 | INFO | httpx | HTTP Request: GET http://localhost:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2026-06-01 23:51:51,585 | INFO | httpx | HTTP Request: HEAD http://localhost:7860/ "HTTP/1.1 200 OK"
+* To create a public link, set `share=True` in `launch()`.
+2026-06-01 23:51:52,596 | INFO | httpx | HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2026-06-01 23:51:55,533 | INFO | PIPE | [PIPEWORKER] Booting AI Core for 1776007462...
+C:\just-dub-it2\env\Lib\site-packages\pyannote\audio\core\io.py:43: UserWarning: torchaudio._backend.set_audio_backend has been deprecated. With dispatcher enabled, this function is no-op. You can remove the function call.
+  torchaudio.set_audio_backend("soundfile")
+2026-06-01 23:52:14,405 | INFO | PIPE | Source language detected: unknown
+2026-06-01 23:52:14,407 | INFO | PIPE | Loaded diarized segments and speaker references from cache.
+2026-06-01 23:53:53,744 | INFO | PIPE | [PIPEWORKER] Job 1776007462 FINISHED successfully.
+2026-06-02 00:04:37,420 | ERROR | asyncio | Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\curtis\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\curtis\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2026-06-02 00:19:47,202 | ERROR | asyncio | Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\curtis\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\curtis\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\brotli_middleware.py", line 74, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\route_utils.py", line 898, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 121, in app
+    await response(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 378, in __call__
+    await self._handle_single_range(send, start, end, stat_result.st_size, send_header_only)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 409, in _handle_single_range
+    async with await anyio.open_file(self.path, mode="rb") as file:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_core\_fileio.py", line 187, in open_file
+    fp = await to_thread.run_sync(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\just-dub-it2\\workspace\\gradio_temp\\0bf1f7e8518c770e7cfd89a80bc52af9ef91a396691ae147e3929ad2b8e252cd\\Copy.mp4'
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\brotli_middleware.py", line 74, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\route_utils.py", line 898, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 121, in app
+    await response(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 378, in __call__
+    await self._handle_single_range(send, start, end, stat_result.st_size, send_header_only)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 409, in _handle_single_range
+    async with await anyio.open_file(self.path, mode="rb") as file:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_core\_fileio.py", line 187, in open_file
+    fp = await to_thread.run_sync(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\just-dub-it2\\workspace\\gradio_temp\\0bf1f7e8518c770e7cfd89a80bc52af9ef91a396691ae147e3929ad2b8e252cd\\Copy.mp4'
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\brotli_middleware.py", line 74, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\route_utils.py", line 898, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 121, in app
+    await response(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 378, in __call__
+    await self._handle_single_range(send, start, end, stat_result.st_size, send_header_only)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 409, in _handle_single_range
+    async with await anyio.open_file(self.path, mode="rb") as file:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_core\_fileio.py", line 187, in open_file
+    fp = await to_thread.run_sync(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\just-dub-it2\\workspace\\gradio_temp\\0bf1f7e8518c770e7cfd89a80bc52af9ef91a396691ae147e3929ad2b8e252cd\\Copy.mp4'
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\brotli_middleware.py", line 74, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\route_utils.py", line 898, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 121, in app
+    await response(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 378, in __call__
+    await self._handle_single_range(send, start, end, stat_result.st_size, send_header_only)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 409, in _handle_single_range
+    async with await anyio.open_file(self.path, mode="rb") as file:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_core\_fileio.py", line 187, in open_file
+    fp = await to_thread.run_sync(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\just-dub-it2\\workspace\\gradio_temp\\0bf1f7e8518c770e7cfd89a80bc52af9ef91a396691ae147e3929ad2b8e252cd\\Copy.mp4'
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 186, in __call__
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\brotli_middleware.py", line 74, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\route_utils.py", line 898, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\just-dub-it2\env\Lib\site-packages\fastapi\routing.py", line 121, in app
+    await response(scope, receive, send)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 378, in __call__
+    await self._handle_single_range(send, start, end, stat_result.st_size, send_header_only)
+  File "C:\just-dub-it2\env\Lib\site-packages\starlette\responses.py", line 409, in _handle_single_range
+    async with await anyio.open_file(self.path, mode="rb") as file:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_core\_fileio.py", line 187, in open_file
+    fp = await to_thread.run_sync(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\just-dub-it2\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\just-dub-it2\\workspace\\gradio_temp\\0bf1f7e8518c770e7cfd89a80bc52af9ef91a396691ae147e3929ad2b8e252cd\\Copy.mp4'

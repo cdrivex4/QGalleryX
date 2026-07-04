@@ -1,0 +1,42 @@
+# Interactive Scene Auditor (Timeline Preview) Plan
+
+This plan implements the "Interactive Auditor" feature. It allows users to scrub through a long film (like our 86-minute project), select a specific scene, and instantly preview the dub by inheriting existing translation data from a "Master" folder.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Data Inheritance**: To make this "instant," the system will look for a "Master" workspace (e.g., `1776007462`). It will slice out the specific segments you've already cleaned/translated within your selected time window and port them to a separate preview job.
+
+> [!TIP]
+> **Performance**: By using existing translations, we bypass the heavy LLM (Stage 3) and Transcription (Stage 2) steps. A 30-second preview should be ready to hear in under 60 seconds.
+
+## Proposed Changes
+
+### 1. UI Upgrades
+#### [MODIFY] [main_ui.py](file:///c:/just-dub-it2/app/main_ui.py)
+*   **Timeline Sliders**: Replace `gr.Number` for "Preview Start" and "Duration" with `gr.Slider`.
+*   **Dynamic Range**: Add a trigger that updates the Slider's `maximum` value whenever a new video is uploaded to the Gradio component.
+*   **Master Workspace Selector**: Add a `gr.Dropdown` that lists existing numeric workspaces (`1776007462`, etc.) to use as the "Translation Data Source."
+
+### 2. Pipeline Inheritance Logic
+#### [MODIFY] [pipeline.py](file:///c:/just-dub-it2/app/pipeline.py)
+*   **Smart `add_job`**: Add a `master_ws` parameter. If provided, the manager will copy the `translated_segments.json` from the master, slice it for the requested time-window, and mark Stages 1-3 as "Already Done."
+*   **Force-Start at TTS**: Ensure these preview jobs prioritize synthesis over everything else.
+
+### 3. Audio Splicing Enhancement
+#### [MODIFY] [audio_mix.py](file:///c:/just-dub-it2/app/stages/audio_mix.py)
+*   Ensure the Pydub mixer correctly handles segments that have been "time-shifted" for a partial preview.
+
+## Open Questions
+
+*   **Audio Focus**: When you preview a scene, do you want to hear just the new AI Dub, or the Dub mixed with the original background music?
+*   **Deep Preview**: Should the Selective Preview ALWAYS run through Stage 6 (Lipsync), or should it stop at Stage 5 (Audio Mix) by default to save your GPU time?
+
+## Verification Plan
+
+### Automated Tests
+1.  **Segment Slicing Test**: Create a mock `translated_segments.json` with 10 segments. Run the slicing function for `start=20s, duration=10s` and verify the output has the correct offset segments.
+2.  **Gradio Update Test**: Confirm the slider range updates correctly when a video path is set.
+
+### Manual Verification
+1.  **Instant Audit**: Load the 86-minute film, select a 30s window at the 45-minute mark, select `1776007462` as the master, and confirm it proceeds directly to TTS.

@@ -1,0 +1,28 @@
+# Research and Planning
+
+- [x] Analyze current video handling and ffmpeg integration possibilities <!-- id: 0 -->
+- [x] Analyze current image handling and compatibility improvements <!-- id: 1 -->
+- [x] Analyze folder scanning logic and UI feedback mechanisms <!-- id: 2 -->
+- [x] Compile Research Report & Implementation Plan <!-- id: 3 -->
+
+## Phase 1: Scanning Feedback
+- [x] Add [isLoading](file:///d:/Dev/antigravity/src/ImageModel.h#47-48) property to [ImageModel](file:///d:/Dev/antigravity/src/ImageModel.h#18-56) <!-- id: 4 -->
+- [x] Update [Main.qml](file:///d:/Dev/antigravity/resources/qml/Main.qml) to show scanning overlay <!-- id: 5 -->
+
+## Phase 2: FFmpeg Integration (Revised)
+- [x] Research FFmpeg library integration (libavcodec/libavformat) <!-- id: 6 -->
+- [x] Acquire/Setup FFmpeg in `3rdparty` <!-- id: 7 -->
+- [x] Configure build system (CMake/QMake) to link FFmpeg <!-- id: 8 -->
+- [x] Implement [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#16-17) class using FFmpeg C API <!-- id: 9 -->
+- [x] Update `AsyncImageProvider` to use [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#16-17) <!-- id: 10 -->
+
+## Phase 3: Image Compatibility
+- [x] Add new image/raw extensions to [ImageModel](file:///d:/Dev/antigravity/src/ImageModel.h#18-56) <!-- id: 11 -->
+## Phase 3: Image Compatibility
+- [x] Add new image/raw extensions to [ImageModel](file:///d:/Dev/antigravity/src/ImageModel.h#18-56) <!-- id: 11 -->
+- [x] Update `AsyncImageProvider` for additional formats <!-- id: 12 -->
+
+## Phase 4: Robustness & Testing
+- [ ] Audit code for memory leaks <!-- id: 13 -->
+- [ ] Create Unit Tests for [ImageModel](file:///d:/Dev/antigravity/src/ImageModel.h#18-56) and [Thumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#16-17) <!-- id: 14 -->
+- [ ] Verify using `I:\torrentz\Films` <!-- id: 15 -->

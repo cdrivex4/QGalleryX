@@ -109,17 +109,232 @@ void QHashCacheDatabase::clear() {
     m_totalBytes = 0;
 }
 
-// --- LmdbCacheDatabase Stub Implementation ---
+// --- MmapCacheDatabase Implementation ---
 
-void LmdbCacheDatabase::load(const QString& dbPath) { Q_UNUSED(dbPath); }
-void LmdbCacheDatabase::save(const QString& dbPath) { Q_UNUSED(dbPath); }
-bool LmdbCacheDatabase::contains(const QString& key) { Q_UNUSED(key); return false; }
-CacheEntry LmdbCacheDatabase::get(const QString& key) { Q_UNUSED(key); return CacheEntry(); }
-void LmdbCacheDatabase::insert(const QString& key, const CacheEntry& entry) { Q_UNUSED(key); Q_UNUSED(entry); }
-void LmdbCacheDatabase::remove(const QString& key) { Q_UNUSED(key); }
-qint64 LmdbCacheDatabase::totalSizeBytes() { return 0; }
-QList<QString> LmdbCacheDatabase::getOldestKeys(int limit) { Q_UNUSED(limit); return QList<QString>(); }
-void LmdbCacheDatabase::clear() {}
+MmapCacheDatabase::MmapCacheDatabase() : m_capacity(0) {}
+
+MmapCacheDatabase::~MmapCacheDatabase() {
+    if (m_mappedData) {
+        m_file.unmap(m_mappedData);
+    }
+    if (m_file.isOpen()) {
+        m_file.close();
+    }
+}
+
+void MmapCacheDatabase::load(const QString& dbPath) {
+    QMutexLocker lock(&m_mutex);
+    m_file.setFileName(dbPath);
+    
+    // Create if not exists or if we can't open read/write
+    if (!m_file.open(QIODevice::ReadWrite)) {
+        qWarning() << "Failed to open mmap cache file:" << dbPath;
+        return;
+    }
+
+    m_capacity = 1024LL * 1024LL * 1024LL; // 1GB fixed capacity for ring buffer
+    if (m_file.size() < m_capacity) {
+        m_file.resize(m_capacity);
+    }
+
+    m_mappedData = m_file.map(0, m_capacity);
+    if (!m_mappedData) {
+        qWarning() << "Failed to mmap cache file!";
+        m_file.close();
+        return;
+    }
+
+    RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
+    if (header->magic != 0x4D4D4150) { // 'MMAP'
+        // Initialize new ring buffer
+        header->magic = 0x4D4D4150;
+        header->head = sizeof(RingHeader);
+        header->tail = sizeof(RingHeader);
+        header->capacity = m_capacity;
+    }
+
+    // Rebuild index by walking the ring buffer from tail to head
+    quint64 current = header->tail;
+    while (current != header->head) {
+        if (current >= m_capacity - sizeof(RecordHeader)) {
+            current = sizeof(RingHeader); // Wrap
+            continue;
+        }
+        
+        RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + current);
+        if (rec->keyLen == 0xFFFFFFFF) {
+            current = sizeof(RingHeader); // Wrap marker found
+            continue;
+        }
+        if (rec->keyLen == 0 || rec->keyLen > 1024 || rec->dataLen > 1024*1024*10) {
+            // Corruption detected, reset ring
+            header->head = sizeof(RingHeader);
+            header->tail = sizeof(RingHeader);
+            m_index.clear();
+            m_offsets.clear();
+            break;
+        }
+
+        quint64 nextCurrent = current + sizeof(RecordHeader) + rec->keyLen + rec->dataLen;
+        if (nextCurrent > m_capacity) {
+            current = sizeof(RingHeader); // Wrap
+            continue;
+        }
+
+        QString key = QString::fromUtf8(reinterpret_cast<const char*>(m_mappedData + current + sizeof(RecordHeader)), rec->keyLen);
+        
+        CacheEntry entry;
+        entry.fileSizeBytes = rec->dataLen;
+        m_index.insert(key, entry);
+        m_offsets.insert(key, current);
+
+        current = nextCurrent;
+    }
+}
+
+void MmapCacheDatabase::save(const QString& dbPath) { Q_UNUSED(dbPath); } // Synced automatically via OS pages
+
+bool MmapCacheDatabase::contains(const QString& key) {
+    QMutexLocker lock(&m_mutex);
+    return m_index.contains(key);
+}
+
+CacheEntry MmapCacheDatabase::get(const QString& key) {
+    QMutexLocker lock(&m_mutex);
+    return m_index.value(key);
+}
+
+void MmapCacheDatabase::insert(const QString& key, const CacheEntry& entry) { Q_UNUSED(key); Q_UNUSED(entry); }
+void MmapCacheDatabase::remove(const QString& key) {
+    QMutexLocker lock(&m_mutex);
+    m_index.remove(key);
+    m_offsets.remove(key);
+}
+
+qint64 MmapCacheDatabase::totalSizeBytes() { return 0; } // Managed by ring capacity
+QList<QString> MmapCacheDatabase::getOldestKeys(int limit) { Q_UNUSED(limit); return {}; }
+void MmapCacheDatabase::clear() {
+    QMutexLocker lock(&m_mutex);
+    clearInternal();
+}
+
+void MmapCacheDatabase::clearInternal() {
+    if (m_mappedData) {
+        RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
+        header->head = sizeof(RingHeader);
+        header->tail = sizeof(RingHeader);
+    }
+    m_index.clear();
+    m_offsets.clear();
+}
+
+QByteArray MmapCacheDatabase::getRawData(const QString& key) {
+    QMutexLocker lock(&m_mutex);
+    if (!m_mappedData || !m_offsets.contains(key)) return QByteArray();
+    
+    quint64 offset = m_offsets.value(key);
+    if (offset + sizeof(RecordHeader) > m_capacity) return QByteArray(); // Bounds check
+    
+    RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + offset);
+    
+    if (rec->keyLen > 1024 || rec->dataLen > 1024*1024*50) return QByteArray(); // Sanity check
+    if (offset + sizeof(RecordHeader) + rec->keyLen + rec->dataLen > m_capacity) return QByteArray(); // Bounds check
+    
+    // Deep copy to prevent corruption if another thread wraps the ring buffer during decode
+    return QByteArray(reinterpret_cast<const char*>(m_mappedData + offset + sizeof(RecordHeader) + rec->keyLen), rec->dataLen);
+}
+
+bool MmapCacheDatabase::advanceHead(quint64 requiredSize) {
+    RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
+    
+    // Check if we need to wrap
+    if (header->head + requiredSize > m_capacity) {
+        // Write wrap marker before wrapping, but ONLY if there is enough space!
+        if (header->head + sizeof(RecordHeader) <= m_capacity) {
+            RecordHeader* wrapMarker = reinterpret_cast<RecordHeader*>(m_mappedData + header->head);
+            wrapMarker->keyLen = 0xFFFFFFFF; // Special value indicating wrap
+            wrapMarker->dataLen = 0;
+        }
+
+        // If tail is between head and end, we would overwrite tail by wrapping.
+        // We must push tail forward until it's wrapped.
+        while (header->tail >= header->head || header->tail == sizeof(RingHeader)) {
+            if (header->tail >= m_capacity - sizeof(RecordHeader) || header->tail == header->head) {
+                header->tail = sizeof(RingHeader);
+                continue;
+            }
+            RecordHeader* tailRec = reinterpret_cast<RecordHeader*>(m_mappedData + header->tail);
+            if (tailRec->keyLen == 0xFFFFFFFF) {
+                header->tail = sizeof(RingHeader);
+                continue;
+            }
+            if (tailRec->keyLen > 1024 || tailRec->dataLen > 1024*1024*50 || header->tail + sizeof(RecordHeader) + tailRec->keyLen > m_capacity) {
+                clearInternal(); return true; // Corruption guard
+            }
+            QString tailKey = QString::fromUtf8(reinterpret_cast<const char*>(m_mappedData + header->tail + sizeof(RecordHeader)), tailRec->keyLen);
+            m_index.remove(tailKey);
+            m_offsets.remove(tailKey);
+            
+            quint64 nextTail = header->tail + sizeof(RecordHeader) + tailRec->keyLen + tailRec->dataLen;
+            if (nextTail > m_capacity) header->tail = sizeof(RingHeader);
+            else header->tail = nextTail;
+        }
+        header->head = sizeof(RingHeader); // Wrap head
+    }
+    
+    // Now check if head pushes tail
+    while (header->head < header->tail && header->head + requiredSize > header->tail) {
+        RecordHeader* tailRec = reinterpret_cast<RecordHeader*>(m_mappedData + header->tail);
+        if (tailRec->keyLen == 0xFFFFFFFF) {
+            header->tail = sizeof(RingHeader);
+            continue; // Re-evaluate condition after wrapping
+        }
+        if (tailRec->keyLen > 1024 || tailRec->dataLen > 1024*1024*50 || header->tail + sizeof(RecordHeader) + tailRec->keyLen > m_capacity) {
+            clearInternal(); return true; // Corruption guard
+        }
+        QString tailKey = QString::fromUtf8(reinterpret_cast<const char*>(m_mappedData + header->tail + sizeof(RecordHeader)), tailRec->keyLen);
+        m_index.remove(tailKey);
+        m_offsets.remove(tailKey);
+        
+        quint64 nextTail = header->tail + sizeof(RecordHeader) + tailRec->keyLen + tailRec->dataLen;
+        if (nextTail > m_capacity) header->tail = sizeof(RingHeader);
+        else header->tail = nextTail;
+    }
+    
+    return true;
+}
+
+void MmapCacheDatabase::insertRawData(const QString& key, const QString& originalPath, const QString& sizeKey, const QByteArray& data) {
+    QMutexLocker lock(&m_mutex);
+    if (!m_mappedData) return;
+    
+    QByteArray keyBytes = key.toUtf8();
+    quint64 totalRequired = sizeof(RecordHeader) + keyBytes.size() + data.size();
+    
+    if (totalRequired > m_capacity / 2) return; // Too large for ring
+    
+    RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
+    advanceHead(totalRequired);
+    
+    quint64 offset = header->head;
+    RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + offset);
+    rec->keyLen = keyBytes.size();
+    rec->dataLen = data.size();
+    
+    memcpy(m_mappedData + offset + sizeof(RecordHeader), keyBytes.constData(), rec->keyLen);
+    memcpy(m_mappedData + offset + sizeof(RecordHeader) + rec->keyLen, data.constData(), rec->dataLen);
+    
+    CacheEntry entry;
+    entry.originalPath = originalPath;
+    entry.sizeKey = sizeKey;
+    entry.fileSizeBytes = data.size();
+    entry.lastAccessed = QDateTime::currentMSecsSinceEpoch();
+    
+    m_index.insert(key, entry);
+    m_offsets.insert(key, offset);
+    
+    header->head += totalRequired;
+}
 
 // --- FileCacheManager Implementation ---
 
@@ -130,7 +345,7 @@ FileCacheManager& FileCacheManager::instance() {
 
 FileCacheManager::FileCacheManager() : m_maxBytes(1024LL * 1024LL * 1024LL) /* 1GB default */ {
     QSettings settings("SamsungClone", "Gallery");
-    int dbType = settings.value("diskCacheDatabaseType", 0).toInt();
+    int dbType = settings.value("diskCacheDatabaseType", 1).toInt();
     
     QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/thumbnails";
     QDir dir(cacheDir);
@@ -148,9 +363,9 @@ FileCacheManager::FileCacheManager() : m_maxBytes(1024LL * 1024LL * 1024LL) /* 1
     }
 
     if (dbType == 1) {
-        m_db = std::make_unique<LmdbCacheDatabase>();
-        m_dbPath = cacheDir + "/FileCache.lmdb";
-        qDebug() << "FileCacheManager: Initialized with LMDB (Stub) at" << m_dbPath;
+        m_db = std::make_unique<MmapCacheDatabase>();
+        m_dbPath = cacheDir + "/FileCache.mmap";
+        qDebug() << "FileCacheManager: Initialized with Memory-Mapped Ring Buffer at" << m_dbPath;
     } else {
         m_db = std::make_unique<QHashCacheDatabase>();
         m_dbPath = cacheDir + "/FileCache.db";
@@ -212,6 +427,30 @@ void FileCacheManager::registerCacheFile(const QString& id, const QSize& request
     
     m_db->insert(key, entry);
     m_dirty = true;
+}
+
+QByteArray FileCacheManager::getCachedData(const QString& id, const QSize& requestedSize) {
+    if (!m_canWrite || !m_db) return QByteArray();
+    
+    // Only MmapCacheDatabase supports this direct extraction
+    MmapCacheDatabase* mmapDb = dynamic_cast<MmapCacheDatabase*>(m_db.get());
+    if (mmapDb) {
+        QString key = getCoalesceKey(id, requestedSize);
+        return mmapDb->getRawData(key);
+    }
+    return QByteArray();
+}
+
+void FileCacheManager::registerCachedData(const QString& id, const QSize& requestedSize, const QByteArray& data) {
+    if (!m_canWrite || !m_db) return;
+    
+    MmapCacheDatabase* mmapDb = dynamic_cast<MmapCacheDatabase*>(m_db.get());
+    if (mmapDb) {
+        QString key = getCoalesceKey(id, requestedSize);
+        QString sizeKey = QString("%1x%2").arg(requestedSize.width()).arg(requestedSize.height());
+        mmapDb->insertRawData(key, id, sizeKey, data);
+        m_dirty = true;
+    }
 }
 
 void FileCacheManager::performMaintenance() {

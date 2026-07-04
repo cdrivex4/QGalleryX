@@ -10,6 +10,33 @@ Write-Host "Stopping any running instances..." -ForegroundColor Yellow
 Stop-Process -Name "appScrollBench" -Force -ErrorAction SilentlyContinue
 Start-Sleep -Milliseconds 500
 
+# 1.5 Verify File Locks for network/remote execution
+$exeFile = ".\deploy\appScrollBench.exe"
+if (Test-Path $exeFile) {
+    Write-Host "Verifying file lock on $exeFile..." -ForegroundColor Yellow
+    $locked = $true
+    $waitCount = 0
+    while ($locked) {
+        try {
+            $fileStream = [System.IO.File]::Open($exeFile, 'Open', 'Read', 'None')
+            $fileStream.Close()
+            $fileStream.Dispose()
+            $locked = $false
+            if ($waitCount -gt 0) {
+                Write-Host "  Lock released! Continuing..." -ForegroundColor Green
+            }
+        }
+        catch {
+            if ($waitCount -eq 0) {
+                Write-Host "File is LOCKED by another process: $exeFile" -ForegroundColor Red
+                Write-Host "  Waiting for remote instances to be closed..." -ForegroundColor Yellow
+            }
+            Start-Sleep -Seconds 2
+            $waitCount++
+        }
+    }
+}
+
 # 2. Build (CMake handles dependencies)
 Write-Host "Building..." -ForegroundColor Cyan
 Set-Location build

@@ -1,0 +1,7 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-07-04T16:13:35+04:00
+Prompt: Wait for build
+
+[2026-07-04T16:13:15+04:00] Still waiting. Remaining time: 20s
+[2026-07-04T16:13:25+04:00] Still waiting. Remaining time: 10s
+[2026-07-04T16:13:35+04:00] Timer fired.

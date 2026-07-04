@@ -1,0 +1,21 @@
+# Task List: SIA Prototype Phase 1
+
+## Completed Tasks
+- [x] **Environmental Setup**: Initialized React 19 project with Vite.
+- [x] **Design Tokens**: Defined [index.css](file:///d:/Dev/Recurrant/sia-portal/src/index.css) with premium glassmorphism and emerald-themed palette.
+- [x] **Mock Data Layer**: Created [mockData.js](file:///d:/Dev/Recurrant/sia-portal/src/data/mockData.js) based on SIA regions and CTO's schema.
+- [x] **Application Layout**: Implemented sidebar and navigation header.
+- [x] **CEO Dashboard V1**: Implemented Recharts-powered metrics and project health table.
+- [x] **Project Board V1**: Implemented Kanban layout and task detail modal skeleton.
+
+## Immediate Next Steps
+- [ ] **Notification Sound Engine**: Add audio cues for task moves and comments as requested.
+- [ ] **Mock Document Attachment**: Implement UI for uploading/displaying files on project cards.
+- [ ] **Search Logic**: Connect the header search bar to filter dashboard/board data.
+- [ ] **Dockerization**: Create the initial `Dockerfile` for the prototype.
+- [ ] **Unit Tests**: Write the first set of tests for the project filtering logic and board state.
+
+## Future Tasks
+- [ ] **Vector Search Integration**: Technical spike on how to integrate an LLM for project interrogation.
+- [ ] **Authentication Flow**: Mock login for different roles (CEO vs Engineer).
+- [ ] **Report Generation**: Mock "Nuke" button functionality for PDF export.

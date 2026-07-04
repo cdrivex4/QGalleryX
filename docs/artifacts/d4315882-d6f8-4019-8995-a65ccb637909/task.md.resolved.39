@@ -1,0 +1,41 @@
+# Task: Full LTX-2 Pipeline on Windows (Fresh Start)
+
+## Phase 1 — Download Weights (~44 GB from HuggingFace)
+- [x] Rewrite [scripts/download_weights.py](file:///c:/just-dub-it/scripts/download_weights.py) for real LTX-2 assets
+- [x] Download [ltx-2-19b-dev.safetensors](file:///c:/just-dub-it/weights/ltx-2-19b-dev.safetensors) (~35 GB)
+- [x] Download [ltx-2-19b-distilled-lora-384.safetensors](file:///c:/just-dub-it/weights/ltx-2-19b-distilled-lora-384.safetensors) (~700 MB)
+- [x] Download [ltx-2-spatial-upscaler-x2-1.0.safetensors](file:///c:/just-dub-it/weights/ltx-2-spatial-upscaler-x2-1.0.safetensors) (~360 MB)
+- [x] Download [ltx-2-19b-ic-lora-lipdubbing.safetensors](file:///c:/just-dub-it/weights/ltx-2-19b-ic-lora-lipdubbing.safetensors) (~700 MB)
+- [/] Swap Gemma weights: Replace raw Google shards with Lightricks [text_encoder](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py#248-256) patch (~24 GB, 11 shards)
+    - [ ] `model-00001-of-00011.safetensors` to `model-00011-of-00011.safetensors`
+    - [ ] [model.safetensors.index.json](file:///C:/just-dub-it/weights/gemma/model.safetensors.index.json), [config.json](file:///c:/just-dub-it/optimal_hw_config.json), [tokenizer.json](file:///c:/just-dub-it/weights/gemma/tokenizer.json)
+
+## Phase 2 — Server: Replace Lite Path with Real JustDubit Pipeline
+- [x] Remove Wav2Lip / sync_engine / ultra-lite blocks from [server.py](file:///c:/just-dub-it/server.py)
+- [x] Add lazy [JustDubitPipeline](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py#95-542) initialization at server startup
+- [x] Implement [run_justdubit_inference()](file:///c:/just-dub-it/server.py#202-316) using real pipeline
+- [x] Add `/weights_status` endpoint for download progress
+- [x] Keep existing job queue, progress reporting, CORS, PID management
+
+## Phase 3 — Frontend Updates
+- [x] Add "Speaker Description" input field (feeds prompt)
+- [x] Add weight download status indicator
+- [x] Confirm existing upload / job queue / progress UI still works
+
+## Phase 4 — Cleanup
+- [x] Remove [scripts/sync_engine.py](file:///c:/just-dub-it/scripts/sync_engine.py) (broken placeholder)
+- [x] Remove [scripts/manual_dub.py](file:///c:/just-dub-it/scripts/manual_dub.py) (broken placeholder)
+- [x] Remove [wav2lip_model.py](file:///c:/just-dub-it/wav2lip_model.py) (no longer needed)
+
+## Phase 5 — Verification
+- [x] Confirm imports: [JustDubitPipeline](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py#95-542), `whisper`, CUDA
+- [x] Run end-to-end test with existing test video
+- [x] Verify English dubbed output with real lip sync
+
+## Phase 6 — Automated Hardware Benchmarking
+- [/] Develop parameter sweep script ([bench_hardware.py](file:///c:/just-dub-it/scripts/bench_hardware.py))
+    - [x] Fix [ModelLedger](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py#44-286) weight path logic for sharded Gemma weights
+    - [x] Optimize [SingleGPUModelBuilder](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/loader/single_gpu_model_builder.py#25-117) memory (in-place casting)
+    - [x] Clear `pyrefly.exe` zombie processes (6GB leak)
+- [ ] Test VAE tiling chunks, resolutions, and frames against 4GB/16GB/64GB constraints
+- [ ] Integrate discovered stable limits ([optimal_hw_config.json](file:///c:/just-dub-it/optimal_hw_config.json)) into main [server.py](file:///c:/just-dub-it/server.py)

@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan for cleaning up 'polluted' translation data (robot chatter), optimizing the LLM prompt for speed and zero-explanation output, and performing a system-wide 'flattening' (consolidation of settings and removal of diagnostic tools) to restore the 1-hour movie transcode.",
+  "updatedAt": "2026-04-13T02:21:17.036341500Z",
+  "requestFeedback": true
+}

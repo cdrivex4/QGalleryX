@@ -10,7 +10,7 @@ Item {
     signal imageLoaded(int timeMs)
     
     // Properties
-    property real uiThumbnailSize: appSettings ? appSettings.gridSize : 100
+    property real uiThumbnailSize: appSettings ? appSettings.gridResolution : 100
     property int loadingResolution: appSettings ? appSettings.thumbnailSize : 200
     property string folderPath: ""
     
@@ -58,7 +58,7 @@ Item {
 
     // Zoom State
     property real currentScale: 1.0
-    property real startPinchGridSize: 100
+    property real startPinchGridResolution: 100
     property int zoomTargetSourceIndex: -1
     property real zoomTargetRelativeY: 0.5 // 0 to 1 (relative to viewport height)
 
@@ -154,7 +154,7 @@ Item {
         onActiveChanged: {
             if (active) {
                 // Pinch Started
-                root.startPinchGridSize = appSettings.gridSize
+                root.startPinchGridResolution = appSettings.gridResolution
                 listView.interactive = false // Disable scrolling during pinch
                 
                 // Capture target
@@ -170,14 +170,14 @@ Item {
                 
             } else {
                 // Pinch Ended - Commit Zoom
-                var newSize = root.startPinchGridSize * root.currentScale
+                var newSize = root.startPinchGridResolution * root.currentScale
                 newSize = Math.max(20, Math.min(newSize, 400)) // Min 20px
                 
                 // Reset Scale
                 root.currentScale = 1.0
                 
                 // Apply new size (this will trigger re-layout)
-                appSettings.gridSize = newSize
+                appSettings.gridResolution = newSize
                 
                 // Restore Position
                 if (root.zoomTargetSourceIndex !== -1) {
@@ -218,7 +218,7 @@ Item {
                 var targetSourceIndex = root.getSourceIndexAt(wheel.x, wheel.y)
                 var targetRelativeY = wheel.y / viewport.height
                 
-                var oldSize = appSettings.gridSize
+                var oldSize = appSettings.gridResolution
                 var newSize = oldSize
                 
                 if (wheel.angleDelta.y > 0) {
@@ -228,7 +228,7 @@ Item {
                 }
                 
                 if (newSize !== oldSize) {
-                    appSettings.gridSize = newSize
+                    appSettings.gridResolution = newSize
                     
                     // Restore Position
                     if (targetSourceIndex !== -1) {

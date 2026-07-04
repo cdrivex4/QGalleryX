@@ -1,0 +1,455 @@
+warning: in the working copy of '3rdparty/ffmpeg/LICENSE.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/bootstrap.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/community.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/default.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/developer.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/drawvg-reference.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/faq.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/fate.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-all.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-bitstream-filters.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-codecs.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-devices.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-filters.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-formats.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-protocols.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-resampler.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-scaler.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg-utils.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffmpeg.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffplay-all.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffplay.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffprobe-all.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/ffprobe.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/general.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/git-howto.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libavcodec.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libavdevice.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libavfilter.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libavformat.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libavutil.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libswresample.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/libswscale.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/mailing-list-faq.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/nut.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/platform.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/doc/style.min.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/ac3_parser.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/adts_parser.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/avcodec.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/avdct.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/bsf.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/codec.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/codec_desc.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/codec_id.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/codec_par.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/d3d11va.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/defs.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/dirac.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/dv_profile.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/dxva2.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/exif.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/jni.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/mediacodec.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/packet.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/qsv.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/smpte_436m.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/vdpau.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/version_major.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/videotoolbox.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavcodec/vorbis_parser.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavdevice/avdevice.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavdevice/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavdevice/version_major.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavfilter/avfilter.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavfilter/buffersink.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavfilter/buffersrc.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavfilter/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavfilter/version_major.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavformat/avformat.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavformat/avio.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavformat/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavformat/version_major.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/adler32.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/aes.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/aes_ctr.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/ambient_viewing_environment.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/attributes.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/audio_fifo.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/avassert.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/avconfig.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/avstring.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/avutil.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/base64.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/blowfish.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/bprint.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/bswap.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/buffer.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/camellia.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/cast5.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/channel_layout.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/common.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/container_fifo.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/cpu.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/crc.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/csp.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/des.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/detection_bbox.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/dict.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/display.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/dovi_meta.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/downmix_info.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/encryption_info.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/error.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/eval.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/executor.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/ffversion.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/fifo.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/file.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/film_grain_params.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/frame.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hash.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hdr_dynamic_metadata.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hdr_dynamic_vivid_metadata.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hmac.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_amf.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_cuda.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_d3d11va.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_d3d12va.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_drm.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_dxva2.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_mediacodec.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_oh.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_opencl.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_qsv.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_vaapi.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_vdpau.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_videotoolbox.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/hwcontext_vulkan.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/iamf.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/imgutils.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/intfloat.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/intreadwrite.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/lfg.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/log.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/lzo.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/macros.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/mastering_display_metadata.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/mathematics.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/md5.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/mem.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/motion_vector.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/murmur3.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/opt.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/parseutils.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/pixdesc.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/pixelutils.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/pixfmt.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/random_seed.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/rational.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/rc4.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/refstruct.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/replaygain.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/ripemd.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/samplefmt.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/sha.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/sha512.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/spherical.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/stereo3d.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/tdrdi.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/tea.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/threadmessage.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/time.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/timecode.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/timestamp.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/tree.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/twofish.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/tx.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/uuid.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/video_enc_params.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/video_hint.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/xtea.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libswresample/swresample.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libswresample/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libswresample/version_major.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libswscale/swscale.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libswscale/version.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libswscale/version_major.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/avcodec-62.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/avdevice-62.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/avfilter-11.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/avformat-62.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/avutil-60.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libavcodec.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libavdevice.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libavfilter.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libavformat.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libavutil.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libswresample.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/pkgconfig/libswscale.pc', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/swresample-6.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/lib/swscale-9.def', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/presets/libvpx-1080p.ffpreset', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/presets/libvpx-1080p50_60.ffpreset', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/presets/libvpx-360p.ffpreset', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/presets/libvpx-720p.ffpreset', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/presets/libvpx-720p50_60.ffpreset', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.agents/AGENTS.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gemini/skills/graphify-project/SKILL.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.graphifyignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '3rdparty/ffmpeg/include/libavutil/raw_color_params.h', LF will be replaced by CRLF the next time Git touches it
+error: short read while indexing graphify-out/2026-06-21/.graphify_labels.json
+error: graphify-out/2026-06-21/.graphify_labels.json: failed to insert into database
+error: unable to index file 'graphify-out/2026-06-21/.graphify_labels.json'
+fatal: adding files failed
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   3rdparty/ffmpeg/LICENSE.txt
+	modified:   3rdparty/ffmpeg/bin/avcodec-62.dll
+	modified:   3rdparty/ffmpeg/bin/avdevice-62.dll
+	modified:   3rdparty/ffmpeg/bin/avfilter-11.dll
+	modified:   3rdparty/ffmpeg/bin/avformat-62.dll
+	modified:   3rdparty/ffmpeg/bin/avutil-60.dll
+	modified:   3rdparty/ffmpeg/bin/ffmpeg.exe
+	modified:   3rdparty/ffmpeg/bin/ffplay.exe
+	modified:   3rdparty/ffmpeg/bin/ffprobe.exe
+	modified:   3rdparty/ffmpeg/bin/swresample-6.dll
+	modified:   3rdparty/ffmpeg/bin/swscale-9.dll
+	modified:   3rdparty/ffmpeg/doc/community.html
+	modified:   3rdparty/ffmpeg/doc/developer.html
+	modified:   3rdparty/ffmpeg/doc/drawvg-reference.html
+	modified:   3rdparty/ffmpeg/doc/faq.html
+	modified:   3rdparty/ffmpeg/doc/fate.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-all.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-bitstream-filters.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-codecs.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-devices.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-filters.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-formats.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-protocols.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-resampler.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-scaler.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg-utils.html
+	modified:   3rdparty/ffmpeg/doc/ffmpeg.html
+	modified:   3rdparty/ffmpeg/doc/ffplay-all.html
+	modified:   3rdparty/ffmpeg/doc/ffplay.html
+	modified:   3rdparty/ffmpeg/doc/ffprobe-all.html
+	modified:   3rdparty/ffmpeg/doc/ffprobe.html
+	modified:   3rdparty/ffmpeg/doc/general.html
+	modified:   3rdparty/ffmpeg/doc/git-howto.html
+	modified:   3rdparty/ffmpeg/doc/libavcodec.html
+	modified:   3rdparty/ffmpeg/doc/libavdevice.html
+	modified:   3rdparty/ffmpeg/doc/libavfilter.html
+	modified:   3rdparty/ffmpeg/doc/libavformat.html
+	modified:   3rdparty/ffmpeg/doc/libavutil.html
+	modified:   3rdparty/ffmpeg/doc/libswresample.html
+	modified:   3rdparty/ffmpeg/doc/libswscale.html
+	modified:   3rdparty/ffmpeg/doc/mailing-list-faq.html
+	modified:   3rdparty/ffmpeg/doc/nut.html
+	modified:   3rdparty/ffmpeg/doc/platform.html
+	modified:   3rdparty/ffmpeg/include/libavcodec/ac3_parser.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/adts_parser.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/avcodec.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/avdct.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/bsf.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/codec.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/codec_desc.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/codec_id.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/codec_par.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/d3d11va.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/defs.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/dirac.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/dv_profile.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/dxva2.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/exif.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/jni.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/mediacodec.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/packet.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/qsv.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/smpte_436m.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/vdpau.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/version.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/version_major.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/videotoolbox.h
+	modified:   3rdparty/ffmpeg/include/libavcodec/vorbis_parser.h
+	modified:   3rdparty/ffmpeg/include/libavdevice/avdevice.h
+	modified:   3rdparty/ffmpeg/include/libavdevice/version.h
+	modified:   3rdparty/ffmpeg/include/libavdevice/version_major.h
+	modified:   3rdparty/ffmpeg/include/libavfilter/avfilter.h
+	modified:   3rdparty/ffmpeg/include/libavfilter/buffersink.h
+	modified:   3rdparty/ffmpeg/include/libavfilter/buffersrc.h
+	modified:   3rdparty/ffmpeg/include/libavfilter/version.h
+	modified:   3rdparty/ffmpeg/include/libavfilter/version_major.h
+	modified:   3rdparty/ffmpeg/include/libavformat/avformat.h
+	modified:   3rdparty/ffmpeg/include/libavformat/avio.h
+	modified:   3rdparty/ffmpeg/include/libavformat/version.h
+	modified:   3rdparty/ffmpeg/include/libavformat/version_major.h
+	modified:   3rdparty/ffmpeg/include/libavutil/adler32.h
+	modified:   3rdparty/ffmpeg/include/libavutil/aes.h
+	modified:   3rdparty/ffmpeg/include/libavutil/aes_ctr.h
+	modified:   3rdparty/ffmpeg/include/libavutil/ambient_viewing_environment.h
+	modified:   3rdparty/ffmpeg/include/libavutil/attributes.h
+	modified:   3rdparty/ffmpeg/include/libavutil/audio_fifo.h
+	modified:   3rdparty/ffmpeg/include/libavutil/avassert.h
+	modified:   3rdparty/ffmpeg/include/libavutil/avconfig.h
+	modified:   3rdparty/ffmpeg/include/libavutil/avstring.h
+	modified:   3rdparty/ffmpeg/include/libavutil/avutil.h
+	modified:   3rdparty/ffmpeg/include/libavutil/base64.h
+	modified:   3rdparty/ffmpeg/include/libavutil/blowfish.h
+	modified:   3rdparty/ffmpeg/include/libavutil/bprint.h
+	modified:   3rdparty/ffmpeg/include/libavutil/bswap.h
+	modified:   3rdparty/ffmpeg/include/libavutil/buffer.h
+	modified:   3rdparty/ffmpeg/include/libavutil/camellia.h
+	modified:   3rdparty/ffmpeg/include/libavutil/cast5.h
+	modified:   3rdparty/ffmpeg/include/libavutil/channel_layout.h
+	modified:   3rdparty/ffmpeg/include/libavutil/common.h
+	modified:   3rdparty/ffmpeg/include/libavutil/container_fifo.h
+	modified:   3rdparty/ffmpeg/include/libavutil/cpu.h
+	modified:   3rdparty/ffmpeg/include/libavutil/crc.h
+	modified:   3rdparty/ffmpeg/include/libavutil/csp.h
+	modified:   3rdparty/ffmpeg/include/libavutil/des.h
+	modified:   3rdparty/ffmpeg/include/libavutil/detection_bbox.h
+	modified:   3rdparty/ffmpeg/include/libavutil/dict.h
+	modified:   3rdparty/ffmpeg/include/libavutil/display.h
+	modified:   3rdparty/ffmpeg/include/libavutil/dovi_meta.h
+	modified:   3rdparty/ffmpeg/include/libavutil/downmix_info.h
+	modified:   3rdparty/ffmpeg/include/libavutil/encryption_info.h
+	modified:   3rdparty/ffmpeg/include/libavutil/error.h
+	modified:   3rdparty/ffmpeg/include/libavutil/eval.h
+	modified:   3rdparty/ffmpeg/include/libavutil/executor.h
+	modified:   3rdparty/ffmpeg/include/libavutil/ffversion.h
+	modified:   3rdparty/ffmpeg/include/libavutil/fifo.h
+	modified:   3rdparty/ffmpeg/include/libavutil/file.h
+	modified:   3rdparty/ffmpeg/include/libavutil/film_grain_params.h
+	modified:   3rdparty/ffmpeg/include/libavutil/frame.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hash.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hdr_dynamic_metadata.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hdr_dynamic_vivid_metadata.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hmac.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_amf.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_cuda.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_d3d11va.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_d3d12va.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_drm.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_dxva2.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_mediacodec.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_oh.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_opencl.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_qsv.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_vaapi.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_vdpau.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_videotoolbox.h
+	modified:   3rdparty/ffmpeg/include/libavutil/hwcontext_vulkan.h
+	modified:   3rdparty/ffmpeg/include/libavutil/iamf.h
+	modified:   3rdparty/ffmpeg/include/libavutil/imgutils.h
+	modified:   3rdparty/ffmpeg/include/libavutil/intfloat.h
+	modified:   3rdparty/ffmpeg/include/libavutil/intreadwrite.h
+	modified:   3rdparty/ffmpeg/include/libavutil/lfg.h
+	modified:   3rdparty/ffmpeg/include/libavutil/log.h
+	modified:   3rdparty/ffmpeg/include/libavutil/lzo.h
+	modified:   3rdparty/ffmpeg/include/libavutil/macros.h
+	modified:   3rdparty/ffmpeg/include/libavutil/mastering_display_metadata.h
+	modified:   3rdparty/ffmpeg/include/libavutil/mathematics.h
+	modified:   3rdparty/ffmpeg/include/libavutil/md5.h
+	modified:   3rdparty/ffmpeg/include/libavutil/mem.h
+	modified:   3rdparty/ffmpeg/include/libavutil/motion_vector.h
+	modified:   3rdparty/ffmpeg/include/libavutil/murmur3.h
+	modified:   3rdparty/ffmpeg/include/libavutil/opt.h
+	modified:   3rdparty/ffmpeg/include/libavutil/parseutils.h
+	modified:   3rdparty/ffmpeg/include/libavutil/pixdesc.h
+	modified:   3rdparty/ffmpeg/include/libavutil/pixelutils.h
+	modified:   3rdparty/ffmpeg/include/libavutil/pixfmt.h
+	modified:   3rdparty/ffmpeg/include/libavutil/random_seed.h
+	modified:   3rdparty/ffmpeg/include/libavutil/rational.h
+	modified:   3rdparty/ffmpeg/include/libavutil/rc4.h
+	modified:   3rdparty/ffmpeg/include/libavutil/refstruct.h
+	modified:   3rdparty/ffmpeg/include/libavutil/replaygain.h
+	modified:   3rdparty/ffmpeg/include/libavutil/ripemd.h
+	modified:   3rdparty/ffmpeg/include/libavutil/samplefmt.h
+	modified:   3rdparty/ffmpeg/include/libavutil/sha.h
+	modified:   3rdparty/ffmpeg/include/libavutil/sha512.h
+	modified:   3rdparty/ffmpeg/include/libavutil/spherical.h
+	modified:   3rdparty/ffmpeg/include/libavutil/stereo3d.h
+	modified:   3rdparty/ffmpeg/include/libavutil/tdrdi.h
+	modified:   3rdparty/ffmpeg/include/libavutil/tea.h
+	modified:   3rdparty/ffmpeg/include/libavutil/threadmessage.h
+	modified:   3rdparty/ffmpeg/include/libavutil/time.h
+	modified:   3rdparty/ffmpeg/include/libavutil/timecode.h
+	modified:   3rdparty/ffmpeg/include/libavutil/timestamp.h
+	modified:   3rdparty/ffmpeg/include/libavutil/tree.h
+	modified:   3rdparty/ffmpeg/include/libavutil/twofish.h
+	modified:   3rdparty/ffmpeg/include/libavutil/tx.h
+	modified:   3rdparty/ffmpeg/include/libavutil/uuid.h
+	modified:   3rdparty/ffmpeg/include/libavutil/version.h
+	modified:   3rdparty/ffmpeg/include/libavutil/video_enc_params.h
+	modified:   3rdparty/ffmpeg/include/libavutil/video_hint.h
+	modified:   3rdparty/ffmpeg/include/libavutil/xtea.h
+	modified:   3rdparty/ffmpeg/include/libswresample/swresample.h
+	modified:   3rdparty/ffmpeg/include/libswresample/version.h
+	modified:   3rdparty/ffmpeg/include/libswresample/version_major.h
+	modified:   3rdparty/ffmpeg/include/libswscale/swscale.h
+	modified:   3rdparty/ffmpeg/include/libswscale/version.h
+	modified:   3rdparty/ffmpeg/include/libswscale/version_major.h
+	modified:   3rdparty/ffmpeg/lib/avcodec-62.def
+	modified:   3rdparty/ffmpeg/lib/avcodec.lib
+	modified:   3rdparty/ffmpeg/lib/avformat-62.def
+	modified:   3rdparty/ffmpeg/lib/avformat.lib
+	modified:   3rdparty/ffmpeg/lib/avutil-60.def
+	modified:   3rdparty/ffmpeg/lib/avutil.lib
+	modified:   3rdparty/ffmpeg/lib/libavcodec.dll.a
+	modified:   3rdparty/ffmpeg/lib/libavdevice.dll.a
+	modified:   3rdparty/ffmpeg/lib/libavfilter.dll.a
+	modified:   3rdparty/ffmpeg/lib/libavformat.dll.a
+	modified:   3rdparty/ffmpeg/lib/libavutil.dll.a
+	modified:   3rdparty/ffmpeg/lib/libswresample.dll.a
+	modified:   3rdparty/ffmpeg/lib/libswscale.dll.a
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libavcodec.pc
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libavdevice.pc
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libavfilter.pc
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libavformat.pc
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libavutil.pc
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libswresample.pc
+	modified:   3rdparty/ffmpeg/lib/pkgconfig/libswscale.pc
+	modified:   3rdparty/ffmpeg/lib/swscale-9.def
+	modified:   3rdparty/ffmpeg/lib/swscale.lib
+	modified:   CMakeLists.txt
+	modified:   docs/resume/OUTSTANDING_TASKS.md
+	modified:   resources/qml/BuildInfo.qml
+	modified:   src/AsyncImageProvider.cpp
+	modified:   src/BuildInfo.h
+	modified:   src/HardwareAccelerationManager.cpp
+	modified:   src/SettingsHelper.cpp
+	modified:   src/SettingsHelper.h
+	modified:   src/SystemMonitor.cpp
+	modified:   src/SystemMonitor.h
+	modified:   src/TaskScheduler.cpp
+	modified:   src/VideoThumbnailer.cpp
+	modified:   test_scrollbench/deploy.ps1
+	modified:   test_scrollbench/qml/MainScrollBench.qml
+	modified:   test_scrollbench/qml/PhotoViewerScrollBench.qml
+	modified:   test_scrollbench/src/DiagnosticsMonitor.cpp
+	modified:   version.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.agents/
+	.gemini/skills/
+	.graphifyignore
+	3rdparty/ffmpeg.zip
+	3rdparty/ffmpeg/ffmpeg.exe
+	3rdparty/ffmpeg/ffplay.exe
+	3rdparty/ffmpeg/ffprobe.exe
+	3rdparty/ffmpeg/include/libavutil/raw_color_params.h
+	graphify-out/
+	graphify.toml
+	single_QGalleryX-Standalone/
+
+no changes added to commit (use "git add" and/or "git commit -a")

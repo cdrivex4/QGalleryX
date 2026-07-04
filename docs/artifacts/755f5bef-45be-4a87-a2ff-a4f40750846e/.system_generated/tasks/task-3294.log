@@ -1,0 +1,13 @@
+
+            placeholderText: "dY"? Filter filenames or folders..."
+        // Scan Folder Button
+            text: "dY"? Scan Folder"
+            onClicked: folderDialog.open()
+    FolderDialog {
+        id: folderDialog
+        title: "Select Image Folder"
+            var rawPath = selectedFolder.toString()
+    // SCANNING PROGRESS INDICATOR (Especially for Network Folders)
+                text: "Scanning folder: <b>" + imageModel.scannedCount + "</b> items discovered..."
+
+

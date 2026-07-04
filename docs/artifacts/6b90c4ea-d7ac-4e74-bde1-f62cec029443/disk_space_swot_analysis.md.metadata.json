@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary": "SWOT analysis of 5 disk space optimization strategies for the FaceSwap pipeline, grounded in real-world measurements (5,744 frames = 952 MB for an 86-second video). Covers: (1) Sliding Window Batched Processing, (2) FFmpeg Pipe Streaming, (3) Selective-Only Extraction, (4) JPEG Intermediate Format, and (5) Hybrid Concat Encoding. Each strategy includes strengths, weaknesses, opportunities, threats, implementation complexity, and estimated disk savings.",
+  "updatedAt": "2026-06-09T13:42:42.091652200Z",
+  "requestFeedback": true
+}

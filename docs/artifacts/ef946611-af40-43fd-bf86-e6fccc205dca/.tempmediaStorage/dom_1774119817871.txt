@@ -1,0 +1,159 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Skip to content
+Navigation Menu
+[0] (47,51)<a aria-label='Homepage' class='tmp-mr-lg-3 color-fg-inherit flex-order-2 js-prevent-focus-on-mobile-nav' href='/' />
+[1] (126,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Platform />
+[2] (224,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Solutions />
+[3] (326,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Resources />
+[4] (442,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Open Source />
+[5] (557,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Enterprise />
+[6] (641,51)<a class='NavLink-module__link__EG3d4 MarketingNavigation-module__navLink__hUomM' href='https://github.com/pricing' />
+	[7] (641,51)<span >Pricing />
+[8] (749,51)<button aria-label='Search or jump to…' class='header-search-button placeholder input-button form-control d-flex flex-1 flex-self-stretch flex-items-center no-wrap width-full py-0 pl-2 pr-0 text-left border-0 box-shadow-none' placeholder='Search or jump to...' />
+	[9] (749,51)<div  />
+[10] (809,51)<a class='HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1' href='/login?return_to=https%3A%2F%2Fgithub.com%2FLightDestory%2FqBittorrent-Search-Plugins'>Sign in />
+[11] (890,51)<a class='HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1' href='/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=LightDestory%2FqBittorrent-Search-Plugins'>Sign up />
+[12] (953,51)<button class='Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border' id='icon-button-e4dbf600-337c-40c7-94b5-25e9606ad951' />
+[13] (111,145)<a class='url fn' href='/LightDestory'>LightDestory />
+/
+[14] (300,145)<a href='/LightDestory/qBittorrent-Search-Plugins'>qBittorrent-Search-Plugins />
+Public
+[15] (571,144)<button aria-label='Sponsor LightDestory/qBittorrent-Search-Plugins' class='Button--secondary Button--small Button' id='dialog-show-funding-links-modal-LightDestory-qBittorrent-Search-Plugins' />
+	[16] (571,144)<span  />
+		[17] (571,144)<span  />
+			[18] (583,143)<span >Sponsor />
+[19] (680,143)<a aria-label='You must be signed in to change notification settings' class='btn-sm btn' href='/login?return_to=%2FLightDestory%2FqBittorrent-Search-Plugins' id='repository-details-watch-button'>Notifications />
+[20] (798,143)<a class='btn-sm btn' href='/login?return_to=%2FLightDestory%2FqBittorrent-Search-Plugins' id='fork-button'>Fork />
+	[21] (824,143)<span >21 />
+[22] (913,143)<a aria-label='You must be signed in to star a repository' class='tooltipped tooltipped-sw btn-sm btn' href='/login?return_to=%2FLightDestory%2FqBittorrent-Search-Plugins' />
+	[23] (907,143)<span >Star />
+	[24] (940,143)<span >259 />
+[25] (68,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item selected' href='/LightDestory/qBittorrent-Search-Plugins' id='code-tab' />
+	[26] (79,223)<span >Code />
+[27] (164,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/issues' id='issues-tab' />
+	[28] (162,223)<span >Issues />
+	[29] (198,223)<span >1 />
+[30] (283,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/pulls' id='pull-requests-tab' />
+	[31] (295,223)<span >Pull requests />
+[32] (394,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/actions' id='actions-tab' />
+	[33] (406,223)<span >Actions />
+[34] (490,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/projects' id='projects-tab' />
+	[35] (501,223)<span >Projects />
+[36] (587,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/security' id='security-tab' />
+	[37] (599,223)<span >Security />
+[38] (684,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/pulse' id='insights-tab' />
+	[39] (695,223)<span >Insights />
+LightDestory/qBittorrent-Search-Plugins
+[40] (89,313)<button aria-label='master branch' class='prc-Button-ButtonBase-9n-Xk overview-ref-selector width-full RefSelectorAnchoredOverlay-module__RefSelectorOverlayBtn__a3WK3' id='ref-picker-repos-header-ref-selector' />
+	[41] (89,313)<span  />
+		[42] (77,313)<span  />
+			[43] (77,313)<div  />
+				[44] (52,313)<div  />
+				[45] (87,313)<div  />
+					[46] (87,312)<span >master />
+[47] (175,313)<a aria-label='Go to Branches page' class='prc-Button-ButtonBase-9n-Xk OverviewContent-module__Button_1__vmS6D' href='/LightDestory/qBittorrent-Search-Plugins/branches' />
+[48] (216,313)<a aria-label='Go to Tags page' class='prc-Button-ButtonBase-9n-Xk OverviewContent-module__Button_1__vmS6D' href='/LightDestory/qBittorrent-Search-Plugins/tags' />
+[49] (446,313)<span  />
+	[50] (360,313)<span  />
+	[51] (454,313)<input aria-label='Go to file' class='prc-components-Input-IwWrt' placeholder='Go to file' role='combobox' />
+[52] (609,313)<button class='prc-Button-ButtonBase-9n-Xk' id='_R_3idajal1d_' />
+	[53] (609,313)<span  />
+		[54] (609,313)<span >Code />
+Folders and files
+Latest commit
+[55] (58,395)<a class='Link__StyledLink-sc-1syctfj-0 prc-Link-Link-9ZwDx' href='/LightDestory' />
+	[56] (55,397)<img  />
+[57] (113,395)<a aria-label='commits by LightDestory' class='Link__StyledLink-sc-1syctfj-0 iIGVMW AuthorAvatar-module__authorHoverableLink__MHTT8 prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/commits?author=LightDestory'>LightDestory />
+[58] (302,395)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893'>Merge remote-tracking branch 'origin/master' />
+[59] (453,395)<a aria-label='Commit 31cccd9' class='Link--secondary prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893'>31cccd9 />
+·
+History
+[60] (598,395)<a class='prc-Button-ButtonBase-9n-Xk d-none d-lg-flex LinkButton-module__linkButton__nFnov flex-items-center fgColor-default' href='/LightDestory/qBittorrent-Search-Plugins/commits/master/' />
+	[61] (598,395)<span  />
+		[62] (608,395)<span  />
+			[63] (608,395)<span >99 Commits />
+[64] (346,461)<tr  />
+	[65] (95,461)<a aria-label='.github, (Directory)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/tree/master/.github' title='.github'>.github />
+	[66] (383,461)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>[ImgBot] Optimize images ( />
+	[67] (478,461)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/26'>#26 />
+	[68] (491,461)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>) />
+[69] (346,518)<tr  />
+	[70] (82,518)<a aria-label='src, (Directory)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/tree/master/src' title='src'>src />
+	[71] (439,518)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893' title='Merge remote-tracking branch 'origin/master''>Merge remote-tracking branch 'origin/master' />
+[72] (346,576)<tr  />
+	[73] (103,576)<a aria-label='.gitignore, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/.gitignore' title='.gitignore'>.gitignore />
+	[74] (355,576)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/3bb5e6cf011a5304e59d366a3b851798ec91f895' title='updated gitignore'>updated gitignore />
+[75] (346,633)<tr  />
+	[76] (99,633)<a aria-label='LICENSE, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/LICENSE' title='LICENSE'>LICENSE />
+	[77] (406,633)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/002389ce9e3301c1a658a2ee30001cd7cd82acd7' title='chore: update reposiiitory structure'>chore: update reposiiitory structure />
+[78] (346,691)<tr  />
+	[79] (112,691)<a aria-label='README.md, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/README.md' title='README.md'>README.md />
+	[80] (439,691)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893' title='Merge remote-tracking branch 'origin/master''>Merge remote-tracking branch 'origin/master' />
+Repository files navigation
+[81] (87,778)<a class='prc-components-UnderlineItem-7fP-n' href='#' />
+	[82] (56,778)<span  />
+	[83] (99,778)<span >README />
+[84] (202,778)<a class='prc-components-UnderlineItem-7fP-n' href='#' />
+	[85] (158,778)<span  />
+	[86] (214,778)<span >Contributing />
+[87] (337,778)<a class='prc-components-UnderlineItem-7fP-n' href='#' />
+	[88] (286,778)<span  />
+	[89] (349,778)<span >GPL-3.0 license />
+[90] (636,777)<button aria-label='Outline' class='prc-Button-ButtonBase-9n-Xk OverviewRepoFiles-module__ActionMenu_Button__OKDYV' id='_R_dkdajal1d_' />
+About
+A growing collection of search plugins for the qBittorrent, an awesome and opensource torrent client
+Topics
+[91] (730,487)<a class='topic-tag topic-tag-link' href='/topics/torrent' title='Topic: torrent'>torrent />
+[92] (794,487)<a class='topic-tag topic-tag-link' href='/topics/plugins' title='Topic: plugins'>plugins />
+[93] (870,487)<a class='topic-tag topic-tag-link' href='/topics/qbittorrent' title='Topic: qbittorrent'>qbittorrent />
+[94] (734,526)<a class='topic-tag topic-tag-link' href='/topics/python3' title='Topic: python3'>python3 />
+[95] (831,526)<a class='topic-tag topic-tag-link' href='/topics/qbittorrent-plugin' title='Topic: qbittorrent-plugin'>qbittorrent-plugin />
+Resources
+[96] (739,585)<a class='Link--muted' href='#readme-ov-file'>Readme />
+License
+[97] (760,626)<a class='Link--muted' href='#GPL-3.0-1-ov-file'>GPL-3.0 license />
+Contributing
+[98] (753,666)<a class='Link--muted' href='#contributing-ov-file'>Contributing />
+[99] (737,707)<a class='Link Link--muted' href='/LightDestory/qBittorrent-Search-Plugins/activity' />
+	[100] (750,707)<span >Activity />
+Stars
+[101] (742,748)<a class='Link Link--muted' href='/LightDestory/qBittorrent-Search-Plugins/stargazers'>stars />
+	[102] (740,748)<strong >259 />
+Watchers
+[103] (747,789)<a class='Link Link--muted' href='/LightDestory/qBittorrent-Search-Plugins/watchers'>watching />
+	[104] (732,789)<strong >7 />
+Forks
+[105] (738,830)<a class='Link Link--muted' href='/LightDestory/qBittorrent-Search-Plugins/forks'>forks />
+	[106] (735,830)<strong >21 />
+[107] (754,871)<a class='Link--muted' href='/contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FLightDestory%2FqBittorrent-Search-Plugins&report=LightDestory+%28user%29'>Report repository />
+[108] (731,949)<a class='Link--primary no-underline Link' href='/LightDestory/qBittorrent-Search-Plugins/releases'>Releases />
+No releases published
+
+</current_dom>

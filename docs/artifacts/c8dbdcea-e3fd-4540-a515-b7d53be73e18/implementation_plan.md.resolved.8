@@ -1,0 +1,30 @@
+# 'Micro-Sprint' Stability Upgrade & Hybrid Resume Plan
+
+The current 5-minute (300s) chunks are too high-risk for the GTX 1050 Ti. If a 40-minute render fails at the end, we lose too much progress. This plan switches the remaining work to 1-minute (60s) sprints.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Timeline Safety**: We have already rendered 1 hour (60 minutes) using 5-minute blocks. Switching chunk sizes mid-project usually breaks the movie timeline. This plan uses a **Surgical Hybrid Adapter** to ensure the first hour (Legacy blocks) and the final 26 minutes (Micro-Sprints) join together perfectly.
+
+## Proposed Changes
+
+### [Lipsync Module]
+
+#### [MODIFY] [lipsync_musetalk.py](file:///C:/just-dub-it2/app/stages/lipsync_musetalk.py)
+- **Dynamic Chunking Logic**: 
+    - First 3600 seconds (1 hour): Keep the 300s logic to validate indices of already-completed work.
+    - Post-3600 seconds: Switch to 60s `chunk_duration`.
+- **Hybrid Concatenation**: Update the `processed_chunks` collector to be duration-agnostic. It will now crawl the workspace and find every valid `lipsynced_video.mp4` in chronological order by its start-time, rather than by a fixed index.
+- **Real-Time Reporter**: Integrated the `\r` (Carriage Return) fix so the 8-minute sprints show active frame-by-frame progress.
+
+## Verification Plan
+
+### Automated Tests
+1. **Index Collision Test**: Mock the first hour as completed and verify the system correctly identifies the next start point at exactly 60:00.
+2. **Timeline Audit**: Run FFmpeg's `ffprobe` on the first few 1-minute chunks to ensure they don't overlap with the last 5-minute chunk.
+
+### Manual Verification
+- We will wait for Chunk 12 (now at 99%) to save as the 'Final Legacy Block'.
+- I will then reboot the Dashboard.
+- You should see the UI skip the first 12 chunks instantly and begin **'Chunk 13 [60s Block]'** with a much faster-moving status bar.

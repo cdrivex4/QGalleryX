@@ -1,0 +1,58 @@
+# ScrollBench Feature Port - Task List
+
+## Phase 1: UI Restructure ✅ COMPLETE
+- [x] Move performance overlay to left side
+- [x] Add transparent toggle button
+- [x] Implement slide animation
+- [x] Fix scrollbar overflow (2px/5px/30px)
+- [x] Add filename display at 90px+ zoom
+- [x] Add pinch zoom support
+
+## Phase 2: Selection System ✅ COMPLETE
+- [x] Long-press to enter selection mode
+- [x] Tap to select/deselect
+- [x] Selection overlay with blue highlight
+- [x] Top bar with selection count
+
+## Phase 3: Share & Resize Feature
+### Phase 3.1: Selection Mode Enhancements [/]
+- [/] Add "Select All" button
+- [/] Add "Select None" button
+- [/] Add "Invert Selection" button
+- [/] Implement invertSelection() in model
+- [/] Replace Delete with Share icon (⋮)
+
+### Phase 3.2: Basic Share Dialog
+- [ ] Create ShareDialog.qml
+- [ ] Add "Resize for Email (Small)" preset
+- [ ] Add "Resize for Email (Manual)" option
+- [ ] Add "Share Original" option
+
+### Phase 3.3: Advanced Resize Editor
+- [ ] Create ResizeEditor.qml
+- [ ] Implement split-screen preview
+- [ ] Add quality slider
+- [ ] Add compression slider
+- [ ] Add size calculator (individual + total)
+
+### Phase 3.4: Image Processing Backend
+- [ ] Create C++ image processor class
+- [ ] Implement resize functionality
+- [ ] Implement quality/compression
+- [ ] Generate preview images
+- [ ] Calculate file sizes
+
+### Phase 3.5: Polish
+- [ ] Add drag/zoom to preview images
+- [ ] Implement backwards size calculation
+- [ ] Add export/share functionality
+- [ ] Test with various formats
+
+## Phase 4: PhotoViewer (Deferred)
+- [ ] Copy PhotoViewer.qml
+- [ ] Adapt to ScrollBenchImageModel
+- [ ] Wire up click-to-open
+
+## Phase 5: Settings & Persistence (Deferred)
+- [ ] Copy SettingsHelper
+- [ ] Save/load settings

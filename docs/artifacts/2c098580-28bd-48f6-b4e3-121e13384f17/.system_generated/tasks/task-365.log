@@ -1,0 +1,7 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-02T20:14:04+04:00
+Prompt: Check progress of MuseTalk script execution
+
+[2026-06-02T20:13:44+04:00] Still waiting. Remaining time: 20s
+[2026-06-02T20:13:54+04:00] Still waiting. Remaining time: 10s
+[2026-06-02T20:14:04+04:00] Timer fired.

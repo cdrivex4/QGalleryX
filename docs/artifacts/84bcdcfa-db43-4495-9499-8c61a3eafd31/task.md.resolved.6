@@ -1,0 +1,13 @@
+# Rebranding Fix Tasks
+
+- [ ] Revert broken local state
+  - [ ] Run `git reset --hard` to drop broken configurations
+  - [ ] Run `git clean -fd` to remove improperly renamed files/untracked artifacts
+- [ ] Safe Rename Process
+  - [ ] Use `git mv` to safely rename `test_scrollbench` to `test_QGalleryX-Bench`
+  - [ ] Use `git mv` to safely rename `src` to `src_QGalleryX_Core`
+  - [ ] Safely update `#include` paths in C++ files using code edit tools manually
+  - [ ] Safely update [build.ps1](file:///d:/Dev/antigravity/build.ps1) and [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt) using proper edits
+- [ ] Verification
+  - [ ] Run [.\build.ps1](file:///d:/Dev/antigravity/build.ps1) exactly as the user requested
+  - [ ] Verify `QGalleryX.exe` and `QGalleryX-Bench.exe` successfully build and deploy

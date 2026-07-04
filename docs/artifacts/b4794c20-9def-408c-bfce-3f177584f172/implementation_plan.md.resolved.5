@@ -1,0 +1,45 @@
+# Visual Drag Selection Implementation Plan
+
+## Goal
+Implement a visual "Rubber Band" selection box (rectangle) that behaves like Windows Explorer.
+**Interaction**: Long Press to start -> Drag -> Visual Box appears -> Items colliding with box are selected.
+
+## Proposed Changes
+
+### [MODIFY] [test_scrollbench/src/ScrollBenchImageModel.cpp/h](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp)
+- Add `Q_INVOKABLE void selectVisualRect(int colMin, int colMax, int rowMin, int rowMax, int columns)`.
+    - This efficiently iterates through the rows and columns definition and selects existing indices.
+    - index = `row * columns + col`.
+    - Bounds check `index < totalItems`.
+    - Set `isSelected = true`.
+
+### [MODIFY] [test_scrollbench/qml/MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml)
+- **Properties**: `property point dragStartPosition`.
+- **UI Components**:
+    - Add `Rectangle { id: selectionBox }`.
+        - Visible keys off `dragSelectionStart >= 0` (or a specific `isDragging` flag).
+        - Geometry calculated from `dragStartPosition` and current `mouseX/Y`.
+- **MouseArea**:
+    - `onPressAndHold`:
+        - Record `dragStartPosition = {x: mouse.x, y: mouse.y}`.
+        - Show selectionBox.
+    - `onPositionChanged`:
+        - Update `selectionBox` x,y,width,height.
+        - **Real-time Selection**:
+            - Map rect to content coordinates.
+            - Calculate `colMin, colMax, rowMin, rowMax` based on `cellWidth, cellHeight`.
+            - `let columns = Math.floor(gridView.width / gridView.cellWidth)`.
+            - Call `imageModel.selectVisualRect(...)`.
+
+## Verification
+1.  Long press to start.
+2.  Drag diagonally.
+3.  Verify semi-transparent blue box follows mouse.
+4.  Verify items *visually underneath* the box become selected.
+5.  Verify logic handles "C" shapes correctly (i.e., only items in the box, not everything between start/end index, though for a GridView those are usually the same thing unless we have gaps or special layouts? Actually, in a standard wrapping flow, a visual rect implies a set of indices that might be disjoint if we had a non-standard flow. But for standard LTR flow:
+    - Row 0: [0, 1, 2, 3]
+    - Row 1: [4, 5, 6, 7]
+    - Box over [1, 2] and [5, 6].
+    - Indices: 1, 2, 5, 6.
+    - Linear Range 1-6 would include 3, 4. **User wants visual box, so 3 and 4 should NOT be selected if they are outside the box.** THIS IS CRITICAL.
+    - My `selectVisualRect` logic must strictly select 1,2,5,6, NOT 3,4.

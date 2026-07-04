@@ -1,0 +1,136 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (882,134)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (950,134)<a aria-label='Google Account: Will Turner  
+(willuorwontu464@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/&ec=GBRAmgU' role='button' />
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+[2] (843,28)<a href='https://x.com/NotebookLM'>X />
+or
+[3] (912,28)<a href='https://discord.com/channels/1124402182171672732/1294057633334165596'>Discord />
+for updates.
+[4] (53,134)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[5] (53,134)<labs-tailwind-logo  />
+		[6] (53,134)<img  />
+[7] (349,134)<input class='title-input mat-title-large ng-valid ng-dirty ng-touched' />
+[8] (803,134)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>settings />
+	settings
+[9] (152,207)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[10] (944,207)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>share />
+	share
+[11] (174,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted mdc-tab--active mdc-tab-indicator--active' id='mat-tab-group-0-label-0' role='tab' />
+	[12] (174,269)<span  />
+		[13] (174,269)<span >Sources />
+[14] (508,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted' id='mat-tab-group-0-label-1' role='tab' />
+	[15] (508,269)<span  />
+		[16] (508,269)<span >Chat />
+[17] (834,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted' id='mat-tab-group-0-label-2' role='tab' />
+	[18] (834,269)<span  />
+		[19] (834,269)<span >Studio />
+[20] (500,663)<div class='source-panel-content ng-tns-c84049144-0 ng-star-inserted' scrollable='true' />
+	[21] (492,354)<button aria-label='Add source' class='mdc-button mat-mdc-button-base mat-mdc-tooltip-trigger add-source-button ng-tns-c2806627016-4 mdc-button--outlined mat-mdc-outlined-button mat-unthemed cdk-focused cdk-program-focused'>add
+Add sources />
+		add
+		Add sources
+	search
+	[22] (506,439)<textarea aria-label='Discover sources based on the inputted query' class='mat-mdc-input-element cdk-textarea-autosize query-box-textarea ng-untouched ng-pristine ng-invalid mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored' id='mat-input-15' placeholder='Search the web for new sources' />
+	[23] (99,501)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select corpus-menu-trigger mat-mdc-button mat-unthemed' />
+		language
+		Web
+		keyboard_arrow_down
+	[24] (271,501)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select researcher-menu-trigger mat-mdc-button mat-unthemed' />
+		search_spark
+		Fast Research
+		keyboard_arrow_down
+	arrow_forward
+	Select all sources
+	[25] (933,570)<div  />
+		[26] (933,570)<input aria-label='Select all sources' class='mdc-checkbox__native-control' id='mat-mdc-checkbox-34-input' />
+	[27] (492,632)<div  />
+		[28] (492,632)<button aria-label='01a_primary_legislation_map.md' class='source-stretched-button ng-tns-c2806627016-4' />
+		[29] (51,632)<div  />
+			[30] (51,632)<div  />
+				[31] (51,632)<div  />
+					[32] (51,632)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-4 mat-unthemed' id='source-item-more-button-a22ae37c-d1a9-47f1-a23d-d7c23ea58053' />
+						[33] (51,632)<div  />
+							[34] (51,629)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-4 icon icon-color google-symbols mat-icon-no-color ng-star-inserted' role='img'>markdown />
+		01a_primary_legislation_map.md
+		[35] (933,632)<div  />
+			[36] (933,632)<mat-checkbox  />
+				[37] (933,632)<div  />
+					[38] (933,632)<div  />
+						[39] (933,632)<input aria-label='01a_primary_legislation_map.md' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-35-input' />
+	[40] (492,699)<div  />
+		[41] (492,699)<button aria-label='01b_debt_issuance_review.md' class='source-stretched-button ng-tns-c2806627016-4' />
+		[42] (51,699)<div  />
+			[43] (51,699)<div  />
+				[44] (51,699)<div  />
+					[45] (51,699)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-4 mat-unthemed' id='source-item-more-button-61bfe9af-8f8c-4ce5-87ac-849e10ead95f' />
+						[46] (51,699)<div  />
+							[47] (51,696)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-4 icon icon-color google-symbols mat-icon-no-color ng-star-inserted' role='img'>markdown />
+		01b_debt_issuance_review.md
+		[48] (933,699)<div  />
+			[49] (933,699)<mat-checkbox  />
+				[50] (933,699)<div  />
+					[51] (933,699)<div  />
+						[52] (933,699)<input aria-label='01b_debt_issuance_review.md' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-36-input' />
+	[53] (492,766)<div  />
+		[54] (492,766)<button aria-label='01c_regulatory_bodies_map.md' class='source-stretched-button ng-tns-c2806627016-4' />
+		[55] (51,766)<div  />
+			[56] (51,766)<div  />
+				[57] (51,766)<div  />
+					[58] (51,766)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-4 mat-unthemed' id='source-item-more-button-70007add-a160-4010-a740-b7c9d6a7e372' />
+						[59] (51,766)<div  />
+							[60] (51,763)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-4 icon icon-color google-symbols mat-icon-no-color ng-star-inserted' role='img'>markdown />
+		01c_regulatory_bodies_map.md
+		[61] (933,766)<div  />
+			[62] (933,766)<mat-checkbox  />
+				[63] (933,766)<div  />
+					[64] (933,766)<div  />
+						[65] (933,766)<input aria-label='01c_regulatory_bodies_map.md' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-37-input' />
+	[66] (492,833)<div  />
+		[67] (492,833)<button aria-label='02a_icma_principles_mapping.md' class='source-stretched-button ng-tns-c2806627016-4' />
+		[68] (51,833)<div  />
+			[69] (51,833)<div  />
+				[70] (51,833)<div  />
+					[71] (51,833)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-4 mat-unthemed' id='source-item-more-button-4a903cae-ff1e-40a2-9d77-dcab6ae45fad' />
+						[72] (51,833)<div  />
+							[73] (51,830)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-4 icon icon-color google-symbols mat-icon-no-color ng-star-inserted' role='img'>markdown />
+		02a_icma_principles_mapping.md
+		[74] (933,833)<div  />
+			[75] (933,833)<mat-checkbox  />
+				[76] (933,833)<div  />
+					[77] (933,833)<div  />
+						[78] (933,833)<input aria-label='02a_icma_principles_mapping.md' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-38-input' />
+	[79] (492,900)<div  />
+		[80] (492,900)<button aria-label='02b_sids_comparison.md' class='source-stretched-button ng-tns-c2806627016-4' />
+		[81] (51,900)<div  />
+			[82] (51,900)<div  />
+				[83] (51,900)<div  />
+					[84] (51,900)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-4 mat-unthemed' id='source-item-more-button-f97506ca-87bb-435a-8aa5-75738233806a' />
+						[85] (51,900)<div  />
+							[86] (51,897)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-4 icon icon-color google-symbols mat-icon-no-color ng-star-inserted' role='img'>markdown />
+		02b_sids_comparison.md
+		[87] (933,900)<div  />
+			[88] (933,900)<mat-checkbox  />
+				[89] (933,900)<div  />
+					[90] (933,900)<div  />
+						[91] (933,900)<input aria-label='02b_sids_comparison.md' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-39-input' />
+	[92] (51,967)<div  />
+		[93] (51,967)<div  />
+			[94] (51,967)<div  />
+				[95] (51,967)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-4 mat-unthemed' id='source-item-more-button-7c9e4105-13fe-4dbe-a580-40c9382b81aa' />
+					[96] (51,967)<div  />
+						[97] (51,964)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-4 icon icon-color google-symbols mat-icon-no-color ng-star-inserted' role='img'>markdown />
+	02c_instrument_gap_analysis.md
+	[98] (933,967)<div  />
+		[99] (933,967)<mat-checkbox  />
+			[100] (933,967)<div  />
+				[101] (933,967)<div  />
+					[102] (933,967)<input aria-label='02c_instrument_gap_analysis.md' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-40-input' />
+
+</current_dom>

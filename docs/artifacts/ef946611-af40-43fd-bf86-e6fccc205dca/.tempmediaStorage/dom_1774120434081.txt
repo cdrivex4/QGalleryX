@@ -1,0 +1,66 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (342,509)<table role='table' scrollable='true' />
+	[1] (115,65)<a href='https://naranjatorrent.com/'>naranjatorrent />
+	[2] (236,65)<a href='https://github.com/BurningMop/qBittorrent-Search-Plugins'>BurningMop />
+	1.0
+	07/Nov/2024
+	[3] (526,65)<a href='https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/naranjatorrent.py' />
+		[4] (526,63)<img  />
+	✔ qbt 5.0.x / python 3.9.x
+	[5] (108,235)<a href='https://nyaa.pantsu.cat/'>Nyaa.Pantsu />
+	[6] (217,235)<a href='https://github.com/4chenz/pantsu-plugin/'>4chenz />
+	1.21
+	02/Jan
+	2021
+	[7] (526,235)<a href='https://raw.githubusercontent.com/libellula/qbt-plugins/main/pantsu.py' />
+		[8] (526,233)<img  />
+	✔ qbt 4.0.x / python 3.5.0
+	✖ qbt 4.1.3 (intermittent failure)
+	[9] (108,405)<a href='https://nyaa.pantsu.cat/'>Nyaa.pantsu />
+	Made Of Magic
+	And Wires
+	1.3
+	02/Jan
+	2021
+	[10] (526,405)<a href='https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/refs/heads/main/engines/nyaapantsu.py' />
+		[11] (526,403)<img  />
+	✔ qbt 4.0.x / python 3.5.0
+	[12] (90,541)<a href='https://nyaa.si/'>Nyaa.si />
+	Made Of Magic
+	And Wires
+	1.1
+	01/Mar
+	2019
+	[13] (526,541)<a href='https://raw.githubusercontent.com/MadeOfMagicAndWires/qBit-plugins/master/engines/nyaasi.py' />
+		[14] (526,539)<img  />
+	✔ qbt 4.4.3.1 / python 3.10.5
+	[15] (101,677)<a href='https://online-fix.me/'>Online-Fix />
+	[16] (222,677)<a href='https://github.com/caiocinel/onlinefix-qbittorrent-plugin'>caiocinel />
+	1.0
+	10/Aug
+	2024
+	[17] (526,677)<a href='https://raw.githubusercontent.com/caiocinel/onlinefix-qbittorrent-plugin/main/onlinefix.py' />
+		[18] (526,676)<img  />
+	✔ qbt 4.6.5 / python 3.12.4
+	[19] (89,816)<a href='https://pediatorrent.com/'>PediaTorrent />
+	[20] (225,790)<a href='https://github.com/dangar16/pediatorrent-plugin'>dangar16 />
+	1.0
+	24/Sep
+	2024
+	[21] (526,790)<a href='https://raw.githubusercontent.com/dangar16/pediatorrent-plugin/refs/heads/main/pediatorrent.py' />
+		[22] (526,788)<img  />
+	✔ qbt 4.6.5 / python 3.x
+	[23] (109,902)<a href='https://pediatorrent.com/'>PediaTorrent />
+	[24] (236,902)<a href='https://github.com/BurningMop/qBittorrent-Search-Plugins'>BurningMop />
+	1.0
+	24/Nov/2024
+	[25] (526,902)<a href='https://raw.githubusercontent.com/BurningMop/qBittorrent-Search-Plugins/refs/heads/main/pediatorrent.py' />
+		[26] (526,900)<img  />
+	✔ qbt 5.0.x / python 3.9.x
+	28/Jul
+	✔ qbt 4.3.x / python 3.8.5
+
+</current_dom>

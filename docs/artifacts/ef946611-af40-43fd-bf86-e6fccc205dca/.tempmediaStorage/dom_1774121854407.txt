@@ -1,0 +1,136 @@
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (114,75)<a aria-label='Go to Google Home' href='https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQPAgJ' id='logo' title='Go to Google Home' />
+[1] (429,73)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (662,73)<div  />
+	[3] (660,73)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (660,73)<span  />
+	[5] (684,73)<span  />
+[6] (708,73)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (747,73)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (793,73)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (786,73)<div  />
+		[10] (786,73)<span  />
+[11] (870,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (918,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (961,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3Dsite%253Areddit.com%2BDODI%2BRepacks%2Bofficial%2Bmirrors%2Blist%2B2024%2B2025&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (94,161)<a class='XVMlrc C6AK7c' href='/search?q=site:reddit.com+DODI+Repacks+official+mirrors+list+2024+2025&sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp0UJuhqwKhR0QUhF54-6jIYFfWbU_Clyew-1Wh7zkL7EUcewkj-Y5mEXWvVf2-8S7JwVKiSvr_7KtEyhTBuz8m2lrKcLgOr0lsiZM-oP-89a1zbWSrrBBcuNJqWN-_qjnUXdpbFyvND1GysecUrWAg6AnKuASIKp8uoMvUUIZUZFnm7vLf5o5OAa1tgtaa4rPnCUTVw&aep=1&ntc=1&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQ2J8OegQIERAE' />
+	[15] (94,161)<div  />
+		[16] (94,173)<div  />
+			[17] (94,166)<span >AI Mode />
+[18] (151,161)<a class='C6AK7c' role='link' />
+	All
+[19] (200,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&q=site:reddit.com+DODI+Repacks+official+mirrors+list+2024+2025&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp0UJuhqwKhR0QUhF54-6jIYFfWbU_Clyew-1Wh7zkL7EUcewkj-Y5mEXWvVf2-8S7JwVKiSvr_7KtEyhTBuz8m2lrKcLgOr0lsiZM-oP-89a1zbWSrrBBcuNJqWN-_qjnUXdpbFyvND1GysecUrWAg6AnKuASIKp8uoMvUUIZUZFnm7vLf5o5OAa1tgtaa4rPnCUTVw&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQ0pQJegQIFxAB' />
+	[20] (200,161)<div  />
+		[21] (200,173)<span >News />
+[22] (263,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp0UJuhqwKhR0QUhF54-6jIYFfWbU_Clyew-1Wh7zkL7EUcewkj-Y5mEXWvVf2-8S7JwVKiSvr_7KtEyhTBuz8m2lrKcLgOr0lsiZM-oP-89a1zbWSrrBBcuNJqWN-_qjnUXdpbFyvND1GysecUrWAg6AnKuASIKp8uoMvUUIZUZFnm7vLf5o5OAa1tgtaa4rPnCUTVw&q=site:reddit.com+DODI+Repacks+official+mirrors+list+2024+2025&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQtKgLegQIFhAB' />
+	[23] (263,161)<div  />
+		[24] (263,173)<span >Images />
+[25] (330,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp0UJuhqwKhR0QUhF54-6jIYFfWbU_Clyew-1Wh7zkL7EUcewkj-Y5mEXWvVf2-8S7JwVKiSvr_7KtEyhTBuz8m2lrKcLgOr0lsiZM-oP-89a1zbWSrrBBcuNJqWN-_qjnUXdpbFyvND1GysecUrWAg6AnKuASIKp8uoMvUUIZUZFnm7vLf5o5OAa1tgtaa4rPnCUTVw&q=site:reddit.com+DODI+Repacks+official+mirrors+list+2024+2025&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQtKgLegQIFRAB' />
+	[26] (330,161)<div  />
+		[27] (330,173)<span >Videos />
+[28] (399,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp0UJuhqwKhR0QUhF54-6jIYFfWbU_Clyew-1Wh7zkL7EUcewkj-Y5mEXWvVf2-8S7JwVKiSvr_7KtEyhTBuz8m2lrKcLgOr0lsiZM-oP-89a1zbWSrrBBcuNJqWN-_qjnUXdpbFyvND1GysecUrWAg6AnKuASIKp8uoMvUUIZUZFnm7vLf5o5OAa1tgtaa4rPnCUTVw&q=site:reddit.com+DODI+Repacks+official+mirrors+list+2024+2025&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQs6gLegQIFBAB' />
+	[29] (399,161)<div  />
+		[30] (399,173)<span >Forums />
+[31] (484,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp0UJuhqwKhR0QUhF54-6jIYFfWbU_Clyew-1Wh7zkL7EUcewkj-Y5mEXWvVf2-8S7JwVKiSvr_7KtEyhTBuz8m2lrKcLgOr0lsiZM-oP-89a1zbWSrrBBcuNJqWN-_qjnUXdpbFyvND1GysecUrWAg6AnKuASIKp8uoMvUUIZUZFnm7vLf5o5OAa1tgtaa4rPnCUTVw&q=site:reddit.com+DODI+Repacks+official+mirrors+list+2024+2025&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQs6gLegQIExAB' />
+	[32] (484,161)<div  />
+		[33] (484,173)<span >Short videos />
+[34] (571,161)<div class='mTpL7c' role='button' />
+	[35] (571,161)<div  />
+		[36] (571,173)<div  />
+			[37] (562,166)<span >More />
+			[38] (586,166)<span  />
+[39] (644,161)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (644,161)<div  />
+		[41] (644,173)<div  />
+			[42] (635,166)<span >Tools />
+			[43] (660,166)<span  />
+Search Results
+[44] (236,286)<a class='zReHs' href='https://www.reddit.com/r/CrackSupport/comments/15owghg/is_dodi_repacks_safe/' />
+	[45] (236,313)<h3 >r/CrackSupport - is dodi repacks safe? />
+	[46] (166,263)<div  />
+		[47] (166,263)<div  />
+			[48] (82,263)<span  />
+				[49] (82,263)<div  />
+					[50] (82,263)<img  />
+			[51] (186,263)<div  />
+				[52] (186,251)<div  />
+					[53] (186,251)<span >Reddit · r/CrackSupport />
+				[54] (186,277)<div  />
+					[55] (186,277)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>350+ comments  ·  2 years ago />
+[56] (284,276)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[57] (284,276)<span  />
+		[58] (284,277)<span  />
+Dodi repacks is safe
+but make sure you use the correct site. Steamunlocked is definitely not safe and please ignore anyone saying the opposite.
+[59] (369,385)<a class='vzmbzf' href='https://www.reddit.com/r/CrackSupport/comments/15owghg/is_dodi_repacks_safe/#:~:text=Dodi%20repacks&text=is%20safe%20but%20make%20sure,you%20use%20the%20correct%20site.&text=Steamunlocked&text=is%20definitely%20not%20safe%20and,ignore%20anyone%20saying%20the%20opposite.' />
+	[60] (369,385)<span >Read more />
+[61] (107,417)<a class='Zv9Ied' href='https://www.reddit.com/r/CrackSupport/comments/15owghg/is_dodi_repacks_safe/jvua9ky/'>352 answers />
+·
+Top answer:
+Dodi repacks is safe but make sure you use the correct site. Steamunlocked is definitely ...
+[62] (316,524)<a class='zReHs' href='https://www.reddit.com/r/PiratedGames/comments/1j5c7lj/whats_the_deal_with_dodi_lately_been_seeing_a_lot/' />
+	[63] (316,551)<h3 >What's the deal with DODI lately? Been seeing a lot of ... />
+	[64] (162,501)<div  />
+		[65] (162,501)<div  />
+			[66] (82,501)<span  />
+				[67] (82,501)<div  />
+					[68] (82,501)<img  />
+			[69] (182,501)<div  />
+				[70] (182,488)<div  />
+					[71] (182,488)<span >Reddit · r/PiratedGames />
+				[72] (182,515)<div  />
+					[73] (179,515)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>70+ comments  ·  1 year ago />
+[74] (276,514)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[75] (276,514)<span  />
+		[76] (276,515)<span  />
+It seems the recent influx of people having problems with
+Dodi
+are due to Ublock no longer working on Chromium Browsers.
+[77] (239,623)<a class='vzmbzf' href='https://www.reddit.com/r/PiratedGames/comments/1j5c7lj/whats_the_deal_with_dodi_lately_been_seeing_a_lot/#:~:text=EDIT%3A%20It%20seems%20the%20recent,longer%20working%20on%20Chromium%20Browsers.' />
+	[78] (239,623)<span >Read more />
+[79] (104,654)<a class='Zv9Ied' href='https://www.reddit.com/r/PiratedGames/comments/1j5c7lj/whats_the_deal_with_dodi_lately_been_seeing_a_lot/mggo9l7/'>74 answers />
+·
+44 votes:
+Dodi is great, people just don't know how to navigate the website. He has to use those risky ...
+Missing:
+list
+‎| Show results with:
+[80] (274,685)<a href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CFYL3db-LZm3g8CJmB-iRb6002Q:1774121853139&q=site:reddit.com+DODI+Repacks+official+mirrors+%22list%22+2024+2025&sa=X&ved=2ahUKEwjnzuD23rGTAxWTT2wGHSBkAYMQ5t4CegQIJxAB' />
+	[81] (274,685)<span >list />
+[82] (328,792)<a class='zReHs' href='https://www.reddit.com/r/TPB/comments/1f7tod5/thepiratebay_proxy_list_september_2024_new_links/' />
+	[83] (328,820)<h3 >ThePirateBay Proxy List (September 2024) New Links To ... />
+	[84] (160,770)<div  />
+		[85] (160,770)<div  />
+			[86] (82,770)<span  />
+				[87] (82,770)<div  />
+					[88] (82,770)<img  />
+			[89] (179,770)<div  />
+				[90] (179,757)<div  />
+					[91] (179,757)<span >Reddit · r/TPB />
+				[92] (179,784)<div  />
+					[93] (179,784)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>60+ comments  ·  1 year ago />
+[94] (272,783)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[95] (272,783)<span  />
+		[96] (272,784)<span  />
+Enjoy a seamless and hassle-free experience with these verified Pirate Bay proxies. use these Ad-Free Pirate Bay Sites (100% Clean / No Ads )
+[97] (357,891)<a class='vzmbzf' href='https://www.reddit.com/r/TPB/comments/1f7tod5/thepiratebay_proxy_list_september_2024_new_links/#:~:text=Enjoy%20a%20seamless%20and%20hassle%2Dfree,these%20verified%20Pirate%20Bay%20proxies.&text=use%20these%20Ad%2DFree%20Pirate%20Bay,Clean%20%2F%20No%20Ads%20)' />
+	[98] (357,891)<span >Read more />
+[99] (300,999)<a class='zReHs' href='https://www.reddit.com/r/PiratedGames/comments/1exkwjq/which_of_the_megathread_sites_do_you_personally/' />
+	[100] (162,977)<div  />
+		[101] (162,977)<div  />
+			[102] (82,977)<span  />
+				[103] (82,977)<div  />
+					[104] (82,977)<img  />
+			[105] (182,977)<div  />
+				[106] (182,964)<div  />
+					[107] (182,964)<span >Reddit · r/PiratedGames />
+				[108] (182,991)<div  />
+					[109] (179,991)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>30+ comments  ·  1 year ago />
+[110] (276,989)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[111] (276,989)<span  />
+		[112] (276,991)<span  />

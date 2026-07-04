@@ -24,7 +24,7 @@ Item {
     property var model: imageModel
     
     // UI Grid Size (Zoom level)
-    readonly property real uiThumbnailSize: settings.gridSize
+    readonly property real uiThumbnailSize: settings.gridResolution
     
     // Loading Resolution (Quality/Performance setting)
     // IMPORTANT: This is DEBOUNCED to prevent the slider from blasting
@@ -83,7 +83,7 @@ Item {
             
         } else if (action === "Zoom") {
             // payload: { delta: real }
-            settings.gridSize = Math.max(40, Math.min(settings.gridSize + payload.delta, 400))
+            settings.gridResolution = Math.max(40, Math.min(settings.gridResolution + payload.delta, 400))
             updateTimer.restart()
         }
     }
@@ -157,8 +157,8 @@ Item {
     GridView {
         id: grid
         anchors.fill: parent
-        cellWidth: settings.gridSize
-        cellHeight: settings.gridSize
+        cellWidth: settings.gridResolution
+        cellHeight: settings.gridResolution
         model: imageModel
         clip: true
         interactive: !dragSelect.active
@@ -206,7 +206,7 @@ Item {
         WheelHandler {
             acceptedModifiers: Qt.ControlModifier
             onWheel: (wheel) => {
-                var oldSize = settings.gridSize
+                var oldSize = settings.gridResolution
                 var newSize = oldSize
                 if (wheel.angleDelta.y > 0) {
                     newSize = Math.min(oldSize + 20, 400)
@@ -215,7 +215,7 @@ Item {
                 }
                 
                 if (newSize !== oldSize) {
-                    settings.gridSize = newSize
+                    settings.gridResolution = newSize
                     updateTimer.restart()
                 }
             }
@@ -223,7 +223,7 @@ Item {
 
         Connections {
             target: settings
-            function onGridSizeChanged() {
+            function onGridResolutionChanged() {
                 grid.forceLayout()
                 updateTimer.restart()
             }
@@ -390,9 +390,9 @@ Item {
 
     PinchHandler {
         property real baseSize
-        onActiveChanged: if (active) baseSize = settings.gridSize
+        onActiveChanged: if (active) baseSize = settings.gridResolution
         onScaleChanged: if (active) {
-            settings.gridSize = Math.max(40, Math.min(baseSize * scale, 400))
+            settings.gridResolution = Math.max(40, Math.min(baseSize * scale, 400))
             updateTimer.restart()
         }
     }

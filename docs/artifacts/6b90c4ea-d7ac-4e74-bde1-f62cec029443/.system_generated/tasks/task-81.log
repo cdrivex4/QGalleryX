@@ -1,0 +1,7 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-08T06:54:21+04:00
+Prompt: Check if buffalo_l has finished downloading.
+
+[2026-06-08T06:54:01+04:00] Still waiting. Remaining time: 20s
+[2026-06-08T06:54:11+04:00] Still waiting. Remaining time: 10s
+[2026-06-08T06:54:21+04:00] Timer fired.

@@ -1,0 +1,27 @@
+# Project Structure and Sync Investigation
+
+- [ ] Investigate current directory structure <!-- id: 0 -->
+    - [x] List root directory contents <!-- id: 1 -->
+    - [ ] List `test_scrollbench` contents <!-- id: 2 -->
+    - [ ] Analyze build files (CMake, QMake, etc.) <!-- id: 3 -->
+- [ ] Check for missing Main App 2.1 files <!-- id: 4 -->
+- [x] Propose and implement structural fixes <!-- id: 5 -->
+    - [x] Ensure distinct build targets for Main App and ScrollBench <!-- id: 6 -->
+    - [x] Verify build configuration <!-- id: 7 -->
+- [x] Commit and Push changes so they are available on other computers <!-- id: 8 -->
+- [x] Run and Review ScrollBench <!-- id: 9 -->
+- [x] Fix and Push ScrollBench QML issues <!-- id: 10 -->
+- [x] Ensure FFmpeg binaries are tracked <!-- id: 11 -->
+    - [x] Exclude large [avcodec-62.dll](file:///d:/Dev/antigravity/test_scrollbench/avcodec-62.dll) and push rest <!-- id: 12 -->
+    - [x] Add dependency check to [build.ps1](file:///d:/Dev/antigravity/build.ps1) for missing DLLs <!-- id: 13 -->
+    - [x] Use Git LFS to sync [avcodec-62.dll](file:///d:/Dev/antigravity/test_scrollbench/avcodec-62.dll) <!-- id: 14 -->
+- [x] Segregate ScrollBench binary output to subfolder <!-- id: 15 -->
+
+# Feature Migration (Main App -> ScrollBench)
+
+- [ ] Analyze features to migrate <!-- id: 16 -->
+- [x] Migrate [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-58) (Full integration) <!-- id: 17 -->
+- [ ] Migrate `GalleryView` logic <!-- id: 18 -->
+- [ ] Verify functionality in ScrollBench <!-- id: 19 -->
+- [x] Fix ScrollBench deployment (missing Qt DLLs) <!-- id: 20 -->
+- [ ] Adjust thumb resolution slider min to 20px <!-- id: 21 -->

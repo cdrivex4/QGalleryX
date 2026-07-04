@@ -70,7 +70,11 @@ signals:
 private:
   void updateVisiblePaths();
 
+  void processPendingUpdates();
+
   QList<ImageInfo> m_images;
+  QList<ImageInfo> m_pendingInsertions;
+  class QTimer* m_updateTimer = nullptr;
   bool m_isLoading = false;
   int m_visibleStartIndex = -1;
   int m_visibleEndIndex = -1;

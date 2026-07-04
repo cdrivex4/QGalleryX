@@ -1,0 +1,147 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+X
+or
+Discord
+for updates.
+add
+Create notebook
+share
+Share
+settings
+Settings
+Sources
+dock_to_right
+[0] (133,602)<div class='source-panel-content ng-tns-c84049144-0 ng-star-inserted' scrollable='true' />
+	add
+	Add sources
+	search
+	language
+	Web
+	keyboard_arrow_down
+	travel_explore
+	Deep Research
+	keyboard_arrow_down
+	arrow_forward
+	Select all sources
+	markdown
+	01a_primary_legislation_map.md
+	markdown
+	01b_debt_issuance_review.md
+	markdown
+	01c_regulatory_bodies_map.md
+	markdown
+	02a_icma_principles_mapping.md
+	markdown
+	02b_sids_comparison.md
+	markdown
+	02c_instrument_gap_analysis.md
+	markdown
+	03a_institutional_mandates.md
+	markdown
+	03b_seychelles_track_record.md
+Chat
+tune
+more_vert
+[1] (500,537)<div class='chat-panel-content' scrollable='true' />
+	Pilot Program
+	: The Government, in collaboration with the Central Bank of Seychelles (CBS), plans to launch a
+	6-month pilot retail investor-oriented purchase window
+	7
+	8
+	.
+	Full Implementation
+	: This pilot serves as a prelude to a
+	full-scale buyback facility
+	for trading securities through commercial banks, targeted for completion by the
+	end of 2025
+	9
+	10
+	.
+	Operational Requirements
+	To support this new arrangement, several frameworks must be established:
+	Code of Conduct
+	: The Ministry of Finance (MoFNPT) and CBS will draft obligations regarding quoting, reporting, and investor protection standards
+	11
+	.
+	Oversight and Supervision
+	: Procedures will be created to evaluate the conduct of participating banks and take disciplinary action if necessary
+	6
+	.
+	Securities Settlement
+	: The CBS, as the operator of the securities registry, will manage the settlement of securities exchanged through the buy-back window
+	12
+	.
+	Trade Transparency
+	: Commercial banks must publish
+	daily quotes
+	and report them to the CBS and MoFNPT, while aggregated information will be published on official websites
+	4
+	12
+	.
+	Long-Term Development Plans
+	The Government aims to address deeper structural issues to facilitate a mature secondary market in the long term
+	4
+	:
+	Bond Reopenings
+	: The MoF may conduct "Exchanges" or reopen bonds to allow investors to roll over Treasury Bonds (T-Bonds) close to maturity, helping to avoid market fragmentation
+	13
+	.
+	Stock Exchange Integration
+	: Stakeholders are assessing the feasibility of trading government securities on the stock exchange
+	14
+	. This would require revising the
+	Securities Law
+	to recognize government securities as a "security" for listing, enabling the Financial Services Authority (FSA) as the formal regulator
+keyboard_arrow_down
+23 sources
+arrow_forward
+Studio
+dock_to_left
+audio_magic_eraser
+Audio Overview
+chevron_forward
+tablet
+BETA
+Slide Deck
+chevron_forward
+subscriptions
+Video Overview
+chevron_forward
+flowchart
+Mind Map
+auto_tab_group
+Reports
+chevron_forward
+cards_star
+Flashcards
+chevron_forward
+quiz
+Quiz
+chevron_forward
+stacked_bar_chart
+BETA
+Infographic
+chevron_forward
+table_view
+Data Table
+chevron_forward
+edit_fix_auto
+Studio output will be saved here.
+After adding sources, click to add Audio Overview, Study Guide, Mind Map, and more!
+sticky_note_2
+Add note
+NotebookLM can be inaccurate; please double check its responses.
+Reply ready.
+search_spark
+Fast Research
+Great for quick results
+travel_explore
+Deep Research
+In-depth report and results
+
+</current_dom>

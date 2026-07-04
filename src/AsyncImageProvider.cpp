@@ -7,6 +7,7 @@
 #include "FileCacheManager.h"
 #include <QCryptographicHash>
 #include <QDateTime>
+#include <QBuffer>
 #include <QDebug>
 #include <QDir>
 #include <QElapsedTimer>
@@ -538,8 +539,8 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   QImage cached = getCachedImage(normalizedId, requestedSize);
   if (!cached.isNull()) {
     s_cacheHits++;
-    // Use DirectConnection to bypass the event loop entirely for cache hits!
-    QMetaObject::invokeMethod(response, "handleDone", Qt::DirectConnection,
+    // Use QueuedConnection so the caller has time to connect to the finished() signal!
+    QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
                               Q_ARG(QImage, cached), Q_ARG(int, 0));
     return response;
   }
@@ -732,16 +733,16 @@ void AsyncImageProvider::processStagedRequests() {
     TaskScheduler::TaskCategory cat = isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
 
     QString cKey = getCoalesceKey(req.id, req.requestedSize);
-    TaskScheduler::instance().addTask(
-        TaskScheduler::Task(
-          [req, guard]() {
-            guard->executed.store(true);
-            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
-                                                 req.cancelled, req.tracker);
-          },
-          [cKey]() { return isRequestStillNeeded(cKey); }
-        ),
-        targetPool, TaskScheduler::Immediate, cat);
+        TaskScheduler::instance().addTask(
+          TaskScheduler::Task(
+              [req, guard]() {
+                guard->executed.store(true);
+                AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                     req.cancelled, req.tracker);
+              },
+              [cKey]() { return isRequestStillNeeded(cKey); },
+              [cKey]() { AsyncImageProvider::deliverToPending(cKey, QImage(), 0); }),
+          targetPool, TaskScheduler::Immediate, cat);
   }
 
   // Submit Offscreen
@@ -761,7 +762,8 @@ void AsyncImageProvider::processStagedRequests() {
             AsyncImageProvider::processImageTask(req.id, req.requestedSize,
                                                  req.cancelled, req.tracker);
           },
-          [cKey]() { return isRequestStillNeeded(cKey); }
+          [cKey]() { return isRequestStillNeeded(cKey); },
+          [cKey]() { AsyncImageProvider::deliverToPending(cKey, QImage(), 0); }
         ),
         targetPool, TaskScheduler::Normal, cat);
   }
@@ -894,15 +896,25 @@ void AsyncImageProvider::processImageTaskInternal(
 
     // 1. Worker-side Disk Cache check (Optimized hit)
     if (s_useDiskCache && !id.startsWith("synthetic:")) {
-      QString dp = FileCacheManager::instance().getCachedPath(id, requestedSize);
-      if (!dp.isEmpty()) {
-        if (image.load(dp)) {
-          // Update RAM cache with consistent key
+      QByteArray mmapData = FileCacheManager::instance().getCachedData(id, requestedSize);
+      if (!mmapData.isEmpty()) {
+        if (image.loadFromData(mmapData)) {
           insertCachedImage(id, image, requestedSize);
-          // Disk Cache is also I/O!
           driveGuard.commitStats();
           deliverToPending(cKey, image, workTimer.elapsed());
           return;
+        }
+      } else {
+        QString dp = FileCacheManager::instance().getCachedPath(id, requestedSize);
+        if (!dp.isEmpty()) {
+          if (image.load(dp)) {
+            // Update RAM cache with consistent key
+            insertCachedImage(id, image, requestedSize);
+            // Disk Cache is also I/O!
+            driveGuard.commitStats();
+            deliverToPending(cKey, image, workTimer.elapsed());
+            return;
+          }
         }
       }
     }
@@ -1082,9 +1094,18 @@ deliver:
   if (!image.isNull()) {
     insertCachedImage(id, image, requestedSize);
     if (s_useDiskCache && !id.startsWith("synthetic:")) {
-      QString dp = getDiskCachePath(id, requestedSize);
-      if (image.save(dp, "JPG", 80)) {
-        FileCacheManager::instance().registerCacheFile(id, requestedSize, dp, QFile(dp).size());
+      QSettings settings("SamsungClone", "Gallery");
+      if (settings.value("diskCacheDatabaseType", 0).toInt() == 1) {
+        QByteArray ba;
+        QBuffer buffer(&ba);
+        buffer.open(QIODevice::WriteOnly);
+        image.save(&buffer, "JPG", 80);
+        FileCacheManager::instance().registerCachedData(id, requestedSize, ba);
+      } else {
+        QString dp = getDiskCachePath(id, requestedSize);
+        if (image.save(dp, "JPG", 80)) {
+          FileCacheManager::instance().registerCacheFile(id, requestedSize, dp, QFile(dp).size());
+        }
       }
     }
   }

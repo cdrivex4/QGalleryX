@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Analysis of existing local PyTorch CUDA installations discovered via torch.efu system search. Documents the wan2gp conda environment with torch-2.7.0+cu128 and proposes three strategies (uv install, direct copy, or conda switch) to leverage this existing 5.9GB installation instead of downloading a new one. Recommends a hybrid approach to minimize bandwidth usage.",
+  "updatedAt": "2026-02-17T22:34:37.204133900Z"
+}

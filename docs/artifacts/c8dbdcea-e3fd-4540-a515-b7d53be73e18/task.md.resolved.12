@@ -1,0 +1,8 @@
+# Final Recovery & Production Task List
+
+- [x] Delete corrupted Minute 57 fallback chunk
+- [x] Extend VRAM driver cooldown to 10s in `cuda_utils.py`
+- [x] Clear overnight zombie processes
+- [/] Restart Dashboard and verify re-rendering of Minute 57
+- [ ] Monitor final 26 'Micro-Sprints' (Minutes 60-86)
+- [ ] Perform full-movie concatenation and verify sync

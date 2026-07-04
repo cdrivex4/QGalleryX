@@ -1,0 +1,24 @@
+
+[1/4] Killing lingering FFmpeg workers...
+[2/4] Waiting for process handles to release...
+[3/4] Freeing port 7860...
+[3/3] Starting just-dub-it2 Dashboard...
+
+➔ Local URL: http://127.0.0.1:7860
+➔ Network URL: Exposed on LAN (0.0.0.0)
+
+2026-06-07 11:01:02,693 | INFO | BOOT | >>> BOOTSTRAP: PROVISIONAL ENVIRONMENT LOCK ACTIVE <<
+2026-06-07 11:01:07,508 | INFO | PIPE | [PIPEWORKER] Background Thread Online.
+2026-06-07 11:01:07,508 | INFO | PIPE | PipelineManager initialized. Worker thread active.
+C:\just-dub-it2\app\main_ui.py:280: UserWarning: The parameters have been moved from the Blocks constructor to the launch() method in Gradio 6.0: css. Please pass these parameters to launch() instead.
+  with gr.Blocks(title="Offline AI Studio v2.6.5", css=GLOBAL_CSS) as demo:
+Traceback (most recent call last):
+  File "C:\just-dub-it2\app\main_ui.py", line 721, in <module>
+    telemetry_timer.tick(
+  File "C:\just-dub-it2\env\Lib\site-packages\gradio\events.py", line 717, in event_trigger
+    raise AttributeError(
+AttributeError: Cannot call tick outside of a gradio.Blocks context.
+2026-06-07 11:01:10,056 | INFO | httpx | HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+
+[CRASH] The application exited with an error.
+Press any key to continue . . . 

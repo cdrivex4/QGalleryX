@@ -1,0 +1,202 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Model selection
+close
+search
+[0] (802,116)<input aria-label='Search' class='has-icon ng-valid ng-star-inserted ng-touched ng-dirty' id='input-B4D436EE-A18E-4144-805A-827F1F552B7D' placeholder='Search for a model' />
+[1] (610,189)<button class='ms-button-filter-chip ng-star-inserted ms-button-active ms-button-active-border'>All />
+[2] (668,189)<button class='ms-button-filter-chip ng-star-inserted'>Featured />
+[3] (739,189)<button class='ms-button-filter-chip ng-star-inserted'>Gemini />
+[4] (796,189)<button class='ms-button-filter-chip ng-star-inserted'>Live />
+[5] (854,189)<button class='ms-button-filter-chip ng-star-inserted'>Images />
+[6] (917,189)<button class='ms-button-filter-chip ng-star-inserted'>Video />
+[7] (976,189)<button class='ms-button-filter-chip ng-star-inserted'>Audio />
+[8] (802,602)<div class='model-options-container' scrollable='true' />
+	[9] (796,348)<button class='content-button' id='model-carousel-row-models/gemini-3-flash-preview' />
+		[10] (796,284)<div  />
+			[11] (619,284)<span >spark />
+			[12] (781,284)<div  />
+				[13] (781,271)<div  />
+					[14] (707,271)<span >Gemini 3 Flash Preview />
+					[15] (793,271)<span >New />
+				[16] (781,298)<span >gemini-3-flash-preview />
+		[17] (796,384)<div  />
+			[18] (796,384)<ms-model-carousel-row-details  />
+				[19] (796,384)<ul  />
+					[20] (796,351)<li >Our most intelligent model built for speed, combining frontier intelligence with superior search and grounding. />
+						[21] (609,351)<span >info />
+					[22] (796,396)<li >All context lengths • Input: $0.50 / Output: $3.00 />
+						[23] (609,396)<span >attach_money />
+					[24] (796,429)<li >Knowledge cut off: Jan 2025 />
+						[25] (609,429)<span >network_intelligence_history />
+	[26] (931,286)<button aria-label='Star model' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' />
+		[27] (931,286)<span >star />
+	[28] (954,286)<button aria-label='Copy to clipboard' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small' />
+		[29] (954,286)<span >content_copy />
+	[30] (978,286)<a aria-label='developer guide docs' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' href='https://ai.google.dev/gemini-api/docs/gemini-3' />
+		[31] (978,286)<span >developer_guide />
+	[32] (796,606)<button class='content-button' id='model-carousel-row-models/gemini-3.1-pro-preview' />
+		[33] (796,525)<div  />
+			[34] (619,525)<span >spark />
+			[35] (781,525)<div  />
+				[36] (781,513)<div  />
+					[37] (706,513)<span >Gemini 3.1 Pro Preview />
+					[38] (790,513)<span >New />
+				[39] (781,540)<span >gemini-3.1-pro-preview />
+		[40] (796,643)<div  />
+			[41] (796,643)<ms-model-carousel-row-details  />
+				[42] (796,643)<ul  />
+					[43] (796,592)<li >Our latest SOTA reasoning model with unprecedented depth and nuance, and powerful multimodal understanding and coding capabilities />
+						[44] (609,592)<span >info />
+					[45] (796,637)<li ><=200K tokens • Input: $2.00 / Output: $12.00 />
+						[46] (609,637)<span >attach_money />
+					[47] (796,671)<li >> 200K tokens • Input: $4.00 / Output: $18.00 />
+						[48] (609,671)<span >attach_money />
+					[49] (796,704)<li >Knowledge cut off: Jan 2025 />
+						[50] (609,704)<span >network_intelligence_history />
+	[51] (931,528)<button aria-label='Star model' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' />
+		[52] (931,528)<span >star />
+	[53] (954,528)<button aria-label='Copy to clipboard' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small' />
+		[54] (954,528)<span >content_copy />
+	[55] (978,528)<a aria-label='developer guide docs' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' href='https://ai.google.dev/gemini-api/docs/gemini-3' />
+		[56] (978,528)<span >developer_guide />
+	[57] (796,898)<button class='content-button' id='model-carousel-row-models/gemini-3.1-flash-image-preview' />
+		[58] (796,801)<div  />
+			[59] (781,801)<div  />
+				[60] (781,788)<div  />
+					[61] (686,788)<span >Nano Banana 2 />
+					[62] (750,788)<span >New />
+					[63] (793,788)<span >Paid />
+				[64] (781,815)<span >gemini-3.1-flash-image-preview />
+		[65] (796,935)<div  />
+			[66] (796,935)<ms-model-carousel-row-details  />
+				[67] (796,935)<ul >Image (*Output per image) • Input: $0.50 / Output: $0.0672 />
+					[68] (796,857)<li >Gemini 3.1 Flash Image Preview />
+						[69] (609,857)<span >spark />
+					[70] (796,901)<li >Pro-level visual intelligence with Flash-speed efficiency and reality-grounded generation capabilities. />
+						[71] (609,901)<span >info />
+					[72] (796,946)<li >Text • Input: $0.50 / Output: $3.00 />
+						[73] (609,946)<span >attach_money />
+					attach_money
+					Image (*Output per image) • Input: $0.50 / Output: $0.0672
+	[74] (931,803)<button aria-label='Star model' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' />
+		[75] (931,803)<span >star />
+	[76] (954,803)<button aria-label='Copy to clipboard' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small' />
+		[77] (954,803)<span >content_copy />
+	[78] (978,803)<a aria-label='developer guide docs' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' href='https://ai.google.dev/gemini-api/docs/gemini-3' />
+		[79] (978,803)<span >developer_guide />
+check
+Selected Gemini 3.1 Pro Preview
+[80] (634,91)<button aria-label='Dismiss' class='dismiss-button ms-button-borderless ms-button-icon ng-star-inserted' />
+	[81] (634,91)<span >close />
+[82] (70,45)<a class='logo-link ng-tns-c3193096957-1' href='/' />
+	[83] (70,45)<ms-logo-icon  />
+[84] (152,45)<button aria-label='View related products' class='mat-mdc-menu-trigger dropdown-trigger ng-tns-c3193096957-1 ms-button-borderless ms-button-icon' />
+	[85] (152,45)<span >expand_more />
+[86] (89,112)<a class='playground-link ng-tns-c1280371744-4 has-home-nav active-override ms-button-borderless active' href='/prompts/new_chat'>Playground />
+	[87] (24,112)<span >chat_spark />
+Enable saving
+[88] (89,213)<a class='ms-button-borderless' href='/apps' />
+	[89] (24,213)<span >design_services />
+	[90] (89,213)<span >Build />
+	[91] (154,213)<span >chevron_right />
+[92] (89,263)<a class='ms-button-borderless' href='/api-keys' />
+	[93] (24,263)<span >speed />
+	[94] (89,263)<span >Dashboard />
+	[95] (154,263)<span >chevron_right />
+[96] (89,313)<a class='ms-button-borderless' href='https://ai.google.dev/gemini-api/docs' />
+	[97] (24,313)<span >developer_guide />
+	[98] (89,313)<span >Documentation />
+	[99] (154,313)<span >arrow_outward />
+[100] (89,821)<button aria-label='What's new' class='ng-tns-c1724974082-3 ms-button-borderless'>What's new />
+	[101] (24,821)<span >notifications />
+[102] (89,866)<button class='ms-button-borderless'>Get API key />
+	[103] (24,866)<span >key />
+[104] (89,911)<button class='mat-mdc-menu-trigger trigger-button ms-button-borderless'>Settings />
+	[105] (24,911)<span >settings />
+[106] (89,956)<button class='account-switcher-button ng-tns-c3193096957-1 ms-button-borderless' />
+	[107] (98,956)<span >js3446389@gmail.com />
+[108] (24,958)<div aria-label='Google Account: Jack Sparrow (js3446389@gmail.com)' class='mat-mdc-tooltip-trigger button-container' role='button' />
+	[109] (24,958)<connect-avatar  />
+		[110] (24,958)<img  />
+[111] (208,45)<button aria-label='Toggle navigation menu' class='mat-mdc-tooltip-trigger navbar-toggle-button ng-tns-c4240324331-6 ms-button-icon ms-button-primary' />
+	[112] (208,45)<span >menu_open />
+Playground
+incognito
+share
+compare_arrows
+add
+more_vert
+Start building with Gemini
+[113] (300,384)<button class='category-card ng-star-inserted' />
+	[114] (277,308)<div  />
+		[115] (248,308)<div  />
+			[116] (248,308)<span >star />
+		[117] (295,308)<h3 >Featured />
+	[118] (300,385)<p >Our top picks including Gemini 3 Pro and Nano Banana Pro. />
+[119] (468,384)<button class='category-card ng-star-inserted' />
+	[120] (468,330)<div  />
+		[121] (415,330)<div  />
+			[122] (415,330)<span >chat_bubble />
+		[123] (486,330)<h3 >Code, Reasoning, and Chat />
+	[124] (468,428)<p >Build chatbots, agents, and code with Gemini 3 Pro and Gemini 3 Flash. />
+image
+Image Generation
+Create and edit images with Nano Banana and Imagen.
+[125] (300,623)<button class='category-card ng-star-inserted' />
+	[126] (300,569)<div  />
+		[127] (248,569)<div  />
+			[128] (248,569)<span >movie />
+		[129] (318,569)<h3 >Video Generation />
+	[130] (300,646)<p >Generate videos with Veo models, our state of the art video generation models. />
+[131] (468,623)<button class='category-card ng-star-inserted' />
+	[132] (461,569)<div  />
+		[133] (415,569)<div  />
+			[134] (415,569)<span >mic />
+		[135] (479,569)<h3 >Text to Speech />
+	[136] (468,646)<p >Convert text to speech with lifelike realism using Gemini TTS. />
+bolt
+Real-time
+Real-time voice and video with Gemini Live.
+[137] (468,876)<textarea aria-label='Enter a prompt' class='cdk-textarea-autosize textarea ng-pristine ng-valid ng-touched' placeholder='Start typing a prompt, use alt + enter to append' />
+[138] (213,940)<button aria-label='No API key selected' class='xap-inline-dialog paid-api-key-button ms-button-primary' />
+	[139] (213,940)<span >key_off />
+[140] (272,940)<button aria-label='Open tools menu' class='mat-mdc-tooltip-trigger xap-inline-dialog ms-button-primary mat-mdc-tooltip-disabled'>Tools />
+	[141] (255,940)<span >widgets />
+[142] (411,940)<button class='tool-chip-button'>google
+Grounding with Google Search />
+	google
+	Grounding with Google Search
+[143] (514,940)<button aria-label='Remove Grounding with Google Search' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small' />
+	[144] (514,940)<span >close />
+mic
+add_circle
+Run
+Ctrl
+keyboard_return
+Run settings
+code
+Get code
+reset_settings
+close
+[145] (879,531)<div class='scrollable-area' scrollable='true' />
+	Gemini 3.1 Pro Preview
+	gemini-3.1-pro-preview
+	Our latest SOTA reasoning model with unprecedented depth and nuance, and powerful multimodal understanding and coding capabilities
+	System instructions
+	Optional tone and style instructions for the model
+	No API Key
+	Switch to a paid API key to unlock higher quota and more features.
+	Temperature
+	Media resolution
+	Default
+	Thinking level
+	High
+	expand_more
+	Tools
+	Structured outputs
+	Edit
+
+</current_dom>

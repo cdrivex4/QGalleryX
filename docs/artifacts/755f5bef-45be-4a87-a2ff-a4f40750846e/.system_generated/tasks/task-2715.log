@@ -1,0 +1,20 @@
+================ ENVIRONMENT SNAPSHOT ================
+OS              : "Windows 10 Version 22H2"
+CPU Arch        : "x86_64" ( 6 logical threads)
+Total System RAM: 65466.5 MB
+GPU detected    : "NVIDIA GeForce GTX 1050 Ti" ( 4004 MB VRAM)
+======================================================
+[ "01:21:07.638" ][HWAccel] Requested mode: SettingsHelper::Auto
+[ "01:21:07.638" ][HWAccel] Initiating Auto Fallback Chain...
+[ "01:21:07.638" ][HWAccel] Attempting cuda ...
+[ "01:21:07.638" ][HWAccel] SUCCESS: cuda initialized
+[Diagnostics] Monitor started - running checks every 1000ms
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "01:21:08.043" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 112.117 MB | Sys Avail: 27421.2 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 112.117 MB (Delta: 112.117 ) | VRAM: 46 MB (Delta: 46 )
+[Diagnostics] Attached to ScrollBenchImageModel
+[Diagnostics] Attached to SettingsHelper
+[TaskScheduler] Started 2 CPU threads and 4 IO threads.
+QQmlApplicationEngine failed to load component
+qrc:/ScrollBench/qml/MainScrollBench.qml:61:17: Type GalleryViewScrollBench unavailable
+qrc:/ScrollBench/qml/GalleryViewScrollBench.qml:250:17: Cannot assign to non-existent property "mipmap"

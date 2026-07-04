@@ -1,0 +1,17 @@
+# Build System Review & Fix
+
+- [ ] Analyze Build System & References <!-- id: 0 -->
+    - [x] Verify source files in `src/` <!-- id: 1 -->
+    - [x] Verify QML files in `resources/qml/` <!-- id: 2 -->
+    - [x] Verify 3rdparty dependencies (`LibRaw`) <!-- id: 3 -->
+- [ ] Review Build Scripts (`build.ps1`) <!-- id: 4 -->
+    - [ ] Check for stale build prevention logic <!-- id: 5 -->
+    - [ ] Verify sequence of operations <!-- id: 6 -->
+- [ ] Implement Fixes <!-- id: 7 -->
+    - [x] Update `build.ps1` for robust cleaning <!-- id: 8 -->
+    - [x] Update `CMakeLists.txt` if needed <!-- id: 9 -->
+
+- [x] Implement 'Open in Explorer' Feature <!-- id: 10 -->
+    - [x] Create C++ helper to open folder and select file <!-- id: 11 -->
+    - [x] Add folder icon to Info view in QML <!-- id: 12 -->
+    - [x] Connect QML button to C++ helper <!-- id: 13 -->

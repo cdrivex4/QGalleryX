@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan to fix the 'NameError' in the lazy-loading engine and the subsequent concatenation failure. I will relocate the audio extraction logic inside the task loop, fix the result path resolution in the wrapper, and ensure FFmpeg concat uses absolute Windows-safe paths. Strategy: Logic Realignment. Summary: Finishing the movie.",
+  "updatedAt": "2026-04-13T20:40:29.786947100Z",
+  "requestFeedback": true
+}

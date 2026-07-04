@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan to resolve the '100% CPU / 0% GPU' hardware fallback issue. I have diagnosed that your Llama-CPP library was compiled for CPU-only. I will perform a low-level re-installation of the CUDA-powered backend to 'ignite' your 1050 Ti and move the heavy math off your processor.",
+  "updatedAt": "2026-04-13T02:56:45.533745600Z",
+  "requestFeedback": true
+}

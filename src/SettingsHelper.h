@@ -19,7 +19,7 @@ class SettingsHelper : public QObject {
   Q_PROPERTY(int thumbnailSize READ thumbnailSize WRITE setThumbnailSize NOTIFY
                  thumbnailSizeChanged)
   Q_PROPERTY(
-      int gridSize READ gridSize WRITE setGridSize NOTIFY gridSizeChanged)
+      int gridResolution READ gridResolution WRITE setGridResolution NOTIFY gridResolutionChanged)
   Q_PROPERTY(int cacheSizeMB READ cacheSizeMB WRITE setCacheSizeMB NOTIFY
                  cacheSizeMBChanged)
   Q_PROPERTY(int concurrentThreads READ concurrentThreads WRITE
@@ -58,8 +58,8 @@ public:
   int thumbnailSize() const;
   void setThumbnailSize(int size);
 
-  int gridSize() const;
-  void setGridSize(int size);
+  int gridResolution() const;
+  void setGridResolution(int size);
 
   int cacheSizeMB() const;
   void setCacheSizeMB(int sizeMB);
@@ -108,7 +108,7 @@ signals:
   void graphicsProfileChanged();
   void selectedApiChanged();
   void thumbnailSizeChanged();
-  void gridSizeChanged();
+  void gridResolutionChanged();
   void cacheSizeMBChanged();
   void concurrentThreadsChanged();
   void logLevelChanged();

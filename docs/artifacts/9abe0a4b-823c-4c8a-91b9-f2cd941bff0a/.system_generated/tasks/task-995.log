@@ -1,0 +1,90 @@
+
+=== ScrollBench Build ===
+Stopping any running instances...
+Verifying file lock on .\deploy\appScrollBench.exe...
+Building...
+[1/48] Automatic MOC and UIC for target tst_automation
+[2/47] Automatic MOC and UIC for target tst_linkage
+[3/46] Automatic MOC and UIC for target appScrollBench
+[4/45] Running AUTOMOC file extraction for target appScrollBench
+[5/45] Running moc --collect-json for target appScrollBench
+[6/11] Building CXX object CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj
+FAILED: CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/test_scrollbench/build/appScrollBench_autogen/include -ID:/Dev/antigravity/test_scrollbench -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/../3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtQml/6.9.3 -isystem D:/Qt/6.9.3/mingw_64/include/QtQml/6.9.3/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtCore/6.9.3 -isystem D:/Qt/6.9.3/mingw_64/include/QtCore/6.9.3/QtCore -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -isystem D:/Qt/6.9.3/mingw_64/include/QtQuickControls2 -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -O3 -DNDEBUG -MD -MT CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj -MF CMakeFiles\appScrollBench.dir\D_\Dev\antigravity\src\FileCacheManager.cpp.obj.d -o CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj -c D:/Dev/antigravity/src/FileCacheManager.cpp
+D:/Dev/antigravity/src/FileCacheManager.cpp: In member function 'virtual void MmapCacheDatabase::clear()':
+D:/Dev/antigravity/src/FileCacheManager.cpp:218:5: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  218 |     clearInternal();
+      |     ^~~~~~~~~~~~~
+      |     QInternal
+D:/Dev/antigravity/src/FileCacheManager.cpp: At global scope:
+D:/Dev/antigravity/src/FileCacheManager.cpp:221:6: error: no declaration matches 'void MmapCacheDatabase::clearInternal()'
+  221 | void MmapCacheDatabase::clearInternal() {
+      |      ^~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/FileCacheManager.cpp:221:6: note: no functions named 'void MmapCacheDatabase::clearInternal()'
+In file included from D:/Dev/antigravity/src/FileCacheManager.cpp:1:
+D:/Dev/antigravity/src/FileCacheManager.h:83:7: note: 'class MmapCacheDatabase' defined here
+   83 | class MmapCacheDatabase : public ICacheDatabase {
+      |       ^~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/FileCacheManager.cpp: In member function 'bool MmapCacheDatabase::advanceHead(quint64)':
+D:/Dev/antigravity/src/FileCacheManager.cpp:270:17: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  270 |                 clearInternal(); return true; // Corruption guard
+      |                 ^~~~~~~~~~~~~
+      |                 QInternal
+D:/Dev/antigravity/src/FileCacheManager.cpp:291:13: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  291 |             clearInternal(); return true; // Corruption guard
+      |             ^~~~~~~~~~~~~
+      |             QInternal
+[7/11] Building CXX object CMakeFiles/tst_automation.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj
+FAILED: CMakeFiles/tst_automation.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/test_scrollbench/build/tst_automation_autogen/include -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/../3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -O3 -DNDEBUG -MD -MT CMakeFiles/tst_automation.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj -MF CMakeFiles\tst_automation.dir\D_\Dev\antigravity\src\FileCacheManager.cpp.obj.d -o CMakeFiles/tst_automation.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj -c D:/Dev/antigravity/src/FileCacheManager.cpp
+D:/Dev/antigravity/src/FileCacheManager.cpp: In member function 'virtual void MmapCacheDatabase::clear()':
+D:/Dev/antigravity/src/FileCacheManager.cpp:218:5: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  218 |     clearInternal();
+      |     ^~~~~~~~~~~~~
+      |     QInternal
+D:/Dev/antigravity/src/FileCacheManager.cpp: At global scope:
+D:/Dev/antigravity/src/FileCacheManager.cpp:221:6: error: no declaration matches 'void MmapCacheDatabase::clearInternal()'
+  221 | void MmapCacheDatabase::clearInternal() {
+      |      ^~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/FileCacheManager.cpp:221:6: note: no functions named 'void MmapCacheDatabase::clearInternal()'
+In file included from D:/Dev/antigravity/src/FileCacheManager.cpp:1:
+D:/Dev/antigravity/src/FileCacheManager.h:83:7: note: 'class MmapCacheDatabase' defined here
+   83 | class MmapCacheDatabase : public ICacheDatabase {
+      |       ^~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/FileCacheManager.cpp: In member function 'bool MmapCacheDatabase::advanceHead(quint64)':
+D:/Dev/antigravity/src/FileCacheManager.cpp:270:17: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  270 |                 clearInternal(); return true; // Corruption guard
+      |                 ^~~~~~~~~~~~~
+      |                 QInternal
+D:/Dev/antigravity/src/FileCacheManager.cpp:291:13: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  291 |             clearInternal(); return true; // Corruption guard
+      |             ^~~~~~~~~~~~~
+      |             QInternal
+[8/11] Building CXX object CMakeFiles/tst_linkage.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj
+FAILED: CMakeFiles/tst_linkage.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/test_scrollbench/build/tst_linkage_autogen/include -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/../3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -O3 -DNDEBUG -MD -MT CMakeFiles/tst_linkage.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj -MF CMakeFiles\tst_linkage.dir\D_\Dev\antigravity\src\FileCacheManager.cpp.obj.d -o CMakeFiles/tst_linkage.dir/D_/Dev/antigravity/src/FileCacheManager.cpp.obj -c D:/Dev/antigravity/src/FileCacheManager.cpp
+D:/Dev/antigravity/src/FileCacheManager.cpp: In member function 'virtual void MmapCacheDatabase::clear()':
+D:/Dev/antigravity/src/FileCacheManager.cpp:218:5: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  218 |     clearInternal();
+      |     ^~~~~~~~~~~~~
+      |     QInternal
+D:/Dev/antigravity/src/FileCacheManager.cpp: At global scope:
+D:/Dev/antigravity/src/FileCacheManager.cpp:221:6: error: no declaration matches 'void MmapCacheDatabase::clearInternal()'
+  221 | void MmapCacheDatabase::clearInternal() {
+      |      ^~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/FileCacheManager.cpp:221:6: note: no functions named 'void MmapCacheDatabase::clearInternal()'
+In file included from D:/Dev/antigravity/src/FileCacheManager.cpp:1:
+D:/Dev/antigravity/src/FileCacheManager.h:83:7: note: 'class MmapCacheDatabase' defined here
+   83 | class MmapCacheDatabase : public ICacheDatabase {
+      |       ^~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/FileCacheManager.cpp: In member function 'bool MmapCacheDatabase::advanceHead(quint64)':
+D:/Dev/antigravity/src/FileCacheManager.cpp:270:17: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  270 |                 clearInternal(); return true; // Corruption guard
+      |                 ^~~~~~~~~~~~~
+      |                 QInternal
+D:/Dev/antigravity/src/FileCacheManager.cpp:291:13: error: 'clearInternal' was not declared in this scope; did you mean 'QInternal'?
+  291 |             clearInternal(); return true; // Corruption guard
+      |             ^~~~~~~~~~~~~
+      |             QInternal
+ninja: build stopped: subcommand failed.
+Build failed!

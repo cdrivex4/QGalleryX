@@ -1,0 +1,101 @@
+# ScrollBench - Simple Performance Testing ✅
+
+## 🎯 Executable Path
+
+```
+d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+```
+
+---
+
+## ✨ What's Working
+
+### Core Features
+✅ **Grid View** - Displays thumbnails in grid layout  
+✅ **Performance Overlay** - Right sidebar with all controls  
+✅ **Folder Selection** - "📁 Select Folder" button (top-right)  
+✅ **Real Image Loading** - Uses AsyncImageProvider  
+✅ **Synthetic Test Data** - 10,000 colored rectangles on startup  
+
+### Performance Controls (Right Sidebar)
+✅ **Viewport Culling Toggle** - Enable/disable viewport-based loading  
+✅ **Frame Budget Toggle** - Enable/disable frame budget limiting  
+✅ **Frame Budget Slider** - 1-50 uploads per frame  
+✅ **Thumb Resolution Slider** - 128-512px (affects decode quality)  
+✅ **FPS Monitor** - Color-coded (green ≥55, yellow ≥30, red <30)  
+✅ **Queue Depth** - Real-time pending decode count  
+✅ **Memory Usage** - Live MB counter  
+
+---
+
+## 🎮 How to Use
+
+### 1. Launch
+```
+d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+```
+
+### 2. Test with Synthetic Data (Default)
+- App starts with 10,000 colored rectangles
+- Scroll rapidly to test performance
+- Toggle viewport culling ON/OFF
+- Adjust frame budget (1-50)
+- Watch FPS and queue depth change
+
+### 3. Test with Real Images
+1. Click "📁 Select Folder" (top-right)
+2. Choose folder with 100+ images
+3. Wait for scan to complete
+4. Scroll and test performance
+
+### 4. Performance Testing
+```
+Baseline (Optimizations OFF):
+- Viewport culling: OFF
+- Frame budget: OFF
+- Scroll rapidly
+- Expected: FPS drops, queue spikes
+
+Optimized (Optimizations ON):
+- Viewport culling: ON
+- Frame budget: ON (set to 10)
+- Scroll rapidly
+- Expected: FPS stable 50-60, queue <50
+```
+
+---
+
+## 📊 Performance Overlay Controls
+
+| Control | What It Does | Range |
+|---------|-------------|-------|
+| **Viewport Culling** | Only loads visible items | ON/OFF |
+| **Frame Budget** | Limits uploads per frame | ON/OFF |
+| **Budget Slider** | Max uploads per frame | 1-50 |
+| **Thumb Resolution** | Image decode quality | 128-512px |
+
+**Note**: Thumb resolution affects decode quality and performance, NOT grid cell size.
+
+---
+
+## 🔧 Build Process Improvements
+
+✅ **Auto-kill running instances** - Deploy script now kills `appScrollBench.exe` before copying  
+✅ **Sequential build chain** - Code changes → Build → Deploy → Test  
+
+---
+
+## 🚀 Next Steps
+
+1. **Test with your images** - Select a folder with 1000+ images
+2. **Compare performance** - Toggle optimizations on/off while scrolling
+3. **Monitor metrics** - Verify FPS stays above 30 with optimizations enabled
+4. **Report findings** - Share performance results
+
+If performance is good, these optimizations can be integrated into the main Antigravity application!
+
+---
+
+**Status**: ✅ **READY TO TEST**  
+**Path**: `d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe`  
+**Features**: Simple grid view, performance overlay with all controls, folder selection

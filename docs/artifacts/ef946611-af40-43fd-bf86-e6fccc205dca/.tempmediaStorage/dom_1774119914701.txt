@@ -1,0 +1,310 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (32,45)<button class='prc-Button-ButtonBase-9n-Xk position-relative ExpandFileTreeButton-module__expandButton__hDOcv fgColor-muted prc-Button-IconButton-fyge7' />
+Files
+[1] (138,113)<button aria-label='master branch' class='prc-Button-ButtonBase-9n-Xk react-repos-tree-pane-ref-selector width-full ref-selector-class RefSelectorAnchoredOverlay-module__RefSelectorOverlayBtn__a3WK3' id='ref-picker-repos-header-ref-selector' />
+	[2] (138,113)<span  />
+		[3] (126,113)<span  />
+			[4] (126,113)<div  />
+				[5] (36,113)<div  />
+				[6] (71,113)<div  />
+					[7] (71,112)<span >master />
+[8] (284,113)<button class='prc-Button-ButtonBase-9n-Xk SearchButton-module__IconButton__SBlqu prc-Button-IconButton-fyge7' />
+[9] (158,169)<span  />
+	[10] (32,169)<span  />
+	[11] (166,169)<input aria-label='Go to file' class='prc-components-Input-IwWrt' placeholder='Go to file' role='combobox' />
+[12] (158,604)<div class='ReposFileTreePane-module__Box_5__Zy_o6' scrollable='true' />
+	[13] (150,231)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='.github-item' role='treeitem' />
+		[14] (150,231)<div  />
+			[15] (24,231)<div  />
+			[16] (158,231)<div  />
+				[17] (47,231)<div  />
+					[18] (47,231)<div  />
+				[19] (170,231)<span  />
+					[20] (85,230)<span >.github />
+	[21] (150,276)<div  />
+		[22] (24,276)<div  />
+		[23] (158,276)<div  />
+			[24] (47,276)<div  />
+				[25] (47,276)<div  />
+			[26] (170,276)<span  />
+				[27] (72,276)<span >src />
+	[28] (150,322)<div  />
+		[29] (20,322)<div  />
+			[30] (20,322)<div  />
+				[31] (20,322)<div  />
+		[32] (32,322)<div  />
+		[33] (162,322)<div  />
+			[34] (55,322)<div  />
+				[35] (55,322)<div  />
+			[36] (174,322)<span  />
+				[37] (95,321)<span >engines />
+	[38] (150,367)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/academictorrents.png-item' role='treeitem' />
+		[39] (150,367)<div  />
+			[40] (24,367)<div  />
+				[41] (24,367)<div  />
+					[42] (20,367)<div  />
+					[43] (28,367)<div  />
+			[44] (166,367)<div  />
+				[45] (63,367)<div  />
+				[46] (178,367)<span  />
+					[47] (145,366)<span >academictorrents.png />
+	[48] (150,413)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/academictorrents.py-item' role='treeitem' />
+		[49] (150,413)<div  />
+			[50] (24,413)<div  />
+				[51] (24,413)<div  />
+					[52] (20,413)<div  />
+					[53] (28,413)<div  />
+			[54] (166,413)<div  />
+				[55] (63,412)<div  />
+				[56] (178,413)<span  />
+					[57] (140,412)<span >academictorrents.py />
+	[58] (150,458)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/bitsearch.png-item' role='treeitem' />
+		[59] (150,458)<div  />
+			[60] (24,458)<div  />
+				[61] (24,458)<div  />
+					[62] (20,458)<div  />
+					[63] (28,458)<div  />
+			[64] (166,458)<div  />
+				[65] (63,458)<div  />
+				[66] (178,458)<span  />
+					[67] (120,457)<span >bitsearch.png />
+	[68] (150,503)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/bitsearch.py-item' role='treeitem' />
+		[69] (150,503)<div  />
+			[70] (24,503)<div  />
+				[71] (24,503)<div  />
+					[72] (20,503)<div  />
+					[73] (28,503)<div  />
+			[74] (166,503)<div  />
+				[75] (63,503)<div  />
+				[76] (178,503)<span  />
+					[77] (115,503)<span >bitsearch.py />
+	[78] (150,549)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/bt4g.png-item' role='treeitem' />
+		[79] (150,549)<div  />
+			[80] (24,549)<div  />
+				[81] (24,549)<div  />
+					[82] (20,549)<div  />
+					[83] (28,549)<div  />
+			[84] (166,549)<div  />
+				[85] (63,548)<div  />
+				[86] (178,549)<span  />
+					[87] (107,548)<span >bt4g.png />
+	[88] (150,594)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/bt4g.py-item' role='treeitem' />
+		[89] (150,594)<div  />
+			[90] (24,594)<div  />
+				[91] (24,594)<div  />
+					[92] (20,594)<div  />
+					[93] (28,594)<div  />
+			[94] (166,594)<div  />
+				[95] (63,594)<div  />
+				[96] (178,594)<span  />
+					[97] (102,593)<span >bt4g.py />
+	[98] (150,639)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/btetree.png-item' role='treeitem' />
+		[99] (150,639)<div  />
+			[100] (24,639)<div  />
+				[101] (24,639)<div  />
+					[102] (20,639)<div  />
+					[103] (28,639)<div  />
+			[104] (166,639)<div  />
+				[105] (63,639)<div  />
+				[106] (178,639)<span  />
+					[107] (114,639)<span >btetree.png />
+	[108] (150,685)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/btetree.py-item' role='treeitem' />
+		[109] (150,685)<div  />
+			[110] (24,685)<div  />
+				[111] (24,685)<div  />
+					[112] (20,685)<div  />
+					[113] (28,685)<div  />
+			[114] (166,685)<div  />
+				[115] (63,685)<div  />
+				[116] (178,685)<span  />
+					[117] (110,684)<span >btetree.py />
+	[118] (150,730)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/cloudtorrents.png-item' role='treeitem' />
+		[119] (150,730)<div  />
+			[120] (24,730)<div  />
+				[121] (24,730)<div  />
+					[122] (20,730)<div  />
+					[123] (28,730)<div  />
+			[124] (166,730)<div  />
+				[125] (63,730)<div  />
+				[126] (178,730)<span  />
+					[127] (133,729)<span >cloudtorrents.png />
+	[128] (150,775)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/cloudtorrents.py-item' role='treeitem' />
+		[129] (150,775)<div  />
+			[130] (24,775)<div  />
+				[131] (24,775)<div  />
+					[132] (20,775)<div  />
+					[133] (28,775)<div  />
+			[134] (166,775)<div  />
+				[135] (63,775)<div  />
+				[136] (178,775)<span  />
+					[137] (129,775)<span >cloudtorrents.py />
+	[138] (150,821)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/ettv.png-item' role='treeitem' />
+		[139] (150,821)<div  />
+			[140] (24,821)<div  />
+				[141] (24,821)<div  />
+					[142] (20,821)<div  />
+					[143] (28,821)<div  />
+			[144] (166,821)<div  />
+				[145] (63,821)<div  />
+				[146] (178,821)<span  />
+					[147] (104,820)<span >ettv.png />
+	[148] (150,866)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/ettv.py-item' role='treeitem' />
+		[149] (150,866)<div  />
+			[150] (24,866)<div  />
+				[151] (24,866)<div  />
+					[152] (20,866)<div  />
+					[153] (28,866)<div  />
+			[154] (166,866)<div  />
+				[155] (63,866)<div  />
+				[156] (178,866)<span  />
+					[157] (99,865)<span >ettv.py />
+	[158] (150,911)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/filemood.png-item' role='treeitem' />
+		[159] (150,911)<div  />
+			[160] (24,911)<div  />
+				[161] (24,911)<div  />
+					[162] (20,911)<div  />
+					[163] (28,911)<div  />
+			[164] (166,911)<div  />
+				[165] (63,911)<div  />
+				[166] (178,911)<span  />
+					[167] (120,911)<span >filemood.png />
+	[168] (150,957)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines/filemood.py-item' role='treeitem' />
+		[169] (150,957)<div  />
+			[170] (24,957)<div  />
+				[171] (24,957)<div  />
+					[172] (20,957)<div  />
+					[173] (28,957)<div  />
+			[174] (166,957)<div  />
+				[175] (63,957)<div  />
+				[176] (178,957)<span  />
+					[177] (115,956)<span >filemood.py />
+	glotorrents.png
+[178] (316,500)<div aria-label='Draggable pane splitter' class='prc-PageLayout-DraggableHandle-9s6B4' role='slider' />
+Breadcrumbs
+[179] (432,30)<a class='Breadcrumb-module__repoLink__O2Nbs prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/tree/master'>qBittorrent-Search-Plugins />
+/
+[180] (545,30)<a class='Breadcrumb-module__directoryLink__kQy_t prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/tree/master/src'>src />
+/
+engines
+/
+[181] (948,31)<button class='prc-Button-ButtonBase-9n-Xk FileNameStickyHeader-module__Button__LSEU_ FileNameStickyHeader-module__GoToTopButton__nxAFn' />
+	[182] (948,31)<span  />
+		[183] (957,31)<span >Top />
+glotorrents.png
+style: ICO to PNG
+[184] (658,92)<tr  />
+	[185] (417,92)<a aria-label='glotorrents.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/glotorrents.py' title='glotorrents.py'>glotorrents.py />
+	[186] (760,92)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[187] (658,150)<tr  />
+	[188] (428,150)<a aria-label='ilcorsaronero.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/ilcorsaronero.png' title='ilcorsaronero.png'>ilcorsaronero.png />
+	[189] (662,150)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/df508aca571c3fe4abb085d163952d130b96e2cd' title='style: ICO to PNG'>style: ICO to PNG />
+[190] (658,207)<tr  />
+	[191] (423,207)<a aria-label='ilcorsaronero.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/ilcorsaronero.py' title='ilcorsaronero.py'>ilcorsaronero.py />
+	[192] (760,207)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[193] (658,265)<tr  />
+	[194] (433,265)<a aria-label='kickasstorrents.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/kickasstorrents.png' title='kickasstorrents.png'>kickasstorrents.png />
+	[195] (669,265)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/2e2bdabfa3a85f86d81dce1a985a3ecf65c6747b' title='feat: kickasstorrents'>feat: kickasstorrents />
+[196] (658,322)<tr  />
+	[197] (429,322)<a aria-label='kickasstorrents.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/kickasstorrents.py' title='kickasstorrents.py'>kickasstorrents.py />
+	[198] (732,322)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/a6343ff72736994bb0751c0cb6fd2f1b83e2ac9a' title='fix(kickasstorrent): update regex for html'>fix(kickasstorrent): update regex for html />
+[199] (658,380)<tr  />
+	[200] (425,380)<a aria-label='limetorrents.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/limetorrents.png' title='limetorrents.png'>limetorrents.png />
+	[201] (694,380)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/9736cf8c857783d6e052a3d8daeaa285e47cc067' title='feat: add limetorrent engine'>feat: add limetorrent engine />
+[202] (658,437)<tr  />
+	[203] (420,437)<a aria-label='limetorrents.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/limetorrents.py' title='limetorrents.py'>limetorrents.py />
+	[204] (694,437)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/269af5ba369631fc4e33240a6f1e3bd404fd5432' title='Update limetorrents.py 1.1 (#32)
+
+* 1.1 - fixed parsing and updated to allow (open download window) 
+
+The open download button in qbit was not working, made a minor change to "__findTorrents" and updated "download_torrent" to fix this issue.
+
+* Update limetorrents.py - 1.1
+
+Made a minor parsing change, updated download function to fix issue with "open download window" not working.
+
+* Update limetorrents.py - 1.1 
+
+Update resolves issue with "open download window" not working. Minor parsing fix and function updates.
+
+* Update README.md
+
+Limetorrents 1.1'>Update limetorrents.py 1.1 ( />
+	[205] (790,437)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/32'>#32 />
+	[206] (804,437)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/269af5ba369631fc4e33240a6f1e3bd404fd5432' title='Update limetorrents.py 1.1 (#32)
+
+* 1.1 - fixed parsing and updated to allow (open download window) 
+
+The open download button in qbit was not working, made a minor change to "__findTorrents" and updated "download_torrent" to fix this issue.
+
+* Update limetorrents.py - 1.1
+
+Made a minor parsing change, updated download function to fix issue with "open download window" not working.
+
+* Update limetorrents.py - 1.1 
+
+Update resolves issue with "open download window" not working. Minor parsing fix and function updates.
+
+* Update README.md
+
+Limetorrents 1.1'>) />
+[207] (658,495)<tr  />
+	[208] (402,495)<a aria-label='nitro.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/nitro.png' title='nitro.png'>nitro.png />
+	[209] (648,495)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0829918fad0898bc5ed5e13dc969493382deb948' title='feat: Nitro.to'>feat: Nitro.to />
+[210] (658,552)<tr  />
+	[211] (398,552)<a aria-label='nitro.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/nitro.py' title='nitro.py'>nitro.py />
+	[212] (760,552)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[213] (658,610)<tr  />
+	[214] (414,609)<a aria-label='pirateiro.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/pirateiro.png' title='pirateiro.png'>pirateiro.png />
+	[215] (650,609)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/1f6461198dd14a8c8ab956f57859337694f0ea23' title='feat: Pirateiro'>feat: Pirateiro />
+[216] (658,667)<tr  />
+	[217] (409,667)<a aria-label='pirateiro.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/pirateiro.py' title='pirateiro.py'>pirateiro.py />
+	[218] (760,667)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[219] (658,725)<tr  />
+	[220] (405,724)<a aria-label='rarbg.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rarbg.png' title='rarbg.png'>rarbg.png />
+	[221] (655,724)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/ac4af25bd0c87e3e322745545fefeb324d01d3ca' title='feat: Add rarbg'>feat: Add rarbg />
+[222] (658,782)<tr  />
+	[223] (400,782)<a aria-label='rarbg.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rarbg.py' title='rarbg.py'>rarbg.py />
+	[224] (760,782)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[225] (658,839)<tr  />
+	[226] (412,839)<a aria-label='rockbox.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rockbox.png' title='rockbox.png'>rockbox.png />
+	[227] (662,839)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/df508aca571c3fe4abb085d163952d130b96e2cd' title='style: ICO to PNG'>style: ICO to PNG />
+[228] (658,897)<tr  />
+	rockbox.py
+	[229] (760,897)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[230] (658,954)<tr  />
+	snowfl.png
+	[231] (693,954)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>[ImgBot] Optimize images ( />
+	[232] (788,954)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/26'>#26 />
+	[233] (801,954)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>) />
+snowfl.py
+revert of
+#27
+
+</current_dom>

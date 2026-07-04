@@ -25,6 +25,10 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   // Constructor should be lightweight. Scanning happens via scanDirectory().
   m_visibleStartIndex = -1;
   m_visibleEndIndex = -1;
+  
+  m_updateTimer = new QTimer(this);
+  m_updateTimer->setInterval(16); // ~60fps
+  connect(m_updateTimer, &QTimer::timeout, this, &ImageModel::processPendingUpdates);
 }
 
 int ImageModel::rowCount(const QModelIndex &parent) const {
@@ -139,8 +143,10 @@ void ImageModel::updateVisiblePaths() {
   }
 
   QSet<QString> visiblePaths;
-  int end = qMin(m_visibleEndIndex, (int)m_images.count() - 1);
-  for (int i = qMax(0, m_visibleStartIndex); i <= end; ++i) {
+  const int BUFFER_ZONE = 200; // 2-screen buffer zone
+  int start = qMax(0, m_visibleStartIndex - BUFFER_ZONE);
+  int end = qMin(m_visibleEndIndex + BUFFER_ZONE, (int)m_images.count() - 1);
+  for (int i = start; i <= end; ++i) {
     visiblePaths.insert(m_images[i].filePath);
   }
   VisibleRangeManager::instance().setVisiblePaths(visiblePaths);
@@ -157,6 +163,7 @@ void ImageModel::scanDirectory(const QString &path) {
   // Clear current images immediately so UI updates
   beginResetModel();
   m_images.clear();
+  m_pendingInsertions.clear();
   endResetModel();
 
   // Clear previous pending tasks (e.g. thumbnails from old folder)
@@ -198,8 +205,6 @@ void ImageModel::scanDirectory(const QString &path) {
           });
           return;
         }
-
-        qDebug() << "Scanning directory:" << cleanPath;
 
         qDebug() << "Scanning directory:" << cleanPath;
 
@@ -279,12 +284,9 @@ void ImageModel::scanDirectory(const QString &path) {
                   // existing logic. It is still faster than recursive directory
                   // walking usually.
 
-                  QFileInfo fi(f);
-                  info.size = fi.size();
-                  info.date = fi.birthTime();
-                  if (!info.date.isValid() || info.date.date().year() < 1980) {
-                      info.date = fi.lastModified();
-                  }
+                  // Deferred QFileInfo
+                  // info.size and info.date are left empty to avoid O(n) disk IO
+                  // Fallback to fast date parsing from filename
 
                   QRegularExpressionMatch match =
                       dateRegex.match(info.fileName);
@@ -317,11 +319,8 @@ void ImageModel::scanDirectory(const QString &path) {
             ImageInfo info;
             info.filePath = fileInfo.absoluteFilePath();
             info.fileName = fileInfo.fileName();
-            info.size = fileInfo.size();
-            info.date = fileInfo.birthTime(); // Default
-            if (!info.date.isValid() || info.date.date().year() < 1980) {
-                info.date = fileInfo.lastModified();
-            }
+            // Deferred QFileInfo disk IO for size and date
+            // Fallback to fast date parsing from filename
 
             // Optimize: Try parsing filename for date
             QRegularExpressionMatch match = dateRegex.match(info.fileName);
@@ -337,39 +336,55 @@ void ImageModel::scanDirectory(const QString &path) {
         }
 
         // Final Sort and completion
-        QMetaObject::invokeMethod(this, [this, batch, timer]() {
-          beginResetModel();
-          m_images = batch;
-          std::sort(m_images.begin(), m_images.end(),
-                    [](const ImageInfo &a, const ImageInfo &b) {
-                      return a.date > b.date;
-                    });
+        // Final Sort and completion
+        // Do the sorting in the background thread!
+        std::sort(batch.begin(), batch.end(),
+                  [](const ImageInfo &a, const ImageInfo &b) {
+                    return a.date > b.date;
+                  });
 
-          // Burst Detection: Group shots within 2 seconds
-          if (m_images.size() > 1) {
-            const qint64 BURST_THRESHOLD_MS = 2000;
-            for (int i = 0; i < m_images.size(); ++i) {
-              bool prevNear =
-                  (i > 0) &&
-                  (std::abs(m_images[i].date.msecsTo(m_images[i - 1].date)) <
-                   BURST_THRESHOLD_MS);
-              bool nextNear =
-                  (i < m_images.size() - 1) &&
-                  (std::abs(m_images[i].date.msecsTo(m_images[i + 1].date)) <
-                   BURST_THRESHOLD_MS);
-              m_images[i].isBurst = (prevNear || nextNear);
-            }
+        // Burst Detection: Group shots within 2 seconds
+        if (batch.size() > 1) {
+          const qint64 BURST_THRESHOLD_MS = 2000;
+          for (int i = 0; i < batch.size(); ++i) {
+            bool prevNear =
+                (i > 0) &&
+                (std::abs(batch[i].date.msecsTo(batch[i - 1].date)) <
+                 BURST_THRESHOLD_MS);
+            bool nextNear =
+                (i < batch.size() - 1) &&
+                (std::abs(batch[i].date.msecsTo(batch[i + 1].date)) <
+                 BURST_THRESHOLD_MS);
+            batch[i].isBurst = (prevNear || nextNear);
           }
+        }
 
-          endResetModel();
-
-          m_isLoading = false;
-          emit isLoadingChanged();
-          qDebug() << "Scanning finished in" << timer.elapsed() << "ms. Found"
-                   << m_images.count() << "items.";
+        QMetaObject::invokeMethod(this, [this, batch, timer]() {
+          m_pendingInsertions = batch;
+          m_updateTimer->start();
+          qDebug() << "Scanning background work finished in" << timer.elapsed() << "ms. Starting batched insertion of" << m_pendingInsertions.count() << "items.";
         });
       },
       TaskScheduler::IO_BOUND, TaskScheduler::Normal);
+}
+
+void ImageModel::processPendingUpdates() {
+  if (m_pendingInsertions.isEmpty()) {
+    m_updateTimer->stop();
+    m_isLoading = false;
+    emit isLoadingChanged();
+    return;
+  }
+
+  const int BATCH_SIZE = 100; // Insert 100 items per frame
+  int count = qMin(BATCH_SIZE, (int)m_pendingInsertions.size());
+  
+  int startIdx = m_images.size();
+  beginInsertRows(QModelIndex(), startIdx, startIdx + count - 1);
+  for (int i = 0; i < count; ++i) {
+    m_images.append(m_pendingInsertions.takeFirst());
+  }
+  endInsertRows();
 }
 
 bool ImageModel::cropImage(int index, const QRectF &cropRect) {

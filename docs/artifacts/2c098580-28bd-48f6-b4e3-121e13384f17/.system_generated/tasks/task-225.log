@@ -1,0 +1,36 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 9927-D080
+
+ Directory of C:\just-dub-it2\env\Lib\site-packages\nvidia\cublas\bin
+
+04/13/2026  04:57 PM       102,518,272 cublas64_12.dll
+04/13/2026  04:57 PM       668,673,536 cublasLt64_12.dll
+04/13/2026  04:57 PM           334,848 nvblas64_12.dll
+               3 File(s)    771,526,656 bytes
+
+ Directory of C:\just-dub-it2\env\Lib\site-packages\nvidia\cuda_nvrtc\bin
+
+04/13/2026  04:57 PM         7,217,664 nvrtc-builtins64_129.dll
+04/13/2026  04:57 PM        89,899,520 nvrtc64_120_0.alt.dll
+04/13/2026  04:57 PM        89,832,960 nvrtc64_120_0.dll
+               3 File(s)    186,950,144 bytes
+
+ Directory of C:\just-dub-it2\env\Lib\site-packages\nvidia\cuda_runtime\bin
+
+04/13/2026  04:57 PM           583,680 cudart64_12.dll
+               1 File(s)        583,680 bytes
+
+ Directory of C:\just-dub-it2\env\Lib\site-packages\nvidia\cudnn\bin
+
+06/02/2026  07:59 PM           288,296 cudnn64_8.dll
+06/02/2026  07:59 PM       125,217,320 cudnn_adv_infer64_8.dll
+06/02/2026  07:59 PM       116,558,888 cudnn_adv_train64_8.dll
+06/02/2026  07:59 PM       582,690,344 cudnn_cnn_infer64_8.dll
+06/02/2026  08:00 PM       122,242,104 cudnn_cnn_train64_8.dll
+06/02/2026  08:00 PM        89,759,272 cudnn_ops_infer64_8.dll
+06/02/2026  08:00 PM        70,162,472 cudnn_ops_train64_8.dll
+               7 File(s)  1,106,918,696 bytes
+
+     Total Files Listed:
+              14 File(s)  2,065,979,176 bytes
+               0 Dir(s)  296,513,654,784 bytes free

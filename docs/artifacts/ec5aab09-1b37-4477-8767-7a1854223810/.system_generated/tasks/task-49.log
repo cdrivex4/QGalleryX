@@ -1,0 +1,39 @@
+
++---------------------------------------------------------+
+|             * Hermes Agent Installer                    |
++---------------------------------------------------------+
+|  An open source AI agent by Nous Research.              |
++---------------------------------------------------------+
+
+-> Checking for uv package manager...
+[OK] uv found (uv 0.6.11 (0632e24d1 2025-03-30))
+-> Checking Python 3.11...
+[OK] Python found: Python 3.11.11
+-> Checking Git...
+[OK] Git found (git version 2.54.0.windows.1)
+-> Set HERMES_GIT_BASH_PATH=C:\Program Files\Git\bin\bash.exe
+-> Checking Node.js (for browser tools)...
+[OK] Node.js v24.9.0 found
+-> Checking ripgrep (fast file search)...
+[OK] ripgrep 15.1.0 (rev af60c2de9d) found
+-> Checking ffmpeg (TTS voice messages)...
+[OK] ffmpeg found
+-> Installing to C:\Users\curtis\AppData\Local\hermes\hermes-agent...
+-> Existing installation found, updating...
+Already on 'main'
+Your branch is up to date with 'origin/main'.
+From https://github.com/NousResearch/hermes-agent
+ * branch                main       -> FETCH_HEAD
+Already up to date.
+-> Initializing submodules...
+[OK] Submodules ready
+[OK] Repository ready
+-> Creating virtual environment with Python 3.11...
+-> Virtual environment already exists, recreating...
+
+[X] Installation failed: Cannot remove item C:\Users\curtis\AppData\Local\hermes\hermes-agent\venv\Lib\site-packages\aiohttp\_websocket\mask.cp312-win_amd64.pyd: Access to the path 'mask.cp312-win_amd64.pyd' is denied.
+
+-> If the error is unclear, try downloading and running the script directly:
+  Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1' -OutFile install.ps1
+  .\install.ps1
+

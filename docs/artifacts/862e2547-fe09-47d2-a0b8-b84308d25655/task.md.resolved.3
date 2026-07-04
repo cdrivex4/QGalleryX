@@ -1,0 +1,18 @@
+# Task Checklist
+
+- [x] **Research & Diagnostics**
+    - [x] Review [av_encoder.py](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/encoders/av_encoder.py) and [model_ledger.py](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py) 
+    - [x] Check mapping for `multi_modal_projector` weights
+    - [x] Identify RAM bottleneck: builder scanning 48GB of shards for 9MB of data
+- [x] **Implementation (Round 1 — Feature Extractor)**
+    - [x] Create [GemmaFeaturesExtractorLightricks](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/feature_extractor.py#46-99) in [feature_extractor.py](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/feature_extractor.py)
+    - [x] Update [AVGemmaTextEncoderModelConfigurator](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/encoders/av_encoder.py#74-85) in [av_encoder.py](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/encoders/av_encoder.py)
+- [/] **Implementation (Round 2 — Split-Source Loading)**
+    - [ ] Split `AV_GEMMA_TEXT_ENCODER_KEY_OPS` into projector + connector ops in [av_encoder.py](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/encoders/av_encoder.py)
+    - [ ] Rewrite `text_encoder_builder` in [model_ledger.py](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py) to use two separate builders
+    - [ ] Override [text_encoder()](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py#248-256) to compose the two
+- [ ] **Verification**
+    - [ ] Run [scripts/test_gemma_load.py](file:///c:/just-dub-it/scripts/test_gemma_load.py)
+    - [ ] Run [scripts/bench_hardware.py](file:///c:/just-dub-it/scripts/bench_hardware.py) if load succeeds
+- [ ] **Polishing**
+    - [ ] Robustify [start_justdubit.bat](file:///c:/just-dub-it/start_justdubit.bat) port cleanup logic

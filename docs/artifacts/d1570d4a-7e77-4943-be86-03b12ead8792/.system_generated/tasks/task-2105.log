@@ -1,0 +1,5 @@
+warning: in the working copy of 'docs/TODO.md', LF will be replaced by CRLF the next time Git touches it
+[main 7431f95] Implement true Drag-and-Drop for Jobs board across Kanban cols and List sidebar; mark TODOs as done
+ 2 files changed, 64 insertions(+), 8 deletions(-)
+To https://github.com/cdrivex4/legioncommand.git
+   356dabd..7431f95  main -> main

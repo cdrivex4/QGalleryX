@@ -1,0 +1,183 @@
+# Architecture V2: "SamsungGallery Reforged"
+
+- [x] **Phase 1: The Foundation (Kernel)**
+  - [x] **Fix Build & Tests** <!-- id: 10 -->
+    - [x] Diagnose and fix `tst_imagemodel` crash
+    - [x] Ensure `ctest` passes reliably
+  - [x] **Implement LogManager** <!-- id: 11 -->
+    - [x] Create `src/LogManager` (Async, RingBuffer)
+    - [x] Integrate into [main.cpp](file:///d:/Dev/antigravity/src/main.cpp)
+  - [x] **Implement TaskScheduler** <!-- id: 12 -->
+    - [x] Create `src/TaskScheduler` (Priority Queue)
+    - [x] Create unit test `tst_scheduler`
+    - [x] Integrate into [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt)
+
+- [x] **Phase 2: Refactoring Components**
+  - [x] **Refactor ImageModel** <!-- id: 20 -->
+    - [x] Replace `QtConcurrent::run` with [TaskScheduler](file:///d:/Dev/antigravity/src/TaskScheduler.cpp#15-45) (IO_BOUND)
+    - [x] Implement fine-grained batching updates
+  - [x] **Refactor AsyncImageProvider** <!-- id: 21 -->
+    - [x] Update [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-58) to use [TaskScheduler](file:///d:/Dev/antigravity/src/TaskScheduler.cpp#15-45)
+    - [x] Implement Viewport-aware priority
+
+- [x] **Phase 3: Hardening**
+  - [x] Memory Safety Audit (Smart Pointers)
+  - [x] Crash Handling (LibRaw isolation)
+  - [x] Deployment Script (Self-Extracting exe)
+
+- [x] **Phase 4: Refinements**
+  - [x] **Image Prioritization** <!-- id: 30 -->
+    - [x] [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-58): Viewer requests -> Immediate, Thumbnails -> Low
+  - [x] **Task Cancellation**
+    - [x] `TaskScheduler::clear()` on folder change (`ImageModel::scanDirectory`)
+  - [x] **Advanced Hardening**
+    - [x] Video/Raw Dimension Limits (>8K/12K)
+    - [x] RAII for FFmpeg ([VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16))
+  - [x] **UI Polish**
+    - [x] Fix Settings Menu Scroll/Layout
+    - [x] Implement "Current API" feedback in UI
+
+- [x] **Phase 5: GPU Acceleration (D3D11)**
+  - [x] **Research & Init**
+    - [x] [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16): Init D3D11 `AVHWDeviceContext`
+    - [x] Implement `get_format` callback for D3D11VA
+  - [x] **Implementation**
+    - [x] Pipeline: Decode -> D3D11 Surface -> Transfer -> SwScale -> QImage
+    - [x] Fallback to Software Decoding on failure
+  - [x] **Verification**
+    - [x] Verify lower CPU usage
+    - [x] Verify log output confirmation
+
+
+- [x] **Phase 6: Bug Fix (D3D11 Instability)**
+  - [x] Thread-safe [initHardware](file:///d:/Dev/antigravity/src/VideoThumbnailer.cpp#78-107) (Mutex)
+  - [x] Limit concurrent Hardware Decoding (Semaphore)
+  - [x] Implement Automatic Software Fallback in [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16)
+  - [x] Robust error handling for `get_buffer` failure (Implicit via semaphore)
+
+- [x] **Phase 7: Feature Polish**
+  - [x] **Smart Video Thumbnails**
+    - [x] Implement "Black Frame" detection (Luma < 25)
+    - [x] Implement Retry Logic (10% and 25% seek)
+    - [x] Verify no regression in D3D11 stability
+
+- [x] **Phase 8: Release v2.0 (Reforged)**
+  - [x] **Cleanup**: Remove legacy folders and test apps
+  - [x] **Documentation**: Engineering Philosophy & Roadmap
+  - [x] **Verification**: Clean Build v2.0.0
+  - [x] **CRIT FIX**: Memory Leak & D3D11 Circuit Breaker implementation
+
+- [x] **Phase 9: Performance Enhancements**
+  - [x] **RAW Optimization**: Switch to Embedded Preview extraction (100x speedup)
+  - [x] **Smart Loading**: Toggle for Fast Preview vs Full Decode implemented via Settings
+
+# Architecture V2: "SamsungGallery Reforged"
+
+- [x] **Phase 1: The Foundation (Kernel)**
+  - [x] **Fix Build & Tests** <!-- id: 10 -->
+    - [x] Diagnose and fix `tst_imagemodel` crash
+    - [x] Ensure `ctest` passes reliably
+  - [x] **Implement LogManager** <!-- id: 11 -->
+    - [x] Create `src/LogManager` (Async, RingBuffer)
+    - [x] Integrate into [main.cpp](file:///d:/Dev/antigravity/src/main.cpp)
+  - [x] **Implement TaskScheduler** <!-- id: 12 -->
+    - [x] Create `src/TaskScheduler` (Priority Queue)
+    - [x] Create unit test `tst_scheduler`
+    - [x] Integrate into [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt)
+
+- [x] **Phase 2: Refactoring Components**
+  - [x] **Refactor ImageModel** <!-- id: 20 -->
+    - [x] Replace `QtConcurrent::run` with [TaskScheduler](file:///d:/Dev/antigravity/src/TaskScheduler.cpp#15-45) (IO_BOUND)
+    - [x] Implement fine-grained batching updates
+  - [x] **Refactor AsyncImageProvider** <!-- id: 21 -->
+    - [x] Update [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-58) to use [TaskScheduler](file:///d:/Dev/antigravity/src/TaskScheduler.cpp#15-45)
+    - [x] Implement Viewport-aware priority
+
+- [x] **Phase 3: Hardening**
+  - [x] Memory Safety Audit (Smart Pointers)
+  - [x] Crash Handling (LibRaw isolation)
+  - [x] Deployment Script (Self-Extracting exe)
+
+- [x] **Phase 4: Refinements**
+  - [x] **Image Prioritization** <!-- id: 30 -->
+    - [x] [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-58): Viewer requests -> Immediate, Thumbnails -> Low
+  - [x] **Task Cancellation**
+    - [x] `TaskScheduler::clear()` on folder change (`ImageModel::scanDirectory`)
+  - [x] **Advanced Hardening**
+    - [x] Video/Raw Dimension Limits (>8K/12K)
+    - [x] RAII for FFmpeg ([VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16))
+  - [x] **UI Polish**
+    - [x] Fix Settings Menu Scroll/Layout
+    - [x] Implement "Current API" feedback in UI
+
+- [x] **Phase 5: GPU Acceleration (D3D11)**
+  - [x] **Research & Init**
+    - [x] [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16): Init D3D11 `AVHWDeviceContext`
+    - [x] Implement `get_format` callback for D3D11VA
+  - [x] **Implementation**
+    - [x] Pipeline: Decode -> D3D11 Surface -> Transfer -> SwScale -> QImage
+    - [x] Fallback to Software Decoding on failure
+  - [x] **Verification**
+    - [x] Verify lower CPU usage
+    - [x] Verify log output confirmation
+
+
+- [x] **Phase 6: Bug Fix (D3D11 Instability)**
+  - [x] Thread-safe [initHardware](file:///d:/Dev/antigravity/src/VideoThumbnailer.cpp#78-107) (Mutex)
+  - [x] Limit concurrent Hardware Decoding (Semaphore)
+  - [x] Implement Automatic Software Fallback in [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16)
+  - [x] Robust error handling for `get_buffer` failure (Implicit via semaphore)
+
+- [x] **Phase 7: Feature Polish**
+  - [x] **Smart Video Thumbnails**
+    - [x] Implement "Black Frame" detection (Luma < 25)
+    - [x] Implement Retry Logic (10% and 25% seek)
+    - [x] Verify no regression in D3D11 stability
+
+- [x] **Phase 8: Release v2.0 (Reforged)**
+  - [x] **Cleanup**: Remove legacy folders and test apps
+  - [x] **Documentation**: Engineering Philosophy & Roadmap
+  - [x] **Verification**: Clean Build v2.0.0
+  - [x] **CRIT FIX**: Memory Leak & D3D11 Circuit Breaker implementation
+
+- [x] **Phase 9: Performance Enhancements**
+  - [x] **RAW Optimization**: Switch to Embedded Preview extraction (100x speedup)
+  - [x] **Smart Loading**: Toggle for Fast Preview vs Full Decode implemented via Settings
+
+- [ ] **Phase 10: Debugging Runtime Failure**
+  - [x] **Diagnosis**: Analyze crash/failure logs
+  - [x] **Fix**: Resolve identified runtime issues
+
+- [x] **Phase 11: Final Polish & Fixes**
+  - [x] **Badge Visibility**: Improve contract/size of RAW badge
+  - [x] **Re-verify OOM Guard**: Ensure fallback protection is active
+
+- [x] **Phase 13: Concurrency & Fairness**
+  - [x] **Non-Blocking RAW**: Implement `tryAcquire` + Re-queue pattern for RAW
+  - [x] **Non-Blocking Video**: Implement `tryAcquire` + Re-queue pattern for Video
+
+- [x] **Phase 14: Bug Fixes & Refinement**
+  - [x] **Fix DNG Thumbnails**: Resolve broken thumbnails for DNG files (likely OOM guard too aggressive).
+  - [x] **Fix Standard Images**: Remove `CoInitialize` from worker threads to prevent WIC conflict (fixing PNG/JPG).
+
+- [x] **Phase 15: Network Path Support**
+  - [x] **Diagnosis**: Analyze path handling for UNC/Network compatibility.
+  - [x] **Fix**: Ensure correct resolution of `\\Server\Share` paths by replacing manual splicing with `QUrl`.
+
+- [x] **Phase 16: Deployment Fix**
+  - [x] **Fix**: Remove `--no-compiler-runtime` from `windeployqt` to allow network/portable usage.
+
+- [ ] **Phase 17: Resource Management**
+  - [x] **Refactor**: Make `SystemMonitor::getMemoryUsageMB` static for global access.
+  - [x] **Enforce**: In [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-58), check process memory. (REVERTED due to high mutex contention).
+
+- [x] **Phase 18: UI Refactor (Requests)**
+  - [x] **Settings Infrastructure**: Add [enableVideo](file:///d:/Dev/antigravity/src/SettingsHelper.cpp#105-108) and [enableRaw](file:///d:/Dev/antigravity/src/SettingsHelper.cpp#116-119) to [SettingsHelper](file:///d:/Dev/antigravity/src/SettingsHelper.h#38-39).
+  - [x] **Menu Redesign**: Implement "Plug-ins" section and efficiently layout the Menu tab.
+  - [x] **Restart Features**: Add Restart button to Menu and Stats Overlay.
+  - [x] **Cleanup**: Move relevant settings from Overlay to Menu.
+
+- [x] **Phase 19: Performance Optimization (Weak Hardware)**
+  - [x] **Video Task Throttling**: Limit concurrent video tasks from 4 to 2.
+  - [x] **FFmpeg Log Spam**: Throttle HW failure warnings to once per session.
+  - [x] **Lower Defaults**: Threads 4→2, Cache 512MB→256MB for weak hardware.

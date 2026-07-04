@@ -1,0 +1,8 @@
+[graphify extract] scanning H:\My Drive\UberHermes\hermes-core
+[graphify extract] found 5 code, 5 docs, 0 papers, 0 images
+[graphify extract] AST extraction on 5 code files...
+[graphify extract] semantic extraction on 5 files via openai...
+[graphify extract] chunk 1/1 done
+[graphify extract] wrote H:\My Drive\UberHermes\hermes-core\graphify-out\graph.json — 73 nodes, 119 edges (no clustering)
+[graphify extract] tokens: 9,490 in / 2,069 out, est. cost: $0.0071
+[graphify global] 'hermes-core' merged into global graph (+78 nodes, -0 pruned).

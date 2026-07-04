@@ -1,0 +1,21 @@
+# Tasks
+
+- [x] Environment Discovery
+    - [x] Check installed Qt versions in `D:\Qt` (Found 6.9.3)
+    - [x] Check available compilers (Found MinGW 13.1.0)
+    - [x] Check CMake version (Found 4.1.2)
+- [x] Planning
+    - [x] Create implementation plan
+- [x] Project Setup
+    - [x] Create [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt) configured for Qt 6.9.3 and MinGW
+    - [x] Create [main.cpp](file:///d:/Dev/antigravity/src/main.cpp)
+    - [x] Create [Main.qml](file:///d:/Dev/antigravity/resources/qml/Main.qml) with basic window
+    - [x] Create build script [build.ps1](file:///d:/Dev/antigravity/build.ps1)
+- [x] Implementation
+    - [x] Implement [ImageModel](file:///d:/Dev/antigravity/src/ImageModel.cpp#6-13) (C++) to scan for images
+    - [x] Implement `GalleryView` (QML) with `GridView`
+    - [x] Implement `PhotoViewer` (QML) with `SwipeView`
+    - [x] Ensure GPU acceleration (enabled by default in Qt Quick)
+- [x] Deployment
+    - [x] Create deployment script [deploy.ps1](file:///d:/Dev/antigravity/deploy.ps1) using `windeployqt`
+    - [x] Verify portability

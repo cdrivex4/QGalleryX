@@ -1,0 +1,48 @@
+==========================================
+   ScrollBench Build System
+==========================================
+[1/4] Checking for running instances...
+[2/4] Cleaned autogen & QML cache (forcing QML recompile).
+[3/4] Building (Release)...
+  -> Configuring...
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:42 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:42 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done (3.0s)
+CMake Error:
+  Running
+
+   'D:/Qt/Tools/Ninja/ninja.exe' '-C' 'D:/Dev/antigravity/test_scrollbench/build' '-t' 'restat' 'build.ninja'
+
+  failed with:
+
+   ninja: error: failed recompaction: Permission denied
+
+
+
+-- Generating done (0.4s)
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+BUILD FAILED!
+CMake Configuration Failed

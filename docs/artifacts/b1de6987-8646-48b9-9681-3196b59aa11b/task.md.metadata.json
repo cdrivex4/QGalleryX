@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_TASK",
+  "summary":  "Updated task list with specific ScrollBench bugs: broken selection, viewport priority issues, index mismatch on click, and missing scrubber in album view. Also included scheduler concurrency adjustments.",
+  "updatedAt":  "2026-01-03T09:48:45.044434500Z",
+  "version":  "12"
+}

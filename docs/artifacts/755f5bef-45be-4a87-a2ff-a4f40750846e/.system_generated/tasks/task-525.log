@@ -1,0 +1,6 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-21T11:00:53+04:00
+Prompt: Check if the ScrollBench rebuild task has finished.
+
+[2026-06-21T11:00:43+04:00] Still waiting. Remaining time: 10s
+[2026-06-21T11:00:44+04:00] Timer cancelled: agent received a message during wait.

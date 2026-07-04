@@ -1,0 +1,8 @@
+Re-extracting code files in D:\Dev\antigravity (no LLM needed)...
+  AST extraction: 100/239 uncached files (41%) [6 workers]
+  AST extraction: 200/239 uncached files (83%) [6 workers]
+  AST extraction: 427/427 files (100%) [6 workers]
+[graphify watch] Rebuilt (no clustering): 3554 nodes, 6419 edges
+[graphify watch] graph.json updated in D:\Dev\antigravity\graphify-out
+Code graph updated. For doc/paper/image changes run /graphify --update in your AI assistant.
+Tip: set GEMINI_API_KEY or GOOGLE_API_KEY to use Gemini for semantic extraction.

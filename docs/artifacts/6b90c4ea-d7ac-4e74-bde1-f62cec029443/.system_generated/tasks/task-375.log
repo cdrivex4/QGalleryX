@@ -1,0 +1,156 @@
+Requirement already satisfied: pyannote.audio==3.1.1 in .\env\Lib\site-packages (3.1.1)
+Collecting pyannote-core==5.0.0
+  Using cached pyannote.core-5.0.0-py3-none-any.whl.metadata (1.4 kB)
+Collecting pyannote-metrics==3.2.1
+  Using cached pyannote.metrics-3.2.1-py3-none-any.whl.metadata (1.3 kB)
+Collecting transformers==4.40.1
+  Downloading transformers-4.40.1-py3-none-any.whl.metadata (137 kB)
+Requirement already satisfied: asteroid-filterbanks>=0.4 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (0.4.0)
+Requirement already satisfied: einops>=0.6.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (0.8.2)
+Requirement already satisfied: huggingface-hub>=0.13.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (1.18.0)
+Requirement already satisfied: lightning>=2.0.1 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (2.6.1)
+Requirement already satisfied: omegaconf<3.0,>=2.1 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (2.3.0)
+Requirement already satisfied: pyannote.database>=5.0.1 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (6.1.1)
+Requirement already satisfied: pyannote.pipeline>=3.0.1 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (4.0.0)
+Requirement already satisfied: pytorch-metric-learning>=2.1.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (2.9.0)
+Requirement already satisfied: rich>=12.0.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (15.0.0)
+Requirement already satisfied: semver>=3.0.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (3.0.4)
+Requirement already satisfied: soundfile>=0.12.1 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (0.12.1)
+Requirement already satisfied: speechbrain>=0.5.14 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (1.1.0)
+Requirement already satisfied: tensorboardX>=2.6 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (2.6.5)
+Requirement already satisfied: torch>=2.0.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (2.4.1+cu121)
+Requirement already satisfied: torch-audiomentations>=0.11.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (0.12.0)
+Requirement already satisfied: torchaudio>=2.0.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (2.4.1+cu121)
+Requirement already satisfied: torchmetrics>=0.11.0 in .\env\Lib\site-packages (from pyannote.audio==3.1.1) (1.9.0)
+Requirement already satisfied: sortedcontainers>=2.0.4 in .\env\Lib\site-packages (from pyannote-core==5.0.0) (2.4.0)
+Requirement already satisfied: numpy>=1.10.4 in .\env\Lib\site-packages (from pyannote-core==5.0.0) (1.26.4)
+Requirement already satisfied: scipy>=1.1 in .\env\Lib\site-packages (from pyannote-core==5.0.0) (1.13.0)
+Requirement already satisfied: typing-extensions>=3.7.4.1 in .\env\Lib\site-packages (from pyannote-core==5.0.0) (4.15.0)
+Requirement already satisfied: pandas>=0.19 in .\env\Lib\site-packages (from pyannote-metrics==3.2.1) (2.3.3)
+Requirement already satisfied: scikit-learn>=0.17.1 in .\env\Lib\site-packages (from pyannote-metrics==3.2.1) (1.8.0)
+Requirement already satisfied: docopt>=0.6.2 in .\env\Lib\site-packages (from pyannote-metrics==3.2.1) (0.6.2)
+Requirement already satisfied: tabulate>=0.7.7 in .\env\Lib\site-packages (from pyannote-metrics==3.2.1) (0.10.0)
+Requirement already satisfied: matplotlib>=2.0.0 in .\env\Lib\site-packages (from pyannote-metrics==3.2.1) (3.10.9)
+Requirement already satisfied: sympy>=1.1 in .\env\Lib\site-packages (from pyannote-metrics==3.2.1) (1.14.0)
+Requirement already satisfied: filelock in .\env\Lib\site-packages (from transformers==4.40.1) (3.29.1)
+Collecting huggingface-hub>=0.13.0 (from pyannote.audio==3.1.1)
+  Using cached huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: packaging>=20.0 in .\env\Lib\site-packages (from transformers==4.40.1) (26.2)
+Requirement already satisfied: pyyaml>=5.1 in .\env\Lib\site-packages (from transformers==4.40.1) (6.0.3)
+Requirement already satisfied: regex!=2019.12.17 in .\env\Lib\site-packages (from transformers==4.40.1) (2026.4.4)
+Requirement already satisfied: requests in .\env\Lib\site-packages (from transformers==4.40.1) (2.31.0)
+Collecting tokenizers<0.20,>=0.19 (from transformers==4.40.1)
+  Using cached tokenizers-0.19.1-cp312-none-win_amd64.whl.metadata (6.9 kB)
+Requirement already satisfied: safetensors>=0.4.1 in .\env\Lib\site-packages (from transformers==4.40.1) (0.7.0)
+Requirement already satisfied: tqdm>=4.27 in .\env\Lib\site-packages (from transformers==4.40.1) (4.68.1)
+Requirement already satisfied: fsspec>=2023.5.0 in .\env\Lib\site-packages (from huggingface-hub>=0.13.0->pyannote.audio==3.1.1) (2026.4.0)
+Requirement already satisfied: antlr4-python3-runtime==4.9.* in .\env\Lib\site-packages (from omegaconf<3.0,>=2.1->pyannote.audio==3.1.1) (4.9.3)
+Requirement already satisfied: lightning-utilities<2.0,>=0.10.0 in .\env\Lib\site-packages (from lightning>=2.0.1->pyannote.audio==3.1.1) (0.15.3)
+Requirement already satisfied: pytorch-lightning in .\env\Lib\site-packages (from lightning>=2.0.1->pyannote.audio==3.1.1) (2.6.1)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in .\env\Lib\site-packages (from fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (3.13.5)
+Requirement already satisfied: networkx in .\env\Lib\site-packages (from torch>=2.0.0->pyannote.audio==3.1.1) (3.6.1)
+Requirement already satisfied: jinja2 in .\env\Lib\site-packages (from torch>=2.0.0->pyannote.audio==3.1.1) (3.1.6)
+Requirement already satisfied: setuptools in .\env\Lib\site-packages (from torch>=2.0.0->pyannote.audio==3.1.1) (69.5.1)
+Requirement already satisfied: colorama in .\env\Lib\site-packages (from tqdm>=4.27->transformers==4.40.1) (0.4.6)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (6.7.1)
+Requirement already satisfied: propcache>=0.2.0 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in .\env\Lib\site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (1.23.0)
+Requirement already satisfied: idna>=2.0 in .\env\Lib\site-packages (from yarl<2.0,>=1.17.0->aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<2028.0,>=2022.5.0->lightning>=2.0.1->pyannote.audio==3.1.1) (3.18)
+Requirement already satisfied: contourpy>=1.0.1 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (4.63.0)
+Requirement already satisfied: kiwisolver>=1.3.1 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (1.5.0)
+Requirement already satisfied: pillow>=8 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (10.4.0)
+Requirement already satisfied: pyparsing>=3 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in .\env\Lib\site-packages (from matplotlib>=2.0.0->pyannote-metrics==3.2.1) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in .\env\Lib\site-packages (from pandas>=0.19->pyannote-metrics==3.2.1) (2026.2)
+Requirement already satisfied: tzdata>=2022.7 in .\env\Lib\site-packages (from pandas>=0.19->pyannote-metrics==3.2.1) (2026.2)
+INFO: pip is looking at multiple versions of pyannote-database to determine which version is compatible with other requirements. This could take a while.
+Collecting pyannote.database>=5.0.1 (from pyannote.audio==3.1.1)
+  Using cached pyannote_database-6.1.0-py3-none-any.whl.metadata (30 kB)
+  Using cached pyannote_database-6.0.0-py3-none-any.whl.metadata (30 kB)
+  Using cached pyannote.database-5.1.3-py3-none-any.whl.metadata (1.1 kB)
+Requirement already satisfied: typer>=0.12.1 in .\env\Lib\site-packages (from pyannote.database>=5.0.1->pyannote.audio==3.1.1) (0.25.1)
+Requirement already satisfied: optuna>=4.2.0 in .\env\Lib\site-packages (from pyannote.pipeline>=3.0.1->pyannote.audio==3.1.1) (4.8.0)
+INFO: pip is looking at multiple versions of pyannote-pipeline to determine which version is compatible with other requirements. This could take a while.
+Collecting pyannote.pipeline>=3.0.1 (from pyannote.audio==3.1.1)
+  Using cached pyannote.pipeline-3.0.1-py3-none-any.whl.metadata (897 bytes)
+Requirement already satisfied: alembic>=1.5.0 in .\env\Lib\site-packages (from optuna>=4.2.0->pyannote.pipeline>=3.0.1->pyannote.audio==3.1.1) (1.18.4)
+Requirement already satisfied: colorlog in .\env\Lib\site-packages (from optuna>=4.2.0->pyannote.pipeline>=3.0.1->pyannote.audio==3.1.1) (6.10.1)
+Requirement already satisfied: sqlalchemy>=1.4.2 in .\env\Lib\site-packages (from optuna>=4.2.0->pyannote.pipeline>=3.0.1->pyannote.audio==3.1.1) (2.0.49)
+Requirement already satisfied: Mako in .\env\Lib\site-packages (from alembic>=1.5.0->optuna>=4.2.0->pyannote.pipeline>=3.0.1->pyannote.audio==3.1.1) (1.3.11)
+Requirement already satisfied: six>=1.5 in .\env\Lib\site-packages (from python-dateutil>=2.7->matplotlib>=2.0.0->pyannote-metrics==3.2.1) (1.17.0)
+Requirement already satisfied: markdown-it-py>=2.2.0 in .\env\Lib\site-packages (from rich>=12.0.0->pyannote.audio==3.1.1) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in .\env\Lib\site-packages (from rich>=12.0.0->pyannote.audio==3.1.1) (2.20.0)
+Requirement already satisfied: mdurl~=0.1 in .\env\Lib\site-packages (from markdown-it-py>=2.2.0->rich>=12.0.0->pyannote.audio==3.1.1) (0.1.2)
+Requirement already satisfied: joblib>=1.3.0 in .\env\Lib\site-packages (from scikit-learn>=0.17.1->pyannote-metrics==3.2.1) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in .\env\Lib\site-packages (from scikit-learn>=0.17.1->pyannote-metrics==3.2.1) (3.6.0)
+Requirement already satisfied: cffi>=1.0 in .\env\Lib\site-packages (from soundfile>=0.12.1->pyannote.audio==3.1.1) (2.0.0)
+Requirement already satisfied: pycparser in .\env\Lib\site-packages (from cffi>=1.0->soundfile>=0.12.1->pyannote.audio==3.1.1) (3.0)
+Requirement already satisfied: hyperpyyaml>=0.0.1 in .\env\Lib\site-packages (from speechbrain>=0.5.14->pyannote.audio==3.1.1) (1.2.3)
+Requirement already satisfied: sentencepiece>=0.1.91 in .\env\Lib\site-packages (from speechbrain>=0.5.14->pyannote.audio==3.1.1) (0.2.1)
+Requirement already satisfied: ruamel.yaml<0.19.0,>=0.17.28 in .\env\Lib\site-packages (from hyperpyyaml>=0.0.1->speechbrain>=0.5.14->pyannote.audio==3.1.1) (0.18.17)
+Requirement already satisfied: ruamel.yaml.clib>=0.2.15 in .\env\Lib\site-packages (from ruamel.yaml<0.19.0,>=0.17.28->hyperpyyaml>=0.0.1->speechbrain>=0.5.14->pyannote.audio==3.1.1) (0.2.15)
+Requirement already satisfied: charset-normalizer<4,>=2 in .\env\Lib\site-packages (from requests->transformers==4.40.1) (3.4.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in .\env\Lib\site-packages (from requests->transformers==4.40.1) (2.7.0)
+Requirement already satisfied: certifi>=2017.4.17 in .\env\Lib\site-packages (from requests->transformers==4.40.1) (2026.5.20)
+Requirement already satisfied: greenlet>=1 in .\env\Lib\site-packages (from sqlalchemy>=1.4.2->optuna>=4.2.0->pyannote.pipeline>=3.0.1->pyannote.audio==3.1.1) (3.4.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in .\env\Lib\site-packages (from sympy>=1.1->pyannote-metrics==3.2.1) (1.3.0)
+Requirement already satisfied: protobuf>=3.20 in .\env\Lib\site-packages (from tensorboardX>=2.6->pyannote.audio==3.1.1) (7.34.1)
+Requirement already satisfied: julius<0.3,>=0.2.3 in .\env\Lib\site-packages (from torch-audiomentations>=0.11.0->pyannote.audio==3.1.1) (0.2.7)
+Requirement already satisfied: torch-pitch-shift>=1.2.2 in .\env\Lib\site-packages (from torch-audiomentations>=0.11.0->pyannote.audio==3.1.1) (1.2.5)
+Requirement already satisfied: primePy>=1.3 in .\env\Lib\site-packages (from torch-pitch-shift>=1.2.2->torch-audiomentations>=0.11.0->pyannote.audio==3.1.1) (1.3)
+Requirement already satisfied: click>=8.2.1 in .\env\Lib\site-packages (from typer>=0.12.1->pyannote.database>=5.0.1->pyannote.audio==3.1.1) (8.4.1)
+Requirement already satisfied: shellingham>=1.3.0 in .\env\Lib\site-packages (from typer>=0.12.1->pyannote.database>=5.0.1->pyannote.audio==3.1.1) (1.5.4)
+Requirement already satisfied: annotated-doc>=0.0.2 in .\env\Lib\site-packages (from typer>=0.12.1->pyannote.database>=5.0.1->pyannote.audio==3.1.1) (0.0.4)
+Requirement already satisfied: MarkupSafe>=2.0 in .\env\Lib\site-packages (from jinja2->torch>=2.0.0->pyannote.audio==3.1.1) (2.1.5)
+Using cached pyannote.core-5.0.0-py3-none-any.whl (58 kB)
+Using cached pyannote.metrics-3.2.1-py3-none-any.whl (51 kB)
+Downloading transformers-4.40.1-py3-none-any.whl (9.0 MB)
+   ---------------------------------------- 9.0/9.0 MB 1.7 MB/s  0:00:05
+Using cached huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+Using cached tokenizers-0.19.1-cp312-none-win_amd64.whl (2.2 MB)
+Using cached pyannote.database-5.1.3-py3-none-any.whl (48 kB)
+Using cached pyannote.pipeline-3.0.1-py3-none-any.whl (31 kB)
+Installing collected packages: pyannote-core, huggingface-hub, tokenizers, transformers, pyannote.database, pyannote.pipeline, pyannote-metrics
+  Attempting uninstall: pyannote-core
+    Found existing installation: pyannote-core 6.0.1
+    Uninstalling pyannote-core-6.0.1:
+      Successfully uninstalled pyannote-core-6.0.1
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface_hub 1.18.0
+    Uninstalling huggingface_hub-1.18.0:
+      Successfully uninstalled huggingface_hub-1.18.0
+  Attempting uninstall: tokenizers
+    Found existing installation: tokenizers 0.22.2
+    Uninstalling tokenizers-0.22.2:
+      Successfully uninstalled tokenizers-0.22.2
+  Attempting uninstall: transformers
+    Found existing installation: transformers 5.5.4
+    Uninstalling transformers-5.5.4:
+      Successfully uninstalled transformers-5.5.4
+  Attempting uninstall: pyannote.database
+    Found existing installation: pyannote-database 6.1.1
+    Uninstalling pyannote-database-6.1.1:
+      Successfully uninstalled pyannote-database-6.1.1
+  Attempting uninstall: pyannote.pipeline
+    Found existing installation: pyannote-pipeline 4.0.0
+    Uninstalling pyannote-pipeline-4.0.0:
+      Successfully uninstalled pyannote-pipeline-4.0.0
+  Attempting uninstall: pyannote-metrics
+    Found existing installation: pyannote-metrics 4.0.0
+    Uninstalling pyannote-metrics-4.0.0:
+      Successfully uninstalled pyannote-metrics-4.0.0
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+faster-whisper 1.0.3 requires onnxruntime<2,>=1.14, which is not installed.
+coqui-tts 0.28.0.dev0 requires transformers>=4.57, but you have transformers 4.40.1 which is incompatible.
+hf-gradio 0.3.0 requires gradio-client<3.0,>=2.0, but you have gradio-client 1.3.0 which is incompatible.
+Successfully installed huggingface-hub-0.36.2 pyannote-core-5.0.0 pyannote-metrics-3.2.1 pyannote.database-5.1.3 pyannote.pipeline-3.0.1 tokenizers-0.19.1 transformers-4.40.1
+
+[notice] A new release of pip is available: 26.0.1 -> 26.1.2
+[notice] To update, run: C:\just-dub-it2\env\Scripts\python.exe -m pip install --upgrade pip

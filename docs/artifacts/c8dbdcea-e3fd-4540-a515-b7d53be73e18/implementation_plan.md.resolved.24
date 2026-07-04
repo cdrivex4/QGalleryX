@@ -1,0 +1,25 @@
+# Interactive Video Marker Implementation
+
+You are right—typing numbers into a box is a friction point. We will upgrade the "Selective Preview" section to be a high-interaction "Mark-Capture" system.
+
+## Proposed Changes
+
+### [MODIFY] [main_ui.py](file:///c:/just-dub-it2/app/main_ui.py)
+**Objective**: Build the JavaScript Marker Bridge.
+
+1. **Hardware ID Branding**: Assign a unique `elem_id` to the main video acquisition component.
+2. **The "Mark" Logic (JavaScript)**:
+   - Create a JS shim that listens to the browser's HTML5 video player.
+   - It will surgically extract the `currentTime` of your playback.
+3. **The "Mark" Buttons**:
+   - Replace the manual number boxes with an interactive row:
+     - **Button: 📍 Set Start**: Instantly grabs the video's current second and sets it as the Start Point.
+     - **Button: 🏁 Set Stop**: Grabs the current second and automatically calculates the **Duration** relative to your start point.
+4. **Iterative Flow**: 
+   - You play the video -> Hit **📍 Set Start** at the beginning of the scene -> Play until the end -> Hit **🏁 Set Stop** -> Hit **🎬 Preview Selective Scene**.
+
+## User Review Required
+> [!NOTE]
+> This uses a **JavaScript Capture Bridge**. Because Gradio runs Python on your server and Video in your browser, the "capture" happens the millisecond you click the button. 
+> 
+> Does this "Two-Button Marking" system (Start/Stop) align with how you want to interact with the project?

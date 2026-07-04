@@ -1,0 +1,137 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Skip to content
+Navigation Menu
+[0] (47,55)<a aria-label='Homepage' class='tmp-mr-lg-3 color-fg-inherit flex-order-2 js-prevent-focus-on-mobile-nav' href='/' />
+[1] (126,55)<button class='NavDropdown-module__button__PEHWX js-details-target'>Platform />
+[2] (223,55)<button class='NavDropdown-module__button__PEHWX js-details-target'>Solutions />
+[3] (326,55)<button class='NavDropdown-module__button__PEHWX js-details-target'>Resources />
+[4] (441,55)<button class='NavDropdown-module__button__PEHWX js-details-target'>Open Source />
+[5] (556,55)<button class='NavDropdown-module__button__PEHWX js-details-target'>Enterprise />
+[6] (640,55)<a class='NavLink-module__link__EG3d4 MarketingNavigation-module__navLink__hUomM' href='https://github.com/pricing' />
+	[7] (640,55)<span >Pricing />
+[8] (726,55)<button aria-label='Search or jump to…' class='header-search-button input-button form-control d-flex flex-1 flex-self-stretch flex-items-center no-wrap width-full py-0 pl-2 pr-0 text-left border-0 box-shadow-none placeholder' placeholder='Search or jump to...' />
+	[9] (703,55)<div  />
+[10] (809,55)<a class='HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1' href='/login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dqbittorrent%2Bdodi%2Brepacks%2Bplugin'>Sign in />
+[11] (889,55)<a class='HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1' href='/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Fsearch&source=header'>Sign up />
+[12] (953,55)<button class='Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border' id='icon-button-2d93012c-3230-4175-8738-a8efcd631739' />
+repositories Search Results · qbittorrent dodi repacks plugin
+Filter by
+[13] (146,226)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=code' id='_R_5sraqdb_' />
+	[14] (157,226)<span  />
+		[15] (141,226)<span >Code />
+		...
+		(
+		...
+		)
+		results
+[16] (146,274)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=repositories' id='_R_9sraqdb_' />
+	[17] (157,274)<span  />
+		[18] (142,274)<span >Repositories />
+		0
+		(
+		0
+		)
+		results
+[19] (146,323)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=issues' id='_R_dsraqdb_' />
+	[20] (157,323)<span  />
+		[21] (142,323)<span >Issues />
+		2
+		(
+		2
+		)
+		results
+[22] (146,372)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=pullrequests' id='_R_hsraqdb_' />
+	[23] (157,372)<span  />
+		[24] (142,372)<span >Pull requests />
+		0
+		(
+		0
+		)
+		results
+[25] (146,421)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=discussions' id='_R_lsraqdb_' />
+	[26] (157,421)<span  />
+		[27] (142,421)<span >Discussions />
+		0
+		(
+		0
+		)
+		results
+[28] (146,470)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=users' id='_R_psraqdb_' />
+	[29] (157,470)<span  />
+		[30] (142,470)<span >Users />
+		0
+		(
+		0
+		)
+		results
+[31] (146,518)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=commits' id='_r_h_' />
+	[32] (157,518)<span  />
+		[33] (142,518)<span >Commits />
+		0
+		(
+		0
+		)
+		results
+[34] (146,567)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=registrypackages' id='_r_i_' />
+	[35] (157,567)<span  />
+		[36] (142,567)<span >Packages />
+		0
+		(
+		0
+		)
+		results
+[37] (146,616)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=wikis' id='_r_j_' />
+	[38] (157,616)<span  />
+		[39] (142,616)<span >Wikis />
+		5
+		(
+		5
+		)
+		results
+[40] (146,665)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=topics' id='_r_k_' />
+	[41] (157,665)<span  />
+		[42] (142,665)<span >Topics />
+		0
+		(
+		0
+		)
+		results
+[43] (146,713)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=qbittorrent+dodi+repacks+plugin&type=marketplace' id='_r_l_' />
+	[44] (157,713)<span  />
+		[45] (142,713)<span >Marketplace />
+		0
+		(
+		0
+		)
+		results
+[46] (146,788)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='/search/advanced' id='_R_2baqdb_' />
+	[47] (157,788)<span  />
+		[48] (157,788)<span >Advanced search />
+[49] (292,610)<div aria-label='Draggable pane splitter' class='prc-PageLayout-DraggableHandle-9s6B4' role='slider' />
+0 results
+(
+61
+ms
+)
+0 results
+[50] (872,155)<button class='prc-Button-ButtonBase-9n-Xk' id='_r_7_' />
+	[51] (864,155)<span  />
+		[52] (864,155)<span >Best match />
+			[53] (835,155)<span >Sort by: />
+[54] (963,155)<button aria-label='Open column options' class='prc-Button-ButtonBase-9n-Xk IconButton__StyledIconButton-sc-i53dt6-0 efgNUI prc-Button-IconButton-fyge7' id='_r_e_' />
+Your search did not match any
+repositories
+However we found
+[55] (509,849)<a class='prc-Link-Link-9ZwDx' href='/search?q=qbittorrent+dodi+repacks+plugin&type=wikis'>5
+wikis />
+and
+[56] (583,849)<a class='prc-Link-Link-9ZwDx' href='/search?q=qbittorrent+dodi+repacks+plugin&type=issues'>2
+issues />
+that matched your search query. Alternatively try one of the tips below.
+[57] (638,975)<summary class='Box-sc-62in7e-0 gAwDFL' />
+	[58] (630,975)<span >Search across an organization />
+
+</current_dom>

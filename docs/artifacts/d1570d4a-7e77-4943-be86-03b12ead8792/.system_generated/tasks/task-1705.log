@@ -1,0 +1,12 @@
+   Building nuitka==4.1
+   Building graphifyy @ file:///D:/Dev/tools/graphify
+Downloading pygments (1.2MiB)
+Downloading virtualenv (7.2MiB)
+Downloading pip (1.7MiB)
+Downloading cryptography (3.6MiB)
+Downloading ruff (11.4MiB)
+Downloading numpy (15.1MiB)
+Downloading nltk (1.5MiB)
+Downloading pyright (6.1MiB)
+      Built graphifyy @ file:///D:/Dev/tools/graphify
+      Built nuitka==4.1

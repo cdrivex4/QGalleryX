@@ -1,0 +1,29 @@
+# Project Resume: JustDubit LTX-2 Pipeline (Windows Port)
+
+## Status At-A-Glance
+*   **Weights Integrity**: 100% (Confirmed 11-shard Lightricks Gemma text encoder + 35GB LTX-2 Base).
+*   **Memory Status**: Stable but fragile. **OOMs** occur during the 24GB -> 35GB model swap.
+*   **Blocker**: Current `ModelLedger` mapping for `AVGemmaTextEncoderModel` causes a `meta device` error (tensors requested on CPU but stuck on meta device).
+*   **Hardware**: Target is NVIDIA GTX 1050 Ti (4GB VRAM) + 64GB System RAM.
+
+## Major Accomplishments (This Session)
+1.  **Gemma Weight Swap**: Swapped the raw Google Gemma weights for the **Lightricks text_encoder** patch. This was necessary because the base model lacks the `multi_modal_projector` and adapter layers required by the `JustDubit` pipeline.
+2.  **Gentle Handoff Fix**: In `packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py`, I added explicit `gc.collect()`, `torch.cuda.empty_cache()`, and a `time.sleep(2)` after deleting the text encoder. This allows the OS to reclaim 24GB of RAM before starting the 35GB load.
+3.  **Loader Robustness**: Patched `sft_loader.py` to handle sharded weights passed as tuples/lists and added a fallback to read `config.json` from disk if missing from safetensors metadata.
+4.  **Hardware Benchmarking**: Created `scripts/bench_hardware.py` to find optimal VAE chunking limits for 4GB systems.
+
+## Outstanding Issues & Next Steps
+1.  **"Meta Device" Loading Error**:
+    *   **Error**: `ValueError: Tensor on device meta is not on the expected device cpu` in `base_encoder.py`.
+    *   **Root Cause**: The `AVGemmaTextEncoderModelConfigurator` builds the model on the `meta` device. The `ModelLedger`'s `AV_GEMMA_TEXT_ENCODER_KEY_OPS` mapping is likely incomplete or fails to map the projector weights (found in shard 1 and shard 11 of the Gemma text_encoder directory).
+    *   **Action**: Refine the key replacement logic in `packages/ltx-core/src/ltx_core/text_encoders/gemma/encoders/av_encoder.py`.
+2.  **Benchmark Completion**:
+    *   Once the text encoder loads, run `$env:HIGH_RAM_MODE="false"; uv run python scripts\bench_hardware.py --mode 16gb` to generate `optimal_hw_config.json`.
+3.  **Port 8000 Cleanup**:
+    *   The system occasionally suffers from port-in-use errors. A more robust `start_justdubit.bat` is needed to handle PID-specific killing instead of generic `taskkill`.
+
+## Key Files to Review
+- [pipeline_justdubit.py](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py) (The Gentle Handoff logic)
+- [model_ledger.py](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py) (Gemma pathing logic)
+- [av_encoder.py](file:///c:/just-dub-it/packages/ltx-core/src/ltx_core/text_encoders/gemma/encoders/av_encoder.py) (The source of the meta-device mismatch)
+- [task.md](file:///C:/Users/curtis/.gemini/antigravity/brain/d4315882-d6f8-4019-8995-a65ccb637909/task.md) (Step-by-step progress tracking)

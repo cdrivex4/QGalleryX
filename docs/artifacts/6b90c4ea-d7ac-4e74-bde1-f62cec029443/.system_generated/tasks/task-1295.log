@@ -1,0 +1,13 @@
+Progress: 5.0% [extracting]
+Traceback (most recent call last):
+  File "C:\just-dub-it2\tests\test_faceswap.py", line 117, in <module>
+    test_hybrid_concat_disk_footprint()
+  File "C:\just-dub-it2\tests\test_faceswap.py", line 89, in test_hybrid_concat_disk_footprint
+    result_path = _run_faceswap_core(models, job_data)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\app\stages\faceswap.py", line 98, in _run_faceswap_core
+    source_face = get_source_face(analyser, source_image_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\just-dub-it2\app\stages\faceswap.py", line 61, in get_source_face
+    raise ValueError(f"No face detected in source image: {source_image_path}")
+ValueError: No face detected in source image: C:\just-dub-it2\workspace\test_faceswap_pipeline\dummy_face.png

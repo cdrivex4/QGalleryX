@@ -1,0 +1,10 @@
+SUCCESS: The process "node.exe" with PID 42656 has been terminated.
+rm : Cannot find path 'D:\Dev\tools\graphify-queue\queue-state.json' because it does not exist.
+At line:1 char:27
++ taskkill /F /IM node.exe; rm queue-state.json; node server.js
++                           ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\Dev\tools\gr...ueue-state.json:String) [Remove-Item], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+ 
+Graphify Batch Queue server running on http://localhost:3456

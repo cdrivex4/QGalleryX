@@ -1,0 +1,75 @@
+
+        ext == "pef" || ext == "raf") {
+      return 4; // RAW/DNG decodes are heavy on CPU
+    }
+  
+    if (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" ||
+>       ext == "wmv" || ext == "heic" || ext == "heif") {
+      return 4; // Video thumbnailing / HEVC decoding is heavy on CPU/Video engine
+    }
+  
+    return 1; // Standard JPEGs/PNGs
+  }
+  
+  QMap<QString, AsyncImageProvider::DriveStats> AsyncImageProvider::m_driveStats;
+  QMutex AsyncImageProvider::m_driveStatsMutex;
+  
+  // Debugging for stalls
+  // Debugging for stalls
+  static QMap<QString, qint64> s_activeTasksMap;
+  static QMutex s_activeTasksMutex;
+  
+  QStringList AsyncImageProvider::getActiveTaskIds() {
+    QMutexLocker lock(&s_activeTasksMutex);
+    return s_activeTasksMap.keys();
+  }
+  
+  QString AsyncImageProvider::getDriveRoot(const QString &id) {
+    // Normalize first so we are looking at the same path format as adaptive
+    // stats
+    QString path = normalizeId(id);
+  
+    if (path.length() >= 2 && path[1] == ':') {
+      return path.left(2).toUpper() + "/";
+    }
+    if (path.startsWith("//") || path.startsWith("\\\\")) {
+      int shareEnd = path.indexOf('/', 2);
+      if (shareEnd == -1)
+      }
+  
+      QSize imgSize = requestedSize.isValid() ? requestedSize : QSize(200, 200);
+      QString ext = QFileInfo(realPath).suffix().toLower();
+  
+>     if (ext == "heic" || ext == "heif") {
+        // Draw premium HEIC format placeholder
+        image = QImage(imgSize, QImage::Format_ARGB32_Premultiplied);
+        
+        QLinearGradient gradient(0, 0, 0, imgSize.height());
+        gradient.setColorAt(0, QColor(108, 92, 231)); // Purple
+        gradient.setColorAt(1, QColor(72, 52, 212));  // Dark Purple
+        
+        QPainter painter(&image);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.fillRect(image.rect(), gradient);
+  
+        painter.setPen(QPen(QColor(255, 255, 255, 40), 1));
+        painter.drawRect(image.rect().adjusted(0, 0, -1, -1));
+  
+        // Draw "HEIC" text in the center
+        painter.setPen(Qt::white);
+        QFont font("Segoe UI", qMax(10, qMin(imgSize.width(), imgSize.height()) / 8), QFont::Bold);
+        painter.setFont(font);
+        painter.drawText(image.rect(), Qt::AlignCenter, "HEIC");
+        
+        // Draw subtle photo outline icon
+        int iconSize = qMin(imgSize.width(), imgSize.height()) / 5;
+        if (iconSize > 10) {
+          int cx = imgSize.width() / 2;
+          int cy = imgSize.height() / 2 - iconSize - 5;
+          QRectF frame(cx - iconSize / 2, cy - iconSize / 2, iconSize, iconSize);
+          painter.setPen(QPen(Qt::white, 2));
+          painter.setBrush(Qt::NoBrush);
+          painter.drawRoundedRect(frame, 3, 3);
+          painter.drawEllipse(QPointF(cx - iconSize / 4, cy - iconSize / 4), 2, 2);
+
+

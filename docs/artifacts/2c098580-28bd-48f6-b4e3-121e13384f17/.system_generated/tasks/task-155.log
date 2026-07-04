@@ -1,0 +1,11 @@
+Collecting nvidia-cudnn-cu12==8.9.7.29
+  Downloading nvidia_cudnn_cu12-8.9.7.29-py3-none-win_amd64.whl.metadata (1.6 kB)
+Requirement already satisfied: nvidia-cublas-cu12 in .\env\Lib\site-packages (from nvidia-cudnn-cu12==8.9.7.29) (12.9.2.10)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12 in .\env\Lib\site-packages (from nvidia-cudnn-cu12==8.9.7.29) (12.9.86)
+Downloading nvidia_cudnn_cu12-8.9.7.29-py3-none-win_amd64.whl (719.4 MB)
+   ---------------------------------------- 719.4/719.4 MB 1.4 MB/s  0:08:16
+Installing collected packages: nvidia-cudnn-cu12
+Successfully installed nvidia-cudnn-cu12-8.9.7.29
+
+[notice] A new release of pip is available: 26.0.1 -> 26.1.2
+[notice] To update, run: C:\just-dub-it2\env\Scripts\python.exe -m pip install --upgrade pip

@@ -1,0 +1,10 @@
+
+      int w = requestedSize.width() > 0 ? requestedSize.width() : 400;
+      int h = requestedSize.height() > 0 ? requestedSize.height() : 400;
+      image = QImage(w, h, QImage::Format_RGB32);
+>     image.fill(QColor::fromHsv((index * 137) % 360, 150, 200));
+      QPainter p(&image);
+      p.setPen(Qt::white);
+      p.setFont(QFont("Arial", 20, QFont::Bold));
+
+

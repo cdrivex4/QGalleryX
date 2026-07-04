@@ -1,0 +1,225 @@
+# ScrollBench Test Application - Implementation Plan
+
+## Goal
+
+Create an isolated test application to validate viewport culling and frame budget optimizations for efficiently handling 10,000+ image thumbnails without blocking the UI thread.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Testing Approach**: This is a separate test application. Manual verification will involve:
+> 1. Running the app with 10,000 generated test images
+> 2. Monitoring FPS overlay while scrolling
+> 3. Observing main thread responsiveness
+> 4. Comparing metrics with/without optimizations enabled
+>
+> Do you have a preferred test image dataset, or should I generate synthetic test data using colored rectangles with metadata?
+
+## Proposed Changes
+
+### Component 1: Build System
+
+#### [NEW] [test_scrollbench/CMakeLists.txt](file:///d:/Dev/antigravity/test_scrollbench/CMakeLists.txt)
+
+- New CMake configuration for `appScrollBench` executable
+- Links to existing dependencies: Qt6::Quick, Qt6::Concurrent, Qt6::Gui
+- Reuses `TaskScheduler`, `AsyncImageProvider`, `LogManager` from main project
+- No LibRaw/FFmpeg needed (simple image loading only)
+
+---
+
+### Component 2: Core C++ Classes
+
+#### [NEW] [ScrollBenchImageModel.h](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h)
+#### [NEW] [ScrollBenchImageModel.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp)
+
+Extends `QAbstractListModel` with viewport culling:
+
+**Key Features**:
+- `visibleStartIndex` / `visibleEndIndex` properties (set from QML)
+- Only queues thumbnail loads for visible range +/- buffer (10 items)
+- Generates 10,000 synthetic test items on demand
+- Tracks telemetry (cache hits, pending decodes, active delegates)
+
+**New Methods**:
+```cpp
+void setVisibleStartIndex(int index);
+void setVisibleEndIndex(int index); 
+void updateVisibleRange(); // Triggers load cancellation + new requests
+int pendingDecodeCount() const;
+```
+
+---
+
+#### [NEW] [FrameBudgetScheduler.h](file:///d:/Dev/antigravity/test_scrollbench/src/FrameBudgetScheduler.h)
+#### [NEW] [FrameBudgetScheduler.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/FrameBudgetScheduler.cpp)
+
+Wraps `TaskScheduler` with frame budget limiting:
+
+**Key Features**:
+- Limits texture uploads to 5-10 per frame (configurable)
+- Uses `QElapsedTimer` to track 16ms frame boundaries
+- Defers excess completions to next frame via `QMetaObject::invokeMethod` with `Qt::QueuedConnection`
+- Exposes `frameBudget` as Q_PROPERTY for runtime tuning
+
+**Integration**:
+```cpp
+// Intercepts task completions
+void onTaskReady(QImage result) {
+    if (m_completionsThisFrame < m_frameBudget) {
+        emit imageReady(result);
+        m_completionsThisFrame++;  
+    } else {
+        // Defer to next frame
+        QMetaObject::invokeMethod(this, [result]() {
+            emit imageReady(result);
+        }, Qt::QueuedConnection);
+    }
+}
+```
+
+---
+
+#### [NEW] [TelemetryMonitor.h](file:///d:/Dev/antigravity/test_scrollbench/src/TelemetryMonitor.h)
+#### [NEW] [TelemetryMonitor.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/TelemetryMonitor.cpp)
+
+Tracks performance metrics:
+
+**Metrics**:
+- Main thread FPS (via `QElapsedTimer` in QML render loop)
+- Pending decode queue depth
+- Cache hit rate
+- Active delegate count
+- Memory usage (via `QProcess`)
+
+**Exposed as Q_PROPERTIES**: `fps`, `pendingDecodes`, `cacheHitRate`, `delegateCount`
+
+---
+
+### Component 3: QML UI
+
+#### [NEW] [MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml)
+
+**Features**:
+1. **Large ListView**: 10,000 item model with thumbnail delegates
+2. **Viewport Tracking**: `onContentYChanged` updates model's visible range
+3. **Performance Overlay**: Shows FPS, queue depth, cache stats in real-time
+4. **Toggle Controls**: Enable/disable optimizations for A/B testing
+
+**Viewport Tracking Logic**:
+```qml
+ListView {
+    onContentYChanged: {
+        var startIdx = indexAt(contentX, contentY)
+        var endIdx = indexAt(contentX, contentY + height)
+        
+        if (startIdx >= 0 && endIdx >= 0) {
+            imageModel.visibleStartIndex = Math.max(0, startIdx - 10)
+            imageModel.visibleEndIndex = Math.min(count - 1, endIdx + 10)
+        }
+    }
+}
+```
+
+---
+
+#### [NEW] [PerformanceOverlay.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/PerformanceOverlay.qml)
+
+Real-time stats display:
+- FPS graph (last 60 frames)
+- Pending decode queue bar
+- Cache hit rate percentage
+- Toggle switches for optimizations
+
+---
+
+#### [NEW] [ThumbnailDelegate.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/ThumbnailDelegate.qml)
+
+Simple image delegate:
+- 200x200px thumbnail
+- Index/filename label
+- Loading indicator
+- Uses `image://async/` provider
+
+---
+
+### Component 4: Application Entry Point
+
+#### [NEW] [main_scrollbench.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/main_scrollbench.cpp)
+
+**Setup**:
+- Initializes `QGuiApplication`
+- Registers `ScrollBenchImageModel`, `FrameBudgetScheduler`, `TelemetryMonitor` with QML
+- Sets up `AsyncImageProvider` (reused from main project)
+- Loads `MainScrollBench.qml`
+- Generates 10,000 test images (or uses provided directory)
+
+---
+
+## Verification Plan
+
+### Automated Tests
+
+No unit tests for this prototype - focus on manual validation.
+
+### Manual Verification
+
+#### Test 1: Baseline Performance (No Optimizations)
+1. Build ScrollBench: `cd test_scrollbench && cmake --build .`
+2. Run: `./appScrollBench.exe`
+3. Disable viewport culling and frame budget in UI
+4. Scroll rapidly through 10,000 items
+5. **Expected**: FPS drops below 30, UI stutters, queue depth grows to 100+
+
+#### Test 2: With Viewport Culling
+1. Enable "Viewport Culling" toggle
+2. Scroll rapidly
+3. **Expected**: Queue depth stays < 50, FPS improves but may still drop during rapid scroll
+
+#### Test 3: With Frame Budget
+1. Enable "Frame Budget" toggle (set to 10 uploads/frame)
+2. Scroll rapidly
+3. **Expected**: FPS stays ≥ 30, queue depth controlled, some delayed thumbnail pops
+
+#### Test 4: Both Optimizations
+1. Enable both toggles
+2. Scroll through entire 10,000 item list
+3. **Expected**: FPS ≥ 60 during normal scroll, ≥ 30 during fast scroll, no UI freezes
+
+#### Test 5: Stress Test
+1. Rapidly fling scroll multiple times
+2. Monitor memory usage
+3. **Expected**: Memory stable (cache eviction working), no leaks, responsive UI
+
+### Success Criteria
+
+| Metric | Without Optimizations | With Optimizations | Target |
+|--------|----------------------|-------------------|---------|
+| Scroll FPS | 15-25 | 50-60 | ≥30 |
+| Peak Queue Depth | 200+ | 20-50 | <50 |
+| UI Responsive | No (stutters) | Yes (smooth) | Yes |
+| Memory Usage | 2GB+ | <1GB | <1GB |
+
+---
+
+## Integration Plan
+
+If tests are successful:
+1. Integrate `FrameBudgetScheduler` into main app's `TaskScheduler`
+2. Add `visibleStartIndex`/`visibleEndIndex` to main `ImageModel`
+3. Update `GalleryViewTiles.qml` and `GalleryViewSemantic.qml` with viewport tracking
+4. Add telemetry to `StatsOverlay.qml`
+5. Document findings in [PROGRESS.md](file:///d:/Dev/antigravity/docs/PROGRESS.md)
+
+---
+
+## Open Questions
+
+1. Should test images be generated synthetically or use a real directory?
+2. What thumbnail size should we test? (Current: 200x200, typical usage: 256x256)
+3. Do you want A/B comparison view (split screen with/without opts)?
+
+---
+
+**Estimated Effort**: 2-3 hours
+**Risk Level**: Low (isolated test, no impact on main app)

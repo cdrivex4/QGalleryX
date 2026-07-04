@@ -1,0 +1,40 @@
+================ ENVIRONMENT SNAPSHOT ================
+OS              : "Windows 10 Version 22H2"
+CPU Arch        : "x86_64" ( 6 logical threads)
+Total System RAM: 65466.5 MB
+GPU detected    : "NVIDIA GeForce GTX 1050 Ti" ( 4004 MB VRAM)
+======================================================
+[ "18:50:14.189" ][HWAccel] Requested mode: SettingsHelper::None
+[ "18:50:14.189" ][HWAccel] CPU decoding selected (no acceleration).
+[ "18:50:14.189" ][HWAccel] CPU Features: "SSE, SSE2, SSE3, SSSE3, SSE4.1, SSE4.2, AVX, AVX2, CUDA, VAAPI, DXVA2, QSV, D3D11VA, OPENCL, VULKAN, D3D12VA, AMF"
+[Diagnostics] Monitor started - running checks every 1000ms
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "18:50:14.193" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 28.4961 MB | Sys Avail: 23473.3 MB / 65466.5 MB
+[Diagnostics] Attached to ScrollBenchImageModel
+[Diagnostics] Attached to SettingsHelper
+[TaskScheduler] Started 2 CPU threads and 4 IO threads.
+qrc:/ScrollBench/qml/SelectionActionBar.qml:17:5: Unable to assign [undefined] to int
+[ "18:50:15.344" ][SystemMonitor] Stats Update: CPU App: 12.5571 % | Sys: 68.7215 % | RAM App: 132.711 MB | Sys Avail: 23347.8 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 132.711 MB (Delta: 132.711 ) | VRAM: 27.2539 MB (Delta: 27.2539 )
+[ "18:50:16.196" ][SystemMonitor] Stats Update: CPU App: 1.81818 % | Sys: 76.6667 % | RAM App: 134.156 MB | Sys Avail: 23282.6 MB / 65466.5 MB
+[ "18:50:17.189" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 75.7813 % | RAM App: 134.535 MB | Sys Avail: 23353.7 MB / 65466.5 MB
+[ "18:50:18.196" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 61.7188 % | RAM App: 134.637 MB | Sys Avail: 23481.8 MB / 65466.5 MB
+[ "18:50:19.189" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 75.7813 % | RAM App: 134.664 MB | Sys Avail: 23649 MB / 65466.5 MB
+[ "18:50:20.195" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 55.9896 % | RAM App: 134.699 MB | Sys Avail: 23707.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "18:50:21.191" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 57.2917 % | RAM App: 134.742 MB | Sys Avail: 23665.8 MB / 65466.5 MB
+[ "18:50:22.195" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 51.8229 % | RAM App: 134.762 MB | Sys Avail: 23662.5 MB / 65466.5 MB
+[ "18:50:23.188" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 53.125 % | RAM App: 133.266 MB | Sys Avail: 23642 MB / 65466.5 MB
+[ "18:50:24.192" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 48.6979 % | RAM App: 133.355 MB | Sys Avail: 23663.6 MB / 65466.5 MB
+[ "18:50:25.189" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 50.2604 % | RAM App: 133.441 MB | Sys Avail: 23648 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "18:50:26.196" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 55.7292 % | RAM App: 133.523 MB | Sys Avail: 23626.3 MB / 65466.5 MB
+[ "18:50:27.189" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 51.3021 % | RAM App: 133.59 MB | Sys Avail: 23638.1 MB / 65466.5 MB
+[ "18:50:28.196" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 55.4688 % | RAM App: 133.648 MB | Sys Avail: 23587.7 MB / 65466.5 MB
+[ "18:50:29.189" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 35.4167 % | RAM App: 133.68 MB | Sys Avail: 23567.7 MB / 65466.5 MB
+[ "18:50:30.196" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 41.6667 % | RAM App: 133.703 MB | Sys Avail: 23571.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "18:50:31.188" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 48.9583 % | RAM App: 133.824 MB | Sys Avail: 23582.6 MB / 65466.5 MB
+[ "18:50:32.189" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 35.4167 % | RAM App: 133.859 MB | Sys Avail: 23595.7 MB / 65466.5 MB
+[ "18:50:33.188" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 40.3646 % | RAM App: 133.879 MB | Sys Avail: 23581.8 MB / 65466.5 MB
+[ "18:50:34.190" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 40.1042 % | RAM App: 133.918 MB | Sys Avail: 23590.1 MB / 65466.5 MB

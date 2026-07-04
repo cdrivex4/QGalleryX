@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary": "Line-by-line audit of main_ui.py and its wiring to pipeline.py. Found 16 UI bugs: missing subprocess import, missing status mappings for gpu_diarizing and gpu_faceswap, dead download link, settings.json CWD mismatch, broken Mark Start/End buttons, stale Gradio 6.0 CSS parameter, missing error display for failed jobs, preview player wiring broken, no target_language or low_vram_mode settings controls, and more.",
+  "updatedAt": "2026-06-01T16:38:23.494291700Z",
+  "requestFeedback": true
+}

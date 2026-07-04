@@ -1,0 +1,1666 @@
+[ "10:46:31.564" ][HWAccel] Requested mode: SettingsHelper::None
+[ "10:46:31.564" ][HWAccel] CPU decoding selected (no acceleration).
+[ "10:46:31.564" ][HWAccel] CPU Features: "SSE, SSE2, SSE3"
+[Diagnostics] Monitor started - running checks every 1000ms
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "10:46:31.985" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 28.125 MB | Sys Avail: 29487.7 MB / 65466.5 MB
+[Diagnostics] Attached to ScrollBenchImageModel
+[Diagnostics] Attached to SettingsHelper
+[TaskScheduler] Started 2 CPU threads and 4 IO threads.
+qrc:/ScrollBench/qml/SelectionActionBar.qml:17:5: Unable to assign [undefined] to int
+[ "10:46:32.986" ][SystemMonitor] Stats Update: CPU App: 10.4167 % | Sys: 76.0417 % | RAM App: 100.641 MB | Sys Avail: 29412.4 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 100.641 MB (Delta: 100.641 ) | VRAM: 27.5977 MB (Delta: 27.5977 )
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:33.984" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 77.6042 % | RAM App: 102.016 MB | Sys Avail: 29376.8 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:34.985" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 64.0625 % | RAM App: 104.195 MB | Sys Avail: 29375.5 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:35.985" ][SystemMonitor] Stats Update: CPU App: 25.5208 % | Sys: 86.9792 % | RAM App: 132.613 MB | Sys Avail: 29376.8 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:36.990" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 61.9792 % | RAM App: 132.445 MB | Sys Avail: 29355.8 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:46:37.985" ][SystemMonitor] Stats Update: CPU App: 9.63542 % | Sys: 67.4479 % | RAM App: 135.168 MB | Sys Avail: 29355.1 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:38.986" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 58.0729 % | RAM App: 136.484 MB | Sys Avail: 29346.1 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:39.993" ][SystemMonitor] Stats Update: CPU App: 4.42708 % | Sys: 55.9896 % | RAM App: 136.344 MB | Sys Avail: 29323.5 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:40.989" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 52.0833 % | RAM App: 136.852 MB | Sys Avail: 29312.4 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:41.989" ][SystemMonitor] Stats Update: CPU App: 4.42708 % | Sys: 57.5521 % | RAM App: 138.191 MB | Sys Avail: 29349.9 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[NetworkScan] Detected mapped network drive: "I:\\MY SDCArds" Device: "\\\\?\\Volume{53c9d0f1-9d99-4d19-8241-f18cb8d6e107}\\"
+[NetworkScan] Using non-incremental scan strategy for network path
+[ "10:46:43.014" ][SystemMonitor] Stats Update: CPU App: 9.74359 % | Sys: 72.0513 % | RAM App: 141.824 MB | Sys Avail: 29382.9 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+Corrupt JPEG data: premature end of data segment
+[AdaptiveIO] Stats:  "I:/"  Avg:  72  Limit:  2  ActiveWeight:  2
+[AdaptiveIO] Stats:  "I:/"  Avg:  72.4  Limit:  4  ActiveWeight:  3
+[AdaptiveIO] Stats:  "I:/"  Avg:  71.36  Limit:  4  ActiveWeight:  2
+[AdaptiveIO] Stats:  "I:/"  Avg:  70.824  Limit:  4  ActiveWeight:  1
+[ "10:46:43.109" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0061.MP4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  70.4416  Limit:  4  ActiveWeight:  4
+[ "10:46:43.177" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0060.MP4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  69.3974  Limit:  4  ActiveWeight:  4
+[ "10:46:43.239" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0058.MP4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  69.0577  Limit:  4  ActiveWeight:  4
+[ "10:46:43.306" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0056.MP4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  73.5519  Limit:  4  ActiveWeight:  4
+[ "10:46:43.998" ][SystemMonitor] Stats Update: CPU App: 25.6614 % | Sys: 73.2804 % | RAM App: 146.652 MB | Sys Avail: 29373.6 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:44.997" ][SystemMonitor] Stats Update: CPU App: 15.1042 % | Sys: 87.2396 % | RAM App: 147 MB | Sys Avail: 29358 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:46:46.015" ][SystemMonitor] Stats Update: CPU App: 14.1026 % | Sys: 85.8974 % | RAM App: 147.805 MB | Sys Avail: 29292.4 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+Using Qt multimedia with FFmpeg version 7.1.1 LGPL version 2.1 or later
+Starting video (isCurrent): file:///I:/MY SDCArds/S22 ultra/Whatsapp/VID-20230809-WA0002.mp4
+[ "10:46:47.186" ][SystemMonitor] Stats Update: CPU App: 16.8889 % | Sys: 57.7778 % | RAM App: 206.25 MB | Sys Avail: 29279.3 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 206.25 MB (Delta: 105.609 ) | VRAM: 29.1484 MB (Delta: 1.55078 )
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 0. Stuck: None (Logic Error?)"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 0. Stuck: None (Logic Error?)
+[PhotoViewer] Image source changed to: file:///I:/MY SDCArds/S22 ultra/Videocaptures/VideoCapture_20250110-122217.jpg?v=undefined
+[PhotoViewer] Image status: 2 for index: 2
+[AdaptiveIO] Stats:  "I:/"  Avg:  66.1967  Limit:  4  ActiveWeight:  4
+[AdaptiveIO] Stats:  "I:/"  Avg:  59.5771  Limit:  6  ActiveWeight:  3
+[AdaptiveIO] Stats:  "I:/"  Avg:  53.7194  Limit:  6  ActiveWeight:  2
+[AdaptiveIO] Stats:  "I:/"  Avg:  48.5474  Limit:  6  ActiveWeight:  1
+[ "10:46:47.275" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260309_204645_Brave_1_1.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  43.6927  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  39.3234  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  36.4911  Limit:  6  ActiveWeight:  5
+[AdaptiveIO] Stats:  "I:/"  Avg:  32.842  Limit:  6  ActiveWeight:  8
+[AdaptiveIO] Stats:  "I:/"  Avg:  32.3578  Limit:  6  ActiveWeight:  7
+[AdaptiveIO] Stats:  "I:/"  Avg:  29.122  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  31.7098  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  28.9388  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  26.0449  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.4404  Limit:  6  ActiveWeight:  8
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.1964  Limit:  6  ActiveWeight:  7
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.3768  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.4391  Limit:  6  ActiveWeight:  6
+[PhotoViewer] Image status: 1 for index: 2
+[AdaptiveIO] Stats:  "I:/"  Avg:  15.8952  Limit:  6  ActiveWeight:  7
+[AdaptiveIO] Stats:  "I:/"  Avg:  24.4057  Limit:  6  ActiveWeight:  7
+[AdaptiveIO] Stats:  "I:/"  Avg:  22.3651  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.3286  Limit:  6  ActiveWeight:  8
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.4957  Limit:  6  ActiveWeight:  7
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.6461  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.8815  Limit:  6  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.7934  Limit:  6  ActiveWeight:  5
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.014  Limit:  6  ActiveWeight:  6
+[ "10:46:47.425" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/9a77fc917cbae4e87b477cda89bb8ee1.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  15.6126  Limit:  6  ActiveWeight:  8
+[AdaptiveIO] Stats:  "I:/"  Avg:  14.7514  Limit:  6  ActiveWeight:  10
+[AdaptiveIO] Stats:  "I:/"  Avg:  14.8762  Limit:  6  ActiveWeight:  9
+[ "10:46:47.450" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Double Side Camera/2023_02_23_15_19_16_033.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  13.5886  Limit:  6  ActiveWeight:  10
+[ "10:46:47.453" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/cf3d36275fe99e914264b8827039a1fb.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  12.6298  Limit:  6  ActiveWeight:  9
+[AdaptiveIO] Stats:  "I:/"  Avg:  11.4668  Limit:  6  ActiveWeight:  8
+[AdaptiveIO] Stats:  "I:/"  Avg:  10.3201  Limit:  6  ActiveWeight:  7
+setVisibleEndIndex called with: 640
+[AdaptiveIO] Stats:  "I:/"  Avg:  10.0881  Limit:  6  ActiveWeight:  6
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 7. Stuck: I:/MY SDCArds/S22 ultra/Camera/cf3d36275fe99e914264b8827039a1fb.mp4?idx=331, I:/MY SDCArds/S22 ultra/Double Side Camera/2023_02_23_15_19_16_033.mp4?idx=296"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 7. Stuck: I:/MY SDCArds/S22 ultra/Camera/cf3d36275fe99e914264b8827039a1fb.mp4?idx=331, I:/MY SDCArds/S22 ultra/Double Side Camera/2023_02_23_15_19_16_033.mp4?idx=296
+[ViewportCulling] Current settings: m_viewportCullingEnabled= true , BUFFER_SIZE= 50
+[ViewportCulling] RANGE UPDATE: 
+  Viewport indices: 0 to 640 ( 641 items) 
+  Buffered range: 0 to 690 ( 691 items with BUFFER_SIZE= 50 ) 
+  Total items in model: 8948
+[ViewportCulling] Setting 691 visible paths in VRM
+[VRM] Total visible paths: 691 Sample: "I:/MY SDCArds/S22 ultra/Camera/20260606_103659.heic"
+[ViewportCulling] Requested: 691 | Already loaded: 0 | Total in range: 691
+Viewport settled at: 0 - 640
+[AdaptiveIO] Stats:  "I:/"  Avg:  12.9793  Limit:  6  ActiveWeight:  5
+[ "10:46:47.493" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1763990955123.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.1814  Limit:  6  ActiveWeight:  19
+[AdaptiveIO] Stats:  "I:/"  Avg:  16.3632  Limit:  6  ActiveWeight:  19
+[AdaptiveIO] Stats:  "I:/"  Avg:  15.4269  Limit:  6  ActiveWeight:  18
+[AdaptiveIO] Stats:  "I:/"  Avg:  15.2842  Limit:  6  ActiveWeight:  17
+processPendingUpdates: Emitted dataChanged for range: 0 to 19
+[AdaptiveIO] Stats:  "I:/"  Avg:  14.7558  Limit:  6  ActiveWeight:  16
+[AdaptiveIO] Stats:  "I:/"  Avg:  14.0802  Limit:  6  ActiveWeight:  15
+[ "10:46:47.543" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1763396447984.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  13.1722  Limit:  6  ActiveWeight:  14
+[AdaptiveIO] Stats:  "I:/"  Avg:  12.255  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  11.3295  Limit:  6  ActiveWeight:  12
+[ "10:46:47.567" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/dc7a0533f555e355aa02bfe6a07a99e6.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.3965  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.0569  Limit:  6  ActiveWeight:  9
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.4512  Limit:  6  ActiveWeight:  8
+[ "10:46:47.597" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/bf58c1d0a196cdddc25ed870c99c6f28.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.7061  Limit:  6  ActiveWeight:  16
+[ "10:46:47.624" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b53c1a8911cac6831560fb208ca83789.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.2355  Limit:  6  ActiveWeight:  20
+[ "10:46:47.638" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b7424719f4ed920cfac61645e277da80.mp4"
+processPendingUpdates: Emitted dataChanged for range: 20 to 39
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.7119  Limit:  6  ActiveWeight:  19
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.2407  Limit:  6  ActiveWeight:  15
+[AdaptiveIO] Stats:  "I:/"  Avg:  27.7166  Limit:  6  ActiveWeight:  11
+[AdaptiveIO] Stats:  "I:/"  Avg:  25.245  Limit:  6  ActiveWeight:  14
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.8205  Limit:  6  ActiveWeight:  15
+[AdaptiveIO] Stats:  "I:/"  Avg:  24.9384  Limit:  6  ActiveWeight:  14
+[AdaptiveIO] Stats:  "I:/"  Avg:  24.1446  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.7301  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  28.4571  Limit:  6  ActiveWeight:  11
+[AdaptiveIO] Stats:  "I:/"  Avg:  25.6114  Limit:  6  ActiveWeight:  10
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.9503  Limit:  6  ActiveWeight:  9
+[ "10:46:47.729" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/14eb2a6290cb37015048f8a3cd6bc30c.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.8552  Limit:  6  ActiveWeight:  16
+processPendingUpdates: Emitted dataChanged for range: 40 to 59
+[AdaptiveIO] Stats:  "I:/"  Avg:  29.5697  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  35.0127  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  35.6115  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  40.1503  Limit:  6  ActiveWeight:  11
+[AdaptiveIO] Stats:  "I:/"  Avg:  43.9353  Limit:  6  ActiveWeight:  14
+[AdaptiveIO] Stats:  "I:/"  Avg:  43.5418  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  43.7876  Limit:  6  ActiveWeight:  12
+processPendingUpdates: Emitted dataChanged for range: 60 to 79
+[AdaptiveIO] Stats:  "I:/"  Avg:  39.4088  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  35.6679  Limit:  6  ActiveWeight:  14
+[AdaptiveIO] Stats:  "I:/"  Avg:  32.1012  Limit:  6  ActiveWeight:  13
+[ "10:46:47.879" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/2157db40a81fafeb6293e0f8f0a9eed1.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  29.591  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  26.6319  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.9687  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.5719  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.4147  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  31.0732  Limit:  6  ActiveWeight:  11
+[AdaptiveIO] Stats:  "I:/"  Avg:  28.0659  Limit:  6  ActiveWeight:  13
+[AdaptiveIO] Stats:  "I:/"  Avg:  25.4593  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.8134  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.732  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.9588  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.1629  Limit:  6  ActiveWeight:  11
+processPendingUpdates: Emitted dataChanged for range: 80 to 99
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.0467  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  15.842  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  27.4578  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  28.212  Limit:  6  ActiveWeight:  12
+[ "10:46:48.019" ][SystemMonitor] Stats Update: CPU App: 46.6049 % | Sys: 92.9012 % | RAM App: 296.555 MB | Sys Avail: 29162.4 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 296.555 MB (Delta: 90.3047 ) | VRAM: 36.0117 MB (Delta: 6.86328 )
+[AdaptiveIO] Stats:  "I:/"  Avg:  25.3908  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  22.8517  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.5666  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.5099  Limit:  6  ActiveWeight:  12
+[AdaptiveIO] Stats:  "I:/"  Avg:  16.7589  Limit:  6  ActiveWeight:  12
+processPendingUpdates: Emitted dataChanged for range: 100 to 119
+[ "10:46:48.132" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/fd0df56a41a0585671643546821e5e62.mp4"
+processPendingUpdates: Emitted dataChanged for range: 120 to 139
+processPendingUpdates: Emitted dataChanged for range: 140 to 159
+[AdaptiveIO] Stats:  "I:/"  Avg:  3.46567  Limit:  4  ActiveWeight:  12
+[ "10:46:48.378" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/0cd8f78a49f760189265deb264e7a046.mp4"
+processPendingUpdates: Emitted dataChanged for range: 160 to 179
+processPendingUpdates: Emitted dataChanged for range: 180 to 199
+[ "10:46:48.561" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Whatsapp/VID-20230923-WA0011.mp4"
+processPendingUpdates: Emitted dataChanged for range: 200 to 219
+[AdaptiveIO] Stats:  "I:/"  Avg:  4.74007  Limit:  4  ActiveWeight:  11
+processPendingUpdates: Emitted dataChanged for range: 220 to 239
+processPendingUpdates: Emitted dataChanged for range: 240 to 259
+[ "10:46:48.824" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260214_212129.mp4"
+[ "10:46:48.884" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260214_212816.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  3.43458  Limit:  4  ActiveWeight:  14
+processPendingUpdates: Emitted dataChanged for range: 260 to 269
+[ "10:46:48.935" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260209_203754.mp4"
+[ "10:46:48.960" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260209_204206.mp4"
+processPendingUpdates: Emitted dataChanged for range: 270 to 289
+[ "10:46:49.005" ][SystemMonitor] Stats Update: CPU App: 47.0899 % | Sys: 93.6508 % | RAM App: 350.438 MB | Sys Avail: 29099.9 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 350.438 MB (Delta: 53.8828 ) | VRAM: 36.2617 MB (Delta: 0.25 )
+[ "10:46:49.052" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260209_204347.mp4"
+processPendingUpdates: Emitted dataChanged for range: 290 to 309
+[ "10:46:49.109" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260409_012156_Instagram.mp4"
+processPendingUpdates: Emitted dataChanged for range: 310 to 329
+[AdaptiveIO] Stats:  "I:/"  Avg:  5.72556  Limit:  4  ActiveWeight:  11
+[ "10:46:49.268" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/87fc39454200d213e1a16c81ee0e6a1d.mp4"
+processPendingUpdates: Emitted dataChanged for range: 330 to 349
+[ "10:46:49.341" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0061.MP4"
+processPendingUpdates: Emitted dataChanged for range: 350 to 359
+processPendingUpdates: Emitted dataChanged for range: 360 to 379
+processPendingUpdates: Emitted dataChanged for range: 380 to 399
+[ "10:46:49.472" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ebd1c0d2f2e5140a51d207c2b89e9197.mp4"
+[ "10:46:49.478" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260615_162208.mp4"
+processPendingUpdates: Emitted dataChanged for range: 400 to 419
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.54525  Limit:  4  ActiveWeight:  10
+[ "10:46:49.588" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0066.MP4"
+[ "10:46:49.645" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1763990955123.mp4"
+processPendingUpdates: Emitted dataChanged for range: 420 to 429
+processPendingUpdates: Emitted dataChanged for range: 430 to 439
+processPendingUpdates: Emitted dataChanged for range: 440 to 449
+[ "10:46:49.756" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/01cd8d184f0f8aae46d7ac9d344bf736.mp4"
+[ "10:46:49.767" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c42a6d2b497dfcef0118e25f6fba0b35.mp4"
+processPendingUpdates: Emitted dataChanged for range: 450 to 469
+[AdaptiveIO] Stats:  "I:/"  Avg:  8.98031  Limit:  4  ActiveWeight:  10
+processPendingUpdates: Emitted dataChanged for range: 470 to 489
+[ "10:46:49.993" ][SystemMonitor] Stats Update: CPU App: 48.9418 % | Sys: 89.418 % | RAM App: 348.602 MB | Sys Avail: 29151.7 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 490 to 509
+processPendingUpdates: Emitted dataChanged for range: 510 to 519
+[ "10:46:50.199" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a718c67c8c2494e3924b2ac0668040d0.mp4"
+processPendingUpdates: Emitted dataChanged for range: 520 to 539
+processPendingUpdates: Emitted dataChanged for range: 540 to 559
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.61683  Limit:  4  ActiveWeight:  11
+[ "10:46:50.337" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/37ced116f0b5664c39d99600f32296c0.mp4"
+processPendingUpdates: Emitted dataChanged for range: 560 to 579
+[ "10:46:50.360" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/76f14fb3d33e99d9e449cad3b8e408a1.mp4"
+[ "10:46:50.415" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5d16fe01c27eca56b235bfcc300236d9.mp4"
+[ "10:46:50.422" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5c1e9b63a20c93a5cd0b109e89a82fae.mp4"
+[ "10:46:50.431" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/532d8ad6009f7a76f0f7b3e96fdeb1c8.mp4"
+[ "10:46:50.436" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/6e2e24966def117a925ad84005b1ba57.mp4"
+processPendingUpdates: Emitted dataChanged for range: 580 to 599
+processPendingUpdates: Emitted dataChanged for range: 600 to 609
+processPendingUpdates: Emitted dataChanged for range: 610 to 619
+processPendingUpdates: Emitted dataChanged for range: 620 to 629
+processPendingUpdates: Emitted dataChanged for range: 630 to 639
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.69839  Limit:  4  ActiveWeight:  13
+[ "10:46:50.688" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/65de94cd190e4c857f3f117d49a42860.mp4"
+[ "10:46:50.693" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1763396447984.mp4"
+processPendingUpdates: Emitted dataChanged for range: 640 to 659
+[ "10:46:50.727" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/863ba5b6a6a1e27ebf88d2b96d3a72ba.mp4"
+processPendingUpdates: Emitted dataChanged for range: 660 to 679
+[ "10:46:50.794" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/dc9dfae46e060561a0625f57cf1ca36d.mp4"
+[ "10:46:50.794" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+processPendingUpdates: Emitted dataChanged for range: 680 to 690
+[ "10:46:50.839" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/070d55d441509f358e66bf20183195b5.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  5.37016  Limit:  4  ActiveWeight:  13
+[ "10:46:50.999" ][SystemMonitor] Stats Update: CPU App: 46.875 % | Sys: 92.9688 % | RAM App: 359.469 MB | Sys Avail: 29141.2 MB / 65466.5 MB
+[ "10:46:51.038" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/069137efc3b20bc4cebcc654c5884f14.mp4"
+[ "10:46:51.043" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/VID-20230410-WA0020.mp4"
+[ "10:46:51.115" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260321_002407_Facebook.mp4"
+[ "10:46:51.135" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260610_065048.mp4"
+[ "10:46:51.167" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/fe85daaf7d0a17287c33257ac4781d2d.mp4"
+[ "10:46:51.203" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a3381531c0678086b742d906c0c99754.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.14863  Limit:  4  ActiveWeight:  15
+[ "10:46:51.260" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/531134dac9b1af080ca7aeeb776bbf50.mp4"
+[ "10:46:51.296" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260315_201735.mp4"
+[ "10:46:51.334" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/36f8161b55b835d85e06b60fbc7fd43c.mp4"
+[ "10:46:51.389" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/598299a40fd386365ca8d3aed94731e0.mp4"
+[ "10:46:51.413" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/198828937b76e9d2df0326d92008c483.mp4"
+[ "10:46:51.439" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/937b9d9fb5fecb91f26651cad138c9f2.mp4"
+[ "10:46:51.440" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5750e6869edab59846a65acd7dc2e8ff.mp4"
+[ "10:46:51.490" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/14eb2a6290cb37015048f8a3cd6bc30c.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.22278  Limit:  4  ActiveWeight:  9
+[ "10:46:51.544" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260209_204206.mp4"
+[ "10:46:51.598" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/2157db40a81fafeb6293e0f8f0a9eed1.mp4"
+[ "10:46:51.631" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ec618d97d534ccc60544ab32f27d4bb5.mp4"
+[ "10:46:51.648" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1754068439899.mp4"
+[ "10:46:51.722" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/0cef630871e4692a3692ea3f2549e3e3.mp4"
+[ "10:46:51.736" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ece55d1ae67dfbe98de9b172dbc6e0eb.mp4"
+[ "10:46:51.866" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/607494d83d9287894d819f0cea02cea9.mp4"
+[ "10:46:51.874" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/613004b735f7cc60008abe9bc61fe178.mp4"
+[ "10:46:51.866" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:51.866" ][VideoThumbnailer] Black frame at 4878 ms, retrying...
+[ "10:46:51.866" ][VideoThumbnailer] Black frame at 9756 ms, retrying...
+[ "10:46:51.907" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/622b1a61d57021a5cfb554d92243e192.mp4"
+[ "10:46:51.908" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/6297322f3bd5f18cd1be1562bd92e74a.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.2949  Limit:  4  ActiveWeight:  11
+[ "10:46:51.925" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/f123491e1f00322b6c5e87b6ff41de35.mp4"
+[ "10:46:51.988" ][SystemMonitor] Stats Update: CPU App: 53.6458 % | Sys: 89.5833 % | RAM App: 363.102 MB | Sys Avail: 29134.4 MB / 65466.5 MB
+[ "10:46:51.999" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/VID-20230315-WA0004.mp4"
+[ "10:46:52.002" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/VID-20230315-WA0006.mp4"
+[ "10:46:52.079" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1763224378035.mp4"
+[ "10:46:52.189" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260322_104035_Facebook.mp4"
+[ "10:46:52.201" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260323_091759_Facebook.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.4605  Limit:  4  ActiveWeight:  10
+[ "10:46:52.356" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/3b69154fbebc2fd1e6d4e61be896240f.mp4"
+[ "10:46:52.367" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260425_132435_Facebook.mp4"
+[ "10:46:52.381" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0076.MP4"
+[ "10:46:52.426" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260425_200301_Facebook.mp4"
+[ "10:46:52.455" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/83faf13f31b9863be2207767837a1d48.mp4"
+[ "10:46:52.470" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/129e42681cac315687ba79e014fd37fa.mp4"
+[ "10:46:52.470" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:52.487" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/96ad5fbda2c723152e1779a891e1bba5.mp4"
+[ "10:46:52.494" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/90e55ff6a28db7737d963137ea5ed616.mp4"
+[ "10:46:52.487" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:52.504" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0069.MP4"
+[ "10:46:52.529" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c50053564b8f205b27f8fff01319fb26.mp4"
+[ "10:46:52.529" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:52.555" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c78e25fe6703271eb3ae375b0a4a0881.mp4"
+[ "10:46:52.574" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c6eac33bfa9e8609bdcc15d29ce81db5.mp4"
+[ "10:46:52.598" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1020230256.mp4"
+[ "10:46:52.651" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/3bb7155546984b26c7c2ed5db9bbfa92.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.70331  Limit:  4  ActiveWeight:  9
+[ "10:46:52.677" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/73ca2ba6f5be15670fb5c54309283b9d.mp4"
+[ "10:46:52.693" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/532d8ad6009f7a76f0f7b3e96fdeb1c8.mp4"
+[ "10:46:52.706" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260209_203754.mp4"
+[ "10:46:52.808" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0056.MP4"
+[ "10:46:52.812" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0058.MP4"
+[ "10:46:52.874" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0062.MP4"
+[ "10:46:52.941" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0060.MP4"
+[ "10:46:52.988" ][SystemMonitor] Stats Update: CPU App: 53.9063 % | Sys: 91.9271 % | RAM App: 384.504 MB | Sys Avail: 29120.1 MB / 65466.5 MB
+[ "10:46:53.025" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260209_204347.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  24.3433  Limit:  4  ActiveWeight:  15
+[ "10:46:53.093" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/8443591f33bc194b3513f322b8c781be.mp4"
+[ "10:46:53.134" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5aff3e2dc65647f1251e942612c4f04b.mp4"
+[ "10:46:53.138" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/4eb33c89b76a386ce771423c5475cd55.mp4"
+[ "10:46:53.154" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-235618355.mp4"
+[ "10:46:53.158" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1390399253.mp4"
+[ "10:46:53.200" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c3971d2d790c17dcf2b7e682723365d3.mp4"
+[ "10:46:53.200" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:53.228" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c3ebccbde00575d81714474880a54e21.mp4"
+[ "10:46:53.238" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c277144919e829710cb5665600cfc6bb.mp4"
+[ "10:46:53.262" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1237898371.mp4"
+[ "10:46:53.276" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-960036586.mp4"
+[ "10:46:53.304" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1717667834.mp4"
+[ "10:46:53.382" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/946d1797055b1d45ed9ba152c6d4db11.mp4"
+[ "10:46:53.393" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0065.MP4"
+[ "10:46:53.382" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:53.402" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0067.MP4"
+[ "10:46:53.453" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0068.MP4"
+[ "10:46:53.517" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0070.MP4"
+[ "10:46:53.576" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0071.MP4"
+[ "10:46:53.609" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0072.mp4"
+[ "10:46:53.746" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0076.MP4"
+[ "10:46:53.787" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0077.MP4"
+[ "10:46:53.809" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0078.MP4"
+[ "10:46:53.962" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/2e5b1ace31b491aad70d2df043b5a427.mp4"
+[ "10:46:53.977" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/2e5d3e86f276ceefd440bb7a6effba3a.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  118.471  Limit:  4  ActiveWeight:  10
+[ "10:46:53.986" ][SystemMonitor] Stats Update: CPU App: 48.4375 % | Sys: 86.4583 % | RAM App: 382.113 MB | Sys Avail: 29103.3 MB / 65466.5 MB
+[ "10:46:53.991" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5bf5b63a277f1ec214f3f81ed02e94eb.mp4"
+[ "10:46:54.005" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0064.MP4"
+[ "10:46:54.012" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/7ee609991a4a478dbf45405735d23d14.mp4"
+[ "10:46:54.071" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260214_212129.mp4"
+[Performance] SLOW LOAD detected: 749 ms for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0064.MP4?idx=423"
+[ "10:46:54.078" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/65de94cd190e4c857f3f117d49a42860.mp4"
+[ "10:46:54.091" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/16dc3732a5a3ccb9bb52c401dfd1a096.mp4"
+[ "10:46:54.108" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/27bbc32c197bcc9388a4e93e452694d4.mp4"
+[ "10:46:54.111" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/45a373b660754d8de9c2344b956a4b1b.mp4"
+[ "10:46:54.124" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/47c9a60562e98c98f4830cf33a0941e6.mp4"
+[ "10:46:54.130" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ca1eb1f9c673d3ce2d36d9b0e0452d80.mp4"
+[ "10:46:54.139" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/58fdc7b732bdee96c371b6a9c3f02bbb.mp4"
+[ "10:46:54.153" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/056dff2ae2f24270add40b70a8263e16.mp4"
+[ "10:46:54.155" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1774196660266.mp4"
+[ "10:46:54.170" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/73c8ff94adad83bce000ded5968cf9b9.mp4"
+[ "10:46:54.188" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/305fd731c329dd1439aee9a4ea83b31a.mp4"
+[ "10:46:54.195" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/359a15de79c48405f2d5da40640b97b5.mp4"
+[ "10:46:54.223" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/0833fe746c091f2e1447cbdc6712279a.mp4"
+[ "10:46:54.234" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/244cd01932b98c5592f03d82be7b4795.mp4"
+[ "10:46:54.257" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/909c35d7aa2bf2cc78f973e0bcffcadb.mp4"
+[ "10:46:54.265" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/698ec1107c3134347d2d3b329f6d5748.mp4"
+[ "10:46:54.268" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/daec6559523c02d405b64e445d400abf.mp4"
+[ "10:46:54.279" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/849e3afbf19e6f76c499963247a3f97a.mp4"
+[ "10:46:54.285" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/937b9d9fb5fecb91f26651cad138c9f2.mp4"
+[ "10:46:54.304" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/51486ba4d604deeaee445c90e60affcf.mp4"
+[ "10:46:54.305" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/3996acec79970bcd86eddd1a265f5030.mp4"
+[ "10:46:54.323" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/598627694f6d58b5e64da9b6c67b3b40.mp4"
+[ "10:46:54.335" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/65269303efa21dfe0e5b47128220f1e9.mp4"
+[ "10:46:54.337" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a8959f0e710bd1f030c4dbbe5a77e8e5.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  23.4136  Limit:  4  ActiveWeight:  10
+[ "10:46:54.353" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a8b06f9b40ddb82cf82216a4dfad3fbd.mp4"
+[ "10:46:54.362" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b0213c16473efc872b2e9d4b386db8cc.mp4"
+[ "10:46:54.387" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a099d2a733ee8cf1ff691e3ba44ecb44.mp4"
+[ "10:46:54.388" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260309_204645_Brave_1_1.mp4"
+[ "10:46:54.401" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b53c1a8911cac6831560fb208ca83789.mp4"
+[ "10:46:54.418" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b4bb736acf42ef19b0b3acc390f487de.mp4"
+[ "10:46:54.428" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/d230aabd76ed33160fd255defcb41e2d.mp4"
+[ "10:46:54.456" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b7424719f4ed920cfac61645e277da80.mp4"
+[ "10:46:54.477" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/bc33001d2c0580c7eee2c94422e95035.mp4"
+[ "10:46:54.500" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/dce195fda485c26595032e1b1479727b.mp4"
+[ "10:46:54.502" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/bf58c1d0a196cdddc25ed870c99c6f28.mp4"
+[ "10:46:54.522" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/e4b411977edebcbbee2108809de75278.mp4"
+[ "10:46:54.537" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/e8b34621aff4a014b465e5305d98095d.mp4"
+[ "10:46:54.549" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/d4428b05a7603f2125072d7a751fb94b.mp4"
+[ "10:46:54.555" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/f51c840581e2f64ca12d0eb7faf84bfa.mp4"
+[ "10:46:54.569" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1932978751.mp4"
+[ "10:46:54.578" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/f60ea2c96345e99c0a4801287c32c8e4.mp4"
+[ "10:46:54.606" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/fa9b9e4e6957ebbc71efc4f467a9905d.mp4"
+[ "10:46:54.717" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1774196661121.mp4"
+[ "10:46:54.752" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1754068438705.mp4"
+[ "10:46:54.766" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1752069828324.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.4191  Limit:  4  ActiveWeight:  10
+[ "10:46:54.967" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1429238178.mp4"
+[ "10:46:54.998" ][SystemMonitor] Stats Update: CPU App: 47.9167 % | Sys: 94.5313 % | RAM App: 387.043 MB | Sys Avail: 29065.4 MB / 65466.5 MB
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.89236  Limit:  4  ActiveWeight:  9
+[ "10:46:55.132" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Movies/VID-20230903-WA0001.mp4"
+[ "10:46:55.231" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-647663909.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  9.6444  Limit:  4  ActiveWeight:  9
+[ "10:46:55.288" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/e42a17581b9cd45b23deae20bbb3f663.mp4"
+[ "10:46:55.310" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260214_212816.mp4"
+[ "10:46:55.322" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260315_201735.mp4"
+[ "10:46:55.338" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/27bbc32c197bcc9388a4e93e452694d4.mp4"
+[ "10:46:55.350" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0078.MP4"
+[ "10:46:55.383" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260322_104035_Facebook.mp4"
+[ "10:46:55.455" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260321_002407_Facebook.mp4"
+[ "10:46:55.482" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/3bb7155546984b26c7c2ed5db9bbfa92.mp4"
+[ "10:46:55.503" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/9a77fc917cbae4e87b477cda89bb8ee1.mp4"
+[ "10:46:55.520" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260323_091759_Facebook.mp4"
+[ "10:46:55.547" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260409_012156_Instagram.mp4"
+[ "10:46:55.600" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-315429331.mp4"
+[ "10:46:55.623" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-289408284.mp4"
+[ "10:46:55.632" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260425_200301_Facebook.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  26.6576  Limit:  4  ActiveWeight:  12
+[ "10:46:55.700" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-85323170.mp4"
+[ "10:46:55.702" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-2127517485.mp4"
+[ "10:46:55.742" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20260425_132435_Facebook.mp4"
+[ "10:46:55.805" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260610_065048.mp4"
+[ "10:46:55.824" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1390399253.mp4"
+[ "10:46:55.835" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1754068439899.mp4"
+[ "10:46:55.885" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Whatsapp/VID-20230809-WA0002.mp4"
+[ "10:46:55.897" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260615_162208.mp4"
+[ "10:46:55.905" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0065.MP4"
+[ "10:46:55.936" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0066.MP4"
+[ "10:46:55.970" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/f123491e1f00322b6c5e87b6ff41de35.mp4"
+[ "10:46:55.997" ][SystemMonitor] Stats Update: CPU App: 51.0417 % | Sys: 92.4479 % | RAM App: 393.953 MB | Sys Avail: 29042.9 MB / 65466.5 MB
+[AdaptiveIO] Stats:  "I:/"  Avg:  22.3588  Limit:  4  ActiveWeight:  8
+[ "10:46:56.026" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-235618355.mp4"
+[ "10:46:56.077" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0062.MP4"
+[ "10:46:56.078" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5d16fe01c27eca56b235bfcc300236d9.mp4"
+TelemetryMonitor: Processed 300 frames. Current FPS: 22
+[AdaptiveIO] Stats:  "I:/"  Avg:  6.80374  Limit:  4  ActiveWeight:  10
+[ "10:46:56.340" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0064.MP4"
+[ "10:46:56.358" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0067.MP4"
+[ "10:46:56.411" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0070.MP4"
+[ "10:46:56.477" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0068.MP4"
+[ "10:46:56.544" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0069.MP4"
+[ "10:46:56.587" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/0cd8f78a49f760189265deb264e7a046.mp4"
+[QML ViewportRange] Precise detected range: 61 to 348 (288 items)
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 2. Stuck: I:/MY SDCArds/S22 ultra/100_CINE/MOV_0069.MP4, I:/MY SDCArds/S22 ultra/Camera/0cd8f78a49f760189265deb264e7a046.mp4"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 2. Stuck: I:/MY SDCArds/S22 ultra/100_CINE/MOV_0069.MP4, I:/MY SDCArds/S22 ultra/Camera/0cd8f78a49f760189265deb264e7a046.mp4
+[ViewportCulling] Current settings: m_viewportCullingEnabled= true , BUFFER_SIZE= 50
+[ViewportCulling] RANGE UPDATE: 
+  Viewport indices: 61 to 640 ( 580 items) 
+  Buffered range: 11 to 690 ( 680 items with BUFFER_SIZE= 50 ) 
+  Total items in model: 8948
+[ViewportCulling] Setting 680 visible paths in VRM
+[VRM] Total visible paths: 680 Sample: "I:/MY SDCArds/S22 ultra/Camera/20260606_103659.heic"
+[ViewportCulling] Requested: 0 | Already loaded: 680 | Total in range: 680
+setVisibleEndIndex called with: 348
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 2. Stuck: I:/MY SDCArds/S22 ultra/Camera/0cd8f78a49f760189265deb264e7a046.mp4"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 2. Stuck: I:/MY SDCArds/S22 ultra/Camera/0cd8f78a49f760189265deb264e7a046.mp4
+[ViewportCulling] Current settings: m_viewportCullingEnabled= true , BUFFER_SIZE= 50
+[ViewportCulling] RANGE UPDATE: 
+  Viewport indices: 61 to 348 ( 288 items) 
+  Buffered range: 11 to 398 ( 388 items with BUFFER_SIZE= 50 ) 
+  Total items in model: 8948
+[ViewportCulling] Setting 388 visible paths in VRM
+[VRM] Total visible paths: 388 Sample: "I:/MY SDCArds/S22 ultra/Photography/Screenshot_20210813-010004_Facebook.jpg"
+[ViewportCulling] Requested: 0 | Already loaded: 388 | Total in range: 388
+[ "10:46:56.631" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/7ee609991a4a478dbf45405735d23d14.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  8.08302  Limit:  4  ActiveWeight:  9
+[ "10:46:56.651" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/36f8161b55b835d85e06b60fbc7fd43c.mp4"
+[ "10:46:56.666" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/37ced116f0b5664c39d99600f32296c0.mp4"
+[ "10:46:56.689" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/16dc3732a5a3ccb9bb52c401dfd1a096.mp4"
+[ "10:46:56.689" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/fa9b9e4e6957ebbc71efc4f467a9905d.mp4"
+[ "10:46:56.716" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/47c9a60562e98c98f4830cf33a0941e6.mp4"
+[ "10:46:56.743" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/45a373b660754d8de9c2344b956a4b1b.mp4"
+[ "10:46:56.758" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251223_185713.mp4"
+[ "10:46:56.770" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/056dff2ae2f24270add40b70a8263e16.mp4"
+[ "10:46:56.793" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/58fdc7b732bdee96c371b6a9c3f02bbb.mp4"
+[ "10:46:56.828" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251029_205151.mp4"
+[ "10:46:56.890" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/070d55d441509f358e66bf20183195b5.mp4"
+[ "10:46:56.903" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/73c8ff94adad83bce000ded5968cf9b9.mp4"
+[ "10:46:56.924" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/76f14fb3d33e99d9e449cad3b8e408a1.mp4"
+[ "10:46:56.943" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/622b1a61d57021a5cfb554d92243e192.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  37.0273  Limit:  4  ActiveWeight:  9
+[ "10:46:56.965" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/73ca2ba6f5be15670fb5c54309283b9d.mp4"
+[ "10:46:56.985" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/305fd731c329dd1439aee9a4ea83b31a.mp4"
+[ "10:46:56.985" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-85323170.mp4"
+[ "10:46:57.015" ][SystemMonitor] Stats Update: CPU App: 53.8462 % | Sys: 92.5641 % | RAM App: 419.613 MB | Sys Avail: 29036.1 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 419.613 MB (Delta: 69.1758 ) | VRAM: 41.582 MB (Delta: 5.32031 )
+[Diagnostics] CRITICAL: "Load stalled for 6s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20250725_172013.jpg, I:/MY SDCArds/S22 ultra/Camera/20250725_172016.jpg, I:/MY SDCArds/S22 ultra/Camera/20250725_172514.jpg, I:/MY SDCArds/S22 ultra/Snapchat/Snapchat..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 6s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20250725_172013.jpg, I:/MY SDCArds/S22 ultra/Camera/20250725_172016.jpg, I:/MY SDCArds/S22 ultra/Camera/20250725_172514.jpg, I:/MY SDCArds/S22 ultra/Snapchat/Snapchat...
+[ "10:46:57.030" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/129e42681cac315687ba79e014fd37fa.mp4"
+[ "10:46:57.030" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:57.110" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/90e55ff6a28db7737d963137ea5ed616.mp4"
+[QML ViewportRange] Precise detected range: 373 to 660 (288 items)
+[Diagnostics] WARNING: "Viewport only showing -24 items - possible detection issue"
+[Diagnostics] CRITICAL: "Load stalled for 6s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20250725_172018.jpg, I:/MY SDCArds/S22 ultra/Camera/90e55ff6a28db7737d963137ea5ed616.mp4, I:/MY SDCArds/S22 ultra/Screenshots/Screenshot_20250722_195710_Discord.jpg"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 6s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20250725_172018.jpg, I:/MY SDCArds/S22 ultra/Camera/90e55ff6a28db7737d963137ea5ed616.mp4, I:/MY SDCArds/S22 ultra/Screenshots/Screenshot_20250722_195710_Discord.jpg
+[ViewportCulling] Current settings: m_viewportCullingEnabled= true , BUFFER_SIZE= 50
+[ViewportCulling] RANGE UPDATE: 
+  Viewport indices: 373 to 348 ( -24 items) 
+  Buffered range: 323 to 398 ( 76 items with BUFFER_SIZE= 50 ) 
+  Total items in model: 8948
+[ViewportCulling] Setting 76 visible paths in VRM
+[VRM] Total visible paths: 76 Sample: "I:/MY SDCArds/S22 ultra/Camera/244cd01932b98c5592f03d82be7b4795.mp4"
+[ViewportCulling] Requested: 0 | Already loaded: 76 | Total in range: 76
+setVisibleEndIndex called with: 660
+[Diagnostics] CRITICAL: "Load stalled for 6s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/90e55ff6a28db7737d963137ea5ed616.mp4"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 6s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/90e55ff6a28db7737d963137ea5ed616.mp4
+[ViewportCulling] Current settings: m_viewportCullingEnabled= true , BUFFER_SIZE= 50
+[ViewportCulling] RANGE UPDATE: 
+  Viewport indices: 373 to 660 ( 288 items) 
+  Buffered range: 323 to 710 ( 388 items with BUFFER_SIZE= 50 ) 
+  Total items in model: 8948
+[ViewportCulling] Setting 388 visible paths in VRM
+[VRM] Total visible paths: 388 Sample: "I:/MY SDCArds/S22 ultra/Camera/20260606_103659.heic"
+[ViewportCulling] Requested: 20 | Already loaded: 368 | Total in range: 388
+[ "10:46:57.136" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260122_101025.mp4"
+processPendingUpdates: Emitted dataChanged for range: 691 to 710
+[ "10:46:57.216" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260122_101025.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  6.05341  Limit:  4  ActiveWeight:  8
+[ "10:46:57.289" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5bf5b63a277f1ec214f3f81ed02e94eb.mp4"
+[ "10:46:57.307" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/0cef630871e4692a3692ea3f2549e3e3.mp4"
+[ "10:46:57.334" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/01cd8d184f0f8aae46d7ac9d344bf736.mp4"
+[ "10:46:57.338" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/6e2e24966def117a925ad84005b1ba57.mp4"
+[ "10:46:57.396" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5aff3e2dc65647f1251e942612c4f04b.mp4"
+[ "10:46:57.417" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/2e5d3e86f276ceefd440bb7a6effba3a.mp4"
+[ "10:46:57.434" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/3b69154fbebc2fd1e6d4e61be896240f.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  9.71588  Limit:  4  ActiveWeight:  11
+[ "10:46:57.500" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/2e5b1ace31b491aad70d2df043b5a427.mp4"
+[ "10:46:57.521" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5c1e9b63a20c93a5cd0b109e89a82fae.mp4"
+[ "10:46:57.535" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/4eb33c89b76a386ce771423c5475cd55.mp4"
+[ "10:46:57.558" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0072.mp4"
+[ "10:46:57.574" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0077.MP4"
+[ "10:46:57.754" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/100_CINE/MOV_0071.MP4"
+[ "10:46:57.760" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/83faf13f31b9863be2207767837a1d48.mp4"
+[ "10:46:57.779" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/359a15de79c48405f2d5da40640b97b5.mp4"
+[ "10:46:57.802" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/244cd01932b98c5592f03d82be7b4795.mp4"
+[ "10:46:57.827" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/87fc39454200d213e1a16c81ee0e6a1d.mp4"
+[ "10:46:57.861" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/96ad5fbda2c723152e1779a891e1bba5.mp4"
+[ "10:46:57.861" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:57.888" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/0833fe746c091f2e1447cbdc6712279a.mp4"
+[ "10:46:57.910" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/698ec1107c3134347d2d3b329f6d5748.mp4"
+[ "10:46:57.927" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/849e3afbf19e6f76c499963247a3f97a.mp4"
+[ "10:46:57.934" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250612_075448.mp4"
+[ "10:46:57.948" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/863ba5b6a6a1e27ebf88d2b96d3a72ba.mp4"
+[ "10:46:57.969" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/909c35d7aa2bf2cc78f973e0bcffcadb.mp4"
+[ "10:46:57.983" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/946d1797055b1d45ed9ba152c6d4db11.mp4"
+[ "10:46:57.983" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:57.999" ][SystemMonitor] Stats Update: CPU App: 51.0417 % | Sys: 89.3229 % | RAM App: 471.703 MB | Sys Avail: 28961.9 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 471.703 MB (Delta: 52.0898 ) | VRAM: 41.8945 MB (Delta: 0.3125 )
+[ "10:46:58.012" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/3996acec79970bcd86eddd1a265f5030.mp4"
+[ "10:46:58.029" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/531134dac9b1af080ca7aeeb776bbf50.mp4"
+[ "10:46:58.058" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/51486ba4d604deeaee445c90e60affcf.mp4"
+[ "10:46:58.079" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/5750e6869edab59846a65acd7dc2e8ff.mp4"
+[ "10:46:58.086" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/069137efc3b20bc4cebcc654c5884f14.mp4"
+[ "10:46:58.111" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/598299a40fd386365ca8d3aed94731e0.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.1942  Limit:  4  ActiveWeight:  9
+[ "10:46:58.171" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/198828937b76e9d2df0326d92008c483.mp4"
+[ "10:46:58.220" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a099d2a733ee8cf1ff691e3ba44ecb44.mp4"
+[ "10:46:58.235" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a3381531c0678086b742d906c0c99754.mp4"
+[ "10:46:58.268" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/d230aabd76ed33160fd255defcb41e2d.mp4"
+[ "10:46:58.295" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/613004b735f7cc60008abe9bc61fe178.mp4"
+[ "10:46:58.323" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/598627694f6d58b5e64da9b6c67b3b40.mp4"
+[ "10:46:58.342" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/607494d83d9287894d819f0cea02cea9.mp4"
+[ "10:46:58.342" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:58.342" ][VideoThumbnailer] Black frame at 4878 ms, retrying...
+[ "10:46:58.342" ][VideoThumbnailer] Black frame at 9756 ms, retrying...
+[ "10:46:58.383" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/6297322f3bd5f18cd1be1562bd92e74a.mp4"
+[ "10:46:58.409" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/65269303efa21dfe0e5b47128220f1e9.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  10.3198  Limit:  4  ActiveWeight:  6
+[ "10:46:58.429" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250615_121632.mp4"
+[ "10:46:58.468" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/8443591f33bc194b3513f322b8c781be.mp4"
+[ "10:46:58.491" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a718c67c8c2494e3924b2ac0668040d0.mp4"
+[ "10:46:58.509" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b0213c16473efc872b2e9d4b386db8cc.mp4"
+[ "10:46:58.526" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/b4bb736acf42ef19b0b3acc390f487de.mp4"
+[ "10:46:58.541" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20250625_214033_Facebook.mp4"
+[ "10:46:58.558" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a8959f0e710bd1f030c4dbbe5a77e8e5.mp4"
+[ "10:46:58.587" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/a8b06f9b40ddb82cf82216a4dfad3fbd.mp4"
+[ "10:46:58.619" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/bc33001d2c0580c7eee2c94422e95035.mp4"
+[ "10:46:58.636" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c277144919e829710cb5665600cfc6bb.mp4"
+[ "10:46:58.641" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c3ebccbde00575d81714474880a54e21.mp4"
+[ "10:46:58.669" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250627_075401.mp4"
+[ "10:46:58.671" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250725_164258.mp4"
+[ "10:46:58.811" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c3971d2d790c17dcf2b7e682723365d3.mp4"
+[ "10:46:58.811" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:58.834" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c42a6d2b497dfcef0118e25f6fba0b35.mp4"
+[ "10:46:58.839" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c50053564b8f205b27f8fff01319fb26.mp4"
+[ "10:46:58.839" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:58.859" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250628_161919.mp4"
+[ "10:46:58.859" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ca1eb1f9c673d3ce2d36d9b0e0452d80.mp4"
+[ "10:46:58.888" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c78e25fe6703271eb3ae375b0a4a0881.mp4"
+[ "10:46:58.906" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/c6eac33bfa9e8609bdcc15d29ce81db5.mp4"
+[ "10:46:58.925" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/cf3d36275fe99e914264b8827039a1fb.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  27.6105  Limit:  4  ActiveWeight:  8
+[ "10:46:58.956" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/d4428b05a7603f2125072d7a751fb94b.mp4"
+[ "10:46:58.961" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/daec6559523c02d405b64e445d400abf.mp4"
+[ "10:46:58.974" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/dce195fda485c26595032e1b1479727b.mp4"
+[ "10:46:58.980" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/dc7a0533f555e355aa02bfe6a07a99e6.mp4"
+[ "10:46:58.997" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/dc9dfae46e060561a0625f57cf1ca36d.mp4"
+[ "10:46:58.997" ][VideoThumbnailer] Black frame at 0 ms, retrying...
+[ "10:46:59.007" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/e4b411977edebcbbee2108809de75278.mp4"
+[ "10:46:59.015" ][SystemMonitor] Stats Update: CPU App: 50.7813 % | Sys: 88.0208 % | RAM App: 430.988 MB | Sys Avail: 29028.2 MB / 65466.5 MB
+[ "10:46:59.031" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/e42a17581b9cd45b23deae20bbb3f663.mp4"
+[ "10:46:59.043" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250629_113221.mp4"
+[ "10:46:59.171" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250705_155553.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.5915  Limit:  4  ActiveWeight:  5
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.29394  Limit:  4  ActiveWeight:  4
+[AdaptiveIO] Stats:  "I:/"  Avg:  2.32772  Limit:  4  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  19.5964  Limit:  4  ActiveWeight:  6
+[ "10:46:59.998" ][SystemMonitor] Stats Update: CPU App: 54.4974 % | Sys: 94.9735 % | RAM App: 443.613 MB | Sys Avail: 29014.4 MB / 65466.5 MB
+[ "10:47:00.097" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251218_213226.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  9.09379  Limit:  4  ActiveWeight:  4
+[AdaptiveIO] Stats:  "I:/"  Avg:  14.0175  Limit:  4  ActiveWeight:  6
+[AdaptiveIO] Stats:  "I:/"  Avg:  13.9447  Limit:  4  ActiveWeight:  4
+[ "10:47:00.486" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251223_191551.mp4"
+[ "10:47:00.508" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260114_163622.mp4"
+[ "10:47:00.584" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251228_134011.mp4"
+[ "10:47:00.615" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260101_171037.mp4"
+[ "10:47:00.688" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260104_162818.mp4"
+[ "10:47:00.713" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260101_174419.mp4"
+[ "10:47:00.839" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260109_144430.mp4"
+[ "10:47:00.921" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260106_124959.mp4"
+[ "10:47:00.997" ][SystemMonitor] Stats Update: CPU App: 50.2604 % | Sys: 85.1563 % | RAM App: 564.734 MB | Sys Avail: 28883.4 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 564.734 MB (Delta: 93.0313 ) | VRAM: 41.8945 MB (Delta: 0 )
+[ "10:47:01.015" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260107_204643.mp4"
+[ "10:47:01.076" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260105_170742.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  79.4374  Limit:  4  ActiveWeight:  5
+[AdaptiveIO] Stats:  "I:/"  Avg:  8.70561  Limit:  4  ActiveWeight:  3
+[ "10:47:01.217" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250709_165858.mp4"
+[ "10:47:01.312" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250709_170013.mp4"
+[ "10:47:01.397" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250718_095232.mp4"
+[ "10:47:01.397" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250710_180955.mp4"
+[ "10:47:01.489" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250718_180736.mp4"
+[ "10:47:01.631" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250719_122053.mp4"
+[ "10:47:01.783" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250720_132052.mp4"
+[ "10:47:01.876" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Screen recordings/Screen_Recording_20250723_213445_YouTube.mp4"
+[ "10:47:01.962" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250725_171334.mp4"
+[ "10:47:01.998" ][SystemMonitor] Stats Update: CPU App: 30.7292 % | Sys: 70.0521 % | RAM App: 474.742 MB | Sys Avail: 29031.3 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 474.742 MB (Delta: -89.9922 ) | VRAM: 41.8945 MB (Delta: 0 )
+[ "10:47:02.112" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250725_172134.mp4"
+[ "10:47:02.322" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250725_172553.mp4"
+[ "10:47:02.322" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250725_172836.mp4"
+[ "10:47:02.599" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250725_173938.mp4"
+[ "10:47:02.828" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250805_160328.mp4"
+[ "10:47:02.875" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250901_200955.mp4"
+[ "10:47:02.988" ][SystemMonitor] Stats Update: CPU App: 20.0521 % | Sys: 78.125 % | RAM App: 480.102 MB | Sys Avail: 29036.5 MB / 65466.5 MB
+[ "10:47:03.063" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250914_181118.mp4"
+[ "10:47:03.164" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250914_181207.mp4"
+[ "10:47:03.258" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251029_205151.mp4"
+[ "10:47:03.345" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251218_213226.mp4"
+[ "10:47:03.429" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251223_185713.mp4"
+[ "10:47:03.516" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251223_191551.mp4"
+[ "10:47:03.610" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20251228_134011.mp4"
+[ "10:47:03.734" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260101_171037.mp4"
+[ "10:47:03.802" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260101_174419.mp4"
+[ "10:47:03.921" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260104_162818.mp4"
+[ "10:47:04.015" ][SystemMonitor] Stats Update: CPU App: 20.5128 % | Sys: 64.8718 % | RAM App: 527.266 MB | Sys Avail: 29010 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 527.266 MB (Delta: 52.5234 ) | VRAM: 41.8945 MB (Delta: 0 )
+[Diagnostics] CRITICAL: "Load stalled for 6s. Pending: 1. Stuck: I:/MY SDCArds/S22 ultra/Camera/20260104_162818.mp4"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 6s. Pending: 1. Stuck: I:/MY SDCArds/S22 ultra/Camera/20260104_162818.mp4
+[ "10:47:04.284" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260105_170742.mp4"
+[ "10:47:04.350" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260106_124959.mp4"
+[ "10:47:04.448" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260107_204643.mp4"
+[ "10:47:04.552" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260109_144430.mp4"
+[ "10:47:04.641" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20260114_163622.mp4"
+[ "10:47:04.735" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ec618d97d534ccc60544ab32f27d4bb5.mp4"
+[ "10:47:04.755" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/f51c840581e2f64ca12d0eb7faf84bfa.mp4"
+[ "10:47:04.770" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/e8b34621aff4a014b465e5305d98095d.mp4"
+[ "10:47:04.780" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/fe85daaf7d0a17287c33257ac4781d2d.mp4"
+[ "10:47:04.800" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ebd1c0d2f2e5140a51d207c2b89e9197.mp4"
+[ "10:47:04.812" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/fd0df56a41a0585671643546821e5e62.mp4"
+[ "10:47:04.824" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/ece55d1ae67dfbe98de9b172dbc6e0eb.mp4"
+[ "10:47:04.846" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/VID-20230315-WA0006.mp4"
+[ "10:47:04.867" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/VID-20230315-WA0004.mp4"
+[ "10:47:04.924" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/VID-20230410-WA0020.mp4"
+[ "10:47:04.933" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/f60ea2c96345e99c0a4801287c32c8e4.mp4"
+[ "10:47:04.951" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1774196660266.mp4"
+[ "10:47:04.985" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1763224378035.mp4"
+[ "10:47:04.998" ][SystemMonitor] Stats Update: CPU App: 20.1058 % | Sys: 65.6085 % | RAM App: 450.512 MB | Sys Avail: 29020.1 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 450.512 MB (Delta: -76.7539 ) | VRAM: 41.8945 MB (Delta: 0 )
+[Diagnostics] CRITICAL: "Load stalled for 6s. Pending: 1. Stuck: I:/MY SDCArds/S22 ultra/Ezviz/1763224378035.mp4"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 6s. Pending: 1. Stuck: I:/MY SDCArds/S22 ultra/Ezviz/1763224378035.mp4
+[AdaptiveIO] Stats:  "I:/"  Avg:  49.367  Limit:  5  ActiveWeight:  4
+[ "10:47:05.048" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Double Side Camera/2023_02_23_15_19_16_033.mp4"
+[ "10:47:05.049" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Movies/VID-20230903-WA0001.mp4"
+[ "10:47:05.070" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1774196661121.mp4"
+[ "10:47:05.097" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1754068438705.mp4"
+[ "10:47:05.156" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Ezviz/1752069828324.mp4"
+[ "10:47:05.156" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-647663909.mp4"
+[ "10:47:05.227" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-315429331.mp4"
+[ "10:47:05.241" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-960036586.mp4"
+[ "10:47:05.327" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1237898371.mp4"
+[ "10:47:05.364" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1717667834.mp4"
+[ "10:47:05.433" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1429238178.mp4"
+[ "10:47:05.490" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-289408284.mp4"
+[ "10:47:05.561" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-2127517485.mp4"
+[ "10:47:05.596" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1020230256.mp4"
+[ "10:47:05.669" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Snapchat/Snapchat-1932978751.mp4"
+[ "10:47:05.694" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Whatsapp/VID-20230923-WA0011.mp4"
+[ "10:47:05.707" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Whatsapp/VID-20230809-WA0002.mp4"
+[ "10:47:05.994" ][SystemMonitor] Stats Update: CPU App: 16.6667 % | Sys: 59.1146 % | RAM App: 440.887 MB | Sys Avail: 29021.6 MB / 65466.5 MB
+[ "10:47:06.988" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 58.5938 % | RAM App: 440.961 MB | Sys Avail: 29041 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:47:07.990" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 80.4688 % | RAM App: 440.953 MB | Sys Avail: 29034.1 MB / 65466.5 MB
+[ "10:47:08.990" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 82.0313 % | RAM App: 440.961 MB | Sys Avail: 29013.1 MB / 65466.5 MB
+[ "10:47:09.996" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 56.5104 % | RAM App: 440.969 MB | Sys Avail: 29022.1 MB / 65466.5 MB
+[ "10:47:10.990" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 39.5833 % | RAM App: 440.98 MB | Sys Avail: 29028.6 MB / 65466.5 MB
+[ "10:47:11.993" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 55.4688 % | RAM App: 440.988 MB | Sys Avail: 29104.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:47:12.989" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 47.6563 % | RAM App: 440.953 MB | Sys Avail: 29101.2 MB / 65466.5 MB
+[ "10:47:13.985" ][SystemMonitor] Stats Update: CPU App: 3.125 % | Sys: 42.9688 % | RAM App: 440.961 MB | Sys Avail: 29113.5 MB / 65466.5 MB
+[ "10:47:14.988" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 42.4479 % | RAM App: 440.973 MB | Sys Avail: 29120.1 MB / 65466.5 MB
+[ "10:47:15.995" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 40.625 % | RAM App: 440.98 MB | Sys Avail: 29104.1 MB / 65466.5 MB
+[ "10:47:16.985" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 44.7917 % | RAM App: 440.988 MB | Sys Avail: 29134.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:47:17.988" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 46.875 % | RAM App: 441 MB | Sys Avail: 29113.3 MB / 65466.5 MB
+[ "10:47:18.989" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 44.0104 % | RAM App: 440.879 MB | Sys Avail: 29134.2 MB / 65466.5 MB
+[ViewportCulling] TOGGLE: OFF Total items: 8948
+[ViewportCulling] Loading ALL items (Throttled)
+[ "10:47:19.998" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 43.2292 % | RAM App: 440.898 MB | Sys Avail: 29116 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 711 to 720
+processPendingUpdates: Emitted dataChanged for range: 721 to 730
+processPendingUpdates: Emitted dataChanged for range: 1000 to 1004
+processPendingUpdates: Emitted dataChanged for range: 746 to 755
+processPendingUpdates: Emitted dataChanged for range: 756 to 775
+processPendingUpdates: Emitted dataChanged for range: 776 to 785
+processPendingUpdates: Emitted dataChanged for range: 786 to 805
+processPendingUpdates: Emitted dataChanged for range: 1500 to 1504
+processPendingUpdates: Emitted dataChanged for range: 811 to 820
+processPendingUpdates: Emitted dataChanged for range: 821 to 830
+processPendingUpdates: Emitted dataChanged for range: 831 to 840
+processPendingUpdates: Emitted dataChanged for range: 841 to 860
+processPendingUpdates: Emitted dataChanged for range: 2000 to 2004
+processPendingUpdates: Emitted dataChanged for range: 866 to 885
+processPendingUpdates: Emitted dataChanged for range: 2200 to 2204
+processPendingUpdates: Emitted dataChanged for range: 891 to 910
+processPendingUpdates: Emitted dataChanged for range: 2400 to 2404
+processPendingUpdates: Emitted dataChanged for range: 916 to 935
+processPendingUpdates: Emitted dataChanged for range: 2600 to 2604
+processPendingUpdates: Emitted dataChanged for range: 941 to 960
+processPendingUpdates: Emitted dataChanged for range: 2800 to 2804
+processPendingUpdates: Emitted dataChanged for range: 966 to 985
+processPendingUpdates: Emitted dataChanged for range: 3100 to 3104
+processPendingUpdates: Emitted dataChanged for range: 3200 to 3204
+processPendingUpdates: Emitted dataChanged for range: 3300 to 3304
+processPendingUpdates: Emitted dataChanged for range: 1026 to 1035
+processPendingUpdates: Emitted dataChanged for range: 1036 to 1055
+[ "10:47:20.985" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 50 % | RAM App: 440.906 MB | Sys Avail: 29099.8 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 3700 to 3704
+processPendingUpdates: Emitted dataChanged for range: 1061 to 1080
+processPendingUpdates: Emitted dataChanged for range: 1081 to 1090
+processPendingUpdates: Emitted dataChanged for range: 1091 to 1100
+processPendingUpdates: Emitted dataChanged for range: 1101 to 1110
+processPendingUpdates: Emitted dataChanged for range: 1111 to 1130
+processPendingUpdates: Emitted dataChanged for range: 4300 to 4304
+processPendingUpdates: Emitted dataChanged for range: 4400 to 4404
+processPendingUpdates: Emitted dataChanged for range: 4500 to 4504
+processPendingUpdates: Emitted dataChanged for range: 4600 to 4604
+processPendingUpdates: Emitted dataChanged for range: 1151 to 1170
+processPendingUpdates: Emitted dataChanged for range: 4800 to 4804
+processPendingUpdates: Emitted dataChanged for range: 1176 to 1185
+processPendingUpdates: Emitted dataChanged for range: 1186 to 1195
+processPendingUpdates: Emitted dataChanged for range: 5200 to 5204
+processPendingUpdates: Emitted dataChanged for range: 1206 to 1215
+processPendingUpdates: Emitted dataChanged for range: 1216 to 1225
+processPendingUpdates: Emitted dataChanged for range: 5600 to 5604
+processPendingUpdates: Emitted dataChanged for range: 1241 to 1250
+processPendingUpdates: Emitted dataChanged for range: 5800 to 5804
+processPendingUpdates: Emitted dataChanged for range: 1266 to 1285
+processPendingUpdates: Emitted dataChanged for range: 6000 to 6004
+processPendingUpdates: Emitted dataChanged for range: 6100 to 6104
+processPendingUpdates: Emitted dataChanged for range: 1296 to 1315
+processPendingUpdates: Emitted dataChanged for range: 6300 to 6304
+processPendingUpdates: Emitted dataChanged for range: 1321 to 1330
+processPendingUpdates: Emitted dataChanged for range: 1331 to 1350
+processPendingUpdates: Emitted dataChanged for range: 6600 to 6604
+processPendingUpdates: Emitted dataChanged for range: 1356 to 1375
+processPendingUpdates: Emitted dataChanged for range: 6800 to 6804
+[ "10:47:21.987" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 64.5833 % | RAM App: 440.914 MB | Sys Avail: 29069.8 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 1381 to 1390
+processPendingUpdates: Emitted dataChanged for range: 1391 to 1410
+processPendingUpdates: Emitted dataChanged for range: 7100 to 7104
+processPendingUpdates: Emitted dataChanged for range: 1416 to 1425
+processPendingUpdates: Emitted dataChanged for range: 7300 to 7304
+processPendingUpdates: Emitted dataChanged for range: 7400 to 7404
+processPendingUpdates: Emitted dataChanged for range: 7500 to 7504
+processPendingUpdates: Emitted dataChanged for range: 1461 to 1470
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+processPendingUpdates: Emitted dataChanged for range: 1471 to 1490
+processPendingUpdates: Emitted dataChanged for range: 1505 to 1515
+processPendingUpdates: Emitted dataChanged for range: 8000 to 8004
+processPendingUpdates: Emitted dataChanged for range: 1521 to 1530
+processPendingUpdates: Emitted dataChanged for range: 1531 to 1550
+processPendingUpdates: Emitted dataChanged for range: 8300 to 8304
+processPendingUpdates: Emitted dataChanged for range: 1556 to 1575
+processPendingUpdates: Emitted dataChanged for range: 1576 to 1585
+processPendingUpdates: Emitted dataChanged for range: 1586 to 1595
+processPendingUpdates: Emitted dataChanged for range: 1596 to 1605
+processPendingUpdates: Emitted dataChanged for range: 1606 to 1615
+[ViewportCulling] Load ALL Complete.
+processPendingUpdates: Emitted dataChanged for range: 1616 to 1625
+processPendingUpdates: Emitted dataChanged for range: 1626 to 1645
+processPendingUpdates: Emitted dataChanged for range: 1646 to 1655
+processPendingUpdates: Emitted dataChanged for range: 1656 to 1665
+processPendingUpdates: Emitted dataChanged for range: 1666 to 1675
+processPendingUpdates: Emitted dataChanged for range: 1676 to 1685
+processPendingUpdates: Emitted dataChanged for range: 1686 to 1695
+processPendingUpdates: Emitted dataChanged for range: 1696 to 1715
+processPendingUpdates: Emitted dataChanged for range: 1716 to 1735
+processPendingUpdates: Emitted dataChanged for range: 1736 to 1755
+processPendingUpdates: Emitted dataChanged for range: 1756 to 1765
+[ "10:47:22.986" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 45.5729 % | RAM App: 440.914 MB | Sys Avail: 29080 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 1766 to 1785
+processPendingUpdates: Emitted dataChanged for range: 1786 to 1795
+processPendingUpdates: Emitted dataChanged for range: 1796 to 1805
+processPendingUpdates: Emitted dataChanged for range: 1806 to 1825
+processPendingUpdates: Emitted dataChanged for range: 1826 to 1845
+processPendingUpdates: Emitted dataChanged for range: 1846 to 1855
+processPendingUpdates: Emitted dataChanged for range: 1856 to 1865
+processPendingUpdates: Emitted dataChanged for range: 1866 to 1885
+processPendingUpdates: Emitted dataChanged for range: 1886 to 1905
+processPendingUpdates: Emitted dataChanged for range: 1906 to 1925
+processPendingUpdates: Emitted dataChanged for range: 1926 to 1935
+processPendingUpdates: Emitted dataChanged for range: 1936 to 1945
+processPendingUpdates: Emitted dataChanged for range: 1946 to 1965
+[AdaptiveIO] Stats:  "I:/"  Avg:  2.42151  Limit:  9  ActiveWeight:  9
+processPendingUpdates: Emitted dataChanged for range: 1966 to 1985
+processPendingUpdates: Emitted dataChanged for range: 1986 to 1995
+processPendingUpdates: Emitted dataChanged for range: 2005 to 2020
+processPendingUpdates: Emitted dataChanged for range: 2021 to 2030
+processPendingUpdates: Emitted dataChanged for range: 2031 to 2050
+processPendingUpdates: Emitted dataChanged for range: 2051 to 2060
+processPendingUpdates: Emitted dataChanged for range: 2061 to 2080
+processPendingUpdates: Emitted dataChanged for range: 2081 to 2100
+[QML ViewportRange] Precise detected range: 421 to 708 (288 items)
+setVisibleEndIndex called with: 708
+processPendingUpdates: Emitted dataChanged for range: 2101 to 2110
+processPendingUpdates: Emitted dataChanged for range: 2111 to 2120
+processPendingUpdates: Emitted dataChanged for range: 2121 to 2140
+[ "10:47:23.985" ][SystemMonitor] Stats Update: CPU App: 5.98958 % | Sys: 53.3854 % | RAM App: 442 MB | Sys Avail: 29076.7 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 2141 to 2160
+processPendingUpdates: Emitted dataChanged for range: 2161 to 2170
+processPendingUpdates: Emitted dataChanged for range: 2171 to 2190
+processPendingUpdates: Emitted dataChanged for range: 2205 to 2205
+processPendingUpdates: Emitted dataChanged for range: 2206 to 2225
+processPendingUpdates: Emitted dataChanged for range: 2226 to 2235
+processPendingUpdates: Emitted dataChanged for range: 2236 to 2245
+processPendingUpdates: Emitted dataChanged for range: 2246 to 2265
+processPendingUpdates: Emitted dataChanged for range: 2266 to 2275
+processPendingUpdates: Emitted dataChanged for range: 2276 to 2295
+processPendingUpdates: Emitted dataChanged for range: 2296 to 2315
+processPendingUpdates: Emitted dataChanged for range: 2316 to 2335
+processPendingUpdates: Emitted dataChanged for range: 2336 to 2345
+processPendingUpdates: Emitted dataChanged for range: 2346 to 2355
+processPendingUpdates: Emitted dataChanged for range: 2356 to 2365
+processPendingUpdates: Emitted dataChanged for range: 2366 to 2385
+processPendingUpdates: Emitted dataChanged for range: 2386 to 2395
+processPendingUpdates: Emitted dataChanged for range: 2405 to 2410
+processPendingUpdates: Emitted dataChanged for range: 2411 to 2420
+processPendingUpdates: Emitted dataChanged for range: 2421 to 2430
+processPendingUpdates: Emitted dataChanged for range: 2431 to 2450
+processPendingUpdates: Emitted dataChanged for range: 2451 to 2470
+processPendingUpdates: Emitted dataChanged for range: 2471 to 2480
+processPendingUpdates: Emitted dataChanged for range: 2481 to 2490
+processPendingUpdates: Emitted dataChanged for range: 2491 to 2510
+processPendingUpdates: Emitted dataChanged for range: 2511 to 2530
+processPendingUpdates: Emitted dataChanged for range: 2531 to 2550
+processPendingUpdates: Emitted dataChanged for range: 2551 to 2570
+[QML ViewportRange] Precise detected range: 397 to 684 (288 items)
+setVisibleEndIndex called with: 684
+[ "10:47:24.985" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 49.2188 % | RAM App: 442.004 MB | Sys Avail: 29153.6 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 2571 to 2590
+processPendingUpdates: Emitted dataChanged for range: 2605 to 2615
+processPendingUpdates: Emitted dataChanged for range: 2616 to 2635
+processPendingUpdates: Emitted dataChanged for range: 2636 to 2645
+processPendingUpdates: Emitted dataChanged for range: 2646 to 2655
+processPendingUpdates: Emitted dataChanged for range: 2656 to 2675
+[QML ViewportRange] Precise detected range: 397 to 684 (288 items)
+setVisibleEndIndex called with: 684
+processPendingUpdates: Emitted dataChanged for range: 2676 to 2685
+processPendingUpdates: Emitted dataChanged for range: 2686 to 2705
+processPendingUpdates: Emitted dataChanged for range: 2706 to 2725
+processPendingUpdates: Emitted dataChanged for range: 2726 to 2735
+processPendingUpdates: Emitted dataChanged for range: 2736 to 2745
+processPendingUpdates: Emitted dataChanged for range: 2746 to 2765
+processPendingUpdates: Emitted dataChanged for range: 2766 to 2775
+processPendingUpdates: Emitted dataChanged for range: 2776 to 2795
+processPendingUpdates: Emitted dataChanged for range: 2805 to 2820
+processPendingUpdates: Emitted dataChanged for range: 2821 to 2830
+processPendingUpdates: Emitted dataChanged for range: 2831 to 2850
+processPendingUpdates: Emitted dataChanged for range: 2851 to 2870
+processPendingUpdates: Emitted dataChanged for range: 2871 to 2880
+processPendingUpdates: Emitted dataChanged for range: 2881 to 2890
+processPendingUpdates: Emitted dataChanged for range: 2891 to 2910
+processPendingUpdates: Emitted dataChanged for range: 2911 to 2930
+processPendingUpdates: Emitted dataChanged for range: 2931 to 2940
+processPendingUpdates: Emitted dataChanged for range: 2941 to 2950
+processPendingUpdates: Emitted dataChanged for range: 2951 to 2970
+processPendingUpdates: Emitted dataChanged for range: 2971 to 2980
+processPendingUpdates: Emitted dataChanged for range: 2981 to 2990
+processPendingUpdates: Emitted dataChanged for range: 2991 to 3010
+[ "10:47:25.986" ][SystemMonitor] Stats Update: CPU App: 3.64583 % | Sys: 42.4479 % | RAM App: 444.566 MB | Sys Avail: 29136.9 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 3011 to 3030
+processPendingUpdates: Emitted dataChanged for range: 3031 to 3040
+processPendingUpdates: Emitted dataChanged for range: 3041 to 3060
+[QML ViewportRange] Precise detected range: 0 to 228 (229 items)
+setVisibleEndIndex called with: 228
+processPendingUpdates: Emitted dataChanged for range: 3061 to 3080
+processPendingUpdates: Emitted dataChanged for range: 3105 to 3105
+processPendingUpdates: Emitted dataChanged for range: 3106 to 3115
+processPendingUpdates: Emitted dataChanged for range: 3116 to 3135
+processPendingUpdates: Emitted dataChanged for range: 3136 to 3145
+processPendingUpdates: Emitted dataChanged for range: 3146 to 3155
+processPendingUpdates: Emitted dataChanged for range: 3156 to 3165
+processPendingUpdates: Emitted dataChanged for range: 3166 to 3175
+processPendingUpdates: Emitted dataChanged for range: 3176 to 3185
+processPendingUpdates: Emitted dataChanged for range: 3205 to 3210
+processPendingUpdates: Emitted dataChanged for range: 3211 to 3230
+processPendingUpdates: Emitted dataChanged for range: 3231 to 3240
+processPendingUpdates: Emitted dataChanged for range: 3241 to 3260
+processPendingUpdates: Emitted dataChanged for range: 3261 to 3280
+processPendingUpdates: Emitted dataChanged for range: 3281 to 3290
+processPendingUpdates: Emitted dataChanged for range: 3305 to 3315
+processPendingUpdates: Emitted dataChanged for range: 3316 to 3325
+processPendingUpdates: Emitted dataChanged for range: 3326 to 3345
+processPendingUpdates: Emitted dataChanged for range: 3346 to 3355
+processPendingUpdates: Emitted dataChanged for range: 3356 to 3375
+processPendingUpdates: Emitted dataChanged for range: 3376 to 3395
+processPendingUpdates: Emitted dataChanged for range: 3396 to 3415
+processPendingUpdates: Emitted dataChanged for range: 3416 to 3435
+[ "10:47:26.994" ][SystemMonitor] Stats Update: CPU App: 5.98958 % | Sys: 68.2292 % | RAM App: 446.152 MB | Sys Avail: 29093.4 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 3436 to 3455
+processPendingUpdates: Emitted dataChanged for range: 3456 to 3475
+processPendingUpdates: Emitted dataChanged for range: 3476 to 3495
+processPendingUpdates: Emitted dataChanged for range: 3496 to 3515
+[ "10:47:27.727" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250116_173857.mp4"
+processPendingUpdates: Emitted dataChanged for range: 3516 to 3535
+[ "10:47:28.023" ][SystemMonitor] Stats Update: CPU App: 31.0606 % | Sys: 69.9495 % | RAM App: 500.148 MB | Sys Avail: 28992.3 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 3536 to 3555
+[AdaptiveIO] Stats:  "I:/"  Avg:  30.6869  Limit:  11  ActiveWeight:  12
+[ "10:47:28.124" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241214_212124.mp4"
+[ "10:47:28.146" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240923_172440.mp4"
+processPendingUpdates: Emitted dataChanged for range: 3556 to 3565
+processPendingUpdates: Emitted dataChanged for range: 3566 to 3585
+[QML ViewportRange] Precise detected range: 1597 to 1884 (288 items)
+setVisibleEndIndex called with: 1884
+processPendingUpdates: Emitted dataChanged for range: 3586 to 3605
+processPendingUpdates: Emitted dataChanged for range: 3606 to 3625
+processPendingUpdates: Emitted dataChanged for range: 3626 to 3645
+[AdaptiveIO] Stats:  "I:/"  Avg:  28.4717  Limit:  11  ActiveWeight:  12
+Corrupt JPEG data: 1041752 extraneous bytes before marker 0xd2
+processPendingUpdates: Emitted dataChanged for range: 3646 to 3665
+processPendingUpdates: Emitted dataChanged for range: 3666 to 3685
+[AdaptiveIO] Stats:  "I:/"  Avg:  11.0059  Limit:  13  ActiveWeight:  13
+processPendingUpdates: Emitted dataChanged for range: 3705 to 3710
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+processPendingUpdates: Emitted dataChanged for range: 3711 to 3730
+Corrupt JPEG data: premature end of data segment
+Unsupported marker type 0x8a
+Unsupported marker type 0x8a
+[ "10:47:29.023" ][SystemMonitor] Stats Update: CPU App: 61.7188 % | Sys: 93.4896 % | RAM App: 485.164 MB | Sys Avail: 29013.1 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 3731 to 3750
+[ "10:47:29.053" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240613_171827.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  21.7129  Limit:  13  ActiveWeight:  24
+processPendingUpdates: Emitted dataChanged for range: 3751 to 3770
+processPendingUpdates: Emitted dataChanged for range: 3771 to 3790
+processPendingUpdates: Emitted dataChanged for range: 3791 to 3810
+processPendingUpdates: Emitted dataChanged for range: 3811 to 3820
+processPendingUpdates: Emitted dataChanged for range: 3821 to 3830
+processPendingUpdates: Emitted dataChanged for range: 3831 to 3840
+[ "10:47:29.558" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240419_185622.mp4"
+[ "10:47:29.558" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240429_175239.mp4"
+processPendingUpdates: Emitted dataChanged for range: 3841 to 3860
+processPendingUpdates: Emitted dataChanged for range: 3861 to 3880
+[AdaptiveIO] Stats:  "I:/"  Avg:  30.2557  Limit:  13  ActiveWeight:  22
+processPendingUpdates: Emitted dataChanged for range: 3881 to 3890
+processPendingUpdates: Emitted dataChanged for range: 3891 to 3900
+processPendingUpdates: Emitted dataChanged for range: 3901 to 3920
+processPendingUpdates: Emitted dataChanged for range: 3921 to 3930
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.9695  Limit:  7  ActiveWeight:  10
+processPendingUpdates: Emitted dataChanged for range: 3931 to 3950
+[ "10:47:30.016" ][SystemMonitor] Stats Update: CPU App: 40.3646 % | Sys: 78.3854 % | RAM App: 494.422 MB | Sys Avail: 29042.5 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 3951 to 3970
+processPendingUpdates: Emitted dataChanged for range: 3971 to 3980
+processPendingUpdates: Emitted dataChanged for range: 3981 to 3990
+processPendingUpdates: Emitted dataChanged for range: 3991 to 4000
+processPendingUpdates: Emitted dataChanged for range: 4001 to 4010
+processPendingUpdates: Emitted dataChanged for range: 4011 to 4030
+processPendingUpdates: Emitted dataChanged for range: 4031 to 4050
+[AdaptiveIO] Stats:  "I:/"  Avg:  40.1882  Limit:  7  ActiveWeight:  8
+processPendingUpdates: Emitted dataChanged for range: 4051 to 4070
+processPendingUpdates: Emitted dataChanged for range: 4071 to 4080
+processPendingUpdates: Emitted dataChanged for range: 4081 to 4090
+processPendingUpdates: Emitted dataChanged for range: 4091 to 4100
+processPendingUpdates: Emitted dataChanged for range: 4101 to 4110
+processPendingUpdates: Emitted dataChanged for range: 4111 to 4130
+[AdaptiveIO] Stats:  "I:/"  Avg:  15.8244  Limit:  6  ActiveWeight:  7
+processPendingUpdates: Emitted dataChanged for range: 4131 to 4140
+processPendingUpdates: Emitted dataChanged for range: 4141 to 4150
+[ "10:47:30.899" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240423_181413.mp4"
+[ "10:47:30.899" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240428_150835.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4151 to 4160
+processPendingUpdates: Emitted dataChanged for range: 4161 to 4170
+[ "10:47:30.989" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240501_170453_B.mp4"
+[ "10:47:31.018" ][SystemMonitor] Stats Update: CPU App: 41.4063 % | Sys: 79.6875 % | RAM App: 505.711 MB | Sys Avail: 28983.1 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 505.711 MB (Delta: 55.1992 ) | VRAM: 43.9375 MB (Delta: 2.04297 )
+processPendingUpdates: Emitted dataChanged for range: 4171 to 4180
+[ "10:47:31.041" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240420_203305.mp4"
+[ "10:47:31.045" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240501_170453_A.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4181 to 4200
+[ "10:47:31.106" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240421_103432.mp4"
+[AdaptiveIO] Stats:  "I:/"  Avg:  20.0634  Limit:  6  ActiveWeight:  6
+processPendingUpdates: Emitted dataChanged for range: 4201 to 4220
+[ "10:47:31.189" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20240428_150914.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4221 to 4230
+processPendingUpdates: Emitted dataChanged for range: 4231 to 4240
+processPendingUpdates: Emitted dataChanged for range: 4241 to 4250
+processPendingUpdates: Emitted dataChanged for range: 4251 to 4260
+[AdaptiveIO] Stats:  "I:/"  Avg:  17.1565  Limit:  6  ActiveWeight:  5
+processPendingUpdates: Emitted dataChanged for range: 4261 to 4270
+processPendingUpdates: Emitted dataChanged for range: 4271 to 4290
+processPendingUpdates: Emitted dataChanged for range: 4305 to 4305
+processPendingUpdates: Emitted dataChanged for range: 4306 to 4315
+processPendingUpdates: Emitted dataChanged for range: 4316 to 4325
+[AdaptiveIO] Stats:  "I:/"  Avg:  14.3509  Limit:  6  ActiveWeight:  10
+processPendingUpdates: Emitted dataChanged for range: 4326 to 4335
+Invalid SOS parameters for sequential JPEG
+processPendingUpdates: Emitted dataChanged for range: 4336 to 4345
+processPendingUpdates: Emitted dataChanged for range: 4346 to 4355
+processPendingUpdates: Emitted dataChanged for range: 4356 to 4365
+processPendingUpdates: Emitted dataChanged for range: 4366 to 4385
+[AdaptiveIO] Stats:  "I:/"  Avg:  18.3292  Limit:  6  ActiveWeight:  7
+[ "10:47:32.019" ][SystemMonitor] Stats Update: CPU App: 54.4271 % | Sys: 89.0625 % | RAM App: 491.43 MB | Sys Avail: 28989.8 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 4386 to 4395
+processPendingUpdates: Emitted dataChanged for range: 4405 to 4410
+processPendingUpdates: Emitted dataChanged for range: 4411 to 4420
+[QML ViewportRange] Precise detected range: 1381 to 1692 (312 items)
+setVisibleEndIndex called with: 1692
+Corrupt JPEG data: 1049258 extraneous bytes before marker 0xd3
+processPendingUpdates: Emitted dataChanged for range: 4421 to 4430
+[AdaptiveIO] Stats:  "I:/"  Avg:  7.44659  Limit:  4  ActiveWeight:  3
+processPendingUpdates: Emitted dataChanged for range: 4431 to 4440
+processPendingUpdates: Emitted dataChanged for range: 4441 to 4460
+processPendingUpdates: Emitted dataChanged for range: 4461 to 4470
+processPendingUpdates: Emitted dataChanged for range: 4471 to 4480
+processPendingUpdates: Emitted dataChanged for range: 4481 to 4490
+[AdaptiveIO] Stats:  "I:/"  Avg:  13.0684  Limit:  4  ActiveWeight:  5
+processPendingUpdates: Emitted dataChanged for range: 4505 to 4505
+processPendingUpdates: Emitted dataChanged for range: 4506 to 4515
+processPendingUpdates: Emitted dataChanged for range: 4516 to 4525
+processPendingUpdates: Emitted dataChanged for range: 4526 to 4545
+[AdaptiveIO] Stats:  "I:/"  Avg:  22.231  Limit:  4  ActiveWeight:  4
+processPendingUpdates: Emitted dataChanged for range: 4546 to 4555
+processPendingUpdates: Emitted dataChanged for range: 4556 to 4565
+[QML ViewportRange] Precise detected range: 997 to 1284 (288 items)
+setVisibleEndIndex called with: 1284
+processPendingUpdates: Emitted dataChanged for range: 4566 to 4575
+[AdaptiveIO] Stats:  "I:/"  Avg:  6.73262  Limit:  4  ActiveWeight:  6
+processPendingUpdates: Emitted dataChanged for range: 4576 to 4585
+[ "10:47:33.002" ][SystemMonitor] Stats Update: CPU App: 62.1693 % | Sys: 97.0899 % | RAM App: 488.855 MB | Sys Avail: 28996.3 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 4605 to 4610
+processPendingUpdates: Emitted dataChanged for range: 4611 to 4630
+processPendingUpdates: Emitted dataChanged for range: 4631 to 4650
+[QML ViewportRange] Precise detected range: 949 to 1236 (288 items)
+setVisibleEndIndex called with: 1236
+[AdaptiveIO] Stats:  "I:/"  Avg:  34.9569  Limit:  4  ActiveWeight:  4
+processPendingUpdates: Emitted dataChanged for range: 4651 to 4660
+processPendingUpdates: Emitted dataChanged for range: 4661 to 4680
+processPendingUpdates: Emitted dataChanged for range: 4681 to 4700
+[AdaptiveIO] Stats:  "I:/"  Avg:  10.5499  Limit:  4  ActiveWeight:  4
+processPendingUpdates: Emitted dataChanged for range: 4701 to 4720
+processPendingUpdates: Emitted dataChanged for range: 4721 to 4730
+[QML ViewportRange] Precise detected range: 805 to 1116 (312 items)
+setVisibleEndIndex called with: 1116
+[AdaptiveIO] Stats:  "I:/"  Avg:  3.56753  Limit:  4  ActiveWeight:  4
+[ "10:47:33.652" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250106_103433.mp4"
+[ "10:47:33.652" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241202_182405.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4731 to 4740
+processPendingUpdates: Emitted dataChanged for range: 4741 to 4750
+[ "10:47:33.752" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241229_181427.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4751 to 4770
+processPendingUpdates: Emitted dataChanged for range: 4771 to 4780
+[ "10:47:33.878" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241219_123653.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4805 to 4805
+[QML ViewportRange] Precise detected range: 781 to 1092 (312 items)
+setVisibleEndIndex called with: 1092
+processPendingUpdates: Emitted dataChanged for range: 4806 to 4825
+[ "10:47:33.999" ][SystemMonitor] Stats Update: CPU App: 52.9101 % | Sys: 85.7143 % | RAM App: 526.922 MB | Sys Avail: 29010.9 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 4826 to 4835
+[ "10:47:34.040" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241214_211427.mp4"
+[ "10:47:34.040" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241220_081321.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4836 to 4845
+processPendingUpdates: Emitted dataChanged for range: 4846 to 4855
+[ "10:47:34.129" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241224_131450.mp4"
+[ "10:47:34.129" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241217_170723.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4856 to 4865
+processPendingUpdates: Emitted dataChanged for range: 4866 to 4875
+processPendingUpdates: Emitted dataChanged for range: 4876 to 4885
+processPendingUpdates: Emitted dataChanged for range: 4886 to 4895
+[ "10:47:34.259" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241215_115906.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4896 to 4915
+processPendingUpdates: Emitted dataChanged for range: 4916 to 4935
+[ "10:47:34.400" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241229_173600.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4936 to 4945
+[QML ViewportRange] Precise detected range: 757 to 1044 (288 items)
+setVisibleEndIndex called with: 1044
+processPendingUpdates: Emitted dataChanged for range: 4946 to 4955
+processPendingUpdates: Emitted dataChanged for range: 4956 to 4965
+[ "10:47:34.517" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241229_173116.mp4"
+[ "10:47:34.517" ][FFmpeg Error] "moov atom not found"
+[ "10:47:34.517" ][FFmpeg] Failed to open file (or timeout): "I:/MY SDCArds/S22 ultra/Camera/20241229_173116.mp4"
+[ "10:47:34.526" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250216_164154.mp4"
+[ "10:47:34.526" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241229_174742.mp4"
+processPendingUpdates: Emitted dataChanged for range: 4966 to 4975
+processPendingUpdates: Emitted dataChanged for range: 4976 to 4985
+processPendingUpdates: Emitted dataChanged for range: 4986 to 4995
+processPendingUpdates: Emitted dataChanged for range: 4996 to 5005
+processPendingUpdates: Emitted dataChanged for range: 5006 to 5015
+processPendingUpdates: Emitted dataChanged for range: 5016 to 5035
+[ "10:47:34.779" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20241229_181630.mp4"
+[ "10:47:34.812" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250101_141803.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5036 to 5045
+processPendingUpdates: Emitted dataChanged for range: 5046 to 5065
+[ "10:47:34.950" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250101_141758.mp4"
+[ "10:47:34.994" ][SystemMonitor] Stats Update: CPU App: 29.4271 % | Sys: 71.3542 % | RAM App: 525.133 MB | Sys Avail: 29003.2 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 5066 to 5085
+processPendingUpdates: Emitted dataChanged for range: 5105 to 5110
+[ "10:47:35.088" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250116_180748.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5111 to 5130
+[ "10:47:35.188" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250201_175013.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5131 to 5150
+processPendingUpdates: Emitted dataChanged for range: 5151 to 5170
+[ "10:47:35.296" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250304_184538.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5171 to 5180
+[AdaptiveIO] Stats:  "I:/"  Avg:  72.7427  Limit:  4  ActiveWeight:  4
+[ "10:47:35.374" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250314_203008.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5181 to 5190
+processPendingUpdates: Emitted dataChanged for range: 5205 to 5205
+[QML ViewportRange] Precise detected range: 589 to 900 (312 items)
+setVisibleEndIndex called with: 900
+processPendingUpdates: Emitted dataChanged for range: 5206 to 5215
+processPendingUpdates: Emitted dataChanged for range: 5216 to 5225
+processPendingUpdates: Emitted dataChanged for range: 5226 to 5235
+processPendingUpdates: Emitted dataChanged for range: 5236 to 5245
+processPendingUpdates: Emitted dataChanged for range: 5246 to 5255
+[ "10:47:35.642" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250323_174642.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5256 to 5265
+processPendingUpdates: Emitted dataChanged for range: 5266 to 5275
+processPendingUpdates: Emitted dataChanged for range: 5276 to 5285
+processPendingUpdates: Emitted dataChanged for range: 5286 to 5295
+[ "10:47:35.774" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250323_184417.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5296 to 5305
+[ "10:47:35.847" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250329_115738.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5306 to 5315
+processPendingUpdates: Emitted dataChanged for range: 5316 to 5325
+processPendingUpdates: Emitted dataChanged for range: 5326 to 5335
+[ "10:47:35.938" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250409_074349.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5336 to 5355
+[QML ViewportRange] Precise detected range: 589 to 900 (312 items)
+setVisibleEndIndex called with: 900
+[ "10:47:35.985" ][SystemMonitor] Stats Update: CPU App: 24.2188 % | Sys: 71.6146 % | RAM App: 502.781 MB | Sys Avail: 29012.3 MB / 65466.5 MB
+[ "10:47:36.024" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250417_170646.mp4"
+[ "10:47:36.061" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250422_201607.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5356 to 5365
+processPendingUpdates: Emitted dataChanged for range: 5366 to 5375
+[ "10:47:36.138" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250425_185642.mp4"
+[ "10:47:36.175" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250428_174410.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5376 to 5385
+processPendingUpdates: Emitted dataChanged for range: 5386 to 5395
+processPendingUpdates: Emitted dataChanged for range: 5396 to 5405
+[ "10:47:36.283" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250514_160518.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5406 to 5415
+processPendingUpdates: Emitted dataChanged for range: 5416 to 5435
+[AdaptiveIO] Stats:  "I:/"  Avg:  16.3983  Limit:  4  ActiveWeight:  4
+[ "10:47:36.394" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250512_230600.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5436 to 5445
+[ "10:47:36.462" ][VideoThumbnailer] Entering extractFrame for "I:/MY SDCArds/S22 ultra/Camera/20250514_210326.mp4"
+processPendingUpdates: Emitted dataChanged for range: 5446 to 5455
+processPendingUpdates: Emitted dataChanged for range: 5456 to 5465
+processPendingUpdates: Emitted dataChanged for range: 5466 to 5475
+processPendingUpdates: Emitted dataChanged for range: 5476 to 5485
+processPendingUpdates: Emitted dataChanged for range: 5486 to 5495
+processPendingUpdates: Emitted dataChanged for range: 5496 to 5515
+processPendingUpdates: Emitted dataChanged for range: 5516 to 5525
+processPendingUpdates: Emitted dataChanged for range: 5526 to 5535
+processPendingUpdates: Emitted dataChanged for range: 5536 to 5555
+processPendingUpdates: Emitted dataChanged for range: 5556 to 5565
+processPendingUpdates: Emitted dataChanged for range: 5566 to 5575
+processPendingUpdates: Emitted dataChanged for range: 5576 to 5585
+processPendingUpdates: Emitted dataChanged for range: 5605 to 5610
+processPendingUpdates: Emitted dataChanged for range: 5611 to 5630
+processPendingUpdates: Emitted dataChanged for range: 5631 to 5650
+[ "10:47:36.989" ][SystemMonitor] Stats Update: CPU App: 14.3229 % | Sys: 56.25 % | RAM App: 484.797 MB | Sys Avail: 29027.7 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 5651 to 5660
+processPendingUpdates: Emitted dataChanged for range: 5661 to 5680
+processPendingUpdates: Emitted dataChanged for range: 5681 to 5700
+processPendingUpdates: Emitted dataChanged for range: 5701 to 5720
+processPendingUpdates: Emitted dataChanged for range: 5721 to 5740
+processPendingUpdates: Emitted dataChanged for range: 5741 to 5750
+processPendingUpdates: Emitted dataChanged for range: 5751 to 5760
+processPendingUpdates: Emitted dataChanged for range: 5761 to 5770
+processPendingUpdates: Emitted dataChanged for range: 5771 to 5780
+processPendingUpdates: Emitted dataChanged for range: 5781 to 5790
+processPendingUpdates: Emitted dataChanged for range: 5805 to 5805
+processPendingUpdates: Emitted dataChanged for range: 5806 to 5825
+processPendingUpdates: Emitted dataChanged for range: 5826 to 5835
+processPendingUpdates: Emitted dataChanged for range: 5836 to 5855
+processPendingUpdates: Emitted dataChanged for range: 5856 to 5865
+processPendingUpdates: Emitted dataChanged for range: 5866 to 5885
+processPendingUpdates: Emitted dataChanged for range: 5886 to 5905
+processPendingUpdates: Emitted dataChanged for range: 5906 to 5915
+processPendingUpdates: Emitted dataChanged for range: 5916 to 5935
+processPendingUpdates: Emitted dataChanged for range: 5936 to 5955
+processPendingUpdates: Emitted dataChanged for range: 5956 to 5975
+processPendingUpdates: Emitted dataChanged for range: 5976 to 5985
+processPendingUpdates: Emitted dataChanged for range: 5986 to 5995
+processPendingUpdates: Emitted dataChanged for range: 6005 to 6020
+processPendingUpdates: Emitted dataChanged for range: 6021 to 6030
+processPendingUpdates: Emitted dataChanged for range: 6031 to 6050
+processPendingUpdates: Emitted dataChanged for range: 6051 to 6060
+processPendingUpdates: Emitted dataChanged for range: 6061 to 6070
+[ "10:47:37.993" ][SystemMonitor] Stats Update: CPU App: 3.90625 % | Sys: 58.3333 % | RAM App: 484.613 MB | Sys Avail: 29011.8 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 6071 to 6080
+processPendingUpdates: Emitted dataChanged for range: 6105 to 6105
+processPendingUpdates: Emitted dataChanged for range: 6106 to 6115
+processPendingUpdates: Emitted dataChanged for range: 6116 to 6135
+processPendingUpdates: Emitted dataChanged for range: 6136 to 6145
+processPendingUpdates: Emitted dataChanged for range: 6146 to 6165
+processPendingUpdates: Emitted dataChanged for range: 6166 to 6175
+processPendingUpdates: Emitted dataChanged for range: 6176 to 6185
+processPendingUpdates: Emitted dataChanged for range: 6186 to 6195
+processPendingUpdates: Emitted dataChanged for range: 6196 to 6215
+processPendingUpdates: Emitted dataChanged for range: 6216 to 6235
+processPendingUpdates: Emitted dataChanged for range: 6236 to 6245
+processPendingUpdates: Emitted dataChanged for range: 6246 to 6265
+processPendingUpdates: Emitted dataChanged for range: 6266 to 6275
+processPendingUpdates: Emitted dataChanged for range: 6276 to 6295
+processPendingUpdates: Emitted dataChanged for range: 6305 to 6320
+processPendingUpdates: Emitted dataChanged for range: 6321 to 6340
+processPendingUpdates: Emitted dataChanged for range: 6341 to 6360
+processPendingUpdates: Emitted dataChanged for range: 6361 to 6380
+processPendingUpdates: Emitted dataChanged for range: 6381 to 6400
+processPendingUpdates: Emitted dataChanged for range: 6401 to 6410
+processPendingUpdates: Emitted dataChanged for range: 6411 to 6420
+processPendingUpdates: Emitted dataChanged for range: 6421 to 6440
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+processPendingUpdates: Emitted dataChanged for range: 6441 to 6450
+processPendingUpdates: Emitted dataChanged for range: 6451 to 6460
+processPendingUpdates: Emitted dataChanged for range: 6461 to 6470
+[ "10:47:38.988" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 68.75 % | RAM App: 483.559 MB | Sys Avail: 29008.3 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 6471 to 6480
+processPendingUpdates: Emitted dataChanged for range: 6481 to 6490
+processPendingUpdates: Emitted dataChanged for range: 6491 to 6500
+processPendingUpdates: Emitted dataChanged for range: 6501 to 6520
+processPendingUpdates: Emitted dataChanged for range: 6521 to 6540
+processPendingUpdates: Emitted dataChanged for range: 6541 to 6550
+processPendingUpdates: Emitted dataChanged for range: 6551 to 6560
+processPendingUpdates: Emitted dataChanged for range: 6561 to 6580
+processPendingUpdates: Emitted dataChanged for range: 6581 to 6590
+processPendingUpdates: Emitted dataChanged for range: 6605 to 6615
+processPendingUpdates: Emitted dataChanged for range: 6616 to 6625
+processPendingUpdates: Emitted dataChanged for range: 6626 to 6645
+processPendingUpdates: Emitted dataChanged for range: 6646 to 6655
+processPendingUpdates: Emitted dataChanged for range: 6656 to 6665
+processPendingUpdates: Emitted dataChanged for range: 6666 to 6675
+processPendingUpdates: Emitted dataChanged for range: 6676 to 6685
+processPendingUpdates: Emitted dataChanged for range: 6686 to 6705
+processPendingUpdates: Emitted dataChanged for range: 6706 to 6725
+processPendingUpdates: Emitted dataChanged for range: 6726 to 6735
+processPendingUpdates: Emitted dataChanged for range: 6736 to 6745
+processPendingUpdates: Emitted dataChanged for range: 6746 to 6755
+processPendingUpdates: Emitted dataChanged for range: 6756 to 6765
+processPendingUpdates: Emitted dataChanged for range: 6766 to 6775
+processPendingUpdates: Emitted dataChanged for range: 6776 to 6785
+processPendingUpdates: Emitted dataChanged for range: 6786 to 6795
+processPendingUpdates: Emitted dataChanged for range: 6805 to 6820
+processPendingUpdates: Emitted dataChanged for range: 6821 to 6830
+processPendingUpdates: Emitted dataChanged for range: 6831 to 6840
+processPendingUpdates: Emitted dataChanged for range: 6841 to 6860
+[ "10:47:39.988" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 46.875 % | RAM App: 482.535 MB | Sys Avail: 29031.2 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 6861 to 6880
+processPendingUpdates: Emitted dataChanged for range: 6881 to 6890
+processPendingUpdates: Emitted dataChanged for range: 6891 to 6900
+processPendingUpdates: Emitted dataChanged for range: 6901 to 6920
+processPendingUpdates: Emitted dataChanged for range: 6921 to 6930
+processPendingUpdates: Emitted dataChanged for range: 6931 to 6950
+processPendingUpdates: Emitted dataChanged for range: 6951 to 6960
+processPendingUpdates: Emitted dataChanged for range: 6961 to 6980
+processPendingUpdates: Emitted dataChanged for range: 6981 to 7000
+processPendingUpdates: Emitted dataChanged for range: 7001 to 7020
+processPendingUpdates: Emitted dataChanged for range: 7021 to 7040
+processPendingUpdates: Emitted dataChanged for range: 7041 to 7060
+processPendingUpdates: Emitted dataChanged for range: 7061 to 7080
+processPendingUpdates: Emitted dataChanged for range: 7081 to 7090
+processPendingUpdates: Emitted dataChanged for range: 7105 to 7105
+processPendingUpdates: Emitted dataChanged for range: 7106 to 7125
+processPendingUpdates: Emitted dataChanged for range: 7126 to 7135
+processPendingUpdates: Emitted dataChanged for range: 7136 to 7155
+processPendingUpdates: Emitted dataChanged for range: 7156 to 7165
+processPendingUpdates: Emitted dataChanged for range: 7166 to 7185
+processPendingUpdates: Emitted dataChanged for range: 7186 to 7205
+processPendingUpdates: Emitted dataChanged for range: 7206 to 7215
+processPendingUpdates: Emitted dataChanged for range: 7216 to 7225
+processPendingUpdates: Emitted dataChanged for range: 7226 to 7245
+processPendingUpdates: Emitted dataChanged for range: 7246 to 7255
+processPendingUpdates: Emitted dataChanged for range: 7256 to 7275
+processPendingUpdates: Emitted dataChanged for range: 7276 to 7285
+[ "10:47:40.988" ][SystemMonitor] Stats Update: CPU App: 3.125 % | Sys: 48.4375 % | RAM App: 481.461 MB | Sys Avail: 29053.9 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 7286 to 7295
+processPendingUpdates: Emitted dataChanged for range: 7305 to 7310
+processPendingUpdates: Emitted dataChanged for range: 7311 to 7320
+processPendingUpdates: Emitted dataChanged for range: 7321 to 7340
+processPendingUpdates: Emitted dataChanged for range: 7341 to 7360
+processPendingUpdates: Emitted dataChanged for range: 7361 to 7380
+processPendingUpdates: Emitted dataChanged for range: 7405 to 7405
+processPendingUpdates: Emitted dataChanged for range: 7406 to 7415
+processPendingUpdates: Emitted dataChanged for range: 7416 to 7435
+processPendingUpdates: Emitted dataChanged for range: 7436 to 7445
+processPendingUpdates: Emitted dataChanged for range: 7446 to 7465
+processPendingUpdates: Emitted dataChanged for range: 7466 to 7475
+processPendingUpdates: Emitted dataChanged for range: 7476 to 7485
+processPendingUpdates: Emitted dataChanged for range: 7505 to 7510
+processPendingUpdates: Emitted dataChanged for range: 7511 to 7520
+processPendingUpdates: Emitted dataChanged for range: 7521 to 7530
+processPendingUpdates: Emitted dataChanged for range: 7531 to 7540
+processPendingUpdates: Emitted dataChanged for range: 7541 to 7560
+processPendingUpdates: Emitted dataChanged for range: 7561 to 7580
+processPendingUpdates: Emitted dataChanged for range: 7581 to 7590
+processPendingUpdates: Emitted dataChanged for range: 7591 to 7610
+processPendingUpdates: Emitted dataChanged for range: 7611 to 7630
+processPendingUpdates: Emitted dataChanged for range: 7631 to 7650
+processPendingUpdates: Emitted dataChanged for range: 7651 to 7660
+processPendingUpdates: Emitted dataChanged for range: 7661 to 7670
+processPendingUpdates: Emitted dataChanged for range: 7671 to 7690
+processPendingUpdates: Emitted dataChanged for range: 7691 to 7700
+[ "10:47:41.991" ][SystemMonitor] Stats Update: CPU App: 3.38542 % | Sys: 47.6563 % | RAM App: 480.84 MB | Sys Avail: 29063.5 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 7701 to 7720
+processPendingUpdates: Emitted dataChanged for range: 7721 to 7730
+processPendingUpdates: Emitted dataChanged for range: 7731 to 7740
+processPendingUpdates: Emitted dataChanged for range: 7741 to 7760
+processPendingUpdates: Emitted dataChanged for range: 7761 to 7780
+processPendingUpdates: Emitted dataChanged for range: 7781 to 7790
+processPendingUpdates: Emitted dataChanged for range: 7791 to 7810
+processPendingUpdates: Emitted dataChanged for range: 7811 to 7830
+processPendingUpdates: Emitted dataChanged for range: 7831 to 7840
+processPendingUpdates: Emitted dataChanged for range: 7841 to 7850
+processPendingUpdates: Emitted dataChanged for range: 7851 to 7860
+processPendingUpdates: Emitted dataChanged for range: 7861 to 7880
+processPendingUpdates: Emitted dataChanged for range: 7881 to 7890
+processPendingUpdates: Emitted dataChanged for range: 7891 to 7900
+processPendingUpdates: Emitted dataChanged for range: 7901 to 7920
+processPendingUpdates: Emitted dataChanged for range: 7921 to 7940
+processPendingUpdates: Emitted dataChanged for range: 7941 to 7950
+processPendingUpdates: Emitted dataChanged for range: 7951 to 7960
+processPendingUpdates: Emitted dataChanged for range: 7961 to 7970
+processPendingUpdates: Emitted dataChanged for range: 7971 to 7990
+processPendingUpdates: Emitted dataChanged for range: 8005 to 8005
+processPendingUpdates: Emitted dataChanged for range: 8006 to 8015
+processPendingUpdates: Emitted dataChanged for range: 8016 to 8035
+processPendingUpdates: Emitted dataChanged for range: 8036 to 8055
+processPendingUpdates: Emitted dataChanged for range: 8056 to 8065
+processPendingUpdates: Emitted dataChanged for range: 8066 to 8085
+processPendingUpdates: Emitted dataChanged for range: 8086 to 8105
+processPendingUpdates: Emitted dataChanged for range: 8106 to 8115
+processPendingUpdates: Emitted dataChanged for range: 8116 to 8135
+[ "10:47:42.990" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 50.7813 % | RAM App: 480.84 MB | Sys Avail: 29036.3 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 8136 to 8155
+processPendingUpdates: Emitted dataChanged for range: 8156 to 8165
+processPendingUpdates: Emitted dataChanged for range: 8166 to 8175
+processPendingUpdates: Emitted dataChanged for range: 8176 to 8185
+processPendingUpdates: Emitted dataChanged for range: 8186 to 8205
+processPendingUpdates: Emitted dataChanged for range: 8206 to 8225
+processPendingUpdates: Emitted dataChanged for range: 8226 to 8245
+processPendingUpdates: Emitted dataChanged for range: 8246 to 8265
+processPendingUpdates: Emitted dataChanged for range: 8266 to 8275
+processPendingUpdates: Emitted dataChanged for range: 8276 to 8285
+processPendingUpdates: Emitted dataChanged for range: 8286 to 8295
+processPendingUpdates: Emitted dataChanged for range: 8305 to 8320
+processPendingUpdates: Emitted dataChanged for range: 8321 to 8340
+processPendingUpdates: Emitted dataChanged for range: 8341 to 8350
+processPendingUpdates: Emitted dataChanged for range: 8351 to 8360
+processPendingUpdates: Emitted dataChanged for range: 8361 to 8380
+processPendingUpdates: Emitted dataChanged for range: 8381 to 8390
+processPendingUpdates: Emitted dataChanged for range: 8391 to 8400
+processPendingUpdates: Emitted dataChanged for range: 8401 to 8420
+processPendingUpdates: Emitted dataChanged for range: 8421 to 8440
+processPendingUpdates: Emitted dataChanged for range: 8441 to 8450
+processPendingUpdates: Emitted dataChanged for range: 8451 to 8460
+processPendingUpdates: Emitted dataChanged for range: 8461 to 8480
+processPendingUpdates: Emitted dataChanged for range: 8481 to 8490
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+processPendingUpdates: Emitted dataChanged for range: 8491 to 8500
+processPendingUpdates: Emitted dataChanged for range: 8501 to 8520
+processPendingUpdates: Emitted dataChanged for range: 8521 to 8530
+[ "10:47:43.990" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 47.1354 % | RAM App: 480.84 MB | Sys Avail: 29041 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 8531 to 8550
+processPendingUpdates: Emitted dataChanged for range: 8551 to 8560
+processPendingUpdates: Emitted dataChanged for range: 8561 to 8580
+processPendingUpdates: Emitted dataChanged for range: 8581 to 8600
+processPendingUpdates: Emitted dataChanged for range: 8601 to 8620
+processPendingUpdates: Emitted dataChanged for range: 8621 to 8630
+processPendingUpdates: Emitted dataChanged for range: 8631 to 8650
+processPendingUpdates: Emitted dataChanged for range: 8651 to 8660
+processPendingUpdates: Emitted dataChanged for range: 8661 to 8670
+processPendingUpdates: Emitted dataChanged for range: 8671 to 8690
+processPendingUpdates: Emitted dataChanged for range: 8691 to 8700
+processPendingUpdates: Emitted dataChanged for range: 8701 to 8710
+processPendingUpdates: Emitted dataChanged for range: 8711 to 8720
+processPendingUpdates: Emitted dataChanged for range: 8721 to 8740
+processPendingUpdates: Emitted dataChanged for range: 8741 to 8750
+processPendingUpdates: Emitted dataChanged for range: 8751 to 8760
+processPendingUpdates: Emitted dataChanged for range: 8761 to 8770
+processPendingUpdates: Emitted dataChanged for range: 8771 to 8790
+processPendingUpdates: Emitted dataChanged for range: 8791 to 8810
+processPendingUpdates: Emitted dataChanged for range: 8811 to 8820
+processPendingUpdates: Emitted dataChanged for range: 8821 to 8830
+processPendingUpdates: Emitted dataChanged for range: 8831 to 8850
+processPendingUpdates: Emitted dataChanged for range: 8851 to 8870
+processPendingUpdates: Emitted dataChanged for range: 8871 to 8880
+processPendingUpdates: Emitted dataChanged for range: 8881 to 8890
+processPendingUpdates: Emitted dataChanged for range: 8891 to 8900
+processPendingUpdates: Emitted dataChanged for range: 8901 to 8920
+[ "10:47:44.984" ][SystemMonitor] Stats Update: CPU App: 2.60417 % | Sys: 42.4479 % | RAM App: 480.84 MB | Sys Avail: 29056.9 MB / 65466.5 MB
+processPendingUpdates: Emitted dataChanged for range: 8921 to 8930
+processPendingUpdates: Emitted dataChanged for range: 8931 to 8947
+[ "10:47:45.999" ][SystemMonitor] Stats Update: CPU App: 3.10078 % | Sys: 41.0256 % | RAM App: 480.84 MB | Sys Avail: 29056.8 MB / 65466.5 MB
+[ "10:47:46.989" ][SystemMonitor] Stats Update: CPU App: 2.09974 % | Sys: 60.3175 % | RAM App: 480.84 MB | Sys Avail: 29115.7 MB / 65466.5 MB
+[ "10:47:47.994" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 51.3021 % | RAM App: 480.84 MB | Sys Avail: 29094.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:47:48.990" ][SystemMonitor] Stats Update: CPU App: 3.38542 % | Sys: 40.3646 % | RAM App: 480.84 MB | Sys Avail: 29126.1 MB / 65466.5 MB
+[ "10:47:49.993" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 38.2813 % | RAM App: 480.875 MB | Sys Avail: 29115 MB / 65466.5 MB
+[ "10:47:50.986" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 39.0625 % | RAM App: 480.875 MB | Sys Avail: 29219 MB / 65466.5 MB
+[ "10:47:51.987" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 35.1563 % | RAM App: 480.875 MB | Sys Avail: 29236.6 MB / 65466.5 MB
+[ "10:47:52.988" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 39.8438 % | RAM App: 480.875 MB | Sys Avail: 29230.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:47:53.985" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 41.9271 % | RAM App: 480.875 MB | Sys Avail: 29226.7 MB / 65466.5 MB
+[QML ViewportRange] Precise detected range: 0 to 228 (229 items)
+setVisibleEndIndex called with: 228
+[ "10:47:54.990" ][SystemMonitor] Stats Update: CPU App: 13.8021 % | Sys: 53.9063 % | RAM App: 486.883 MB | Sys Avail: 29213.1 MB / 65466.5 MB
+[ "10:47:56.002" ][SystemMonitor] Stats Update: CPU App: 5.12821 % | Sys: 43.3333 % | RAM App: 488.242 MB | Sys Avail: 29224.2 MB / 65466.5 MB
+[ "10:47:57.205" ][SystemMonitor] Stats Update: CPU App: 18.3983 % | Sys: 55.8442 % | RAM App: 510.051 MB | Sys Avail: 29180.7 MB / 65466.5 MB
+[QML ViewportRange] Precise detected range: 2221 to 2508 (288 items)
+setVisibleEndIndex called with: 2508
+[ "10:47:57.999" ][SystemMonitor] Stats Update: CPU App: 24.3333 % | Sys: 61.6667 % | RAM App: 517.555 MB | Sys Avail: 29168.4 MB / 65466.5 MB
+[AdaptiveIO] Stats:  "I:/"  Avg:  65.8094  Limit:  6  ActiveWeight:  6
+[ "10:47:59.021" ][SystemMonitor] Stats Update: CPU App: 39.6465 % | Sys: 74.2424 % | RAM App: 521.121 MB | Sys Avail: 29153.8 MB / 65466.5 MB
+[QML ViewportRange] Precise detected range: 2677 to 2988 (312 items)
+setVisibleEndIndex called with: 2988
+[AdaptiveIO] Stats:  "I:/"  Avg:  91.6267  Limit:  8  ActiveWeight:  8
+[ "10:48:00.000" ][SystemMonitor] Stats Update: CPU App: 37.8307 % | Sys: 85.4497 % | RAM App: 522.516 MB | Sys Avail: 29141.8 MB / 65466.5 MB
+Invalid SOS parameters for sequential JPEG
+[ "10:48:00.999" ][SystemMonitor] Stats Update: CPU App: 29.9479 % | Sys: 74.7396 % | RAM App: 522.184 MB | Sys Avail: 29106.4 MB / 65466.5 MB
+[AdaptiveIO] Stats:  "I:/"  Avg:  133.468  Limit:  4  ActiveWeight:  4
+[QML ViewportRange] Precise detected range: 2677 to 2988 (312 items)
+setVisibleEndIndex called with: 2988
+[ "10:48:01.992" ][SystemMonitor] Stats Update: CPU App: 32.2751 % | Sys: 71.9577 % | RAM App: 520.621 MB | Sys Avail: 29100.1 MB / 65466.5 MB
+Invalid SOS parameters for sequential JPEG
+Starting video (isCurrent): file:///I:/MY SDCArds/S22 ultra/Camera/20231209_173430.mp4
+[PhotoViewer] Image source changed to: file:///I:/MY SDCArds/S22 ultra/Camera/20231208_214614.jpg?v=undefined
+[PhotoViewer] Image status: 2 for index: 2839
+Stopping background video: file:///I:/MY SDCArds/S22 ultra/Whatsapp/VID-20230809-WA0002.mp4
+[PhotoViewer] Image source changed to: file:///I:/MY SDCArds/S22 ultra/Camera/20231208_200304.jpg?v=undefined
+[PhotoViewer] Image status: 2 for index: 2840
+[ "10:48:03.022" ][SystemMonitor] Stats Update: CPU App: 28.7879 % | Sys: 61.3636 % | RAM App: 538.332 MB | Sys Avail: 29065.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230821_161709.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230821_161709.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_1...
+[PhotoViewer] Image status: 1 for index: 2839
+[QML ViewportRange] Precise detected range: 2677 to 3012 (336 items)
+setVisibleEndIndex called with: 3012
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230821_161709.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230821_161709.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_1...
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 5. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102641.jpg"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 5. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102641.jpg
+setVisibleEndIndex called with: 672
+[Diagnostics] CRITICAL: "Load stalled for 5s. Pending: 5. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102641.jpg"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 5s. Pending: 5. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230823_094625.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102631.jpg, I:/MY SDCArds/S22 ultra/Camera/20230823_102641.jpg
+Viewport settled at: 0 - 672
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'I:/MY SDCArds/S22 ultra/Camera/20231209_173430.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2023-12-09T13:35:04.000000Z
+    location        : -04.6551+055.4670/
+    location-eng    : -04.6551+055.4670/
+    com.android.version: 14
+    com.android.capture.fps: 30.000000
+  Duration: 00:00:23.33, start: 0.000000, bitrate: 54327 kb/s
+  Stream #0:0[0x1](eng): Video: hevc (Main 10) (hvc1 / 0x31637668), yuv420p10le(tv, bt2020nc/bt2020/smpte2084), 3840x2160, 54067 kb/s, 30 fps, 30 tbr, 90k tbn (default)
+      Metadata:
+        creation_time   : 2023-12-09T13:35:04.000000Z
+        handler_name    : VideoHandle
+        vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 256 kb/s (default)
+      Metadata:
+        creation_time   : 2023-12-09T13:35:04.000000Z
+        handler_name    : SoundHandle
+        vendor_id       : [0][0][0][0]
+[MediaPlayer] Video codec: undefined
+[MediaPlayer] Resolution: 3 x 256046
+[MediaPlayer] Video bitrate: 1 bps
+[AdaptiveIO] Stats:  "I:/"  Avg:  156.928  Limit:  5  ActiveWeight:  5
+[PhotoViewer] Image status: 1 for index: 2840
+[MediaPlayer] Playback state: 1 for: file:///I:/MY SDCArds/S22 ultra/Camera/20231209_173430.mp4
+[TaskScheduler] Paused.
+DesktopHelper: Paused background tasks.
+Frame budget scheduler paused
+[ "10:48:04.034" ][SystemMonitor] Stats Update: CPU App: 37.6923 % | Sys: 73.5897 % | RAM App: 827.938 MB | Sys Avail: 28824.8 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 827.938 MB (Delta: 322.227 ) | VRAM: 798.902 MB (Delta: 754.965 )
+[Diagnostics] CRITICAL: "Load stalled for 6s. Pending: 5. Stuck: None (Logic Error?)"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 6s. Pending: 5. Stuck: None (Logic Error?)
+[ "10:48:04.986" ][SystemMonitor] Stats Update: CPU App: 16.1202 % | Sys: 74.3169 % | RAM App: 852.098 MB | Sys Avail: 28698.7 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 852.098 MB (Delta: 24.1602 ) | VRAM: 918.91 MB (Delta: 120.008 )
+[Diagnostics] CRITICAL: "Load stalled for 7s. Pending: 5. Stuck: None (Logic Error?)"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 7s. Pending: 5. Stuck: None (Logic Error?)
+[MediaPlayer] Playback state: 2 for: file:///I:/MY SDCArds/S22 ultra/Camera/20231209_173430.mp4
+[TaskScheduler] Resumed.
+DesktopHelper: Resumed background tasks.
+Frame budget scheduler resumed
+[ "10:48:05.984" ][SystemMonitor] Stats Update: CPU App: 17.7083 % | Sys: 88.5417 % | RAM App: 852.129 MB | Sys Avail: 28527.8 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 8s. Pending: 6. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230615_180347.jpg, I:/MY SDCArds/S22 ultra/Camera/20230620_201718.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_113248.jpg, I:/MY SDCArds/S22 ultra/Camera/20230908_0..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 8s. Pending: 6. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230615_180347.jpg, I:/MY SDCArds/S22 ultra/Camera/20230620_201718.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_113248.jpg, I:/MY SDCArds/S22 ultra/Camera/20230908_0...
+[AdaptiveIO] Stats:  "I:/"  Avg:  108.039  Limit:  4  ActiveWeight:  6
+Invalid SOS parameters for sequential JPEG
+TelemetryMonitor: Processed 300 frames. Current FPS: 22
+[ "10:48:06.986" ][SystemMonitor] Stats Update: CPU App: 29.6875 % | Sys: 76.8229 % | RAM App: 851.828 MB | Sys Avail: 28526.1 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 9s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 9s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:07.990" ][SystemMonitor] Stats Update: CPU App: 14.8438 % | Sys: 72.3958 % | RAM App: 851.832 MB | Sys Avail: 28523.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 10s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 10s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:08.985" ][SystemMonitor] Stats Update: CPU App: 17.1875 % | Sys: 88.5417 % | RAM App: 851.828 MB | Sys Avail: 28536.4 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 11s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 11s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:09.989" ][SystemMonitor] Stats Update: CPU App: 18.4896 % | Sys: 90.1042 % | RAM App: 804.879 MB | Sys Avail: 28608.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 12s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 12s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:11.002" ][SystemMonitor] Stats Update: CPU App: 16.6667 % | Sys: 78.7179 % | RAM App: 804.469 MB | Sys Avail: 28573.1 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 13s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 13s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:11.987" ][SystemMonitor] Stats Update: CPU App: 18.5185 % | Sys: 69.3122 % | RAM App: 804.473 MB | Sys Avail: 28604.1 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 14s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 14s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:12.985" ][SystemMonitor] Stats Update: CPU App: 13.5417 % | Sys: 56.7708 % | RAM App: 803.074 MB | Sys Avail: 28547.6 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 15s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 15s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:14.000" ][SystemMonitor] Stats Update: CPU App: 13.5897 % | Sys: 62.3077 % | RAM App: 801.391 MB | Sys Avail: 28579.1 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 801.391 MB (Delta: -50.707 ) | VRAM: 919.547 MB (Delta: 0.636719 )
+[Diagnostics] CRITICAL: "Load stalled for 16s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 16s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:15.000" ][SystemMonitor] Stats Update: CPU App: 15.1042 % | Sys: 50.7813 % | RAM App: 801.129 MB | Sys Avail: 28598.3 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 17s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 17s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:15.984" ][SystemMonitor] Stats Update: CPU App: 16.9312 % | Sys: 64.8148 % | RAM App: 801.129 MB | Sys Avail: 28575.6 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 18s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 18s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:16.990" ][SystemMonitor] Stats Update: CPU App: 13.2813 % | Sys: 59.1146 % | RAM App: 801.129 MB | Sys Avail: 28559.1 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 19s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 19s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "10:48:17.999" ][SystemMonitor] Stats Update: CPU App: 14.8438 % | Sys: 60.6771 % | RAM App: 801.301 MB | Sys Avail: 28597 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 20s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 20s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:19.001" ][SystemMonitor] Stats Update: CPU App: 16.4103 % | Sys: 72.3077 % | RAM App: 801.301 MB | Sys Avail: 28572.4 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 21s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 21s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:19.989" ][SystemMonitor] Stats Update: CPU App: 14.2857 % | Sys: 48.6772 % | RAM App: 801.301 MB | Sys Avail: 28600 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 22s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 22s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[ "10:48:20.991" ][SystemMonitor] Stats Update: CPU App: 14.3229 % | Sys: 61.9792 % | RAM App: 801.305 MB | Sys Avail: 28593.2 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 23s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 23s. Pending: 4. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg, I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg, I:/MY SDCArds/S22 ultra/Camera/20231117_1...
+[AsyncImageProvider] STALL DETECTED for: "I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg" Duration: 15047 ms
+[AsyncImageProvider] Forcing slots free for drive: "I:/" Weight recovered: 1 New Active Weight: 3
+[AsyncImageProvider] STALL DETECTED for: "I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg" Duration: 15068 ms
+[AsyncImageProvider] Forcing slots free for drive: "I:/" Weight recovered: 1 New Active Weight: 2
+[AsyncImageProvider] STALL DETECTED for: "I:/MY SDCArds/S22 ultra/Camera/20231117_150442.jpg" Duration: 15379 ms
+[AsyncImageProvider] Forcing slots free for drive: "I:/" Weight recovered: 1 New Active Weight: 1
+[AsyncImageProvider] Skipped pool expansion (stability check) for 3 stalled tasks.
+[ "10:48:22.000" ][SystemMonitor] Stats Update: CPU App: 14.8718 % | Sys: 66.4103 % | RAM App: 801.305 MB | Sys Avail: 28606.9 MB / 65466.5 MB
+[AsyncImageProvider] STALL DETECTED for: "I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg" Duration: 15432 ms
+[AsyncImageProvider] Forcing slots free for drive: "I:/" Weight recovered: 1 New Active Weight: 3
+[AsyncImageProvider] Skipped pool expansion (stability check) for 1 stalled tasks.
+[Diagnostics] CRITICAL: "Load stalled for 24s. Pending: 7. Stuck: None (Logic Error?)"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 24s. Pending: 7. Stuck: None (Logic Error?)
+[ "10:48:22.984" ][SystemMonitor] Stats Update: CPU App: 13.7566 % | Sys: 48.9418 % | RAM App: 801.305 MB | Sys Avail: 28613.8 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 25s. Pending: 8. Stuck: None (Logic Error?)"
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 25s. Pending: 8. Stuck: None (Logic Error?)
+[Performance] SLOW LOAD detected: 17112 ms for "I:/MY SDCArds/S22 ultra/Camera/20231117_150442.jpg"
+[Performance] SLOW LOAD detected: 16871 ms for "I:/MY SDCArds/S22 ultra/Camera/20230826_114508.jpg"
+[Performance] SLOW LOAD detected: 16851 ms for "I:/MY SDCArds/S22 ultra/Camera/20230826_162144.jpg"
+[Performance] SLOW LOAD detected: 17030 ms for "I:/MY SDCArds/S22 ultra/Camera/20231013_221730.jpg"
+[AdaptiveIO] Stats:  "I:/"  Avg:  4648.58  Limit:  4  ActiveWeight:  4
+[ "10:48:23.988" ][SystemMonitor] Stats Update: CPU App: 32.0313 % | Sys: 67.9688 % | RAM App: 800.012 MB | Sys Avail: 28619.9 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 26s. Pending: 15. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_104709.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_110424.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_111356.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 26s. Pending: 15. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_104709.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_110424.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_111356.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+Invalid SOS parameters for sequential JPEG
+Invalid SOS parameters for sequential JPEG
+Invalid SOS parameters for sequential JPEG
+Invalid SOS parameters for sequential JPEG
+[ "10:48:24.990" ][SystemMonitor] Stats Update: CPU App: 35.9375 % | Sys: 71.3542 % | RAM App: 801.398 MB | Sys Avail: 28621.5 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 27s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113325.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_113328.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_113602.jpg, I:/MY SDCArds/S22 ultra/Camera/20231026_0..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 27s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113325.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_113328.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_113602.jpg, I:/MY SDCArds/S22 ultra/Camera/20231026_0...
+[AdaptiveIO] Stats:  "I:/"  Avg:  143.442  Limit:  4  ActiveWeight:  4
+[ "10:48:26.001" ][SystemMonitor] Stats Update: CPU App: 27.1795 % | Sys: 72.8205 % | RAM App: 803.109 MB | Sys Avail: 28654 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 28s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 28s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:26.985" ][SystemMonitor] Stats Update: CPU App: 16.9312 % | Sys: 79.8942 % | RAM App: 803.109 MB | Sys Avail: 28617.1 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 29s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 29s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:27.985" ][SystemMonitor] Stats Update: CPU App: 15.3646 % | Sys: 74.7396 % | RAM App: 803.109 MB | Sys Avail: 28581.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 30s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 30s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "10:48:29.000" ][SystemMonitor] Stats Update: CPU App: 14.6154 % | Sys: 58.2051 % | RAM App: 803.109 MB | Sys Avail: 28578.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 31s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 31s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:29.988" ][SystemMonitor] Stats Update: CPU App: 15.3439 % | Sys: 66.6667 % | RAM App: 803.109 MB | Sys Avail: 28609.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 32s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 32s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:30.985" ][SystemMonitor] Stats Update: CPU App: 15.8854 % | Sys: 67.4479 % | RAM App: 803.098 MB | Sys Avail: 28590.7 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 33s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 33s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:32.003" ][SystemMonitor] Stats Update: CPU App: 14.6154 % | Sys: 61.7949 % | RAM App: 803.078 MB | Sys Avail: 28565 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 34s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 34s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:32.984" ][SystemMonitor] Stats Update: CPU App: 13.2275 % | Sys: 46.0317 % | RAM App: 802.258 MB | Sys Avail: 28595.4 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 35s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 35s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:34.002" ][SystemMonitor] Stats Update: CPU App: 13.8462 % | Sys: 62.5641 % | RAM App: 802.234 MB | Sys Avail: 28591.1 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 36s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 36s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:34.990" ][SystemMonitor] Stats Update: CPU App: 13.4921 % | Sys: 50.2646 % | RAM App: 801.973 MB | Sys Avail: 28633 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 37s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 37s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+Retrying to obtain clipboard.
+Retrying to obtain clipboard.
+Unable to obtain clipboard.
+[ "10:48:35.985" ][SystemMonitor] Stats Update: CPU App: 14.0625 % | Sys: 55.4688 % | RAM App: 802.055 MB | Sys Avail: 28610.2 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 38s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 38s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:37.001" ][SystemMonitor] Stats Update: CPU App: 14.1026 % | Sys: 61.5385 % | RAM App: 800.906 MB | Sys Avail: 28635.2 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 39s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 39s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:37.985" ][SystemMonitor] Stats Update: CPU App: 14.2857 % | Sys: 61.1111 % | RAM App: 800.895 MB | Sys Avail: 28652.8 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 40s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 40s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:38.985" ][SystemMonitor] Stats Update: CPU App: 14.5833 % | Sys: 55.4688 % | RAM App: 800.895 MB | Sys Avail: 28635.8 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 41s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 41s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+[ "10:48:40.001" ][SystemMonitor] Stats Update: CPU App: 14.6154 % | Sys: 50.5128 % | RAM App: 800.895 MB | Sys Avail: 28620 MB / 65466.5 MB
+[Diagnostics] CRITICAL: "Load stalled for 42s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1..."
+[DiagnosticsUI] CRITICAL ISSUE: Load stalled for 42s. Pending: 8. Stuck: I:/MY SDCArds/S22 ultra/Camera/20230826_113912.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114506.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_114509.jpg, I:/MY SDCArds/S22 ultra/Camera/20230826_1...
+TelemetryMonitor: Processed 300 frames. Current FPS: 27

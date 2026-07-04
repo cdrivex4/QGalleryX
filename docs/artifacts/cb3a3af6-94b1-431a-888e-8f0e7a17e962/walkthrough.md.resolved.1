@@ -1,0 +1,56 @@
+# Walkthrough - FFmpeg Integration & Image Compatibility
+
+## Overview
+We have successfully integrated FFmpeg for robust video thumbnailing, expanded image format support, and added a directory scanning UI.
+
+## Changes
+
+### 1. Integrated FFmpeg Support
+*   **Dependency Setup:** [3rdparty/setup_ffmpeg.ps1](file:///d:/Dev/antigravity/3rdparty/setup_ffmpeg.ps1) downloads and configures FFmpeg libraries.
+*   **Build System:** [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt) links against `avcodec`, `avformat`, `avutil`, `swscale` and copies DLLs.
+*   **Code:**
+    *   `src/VideoThumbnailer.h/cpp`: New class using FFmpeg C API for safe frame extraction.
+    *   [src/AsyncImageProvider.cpp](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp): Uses [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#16-17) for video files.
+
+### 2. Image Compatibility
+*   **New Formats Supported:**
+    *   **Images:** `bmp`, `gif`, `ico`, `tga`
+    *   **Raw:** `sr2`, `srf`, `orf`, `rw2`, `pef`, `raf`
+    *   **Video:** `webm`, `flv`, `vob`, `ogg`, `ogv`, `mts`, `m2ts`, [ts](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp#390-397), `3gp`
+
+### 3. User Experience
+*   **Scanning Feedback:** "Scanning..." overlay in [Main.qml](file:///d:/Dev/antigravity/resources/qml/Main.qml) appears during folder processing.
+
+## Verification Steps
+
+### 1. Build Verification
+The project builds successfully (Release mode).
+*   **Executable:** [build/appSamsungGallery.exe](file:///d:/Dev/antigravity/build/appSamsungGallery.exe)
+*   **Test Executable:** [build/appSamsungGalleryTest.exe](file:///d:/Dev/antigravity/build/appSamsungGalleryTest.exe)
+
+### 2. Manual Verification (User Action Required)
+Please perform the following using your test directory `I:\torrentz\Films`:
+
+1.  **Launch the Application:**
+    Run [build/appSamsungGallery.exe](file:///d:/Dev/antigravity/build/appSamsungGallery.exe).
+
+2.  **Verify FFmpeg Integration:**
+    *   Navigate to `I:\torrentz\Films`.
+    *   **Success Criteria:** Thumbnails should appear for video formats that previously failed or were unsupported (e.g., `mkv`, `webm`).
+    *   **Stability:** Scroll rapidly. The application should **not crash**.
+
+3.  **Verify Image Formats:**
+    *   Navigate to a folder with `bmp`, `gif`, or raw files (`orf`, `raf`).
+    *   **Success Criteria:** Files are listed and thumbnails are generated.
+
+4.  **Verify Scanning UI:**
+    *   Switch folders.
+    *   **Success Criteria:** A "Scanning selected folder..." overlay with a spinner should appear briefly while loading.
+
+### 3. Automated Tests
+*   [tests/tst_imagemodel.cpp](file:///d:/Dev/antigravity/tests/tst_imagemodel.cpp) created.
+*   *Note:* Running tests requires the environment (PATH) to include Qt and MinGW DLLs. The build system is configured, but running directly from some shells may require `setup_env.bat` or similar.
+
+## Next Steps
+*   If you encounter any specific video files that still crash, please provide the file format details.
+*   Further optimization of the [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#16-17) (seeking performance) can be done if thumbnails are slow to generate for large files.

@@ -1,0 +1,117 @@
+# ScrollBench - Grid Zoom + Performance Testing ✅
+
+## 🎯 Executable Path
+
+```
+d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+```
+
+---
+
+## 🔨 Building
+
+**IMPORTANT**: Always use the build script to avoid file locking issues:
+
+```powershell
+cd d:\Dev\antigravity\test_scrollbench
+.\build.ps1
+```
+
+This script:
+1. Kills any running `appScrollBench.exe` instances
+2. Builds the project
+3. Deploys to `deploy\` folder
+
+---
+
+## ✨ Features
+
+### Grid Controls
+✅ **Grid Size Slider** - 20-400px (in performance overlay)  
+✅ **Ctrl+Wheel Zoom** - Resize grid cells (20-400px)  
+✅ **Starts at 20px** - Tiny cells by default  
+✅ **Dynamic Layout** - Grid adapts to zoom level  
+
+### Image Quality
+✅ **Thumbnail Resolution Slider** - 128-512px decode quality  
+✅ **Separate from Grid Size** - Grid = UI zoom, Thumb = image quality  
+
+### Performance Controls (Right Sidebar)
+✅ **Grid Size (UI Zoom)** - 20-400px slider + Ctrl+Wheel  
+✅ **Thumb Resolution (Quality)** - 128-512px slider  
+✅ **Viewport Culling Toggle** - Only loads visible items  
+✅ **Frame Budget Toggle** - Limits uploads per frame  
+✅ **Frame Budget Slider** - 1-50 uploads/frame  
+✅ **FPS Monitor** - Color-coded real-time  
+✅ **Queue Depth** - Pending decode count  
+✅ **Memory Usage** - Live MB counter  
+
+---
+
+## 🎮 How to Use
+
+### 1. Launch
+```
+d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+```
+
+### 2. Test Grid Size
+- **Slider** (right sidebar) → "Grid Size (UI Zoom)"
+- Drag from 20px (tiny) to 400px (huge)
+- **OR** use **Ctrl+Wheel** to zoom
+- Info label (top-left) shows current size
+
+### 3. Test Thumbnail Resolution
+- **Slider** (right sidebar) → "Thumb Resolution (Quality)"
+- 128px = Fast, lower quality
+- 256px = Balanced (default ⭐)
+- 512px = Slow, higher quality
+- Watch FPS change
+
+### 4. Load Real Images
+1. Click "📁 Select Folder" (top-right)
+2. Choose folder with 100+ images
+3. Scroll and zoom to test
+
+---
+
+## 📊 Key Distinctions
+
+| Setting | Controls | Range | Impact |
+|---------|----------|-------|--------|
+| **Grid Size** | UI cell size | 20-400px | Visual density |
+| **Thumb Resolution** | Image decode quality | 128-512px | FPS/memory |
+
+**Grid Size** = How big the cells are on screen  
+**Thumb Resolution** = How detailed the images are  
+
+**Independent controls:**
+- Small grid (20px) + high quality (512px) = Tiny sharp thumbnails
+- Large grid (400px) + low quality (128px) = Huge blurry thumbnails
+
+---
+
+## 🐛 Debugging Ctrl+Wheel
+
+If Ctrl+Wheel doesn't work:
+1. Check console output for "Grid size changed to: XX"
+2. If you see messages, it's working (grid should resize)
+3. If no messages, the MouseArea might not have focus
+
+---
+
+## 🚀 Testing Workflow
+
+1. **Start** - Grid at 20px (tiny cells)
+2. **Use slider** - Increase to 100px, verify grid grows
+3. **Try Ctrl+Wheel** - Should zoom smoothly
+4. **Adjust thumb resolution** - Watch FPS impact
+5. **Load real images** - Test with your library
+6. **Toggle optimizations** - Compare performance
+
+---
+
+**Status**: ✅ **READY TO TEST**  
+**Build**: [.\build.ps1](file:///d:/Dev/antigravity/build.ps1) (kills running instances automatically)  
+**Path**: `d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe`  
+**Features**: Grid zoom (20-400px), Thumbnail resolution (128-512px), Performance overlay

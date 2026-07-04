@@ -1,0 +1,7 @@
+Select-String : The string model.data( is not a valid regular expression: parsing "model.data(" - Not enough )'s.
+At line:1 char:56
++ ... iewSemanticScrollBench.qml | Select-String "model.data(" -Context 1,1
++                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Select-String], ArgumentException
+    + FullyQualifiedErrorId : InvalidRegex,Microsoft.PowerShell.Commands.SelectStringCommand
+ 

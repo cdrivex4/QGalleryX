@@ -21,7 +21,7 @@ Item {
     property alias model: imageModel
 
     // UI Grid Size (Zoom level)
-    property real uiThumbnailSize: appSettings.gridSize
+    property real uiThumbnailSize: appSettings.gridResolution
     
     // Loading Resolution (Quality/Performance setting)
     property int loadingResolution: appSettings.thumbnailSize
@@ -137,13 +137,13 @@ Item {
         anchors.fill: parent; acceptedButtons: Qt.NoButton; propagateComposedEvents: true
         onWheel: (wheel) => {
             if (wheel.modifiers & Qt.ControlModifier) {
-                var oldSize = appSettings.gridSize
+                var oldSize = appSettings.gridResolution
                 var newSize = oldSize
                 if (wheel.angleDelta.y > 0) newSize = Math.min(oldSize + 20, 400)
                 else newSize = Math.max(oldSize - 20, 40)
                 
                 if (newSize !== oldSize) {
-                    appSettings.gridSize = newSize
+                    appSettings.gridResolution = newSize
                     updateTimer.restart()
                 }
                 wheel.accepted = true
@@ -154,8 +154,8 @@ Item {
     PinchHandler {
         target: grid
         onScaleChanged: (delta) => {
-            var newSize = appSettings.gridSize * (1 + (delta - 1) * 0.5)
-            appSettings.gridSize = Math.max(40, Math.min(newSize, 400))
+            var newSize = appSettings.gridResolution * (1 + (delta - 1) * 0.5)
+            appSettings.gridResolution = Math.max(40, Math.min(newSize, 400))
             updateTimer.restart()
         }
     }

@@ -1,0 +1,67 @@
+# ScrollBench Feature Port - Task List
+
+## Phase 1: UI Restructure ✅ COMPLETE
+- [x] Move performance overlay to left side (off-screen)
+- [x] Add transparent toggle button (left edge)
+- [x] Implement slide animation (200ms)
+- [x] Fix scrollbar overflow (tested values: 2px/5px/30px)
+- [x] Add filename display at 90px+ zoom
+- [x] Keep #index at < 90px zoom
+- [x] Add pinch zoom support
+
+## Phase 2: Selection System
+- [ ] Add selection properties to ScrollBenchImageModel
+  - [ ] Add `isSelected` bool to ImageItem struct
+  - [ ] Add `IsSelectedRole` to roleNames
+  - [ ] Add `toggleSelection(int index)` method
+  - [ ] Add `selectAll()` method
+  - [ ] Add `clearSelection()` method
+  - [ ] Add `selectedCount` property
+- [ ] Add checkbox to thumbnail delegate
+  - [ ] Position in top-left corner
+  - [ ] Scale with grid zoom (min 16px, max 32px)
+  - [ ] Separate click area from image
+  - [ ] Show at all zoom levels
+- [ ] Create SelectionBar component
+  - [ ] Show selection count
+  - [ ] Add "Delete" button
+  - [ ] Add "Deselect All" button
+  - [ ] Position at bottom of screen
+- [ ] Wire up selection in MainScrollBench
+  - [ ] Show SelectionBar when items selected
+  - [ ] Handle delete action
+  - [ ] Update after deletion
+
+## Phase 3: PhotoViewer
+- [ ] Copy PhotoViewer.qml → PhotoViewerScrollBench.qml
+- [ ] Remove SamsungGallery imports
+- [ ] Adapt to ScrollBenchImageModel
+- [ ] Test zoom, pan, swipe navigation
+- [ ] Test video playback
+- [ ] Wire up click-to-open from grid
+- [ ] Add back button
+
+## Phase 4: Settings & Persistence
+- [ ] Copy SettingsHelper from main app
+- [ ] Integrate with ScrollBench
+- [ ] Save/load lastFolder
+- [ ] Save/load gridSize
+- [ ] Save/load thumbnailSize
+- [ ] Save/load performance settings
+- [ ] Auto-load last folder on startup
+
+## Phase 5: Polish
+- [ ] Add keyboard shortcuts (Ctrl+A, Delete, etc.)
+- [ ] Add context menu (right-click)
+- [ ] Test all features together
+- [ ] Performance testing with 1000+ images
+- [ ] Create walkthrough documentation
+
+## Completed
+- ✅ Sliding performance overlay from left
+- ✅ Transparent toggle button with hover effect
+- ✅ Filename display at 90px+ zoom
+- ✅ Index display below 90px
+- ✅ Pinch zoom support
+- ✅ Scrollbar containment fix (2px/5px/30px margins)
+- ✅ Build script QML cache cleanup

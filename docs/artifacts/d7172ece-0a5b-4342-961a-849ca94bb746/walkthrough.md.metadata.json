@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary": "Documents the complete patching journey for MX Player Pro v1.68.2, including the breakthrough discovery that nagware patches short-circuit native library loading, and the definitive fix using static class initializers.",
+  "updatedAt": "2026-03-11T20:31:20.429536Z",
+  "version": "2"
+}

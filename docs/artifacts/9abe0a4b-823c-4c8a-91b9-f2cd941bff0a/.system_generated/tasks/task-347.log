@@ -1,0 +1,26 @@
+[2026-07-04 15:23:59.167] [Thread 23772] Debug: [DIAG] Supported Image Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
+[2026-07-04 15:23:59.607] [Thread 23772] Debug: SystemMonitor: Starting monitoring with interval 1000 ms
+[2026-07-04 15:24:00.360] [Thread 23772] Warning: qrc:/SamsungGallery/resources/qml_legacy/Main.qml:19:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[2026-07-04 15:24:00.563] [Thread 23772] Debug: Loading last folder: I:/MY SDCArds
+[2026-07-04 15:24:00.564] [Thread 23772] Debug: [TaskScheduler] Started 2 CPU threads and 2 IO threads.
+[2026-07-04 15:24:00.564] [Thread 23772] Debug: [TaskScheduler] Cleared all pending tasks.
+[2026-07-04 15:24:00.565] [Thread 15740] Debug: Scanning directory: "I:\\MY SDCArds"
+[2026-07-04 15:24:00.883] [Thread 23772] Debug: [SystemMonitor] Resource Update: RAM: 89.7422 MB (Delta: 89.7422 ) | VRAM: 28.3047 MB (Delta: 28.3047 )
+[2026-07-04 15:24:02.035] [Thread 2524] Warning: Corrupt JPEG data: premature end of data segment
+[2026-07-04 15:24:03.537] [Thread 21952] Warning: Corrupt JPEG data: premature end of data segment
+[2026-07-04 15:24:03.596] [Thread 21952] Warning: Invalid SOS parameters for sequential JPEG
+[2026-07-04 15:24:04.114] [Thread 23772] Debug: Scanning finished in 3548 ms. Found 8948 items.
+[2026-07-04 15:24:04.171] [Thread 21952] Info: [FFmpeg] Initialized D3D11VA Hardware Acceleration.
+[2026-07-04 15:24:04.339] [Thread 21952] Critical: [FFmpeg Error] "Failed setup for format d3d11: hwaccel initialisation returned error."
+[2026-07-04 15:24:04.339] [Thread 21952] Warning: [FFmpeg] Failed to get HW surface format.
+[2026-07-04 15:24:04.339] [Thread 21952] Critical: [FFmpeg Error] "no frame!"
+[2026-07-04 15:24:04.340] [Thread 21952] Critical: [FFmpeg Error] "Missing reference picture, default is 0"
+[2026-07-04 15:24:04.370] [Thread 21952] Debug: [VideoThumbnailer] Failed to decode frame at 0
+[2026-07-04 15:24:04.602] [Thread 23772] Debug: [SystemMonitor] Resource Update: RAM: 162.934 MB (Delta: 73.1914 ) | VRAM: 69.9844 MB (Delta: 41.6797 )
+[2026-07-04 15:24:04.786] [Thread 2524] Critical: [FFmpeg Error] "Failed setup for format d3d11: hwaccel initialisation returned error."
+[2026-07-04 15:24:04.786] [Thread 2524] Warning: [FFmpeg] Failed to get HW surface format.
+[2026-07-04 15:24:04.786] [Thread 2524] Critical: [FFmpeg Error] "no frame!"
+[2026-07-04 15:24:04.787] [Thread 2524] Critical: [FFmpeg Error] "Missing reference picture, default is 0"
+[2026-07-04 15:24:04.816] [Thread 2524] Debug: [VideoThumbnailer] Failed to decode frame at 0
+[2026-07-04 15:24:05.612] [Thread 23772] Debug: [SystemMonitor] Resource Update: RAM: 194.465 MB (Delta: 31.5313 ) | VRAM: 336.961 MB (Delta: 266.977 )
+[2026-07-04 15:24:06.604] [Thread 23772] Debug: [SystemMonitor] Resource Update: RAM: 209.711 MB (Delta: 15.2461 ) | VRAM: 189.488 MB (Delta: -147.473 )

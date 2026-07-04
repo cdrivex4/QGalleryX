@@ -1,0 +1,8 @@
+# Task List
+- [ ] Navigate to http://localhost:5174/ and wait 3s
+- [ ] Capture screenshot of Dashboard
+- [ ] Describe Dashboard elements (sidebar, cards, charts, tables, etc.)
+- [ ] Note any errors or missing components
+- [ ] Click "Project Board" in the sidebar
+- [ ] Wait 2s and capture screenshot of Project Board
+- [ ] Describe Project Board view

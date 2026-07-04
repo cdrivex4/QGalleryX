@@ -1,0 +1,10 @@
+  
+  resortItems();
+  
+  m_totalItems = m_items.count();
+  m_remainingItems = m_totalItems;
+  endResetModel();
+  emit layoutChanged();
+  emit forceUpdateGridView();
+  emit remainingItemsChanged();
+}

@@ -1,0 +1,59 @@
+# ScrollBench Feature Port - Task List
+
+## Phase 1: UI Restructure ✅
+- [x] Sliding performance overlay
+- [x] Scrollbar fix (2px/5px/30px)
+- [x] Filename display at 90px+ zoom
+- [x] Pinch zoom support
+
+## Phase 2: Selection System ✅
+- [x] Long-press to enter selection mode
+- [x] Selection overlay with blue highlight
+- [x] Top bar with selection count
+
+## Phase 3: Share & Resize ✅ Phase 3.1 | [/] Phase 3.2
+### 3.1: Selection Buttons ✅
+- [x] Select All, Select None, Invert
+- [x] Share icon (⋮)
+- [x] invertSelection() method
+
+### 3.2: Share Dialog [/]
+- [ ] Create ShareDialog.qml
+- [ ] Wire up share button
+- [ ] Add resize presets
+- [ ] Share original option
+
+### 3.3: Resize Editor
+- [ ] Split-screen preview
+- [ ] Quality/compression sliders
+- [ ] Size calculator
+
+### 3.4: Image Processing
+- [ ] C++ resize backend
+- [ ] Quality/compression
+- [ ] Preview generation
+
+## Phase 4: Media Type Support
+### Video Thumbnails
+- [ ] FFmpeg integration
+- [ ] Video thumbnail generation
+- [ ] Caching system
+
+### RAW Format Support
+- [ ] LibRaw integration
+- [ ] RAW thumbnail generation
+- [ ] Format detection
+
+### Media Type Toggles
+- [ ] Add toggles to performance overlay
+- [ ] "Show Images" switch
+- [ ] "Show Videos" switch
+- [ ] "Show RAW Formats" switch
+- [ ] Filter implementation in model
+
+## Phase 5: PhotoViewer (Deferred)
+- [ ] Copy and adapt PhotoViewer.qml
+- [ ] Wire up click-to-open
+
+## Phase 6: Settings (Deferred)
+- [ ] Settings persistence

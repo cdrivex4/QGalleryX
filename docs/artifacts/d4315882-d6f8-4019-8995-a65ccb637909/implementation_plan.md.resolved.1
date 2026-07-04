@@ -1,0 +1,38 @@
+# JustDubit Interface & Model Acquisition
+
+This plan outlines the creation of a premium web interface for the video dubbing pipeline and the process for downloading the necessary multi-gigabyte model weights.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Large Download Required**: The total size of the model weights is approximately **40GB**. Please ensure you have sufficient disk space and a stable internet connection before I begin the download.
+>
+> **GPU Requirement**: This interface will trigger heavy GPU computations. Ensure your system meets the requirements for LTX-2 (typically 24GB+ VRAM for full resolution).
+
+## Proposed Changes
+
+### Web Interface (FastAPI + React)
+- **Backend (Python)**:
+  - Create a FastAPI server (`server.py`) to handle file uploads and trigger the inference pipeline.
+  - Implement a websocket or polling mechanism to provide real-time status updates from the pipeline.
+- **Frontend (React/Vite)**:
+  - Design a "WOW" factor interface with:
+    - Glassmorphism effect for the main container.
+    - Drag-and-drop zone with smooth animations.
+    - Interactive sliders and inputs for prompt, resolution, and seed.
+    - Live progress bar and status console.
+    - Video preview for both source and dubbed output.
+
+### Model Download Script
+- Create a `scripts/download_weights.py` using `huggingface_hub` to download all required components into a `weights/` directory.
+- Implement progress tracking for the massive downloads.
+
+## Verification Plan
+
+### Automated Tests
+- Verify FastAPI endpoints with `pytest` or simple health checks.
+- Verify `huggingface-cli` connectivity.
+
+### Manual Verification
+- Test the drag-and-drop functionality with a small sample video.
+- Verify that inference can be triggered and status is reported back to the UI.

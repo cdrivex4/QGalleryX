@@ -1,0 +1,8 @@
+# Task Plan
+
+- [ ] Identify the two floating overlays in the QML code.
+- [ ] Determine where application settings are defined (C++ object exposed to QML).
+- [ ] Add boolean settings (`showFloatingStats`, `showDiagnosticsOverlay`) to the settings manager.
+- [ ] Add UI toggles for these settings in the Settings panel ([PerformanceOverlay.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/PerformanceOverlay.qml)).
+- [ ] Bind the visibility of `Floating Performance Stats` and `DiagnosticsOverlay` to these settings in [MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml).
+- [ ] Test the toggles.

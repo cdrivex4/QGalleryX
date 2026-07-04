@@ -1,0 +1,114 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Skip to content
+Navigation Menu
+[0] (47,51)<a aria-label='Homepage' class='tmp-mr-lg-3 color-fg-inherit flex-order-2 js-prevent-focus-on-mobile-nav' href='/' />
+[1] (126,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Platform />
+[2] (224,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Solutions />
+[3] (326,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Resources />
+[4] (442,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Open Source />
+[5] (557,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Enterprise />
+[6] (641,51)<a class='NavLink-module__link__EG3d4 MarketingNavigation-module__navLink__hUomM' href='https://github.com/pricing' />
+	[7] (641,51)<span >Pricing />
+[8] (727,51)<button aria-label='Search or jump to…' class='header-search-button input-button form-control d-flex flex-1 flex-self-stretch flex-items-center no-wrap width-full py-0 pl-2 pr-0 text-left border-0 box-shadow-none' placeholder='Search or jump to...' />
+	[9] (704,51)<div  />
+[10] (809,51)<a class='HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1' href='/login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Ddodi_repacks.py%2Bmanucabral%26type%3Dcode'>Sign in />
+[11] (890,51)<a class='HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1' href='/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Fsearch&source=header'>Sign up />
+[12] (953,51)<button class='Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border' id='icon-button-2a57dc4a-6985-4b0c-af75-7c98e419cae7' />
+Search Results · dodi_repacks.py manucabral
+[13] (146,601)<div class='prc-PageLayout-Pane-AyzHK' role='region' scrollable='true'>Filter by />
+	Filter by
+	[14] (138,208)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=code' id='_R_5sraqdb_' />
+		[15] (150,208)<span  />
+			[16] (133,208)<span >Code />
+			...
+			(
+			...
+			)
+			results
+	[17] (138,254)<li  />
+		[18] (138,254)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=repositories' id='_R_9sraqdb_' />
+			[19] (150,254)<span  />
+				[20] (134,254)<span >Repositories />
+				0
+				(
+				0
+				)
+				results
+	[21] (138,299)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=issues' id='_R_dsraqdb_' />
+		[22] (150,299)<span  />
+			[23] (134,299)<span >Issues />
+			0
+			(
+			0
+			)
+			results
+	[24] (138,344)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=pullrequests' id='_R_hsraqdb_' />
+		[25] (150,344)<span  />
+			[26] (134,344)<span >Pull requests />
+			0
+			(
+			0
+			)
+			results
+	[27] (138,389)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=discussions' id='_R_lsraqdb_' />
+		[28] (150,389)<span  />
+			[29] (134,389)<span >Discussions />
+			0
+			(
+			0
+			)
+			results
+	[30] (138,434)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=users' id='_R_psraqdb_' />
+		[31] (150,434)<span  />
+			[32] (134,434)<span >Users />
+			0
+			(
+			0
+			)
+			results
+	[33] (138,479)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=commits' id='_r_4_' />
+		[34] (150,479)<span  />
+			[35] (134,479)<span >Commits />
+			0
+			(
+			0
+			)
+			results
+	[36] (138,524)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=registrypackages' id='_r_5_' />
+		[37] (150,524)<span  />
+			[38] (134,524)<span >Packages />
+			0
+			(
+			0
+			)
+			results
+	[39] (138,569)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=wikis' id='_r_6_' />
+		[40] (150,569)<span  />
+			[41] (134,569)<span >Wikis />
+			0
+			(
+			0
+			)
+			results
+	[42] (138,614)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=topics' id='_r_7_' />
+		[43] (150,614)<span  />
+			[44] (134,614)<span >Topics />
+			0
+			(
+			0
+			)
+			results
+	[45] (138,659)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='https://github.com/search?q=dodi_repacks.py+manucabral&type=marketplace' id='_r_8_' />
+		[46] (150,659)<span  />
+			[47] (134,659)<span >Marketplace />
+			0
+			(
+			0
+			)
+			results
+[48] (292,601)<div aria-label='Draggable pane splitter' class='prc-PageLayout-DraggableHandle-9s6B4' role='slider' />
+
+</current_dom>

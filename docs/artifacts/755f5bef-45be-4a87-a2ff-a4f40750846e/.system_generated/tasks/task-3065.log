@@ -1,0 +1,24 @@
+
+        cancelPendingRequests();
+        updateVisibleRange();
+      } else {
+        qCritical() << "[ViewportCulling] Loading ALL items (Throttled)";
+        m_loadAllIndex = 0;
+        m_loadAllTimer->start();
+      }
+    }
+  }
+  
+  void ScrollBenchImageModel::generateTestData(int count) {
+    beginResetModel();
+    m_items.clear();
+    m_items.reserve(count);
+  
+>   QStringList colors = {"#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A", "#98D8C8",
+                          "#F7DC6F", "#BB8FCE", "#85C1E2", "#F8B739", "#52B788"};
+  
+    QDateTime now = QDateTime::currentDateTime();
+    for (int i = 0; i < count; ++i) {
+      ImageItem item;
+
+

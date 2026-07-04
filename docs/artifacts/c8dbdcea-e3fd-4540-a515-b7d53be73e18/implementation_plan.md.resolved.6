@@ -1,0 +1,29 @@
+# Real-Time Status Monitoring Fix
+
+The pipeline **is definitely working** (as proven by your 100% GPU usage and 7,500 frames created), but the UI looks frozen because our status reporter is waiting for a "New Line" before it updates. In long renders, MuseTalk stays on the same line for 20 minutes using "Carriage Returns" (\r).
+
+This plan fixes the reporting "heartbeat" so you always know exactly where it is.
+
+## User Review Required
+
+> [!NOTE]
+> This change only affects **how the progress is reported to you**—it does not change the actual AI rendering (which is already working optimally on your GPU).
+
+## Proposed Changes
+
+### [Engine Core]
+
+#### [MODIFY] [lipsync_musetalk.py](file:///C:/just-dub-it2/app/stages/lipsync_musetalk.py)
+- **Non-Blocking Reader**: Replace `readline()` (which blocks on `\n`) with a character-based reader that catches `\r`.
+- **Progress Heartbeat**: Ensure the `tqdm` percentage from the child process is passed to the Gradio UI immediately.
+- **Improved Scraper**: Update the phase detection keywords to be more sensitive to the actual MuseTalk output stream.
+
+## Verification Plan
+
+### Automated Tests
+1. **Stream Test**: Run `inference.py` in a mock environment and verify that the status labels ("UNet Inference", "Post-processing") change instantly.
+2. **Heartbeat Check**: Verify the "Transformation" % updates every few seconds instead of every 15 minutes.
+
+### Manual Verification
+- Once approved, I will reboot the Dashboard.
+- You should see the status move from "Extracting Landmarks" to "Rendering Frames" within the first 60 seconds of a chunk starting.

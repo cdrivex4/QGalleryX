@@ -1,0 +1,42 @@
+[graphify extract] scanning C:\just-dub-it2
+[graphify extract] found 246 code, 65 docs, 0 papers, 12 images
+[graphify extract] AST extraction on 246 code files...
+[graphify extract] semantic extraction on 77 files via lm-studio...
+[graphify extract] chunk 1/46 done
+[graphify] chunk 2/46 failed: Request timed out.
+[graphify extract] chunk 3/46 done
+[graphify extract] chunk 4/46 done
+[graphify extract] chunk 5/46 done
+[graphify extract] chunk 6/46 done
+[graphify extract] chunk 7/46 done
+[graphify extract] chunk 8/46 done
+[graphify extract] chunk 9/46 done
+[graphify extract] chunk 10/46 done
+[graphify extract] chunk 11/46 done
+[graphify] chunk 12/46 failed: Request timed out.
+[graphify extract] chunk 13/46 done
+[graphify extract] chunk 14/46 done
+[graphify extract] chunk 15/46 done
+[graphify extract] chunk 16/46 done
+[graphify] chunk 17/46 failed: Request timed out.
+[graphify] chunk 18/46 failed: Request timed out.
+[graphify] LLM returned invalid JSON, skipping chunk (first 200 chars: '{"nodes":[{"id":"ffmpeg_utils_description","label":"FFmpeg Utilities Documentation Description","file_type":"document","source_file":"tools\\ffmpeg\\doc\\ffmpeg-utils.html","source_location":null,"source')
+[graphify] lm-studio returned a hollow response (content=no nodes/edges, output_tokens=485); treating as truncation so adaptive retry can bisect the chunk.
+[graphify] single-file chunk C:\just-dub-it2\tools\ffmpeg\doc\ffmpeg-utils.html truncated at max_completion_tokens — partial result kept
+[graphify extract] chunk 19/46 done
+[graphify] LLM returned invalid JSON, skipping chunk (first 200 chars: '{"nodes":[{"id":"tools_ffmpeg_document","label":"ffmpeg Documentation","file_type":"document","source_file":"tools\\\\ffmpeg\\\\doc\\\\ffmpeg.html"},{"id":"tools_ffmpeg_tool","label":"ffmpeg","file_type":"c')
+[graphify] lm-studio returned a hollow response (content=no nodes/edges, output_tokens=82); treating as truncation so adaptive retry can bisect the chunk.
+[graphify] single-file chunk C:\just-dub-it2\tools\ffmpeg\doc\ffmpeg.html truncated at max_completion_tokens — partial result kept
+[graphify extract] chunk 20/46 done
+[graphify] LLM returned invalid JSON, skipping chunk (first 200 chars: '{"nodes":[{"id":"tools_ffplay","label":"ffplay","file_type":"document","source_file":"tools\\ffmpeg\\doc\\ffplay-alls.html","source_location":null,"source_url":null,"captured_at":null,"author":null,"cont')
+[graphify] lm-studio returned a hollow response (content=no nodes/edges, output_tokens=131); treating as truncation so adaptive retry can bisect the chunk.
+[graphify] single-file chunk C:\just-dub-it2\tools\ffmpeg\doc\ffplay-all.html truncated at max_completion_tokens — partial result kept
+[graphify extract] chunk 21/46 done
+[graphify] LLM returned invalid JSON, skipping chunk (first 200 chars: '{"nodes":[{"id":"tools_ffplay","label":"ffplay","file_type":"document","source_file":"tools\\ffmpeg\\doc\\ffplay. html","source_location":null,"source_url":null,"captured_at":null,"author":null},{"id":"t')
+[graphify] lm-studio returned a hollow response (content=no nodes/edges, output_tokens=118); treating as truncation so adaptive retry can bisect the chunk.
+[graphify] single-file chunk C:\just-dub-it2\tools\ffmpeg\doc\ffplay.html truncated at max_completion_tokens — partial result kept
+[graphify extract] chunk 22/46 done
+[graphify extract] chunk 23/46 done
+[graphify extract] chunk 24/46 done
+[graphify] chunk 25/46 failed: Request timed out.
+[graphify extract] chunk 26/46 done

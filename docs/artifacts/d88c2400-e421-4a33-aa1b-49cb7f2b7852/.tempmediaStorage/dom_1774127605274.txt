@@ -1,0 +1,117 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (932,45)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (971,45)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/notebook/5c28b8a5-8057-4e12-bcc0-65f5a0ad3030&ec=GBRAmgU' role='button' />
+[2] (31,45)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[3] (31,45)<labs-tailwind-logo  />
+		[4] (31,45)<img  />
+[5] (140,45)<input class='title-input mat-title-large ng-untouched ng-pristine ng-valid' />
+[6] (756,45)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[7] (847,45)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>share />
+	share
+[8] (887,45)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>settings />
+	settings
+Sources
+dock_to_right
+[9] (134,208)<button aria-label='Add source' class='mdc-button mat-mdc-button-base mat-mdc-tooltip-trigger add-source-button ng-tns-c1374014999-2 mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>add
+Add sources />
+	add
+	Add sources
+search
+[10] (142,310)<textarea aria-label='Discover sources based on the inputted query' class='mat-mdc-input-element cdk-textarea-autosize query-box-textarea ng-untouched ng-pristine ng-invalid mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored' id='mat-input-0' placeholder='Search the web for new sources' />
+[11] (59,366)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select corpus-menu-trigger mat-mdc-button mat-unthemed' />
+	language
+	keyboard_arrow_down
+[12] (114,366)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select researcher-menu-trigger mat-mdc-button mat-unthemed' />
+	search_spark
+	keyboard_arrow_down
+arrow_forward
+docs
+Saved sources will appear here
+Click Add source above to add PDFs, websites, text, videos, or audio files. Or import a file directly from Google Drive.
+Chat
+tune
+more_vert
+upload
+Add a source to get started
+Upload a source
+0 sources
+arrow_forward
+Studio
+[13] (973,123)<button aria-label='Collapse studio panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-studio-panel-button label-medium-button ng-tns-c1188202019-0 mat-unthemed ng-star-inserted' />
+	[14] (973,123)<mat-icon class='mat-icon notranslate material-symbols-outlined mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>dock_to_left />
+[15] (812,219)<div aria-label='Audio Overview' class='mat-mdc-tooltip-trigger blue create-artifact-button-container disabled-tile mat-label-medium' role='button' />
+	audio_magic_eraser
+	Audio Overview
+[16] (924,219)<div aria-label='Slide Deck' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium yellow' role='button' />
+	tablet
+	Slide Deck
+[17] (812,309)<div aria-label='Video Overview' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile green mat-label-medium' role='button' />
+	subscriptions
+	Video Overview
+[18] (924,309)<div aria-label='Mind Map' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium pink' role='button' />
+	flowchart
+	Mind Map
+[19] (812,398)<div aria-label='Reports' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium yellow' role='button' />
+	auto_tab_group
+	Reports
+[20] (924,398)<div aria-label='Flashcards' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium orange' role='button' />
+	cards_star
+	Flashcards
+[21] (812,488)<div aria-label='Quiz' class='mat-mdc-tooltip-trigger create-artifact-button-container cyan disabled-tile mat-label-medium' role='button' />
+	quiz
+	Quiz
+[22] (924,488)<div aria-label='Infographic' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium pink' role='button' />
+	stacked_bar_chart
+	Infographic
+[23] (812,577)<div aria-label='Data Table' class='mat-mdc-tooltip-trigger blue create-artifact-button-container disabled-tile mat-label-medium' role='button' />
+	table_view
+	Data Table
+edit_fix_auto
+Studio output will be saved here.
+After adding sources, click to add Audio Overview, Study Guide, Mind Map, and more!
+[24] (868,919)<button class='mdc-button mat-mdc-button-base add-note-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>sticky_note_2
+Add note />
+	sticky_note_2
+	Add note
+NotebookLM can be inaccurate; please double check its responses.
+Create Audio and Video Overviews from
+your documents
+your documents
+search
+[25] (508,329)<textarea aria-label='Discover sources based on the inputted query' class='mat-mdc-input-element cdk-textarea-autosize query-box-textarea ng-untouched ng-pristine ng-invalid mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored' id='mat-input-1' placeholder='Search the web for new sources' />
+[26] (297,390)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select corpus-menu-trigger mat-mdc-button mat-unthemed' />
+	language
+	Web
+	keyboard_arrow_down
+[27] (397,390)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select researcher-menu-trigger mat-mdc-button mat-unthemed' />
+	search_spark
+	Fast Research
+	keyboard_arrow_down
+arrow_forward
+or drop your files
+pdf, images, docs, audio,
+[28] (566,633)<span >and more />
+[29] (327,745)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>upload />
+	upload
+	Upload files
+[30] (455,745)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>link
+video_youtube />
+	link
+	video_youtube
+	Websites
+[31] (565,745)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>drive />
+	drive
+	Drive
+[32] (675,745)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>content_paste />
+	content_paste
+	Copied text
+[33] (763,158)<button aria-label='Close' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base close-button mat-unthemed' />
+	[34] (763,158)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>close />
+
+</current_dom>

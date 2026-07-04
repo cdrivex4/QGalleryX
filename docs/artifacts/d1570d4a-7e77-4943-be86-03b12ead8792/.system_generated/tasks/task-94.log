@@ -1,0 +1,8 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-18T23:01:32+04:00
+Prompt: Check graphify extract logs to see if it's proceeding correctly without JSON decode errors
+
+[2026-06-18T23:00:02+04:00] Still waiting. Remaining time: 1m30s
+[2026-06-18T23:00:32+04:00] Still waiting. Remaining time: 1m0s
+[2026-06-18T23:01:02+04:00] Still waiting. Remaining time: 30s
+[2026-06-18T23:01:23+04:00] Timer cancelled: agent received a message during wait.

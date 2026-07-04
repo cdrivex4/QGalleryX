@@ -1,0 +1,65 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (114,75)<a aria-label='Go to Google Home' href='https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQPAgJ' id='logo' title='Go to Google Home' />
+[1] (429,73)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (662,73)<div  />
+	[3] (660,73)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (660,73)<span  />
+	[5] (684,73)<span  />
+[6] (708,73)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (747,73)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (793,73)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (786,73)<div  />
+		[10] (786,73)<span  />
+[11] (870,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (918,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (961,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3Draw%2Bdodi_repacks.py%2Bmanucabral&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (95,161)<a class='XVMlrc C6AK7c' href='/search?q=raw+dodi_repacks.py+manucabral&sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n5iz-xL_7-YnfFWOoOELpO2luA2Xw:1774120126438&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtUUHazwOqTPNsLn3DcM4oH43hhhwSb1tZGUq38A_oCdqssPz3L_SErMftnHXvdYgQoQI9v2njiUdJGbSx7_WBysAHEt9JBNNwsWtaV2vAlkKGjcXbajbTzqnvsmfRWxeQlkoruQ&aep=1&ntc=1&sa=X&ved=2ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQ2J8OegQIEBAE' />
+	[15] (95,161)<div  />
+		[16] (95,173)<div  />
+			[17] (95,166)<span >AI Mode />
+[18] (153,161)<a class='C6AK7c' role='link' />
+	All
+[19] (209,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n5iz-xL_7-YnfFWOoOELpO2luA2Xw:1774120126438&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtUUHazwOqTPNsLn3DcM4oH43hhhwSb1tZGUq38A_oCdqssPz3L_SErMftnHXvdYgQoQI9v2njiUdJGbSx7_WBysAHEt9JBNNwsWtaV2vAlkKGjcXbajbTzqnvsmfRWxeQlkoruQ&q=raw+dodi_repacks.py+manucabral&sa=X&ved=2ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQtKgLegQIFBAB' />
+	[20] (209,161)<div  />
+		[21] (209,173)<span >Images />
+[22] (278,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n5iz-xL_7-YnfFWOoOELpO2luA2Xw:1774120126438&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtUUHazwOqTPNsLn3DcM4oH43hhhwSb1tZGUq38A_oCdqssPz3L_SErMftnHXvdYgQoQI9v2njiUdJGbSx7_WBysAHEt9JBNNwsWtaV2vAlkKGjcXbajbTzqnvsmfRWxeQlkoruQ&q=raw+dodi_repacks.py+manucabral&sa=X&ved=2ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQtKgLegQIFRAB' />
+	[23] (278,161)<div  />
+		[24] (278,173)<span >Videos />
+[25] (347,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n5iz-xL_7-YnfFWOoOELpO2luA2Xw:1774120126438&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtUUHazwOqTPNsLn3DcM4oH43hhhwSb1tZGUq38A_oCdqssPz3L_SErMftnHXvdYgQoQI9v2njiUdJGbSx7_WBysAHEt9JBNNwsWtaV2vAlkKGjcXbajbTzqnvsmfRWxeQlkoruQ&q=raw+dodi_repacks.py+manucabral&sa=X&ved=2ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQs6gLegQIFhAB' />
+	[26] (347,161)<div  />
+		[27] (347,173)<span >Forums />
+[28] (436,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n5iz-xL_7-YnfFWOoOELpO2luA2Xw:1774120126438&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtUUHazwOqTPNsLn3DcM4oH43hhhwSb1tZGUq38A_oCdqssPz3L_SErMftnHXvdYgQoQI9v2njiUdJGbSx7_WBysAHEt9JBNNwsWtaV2vAlkKGjcXbajbTzqnvsmfRWxeQlkoruQ&q=raw+dodi_repacks.py+manucabral&sa=X&ved=2ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQs6gLegQIExAB' />
+	[29] (436,161)<div  />
+		[30] (436,173)<span >Short videos />
+[31] (518,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n5iz-xL_7-YnfFWOoOELpO2luA2Xw:1774120126438&q=raw+dodi_repacks.py+manucabral&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtUUHazwOqTPNsLn3DcM4oH43hhhwSb1tZGUq38A_oCdqssPz3L_SErMftnHXvdYgQoQI9v2njiUdJGbSx7_WBysAHEt9JBNNwsWtaV2vAlkKGjcXbajbTzqnvsmfRWxeQlkoruQ&sa=X&ved=2ahUKEwjdkrO_2LGTAxWvslYBHSKnOVYQ0pQJegQIERAB' />
+	[32] (518,161)<div  />
+		[33] (518,173)<span >News />
+[34] (585,161)<div class='mTpL7c' role='button' />
+	[35] (585,161)<div  />
+		[36] (585,173)<div  />
+			[37] (576,166)<span >More />
+			[38] (602,166)<span  />
+[39] (660,161)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (660,161)<div  />
+		[41] (660,173)<div  />
+			[42] (651,166)<span >Tools />
+			[43] (677,166)<span  />
+Your search -
+raw dodi_repacks.py manucabral
+- did not match any documents.
+Suggestions:
+Make sure that all words are spelled correctly.
+Try different keywords.
+Try more general keywords.
+Try fewer keywords.
+
+</current_dom>

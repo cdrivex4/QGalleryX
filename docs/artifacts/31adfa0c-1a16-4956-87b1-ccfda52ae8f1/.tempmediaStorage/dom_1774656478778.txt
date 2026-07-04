@@ -1,0 +1,44 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (891,134)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (953,134)<a aria-label='Google Account: Will Turner  
+(willuorwontu464@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/notebook/e24f7ca5-dd81-43ff-b8b3-17c774010c6d&ec=GBRAmgU' role='button' />
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+[2] (844,28)<a href='https://x.com/NotebookLM'>X />
+or
+[3] (908,28)<a href='https://discord.com/channels/1124402182171672732/1294057633334165596'>Discord />
+for updates.
+[4] (50,134)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[5] (50,134)<labs-tailwind-logo  />
+		[6] (50,134)<img  />
+[7] (323,134)<input class='title-input mat-title-large ng-untouched ng-pristine ng-valid' />
+[8] (818,134)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>settings />
+	settings
+[9] (141,207)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[10] (948,207)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>share />
+	share
+[11] (174,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted' id='mat-tab-group-0-label-0' role='tab' />
+	[12] (174,269)<span  />
+		[13] (174,269)<span >Sources />
+[14] (507,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator mdc-tab--active mdc-tab-indicator--active ng-star-inserted' id='mat-tab-group-0-label-1' role='tab' />
+	[15] (507,269)<span  />
+		[16] (507,269)<span >Chat />
+[17] (834,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted' id='mat-tab-group-0-label-2' role='tab' />
+	[18] (834,269)<span  />
+		[19] (834,269)<span >Studio />
+[20] (930,328)<button aria-label='Configure notebook' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger configure-settings-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[21] (930,328)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>tune />
+[22] (977,328)<button aria-label='Chat options' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[23] (977,328)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>more_vert />
+[24] (500,612)<div class='chat-panel-content' scrollable='true' />
+docs
+(42)
+arrow_forward
+NotebookLM can be inaccurate; please double check its responses.
+
+</current_dom>

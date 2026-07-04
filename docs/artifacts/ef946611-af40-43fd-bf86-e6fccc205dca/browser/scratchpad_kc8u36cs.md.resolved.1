@@ -1,0 +1,13 @@
+# Task List
+- [ ] Find raw URLs from `manucabral/qBittorrent-Search-Plugins`
+    - [ ] `dodi_repacks.py`
+    - [ ] `fitgirl_repacks.py`
+    - [ ] `esmeraldatorrent.py`
+    - [ ] `dontorrent.py`
+- [ ] Find raw URLs from `LightDestory/qBittorrent-Search-Plugins`
+    - [ ] `audiobookbay.py` (Missing)
+    - [x] `academictorrents.py` -> `src/engines/academictorrents.py`
+    - [ ] `yts.py` (Missing)
+    - [x] `glotorrents.py` -> `src/engines/glotorrents.py`
+    - [x] `kickasstorrents.py` -> `src/engines/kickasstorrents.py`
+    - [ ] `magnetdl.py` (Missing)

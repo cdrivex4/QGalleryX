@@ -1,0 +1,14 @@
+# Rebranding Fix Tasks (Manual Recovery)
+
+- [ ] Identify the Damage
+  - [x] Identify the staging commit (`0725b11`)
+  - [ ] Identify which specific files need to be overwritten from the staging commit
+- [ ] Selective Recovery
+  - [ ] Manually pull/checkout specific files from `0725b11` as instructed by the user
+  - [ ] Verify the files are correct
+- [ ] Safe Rename Process
+  - [ ] Make manual, targeted edits to [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt) and [build.ps1](file:///d:/Dev/antigravity/build.ps1) rather than bulk replaces
+  - [ ] Verify GitHub remote URL and fix GitHub Desktop sync issue
+- [ ] Verification
+  - [ ] Run [.\build.ps1](file:///d:/Dev/antigravity/build.ps1) exactly as the user requested
+  - [ ] Verify `QGalleryX.exe` and `QGalleryX-Bench.exe` successfully build and deploy

@@ -1,0 +1,14 @@
+# Task: Get ReShade Shaders Working for UT2004
+
+- [ ] Planning and Research [/]
+    - [ ] Review handoff report [x]
+    - [ ] Create implementation plan [/]
+- [ ] Execution [ ]
+    - [ ] Download ReShade shaders using browser [ ]
+    - [ ] Extract shaders to `System\reshade-shaders` [ ]
+    - [ ] Verify file structure [ ]
+- [ ] Verification [ ]
+    - [ ] Launch game via `Play_ReShade.bat` [ ]
+    - [ ] Confirm ReShade interface (user manual check) [ ]
+- [ ] Documentation [ ]
+    - [ ] Update handoff report/walkthrough [ ]

@@ -1,0 +1,91 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (932,45)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (971,45)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/notebook/5c28b8a5-8057-4e12-bcc0-65f5a0ad3030&ec=GBRAmgU' role='button' />
+[2] (31,45)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[3] (31,45)<labs-tailwind-logo  />
+		[4] (31,45)<img  />
+[5] (140,45)<input class='title-input mat-title-large ng-untouched ng-pristine ng-valid' />
+[6] (756,45)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[7] (847,45)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>share />
+	share
+[8] (887,45)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>settings />
+	settings
+Sources
+[9] (240,123)<button aria-label='Collapse source panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-source-panel-button label-medium-button ng-tns-c1188202019-0 mat-unthemed' />
+	[10] (240,123)<mat-icon class='mat-icon notranslate material-symbols-outlined google-symbols mat-icon-no-color' role='img'>dock_to_right />
+[11] (134,208)<button aria-label='Add source' class='mdc-button mat-mdc-button-base mat-mdc-tooltip-trigger add-source-button ng-tns-c1374014999-2 mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>add
+Add sources />
+	add
+	Add sources
+search
+[12] (142,310)<textarea aria-label='Discover sources based on the inputted query' class='mat-mdc-input-element cdk-textarea-autosize query-box-textarea ng-untouched ng-pristine ng-invalid mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored' id='mat-input-0' placeholder='Search the web for new sources' />
+[13] (59,366)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select corpus-menu-trigger mat-mdc-button mat-unthemed' />
+	language
+	keyboard_arrow_down
+[14] (114,366)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select researcher-menu-trigger mat-mdc-button mat-unthemed' />
+	search_spark
+	keyboard_arrow_down
+arrow_forward
+docs
+Saved sources will appear here
+Click Add source above to add PDFs, websites, text, videos, or audio files. Or import a file directly from Google Drive.
+[15] (261,529)<div  />
+Chat
+[16] (679,123)<button aria-label='Configure notebook' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger configure-settings-button label-medium-button ng-tns-c1188202019-0 mat-unthemed ng-star-inserted' />
+	[17] (679,123)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>tune />
+[18] (711,123)<button aria-label='Chat options' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger label-medium-button ng-tns-c1188202019-0 mat-unthemed ng-star-inserted' />
+	[19] (711,123)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>more_vert />
+[20] (500,442)<button aria-label=' Opens the upload source dialog' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger upload-icon-button mat-unthemed' />
+	[21] (500,442)<mat-icon class='mat-icon notranslate upload-icon google-symbols mat-icon-no-color' role='img'>upload />
+Add a source to get started
+[22] (500,576)<button class='mdc-button mat-mdc-button-base upload-button mdc-button--outlined mat-mdc-outlined-button mat-primary'>Upload a source />
+	Upload a source
+0 sources
+arrow_forward
+[23] (739,529)<div  />
+Studio
+[24] (973,123)<button aria-label='Collapse studio panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-studio-panel-button label-medium-button ng-tns-c1188202019-0 mat-unthemed ng-star-inserted' />
+	[25] (973,123)<mat-icon class='mat-icon notranslate material-symbols-outlined mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>dock_to_left />
+[26] (812,219)<div aria-label='Audio Overview' class='mat-mdc-tooltip-trigger blue create-artifact-button-container disabled-tile mat-label-medium' role='button' />
+	audio_magic_eraser
+	Audio Overview
+[27] (924,219)<div aria-label='Slide Deck' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium yellow' role='button' />
+	tablet
+	Slide Deck
+[28] (812,309)<div aria-label='Video Overview' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile green mat-label-medium' role='button' />
+	subscriptions
+	Video Overview
+[29] (924,309)<div aria-label='Mind Map' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium pink' role='button' />
+	flowchart
+	Mind Map
+[30] (812,398)<div aria-label='Reports' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium yellow' role='button' />
+	auto_tab_group
+	Reports
+[31] (924,398)<div aria-label='Flashcards' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium orange' role='button' />
+	cards_star
+	Flashcards
+[32] (812,488)<div aria-label='Quiz' class='mat-mdc-tooltip-trigger create-artifact-button-container cyan disabled-tile mat-label-medium' role='button' />
+	quiz
+	Quiz
+[33] (924,488)<div aria-label='Infographic' class='mat-mdc-tooltip-trigger create-artifact-button-container disabled-tile mat-label-medium pink' role='button' />
+	stacked_bar_chart
+	Infographic
+[34] (812,577)<div aria-label='Data Table' class='mat-mdc-tooltip-trigger blue create-artifact-button-container disabled-tile mat-label-medium' role='button' />
+	table_view
+	Data Table
+edit_fix_auto
+Studio output will be saved here.
+After adding sources, click to add Audio Overview, Study Guide, Mind Map, and more!
+[35] (868,919)<button class='mdc-button mat-mdc-button-base add-note-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>sticky_note_2
+Add note />
+	sticky_note_2
+	Add note
+NotebookLM can be inaccurate; please double check its responses.
+
+</current_dom>

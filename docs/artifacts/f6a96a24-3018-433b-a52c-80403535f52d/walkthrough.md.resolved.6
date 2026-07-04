@@ -1,0 +1,116 @@
+# ScrollBench - Grid Zoom + Performance Testing ✅
+
+## 🎯 Executable Path
+
+```
+d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+```
+
+---
+
+## ✨ Features
+
+### Grid Controls
+✅ **Ctrl+Wheel Zoom** - Resize grid cells (40-400px)  
+✅ **Dynamic Layout** - Grid adapts to zoom level  
+✅ **Smart UI** - Labels hide when grid is too small  
+
+### Image Quality
+✅ **Thumbnail Resolution Slider** - 128-512px decode quality (in performance overlay)  
+✅ **Separate from Grid Size** - Grid size = UI zoom, Thumb resolution = image quality  
+
+### Performance Controls (Right Sidebar)
+✅ **Viewport Culling Toggle** - Only loads visible items  
+✅ **Frame Budget Toggle** - Limits uploads per frame  
+✅ **Frame Budget Slider** - 1-50 uploads/frame  
+✅ **Thumb Resolution Slider** - 128-512px quality  
+✅ **FPS Monitor** - Color-coded real-time  
+✅ **Queue Depth** - Pending decode count  
+✅ **Memory Usage** - Live MB counter  
+
+### Data Loading
+✅ **Synthetic Test Data** - 10,000 colored rectangles on startup  
+✅ **Real Image Loading** - "📁 Select Folder" button (top-right)  
+✅ **Recursive Scanning** - Loads all subdirectories  
+
+---
+
+## 🎮 How to Use
+
+### 1. Launch
+```
+d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+```
+
+### 2. Test Grid Zoom
+- **Ctrl+Wheel Up** - Zoom in (larger cells)
+- **Ctrl+Wheel Down** - Zoom out (smaller cells)
+- **Range**: 40px (tiny) to 400px (huge)
+- **Info label** shows current grid size
+
+### 3. Test Thumbnail Resolution
+- **Right sidebar** → "Thumb Resolution" slider
+- **128px** - Fast, lower quality
+- **256px** - Balanced (default ⭐)
+- **512px** - Slow, higher quality
+- **Watch FPS** change as you adjust
+
+### 4. Load Real Images
+1. Click "📁 Select Folder" (top-right)
+2. Choose folder with 100+ images
+3. Scroll and zoom to test performance
+
+### 5. Performance Testing
+```
+Test 1: Grid Zoom Impact
+- Set thumb resolution to 256px
+- Zoom grid from 40px to 400px
+- Watch FPS (should stay stable)
+
+Test 2: Thumb Resolution Impact
+- Set grid to 150px
+- Change thumb resolution 128→512px
+- Watch FPS drop with higher quality
+
+Test 3: Viewport Culling
+- Load 1000+ images
+- Scroll rapidly with culling OFF → FPS drops
+- Enable culling → FPS stable
+
+Test 4: Frame Budget
+- Disable frame budget → Queue spikes
+- Enable budget (10) → Queue controlled
+```
+
+---
+
+## 📊 Key Distinctions
+
+| Setting | Controls | Range | Impact |
+|---------|----------|-------|--------|
+| **Grid Size** | UI cell size (zoom) | 40-400px | Visual density |
+| **Thumb Resolution** | Image decode quality | 128-512px | FPS/memory |
+
+**Ctrl+Wheel** changes grid size (zoom level)  
+**Slider** changes thumbnail resolution (decode quality)  
+
+These are **independent** - you can have:
+- Small grid (40px) with high quality (512px) = Tiny sharp thumbnails
+- Large grid (400px) with low quality (128px) = Huge blurry thumbnails
+
+---
+
+## 🚀 Testing Workflow
+
+1. **Start with defaults** (Grid: 150px, Thumb: 256px)
+2. **Zoom in/out** with Ctrl+Wheel - verify smooth resizing
+3. **Adjust thumb resolution** - watch FPS impact
+4. **Load real images** - test with your photo library
+5. **Toggle optimizations** - compare performance
+6. **Monitor metrics** - FPS should stay ≥30 with optimizations ON
+
+---
+
+**Status**: ✅ **READY TO TEST**  
+**Path**: `d:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe`  
+**New Features**: Ctrl+Wheel grid zoom (40-400px), Thumbnail resolution slider (128-512px)

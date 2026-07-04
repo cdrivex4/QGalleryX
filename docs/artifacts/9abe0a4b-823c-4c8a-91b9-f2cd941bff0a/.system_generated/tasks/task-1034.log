@@ -1,0 +1,1294 @@
+================ ENVIRONMENT SNAPSHOT ================
+OS              : "Windows 10 Version 22H2"
+CPU Arch        : "x86_64" ( 6 logical threads)
+Total System RAM: 65466.5 MB
+GPU detected    : "NVIDIA GeForce GTX 1050 Ti" ( 4004 MB VRAM)
+======================================================
+[ "17:04:29.859" ][HWAccel] Requested mode: SettingsHelper::None
+[ "17:04:29.859" ][HWAccel] CPU decoding selected (no acceleration).
+[ "17:04:29.859" ][HWAccel] CPU Features: "SSE, SSE2, SSE3, SSSE3, SSE4.1, SSE4.2, AVX, AVX2, CUDA, VAAPI, DXVA2, QSV, D3D11VA, OPENCL, VULKAN, D3D12VA, AMF"
+[Diagnostics] Monitor started - running checks every 1000ms
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "17:04:29.862" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 61.3164 MB | Sys Avail: 24857.8 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 61.3164 MB (Delta: 61.3164 ) | VRAM: 0.804688 MB (Delta: 0.804688 )
+[Diagnostics] Attached to ScrollBenchImageModel
+[Diagnostics] Attached to SettingsHelper
+[TaskScheduler] Started 2 CPU threads and 4 IO threads.
+FileCacheManager: Initialized with Memory-Mapped Ring Buffer at "C:/Users/curtis/AppData/Local/appScrollBench/cache/thumbnails/FileCache.mmap"
+qrc:/ScrollBench/qml/MainScrollBench.qml:22:5: QML Settings: Failed to initialize QSettings instance. Status code is: 1
+qrc:/ScrollBench/qml/MainScrollBench.qml:22:5: QML Settings: The following application identifiers have not been set: QList("organizationName", "organizationDomain")
+qrc:/ScrollBench/qml/MainScrollBench.qml:22:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[ "17:04:30.872" ][SystemMonitor] Stats Update: CPU App: 11.7949 % | Sys: 96.9231 % | RAM App: 137.145 MB | Sys Avail: 24630.8 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 137.145 MB (Delta: 75.8281 ) | VRAM: 28.4766 MB (Delta: 27.6719 )
+[ "17:04:31.853" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 92.0635 % | RAM App: 138.168 MB | Sys Avail: 24592.9 MB / 65466.5 MB
+[ "17:04:32.866" ][SystemMonitor] Stats Update: CPU App: 1.55039 % | Sys: 94.8718 % | RAM App: 138.297 MB | Sys Avail: 24743 MB / 65466.5 MB
+[ "17:04:33.886" ][SystemMonitor] Stats Update: CPU App: 0.508906 % | Sys: 93.8462 % | RAM App: 138.309 MB | Sys Avail: 24751.3 MB / 65466.5 MB
+[ "17:04:34.870" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 97.0899 % | RAM App: 138.383 MB | Sys Avail: 24865.3 MB / 65466.5 MB
+[ "17:04:35.853" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 87.3016 % | RAM App: 138.434 MB | Sys Avail: 24873.9 MB / 65466.5 MB
+[ "17:04:36.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 86.7188 % | RAM App: 138.492 MB | Sys Avail: 24872.1 MB / 65466.5 MB
+[ "17:04:37.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.7917 % | RAM App: 138.547 MB | Sys Avail: 24776.7 MB / 65466.5 MB
+[ "17:04:38.853" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.6354 % | RAM App: 137.383 MB | Sys Avail: 24880 MB / 65466.5 MB
+[ "17:04:39.853" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.6354 % | RAM App: 137.426 MB | Sys Avail: 24907.2 MB / 65466.5 MB
+[ "17:04:40.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.1146 % | RAM App: 137.422 MB | Sys Avail: 24923.1 MB / 65466.5 MB
+[ "17:04:41.853" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 86.4583 % | RAM App: 137.457 MB | Sys Avail: 24825.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:04:42.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.625 % | RAM App: 137.543 MB | Sys Avail: 24828.6 MB / 65466.5 MB
+[ "17:04:43.887" ][SystemMonitor] Stats Update: CPU App: 0.505051 % | Sys: 82.8283 % | RAM App: 137.566 MB | Sys Avail: 24723.8 MB / 65466.5 MB
+[ "17:04:44.852" ][SystemMonitor] Stats Update: CPU App: 1.07527 % | Sys: 76.0753 % | RAM App: 137.586 MB | Sys Avail: 24870.3 MB / 65466.5 MB
+[ "17:04:45.853" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 80.9896 % | RAM App: 137.602 MB | Sys Avail: 24801.2 MB / 65466.5 MB
+[ "17:04:46.852" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 83.5938 % | RAM App: 137.727 MB | Sys Avail: 24907.8 MB / 65466.5 MB
+[ "17:04:47.852" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 80.4688 % | RAM App: 137.758 MB | Sys Avail: 24938.4 MB / 65466.5 MB
+[ "17:04:48.853" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 81.5104 % | RAM App: 137.777 MB | Sys Avail: 24816.2 MB / 65466.5 MB
+[ "17:04:49.851" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.25 % | RAM App: 137.801 MB | Sys Avail: 24900 MB / 65466.5 MB
+[ "17:04:50.870" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 80.7692 % | RAM App: 137.824 MB | Sys Avail: 24948.8 MB / 65466.5 MB
+[ "17:04:51.852" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 81.2169 % | RAM App: 137.844 MB | Sys Avail: 24948 MB / 65466.5 MB
+[ "17:04:52.852" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.8125 % | RAM App: 137.867 MB | Sys Avail: 24803.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:04:53.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 86.9792 % | RAM App: 137.887 MB | Sys Avail: 24947.9 MB / 65466.5 MB
+[ "17:04:54.852" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.5104 % | RAM App: 137.93 MB | Sys Avail: 24961.8 MB / 65466.5 MB
+[ "17:04:55.869" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 82.3077 % | RAM App: 137.984 MB | Sys Avail: 24958.8 MB / 65466.5 MB
+[ "17:04:56.870" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.8958 % | RAM App: 138.02 MB | Sys Avail: 24828.1 MB / 65466.5 MB
+[ "17:04:57.853" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 78.0423 % | RAM App: 138.039 MB | Sys Avail: 24964.7 MB / 65466.5 MB
+[ "17:04:58.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.2083 % | RAM App: 138.063 MB | Sys Avail: 24937.9 MB / 65466.5 MB
+[ "17:04:59.852" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 68.4896 % | RAM App: 138.078 MB | Sys Avail: 24965.6 MB / 65466.5 MB
+[ "17:05:00.870" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 65.8974 % | RAM App: 136.367 MB | Sys Avail: 24961.7 MB / 65466.5 MB
+[ "17:05:01.869" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.3229 % | RAM App: 136.57 MB | Sys Avail: 24962 MB / 65466.5 MB
+[ "17:05:02.870" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 98.1771 % | RAM App: 136.602 MB | Sys Avail: 24866.1 MB / 65466.5 MB
+[ "17:05:03.870" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 97.6563 % | RAM App: 136.703 MB | Sys Avail: 24946.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:05:04.853" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 100 % | RAM App: 136.441 MB | Sys Avail: 24930.2 MB / 65466.5 MB
+[ "17:05:05.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.3646 % | RAM App: 136.086 MB | Sys Avail: 24913.4 MB / 65466.5 MB
+[ "17:05:06.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 88.2813 % | RAM App: 135.91 MB | Sys Avail: 24913 MB / 65466.5 MB
+[ "17:05:07.871" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 90.7692 % | RAM App: 135.992 MB | Sys Avail: 24912.1 MB / 65466.5 MB
+[ "17:05:08.851" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 95.2381 % | RAM App: 136.086 MB | Sys Avail: 24888.1 MB / 65466.5 MB
+[ "17:05:09.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.4063 % | RAM App: 136.145 MB | Sys Avail: 24888.7 MB / 65466.5 MB
+[ "17:05:10.851" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.1042 % | RAM App: 136.172 MB | Sys Avail: 24884.4 MB / 65466.5 MB
+[ "17:05:11.871" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 92.3077 % | RAM App: 136.203 MB | Sys Avail: 24888 MB / 65466.5 MB
+[ "17:05:12.855" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 91.7989 % | RAM App: 136.254 MB | Sys Avail: 24972 MB / 65466.5 MB
+[ "17:05:13.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.8438 % | RAM App: 136.313 MB | Sys Avail: 24969.7 MB / 65466.5 MB
+[ "17:05:14.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.3229 % | RAM App: 136.34 MB | Sys Avail: 24970.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:05:15.853" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 90.3646 % | RAM App: 136.367 MB | Sys Avail: 24973.6 MB / 65466.5 MB
+[ "17:05:16.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.8854 % | RAM App: 136.469 MB | Sys Avail: 24974.9 MB / 65466.5 MB
+[ "17:05:17.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 88.8021 % | RAM App: 136.535 MB | Sys Avail: 24974.3 MB / 65466.5 MB
+[ "17:05:18.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 85.4167 % | RAM App: 136.594 MB | Sys Avail: 24975.5 MB / 65466.5 MB
+[ "17:05:19.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 79.4271 % | RAM App: 136.695 MB | Sys Avail: 24956.2 MB / 65466.5 MB
+[ "17:05:20.870" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 80.5128 % | RAM App: 136.719 MB | Sys Avail: 24950.9 MB / 65466.5 MB
+[ "17:05:21.853" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 81.2169 % | RAM App: 136.801 MB | Sys Avail: 24948 MB / 65466.5 MB
+[ "17:05:22.871" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 88.4615 % | RAM App: 136.945 MB | Sys Avail: 24897.8 MB / 65466.5 MB
+[ "17:05:23.854" ][SystemMonitor] Stats Update: CPU App: 2.1164 % | Sys: 83.0688 % | RAM App: 136.969 MB | Sys Avail: 24894.4 MB / 65466.5 MB
+[ "17:05:24.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 85.6771 % | RAM App: 136.984 MB | Sys Avail: 24897.2 MB / 65466.5 MB
+[ "17:05:25.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 85.1563 % | RAM App: 137.043 MB | Sys Avail: 24901.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:05:26.851" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 85.4167 % | RAM App: 137.125 MB | Sys Avail: 24904.7 MB / 65466.5 MB
+[ "17:05:27.872" ][SystemMonitor] Stats Update: CPU App: 1.79487 % | Sys: 84.8718 % | RAM App: 137.156 MB | Sys Avail: 24889.1 MB / 65466.5 MB
+[ "17:05:28.854" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 87.3016 % | RAM App: 136.273 MB | Sys Avail: 24888.9 MB / 65466.5 MB
+[ "17:05:29.871" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 77.9487 % | RAM App: 136.23 MB | Sys Avail: 24889 MB / 65466.5 MB
+[ "17:05:30.870" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 87.2396 % | RAM App: 136.23 MB | Sys Avail: 25122.9 MB / 65466.5 MB
+[ "17:05:31.854" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 82.8042 % | RAM App: 136.23 MB | Sys Avail: 25137 MB / 65466.5 MB
+[ "17:05:32.854" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 97.1354 % | RAM App: 136.262 MB | Sys Avail: 25063.6 MB / 65466.5 MB
+[ "17:05:33.854" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 86.9792 % | RAM App: 136.297 MB | Sys Avail: 25171.3 MB / 65466.5 MB
+[ "17:05:34.854" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 89.8438 % | RAM App: 136.332 MB | Sys Avail: 25225.5 MB / 65466.5 MB
+[ "17:05:35.854" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.9479 % | RAM App: 136.371 MB | Sys Avail: 25236.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:05:36.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 76.0417 % | RAM App: 136.387 MB | Sys Avail: 25235.2 MB / 65466.5 MB
+[ "17:05:37.854" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 82.2917 % | RAM App: 136.387 MB | Sys Avail: 25202.6 MB / 65466.5 MB
+[ "17:05:38.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 85.1563 % | RAM App: 136.387 MB | Sys Avail: 25217 MB / 65466.5 MB
+[ "17:05:39.855" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 87.5 % | RAM App: 136.449 MB | Sys Avail: 25211.3 MB / 65466.5 MB
+[ "17:05:40.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 78.9063 % | RAM App: 136.512 MB | Sys Avail: 25216.1 MB / 65466.5 MB
+[ "17:05:41.853" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 82.0313 % | RAM App: 136.543 MB | Sys Avail: 25226.8 MB / 65466.5 MB
+[ "17:05:42.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 76.5625 % | RAM App: 136.555 MB | Sys Avail: 25227.5 MB / 65466.5 MB
+[ "17:05:43.852" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.6354 % | RAM App: 136.605 MB | Sys Avail: 25221.5 MB / 65466.5 MB
+[ "17:05:44.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 86.1979 % | RAM App: 136.684 MB | Sys Avail: 25116.6 MB / 65466.5 MB
+[ "17:05:45.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.4063 % | RAM App: 136.691 MB | Sys Avail: 25094.5 MB / 65466.5 MB
+[ "17:05:46.871" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 88.7179 % | RAM App: 136.719 MB | Sys Avail: 24953.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:05:47.855" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 89.1534 % | RAM App: 136.758 MB | Sys Avail: 24879.5 MB / 65466.5 MB
+[ "17:05:48.855" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 92.1875 % | RAM App: 136.809 MB | Sys Avail: 24880.6 MB / 65466.5 MB
+[ "17:05:49.855" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.625 % | RAM App: 136.895 MB | Sys Avail: 24772.2 MB / 65466.5 MB
+[ "17:05:50.850" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.7083 % | RAM App: 136.918 MB | Sys Avail: 24719.4 MB / 65466.5 MB
+[ "17:05:51.854" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.5833 % | RAM App: 136.934 MB | Sys Avail: 24666.9 MB / 65466.5 MB
+[ "17:05:52.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 90.1042 % | RAM App: 136.957 MB | Sys Avail: 24659 MB / 65466.5 MB
+[ "17:05:53.851" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 93.75 % | RAM App: 136.977 MB | Sys Avail: 24557 MB / 65466.5 MB
+[ "17:05:54.855" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 90.625 % | RAM App: 137.012 MB | Sys Avail: 24541.5 MB / 65466.5 MB
+[ "17:05:55.855" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 89.8438 % | RAM App: 137.035 MB | Sys Avail: 24577.5 MB / 65466.5 MB
+[ "17:05:56.854" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 96.6146 % | RAM App: 137.055 MB | Sys Avail: 24602.1 MB / 65466.5 MB
+[ "17:05:57.852" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 96.3542 % | RAM App: 137.074 MB | Sys Avail: 24574.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:05:58.855" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 97.6563 % | RAM App: 137.098 MB | Sys Avail: 24401.6 MB / 65466.5 MB
+[ "17:05:59.855" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 90.3646 % | RAM App: 137.121 MB | Sys Avail: 24536.2 MB / 65466.5 MB
+[ "17:06:00.854" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.6354 % | RAM App: 137.145 MB | Sys Avail: 24611.3 MB / 65466.5 MB
+[ "17:06:01.873" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 84.8718 % | RAM App: 137.168 MB | Sys Avail: 24610.9 MB / 65466.5 MB
+[ "17:06:02.855" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 96.0317 % | RAM App: 137.195 MB | Sys Avail: 24504.6 MB / 65466.5 MB
+[ "17:06:03.855" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.1458 % | RAM App: 137.156 MB | Sys Avail: 24574.5 MB / 65466.5 MB
+[ "17:06:04.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 94.7917 % | RAM App: 137.184 MB | Sys Avail: 24564.8 MB / 65466.5 MB
+[ "17:06:05.854" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 96.875 % | RAM App: 137.207 MB | Sys Avail: 24568.4 MB / 65466.5 MB
+[ "17:06:06.855" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.7083 % | RAM App: 137.234 MB | Sys Avail: 24547.5 MB / 65466.5 MB
+[ "17:06:07.854" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 89.0625 % | RAM App: 137.262 MB | Sys Avail: 24560.5 MB / 65466.5 MB
+[ "17:06:08.855" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.4271 % | RAM App: 137.285 MB | Sys Avail: 24556.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:06:09.849" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.625 % | RAM App: 137.301 MB | Sys Avail: 24566.2 MB / 65466.5 MB
+[ "17:06:10.855" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 78.9063 % | RAM App: 137.332 MB | Sys Avail: 24559.6 MB / 65466.5 MB
+[ "17:06:11.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 78.9063 % | RAM App: 137.355 MB | Sys Avail: 24563.6 MB / 65466.5 MB
+[ "17:06:12.856" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.2917 % | RAM App: 137.375 MB | Sys Avail: 24513.5 MB / 65466.5 MB
+[ "17:06:13.856" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 80.7292 % | RAM App: 137.395 MB | Sys Avail: 24478.2 MB / 65466.5 MB
+[ "17:06:14.850" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 86.1979 % | RAM App: 137.422 MB | Sys Avail: 24562.7 MB / 65466.5 MB
+[ "17:06:15.855" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.5833 % | RAM App: 137.449 MB | Sys Avail: 24587.8 MB / 65466.5 MB
+[ "17:06:16.855" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 97.9167 % | RAM App: 137.477 MB | Sys Avail: 24597.6 MB / 65466.5 MB
+[ "17:06:17.855" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 92.1875 % | RAM App: 137.5 MB | Sys Avail: 24576.7 MB / 65466.5 MB
+[ "17:06:18.856" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.8021 % | RAM App: 137.527 MB | Sys Avail: 24578.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 30
+[ "17:06:19.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.1979 % | RAM App: 137.547 MB | Sys Avail: 24586.2 MB / 65466.5 MB
+[ "17:06:20.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.8854 % | RAM App: 137.574 MB | Sys Avail: 24591.1 MB / 65466.5 MB
+[ "17:06:21.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.5833 % | RAM App: 137.598 MB | Sys Avail: 24583 MB / 65466.5 MB
+[ "17:06:22.856" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.5313 % | RAM App: 137.625 MB | Sys Avail: 24608.7 MB / 65466.5 MB
+[ "17:06:23.852" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 93.75 % | RAM App: 137.676 MB | Sys Avail: 24598.8 MB / 65466.5 MB
+[ "17:06:24.856" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 86.7188 % | RAM App: 137.711 MB | Sys Avail: 24596.3 MB / 65466.5 MB
+[ "17:06:25.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.8021 % | RAM App: 137.734 MB | Sys Avail: 24605.8 MB / 65466.5 MB
+[ "17:06:26.856" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.4583 % | RAM App: 137.809 MB | Sys Avail: 24607.8 MB / 65466.5 MB
+[ "17:06:27.855" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.3229 % | RAM App: 137.836 MB | Sys Avail: 24617 MB / 65466.5 MB
+[ "17:06:28.852" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.6354 % | RAM App: 136.914 MB | Sys Avail: 24611.5 MB / 65466.5 MB
+[ "17:06:29.856" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 82.8125 % | RAM App: 136.914 MB | Sys Avail: 24515.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:06:30.851" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.1146 % | RAM App: 136.914 MB | Sys Avail: 24606.3 MB / 65466.5 MB
+[ "17:06:31.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 83.0729 % | RAM App: 136.914 MB | Sys Avail: 24603 MB / 65466.5 MB
+[ "17:06:32.856" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 95.0521 % | RAM App: 136.93 MB | Sys Avail: 24499.2 MB / 65466.5 MB
+[ "17:06:33.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.2292 % | RAM App: 136.938 MB | Sys Avail: 24603 MB / 65466.5 MB
+[ "17:06:34.855" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.0104 % | RAM App: 136.953 MB | Sys Avail: 24609 MB / 65466.5 MB
+[ "17:06:35.851" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.5104 % | RAM App: 136.953 MB | Sys Avail: 24589.1 MB / 65466.5 MB
+[ "17:06:36.856" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 83.5938 % | RAM App: 136.953 MB | Sys Avail: 24458.3 MB / 65466.5 MB
+[ "17:06:37.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 85.9375 % | RAM App: 136.953 MB | Sys Avail: 24604.4 MB / 65466.5 MB
+[ "17:06:38.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 75.5208 % | RAM App: 136.953 MB | Sys Avail: 24617 MB / 65466.5 MB
+[ "17:06:39.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 67.4479 % | RAM App: 136.953 MB | Sys Avail: 24613.4 MB / 65466.5 MB
+[ "17:06:40.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 88.2813 % | RAM App: 136.953 MB | Sys Avail: 24613.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:06:41.852" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.2292 % | RAM App: 136.953 MB | Sys Avail: 24617 MB / 65466.5 MB
+[ "17:06:42.857" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.9271 % | RAM App: 136.953 MB | Sys Avail: 24680.2 MB / 65466.5 MB
+[ "17:06:43.857" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 89.0625 % | RAM App: 136.957 MB | Sys Avail: 24664.3 MB / 65466.5 MB
+[ "17:06:44.855" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 91.1458 % | RAM App: 136.957 MB | Sys Avail: 24664.8 MB / 65466.5 MB
+[ "17:06:45.857" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.8333 % | RAM App: 136.957 MB | Sys Avail: 24670.3 MB / 65466.5 MB
+[ "17:06:46.857" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.3958 % | RAM App: 136.969 MB | Sys Avail: 24705.4 MB / 65466.5 MB
+[ "17:06:47.857" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 98.6979 % | RAM App: 136.992 MB | Sys Avail: 24977.1 MB / 65466.5 MB
+[ "17:06:48.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 97.1354 % | RAM App: 137.012 MB | Sys Avail: 25120.3 MB / 65466.5 MB
+[ "17:06:49.854" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.1875 % | RAM App: 137.031 MB | Sys Avail: 25119.3 MB / 65466.5 MB
+[ "17:06:50.873" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 92.5641 % | RAM App: 137.055 MB | Sys Avail: 25101.9 MB / 65466.5 MB
+[ "17:06:51.853" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 96.0317 % | RAM App: 137.074 MB | Sys Avail: 25118.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:06:52.865" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 89.4872 % | RAM App: 137.094 MB | Sys Avail: 25121 MB / 65466.5 MB
+[ "17:06:53.856" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 90.7407 % | RAM App: 137.113 MB | Sys Avail: 25117.4 MB / 65466.5 MB
+[ "17:06:54.873" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 91.7949 % | RAM App: 137.137 MB | Sys Avail: 25117.8 MB / 65466.5 MB
+[ "17:06:55.857" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 89.6825 % | RAM App: 137.164 MB | Sys Avail: 25117.4 MB / 65466.5 MB
+[ "17:06:56.859" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 93.4896 % | RAM App: 137.184 MB | Sys Avail: 25121.6 MB / 65466.5 MB
+[ "17:06:57.852" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.6354 % | RAM App: 137.211 MB | Sys Avail: 25128.4 MB / 65466.5 MB
+[ "17:06:58.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.1458 % | RAM App: 137.234 MB | Sys Avail: 25139.1 MB / 65466.5 MB
+[ "17:06:59.854" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 92.4479 % | RAM App: 137.254 MB | Sys Avail: 25286.2 MB / 65466.5 MB
+[ "17:07:00.858" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.1042 % | RAM App: 137.273 MB | Sys Avail: 25098.8 MB / 65466.5 MB
+[ "17:07:01.856" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.3646 % | RAM App: 137.297 MB | Sys Avail: 25076.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:07:02.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 96.6146 % | RAM App: 137.316 MB | Sys Avail: 24961.2 MB / 65466.5 MB
+[ "17:07:03.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.2708 % | RAM App: 137.336 MB | Sys Avail: 25023.5 MB / 65466.5 MB
+[ "17:07:04.856" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 96.3542 % | RAM App: 137.359 MB | Sys Avail: 25027.6 MB / 65466.5 MB
+[ "17:07:05.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 89.3229 % | RAM App: 137.379 MB | Sys Avail: 24991.8 MB / 65466.5 MB
+[ "17:07:06.856" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.625 % | RAM App: 137.398 MB | Sys Avail: 24997.3 MB / 65466.5 MB
+[ "17:07:07.857" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 93.75 % | RAM App: 137.422 MB | Sys Avail: 24989.7 MB / 65466.5 MB
+[ "17:07:08.874" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 91.5385 % | RAM App: 137.441 MB | Sys Avail: 24984.8 MB / 65466.5 MB
+[ "17:07:09.856" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 90.7407 % | RAM App: 137.461 MB | Sys Avail: 24805.2 MB / 65466.5 MB
+[ "17:07:10.858" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.5417 % | RAM App: 137.484 MB | Sys Avail: 24897.4 MB / 65466.5 MB
+[ "17:07:11.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.9271 % | RAM App: 137.504 MB | Sys Avail: 24692.5 MB / 65466.5 MB
+[ "17:07:12.856" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 89.0625 % | RAM App: 137.523 MB | Sys Avail: 24833.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:07:13.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 85.1563 % | RAM App: 137.547 MB | Sys Avail: 24821.6 MB / 65466.5 MB
+[ "17:07:14.857" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 84.375 % | RAM App: 137.695 MB | Sys Avail: 24828.8 MB / 65466.5 MB
+[ "17:07:15.857" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 79.4271 % | RAM App: 137.727 MB | Sys Avail: 24847.5 MB / 65466.5 MB
+[ "17:07:16.857" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 81.5104 % | RAM App: 137.754 MB | Sys Avail: 24849.5 MB / 65466.5 MB
+[ "17:07:17.861" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.8958 % | RAM App: 137.781 MB | Sys Avail: 24853.3 MB / 65466.5 MB
+[ "17:07:18.857" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.9479 % | RAM App: 137.809 MB | Sys Avail: 24854.6 MB / 65466.5 MB
+[ "17:07:19.853" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 80.9896 % | RAM App: 137.828 MB | Sys Avail: 24861.5 MB / 65466.5 MB
+[ "17:07:20.852" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 76.0417 % | RAM App: 137.852 MB | Sys Avail: 24859 MB / 65466.5 MB
+[ "17:07:21.851" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.8125 % | RAM App: 137.875 MB | Sys Avail: 24860.2 MB / 65466.5 MB
+[ "17:07:22.849" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 85.6771 % | RAM App: 137.902 MB | Sys Avail: 24862.9 MB / 65466.5 MB
+[ "17:07:23.857" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.2083 % | RAM App: 137.926 MB | Sys Avail: 24865.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:07:24.879" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 81.2821 % | RAM App: 137.957 MB | Sys Avail: 24866 MB / 65466.5 MB
+[ "17:07:25.858" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 89.418 % | RAM App: 137.98 MB | Sys Avail: 24859.7 MB / 65466.5 MB
+[ "17:07:26.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 80.4688 % | RAM App: 138.008 MB | Sys Avail: 24860.3 MB / 65466.5 MB
+[ "17:07:27.858" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 91.1458 % | RAM App: 138.031 MB | Sys Avail: 24860.6 MB / 65466.5 MB
+[ "17:07:28.857" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 76.5625 % | RAM App: 137.113 MB | Sys Avail: 24883.4 MB / 65466.5 MB
+[ "17:07:29.874" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 84.1026 % | RAM App: 137.113 MB | Sys Avail: 25028.4 MB / 65466.5 MB
+[ "17:07:30.874" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 85.6771 % | RAM App: 137.117 MB | Sys Avail: 25161.1 MB / 65466.5 MB
+[ "17:07:31.858" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 78.836 % | RAM App: 137.117 MB | Sys Avail: 25172.1 MB / 65466.5 MB
+[ "17:07:32.858" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 98.4375 % | RAM App: 137.133 MB | Sys Avail: 25073.1 MB / 65466.5 MB
+[ "17:07:33.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 96.6146 % | RAM App: 137.156 MB | Sys Avail: 25193.6 MB / 65466.5 MB
+[ "17:07:34.858" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 93.2292 % | RAM App: 137.176 MB | Sys Avail: 25090.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:07:35.852" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 79.6875 % | RAM App: 137.176 MB | Sys Avail: 25117.9 MB / 65466.5 MB
+[ "17:07:36.858" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 85.6771 % | RAM App: 137.176 MB | Sys Avail: 25132.5 MB / 65466.5 MB
+[ "17:07:37.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.2292 % | RAM App: 137.176 MB | Sys Avail: 25139.6 MB / 65466.5 MB
+[ "17:07:38.874" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 93.8462 % | RAM App: 137.176 MB | Sys Avail: 25139.5 MB / 65466.5 MB
+[ "17:07:39.851" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 90.4762 % | RAM App: 137.176 MB | Sys Avail: 25111.6 MB / 65466.5 MB
+[ "17:07:40.858" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 76.3021 % | RAM App: 137.18 MB | Sys Avail: 25112.2 MB / 65466.5 MB
+[ "17:07:41.859" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.8125 % | RAM App: 137.18 MB | Sys Avail: 25234.7 MB / 65466.5 MB
+[ "17:07:42.858" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.4063 % | RAM App: 137.184 MB | Sys Avail: 25329.8 MB / 65466.5 MB
+[ "17:07:43.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.9792 % | RAM App: 137.184 MB | Sys Avail: 25359.1 MB / 65466.5 MB
+[ "17:07:44.859" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.9896 % | RAM App: 137.188 MB | Sys Avail: 25366.3 MB / 65466.5 MB
+[ "17:07:45.908" ][SystemMonitor] Stats Update: CPU App: 1.24378 % | Sys: 88.806 % | RAM App: 137.188 MB | Sys Avail: 25351 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 26
+[ "17:07:46.858" ][SystemMonitor] Stats Update: CPU App: 0.546448 % | Sys: 86.612 % | RAM App: 137.215 MB | Sys Avail: 25341.9 MB / 65466.5 MB
+[ "17:07:47.858" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.5938 % | RAM App: 137.238 MB | Sys Avail: 25343.9 MB / 65466.5 MB
+[ "17:07:48.861" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.4583 % | RAM App: 137.273 MB | Sys Avail: 25326.3 MB / 65466.5 MB
+[ "17:07:49.851" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 95.0521 % | RAM App: 137.512 MB | Sys Avail: 25273.1 MB / 65466.5 MB
+[ "17:07:50.858" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 96.0938 % | RAM App: 137.531 MB | Sys Avail: 25206.5 MB / 65466.5 MB
+[ "17:07:51.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 77.8646 % | RAM App: 137.551 MB | Sys Avail: 25201.6 MB / 65466.5 MB
+[ "17:07:52.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.2083 % | RAM App: 137.574 MB | Sys Avail: 25204 MB / 65466.5 MB
+[ "17:07:53.866" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 91.4063 % | RAM App: 137.594 MB | Sys Avail: 25178.8 MB / 65466.5 MB
+[ "17:07:54.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.8333 % | RAM App: 137.613 MB | Sys Avail: 25138.7 MB / 65466.5 MB
+[ "17:07:55.859" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.5417 % | RAM App: 137.637 MB | Sys Avail: 25151 MB / 65466.5 MB
+[ "17:07:56.853" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 96.3542 % | RAM App: 137.66 MB | Sys Avail: 25146.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:07:57.853" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 98.6979 % | RAM App: 137.676 MB | Sys Avail: 25113.3 MB / 65466.5 MB
+[ "17:07:58.860" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 90.3646 % | RAM App: 137.699 MB | Sys Avail: 25144.5 MB / 65466.5 MB
+[ "17:07:59.876" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 97.9487 % | RAM App: 137.719 MB | Sys Avail: 25124.4 MB / 65466.5 MB
+[ "17:08:00.859" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 94.4444 % | RAM App: 137.738 MB | Sys Avail: 25168 MB / 65466.5 MB
+[ "17:08:01.853" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 90.625 % | RAM App: 137.762 MB | Sys Avail: 25160.8 MB / 65466.5 MB
+[ "17:08:02.856" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 97.6563 % | RAM App: 137.781 MB | Sys Avail: 25070.6 MB / 65466.5 MB
+[ "17:08:03.859" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.7083 % | RAM App: 137.859 MB | Sys Avail: 24896.3 MB / 65466.5 MB
+[ "17:08:04.852" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 95.5729 % | RAM App: 137.938 MB | Sys Avail: 24763.5 MB / 65466.5 MB
+[ "17:08:05.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 98.9583 % | RAM App: 137.957 MB | Sys Avail: 24620.4 MB / 65466.5 MB
+[ "17:08:06.859" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 98.6979 % | RAM App: 137.977 MB | Sys Avail: 24471 MB / 65466.5 MB
+[ "17:08:07.853" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 98.9583 % | RAM App: 138 MB | Sys Avail: 24327.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:08:08.858" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.5729 % | RAM App: 138.07 MB | Sys Avail: 24297.5 MB / 65466.5 MB
+[ "17:08:09.851" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 100 % | RAM App: 138.105 MB | Sys Avail: 24600.8 MB / 65466.5 MB
+[ "17:08:10.876" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 99.4872 % | RAM App: 138.184 MB | Sys Avail: 24922.1 MB / 65466.5 MB
+[ "17:08:11.859" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 99.7354 % | RAM App: 138.207 MB | Sys Avail: 24919.7 MB / 65466.5 MB
+[ "17:08:12.860" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 100 % | RAM App: 138.223 MB | Sys Avail: 24852 MB / 65466.5 MB
+[ "17:08:13.851" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 98.9583 % | RAM App: 138.246 MB | Sys Avail: 24847.1 MB / 65466.5 MB
+[ "17:08:14.860" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 98.9583 % | RAM App: 138.32 MB | Sys Avail: 24838.3 MB / 65466.5 MB
+[ "17:08:15.859" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 96.3542 % | RAM App: 138.336 MB | Sys Avail: 24687.6 MB / 65466.5 MB
+[ "17:08:16.856" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 96.875 % | RAM App: 138.355 MB | Sys Avail: 24820.9 MB / 65466.5 MB
+[ "17:08:17.853" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 94.5313 % | RAM App: 138.379 MB | Sys Avail: 24714.8 MB / 65466.5 MB
+[ "17:08:18.858" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.5313 % | RAM App: 138.414 MB | Sys Avail: 24756.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:08:19.859" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 95.0521 % | RAM App: 138.453 MB | Sys Avail: 24689.4 MB / 65466.5 MB
+[ "17:08:20.876" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 94.359 % | RAM App: 138.527 MB | Sys Avail: 24644.5 MB / 65466.5 MB
+[ "17:08:21.859" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 90.7407 % | RAM App: 138.551 MB | Sys Avail: 24604.9 MB / 65466.5 MB
+[ "17:08:22.859" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.2708 % | RAM App: 138.648 MB | Sys Avail: 24660.6 MB / 65466.5 MB
+[ "17:08:23.860" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.9688 % | RAM App: 138.668 MB | Sys Avail: 24612.6 MB / 65466.5 MB
+[ "17:08:24.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.9688 % | RAM App: 138.707 MB | Sys Avail: 24525.8 MB / 65466.5 MB
+[ "17:08:25.854" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.0104 % | RAM App: 138.723 MB | Sys Avail: 24605.6 MB / 65466.5 MB
+[ "17:08:26.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.4479 % | RAM App: 138.762 MB | Sys Avail: 24585.1 MB / 65466.5 MB
+[ "17:08:27.862" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 94.0104 % | RAM App: 138.781 MB | Sys Avail: 24581.3 MB / 65466.5 MB
+[ "17:08:28.859" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 96.6146 % | RAM App: 137.875 MB | Sys Avail: 24370.7 MB / 65466.5 MB
+[ "17:08:29.859" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 97.3958 % | RAM App: 137.875 MB | Sys Avail: 24443.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:08:30.878" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 97.9487 % | RAM App: 137.891 MB | Sys Avail: 24491 MB / 65466.5 MB
+[ "17:08:31.860" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 84.3915 % | RAM App: 137.891 MB | Sys Avail: 24429.4 MB / 65466.5 MB
+[ "17:08:32.856" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 90.625 % | RAM App: 137.91 MB | Sys Avail: 24371 MB / 65466.5 MB
+[ "17:08:33.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.9479 % | RAM App: 137.93 MB | Sys Avail: 24317.7 MB / 65466.5 MB
+[ "17:08:34.860" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 98.1771 % | RAM App: 137.945 MB | Sys Avail: 24395.1 MB / 65466.5 MB
+[ "17:08:35.854" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 96.875 % | RAM App: 137.945 MB | Sys Avail: 24411.5 MB / 65466.5 MB
+[ "17:08:36.859" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 98.4375 % | RAM App: 137.953 MB | Sys Avail: 24571.6 MB / 65466.5 MB
+[ "17:08:37.860" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 95.0521 % | RAM App: 137.953 MB | Sys Avail: 24554.3 MB / 65466.5 MB
+[ "17:08:38.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.3958 % | RAM App: 138.109 MB | Sys Avail: 24491.7 MB / 65466.5 MB
+[ "17:08:39.866" ][SystemMonitor] Stats Update: CPU App: 1.79487 % | Sys: 94.8718 % | RAM App: 138.109 MB | Sys Avail: 24509.8 MB / 65466.5 MB
+[ "17:08:40.858" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 95.2381 % | RAM App: 138.117 MB | Sys Avail: 24512.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 25
+[ "17:08:41.861" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 96.875 % | RAM App: 138.117 MB | Sys Avail: 24506.7 MB / 65466.5 MB
+[ "17:08:42.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 96.3542 % | RAM App: 138.121 MB | Sys Avail: 24636.4 MB / 65466.5 MB
+Retrying to obtain clipboard.
+Retrying to obtain clipboard.
+Unable to obtain clipboard.
+Retrying to obtain clipboard.
+[ "17:08:43.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 98.4375 % | RAM App: 138.129 MB | Sys Avail: 24626.8 MB / 65466.5 MB
+[ "17:08:44.856" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 94.2708 % | RAM App: 138.129 MB | Sys Avail: 24631 MB / 65466.5 MB
+[ "17:08:45.854" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 91.4063 % | RAM App: 138.129 MB | Sys Avail: 24644.2 MB / 65466.5 MB
+[ "17:08:46.860" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.5313 % | RAM App: 138.152 MB | Sys Avail: 24685.8 MB / 65466.5 MB
+[ "17:08:47.882" ][SystemMonitor] Stats Update: CPU App: 1.0101 % | Sys: 94.697 % | RAM App: 138.172 MB | Sys Avail: 24683.3 MB / 65466.5 MB
+[ "17:08:48.859" ][SystemMonitor] Stats Update: CPU App: 1.6129 % | Sys: 94.3548 % | RAM App: 138.191 MB | Sys Avail: 24721.2 MB / 65466.5 MB
+[ "17:08:49.862" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 95.8333 % | RAM App: 138.211 MB | Sys Avail: 24752.7 MB / 65466.5 MB
+[ "17:08:50.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.0104 % | RAM App: 138.234 MB | Sys Avail: 24746.7 MB / 65466.5 MB
+[ "17:08:51.860" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 94.5313 % | RAM App: 138.254 MB | Sys Avail: 24756.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:08:52.851" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 95.0521 % | RAM App: 138.277 MB | Sys Avail: 24756.8 MB / 65466.5 MB
+[ "17:08:53.866" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 85.3846 % | RAM App: 138.297 MB | Sys Avail: 24755.1 MB / 65466.5 MB
+[ "17:08:54.849" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 83.8624 % | RAM App: 138.316 MB | Sys Avail: 24749.6 MB / 65466.5 MB
+[ "17:08:55.862" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 80.9896 % | RAM App: 138.34 MB | Sys Avail: 24751.6 MB / 65466.5 MB
+[ "17:08:56.857" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 85.1563 % | RAM App: 138.359 MB | Sys Avail: 24756.2 MB / 65466.5 MB
+[ "17:08:57.860" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 86.7188 % | RAM App: 138.379 MB | Sys Avail: 24756.3 MB / 65466.5 MB
+[ "17:08:58.860" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 83.0729 % | RAM App: 138.402 MB | Sys Avail: 24753.8 MB / 65466.5 MB
+[ "17:08:59.861" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.6667 % | RAM App: 138.422 MB | Sys Avail: 24753.4 MB / 65466.5 MB
+[ "17:09:00.863" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 90.8854 % | RAM App: 138.441 MB | Sys Avail: 24752.8 MB / 65466.5 MB
+[ "17:09:01.861" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 88.2813 % | RAM App: 138.465 MB | Sys Avail: 24753.4 MB / 65466.5 MB
+[ "17:09:02.879" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 95.3846 % | RAM App: 138.488 MB | Sys Avail: 24657 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:09:03.861" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 91.2698 % | RAM App: 138.508 MB | Sys Avail: 24735.9 MB / 65466.5 MB
+[ "17:09:04.861" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 93.2292 % | RAM App: 138.531 MB | Sys Avail: 24747.1 MB / 65466.5 MB
+[ "17:09:05.861" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 88.5417 % | RAM App: 138.551 MB | Sys Avail: 24738 MB / 65466.5 MB
+[ "17:09:06.861" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 78.6458 % | RAM App: 138.57 MB | Sys Avail: 24740.1 MB / 65466.5 MB
+Retrying to obtain clipboard.
+[ "17:09:07.862" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 87.7604 % | RAM App: 138.594 MB | Sys Avail: 24739.9 MB / 65466.5 MB
+[ "17:09:08.856" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.8854 % | RAM App: 138.613 MB | Sys Avail: 24726.9 MB / 65466.5 MB
+[ "17:09:09.853" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 91.1458 % | RAM App: 138.633 MB | Sys Avail: 24734.7 MB / 65466.5 MB
+[ "17:09:10.861" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 89.5833 % | RAM App: 138.727 MB | Sys Avail: 24732.5 MB / 65466.5 MB
+[ "17:09:11.862" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 89.8438 % | RAM App: 138.746 MB | Sys Avail: 24702.9 MB / 65466.5 MB
+[ "17:09:12.857" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 88.0208 % | RAM App: 138.773 MB | Sys Avail: 24701.3 MB / 65466.5 MB
+[ "17:09:13.860" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 87.2396 % | RAM App: 138.797 MB | Sys Avail: 24698.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:09:14.861" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 85.9375 % | RAM App: 138.824 MB | Sys Avail: 24704.9 MB / 65466.5 MB
+[ "17:09:15.862" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.8125 % | RAM App: 138.844 MB | Sys Avail: 24703.7 MB / 65466.5 MB
+[ "17:09:16.861" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 86.4583 % | RAM App: 138.875 MB | Sys Avail: 24712.4 MB / 65466.5 MB
+[ "17:09:17.862" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.375 % | RAM App: 138.895 MB | Sys Avail: 24713.2 MB / 65466.5 MB
+[ "17:09:18.878" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 84.6154 % | RAM App: 138.922 MB | Sys Avail: 24712.8 MB / 65466.5 MB
+[ "17:09:19.863" ][SystemMonitor] Stats Update: CPU App: 1.85185 % | Sys: 91.0053 % | RAM App: 138.945 MB | Sys Avail: 24724.9 MB / 65466.5 MB
+[ "17:09:20.850" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 85.4167 % | RAM App: 138.973 MB | Sys Avail: 24737.8 MB / 65466.5 MB
+[ "17:09:21.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 86.9792 % | RAM App: 138.992 MB | Sys Avail: 24737.2 MB / 65466.5 MB
+[ "17:09:22.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 87.7604 % | RAM App: 139.074 MB | Sys Avail: 24743.7 MB / 65466.5 MB
+[ "17:09:23.861" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.7708 % | RAM App: 139.098 MB | Sys Avail: 24738.6 MB / 65466.5 MB
+[ "17:09:24.856" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 80.2083 % | RAM App: 139.121 MB | Sys Avail: 24738.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:09:25.863" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 88.2813 % | RAM App: 139.145 MB | Sys Avail: 24740.1 MB / 65466.5 MB
+[ "17:09:26.862" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 87.7604 % | RAM App: 139.297 MB | Sys Avail: 24741.4 MB / 65466.5 MB
+[ "17:09:27.852" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 90.625 % | RAM App: 139.313 MB | Sys Avail: 24739.1 MB / 65466.5 MB
+[ "17:09:28.861" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.375 % | RAM App: 136.57 MB | Sys Avail: 24742.6 MB / 65466.5 MB
+[ "17:09:29.851" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 81.7708 % | RAM App: 136.762 MB | Sys Avail: 24738.4 MB / 65466.5 MB
+[ "17:09:30.862" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.5833 % | RAM App: 136.813 MB | Sys Avail: 24741.4 MB / 65466.5 MB
+[ "17:09:31.861" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 83.0729 % | RAM App: 136.82 MB | Sys Avail: 24728.8 MB / 65466.5 MB
+[ "17:09:32.863" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 98.4375 % | RAM App: 136.848 MB | Sys Avail: 24566.2 MB / 65466.5 MB
+[ "17:09:33.861" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.6563 % | RAM App: 136.887 MB | Sys Avail: 24644.2 MB / 65466.5 MB
+[ "17:09:34.850" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 96.875 % | RAM App: 136.977 MB | Sys Avail: 24640.7 MB / 65466.5 MB
+[ "17:09:35.879" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 99.7436 % | RAM App: 136.992 MB | Sys Avail: 24582.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:09:36.856" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 100 % | RAM App: 137 MB | Sys Avail: 24576.3 MB / 65466.5 MB
+[ "17:09:37.863" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 100 % | RAM App: 137.02 MB | Sys Avail: 24566 MB / 65466.5 MB
+[ "17:09:38.850" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 100 % | RAM App: 137.027 MB | Sys Avail: 24527.7 MB / 65466.5 MB
+[ "17:09:39.874" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 99.7436 % | RAM App: 137.031 MB | Sys Avail: 24456.3 MB / 65466.5 MB
+[ "17:09:40.879" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 99.7396 % | RAM App: 137.039 MB | Sys Avail: 24430.7 MB / 65466.5 MB
+[ "17:09:41.855" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 100 % | RAM App: 137.055 MB | Sys Avail: 24436.1 MB / 65466.5 MB
+[ "17:09:42.862" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 137.063 MB | Sys Avail: 24376.7 MB / 65466.5 MB
+[ "17:09:43.893" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 100 % | RAM App: 137.09 MB | Sys Avail: 24404.1 MB / 65466.5 MB
+[ "17:09:44.862" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 100 % | RAM App: 137.09 MB | Sys Avail: 24450 MB / 65466.5 MB
+[ "17:09:45.864" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 100 % | RAM App: 137.113 MB | Sys Avail: 24395 MB / 65466.5 MB
+[ "17:09:46.862" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 89.3229 % | RAM App: 137.195 MB | Sys Avail: 24420 MB / 65466.5 MB
+[ "17:09:47.863" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 83.0729 % | RAM App: 137.234 MB | Sys Avail: 24417.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:09:48.862" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 99.4792 % | RAM App: 137.266 MB | Sys Avail: 24427.4 MB / 65466.5 MB
+[ "17:09:49.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.8854 % | RAM App: 137.313 MB | Sys Avail: 24405.9 MB / 65466.5 MB
+[ "17:09:50.863" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.625 % | RAM App: 137.344 MB | Sys Avail: 24376.6 MB / 65466.5 MB
+[ "17:09:51.862" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 88.5417 % | RAM App: 137.395 MB | Sys Avail: 24422.8 MB / 65466.5 MB
+[ "17:09:52.863" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.0729 % | RAM App: 137.426 MB | Sys Avail: 24425.5 MB / 65466.5 MB
+[ "17:09:53.853" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.4479 % | RAM App: 137.473 MB | Sys Avail: 24422.4 MB / 65466.5 MB
+[ "17:09:54.863" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 90.1042 % | RAM App: 137.504 MB | Sys Avail: 24419.9 MB / 65466.5 MB
+[ "17:09:55.854" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 82.0313 % | RAM App: 137.539 MB | Sys Avail: 24390.8 MB / 65466.5 MB
+[ "17:09:56.857" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 85.1563 % | RAM App: 137.574 MB | Sys Avail: 24388.5 MB / 65466.5 MB
+[ "17:09:57.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.3646 % | RAM App: 137.617 MB | Sys Avail: 24381.5 MB / 65466.5 MB
+[ "17:09:58.859" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 87.5 % | RAM App: 137.66 MB | Sys Avail: 24378.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:09:59.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.0313 % | RAM App: 137.699 MB | Sys Avail: 24383.7 MB / 65466.5 MB
+[ "17:10:00.880" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 92.3077 % | RAM App: 137.734 MB | Sys Avail: 24383.9 MB / 65466.5 MB
+[ "17:10:01.862" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 90.4762 % | RAM App: 137.777 MB | Sys Avail: 24266.6 MB / 65466.5 MB
+[ "17:10:02.862" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 96.6146 % | RAM App: 137.871 MB | Sys Avail: 24276.8 MB / 65466.5 MB
+[ "17:10:03.863" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.9271 % | RAM App: 137.895 MB | Sys Avail: 24302.7 MB / 65466.5 MB
+[ "17:10:04.861" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.5729 % | RAM App: 137.926 MB | Sys Avail: 24255.4 MB / 65466.5 MB
+[ "17:10:05.863" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 85.1563 % | RAM App: 137.988 MB | Sys Avail: 24254.1 MB / 65466.5 MB
+[ "17:10:06.862" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.6354 % | RAM App: 138.02 MB | Sys Avail: 24290.1 MB / 65466.5 MB
+[ "17:10:07.863" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.8542 % | RAM App: 138.047 MB | Sys Avail: 24289.1 MB / 65466.5 MB
+[ "17:10:08.863" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 87.5 % | RAM App: 138.074 MB | Sys Avail: 24382.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:10:09.863" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 92.9688 % | RAM App: 138.098 MB | Sys Avail: 24243 MB / 65466.5 MB
+[ "17:10:10.860" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.75 % | RAM App: 138.184 MB | Sys Avail: 24296.3 MB / 65466.5 MB
+[ "17:10:11.853" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.1354 % | RAM App: 138.203 MB | Sys Avail: 24257.7 MB / 65466.5 MB
+[ "17:10:12.863" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 92.9688 % | RAM App: 138.234 MB | Sys Avail: 24080.7 MB / 65466.5 MB
+[ "17:10:13.863" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 98.1771 % | RAM App: 138.258 MB | Sys Avail: 24004.8 MB / 65466.5 MB
+[ "17:10:14.889" ][SystemMonitor] Stats Update: CPU App: 1.5544 % | Sys: 90.3797 % | RAM App: 138.332 MB | Sys Avail: 23992.5 MB / 65466.5 MB
+[ "17:10:15.864" ][SystemMonitor] Stats Update: CPU App: 0.26178 % | Sys: 94.9062 % | RAM App: 138.355 MB | Sys Avail: 24220.3 MB / 65466.5 MB
+[ "17:10:16.860" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 99.2188 % | RAM App: 138.383 MB | Sys Avail: 24117.6 MB / 65466.5 MB
+[ "17:10:17.880" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 97.6623 % | RAM App: 138.41 MB | Sys Avail: 24090 MB / 65466.5 MB
+[ "17:10:18.862" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.9504 % | RAM App: 138.504 MB | Sys Avail: 23923.8 MB / 65466.5 MB
+[ "17:10:19.864" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 99.4792 % | RAM App: 138.531 MB | Sys Avail: 23846.4 MB / 65466.5 MB
+[ "17:10:20.864" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 96.875 % | RAM App: 138.566 MB | Sys Avail: 23974.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:10:21.863" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 99.4792 % | RAM App: 138.59 MB | Sys Avail: 24077.1 MB / 65466.5 MB
+[ "17:10:22.890" ][SystemMonitor] Stats Update: CPU App: 1.01266 % | Sys: 100 % | RAM App: 138.629 MB | Sys Avail: 24106.5 MB / 65466.5 MB
+[ "17:10:23.854" ][SystemMonitor] Stats Update: CPU App: 0.80429 % | Sys: 97.5806 % | RAM App: 138.648 MB | Sys Avail: 23984.9 MB / 65466.5 MB
+[ "17:10:24.858" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.9167 % | RAM App: 138.742 MB | Sys Avail: 23908.6 MB / 65466.5 MB
+[ "17:10:25.865" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.1354 % | RAM App: 138.766 MB | Sys Avail: 23880.9 MB / 65466.5 MB
+[ "17:10:26.864" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 94.0104 % | RAM App: 138.859 MB | Sys Avail: 24277.7 MB / 65466.5 MB
+[ "17:10:27.855" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 84.6354 % | RAM App: 138.879 MB | Sys Avail: 24146.7 MB / 65466.5 MB
+[ "17:10:28.863" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 88.8021 % | RAM App: 137.988 MB | Sys Avail: 24196.4 MB / 65466.5 MB
+[ "17:10:29.854" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 94.2708 % | RAM App: 138.008 MB | Sys Avail: 24368.8 MB / 65466.5 MB
+[ "17:10:30.864" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 92.9688 % | RAM App: 138.008 MB | Sys Avail: 24308.4 MB / 65466.5 MB
+[ "17:10:31.853" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 96.875 % | RAM App: 138.125 MB | Sys Avail: 24400.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:10:32.900" ][SystemMonitor] Stats Update: CPU App: 0.757576 % | Sys: 99.2424 % | RAM App: 138.145 MB | Sys Avail: 24309.9 MB / 65466.5 MB
+[ "17:10:33.851" ][SystemMonitor] Stats Update: CPU App: 0.268817 % | Sys: 100 % | RAM App: 138.164 MB | Sys Avail: 24343 MB / 65466.5 MB
+[ "17:10:34.864" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 99.2188 % | RAM App: 138.172 MB | Sys Avail: 24385 MB / 65466.5 MB
+[ "17:10:35.865" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 95.0521 % | RAM App: 138.172 MB | Sys Avail: 24292.9 MB / 65466.5 MB
+[ "17:10:36.863" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.2917 % | RAM App: 138.172 MB | Sys Avail: 24328.4 MB / 65466.5 MB
+[ "17:10:37.850" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 86.4583 % | RAM App: 138.172 MB | Sys Avail: 24343.1 MB / 65466.5 MB
+[ "17:10:38.865" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.1875 % | RAM App: 138.188 MB | Sys Avail: 24366.8 MB / 65466.5 MB
+[ "17:10:39.864" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 89.3229 % | RAM App: 138.188 MB | Sys Avail: 24371.4 MB / 65466.5 MB
+[ "17:10:40.857" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 67.9688 % | RAM App: 138.203 MB | Sys Avail: 24369.4 MB / 65466.5 MB
+[ "17:10:41.872" ][SystemMonitor] Stats Update: CPU App: 0.25974 % | Sys: 88.9744 % | RAM App: 138.207 MB | Sys Avail: 24363.4 MB / 65466.5 MB
+[ "17:10:42.850" ][SystemMonitor] Stats Update: CPU App: 0.522193 % | Sys: 93.1217 % | RAM App: 138.215 MB | Sys Avail: 24427 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:10:43.854" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.9167 % | RAM App: 138.215 MB | Sys Avail: 24415.8 MB / 65466.5 MB
+[ "17:10:44.859" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 93.2292 % | RAM App: 138.215 MB | Sys Avail: 24394.6 MB / 65466.5 MB
+[ "17:10:45.856" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 98.6979 % | RAM App: 138.223 MB | Sys Avail: 24365.9 MB / 65466.5 MB
+[ "17:10:46.870" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 100 % | RAM App: 138.25 MB | Sys Avail: 24323.1 MB / 65466.5 MB
+[ "17:10:47.864" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 100 % | RAM App: 138.273 MB | Sys Avail: 24301 MB / 65466.5 MB
+[ "17:10:48.852" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 138.301 MB | Sys Avail: 24222.6 MB / 65466.5 MB
+[ "17:10:49.906" ][SystemMonitor] Stats Update: CPU App: 0.746269 % | Sys: 100 % | RAM App: 138.332 MB | Sys Avail: 24242.4 MB / 65466.5 MB
+[ "17:10:50.851" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 100 % | RAM App: 138.355 MB | Sys Avail: 24213.8 MB / 65466.5 MB
+[ "17:10:51.900" ][SystemMonitor] Stats Update: CPU App: 0.995025 % | Sys: 99.005 % | RAM App: 138.379 MB | Sys Avail: 24137.3 MB / 65466.5 MB
+[ "17:10:52.871" ][SystemMonitor] Stats Update: CPU App: 0.273224 % | Sys: 100 % | RAM App: 138.402 MB | Sys Avail: 24119.4 MB / 65466.5 MB
+[ "17:10:53.864" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 100 % | RAM App: 138.426 MB | Sys Avail: 24087.1 MB / 65466.5 MB
+[ "17:10:54.880" ][SystemMonitor] Stats Update: CPU App: 2.52525 % | Sys: 100 % | RAM App: 138.449 MB | Sys Avail: 24047.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 25
+[ "17:10:55.972" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 138.461 MB | Sys Avail: 23988.5 MB / 65466.5 MB
+[ "17:10:56.865" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 99.711 % | RAM App: 138.484 MB | Sys Avail: 23960.5 MB / 65466.5 MB
+[ "17:10:57.888" ][SystemMonitor] Stats Update: CPU App: 1.26263 % | Sys: 100 % | RAM App: 138.504 MB | Sys Avail: 23966.5 MB / 65466.5 MB
+[ "17:10:58.882" ][SystemMonitor] Stats Update: CPU App: 1.04987 % | Sys: 100 % | RAM App: 138.527 MB | Sys Avail: 23946.6 MB / 65466.5 MB
+[ "17:10:59.864" ][SystemMonitor] Stats Update: CPU App: 0.8 % | Sys: 100 % | RAM App: 138.547 MB | Sys Avail: 23946.7 MB / 65466.5 MB
+[ "17:11:00.958" ][SystemMonitor] Stats Update: CPU App: 1.19048 % | Sys: 100 % | RAM App: 138.563 MB | Sys Avail: 23923.2 MB / 65466.5 MB
+[ "17:11:01.899" ][SystemMonitor] Stats Update: CPU App: 0.819672 % | Sys: 99.4536 % | RAM App: 138.582 MB | Sys Avail: 23946.9 MB / 65466.5 MB
+[ "17:11:02.898" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 99.7396 % | RAM App: 138.656 MB | Sys Avail: 23860.9 MB / 65466.5 MB
+[ "17:11:03.900" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 100 % | RAM App: 138.68 MB | Sys Avail: 23960.5 MB / 65466.5 MB
+[ "17:11:04.898" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 138.711 MB | Sys Avail: 23855.5 MB / 65466.5 MB
+[ "17:11:05.899" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 138.73 MB | Sys Avail: 23519.5 MB / 65466.5 MB
+[ "17:11:06.898" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 99.7396 % | RAM App: 138.758 MB | Sys Avail: 23870.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 25
+[ "17:11:07.899" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 99.4792 % | RAM App: 138.777 MB | Sys Avail: 23865.5 MB / 65466.5 MB
+[ "17:11:08.901" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 138.809 MB | Sys Avail: 23845.5 MB / 65466.5 MB
+[ "17:11:09.898" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 99.4792 % | RAM App: 138.828 MB | Sys Avail: 23851.8 MB / 65466.5 MB
+[ "17:11:10.899" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 98.9583 % | RAM App: 138.855 MB | Sys Avail: 23863.6 MB / 65466.5 MB
+[ "17:11:11.925" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 99.2308 % | RAM App: 138.883 MB | Sys Avail: 23800.3 MB / 65466.5 MB
+[ "17:11:12.899" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 99.7354 % | RAM App: 138.91 MB | Sys Avail: 23816.2 MB / 65466.5 MB
+[ "17:11:13.899" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 99.7396 % | RAM App: 138.93 MB | Sys Avail: 23823.4 MB / 65466.5 MB
+[ "17:11:14.898" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 99.4792 % | RAM App: 138.957 MB | Sys Avail: 23832.9 MB / 65466.5 MB
+[ "17:11:15.898" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 99.4792 % | RAM App: 138.977 MB | Sys Avail: 23798.8 MB / 65466.5 MB
+[ "17:11:16.900" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 100 % | RAM App: 139.004 MB | Sys Avail: 23791.7 MB / 65466.5 MB
+[ "17:11:17.898" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 139.023 MB | Sys Avail: 23793.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 26
+[ "17:11:18.899" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 99.4792 % | RAM App: 139.047 MB | Sys Avail: 23804.1 MB / 65466.5 MB
+[ "17:11:19.898" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 99.4792 % | RAM App: 139.07 MB | Sys Avail: 23788.5 MB / 65466.5 MB
+[ "17:11:20.917" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 99.4872 % | RAM App: 139.094 MB | Sys Avail: 23795.8 MB / 65466.5 MB
+[ "17:11:21.915" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 100 % | RAM App: 139.117 MB | Sys Avail: 23792.7 MB / 65466.5 MB
+[ "17:11:22.898" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 100 % | RAM App: 139.199 MB | Sys Avail: 23787 MB / 65466.5 MB
+[ "17:11:23.898" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 99.2188 % | RAM App: 139.234 MB | Sys Avail: 23786.4 MB / 65466.5 MB
+[ "17:11:24.899" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 139.316 MB | Sys Avail: 23787.8 MB / 65466.5 MB
+[ "17:11:25.899" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 98.9583 % | RAM App: 139.336 MB | Sys Avail: 23777.8 MB / 65466.5 MB
+[ "17:11:26.899" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 99.4792 % | RAM App: 139.367 MB | Sys Avail: 23768.5 MB / 65466.5 MB
+[ "17:11:27.901" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 99.2188 % | RAM App: 139.41 MB | Sys Avail: 23763.9 MB / 65466.5 MB
+[ "17:11:28.900" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 99.2188 % | RAM App: 139.438 MB | Sys Avail: 23761.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:11:29.914" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 99.7436 % | RAM App: 139.457 MB | Sys Avail: 23689.8 MB / 65466.5 MB
+[ "17:11:30.898" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 99.2063 % | RAM App: 139.535 MB | Sys Avail: 23731.6 MB / 65466.5 MB
+[ "17:11:31.899" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 98.1771 % | RAM App: 136.805 MB | Sys Avail: 23846 MB / 65466.5 MB
+[ "17:11:32.899" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 99.4792 % | RAM App: 136.855 MB | Sys Avail: 23741.2 MB / 65466.5 MB
+[ "17:11:33.899" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 99.4792 % | RAM App: 136.875 MB | Sys Avail: 23797.9 MB / 65466.5 MB
+[ "17:11:34.899" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 100 % | RAM App: 136.941 MB | Sys Avail: 23765.6 MB / 65466.5 MB
+[ "17:11:35.899" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 99.4792 % | RAM App: 136.977 MB | Sys Avail: 23830.2 MB / 65466.5 MB
+[ "17:11:36.900" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 98.6979 % | RAM App: 137.004 MB | Sys Avail: 23818 MB / 65466.5 MB
+[ "17:11:37.896" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 99.7396 % | RAM App: 137.039 MB | Sys Avail: 23783.9 MB / 65466.5 MB
+[ "17:11:38.899" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 99.4792 % | RAM App: 137.051 MB | Sys Avail: 23778.5 MB / 65466.5 MB
+[ "17:11:39.899" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 99.4792 % | RAM App: 137.07 MB | Sys Avail: 23488.7 MB / 65466.5 MB
+[ "17:11:40.910" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 100 % | RAM App: 137.129 MB | Sys Avail: 23745.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:11:41.898" ][SystemMonitor] Stats Update: CPU App: 2.86458 % | Sys: 100 % | RAM App: 137.156 MB | Sys Avail: 23719 MB / 65466.5 MB
+[ "17:11:42.923" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 98.9744 % | RAM App: 137.172 MB | Sys Avail: 23717.9 MB / 65466.5 MB
+[ "17:11:43.903" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 98.6772 % | RAM App: 137.188 MB | Sys Avail: 23726.6 MB / 65466.5 MB
+[ "17:11:44.900" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 99.4792 % | RAM App: 137.215 MB | Sys Avail: 23717.8 MB / 65466.5 MB
+[ "17:11:45.899" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 99.7396 % | RAM App: 137.23 MB | Sys Avail: 23751 MB / 65466.5 MB
+[ "17:11:46.899" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 137.242 MB | Sys Avail: 23726.5 MB / 65466.5 MB
+[ "17:11:47.916" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 100 % | RAM App: 137.254 MB | Sys Avail: 23749.1 MB / 65466.5 MB
+[ "17:11:48.899" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 100 % | RAM App: 137.262 MB | Sys Avail: 23803.7 MB / 65466.5 MB
+[ "17:11:49.901" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 100 % | RAM App: 137.293 MB | Sys Avail: 23936.4 MB / 65466.5 MB
+[ "17:11:50.906" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 100 % | RAM App: 137.383 MB | Sys Avail: 24249.4 MB / 65466.5 MB
+[ "17:11:51.900" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 100 % | RAM App: 137.422 MB | Sys Avail: 24385.2 MB / 65466.5 MB
+[ "17:11:52.900" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 100 % | RAM App: 137.434 MB | Sys Avail: 24418.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 23
+[ "17:11:53.898" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 137.473 MB | Sys Avail: 24537.3 MB / 65466.5 MB
+[ "17:11:54.919" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 100 % | RAM App: 137.492 MB | Sys Avail: 24646.4 MB / 65466.5 MB
+[ "17:11:55.917" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 100 % | RAM App: 137.508 MB | Sys Avail: 24699.5 MB / 65466.5 MB
+[ "17:11:56.919" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 137.52 MB | Sys Avail: 24924.7 MB / 65466.5 MB
+[ "17:11:57.943" ][SystemMonitor] Stats Update: CPU App: 0.777202 % | Sys: 100 % | RAM App: 137.598 MB | Sys Avail: 25003.9 MB / 65466.5 MB
+[ "17:11:58.900" ][SystemMonitor] Stats Update: CPU App: 0.531915 % | Sys: 96.5054 % | RAM App: 137.613 MB | Sys Avail: 25030.8 MB / 65466.5 MB
+[ "17:11:59.916" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 97.6923 % | RAM App: 137.688 MB | Sys Avail: 25029.9 MB / 65466.5 MB
+[ "17:12:00.899" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 94.1799 % | RAM App: 137.707 MB | Sys Avail: 25001.1 MB / 65466.5 MB
+[ "17:12:01.899" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 97.9167 % | RAM App: 137.73 MB | Sys Avail: 25011.9 MB / 65466.5 MB
+[ "17:12:02.904" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 100 % | RAM App: 137.754 MB | Sys Avail: 24943.7 MB / 65466.5 MB
+[ "17:12:03.906" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 137.793 MB | Sys Avail: 25341.2 MB / 65466.5 MB
+[ "17:12:04.901" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 99.7396 % | RAM App: 137.816 MB | Sys Avail: 25338.4 MB / 65466.5 MB
+[ "17:12:05.897" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 99.7396 % | RAM App: 137.887 MB | Sys Avail: 25359.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 15
+[ "17:12:06.899" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 137.973 MB | Sys Avail: 25393.4 MB / 65466.5 MB
+[ "17:12:07.902" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 98.6979 % | RAM App: 137.996 MB | Sys Avail: 25401.2 MB / 65466.5 MB
+[ "17:12:08.918" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 95.3846 % | RAM App: 138.027 MB | Sys Avail: 25468.4 MB / 65466.5 MB
+[ "17:12:09.900" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 87.037 % | RAM App: 138.063 MB | Sys Avail: 25415.9 MB / 65466.5 MB
+[ "17:12:10.916" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 79.4872 % | RAM App: 138.098 MB | Sys Avail: 25422.7 MB / 65466.5 MB
+[ "17:12:11.898" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 84.3915 % | RAM App: 138.18 MB | Sys Avail: 25432.8 MB / 65466.5 MB
+[ "17:12:12.900" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 97.1354 % | RAM App: 138.203 MB | Sys Avail: 25422.3 MB / 65466.5 MB
+[ "17:12:14.224" ][SystemMonitor] Stats Update: CPU App: 0.595238 % | Sys: 91.8651 % | RAM App: 138.277 MB | Sys Avail: 25337.1 MB / 65466.5 MB
+[ "17:12:15.058" ][SystemMonitor] Stats Update: CPU App: 1.23457 % | Sys: 85.4938 % | RAM App: 138.359 MB | Sys Avail: 25337.8 MB / 65466.5 MB
+[ "17:12:16.043" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 84.127 % | RAM App: 138.434 MB | Sys Avail: 25336.4 MB / 65466.5 MB
+[ "17:12:17.055" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.4896 % | RAM App: 138.645 MB | Sys Avail: 25338.2 MB / 65466.5 MB
+[ "17:12:18.083" ][SystemMonitor] Stats Update: CPU App: 1.76768 % | Sys: 85.8586 % | RAM App: 138.734 MB | Sys Avail: 25333.1 MB / 65466.5 MB
+[ "17:12:19.058" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 80.6878 % | RAM App: 138.871 MB | Sys Avail: 25332.6 MB / 65466.5 MB
+[ "17:12:20.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 85.6771 % | RAM App: 138.906 MB | Sys Avail: 25336.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 16
+[ "17:12:21.105" ][SystemMonitor] Stats Update: CPU App: 1.24378 % | Sys: 90.796 % | RAM App: 138.988 MB | Sys Avail: 25318 MB / 65466.5 MB
+[ "17:12:22.057" ][SystemMonitor] Stats Update: CPU App: 1.63934 % | Sys: 84.4262 % | RAM App: 139.016 MB | Sys Avail: 25316.1 MB / 65466.5 MB
+[ "17:12:23.079" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 87.4359 % | RAM App: 139.121 MB | Sys Avail: 25314.4 MB / 65466.5 MB
+[ "17:12:24.086" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 92.3077 % | RAM App: 139.16 MB | Sys Avail: 25314.4 MB / 65466.5 MB
+[ "17:12:25.097" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.4583 % | RAM App: 139.285 MB | Sys Avail: 25279.3 MB / 65466.5 MB
+[ "17:12:26.100" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 83.5938 % | RAM App: 139.313 MB | Sys Avail: 25277 MB / 65466.5 MB
+[ "17:12:27.085" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 85.1852 % | RAM App: 139.418 MB | Sys Avail: 25276.4 MB / 65466.5 MB
+[ "17:12:28.075" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 92.4479 % | RAM App: 139.453 MB | Sys Avail: 25268.8 MB / 65466.5 MB
+[ "17:12:29.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 88.2813 % | RAM App: 139.586 MB | Sys Avail: 25269.4 MB / 65466.5 MB
+[ "17:12:30.084" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 77.6923 % | RAM App: 139.613 MB | Sys Avail: 25273.7 MB / 65466.5 MB
+[ "17:12:31.084" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 80.6878 % | RAM App: 139.746 MB | Sys Avail: 25217 MB / 65466.5 MB
+[ "17:12:32.084" ][SystemMonitor] Stats Update: CPU App: 2.05128 % | Sys: 87.6923 % | RAM App: 139.73 MB | Sys Avail: 25283.8 MB / 65466.5 MB
+[ "17:12:33.069" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 96.5608 % | RAM App: 139.824 MB | Sys Avail: 25189.1 MB / 65466.5 MB
+[ "17:12:34.077" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 85.4167 % | RAM App: 137.258 MB | Sys Avail: 25187 MB / 65466.5 MB
+[ "17:12:35.084" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.1299 % | RAM App: 137.387 MB | Sys Avail: 25194.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:12:36.084" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.7728 % | RAM App: 137.469 MB | Sys Avail: 25260.7 MB / 65466.5 MB
+[ "17:12:37.084" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 90.7692 % | RAM App: 137.48 MB | Sys Avail: 25268 MB / 65466.5 MB
+[ "17:12:38.085" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 86.5079 % | RAM App: 137.512 MB | Sys Avail: 25230.7 MB / 65466.5 MB
+[ "17:12:39.073" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 78.6458 % | RAM App: 137.559 MB | Sys Avail: 25246.7 MB / 65466.5 MB
+[ "17:12:40.078" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 89.0625 % | RAM App: 137.578 MB | Sys Avail: 25303 MB / 65466.5 MB
+[ "17:12:41.084" ][SystemMonitor] Stats Update: CPU App: 1.28535 % | Sys: 81.2821 % | RAM App: 137.605 MB | Sys Avail: 25216.1 MB / 65466.5 MB
+[ "17:12:42.084" ][SystemMonitor] Stats Update: CPU App: 1.05541 % | Sys: 79.6296 % | RAM App: 137.609 MB | Sys Avail: 25289.1 MB / 65466.5 MB
+[ "17:12:43.084" ][SystemMonitor] Stats Update: CPU App: 1.81347 % | Sys: 82.8205 % | RAM App: 137.711 MB | Sys Avail: 25301 MB / 65466.5 MB
+[ "17:12:44.084" ][SystemMonitor] Stats Update: CPU App: 0.52356 % | Sys: 81.6273 % | RAM App: 137.719 MB | Sys Avail: 25267 MB / 65466.5 MB
+[ "17:12:45.070" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 86.6142 % | RAM App: 137.82 MB | Sys Avail: 25246.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:12:46.085" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 82.8205 % | RAM App: 137.828 MB | Sys Avail: 25276.6 MB / 65466.5 MB
+[ "17:12:47.069" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 80.6878 % | RAM App: 137.883 MB | Sys Avail: 25301.8 MB / 65466.5 MB
+[ "17:12:48.085" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 86.1538 % | RAM App: 137.887 MB | Sys Avail: 25287.2 MB / 65466.5 MB
+[ "17:12:49.069" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 82.5397 % | RAM App: 137.941 MB | Sys Avail: 25208 MB / 65466.5 MB
+[ "17:12:50.085" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 82.5641 % | RAM App: 137.676 MB | Sys Avail: 25304.5 MB / 65466.5 MB
+[ "17:12:51.069" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 85.9788 % | RAM App: 137.316 MB | Sys Avail: 25288.1 MB / 65466.5 MB
+[ "17:12:52.086" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 91.2821 % | RAM App: 136.934 MB | Sys Avail: 25279 MB / 65466.5 MB
+[ "17:12:53.069" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 84.6561 % | RAM App: 136.621 MB | Sys Avail: 25254.8 MB / 65466.5 MB
+[ "17:12:54.075" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.5104 % | RAM App: 136.23 MB | Sys Avail: 25290.6 MB / 65466.5 MB
+[ "17:12:55.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.5521 % | RAM App: 136.137 MB | Sys Avail: 25251.8 MB / 65466.5 MB
+[ "17:12:56.085" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 81.7949 % | RAM App: 136.211 MB | Sys Avail: 25152 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:12:57.069" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 84.3915 % | RAM App: 136.238 MB | Sys Avail: 25227.7 MB / 65466.5 MB
+[ "17:12:58.078" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 87.7604 % | RAM App: 136.309 MB | Sys Avail: 25274 MB / 65466.5 MB
+[ "17:12:59.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.2917 % | RAM App: 136.398 MB | Sys Avail: 25276.3 MB / 65466.5 MB
+[ "17:13:00.068" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 71.6146 % | RAM App: 136.422 MB | Sys Avail: 25276.8 MB / 65466.5 MB
+[ "17:13:01.069" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 77.6042 % | RAM App: 136.551 MB | Sys Avail: 25276.6 MB / 65466.5 MB
+[ "17:13:02.085" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 90.7692 % | RAM App: 136.625 MB | Sys Avail: 25274.4 MB / 65466.5 MB
+[ "17:13:03.086" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 98.6979 % | RAM App: 136.645 MB | Sys Avail: 25191.4 MB / 65466.5 MB
+[ "17:13:04.072" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 94.4444 % | RAM App: 136.68 MB | Sys Avail: 25269.3 MB / 65466.5 MB
+[ "17:13:05.086" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 96.9231 % | RAM App: 136.746 MB | Sys Avail: 25237.1 MB / 65466.5 MB
+[ "17:13:06.077" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 100 % | RAM App: 136.82 MB | Sys Avail: 25265.2 MB / 65466.5 MB
+[ "17:13:07.085" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 96.6667 % | RAM App: 136.852 MB | Sys Avail: 25267.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:13:08.085" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 93.2292 % | RAM App: 136.918 MB | Sys Avail: 25250.8 MB / 65466.5 MB
+[ "17:13:09.070" ][SystemMonitor] Stats Update: CPU App: 1.85185 % | Sys: 92.8571 % | RAM App: 136.992 MB | Sys Avail: 25254.4 MB / 65466.5 MB
+[ "17:13:10.069" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 90.8854 % | RAM App: 137.07 MB | Sys Avail: 25253.9 MB / 65466.5 MB
+[ "17:13:11.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.4063 % | RAM App: 137.145 MB | Sys Avail: 25254.6 MB / 65466.5 MB
+[ "17:13:12.073" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 91.9271 % | RAM App: 137.211 MB | Sys Avail: 25256.8 MB / 65466.5 MB
+[ "17:13:13.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.5833 % | RAM App: 137.262 MB | Sys Avail: 25319.6 MB / 65466.5 MB
+[ "17:13:14.077" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.6667 % | RAM App: 137.309 MB | Sys Avail: 25319.2 MB / 65466.5 MB
+[ "17:13:15.102" ][SystemMonitor] Stats Update: CPU App: 1.0101 % | Sys: 88.8889 % | RAM App: 137.355 MB | Sys Avail: 25321.1 MB / 65466.5 MB
+[ "17:13:16.079" ][SystemMonitor] Stats Update: CPU App: 1.6129 % | Sys: 92.7419 % | RAM App: 137.406 MB | Sys Avail: 25317.3 MB / 65466.5 MB
+[ "17:13:17.086" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 89.4872 % | RAM App: 137.457 MB | Sys Avail: 25314.8 MB / 65466.5 MB
+[ "17:13:18.086" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.1875 % | RAM App: 137.531 MB | Sys Avail: 25314.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 26
+[ "17:13:19.072" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 89.1534 % | RAM App: 137.621 MB | Sys Avail: 25298.1 MB / 65466.5 MB
+[ "17:13:20.071" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 83.5938 % | RAM App: 137.695 MB | Sys Avail: 25298.3 MB / 65466.5 MB
+[ "17:13:21.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 81.5104 % | RAM App: 137.781 MB | Sys Avail: 25302.1 MB / 65466.5 MB
+[ "17:13:22.070" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 82.0313 % | RAM App: 137.805 MB | Sys Avail: 25300.7 MB / 65466.5 MB
+[ "17:13:23.069" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 80.7292 % | RAM App: 137.871 MB | Sys Avail: 25299.6 MB / 65466.5 MB
+[ "17:13:24.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.6875 % | RAM App: 137.941 MB | Sys Avail: 25300 MB / 65466.5 MB
+[ "17:13:25.086" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 77.1795 % | RAM App: 138.035 MB | Sys Avail: 25304.7 MB / 65466.5 MB
+[ "17:13:26.086" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.8125 % | RAM App: 138.109 MB | Sys Avail: 25306.3 MB / 65466.5 MB
+[ "17:13:27.103" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 78.9744 % | RAM App: 138.184 MB | Sys Avail: 25304.7 MB / 65466.5 MB
+[ "17:13:28.069" ][SystemMonitor] Stats Update: CPU App: 1.88172 % | Sys: 88.7097 % | RAM App: 138.262 MB | Sys Avail: 25305.5 MB / 65466.5 MB
+[ "17:13:29.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 86.7188 % | RAM App: 138.352 MB | Sys Avail: 25295.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:13:30.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 86.7188 % | RAM App: 138.426 MB | Sys Avail: 25303.2 MB / 65466.5 MB
+[ "17:13:31.087" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 80.7692 % | RAM App: 136.047 MB | Sys Avail: 25295.7 MB / 65466.5 MB
+[ "17:13:32.071" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 85.1852 % | RAM App: 136.227 MB | Sys Avail: 25297.7 MB / 65466.5 MB
+[ "17:13:33.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 97.3958 % | RAM App: 136.293 MB | Sys Avail: 25188.8 MB / 65466.5 MB
+[ "17:13:34.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.8125 % | RAM App: 136.301 MB | Sys Avail: 25298.5 MB / 65466.5 MB
+[ "17:13:35.086" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 87.4359 % | RAM App: 136.332 MB | Sys Avail: 25269.6 MB / 65466.5 MB
+[ "17:13:36.087" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.7292 % | RAM App: 136.355 MB | Sys Avail: 25307.1 MB / 65466.5 MB
+[ "17:13:37.070" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 79.1005 % | RAM App: 136.375 MB | Sys Avail: 25313.9 MB / 65466.5 MB
+[ "17:13:38.070" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 88.8021 % | RAM App: 136.383 MB | Sys Avail: 25310.8 MB / 65466.5 MB
+[ "17:13:39.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 88.2813 % | RAM App: 136.453 MB | Sys Avail: 25313.5 MB / 65466.5 MB
+[ "17:13:40.071" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.7708 % | RAM App: 136.457 MB | Sys Avail: 25316.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:13:41.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.5938 % | RAM App: 136.563 MB | Sys Avail: 25320.3 MB / 65466.5 MB
+[ "17:13:42.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 86.9792 % | RAM App: 136.563 MB | Sys Avail: 25323.2 MB / 65466.5 MB
+[ "17:13:43.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 77.0833 % | RAM App: 136.633 MB | Sys Avail: 25322.5 MB / 65466.5 MB
+[ "17:13:44.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 78.6458 % | RAM App: 136.645 MB | Sys Avail: 25318.7 MB / 65466.5 MB
+[ "17:13:45.070" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 87.7604 % | RAM App: 136.672 MB | Sys Avail: 25314.5 MB / 65466.5 MB
+[ "17:13:46.069" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 78.9063 % | RAM App: 136.676 MB | Sys Avail: 25318.3 MB / 65466.5 MB
+[ "17:13:47.086" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 78.7179 % | RAM App: 136.738 MB | Sys Avail: 25342.4 MB / 65466.5 MB
+[ "17:13:48.070" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 78.0423 % | RAM App: 136.758 MB | Sys Avail: 25343.6 MB / 65466.5 MB
+[ "17:13:49.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 83.3333 % | RAM App: 136.805 MB | Sys Avail: 25347.6 MB / 65466.5 MB
+[ "17:13:50.088" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 86.6667 % | RAM App: 136.828 MB | Sys Avail: 25348.9 MB / 65466.5 MB
+[ "17:13:51.070" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 86.7725 % | RAM App: 136.848 MB | Sys Avail: 25273.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:13:52.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.5104 % | RAM App: 136.875 MB | Sys Avail: 25259.1 MB / 65466.5 MB
+[ "17:13:53.087" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 77.4359 % | RAM App: 136.949 MB | Sys Avail: 25253.1 MB / 65466.5 MB
+[ "17:13:54.072" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 83.3333 % | RAM App: 136.992 MB | Sys Avail: 25256.7 MB / 65466.5 MB
+[ "17:13:55.071" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 78.125 % | RAM App: 137.02 MB | Sys Avail: 25196.2 MB / 65466.5 MB
+[ "17:13:56.087" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 78.9744 % | RAM App: 137.086 MB | Sys Avail: 25197.5 MB / 65466.5 MB
+[ "17:13:57.069" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 91.5344 % | RAM App: 137.176 MB | Sys Avail: 25188.9 MB / 65466.5 MB
+[ "17:13:58.074" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 86.9792 % | RAM App: 137.199 MB | Sys Avail: 25156.2 MB / 65466.5 MB
+[ "17:13:59.087" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 97.4359 % | RAM App: 137.223 MB | Sys Avail: 25131.3 MB / 65466.5 MB
+[ "17:14:00.069" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 82.8042 % | RAM App: 137.242 MB | Sys Avail: 25187.5 MB / 65466.5 MB
+[ "17:14:01.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.3438 % | RAM App: 137.266 MB | Sys Avail: 25187.8 MB / 65466.5 MB
+[ "17:14:02.070" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 85.9375 % | RAM App: 137.289 MB | Sys Avail: 25191.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:14:03.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 97.6563 % | RAM App: 137.313 MB | Sys Avail: 25107.9 MB / 65466.5 MB
+[ "17:14:04.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 86.7188 % | RAM App: 137.359 MB | Sys Avail: 25186.2 MB / 65466.5 MB
+[ "17:14:05.069" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 90.625 % | RAM App: 137.398 MB | Sys Avail: 25160.1 MB / 65466.5 MB
+[ "17:14:06.073" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 87.2396 % | RAM App: 137.426 MB | Sys Avail: 25190.4 MB / 65466.5 MB
+[ "17:14:07.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 94.2708 % | RAM App: 137.559 MB | Sys Avail: 25137.8 MB / 65466.5 MB
+[ "17:14:08.087" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 85.641 % | RAM App: 137.578 MB | Sys Avail: 25129.1 MB / 65466.5 MB
+[ "17:14:09.071" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 80.4233 % | RAM App: 137.691 MB | Sys Avail: 25129.6 MB / 65466.5 MB
+[ "17:14:10.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.8958 % | RAM App: 137.711 MB | Sys Avail: 25129.7 MB / 65466.5 MB
+[ "17:14:11.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 85.6771 % | RAM App: 137.746 MB | Sys Avail: 25130.4 MB / 65466.5 MB
+[ "17:14:12.071" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 80.4688 % | RAM App: 137.777 MB | Sys Avail: 25135.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:14:13.079" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.25 % | RAM App: 137.816 MB | Sys Avail: 25135.6 MB / 65466.5 MB
+[ "17:14:14.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 78.6458 % | RAM App: 137.887 MB | Sys Avail: 25097.4 MB / 65466.5 MB
+[ "17:14:15.070" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 85.6771 % | RAM App: 137.973 MB | Sys Avail: 25101.3 MB / 65466.5 MB
+[ "17:14:16.071" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 84.6354 % | RAM App: 138.016 MB | Sys Avail: 25114 MB / 65466.5 MB
+[ "17:14:17.071" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 83.0729 % | RAM App: 138.035 MB | Sys Avail: 25153.3 MB / 65466.5 MB
+[ "17:14:18.105" ][SystemMonitor] Stats Update: CPU App: 0.757576 % | Sys: 87.3737 % | RAM App: 138.066 MB | Sys Avail: 25053.1 MB / 65466.5 MB
+[ "17:14:19.073" ][SystemMonitor] Stats Update: CPU App: 0.806452 % | Sys: 84.1398 % | RAM App: 138.176 MB | Sys Avail: 25073 MB / 65466.5 MB
+[ "17:14:20.094" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 96.1538 % | RAM App: 138.219 MB | Sys Avail: 25024.4 MB / 65466.5 MB
+[ "17:14:21.072" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 93.1217 % | RAM App: 138.293 MB | Sys Avail: 24945.2 MB / 65466.5 MB
+[ "17:14:22.088" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 81.0256 % | RAM App: 138.32 MB | Sys Avail: 24872.8 MB / 65466.5 MB
+[ "17:14:23.071" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 82.2751 % | RAM App: 138.449 MB | Sys Avail: 25012.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:14:24.072" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 84.8958 % | RAM App: 138.523 MB | Sys Avail: 25087.5 MB / 65466.5 MB
+[ "17:14:25.071" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.5104 % | RAM App: 138.602 MB | Sys Avail: 25115.9 MB / 65466.5 MB
+[ "17:14:26.070" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 84.1146 % | RAM App: 138.676 MB | Sys Avail: 25060 MB / 65466.5 MB
+[ "17:14:27.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 78.9063 % | RAM App: 138.703 MB | Sys Avail: 25058.1 MB / 65466.5 MB
+[ "17:14:28.088" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 83.5897 % | RAM App: 138.797 MB | Sys Avail: 25068.7 MB / 65466.5 MB
+[ "17:14:29.069" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 92.0635 % | RAM App: 138.934 MB | Sys Avail: 25128.2 MB / 65466.5 MB
+[ "17:14:30.088" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 86.4103 % | RAM App: 136.371 MB | Sys Avail: 25095.2 MB / 65466.5 MB
+[ "17:14:31.070" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 87.037 % | RAM App: 136.512 MB | Sys Avail: 25084.1 MB / 65466.5 MB
+[ "17:14:32.088" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 80.5128 % | RAM App: 136.582 MB | Sys Avail: 25117.3 MB / 65466.5 MB
+[ "17:14:33.074" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 96.0317 % | RAM App: 136.59 MB | Sys Avail: 25002.5 MB / 65466.5 MB
+[ "17:14:34.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 99.7396 % | RAM App: 136.551 MB | Sys Avail: 25028.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:14:35.073" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 96.6146 % | RAM App: 136.453 MB | Sys Avail: 24896.7 MB / 65466.5 MB
+[ "17:14:36.072" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 84.8958 % | RAM App: 136.387 MB | Sys Avail: 25003.8 MB / 65466.5 MB
+[ "17:14:37.072" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.5938 % | RAM App: 136.484 MB | Sys Avail: 25070.1 MB / 65466.5 MB
+[ "17:14:38.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 87.7604 % | RAM App: 136.484 MB | Sys Avail: 25022.2 MB / 65466.5 MB
+[ "17:14:39.072" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 80.2083 % | RAM App: 136.594 MB | Sys Avail: 25058.1 MB / 65466.5 MB
+[ "17:14:40.072" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 87.5 % | RAM App: 136.594 MB | Sys Avail: 25058.1 MB / 65466.5 MB
+[ "17:14:41.072" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 83.8542 % | RAM App: 136.648 MB | Sys Avail: 25057.3 MB / 65466.5 MB
+[ "17:14:42.071" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 80.7292 % | RAM App: 136.656 MB | Sys Avail: 25041.5 MB / 65466.5 MB
+[ "17:14:43.073" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 70.3125 % | RAM App: 136.734 MB | Sys Avail: 25060 MB / 65466.5 MB
+[ "17:14:44.087" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 96.9231 % | RAM App: 136.734 MB | Sys Avail: 25057 MB / 65466.5 MB
+[ "17:14:45.072" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 90.4762 % | RAM App: 136.785 MB | Sys Avail: 25057.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:14:46.071" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 91.1458 % | RAM App: 136.797 MB | Sys Avail: 25057.7 MB / 65466.5 MB
+[ "17:14:47.073" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.8438 % | RAM App: 136.828 MB | Sys Avail: 25058.6 MB / 65466.5 MB
+[ "17:14:48.089" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 91.5385 % | RAM App: 136.91 MB | Sys Avail: 25076.3 MB / 65466.5 MB
+[ "17:14:49.074" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 91.5344 % | RAM App: 136.93 MB | Sys Avail: 25076.6 MB / 65466.5 MB
+[ "17:14:50.072" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 94.5313 % | RAM App: 136.949 MB | Sys Avail: 25077 MB / 65466.5 MB
+[ "17:14:51.072" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.6667 % | RAM App: 136.973 MB | Sys Avail: 25087.7 MB / 65466.5 MB
+[ "17:14:52.078" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.3646 % | RAM App: 136.992 MB | Sys Avail: 25092.3 MB / 65466.5 MB
+[ "17:14:53.074" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 92.4479 % | RAM App: 137.016 MB | Sys Avail: 25092.1 MB / 65466.5 MB
+[ "17:14:54.072" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 91.4063 % | RAM App: 137.039 MB | Sys Avail: 25094.8 MB / 65466.5 MB
+[ "17:14:55.074" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 97.9167 % | RAM App: 137.113 MB | Sys Avail: 25055.9 MB / 65466.5 MB
+[ "17:14:56.073" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.2292 % | RAM App: 137.141 MB | Sys Avail: 25058.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 26
+[ "17:14:57.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.7083 % | RAM App: 137.18 MB | Sys Avail: 25064.3 MB / 65466.5 MB
+[ "17:14:58.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.4479 % | RAM App: 137.199 MB | Sys Avail: 25068 MB / 65466.5 MB
+[ "17:14:59.089" ][SystemMonitor] Stats Update: CPU App: 1.53846 % | Sys: 88.9744 % | RAM App: 137.219 MB | Sys Avail: 25071.2 MB / 65466.5 MB
+[ "17:15:00.073" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 92.328 % | RAM App: 137.242 MB | Sys Avail: 25069.3 MB / 65466.5 MB
+[ "17:15:01.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.1458 % | RAM App: 137.262 MB | Sys Avail: 25068.8 MB / 65466.5 MB
+[ "17:15:02.071" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.3229 % | RAM App: 137.281 MB | Sys Avail: 25064 MB / 65466.5 MB
+[ "17:15:03.068" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 95.3125 % | RAM App: 137.316 MB | Sys Avail: 24955.6 MB / 65466.5 MB
+[ "17:15:04.072" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 80.2083 % | RAM App: 137.34 MB | Sys Avail: 25048.5 MB / 65466.5 MB
+[ "17:15:05.070" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 88.5417 % | RAM App: 137.363 MB | Sys Avail: 25019.2 MB / 65466.5 MB
+[ "17:15:06.073" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 86.7188 % | RAM App: 137.445 MB | Sys Avail: 25305.7 MB / 65466.5 MB
+[ "17:15:07.091" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 88.2051 % | RAM App: 137.52 MB | Sys Avail: 25285.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:15:08.089" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.0104 % | RAM App: 137.594 MB | Sys Avail: 25305.9 MB / 65466.5 MB
+[ "17:15:09.070" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 91.5344 % | RAM App: 137.672 MB | Sys Avail: 25283.9 MB / 65466.5 MB
+[ "17:15:10.073" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 78.3854 % | RAM App: 137.699 MB | Sys Avail: 25285.8 MB / 65466.5 MB
+[ "17:15:11.073" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 82.5521 % | RAM App: 137.719 MB | Sys Avail: 25294.9 MB / 65466.5 MB
+[ "17:15:12.089" ][SystemMonitor] Stats Update: CPU App: 1.53846 % | Sys: 83.3333 % | RAM App: 137.77 MB | Sys Avail: 25295.5 MB / 65466.5 MB
+[ "17:15:13.073" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 76.9841 % | RAM App: 137.863 MB | Sys Avail: 25319.4 MB / 65466.5 MB
+[ "17:15:14.071" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.0833 % | RAM App: 137.93 MB | Sys Avail: 25318.5 MB / 65466.5 MB
+[ "17:15:15.073" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 77.0833 % | RAM App: 137.953 MB | Sys Avail: 25323.7 MB / 65466.5 MB
+[ "17:15:16.084" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.0313 % | RAM App: 137.969 MB | Sys Avail: 25323.6 MB / 65466.5 MB
+[ "17:15:17.072" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 76.5625 % | RAM App: 138.051 MB | Sys Avail: 25328.7 MB / 65466.5 MB
+[ "17:15:18.073" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 85.9375 % | RAM App: 138.07 MB | Sys Avail: 25330.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:15:19.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 83.8542 % | RAM App: 138.148 MB | Sys Avail: 25333 MB / 65466.5 MB
+[ "17:15:20.072" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.1875 % | RAM App: 138.199 MB | Sys Avail: 25326.7 MB / 65466.5 MB
+[ "17:15:21.073" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 88.8021 % | RAM App: 138.219 MB | Sys Avail: 25344.3 MB / 65466.5 MB
+[ "17:15:22.090" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 80 % | RAM App: 138.262 MB | Sys Avail: 25325.9 MB / 65466.5 MB
+[ "17:15:23.069" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 83.5979 % | RAM App: 138.383 MB | Sys Avail: 25305.1 MB / 65466.5 MB
+[ "17:15:24.089" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 81.5385 % | RAM App: 138.422 MB | Sys Avail: 25323.4 MB / 65466.5 MB
+[ "17:15:25.073" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 77.7778 % | RAM App: 138.445 MB | Sys Avail: 25339.9 MB / 65466.5 MB
+[ "17:15:26.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 83.8542 % | RAM App: 138.5 MB | Sys Avail: 25352.1 MB / 65466.5 MB
+[ "17:15:27.073" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 77.3438 % | RAM App: 138.578 MB | Sys Avail: 25352.8 MB / 65466.5 MB
+[ "17:15:28.073" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.0313 % | RAM App: 138.668 MB | Sys Avail: 25356.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:15:29.073" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 79.4271 % | RAM App: 138.746 MB | Sys Avail: 25362.4 MB / 65466.5 MB
+[ "17:15:30.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.0313 % | RAM App: 136.277 MB | Sys Avail: 25375.3 MB / 65466.5 MB
+[ "17:15:31.068" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.1667 % | RAM App: 136.449 MB | Sys Avail: 25373.3 MB / 65466.5 MB
+[ "17:15:32.094" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 91.2821 % | RAM App: 136.453 MB | Sys Avail: 25325.3 MB / 65466.5 MB
+[ "17:15:33.086" ][SystemMonitor] Stats Update: CPU App: 1.5873 % | Sys: 98.9418 % | RAM App: 136.469 MB | Sys Avail: 25214.2 MB / 65466.5 MB
+[ "17:15:34.067" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.1875 % | RAM App: 136.488 MB | Sys Avail: 25283.2 MB / 65466.5 MB
+[ "17:15:35.091" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 87.1795 % | RAM App: 136.543 MB | Sys Avail: 25275 MB / 65466.5 MB
+[ "17:15:36.073" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 79.3651 % | RAM App: 136.559 MB | Sys Avail: 25304.8 MB / 65466.5 MB
+[ "17:15:37.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.7708 % | RAM App: 136.66 MB | Sys Avail: 25307.4 MB / 65466.5 MB
+[ "17:15:38.075" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 85.4167 % | RAM App: 136.66 MB | Sys Avail: 25315.3 MB / 65466.5 MB
+[ "17:15:39.091" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 78.4615 % | RAM App: 136.688 MB | Sys Avail: 25336.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:15:40.071" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 85.7143 % | RAM App: 136.688 MB | Sys Avail: 25270.8 MB / 65466.5 MB
+[ "17:15:41.070" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 74.2188 % | RAM App: 136.719 MB | Sys Avail: 25271.5 MB / 65466.5 MB
+[ "17:15:42.074" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 77.0833 % | RAM App: 136.73 MB | Sys Avail: 25272.6 MB / 65466.5 MB
+[ "17:15:43.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.625 % | RAM App: 136.73 MB | Sys Avail: 25272.4 MB / 65466.5 MB
+[ "17:15:44.074" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 78.9063 % | RAM App: 136.734 MB | Sys Avail: 25183.8 MB / 65466.5 MB
+[ "17:15:45.073" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.0833 % | RAM App: 136.742 MB | Sys Avail: 25183.4 MB / 65466.5 MB
+[ "17:15:46.090" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 86.4103 % | RAM App: 136.75 MB | Sys Avail: 25068.4 MB / 65466.5 MB
+[ "17:15:47.074" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 93.3862 % | RAM App: 136.762 MB | Sys Avail: 25103.3 MB / 65466.5 MB
+[ "17:15:48.091" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 89.4872 % | RAM App: 136.781 MB | Sys Avail: 24924 MB / 65466.5 MB
+[ "17:15:49.073" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 88.3598 % | RAM App: 136.805 MB | Sys Avail: 24874.9 MB / 65466.5 MB
+[ "17:15:50.075" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.1042 % | RAM App: 136.824 MB | Sys Avail: 24865.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:15:51.075" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.7917 % | RAM App: 136.848 MB | Sys Avail: 24815.8 MB / 65466.5 MB
+[ "17:15:52.074" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.6667 % | RAM App: 136.867 MB | Sys Avail: 24800 MB / 65466.5 MB
+[ "17:15:53.070" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 94.5313 % | RAM App: 136.926 MB | Sys Avail: 24770.6 MB / 65466.5 MB
+[ "17:15:54.074" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.3229 % | RAM App: 136.949 MB | Sys Avail: 24775.2 MB / 65466.5 MB
+[ "17:15:55.091" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 94.359 % | RAM App: 137.035 MB | Sys Avail: 24686.3 MB / 65466.5 MB
+[ "17:15:56.090" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.8438 % | RAM App: 137.055 MB | Sys Avail: 24725.5 MB / 65466.5 MB
+[ "17:15:57.074" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 88.0952 % | RAM App: 137.082 MB | Sys Avail: 24755.1 MB / 65466.5 MB
+[ "17:15:58.075" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.4063 % | RAM App: 137.102 MB | Sys Avail: 24632.1 MB / 65466.5 MB
+[ "17:15:59.074" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 94.0104 % | RAM App: 137.172 MB | Sys Avail: 24503.7 MB / 65466.5 MB
+[ "17:16:00.075" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.7917 % | RAM App: 137.195 MB | Sys Avail: 24609.2 MB / 65466.5 MB
+[ "17:16:01.075" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 98.1771 % | RAM App: 137.238 MB | Sys Avail: 24569.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 26
+[ "17:16:02.075" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.4063 % | RAM App: 137.289 MB | Sys Avail: 24627.8 MB / 65466.5 MB
+[ "17:16:03.075" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 97.9167 % | RAM App: 137.375 MB | Sys Avail: 24417.1 MB / 65466.5 MB
+[ "17:16:04.071" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 93.4896 % | RAM App: 137.422 MB | Sys Avail: 24386.7 MB / 65466.5 MB
+[ "17:16:05.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.9688 % | RAM App: 137.477 MB | Sys Avail: 24529.7 MB / 65466.5 MB
+[ "17:16:06.077" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.7083 % | RAM App: 137.496 MB | Sys Avail: 24679.8 MB / 65466.5 MB
+[ "17:16:07.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.3646 % | RAM App: 137.602 MB | Sys Avail: 24667.2 MB / 65466.5 MB
+[ "17:16:08.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 93.2292 % | RAM App: 137.641 MB | Sys Avail: 24671.9 MB / 65466.5 MB
+[ "17:16:09.075" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.7917 % | RAM App: 137.77 MB | Sys Avail: 24674.6 MB / 65466.5 MB
+[ "17:16:10.071" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.6354 % | RAM App: 137.789 MB | Sys Avail: 24712.7 MB / 65466.5 MB
+[ "17:16:11.078" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 89.0625 % | RAM App: 137.887 MB | Sys Avail: 24683.2 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:16:12.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 89.5833 % | RAM App: 137.988 MB | Sys Avail: 24667.6 MB / 65466.5 MB
+[ "17:16:13.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 86.7188 % | RAM App: 138.016 MB | Sys Avail: 24743.7 MB / 65466.5 MB
+[ "17:16:14.074" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.375 % | RAM App: 138.035 MB | Sys Avail: 24743.8 MB / 65466.5 MB
+[ "17:16:15.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.2083 % | RAM App: 138.09 MB | Sys Avail: 24671.7 MB / 65466.5 MB
+[ "17:16:16.075" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 85.1563 % | RAM App: 138.109 MB | Sys Avail: 24728.8 MB / 65466.5 MB
+[ "17:16:17.075" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 93.75 % | RAM App: 138.145 MB | Sys Avail: 24776.4 MB / 65466.5 MB
+[ "17:16:18.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 87.2396 % | RAM App: 138.176 MB | Sys Avail: 24752.2 MB / 65466.5 MB
+[ "17:16:19.101" ][SystemMonitor] Stats Update: CPU App: 0.252525 % | Sys: 91.6667 % | RAM App: 138.234 MB | Sys Avail: 24693.2 MB / 65466.5 MB
+[ "17:16:20.074" ][SystemMonitor] Stats Update: CPU App: 1.6129 % | Sys: 94.8925 % | RAM App: 138.266 MB | Sys Avail: 24714.3 MB / 65466.5 MB
+[ "17:16:21.075" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.8542 % | RAM App: 138.32 MB | Sys Avail: 24643 MB / 65466.5 MB
+[ "17:16:22.075" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 89.0625 % | RAM App: 138.375 MB | Sys Avail: 24634.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:16:23.075" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 89.3229 % | RAM App: 138.449 MB | Sys Avail: 24791.7 MB / 65466.5 MB
+[ "17:16:24.074" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 80.7292 % | RAM App: 138.527 MB | Sys Avail: 24886.7 MB / 65466.5 MB
+[ "17:16:25.075" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.6042 % | RAM App: 138.605 MB | Sys Avail: 24901.6 MB / 65466.5 MB
+[ "17:16:26.092" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 82.3077 % | RAM App: 138.676 MB | Sys Avail: 24811.7 MB / 65466.5 MB
+[ "17:16:27.069" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 81.4815 % | RAM App: 138.758 MB | Sys Avail: 24800.2 MB / 65466.5 MB
+[ "17:16:28.074" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.9896 % | RAM App: 138.828 MB | Sys Avail: 24885.8 MB / 65466.5 MB
+[ "17:16:29.075" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.25 % | RAM App: 136.305 MB | Sys Avail: 24786.4 MB / 65466.5 MB
+[ "17:16:30.091" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 81.7949 % | RAM App: 136.414 MB | Sys Avail: 24848.4 MB / 65466.5 MB
+[ "17:16:31.070" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 81.746 % | RAM App: 136.434 MB | Sys Avail: 24901.6 MB / 65466.5 MB
+[ "17:16:32.094" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 70.5128 % | RAM App: 136.434 MB | Sys Avail: 24898.2 MB / 65466.5 MB
+[ "17:16:33.070" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 96.0317 % | RAM App: 136.457 MB | Sys Avail: 24808.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:16:34.076" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 100 % | RAM App: 136.492 MB | Sys Avail: 24815.2 MB / 65466.5 MB
+[ "17:16:35.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 96.875 % | RAM App: 136.543 MB | Sys Avail: 24792.7 MB / 65466.5 MB
+[ "17:16:36.075" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 94.2708 % | RAM App: 136.598 MB | Sys Avail: 24821.5 MB / 65466.5 MB
+[ "17:16:37.070" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 92.4479 % | RAM App: 136.648 MB | Sys Avail: 24824.8 MB / 65466.5 MB
+[ "17:16:38.075" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.5833 % | RAM App: 136.707 MB | Sys Avail: 24826.5 MB / 65466.5 MB
+[ "17:16:39.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 90.8854 % | RAM App: 136.734 MB | Sys Avail: 24829.5 MB / 65466.5 MB
+[ "17:16:40.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.5729 % | RAM App: 136.789 MB | Sys Avail: 24835.7 MB / 65466.5 MB
+[ "17:16:41.076" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.9688 % | RAM App: 136.844 MB | Sys Avail: 24828.6 MB / 65466.5 MB
+[ "17:16:42.069" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 93.4896 % | RAM App: 136.871 MB | Sys Avail: 24831.9 MB / 65466.5 MB
+[ "17:16:43.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 93.2292 % | RAM App: 136.91 MB | Sys Avail: 24926.7 MB / 65466.5 MB
+[ "17:16:44.076" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 89.8438 % | RAM App: 136.91 MB | Sys Avail: 24927.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:16:45.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 91.4063 % | RAM App: 136.91 MB | Sys Avail: 24926.9 MB / 65466.5 MB
+[ "17:16:46.076" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.9271 % | RAM App: 136.91 MB | Sys Avail: 24931.2 MB / 65466.5 MB
+[ "17:16:47.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.8854 % | RAM App: 136.934 MB | Sys Avail: 24948.7 MB / 65466.5 MB
+[ "17:16:48.092" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 93.3333 % | RAM App: 136.973 MB | Sys Avail: 24952.3 MB / 65466.5 MB
+[ "17:16:49.093" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.9688 % | RAM App: 137 MB | Sys Avail: 24954 MB / 65466.5 MB
+[ "17:16:50.076" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 98.6772 % | RAM App: 137.023 MB | Sys Avail: 24967.3 MB / 65466.5 MB
+[ "17:16:51.076" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 97.1354 % | RAM App: 137.059 MB | Sys Avail: 25056.3 MB / 65466.5 MB
+[ "17:16:52.076" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 98.4375 % | RAM App: 137.09 MB | Sys Avail: 25299.4 MB / 65466.5 MB
+[ "17:16:53.069" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 97.1354 % | RAM App: 137.113 MB | Sys Avail: 25590.8 MB / 65466.5 MB
+[ "17:16:54.071" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 93.4896 % | RAM App: 137.133 MB | Sys Avail: 25776.7 MB / 65466.5 MB
+[ "17:16:55.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 85.4167 % | RAM App: 137.16 MB | Sys Avail: 25774.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:16:56.068" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.2917 % | RAM App: 137.184 MB | Sys Avail: 25775.8 MB / 65466.5 MB
+[ "17:16:57.076" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 82.2917 % | RAM App: 137.215 MB | Sys Avail: 25777 MB / 65466.5 MB
+[ "17:16:58.077" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 82.8125 % | RAM App: 137.23 MB | Sys Avail: 25779.5 MB / 65466.5 MB
+[ "17:16:59.076" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.625 % | RAM App: 137.285 MB | Sys Avail: 25904.4 MB / 65466.5 MB
+[ "17:17:00.071" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.8854 % | RAM App: 137.363 MB | Sys Avail: 25835.3 MB / 65466.5 MB
+[ "17:17:01.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 88.8021 % | RAM App: 137.457 MB | Sys Avail: 25723.8 MB / 65466.5 MB
+[ "17:17:02.093" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 92.0513 % | RAM App: 137.48 MB | Sys Avail: 25709.1 MB / 65466.5 MB
+[ "17:17:03.077" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 97.3545 % | RAM App: 137.57 MB | Sys Avail: 25553.5 MB / 65466.5 MB
+[ "17:17:04.093" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 94.8718 % | RAM App: 137.594 MB | Sys Avail: 25641.6 MB / 65466.5 MB
+[ "17:17:05.069" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 94.1799 % | RAM App: 137.613 MB | Sys Avail: 25611 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 30
+[ "17:17:06.072" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 93.4896 % | RAM App: 137.645 MB | Sys Avail: 25605.6 MB / 65466.5 MB
+[ "17:17:07.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.5833 % | RAM App: 137.672 MB | Sys Avail: 25595.6 MB / 65466.5 MB
+[ "17:17:08.076" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.6667 % | RAM App: 137.715 MB | Sys Avail: 25596.2 MB / 65466.5 MB
+[ "17:17:09.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.3125 % | RAM App: 137.742 MB | Sys Avail: 25525.9 MB / 65466.5 MB
+[ "17:17:10.076" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 100 % | RAM App: 137.762 MB | Sys Avail: 25412.2 MB / 65466.5 MB
+[ "17:17:11.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 96.6146 % | RAM App: 137.867 MB | Sys Avail: 25514.3 MB / 65466.5 MB
+[ "17:17:12.093" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 92.0513 % | RAM App: 137.938 MB | Sys Avail: 25388.1 MB / 65466.5 MB
+[ "17:17:13.070" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 93.9153 % | RAM App: 138.02 MB | Sys Avail: 25421.3 MB / 65466.5 MB
+[ "17:17:14.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.6667 % | RAM App: 138.043 MB | Sys Avail: 25438.6 MB / 65466.5 MB
+[ "17:17:15.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.1979 % | RAM App: 138.117 MB | Sys Avail: 25587 MB / 65466.5 MB
+[ "17:17:16.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 75.7813 % | RAM App: 138.191 MB | Sys Avail: 25592.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:17:17.076" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 79.9479 % | RAM App: 138.266 MB | Sys Avail: 25596.9 MB / 65466.5 MB
+[ "17:17:18.077" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 89.8438 % | RAM App: 138.34 MB | Sys Avail: 25597.7 MB / 65466.5 MB
+[ "17:17:19.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.9896 % | RAM App: 138.469 MB | Sys Avail: 25594.4 MB / 65466.5 MB
+[ "17:17:20.076" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.5521 % | RAM App: 138.543 MB | Sys Avail: 25606.3 MB / 65466.5 MB
+[ "17:17:21.078" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 93.4896 % | RAM App: 138.641 MB | Sys Avail: 25617.2 MB / 65466.5 MB
+[ "17:17:22.073" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.7292 % | RAM App: 138.66 MB | Sys Avail: 25622.6 MB / 65466.5 MB
+[ "17:17:23.076" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.25 % | RAM App: 138.738 MB | Sys Avail: 25624.8 MB / 65466.5 MB
+[ "17:17:24.072" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 81.7708 % | RAM App: 138.813 MB | Sys Avail: 25627.7 MB / 65466.5 MB
+[ "17:17:25.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 81.7708 % | RAM App: 138.938 MB | Sys Avail: 25630.2 MB / 65466.5 MB
+[ "17:17:26.077" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 78.9063 % | RAM App: 138.953 MB | Sys Avail: 25630.5 MB / 65466.5 MB
+[ "17:17:27.078" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 83.5938 % | RAM App: 139.035 MB | Sys Avail: 25634.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:17:28.077" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.8958 % | RAM App: 139.109 MB | Sys Avail: 25635 MB / 65466.5 MB
+[ "17:17:29.077" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.375 % | RAM App: 136.031 MB | Sys Avail: 25637.8 MB / 65466.5 MB
+[ "17:17:30.070" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 85.4167 % | RAM App: 136.164 MB | Sys Avail: 25771.9 MB / 65466.5 MB
+[ "17:17:31.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.6354 % | RAM App: 136.176 MB | Sys Avail: 25775.4 MB / 65466.5 MB
+[ "17:17:32.077" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.8958 % | RAM App: 136.184 MB | Sys Avail: 25785.6 MB / 65466.5 MB
+[ "17:17:33.081" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 95.3125 % | RAM App: 136.219 MB | Sys Avail: 25679.7 MB / 65466.5 MB
+[ "17:17:34.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 86.7188 % | RAM App: 136.25 MB | Sys Avail: 25774.2 MB / 65466.5 MB
+[ "17:17:35.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 91.9271 % | RAM App: 136.367 MB | Sys Avail: 25743.9 MB / 65466.5 MB
+[ "17:17:36.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.1667 % | RAM App: 136.434 MB | Sys Avail: 25766.6 MB / 65466.5 MB
+[ "17:17:37.078" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 80.4688 % | RAM App: 136.492 MB | Sys Avail: 25773.2 MB / 65466.5 MB
+[ "17:17:38.079" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.9792 % | RAM App: 136.5 MB | Sys Avail: 25766.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:17:39.078" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.8958 % | RAM App: 136.555 MB | Sys Avail: 25679.6 MB / 65466.5 MB
+[ "17:17:40.072" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 80.7292 % | RAM App: 136.563 MB | Sys Avail: 25679.8 MB / 65466.5 MB
+[ "17:17:41.069" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 79.6875 % | RAM App: 136.621 MB | Sys Avail: 25635.5 MB / 65466.5 MB
+[ "17:17:42.094" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 82.0513 % | RAM App: 136.656 MB | Sys Avail: 25638.5 MB / 65466.5 MB
+[ "17:17:43.077" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 81.2169 % | RAM App: 136.66 MB | Sys Avail: 25574.4 MB / 65466.5 MB
+[ "17:17:44.077" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 76.3021 % | RAM App: 136.664 MB | Sys Avail: 25589.8 MB / 65466.5 MB
+[ "17:17:45.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 77.0833 % | RAM App: 136.68 MB | Sys Avail: 25590.7 MB / 65466.5 MB
+[ "17:17:46.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.5417 % | RAM App: 136.695 MB | Sys Avail: 25594.9 MB / 65466.5 MB
+[ "17:17:47.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 77.3438 % | RAM App: 136.719 MB | Sys Avail: 25596 MB / 65466.5 MB
+[ "17:17:48.071" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.6875 % | RAM App: 136.738 MB | Sys Avail: 25596 MB / 65466.5 MB
+[ "17:17:49.069" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 86.4583 % | RAM App: 136.754 MB | Sys Avail: 25595.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:17:50.072" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.5104 % | RAM App: 136.781 MB | Sys Avail: 25822.7 MB / 65466.5 MB
+[ "17:17:51.069" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 85.6771 % | RAM App: 136.809 MB | Sys Avail: 25837.7 MB / 65466.5 MB
+[ "17:17:52.080" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 75.7813 % | RAM App: 136.879 MB | Sys Avail: 25838 MB / 65466.5 MB
+[ "17:17:53.077" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.3646 % | RAM App: 136.934 MB | Sys Avail: 25802 MB / 65466.5 MB
+[ "17:17:54.078" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.6042 % | RAM App: 136.953 MB | Sys Avail: 25808 MB / 65466.5 MB
+[ "17:17:55.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.9479 % | RAM App: 137.008 MB | Sys Avail: 25791.9 MB / 65466.5 MB
+[ "17:17:56.078" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 86.4583 % | RAM App: 137.035 MB | Sys Avail: 25792.3 MB / 65466.5 MB
+[ "17:17:57.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 79.9479 % | RAM App: 137.059 MB | Sys Avail: 25794.3 MB / 65466.5 MB
+[ "17:17:58.094" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 79.4872 % | RAM App: 137.094 MB | Sys Avail: 25823.9 MB / 65466.5 MB
+[ "17:17:59.069" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 78.5714 % | RAM App: 137.129 MB | Sys Avail: 25831.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:18:00.079" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.0313 % | RAM App: 137.164 MB | Sys Avail: 25778.7 MB / 65466.5 MB
+[ "17:18:01.071" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 84.8958 % | RAM App: 137.188 MB | Sys Avail: 25825.5 MB / 65466.5 MB
+[ "17:18:02.072" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.8958 % | RAM App: 137.219 MB | Sys Avail: 25832 MB / 65466.5 MB
+[ "17:18:03.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.3125 % | RAM App: 137.289 MB | Sys Avail: 25695.2 MB / 65466.5 MB
+[ "17:18:04.078" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 86.7188 % | RAM App: 137.355 MB | Sys Avail: 25774 MB / 65466.5 MB
+[ "17:18:05.079" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 90.8854 % | RAM App: 137.379 MB | Sys Avail: 25737.9 MB / 65466.5 MB
+[ "17:18:06.078" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.4896 % | RAM App: 137.449 MB | Sys Avail: 25719.1 MB / 65466.5 MB
+[ "17:18:07.078" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 92.1875 % | RAM App: 137.523 MB | Sys Avail: 25572.1 MB / 65466.5 MB
+[ "17:18:08.078" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 90.625 % | RAM App: 137.656 MB | Sys Avail: 25547.7 MB / 65466.5 MB
+[ "17:18:09.070" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 91.1458 % | RAM App: 137.785 MB | Sys Avail: 25483.7 MB / 65466.5 MB
+[ "17:18:10.069" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 97.6563 % | RAM App: 137.859 MB | Sys Avail: 25495.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:18:11.078" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 94.5313 % | RAM App: 137.945 MB | Sys Avail: 25355 MB / 65466.5 MB
+[ "17:18:12.078" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 88.2813 % | RAM App: 138.02 MB | Sys Avail: 25334 MB / 65466.5 MB
+[ "17:18:13.079" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 93.75 % | RAM App: 138.148 MB | Sys Avail: 25412.4 MB / 65466.5 MB
+[ "17:18:14.078" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.4479 % | RAM App: 138.227 MB | Sys Avail: 25413.1 MB / 65466.5 MB
+[ "17:18:15.070" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 92.4479 % | RAM App: 138.301 MB | Sys Avail: 25283 MB / 65466.5 MB
+[ "17:18:16.097" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 96.9231 % | RAM App: 138.43 MB | Sys Avail: 25386.1 MB / 65466.5 MB
+[ "17:18:17.069" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 90.4762 % | RAM App: 138.504 MB | Sys Avail: 25334 MB / 65466.5 MB
+[ "17:18:18.077" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.3646 % | RAM App: 138.578 MB | Sys Avail: 25270.1 MB / 65466.5 MB
+[ "17:18:19.079" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.1042 % | RAM App: 138.656 MB | Sys Avail: 25291.8 MB / 65466.5 MB
+[ "17:18:20.079" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.9271 % | RAM App: 138.785 MB | Sys Avail: 25134.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:18:21.078" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 93.2292 % | RAM App: 138.867 MB | Sys Avail: 25051 MB / 65466.5 MB
+[ "17:18:22.072" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 93.4896 % | RAM App: 138.949 MB | Sys Avail: 25230.9 MB / 65466.5 MB
+[ "17:18:23.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.6667 % | RAM App: 139.027 MB | Sys Avail: 25191.5 MB / 65466.5 MB
+[ "17:18:24.078" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.0104 % | RAM App: 139.156 MB | Sys Avail: 25247 MB / 65466.5 MB
+[ "17:18:25.080" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.7083 % | RAM App: 139.23 MB | Sys Avail: 25095.3 MB / 65466.5 MB
+[ "17:18:26.079" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 90.8854 % | RAM App: 139.309 MB | Sys Avail: 25065.2 MB / 65466.5 MB
+[ "17:18:27.069" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 73.4375 % | RAM App: 139.441 MB | Sys Avail: 25184 MB / 65466.5 MB
+[ "17:18:28.095" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 86.1538 % | RAM App: 139.52 MB | Sys Avail: 25181.5 MB / 65466.5 MB
+[ "17:18:29.086" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 90.625 % | RAM App: 136.758 MB | Sys Avail: 25186.4 MB / 65466.5 MB
+[ "17:18:30.090" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 92.1875 % | RAM App: 136.91 MB | Sys Avail: 25186.6 MB / 65466.5 MB
+[ "17:18:31.086" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.2292 % | RAM App: 136.977 MB | Sys Avail: 25188.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:18:32.087" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 91.6667 % | RAM App: 136.988 MB | Sys Avail: 25188.6 MB / 65466.5 MB
+[ "17:18:33.085" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 96.0938 % | RAM App: 137.004 MB | Sys Avail: 25104.4 MB / 65466.5 MB
+[ "17:18:34.092" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 96.3542 % | RAM App: 137.082 MB | Sys Avail: 25178.3 MB / 65466.5 MB
+[ "17:18:35.096" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 95.8333 % | RAM App: 137.094 MB | Sys Avail: 25154.9 MB / 65466.5 MB
+[ "17:18:36.089" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 98.9583 % | RAM App: 137.219 MB | Sys Avail: 25469.5 MB / 65466.5 MB
+[ "17:18:37.086" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 96.3542 % | RAM App: 137.219 MB | Sys Avail: 25500.5 MB / 65466.5 MB
+[ "17:18:38.094" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 95.5729 % | RAM App: 137.27 MB | Sys Avail: 25483.4 MB / 65466.5 MB
+[ "17:18:39.096" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 91.4063 % | RAM App: 137.324 MB | Sys Avail: 25486.1 MB / 65466.5 MB
+[ "17:18:40.093" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 91.9271 % | RAM App: 137.379 MB | Sys Avail: 25487.8 MB / 65466.5 MB
+[ "17:18:41.087" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.3125 % | RAM App: 137.484 MB | Sys Avail: 25461.9 MB / 65466.5 MB
+[ "17:18:42.095" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 91.1458 % | RAM App: 137.539 MB | Sys Avail: 25465.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:18:43.113" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 91.7949 % | RAM App: 137.551 MB | Sys Avail: 25562.2 MB / 65466.5 MB
+[ "17:18:44.096" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 91.0053 % | RAM App: 137.625 MB | Sys Avail: 25572.9 MB / 65466.5 MB
+[ "17:18:45.114" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 91.0256 % | RAM App: 137.625 MB | Sys Avail: 25573.2 MB / 65466.5 MB
+[ "17:18:46.087" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 90.7407 % | RAM App: 137.641 MB | Sys Avail: 25576.8 MB / 65466.5 MB
+[ "17:18:47.097" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.5521 % | RAM App: 137.668 MB | Sys Avail: 25574.6 MB / 65466.5 MB
+[ "17:18:48.094" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 81.25 % | RAM App: 137.742 MB | Sys Avail: 25574.5 MB / 65466.5 MB
+[ "17:18:49.085" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.2917 % | RAM App: 137.816 MB | Sys Avail: 25574 MB / 65466.5 MB
+[ "17:18:50.146" ][SystemMonitor] Stats Update: CPU App: 0.746269 % | Sys: 92.0398 % | RAM App: 137.91 MB | Sys Avail: 25542.9 MB / 65466.5 MB
+[ "17:18:51.096" ][SystemMonitor] Stats Update: CPU App: 0.819672 % | Sys: 90.4372 % | RAM App: 137.93 MB | Sys Avail: 25540.2 MB / 65466.5 MB
+[ "17:18:52.094" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.7708 % | RAM App: 137.949 MB | Sys Avail: 25571.8 MB / 65466.5 MB
+[ "17:18:53.085" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 80.4688 % | RAM App: 138.023 MB | Sys Avail: 25574.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:18:54.085" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 80.2083 % | RAM App: 138.043 MB | Sys Avail: 25575.1 MB / 65466.5 MB
+[ "17:18:55.096" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 82.5521 % | RAM App: 138.066 MB | Sys Avail: 25605.9 MB / 65466.5 MB
+[ "17:18:56.097" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.0104 % | RAM App: 138.105 MB | Sys Avail: 25615.9 MB / 65466.5 MB
+[ "17:18:57.098" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 87.5 % | RAM App: 138.129 MB | Sys Avail: 25615.8 MB / 65466.5 MB
+[ "17:18:58.096" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.8125 % | RAM App: 138.16 MB | Sys Avail: 25620.1 MB / 65466.5 MB
+[ "17:18:59.085" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 82.8125 % | RAM App: 138.191 MB | Sys Avail: 25622.4 MB / 65466.5 MB
+[ "17:19:00.090" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.9479 % | RAM App: 138.207 MB | Sys Avail: 25622.7 MB / 65466.5 MB
+[ "17:19:01.085" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 77.0833 % | RAM App: 138.246 MB | Sys Avail: 25625.4 MB / 65466.5 MB
+[ "17:19:02.084" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 83.3333 % | RAM App: 138.266 MB | Sys Avail: 25626.1 MB / 65466.5 MB
+[ "17:19:03.096" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 94.2708 % | RAM App: 138.305 MB | Sys Avail: 25518.3 MB / 65466.5 MB
+[ "17:19:04.098" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.8958 % | RAM App: 138.352 MB | Sys Avail: 25596.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:19:05.086" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 93.75 % | RAM App: 138.375 MB | Sys Avail: 25535.7 MB / 65466.5 MB
+[ "17:19:06.097" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.2813 % | RAM App: 138.398 MB | Sys Avail: 25534.1 MB / 65466.5 MB
+[ "17:19:07.097" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 84.6354 % | RAM App: 138.418 MB | Sys Avail: 25535.5 MB / 65466.5 MB
+[ "17:19:08.090" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 96.875 % | RAM App: 138.465 MB | Sys Avail: 25478.8 MB / 65466.5 MB
+[ "17:19:09.086" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 94.0104 % | RAM App: 138.484 MB | Sys Avail: 25470.9 MB / 65466.5 MB
+[ "17:19:10.092" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.2917 % | RAM App: 138.508 MB | Sys Avail: 25471.5 MB / 65466.5 MB
+[ "17:19:11.085" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 93.2292 % | RAM App: 138.586 MB | Sys Avail: 25480.3 MB / 65466.5 MB
+[ "17:19:12.093" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 84.375 % | RAM App: 138.66 MB | Sys Avail: 25483.3 MB / 65466.5 MB
+[ "17:19:13.085" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 78.9063 % | RAM App: 138.707 MB | Sys Avail: 25484.6 MB / 65466.5 MB
+[ "17:19:14.097" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 80.2083 % | RAM App: 138.738 MB | Sys Avail: 25535.4 MB / 65466.5 MB
+[ "17:19:15.086" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 69.7917 % | RAM App: 138.77 MB | Sys Avail: 25535.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:19:16.093" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 67.7083 % | RAM App: 138.813 MB | Sys Avail: 25538.9 MB / 65466.5 MB
+[ "17:19:17.084" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 68.2292 % | RAM App: 138.859 MB | Sys Avail: 25513.5 MB / 65466.5 MB
+[ "17:19:18.097" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 73.9583 % | RAM App: 138.906 MB | Sys Avail: 25524 MB / 65466.5 MB
+[ "17:19:19.097" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 69.5313 % | RAM App: 138.988 MB | Sys Avail: 25529.1 MB / 65466.5 MB
+[ "17:19:20.093" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 72.6563 % | RAM App: 139.102 MB | Sys Avail: 25501.6 MB / 65466.5 MB
+[ "17:19:21.097" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 64.8438 % | RAM App: 139.164 MB | Sys Avail: 25511.7 MB / 65466.5 MB
+[ "17:19:22.089" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 70.0521 % | RAM App: 139.242 MB | Sys Avail: 25531.9 MB / 65466.5 MB
+[ "17:19:23.086" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 73.6979 % | RAM App: 139.32 MB | Sys Avail: 25537.3 MB / 65466.5 MB
+[ "17:19:24.092" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 69.0104 % | RAM App: 139.395 MB | Sys Avail: 25555.8 MB / 65466.5 MB
+[ "17:19:25.087" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 64.5833 % | RAM App: 139.477 MB | Sys Avail: 25557.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:19:26.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 61.4583 % | RAM App: 139.539 MB | Sys Avail: 25556.5 MB / 65466.5 MB
+[ "17:19:27.084" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 78.125 % | RAM App: 139.621 MB | Sys Avail: 25557 MB / 65466.5 MB
+[ "17:19:28.098" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 80.7292 % | RAM App: 139.75 MB | Sys Avail: 25557 MB / 65466.5 MB
+[ "17:19:29.097" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 72.6563 % | RAM App: 135.172 MB | Sys Avail: 25513.5 MB / 65466.5 MB
+[ "17:19:30.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 67.4479 % | RAM App: 135.352 MB | Sys Avail: 25516.1 MB / 65466.5 MB
+[ "17:19:31.098" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 77.3438 % | RAM App: 135.371 MB | Sys Avail: 25469.5 MB / 65466.5 MB
+[ "17:19:32.089" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 90.8854 % | RAM App: 135.383 MB | Sys Avail: 25505 MB / 65466.5 MB
+[ "17:19:33.086" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 87.7604 % | RAM App: 135.543 MB | Sys Avail: 25349.4 MB / 65466.5 MB
+[ "17:19:34.098" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 66.1458 % | RAM App: 135.543 MB | Sys Avail: 25419.6 MB / 65466.5 MB
+[ "17:19:35.098" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 72.6563 % | RAM App: 135.652 MB | Sys Avail: 25393.7 MB / 65466.5 MB
+[ "17:19:36.097" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 78.6458 % | RAM App: 135.68 MB | Sys Avail: 25439.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:19:37.098" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 64.8438 % | RAM App: 135.766 MB | Sys Avail: 25384.4 MB / 65466.5 MB
+[ "17:19:38.097" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 62.2396 % | RAM App: 135.82 MB | Sys Avail: 25384.6 MB / 65466.5 MB
+[ "17:19:39.098" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 61.7188 % | RAM App: 135.93 MB | Sys Avail: 25401.6 MB / 65466.5 MB
+[ "17:19:40.093" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 74.7396 % | RAM App: 135.93 MB | Sys Avail: 25400.9 MB / 65466.5 MB
+[ "17:19:41.086" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 68.75 % | RAM App: 135.945 MB | Sys Avail: 25392.6 MB / 65466.5 MB
+[ "17:19:42.098" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 62.2396 % | RAM App: 136.051 MB | Sys Avail: 25399.4 MB / 65466.5 MB
+[ "17:19:43.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 77.3438 % | RAM App: 136.063 MB | Sys Avail: 25401.4 MB / 65466.5 MB
+[ "17:19:44.084" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 64.5833 % | RAM App: 136.117 MB | Sys Avail: 25390.9 MB / 65466.5 MB
+[ "17:19:45.085" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 66.1458 % | RAM App: 136.176 MB | Sys Avail: 25392 MB / 65466.5 MB
+[ "17:19:46.093" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 66.9271 % | RAM App: 136.234 MB | Sys Avail: 25388.8 MB / 65466.5 MB
+[ "17:19:47.098" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 72.6563 % | RAM App: 136.344 MB | Sys Avail: 25370.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:19:48.089" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 79.9479 % | RAM App: 136.395 MB | Sys Avail: 25317.4 MB / 65466.5 MB
+[ "17:19:49.098" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 81.7708 % | RAM App: 136.477 MB | Sys Avail: 25324.1 MB / 65466.5 MB
+[ "17:19:50.084" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 78.6458 % | RAM App: 136.504 MB | Sys Avail: 25340.4 MB / 65466.5 MB
+[ "17:19:51.098" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 63.8021 % | RAM App: 136.578 MB | Sys Avail: 25354.3 MB / 65466.5 MB
+[ "17:19:52.093" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 63.2813 % | RAM App: 136.652 MB | Sys Avail: 25379.4 MB / 65466.5 MB
+[ "17:19:53.086" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 68.2292 % | RAM App: 136.738 MB | Sys Avail: 25319.5 MB / 65466.5 MB
+[ "17:19:54.097" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 64.0625 % | RAM App: 136.813 MB | Sys Avail: 25189.8 MB / 65466.5 MB
+[ "17:19:55.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 75.2604 % | RAM App: 136.895 MB | Sys Avail: 25170.1 MB / 65466.5 MB
+[ "17:19:56.089" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 72.6563 % | RAM App: 137.023 MB | Sys Avail: 25357.4 MB / 65466.5 MB
+[ "17:19:57.085" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 66.6667 % | RAM App: 137.043 MB | Sys Avail: 25264.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:19:58.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 72.3958 % | RAM App: 137.109 MB | Sys Avail: 25326.6 MB / 65466.5 MB
+[ "17:19:59.098" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 62.2396 % | RAM App: 137.238 MB | Sys Avail: 25376.6 MB / 65466.5 MB
+[ "17:20:00.098" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 65.1042 % | RAM App: 137.309 MB | Sys Avail: 25283.5 MB / 65466.5 MB
+[ "17:20:01.183" ][SystemMonitor] Stats Update: CPU App: 0.980392 % | Sys: 79.9523 % | RAM App: 137.441 MB | Sys Avail: 25361.6 MB / 65466.5 MB
+[ "17:20:02.099" ][SystemMonitor] Stats Update: CPU App: 0.277778 % | Sys: 88.2521 % | RAM App: 137.52 MB | Sys Avail: 25312.6 MB / 65466.5 MB
+[ "17:20:03.099" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 90.3646 % | RAM App: 137.645 MB | Sys Avail: 25136.6 MB / 65466.5 MB
+[ "17:20:04.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 75 % | RAM App: 137.727 MB | Sys Avail: 25231.9 MB / 65466.5 MB
+[ "17:20:05.099" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 76.3021 % | RAM App: 137.805 MB | Sys Avail: 25386.3 MB / 65466.5 MB
+[ "17:20:06.098" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 69.7917 % | RAM App: 137.938 MB | Sys Avail: 25403.4 MB / 65466.5 MB
+[ "17:20:07.099" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 78.9063 % | RAM App: 138.02 MB | Sys Avail: 25281.1 MB / 65466.5 MB
+[ "17:20:08.099" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 73.9583 % | RAM App: 138.102 MB | Sys Avail: 25537.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 30
+[ "17:20:09.085" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 80.4688 % | RAM App: 138.18 MB | Sys Avail: 25549.3 MB / 65466.5 MB
+[ "17:20:10.092" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 68.2292 % | RAM App: 138.258 MB | Sys Avail: 25582.4 MB / 65466.5 MB
+[ "17:20:11.087" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 67.9688 % | RAM App: 138.332 MB | Sys Avail: 25570.6 MB / 65466.5 MB
+[ "17:20:12.086" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 85.4167 % | RAM App: 138.41 MB | Sys Avail: 25591.7 MB / 65466.5 MB
+[ "17:20:13.099" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 73.6979 % | RAM App: 138.488 MB | Sys Avail: 25628.1 MB / 65466.5 MB
+[ "17:20:14.098" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 70.5729 % | RAM App: 138.574 MB | Sys Avail: 25516 MB / 65466.5 MB
+[ "17:20:15.117" ][SystemMonitor] Stats Update: CPU App: 1.76768 % | Sys: 76.0101 % | RAM App: 138.699 MB | Sys Avail: 25541.8 MB / 65466.5 MB
+[ "17:20:16.099" ][SystemMonitor] Stats Update: CPU App: 0.537634 % | Sys: 76.8817 % | RAM App: 138.781 MB | Sys Avail: 25614.3 MB / 65466.5 MB
+[ "17:20:17.086" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 77.3438 % | RAM App: 138.867 MB | Sys Avail: 25530.2 MB / 65466.5 MB
+[ "17:20:18.100" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 67.4479 % | RAM App: 138.902 MB | Sys Avail: 25397.2 MB / 65466.5 MB
+[ "17:20:19.100" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 71.875 % | RAM App: 138.977 MB | Sys Avail: 25449.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:20:20.092" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 81.5104 % | RAM App: 139.059 MB | Sys Avail: 25487.5 MB / 65466.5 MB
+[ "17:20:21.085" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 47.3958 % | RAM App: 139.148 MB | Sys Avail: 25584.4 MB / 65466.5 MB
+[ "17:20:22.086" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 70.8333 % | RAM App: 139.285 MB | Sys Avail: 25567.5 MB / 65466.5 MB
+[ "17:20:23.099" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.5938 % | RAM App: 139.375 MB | Sys Avail: 25540.8 MB / 65466.5 MB
+[ "17:20:24.100" ][SystemMonitor] Stats Update: CPU App: 1.02828 % | Sys: 81.5385 % | RAM App: 139.465 MB | Sys Avail: 25536 MB / 65466.5 MB
+[ "17:20:25.099" ][SystemMonitor] Stats Update: CPU App: 1.05541 % | Sys: 82.2751 % | RAM App: 139.543 MB | Sys Avail: 25535.9 MB / 65466.5 MB
+[ "17:20:26.115" ][SystemMonitor] Stats Update: CPU App: 1.0101 % | Sys: 79.2929 % | RAM App: 139.672 MB | Sys Avail: 25532.3 MB / 65466.5 MB
+[ "17:20:27.086" ][SystemMonitor] Stats Update: CPU App: 0.806452 % | Sys: 81.4516 % | RAM App: 139.75 MB | Sys Avail: 25530.4 MB / 65466.5 MB
+[ "17:20:28.099" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 81.5104 % | RAM App: 135.273 MB | Sys Avail: 25532.9 MB / 65466.5 MB
+[ "17:20:29.116" ][SystemMonitor] Stats Update: CPU App: 1.27551 % | Sys: 77.2727 % | RAM App: 135.41 MB | Sys Avail: 25533.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:20:30.091" ][SystemMonitor] Stats Update: CPU App: 1.59574 % | Sys: 81.4516 % | RAM App: 135.422 MB | Sys Avail: 25533.4 MB / 65466.5 MB
+[ "17:20:31.100" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 76.8229 % | RAM App: 135.438 MB | Sys Avail: 25533.3 MB / 65466.5 MB
+[ "17:20:32.090" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 79.9479 % | RAM App: 135.566 MB | Sys Avail: 25533.5 MB / 65466.5 MB
+[ "17:20:33.084" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 93.4896 % | RAM App: 135.59 MB | Sys Avail: 25443.7 MB / 65466.5 MB
+[ "17:20:34.100" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 91.1458 % | RAM App: 135.703 MB | Sys Avail: 25486.2 MB / 65466.5 MB
+[ "17:20:35.099" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 92.7083 % | RAM App: 135.711 MB | Sys Avail: 25377.3 MB / 65466.5 MB
+[ "17:20:36.100" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 93.0769 % | RAM App: 135.77 MB | Sys Avail: 25272.5 MB / 65466.5 MB
+[ "17:20:37.099" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 90.5512 % | RAM App: 135.875 MB | Sys Avail: 25221.1 MB / 65466.5 MB
+[ "17:20:38.101" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 93.0233 % | RAM App: 135.926 MB | Sys Avail: 25207.5 MB / 65466.5 MB
+[ "17:20:39.099" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 85.4497 % | RAM App: 135.984 MB | Sys Avail: 25225.2 MB / 65466.5 MB
+[ "17:20:40.102" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 80 % | RAM App: 136.094 MB | Sys Avail: 25207.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:20:41.117" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 78.4615 % | RAM App: 136.109 MB | Sys Avail: 25244.1 MB / 65466.5 MB
+[ "17:20:42.117" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 82.5521 % | RAM App: 136.145 MB | Sys Avail: 25172.3 MB / 65466.5 MB
+[ "17:20:43.117" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 88.2813 % | RAM App: 136.242 MB | Sys Avail: 25234.6 MB / 65466.5 MB
+[ "17:20:44.118" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.9479 % | RAM App: 136.305 MB | Sys Avail: 25107.7 MB / 65466.5 MB
+[ "17:20:45.099" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 75.9259 % | RAM App: 136.379 MB | Sys Avail: 25153.2 MB / 65466.5 MB
+[ "17:20:46.116" ][SystemMonitor] Stats Update: CPU App: 2.05128 % | Sys: 81.5385 % | RAM App: 136.461 MB | Sys Avail: 25168.6 MB / 65466.5 MB
+[ "17:20:47.116" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 76.0417 % | RAM App: 136.594 MB | Sys Avail: 25398.8 MB / 65466.5 MB
+[ "17:20:48.103" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 69.8413 % | RAM App: 136.676 MB | Sys Avail: 25380.5 MB / 65466.5 MB
+[ "17:20:49.100" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 57.8125 % | RAM App: 136.852 MB | Sys Avail: 25392.2 MB / 65466.5 MB
+[ "17:20:50.116" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 71.7949 % | RAM App: 136.934 MB | Sys Avail: 25358.3 MB / 65466.5 MB
+[ "17:20:51.118" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 67.4479 % | RAM App: 137.117 MB | Sys Avail: 25360.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:20:52.117" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 72.1354 % | RAM App: 137.141 MB | Sys Avail: 25361 MB / 65466.5 MB
+[ "17:20:53.101" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 79.8942 % | RAM App: 137.215 MB | Sys Avail: 25377.2 MB / 65466.5 MB
+[ "17:20:54.100" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 62.2396 % | RAM App: 137.25 MB | Sys Avail: 25377.6 MB / 65466.5 MB
+[ "17:20:55.116" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 67.9487 % | RAM App: 137.348 MB | Sys Avail: 25379.8 MB / 65466.5 MB
+[ "17:20:56.116" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 63.2813 % | RAM App: 137.387 MB | Sys Avail: 25379.2 MB / 65466.5 MB
+[ "17:20:57.102" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 76.455 % | RAM App: 137.512 MB | Sys Avail: 25383.8 MB / 65466.5 MB
+[ "17:20:58.116" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 69.4872 % | RAM App: 137.602 MB | Sys Avail: 25382 MB / 65466.5 MB
+[ "17:20:59.102" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 65.3439 % | RAM App: 137.789 MB | Sys Avail: 25382.6 MB / 65466.5 MB
+[ "17:21:00.100" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 65.8854 % | RAM App: 137.816 MB | Sys Avail: 25382.8 MB / 65466.5 MB
+[ "17:21:01.101" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 69.0104 % | RAM App: 137.961 MB | Sys Avail: 25382.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:21:02.100" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 68.75 % | RAM App: 137.988 MB | Sys Avail: 25380.3 MB / 65466.5 MB
+[ "17:21:03.101" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 86.4583 % | RAM App: 138.168 MB | Sys Avail: 25265.8 MB / 65466.5 MB
+[ "17:21:04.117" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 66.6667 % | RAM App: 138.199 MB | Sys Avail: 25368.6 MB / 65466.5 MB
+[ "17:21:05.117" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 80.2083 % | RAM App: 138.332 MB | Sys Avail: 25400.9 MB / 65466.5 MB
+[ "17:21:06.102" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 87.8307 % | RAM App: 138.363 MB | Sys Avail: 25418 MB / 65466.5 MB
+[ "17:21:07.101" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 64.3229 % | RAM App: 138.547 MB | Sys Avail: 25416 MB / 65466.5 MB
+[ "17:21:08.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 75 % | RAM App: 138.574 MB | Sys Avail: 25412.7 MB / 65466.5 MB
+[ "17:21:09.118" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 62.5641 % | RAM App: 138.703 MB | Sys Avail: 25413.7 MB / 65466.5 MB
+[ "17:21:10.102" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 74.3386 % | RAM App: 138.789 MB | Sys Avail: 25414.9 MB / 65466.5 MB
+[ "17:21:11.100" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 69.2708 % | RAM App: 138.859 MB | Sys Avail: 25395.6 MB / 65466.5 MB
+[ "17:21:12.101" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 73.9583 % | RAM App: 138.887 MB | Sys Avail: 25400.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:21:13.101" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 79.6875 % | RAM App: 139.031 MB | Sys Avail: 25400.4 MB / 65466.5 MB
+[ "17:21:14.101" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 65.8854 % | RAM App: 139.074 MB | Sys Avail: 25402.3 MB / 65466.5 MB
+[ "17:21:15.101" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 72.3958 % | RAM App: 139.254 MB | Sys Avail: 25403.1 MB / 65466.5 MB
+[ "17:21:16.101" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.5521 % | RAM App: 139.289 MB | Sys Avail: 25361.8 MB / 65466.5 MB
+[ "17:21:17.101" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 62.5 % | RAM App: 139.418 MB | Sys Avail: 25357.4 MB / 65466.5 MB
+[ "17:21:18.101" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 68.75 % | RAM App: 139.5 MB | Sys Avail: 25357.4 MB / 65466.5 MB
+[ "17:21:19.117" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 69.7436 % | RAM App: 139.688 MB | Sys Avail: 25352.1 MB / 65466.5 MB
+[ "17:21:20.101" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 70.8995 % | RAM App: 139.797 MB | Sys Avail: 25337.2 MB / 65466.5 MB
+[ "17:21:21.100" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 69.7917 % | RAM App: 139.926 MB | Sys Avail: 25309.2 MB / 65466.5 MB
+[ "17:21:22.119" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 64.8718 % | RAM App: 139.961 MB | Sys Avail: 25309.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:21:23.119" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.6875 % | RAM App: 140.148 MB | Sys Avail: 25306.3 MB / 65466.5 MB
+[ "17:21:24.102" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 73.2804 % | RAM App: 140.188 MB | Sys Avail: 25197.9 MB / 65466.5 MB
+[ "17:21:25.103" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 65.625 % | RAM App: 140.32 MB | Sys Avail: 25212.1 MB / 65466.5 MB
+[ "17:21:26.101" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 63.0208 % | RAM App: 140.41 MB | Sys Avail: 25213.4 MB / 65466.5 MB
+[ "17:21:27.100" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.2083 % | RAM App: 134.938 MB | Sys Avail: 25220.2 MB / 65466.5 MB
+[ "17:21:28.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 68.4896 % | RAM App: 135.168 MB | Sys Avail: 25167.9 MB / 65466.5 MB
+[ "17:21:29.118" ][SystemMonitor] Stats Update: CPU App: 1.28205 % | Sys: 60.7692 % | RAM App: 135.223 MB | Sys Avail: 25167.5 MB / 65466.5 MB
+[ "17:21:30.101" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 63.7566 % | RAM App: 135.285 MB | Sys Avail: 25170.9 MB / 65466.5 MB
+[ "17:21:31.118" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 76.1538 % | RAM App: 135.359 MB | Sys Avail: 25171.1 MB / 65466.5 MB
+[ "17:21:32.118" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 65.625 % | RAM App: 135.438 MB | Sys Avail: 25162.4 MB / 65466.5 MB
+[ "17:21:33.102" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 87.3016 % | RAM App: 135.512 MB | Sys Avail: 25055.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 30
+[ "17:21:34.102" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 69.0104 % | RAM App: 135.59 MB | Sys Avail: 25155.1 MB / 65466.5 MB
+[ "17:21:35.101" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 79.4271 % | RAM App: 135.598 MB | Sys Avail: 25120.5 MB / 65466.5 MB
+[ "17:21:36.118" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 65.641 % | RAM App: 135.66 MB | Sys Avail: 25142.8 MB / 65466.5 MB
+[ "17:21:37.101" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 59.5238 % | RAM App: 135.723 MB | Sys Avail: 25142.3 MB / 65466.5 MB
+[ "17:21:38.134" ][SystemMonitor] Stats Update: CPU App: 1.26263 % | Sys: 83.0808 % | RAM App: 135.738 MB | Sys Avail: 25111.9 MB / 65466.5 MB
+[ "17:21:39.101" ][SystemMonitor] Stats Update: CPU App: 0.806452 % | Sys: 61.2903 % | RAM App: 135.746 MB | Sys Avail: 25110.4 MB / 65466.5 MB
+[ "17:21:40.119" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 60 % | RAM App: 135.75 MB | Sys Avail: 25110.6 MB / 65466.5 MB
+[ "17:21:41.101" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 80.1587 % | RAM App: 135.809 MB | Sys Avail: 25101.7 MB / 65466.5 MB
+[ "17:21:42.102" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 69.5313 % | RAM App: 135.871 MB | Sys Avail: 25062.6 MB / 65466.5 MB
+[ "17:21:43.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 61.9792 % | RAM App: 135.938 MB | Sys Avail: 25062.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:21:44.102" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 61.4583 % | RAM App: 136.012 MB | Sys Avail: 25018.1 MB / 65466.5 MB
+[ "17:21:45.102" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 71.6146 % | RAM App: 136.102 MB | Sys Avail: 25007 MB / 65466.5 MB
+[ "17:21:46.119" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 76.1538 % | RAM App: 136.141 MB | Sys Avail: 25056.5 MB / 65466.5 MB
+[ "17:21:47.102" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 69.3122 % | RAM App: 136.227 MB | Sys Avail: 25064 MB / 65466.5 MB
+[ "17:21:48.102" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 63.5417 % | RAM App: 136.313 MB | Sys Avail: 25037.7 MB / 65466.5 MB
+[ "17:21:49.102" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 70.0521 % | RAM App: 136.398 MB | Sys Avail: 24939.3 MB / 65466.5 MB
+[ "17:21:50.102" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 67.4479 % | RAM App: 136.477 MB | Sys Avail: 25130.6 MB / 65466.5 MB
+[ "17:21:51.102" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 71.0938 % | RAM App: 136.566 MB | Sys Avail: 25120 MB / 65466.5 MB
+[ "17:21:52.119" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 82.0513 % | RAM App: 136.652 MB | Sys Avail: 25102.8 MB / 65466.5 MB
+[ "17:21:53.118" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 76.5625 % | RAM App: 136.734 MB | Sys Avail: 25120.7 MB / 65466.5 MB
+[ "17:21:54.118" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 84.375 % | RAM App: 136.816 MB | Sys Avail: 25373.5 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:21:55.102" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 81.746 % | RAM App: 136.898 MB | Sys Avail: 25535.4 MB / 65466.5 MB
+[ "17:21:56.119" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 68.2051 % | RAM App: 136.984 MB | Sys Avail: 25473 MB / 65466.5 MB
+[ "17:21:57.103" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 62.1693 % | RAM App: 137.07 MB | Sys Avail: 25547.1 MB / 65466.5 MB
+[ "17:21:58.119" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 67.4359 % | RAM App: 137.16 MB | Sys Avail: 25492 MB / 65466.5 MB
+[ "17:21:59.102" ][SystemMonitor] Stats Update: CPU App: 1.32275 % | Sys: 68.254 % | RAM App: 137.246 MB | Sys Avail: 25490.6 MB / 65466.5 MB
+[ "17:22:00.102" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 69.2708 % | RAM App: 137.328 MB | Sys Avail: 25470.7 MB / 65466.5 MB
+[ "17:22:01.101" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 70.0521 % | RAM App: 137.41 MB | Sys Avail: 25509.6 MB / 65466.5 MB
+[ "17:22:02.103" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 63.5417 % | RAM App: 137.492 MB | Sys Avail: 25431.2 MB / 65466.5 MB
+[ "17:22:03.103" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 92.1875 % | RAM App: 137.523 MB | Sys Avail: 25403.7 MB / 65466.5 MB
+[ "17:22:04.103" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 77.8646 % | RAM App: 137.652 MB | Sys Avail: 25472.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:22:05.102" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 82.5521 % | RAM App: 137.734 MB | Sys Avail: 25453.6 MB / 65466.5 MB
+[ "17:22:06.103" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.9479 % | RAM App: 137.863 MB | Sys Avail: 25446.2 MB / 65466.5 MB
+[ "17:22:07.102" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 65.625 % | RAM App: 137.949 MB | Sys Avail: 25249.6 MB / 65466.5 MB
+[ "17:22:08.119" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 68.9744 % | RAM App: 138.078 MB | Sys Avail: 25423.3 MB / 65466.5 MB
+[ "17:22:09.100" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 73.2804 % | RAM App: 138.168 MB | Sys Avail: 25462.3 MB / 65466.5 MB
+[ "17:22:10.102" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 51.0417 % | RAM App: 138.254 MB | Sys Avail: 25468 MB / 65466.5 MB
+[ "17:22:11.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 62.7604 % | RAM App: 138.328 MB | Sys Avail: 25462.4 MB / 65466.5 MB
+[ "17:22:12.103" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 90.8854 % | RAM App: 138.461 MB | Sys Avail: 25442.5 MB / 65466.5 MB
+[ "17:22:13.120" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 89.7436 % | RAM App: 138.547 MB | Sys Avail: 25551.6 MB / 65466.5 MB
+[ "17:22:14.103" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 83.5979 % | RAM App: 138.691 MB | Sys Avail: 25554.3 MB / 65466.5 MB
+[ "17:22:15.101" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.3438 % | RAM App: 138.777 MB | Sys Avail: 25559.3 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:22:16.103" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.9896 % | RAM App: 138.906 MB | Sys Avail: 25789.4 MB / 65466.5 MB
+[ "17:22:17.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 80.4688 % | RAM App: 138.996 MB | Sys Avail: 25795 MB / 65466.5 MB
+[ "17:22:18.103" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 85.9375 % | RAM App: 139.129 MB | Sys Avail: 25806.4 MB / 65466.5 MB
+[ "17:22:19.102" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 77.8646 % | RAM App: 139.215 MB | Sys Avail: 25806.5 MB / 65466.5 MB
+[ "17:22:20.101" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 76.3021 % | RAM App: 139.348 MB | Sys Avail: 25809.6 MB / 65466.5 MB
+[ "17:22:21.111" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 78.9063 % | RAM App: 139.438 MB | Sys Avail: 25813.1 MB / 65466.5 MB
+[ "17:22:22.103" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 84.6354 % | RAM App: 139.566 MB | Sys Avail: 25811.9 MB / 65466.5 MB
+[ "17:22:23.103" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 89.8438 % | RAM App: 139.652 MB | Sys Avail: 25812.4 MB / 65466.5 MB
+[ "17:22:24.103" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 92.1875 % | RAM App: 139.785 MB | Sys Avail: 25811.3 MB / 65466.5 MB
+[ "17:22:25.103" ][SystemMonitor] Stats Update: CPU App: 2.34375 % | Sys: 90.1042 % | RAM App: 139.875 MB | Sys Avail: 25814.3 MB / 65466.5 MB
+[ "17:22:26.104" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 94.7917 % | RAM App: 134.938 MB | Sys Avail: 25772.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 27
+[ "17:22:27.121" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 93.5897 % | RAM App: 135.102 MB | Sys Avail: 25733.6 MB / 65466.5 MB
+[ "17:22:28.103" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 91.0053 % | RAM App: 135.164 MB | Sys Avail: 25742.4 MB / 65466.5 MB
+[ "17:22:29.103" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 90.1042 % | RAM App: 135.273 MB | Sys Avail: 25741.4 MB / 65466.5 MB
+[ "17:22:30.138" ][SystemMonitor] Stats Update: CPU App: 0.252525 % | Sys: 88.8889 % | RAM App: 135.348 MB | Sys Avail: 25757.1 MB / 65466.5 MB
+[ "17:22:31.103" ][SystemMonitor] Stats Update: CPU App: 0.806452 % | Sys: 76.3441 % | RAM App: 135.477 MB | Sys Avail: 25751.2 MB / 65466.5 MB
+[ "17:22:32.100" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 81.25 % | RAM App: 135.5 MB | Sys Avail: 25757.1 MB / 65466.5 MB
+[ "17:22:33.120" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 89.7436 % | RAM App: 135.609 MB | Sys Avail: 25658.5 MB / 65466.5 MB
+[ "17:22:34.104" ][SystemMonitor] Stats Update: CPU App: 0.529101 % | Sys: 82.0106 % | RAM App: 135.621 MB | Sys Avail: 25754.8 MB / 65466.5 MB
+[ "17:22:35.104" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 89.3229 % | RAM App: 135.68 MB | Sys Avail: 25755.9 MB / 65466.5 MB
+[ "17:22:36.104" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.6875 % | RAM App: 135.742 MB | Sys Avail: 25796.9 MB / 65466.5 MB
+[ "17:22:37.101" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 78.125 % | RAM App: 135.848 MB | Sys Avail: 25799.9 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:22:38.103" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 80.9896 % | RAM App: 135.855 MB | Sys Avail: 25801.1 MB / 65466.5 MB
+[ "17:22:39.102" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 83.3333 % | RAM App: 136.012 MB | Sys Avail: 25815.6 MB / 65466.5 MB
+[ "17:22:40.102" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 71.3542 % | RAM App: 136.02 MB | Sys Avail: 25824.9 MB / 65466.5 MB
+[ "17:22:41.101" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 80.9896 % | RAM App: 136.184 MB | Sys Avail: 25824.9 MB / 65466.5 MB
+[ "17:22:42.103" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 83.8542 % | RAM App: 136.184 MB | Sys Avail: 25813.4 MB / 65466.5 MB
+[ "17:22:43.124" ][SystemMonitor] Stats Update: CPU App: 1.02564 % | Sys: 90.2564 % | RAM App: 136.293 MB | Sys Avail: 25788.2 MB / 65466.5 MB
+[ "17:22:44.104" ][SystemMonitor] Stats Update: CPU App: 1.85185 % | Sys: 83.5979 % | RAM App: 136.379 MB | Sys Avail: 25801.5 MB / 65466.5 MB
+[ "17:22:45.104" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 68.4896 % | RAM App: 136.508 MB | Sys Avail: 25809.2 MB / 65466.5 MB
+[ "17:22:46.104" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 59.8958 % | RAM App: 136.535 MB | Sys Avail: 25811.4 MB / 65466.5 MB
+[ "17:22:47.104" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 67.9688 % | RAM App: 136.668 MB | Sys Avail: 25830.6 MB / 65466.5 MB
+[ "17:22:48.099" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 72.9167 % | RAM App: 136.75 MB | Sys Avail: 25847.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:22:49.102" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 75.5208 % | RAM App: 136.93 MB | Sys Avail: 25854.5 MB / 65466.5 MB
+[ "17:22:50.104" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 67.9688 % | RAM App: 136.961 MB | Sys Avail: 25869.9 MB / 65466.5 MB
+[ "17:22:51.104" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 60.6771 % | RAM App: 137.137 MB | Sys Avail: 25872.8 MB / 65466.5 MB
+[ "17:22:52.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 71.3542 % | RAM App: 137.168 MB | Sys Avail: 25876.4 MB / 65466.5 MB
+[ "17:22:53.103" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 66.6667 % | RAM App: 137.246 MB | Sys Avail: 25876.8 MB / 65466.5 MB
+[ "17:22:54.105" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 87.5 % | RAM App: 137.328 MB | Sys Avail: 25733.7 MB / 65466.5 MB
+[ "17:22:55.101" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 79.1667 % | RAM App: 137.508 MB | Sys Avail: 25742.6 MB / 65466.5 MB
+[ "17:22:56.104" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 66.6667 % | RAM App: 137.539 MB | Sys Avail: 25753.7 MB / 65466.5 MB
+[ "17:22:57.104" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 72.6563 % | RAM App: 137.664 MB | Sys Avail: 25755.8 MB / 65466.5 MB
+[ "17:22:58.104" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 68.2292 % | RAM App: 137.746 MB | Sys Avail: 25684.8 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 28
+[ "17:22:59.104" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 65.3646 % | RAM App: 137.93 MB | Sys Avail: 25685.3 MB / 65466.5 MB
+[ "17:23:00.105" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 60.6771 % | RAM App: 137.957 MB | Sys Avail: 25684.2 MB / 65466.5 MB
+[ "17:23:01.104" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 74.4792 % | RAM App: 138.086 MB | Sys Avail: 25681.2 MB / 65466.5 MB
+[ "17:23:02.104" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 64.3229 % | RAM App: 138.176 MB | Sys Avail: 25637.4 MB / 65466.5 MB
+[ "17:23:03.100" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 85.1563 % | RAM App: 138.355 MB | Sys Avail: 25529.3 MB / 65466.5 MB
+[ "17:23:04.106" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 74.7396 % | RAM App: 138.383 MB | Sys Avail: 25631.7 MB / 65466.5 MB
+[ "17:23:05.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 98.4375 % | RAM App: 138.516 MB | Sys Avail: 25521.2 MB / 65466.5 MB
+[ "17:23:06.104" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 95.0521 % | RAM App: 138.605 MB | Sys Avail: 25504.8 MB / 65466.5 MB
+[ "17:23:07.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 83.5938 % | RAM App: 138.789 MB | Sys Avail: 25498.4 MB / 65466.5 MB
+[ "17:23:08.121" ][SystemMonitor] Stats Update: CPU App: 0.25641 % | Sys: 80 % | RAM App: 138.82 MB | Sys Avail: 25304.3 MB / 65466.5 MB
+[ "17:23:09.100" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 82.5397 % | RAM App: 138.949 MB | Sys Avail: 25270.7 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:23:10.104" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 75 % | RAM App: 138.98 MB | Sys Avail: 25259.2 MB / 65466.5 MB
+[ "17:23:11.104" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 73.9583 % | RAM App: 139.168 MB | Sys Avail: 25184.6 MB / 65466.5 MB
+[ "17:23:12.106" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 83.5938 % | RAM App: 139.199 MB | Sys Avail: 25187.5 MB / 65466.5 MB
+[ "17:23:13.121" ][SystemMonitor] Stats Update: CPU App: 0.769231 % | Sys: 88.4615 % | RAM App: 139.34 MB | Sys Avail: 25148.8 MB / 65466.5 MB
+[ "17:23:14.100" ][SystemMonitor] Stats Update: CPU App: 0.793651 % | Sys: 83.0688 % | RAM App: 139.434 MB | Sys Avail: 24991.5 MB / 65466.5 MB
+[ "17:23:15.105" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 78.6458 % | RAM App: 139.617 MB | Sys Avail: 25111.8 MB / 65466.5 MB
+[ "17:23:16.105" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 92.1875 % | RAM App: 139.648 MB | Sys Avail: 24669.7 MB / 65466.5 MB
+[ "17:23:17.102" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 76.3021 % | RAM App: 139.781 MB | Sys Avail: 24889.9 MB / 65466.5 MB
+[ "17:23:18.105" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 71.6146 % | RAM App: 139.867 MB | Sys Avail: 24895.3 MB / 65466.5 MB
+[ "17:23:19.102" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 62.2396 % | RAM App: 140.051 MB | Sys Avail: 25126.1 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:23:20.122" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 70.5128 % | RAM App: 140.09 MB | Sys Avail: 25167.6 MB / 65466.5 MB
+[ "17:23:21.105" ][SystemMonitor] Stats Update: CPU App: 0.26455 % | Sys: 77.7778 % | RAM App: 140.219 MB | Sys Avail: 25185.3 MB / 65466.5 MB
+[ "17:23:22.105" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 69.2708 % | RAM App: 140.301 MB | Sys Avail: 25133.3 MB / 65466.5 MB
+[ "17:23:23.105" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 65.3646 % | RAM App: 140.484 MB | Sys Avail: 25073.2 MB / 65466.5 MB
+[ "17:23:24.104" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 68.75 % | RAM App: 140.516 MB | Sys Avail: 25194.1 MB / 65466.5 MB
+[ "17:23:25.106" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 66.1458 % | RAM App: 140.648 MB | Sys Avail: 25149.7 MB / 65466.5 MB
+[ "17:23:26.107" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 71.875 % | RAM App: 135.121 MB | Sys Avail: 25103.8 MB / 65466.5 MB
+[ "17:23:27.105" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 77.0833 % | RAM App: 135.352 MB | Sys Avail: 25211.2 MB / 65466.5 MB
+[ "17:23:28.105" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 74.7396 % | RAM App: 135.461 MB | Sys Avail: 25210 MB / 65466.5 MB
+[ "17:23:29.105" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 66.1458 % | RAM App: 135.516 MB | Sys Avail: 25106.5 MB / 65466.5 MB
+[ "17:23:30.105" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 82.5521 % | RAM App: 135.629 MB | Sys Avail: 25079.6 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:23:31.101" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.2917 % | RAM App: 135.754 MB | Sys Avail: 25112.5 MB / 65466.5 MB
+[ "17:23:32.106" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 88.2813 % | RAM App: 135.816 MB | Sys Avail: 25205.1 MB / 65466.5 MB
+[ "17:23:33.102" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 92.1875 % | RAM App: 135.941 MB | Sys Avail: 25037.2 MB / 65466.5 MB
+[ "17:23:34.103" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 78.9063 % | RAM App: 135.969 MB | Sys Avail: 25088.5 MB / 65466.5 MB
+[ "17:23:35.108" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 78.6458 % | RAM App: 136.035 MB | Sys Avail: 25166.5 MB / 65466.5 MB
+[ "17:23:36.107" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 73.6979 % | RAM App: 136.094 MB | Sys Avail: 25222.4 MB / 65466.5 MB
+[ "17:23:37.101" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 75.5208 % | RAM App: 136.211 MB | Sys Avail: 25202.8 MB / 65466.5 MB
+[ "17:23:38.118" ][SystemMonitor] Stats Update: CPU App: 0.257069 % | Sys: 85.641 % | RAM App: 136.32 MB | Sys Avail: 25174.5 MB / 65466.5 MB
+[ "17:23:39.106" ][SystemMonitor] Stats Update: CPU App: 0.263852 % | Sys: 87.5661 % | RAM App: 136.43 MB | Sys Avail: 25247 MB / 65466.5 MB
+[ "17:23:40.106" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 75.5208 % | RAM App: 136.434 MB | Sys Avail: 25135.3 MB / 65466.5 MB
+[ "17:23:41.106" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 58.3333 % | RAM App: 136.594 MB | Sys Avail: 25241.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29
+[ "17:23:42.103" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 76.0417 % | RAM App: 136.703 MB | Sys Avail: 25250.2 MB / 65466.5 MB
+[ "17:23:43.104" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.5521 % | RAM App: 136.758 MB | Sys Avail: 25387.3 MB / 65466.5 MB
+[ "17:23:44.106" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 80.9896 % | RAM App: 136.914 MB | Sys Avail: 25537.6 MB / 65466.5 MB
+[ "17:23:45.102" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 80.4688 % | RAM App: 137.023 MB | Sys Avail: 25650.7 MB / 65466.5 MB
+[ "17:23:46.102" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 82.5521 % | RAM App: 137.145 MB | Sys Avail: 25659 MB / 65466.5 MB
+[ "17:23:47.105" ][SystemMonitor] Stats Update: CPU App: 1.30208 % | Sys: 83.5938 % | RAM App: 137.277 MB | Sys Avail: 25663.2 MB / 65466.5 MB
+[ "17:23:48.106" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 79.6875 % | RAM App: 137.441 MB | Sys Avail: 25676.4 MB / 65466.5 MB
+[ "17:23:49.106" ][SystemMonitor] Stats Update: CPU App: 1.82292 % | Sys: 81.25 % | RAM App: 137.523 MB | Sys Avail: 25676.8 MB / 65466.5 MB
+[ "17:23:50.099" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 78.6458 % | RAM App: 137.633 MB | Sys Avail: 25684.6 MB / 65466.5 MB
+[ "17:23:51.102" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 83.3333 % | RAM App: 137.723 MB | Sys Avail: 25683.9 MB / 65466.5 MB
+[ "17:23:52.108" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 88.5417 % | RAM App: 137.797 MB | Sys Avail: 25656 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 29

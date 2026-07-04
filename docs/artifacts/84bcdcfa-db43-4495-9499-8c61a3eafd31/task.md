@@ -1,0 +1,13 @@
+# Rebranding Fix Tasks (Manual Recovery)
+
+- [x] Identify the Damage
+  - [x] Identify the staging commit (`0725b11`)
+  - [x] Identify which specific files need to be overwritten from the staging commit
+- [x] Selective Recovery
+  - [x] Manually pull/checkout specific files from `0725b11` as instructed by the user
+  - [x] Verify GitHub remote URL and fix GitHub Desktop sync issue
+- [ ] Verification of Clean State
+  - [ ] Run `.\build.ps1` exactly as the user requested on the cleanly reverted codebase
+  - [ ] Verify `QGalleryX.exe` and `QGalleryX-Bench.exe` successfully build and deploy
+- [ ] Safe Rename Process
+  - [ ] Make manual, targeted edits to `CMakeLists.txt` and `build.ps1` rather than bulk replaces

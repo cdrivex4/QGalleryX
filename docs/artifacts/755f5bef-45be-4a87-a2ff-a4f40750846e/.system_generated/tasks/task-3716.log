@@ -1,0 +1,10 @@
+ERROR: The process "appScrollBench.exe" not found.
+[1/9] Copying appScrollBench qml sources into build dir
+[2/9] Running qmlimportscanner for appScrollBench
+[3/9] Running rcc for resource appScrollBench_raw_qml_0
+[4/9] Generating .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.aotstats
+[5/9] Generating .rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.aotstats
+[6/9] Building CXX object CMakeFiles/appScrollBench.dir/build/.qt/rcc/qrc_appScrollBench_raw_qml_0.cpp.obj
+[7/9] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.obj
+[8/9] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.obj
+[9/9] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe

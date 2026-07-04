@@ -147,8 +147,13 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   cleanup.fmtCtx->interrupt_callback.callback = interrupt_cb;
   cleanup.fmtCtx->interrupt_callback.opaque = &timeoutData;
 
-  if (avformat_open_input(&cleanup.fmtCtx, pathStr.c_str(), nullptr, nullptr) !=
+  AVDictionary *options = nullptr;
+  av_dict_set(&options, "probesize", "5000000", 0); // 5MB limit
+  av_dict_set(&options, "analyzeduration", "2000000", 0); // 2s limit
+
+  if (avformat_open_input(&cleanup.fmtCtx, pathStr.c_str(), nullptr, &options) !=
       0) {
+    if (options) av_dict_free(&options);
     qWarning() << "[" << timeLogStr
                << "][FFmpeg] Failed to open file (or timeout):" << path;
     return QImage();
@@ -156,6 +161,8 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   if (cancelled && cancelled->load())
     return QImage();
+
+  if (options) av_dict_free(&options);
 
   if (avformat_find_stream_info(cleanup.fmtCtx, nullptr) < 0)
     return QImage();

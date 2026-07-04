@@ -17,7 +17,7 @@ Item {
     property alias model: imageModel
 
     // UI Grid Size (Zoom level)
-    property real uiThumbnailSize: appSettings.gridSize
+    property real uiThumbnailSize: appSettings.gridResolution
     
     // Loading Resolution (Quality/Performance setting)
     property int loadingResolution: appSettings.thumbnailSize
@@ -176,7 +176,7 @@ Item {
         onWheel: (wheel) => {
             if (wheel.modifiers & Qt.ControlModifier) {
                 // 1. Identify Item Under Mouse
-                var oldSize = appSettings.gridSize
+                var oldSize = appSettings.gridResolution
                 var oldCols = Math.floor(grid.width / oldSize)
                 if (oldCols < 1) oldCols = 1
                 
@@ -202,7 +202,7 @@ Item {
                 }
                 
                 if (newSize !== oldSize) {
-                    appSettings.gridSize = newSize
+                    appSettings.gridResolution = newSize
                     
                     // 3. Calculate New Position
                     // We use a Timer to ensure the GridView has finished its layout update
@@ -245,8 +245,8 @@ Item {
             }
         }
         onScaleChanged: (delta) => {
-            var newSize = appSettings.gridSize * (1 + (delta - 1) * 0.5) // Dampen sensitivity
-            appSettings.gridSize = Math.max(40, Math.min(newSize, 400))
+            var newSize = appSettings.gridResolution * (1 + (delta - 1) * 0.5) // Dampen sensitivity
+            appSettings.gridResolution = Math.max(40, Math.min(newSize, 400))
         }
     }
     

@@ -1,0 +1,22 @@
+# Tasks
+
+- [ ] Environment Discovery
+    - [ ] Check installed Qt versions in `D:\Qt`
+    - [ ] Check available compilers (MSVC, MinGW)
+    - [ ] Check CMake version
+- [ ] Planning
+    - [ ] Create implementation plan
+    - [ ] Determine Qt module usage (Widgets vs Quick)
+    - [ ] Define deployment strategy for portability
+- [ ] Project Setup
+    - [ ] Create CMakeLists.txt
+    - [ ] Create main.cpp
+    - [ ] Create QML resources (if using Qt Quick)
+- [ ] Implementation
+    - [ ] Implement image model (C++)
+    - [ ] Implement grid view (QML)
+    - [ ] Implement image viewer (QML)
+    - [ ] Ensure GPU acceleration
+- [ ] Deployment
+    - [ ] Configure deployment script (windeployqt)
+    - [ ] Verify portability

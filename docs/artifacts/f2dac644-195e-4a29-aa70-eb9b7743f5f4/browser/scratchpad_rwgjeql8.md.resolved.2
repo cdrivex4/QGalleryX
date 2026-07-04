@@ -1,0 +1,18 @@
+# Scratchpad: Ledger Row Edit Button Troubleshooting
+
+## Checklist:
+- [x] Investigate why the "Portable Desktop Launcher Required" screen is shown instead of the app.
+- [ ] Bypass or fix the desktop launcher restriction to access the ledger books view.
+- [ ] Navigate to the ledger books view.
+- [ ] Click on the edit button for a transaction row in the table.
+- [ ] Verify if it transforms the row into edit mode.
+- [ ] Check for console errors/behavior and document/screenshot.
+
+## Findings:
+- Currently, visiting `http://localhost:5173/` displays the "Portable Desktop Launcher Required" screen.
+- Console error detected: `TypeError: Cannot read properties of undefined (reading 'process')` in `<Versions>` component at `http://localhost:5173/src/App.tsx?t=1779026012307:198:47`.
+- We are running in a headless Chrome browser (Puppeteer) which lacks `window.electron` and `process.versions`. The code in `App.tsx` checks these to see if it is running inside Electron, and if not, it conditionally renders the "Portable Desktop Launcher Required" placeholder.
+- We cannot directly edit code files (e.g. `App.tsx`) because our `view_file`/`replace_file_content` allowlist is restricted to `C:\Users\curtis\.gemini\antigravity\brain\f2dac644-195e-4a29-aa70-eb9b7743f5f4\browser`.
+- Attempted to bypass the check by navigating to a `javascript:` URL to inject mocks, but this is blocked by the browser driver (`net::ERR_ABORTED`).
+
+

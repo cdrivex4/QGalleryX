@@ -1,0 +1,29 @@
+Running Cosmological Fit against Planck 2018...
+Planck Torsion Best Fit:  eta_tor = 6.610696e-20
+Planck Torsion 1-sigma Upper Limit: < 3.299906e-16
+Planck Torsion 2-sigma Upper Limit: < 7.210798e-16
+
+Running Compact Object Constraints against PSR J0740+6620...
+  eta =  0.0 | Max Mass = 2.196 M_sun
+  eta =  1.8 | Max Mass = 2.185 M_sun
+  eta =  3.7 | Max Mass = 2.173 M_sun
+  eta =  5.5 | Max Mass = 2.162 M_sun
+  eta =  7.4 | Max Mass = 2.150 M_sun
+  eta =  9.2 | Max Mass = 2.138 M_sun
+  eta = 11.1 | Max Mass = 2.126 M_sun
+  eta = 12.9 | Max Mass = 2.115 M_sun
+  eta = 14.7 | Max Mass = 2.104 M_sun
+  eta = 16.6 | Max Mass = 2.093 M_sun
+  eta = 18.4 | Max Mass = 2.081 M_sun
+  eta = 20.3 | Max Mass = 2.069 M_sun
+  eta = 22.1 | Max Mass = 2.057 M_sun
+  eta = 23.9 | Max Mass = 2.045 M_sun
+  eta = 25.8 | Max Mass = 2.033 M_sun
+  eta = 27.6 | Max Mass = 2.021 M_sun
+  eta = 29.5 | Max Mass = 2.008 M_sun
+  eta = 31.3 | Max Mass = 1.995 M_sun
+  eta = 33.2 | Max Mass = 1.982 M_sun
+  eta = 35.0 | Max Mass = 1.970 M_sun
+PSR J0740+6620 1-sigma constraint on EoS-softening: eta < 29.19
+
+Observational analysis complete. Plot saved successfully to C:\Users\curtis\.gemini\antigravity-ide\brain\21f6f814-c1e9-4b18-b36a-8e9a619f26ff\ecsk_observational_constraints.png

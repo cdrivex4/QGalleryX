@@ -1,0 +1,9 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-05-23T23:56:35+04:00
+Prompt: Check download status again for task-156
+
+[2026-05-23T23:56:00+04:00] Still waiting. Remaining time: 35s
+[2026-05-23T23:56:10+04:00] Still waiting. Remaining time: 25s
+[2026-05-23T23:56:20+04:00] Still waiting. Remaining time: 15s
+[2026-05-23T23:56:30+04:00] Still waiting. Remaining time: 5s
+[2026-05-23T23:56:35+04:00] Timer fired.

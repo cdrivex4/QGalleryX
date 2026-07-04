@@ -1,0 +1,161 @@
+# ScrollBench - Full App Clone + Performance Testing
+
+## Goal
+
+Create ScrollBench as a **complete functional clone** of the main Antigravity Media Viewer with ALL existing features, PLUS additional performance testing overlay for viewport culling and frame budget optimization testing.
+
+> [!IMPORTANT]
+> **User Requirement**: ScrollBench must have 100% feature parity with main app BEFORE adding performance testing features. Cannot test 1000s of images without the full feature set.
+
+## User Review Required
+
+> [!WARNING]
+> **Critical Design Decision**: This is a MUCH larger scope than initially implemented. Need to copy entire main app structure.
+
+**Questions for user:**
+1. Should ScrollBench reuse QML files from main app (via imports) or duplicate them?
+2. Do you want the performance overlay as a toggle, or always visible?
+3. Should this replace the current minimal ScrollBench or be a new app?
+
+## Proposed Changes
+
+### Phase 1: Core App Structure
+
+#### [NEW] [MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml)
+- Copy structure from Main.qml
+- ApplicationWindow with StackLayout
+- Folder selection dialog
+- Settings persistence
+- Add performance overlay as additional UI element
+
+#### [NEW] [GalleryViewScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml)
+- Copy from GalleryView.qml
+- GridView with dynamic cell sizing
+- Ctrl+Wheel zoom (40px - 400px range)
+- Pinch to zoom support
+- AsyncImageProvider integration
+- Click to open PhotoViewer
+
+#### [NEW] [PhotoViewerScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/PhotoViewerScrollBench.qml)
+- Copy from PhotoViewer.qml
+- Full-screen single image view
+- Zoom in/out (wheel, pinch, double-tap)
+- Swipe navigation
+- Video playback support
+- Info overlay
+- Edit mode (crop)
+
+---
+
+### Phase 2: Supporting Components
+
+#### [MODIFY] [ScrollBenchImageModel.h/.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h)
+- Keep existing viewport culling logic
+- Add metadata support (`getMetadata()`)
+- Add crop support (`cropImage()`)
+- Match ImageModel API from main app
+
+#### [NEW] [BottomBarScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/BottomBarScrollBench.qml)
+- Copy from BottomBar.qml
+- Tab navigation (Pictures, Albums, Stories, Menu)
+- For ScrollBench: simplify to just Pictures + Menu tabs
+
+#### [MODIFY] [PerformanceOverlay.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/PerformanceOverlay.qml)
+- Keep existing FPS/memory/queue monitoring
+- Make it a **floating overlay** (not sidebar)
+- Toggle visibility with checkbox in Menu
+- Position: top-right corner, semi-transparent
+
+---
+
+### Phase 3: Settings & Configuration
+
+#### [MODIFY] [main_scrollbench.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/main_scrollbench.cpp)
+- Register SettingsHelper (copy from main app)
+- Register DesktopHelper
+- Register AsyncImageProvider
+- Expose all models to QML
+
+#### [NEW] [SettingsHelperScrollBench.h/.cpp](file:///d:/Dev/antigravity/test_scrollbench/src/SettingsHelperScrollBench.h)
+- Copy from SettingsHelper
+- Add performance testing settings:
+  - [viewportCullingEnabled](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h#49-50) (bool)
+  - `frameBudgetEnabled` (bool)
+  - `frameBudgetLimit` (int, 1-50)
+  - `gridSize` (int, 40-400)
+  - `thumbnailSize` (int, 128-512) - **THIS is thumb resolution, NOT grid size**
+
+---
+
+### Phase 4: Performance Testing Features
+
+#### Grid Size vs Thumbnail Resolution
+**CRITICAL DISTINCTION:**
+- **Grid Size** (`appSettings.gridSize`): UI cell size (40-400px) - zoom level
+- **Thumbnail Resolution** (`appSettings.thumbnailSize`): Image decode resolution (128-512px) - quality/performance
+
+#### Performance Overlay Controls
+- **Viewport Culling Toggle**: Enable/disable viewport-based loading
+- **Frame Budget Toggle**: Enable/disable frame budget limiting
+- **Frame Budget Slider**: 1-50 uploads per frame
+- **Thumb Resolution Slider**: 128-512px (affects decode quality, not grid size)
+- **Real-time Stats**:
+  - FPS (color-coded)
+  - Queue depth
+  - Memory usage
+  - Visible item count
+
+---
+
+## File Structure
+
+```
+test_scrollbench/
+├── qml/
+│   ├── MainScrollBench.qml          [NEW - copy from Main.qml]
+│   ├── GalleryViewScrollBench.qml   [NEW - copy from GalleryView.qml]
+│   ├── PhotoViewerScrollBench.qml   [NEW - copy from PhotoViewer.qml]
+│   ├── BottomBarScrollBench.qml     [NEW - simplified from BottomBar.qml]
+│   ├── PerformanceOverlay.qml       [MODIFY - make floating]
+│   └── ThumbnailDelegate.qml        [DELETE - use inline delegate]
+├── src/
+│   ├── main_scrollbench.cpp         [MODIFY - add all registrations]
+│   ├── ScrollBenchImageModel.h/cpp  [MODIFY - add metadata/crop]
+│   ├── SettingsHelperScrollBench.h/cpp [NEW - copy from main]
+│   ├── FrameBudgetScheduler.h/cpp   [KEEP]
+│   └── TelemetryMonitor.h/cpp       [KEEP]
+└── CMakeLists.txt                   [MODIFY - add new files]
+```
+
+---
+
+## Verification Plan
+
+### Manual Testing
+1. **Grid View**:
+   - Ctrl+Wheel zoom (40-400px)
+   - Click thumbnail → opens PhotoViewer
+   - Folder selection loads images recursively
+   
+2. **PhotoViewer**:
+   - Swipe left/right navigation
+   - Zoom in/out (wheel, pinch, double-tap)
+   - Back button returns to grid
+   - Video playback works
+   
+3. **Performance Testing**:
+   - Toggle viewport culling on/off while scrolling
+   - Adjust frame budget (1-50)
+   - Adjust thumb resolution (128-512px) - see FPS impact
+   - Monitor queue depth and memory
+   
+4. **1000+ Images**:
+   - Load folder with 1000+ images
+   - Scroll rapidly with optimizations ON → FPS ≥30, queue <50
+   - Scroll rapidly with optimizations OFF → FPS drops, queue spikes
+
+### Success Criteria
+- ✅ All main app features work (grid zoom, single view, etc.)
+- ✅ Performance overlay shows real-time stats
+- ✅ Can handle 1000+ images smoothly with optimizations
+- ✅ Clear FPS difference between optimized/unoptimized modes

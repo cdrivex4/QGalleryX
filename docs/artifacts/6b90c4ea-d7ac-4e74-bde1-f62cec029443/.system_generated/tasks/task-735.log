@@ -1,0 +1,10 @@
+Name: onnxruntime-gpu
+Version: 1.17.1
+Summary: ONNX Runtime is a runtime accelerator for Machine Learning models
+Home-page: https://onnxruntime.ai
+Author: Microsoft Corporation
+Author-email: onnxruntime@microsoft.com
+License: MIT License
+Location: C:\just-dub-it2\env\Lib\site-packages
+Requires: coloredlogs, flatbuffers, numpy, packaging, protobuf, sympy
+Required-by: 

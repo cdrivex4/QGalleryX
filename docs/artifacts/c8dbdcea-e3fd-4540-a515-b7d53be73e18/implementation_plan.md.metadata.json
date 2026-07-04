@@ -1,0 +1,7 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Revised Implementation Plan to address the 'broken' video player and reuse the UI 'mechanism' for range selection. Introduces a dedicated 'Scene Preview' workflow with an integrated player for immediate feedback.",
+  "updatedAt": "2026-04-19T06:37:45.659647100Z",
+  "version": "26",
+  "requestFeedback": true
+}

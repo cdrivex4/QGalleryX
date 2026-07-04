@@ -1,0 +1,15 @@
+# Task: Project Setup for Re-dubbing (Lite Edition)
+
+- [x] Clone repository and explore structure
+- [x] Understand project setup and dependencies
+- [x] Create implementation plan (Updates for Lite Mode)
+- [x] Install dependencies and verify environment
+- [x] Prepare project for re-dubbing task
+- [x] Create drag-and-drop web interface
+- [/] Weights Acquisition (Lite: Stage 1 + Gemma 4B)
+- [x] Integrate local FFmpeg build (Found at `D:\Dev\antigravity\3rdparty\ffmpeg`)
+- [/] Implement local Whisper for language detection/transcription
+- [ ] Refine UI aesthetics (Glassmorphism, Google Fonts)
+- [ ] Implement custom output filename pattern [(original-1).ext](file:///c:/just-dub-it/webapp/src/App.jsx#8-225)
+- [ ] Add custom output directory selection
+- [ ] Integrate UI with pipeline

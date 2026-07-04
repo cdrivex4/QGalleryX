@@ -1,0 +1,6 @@
+
+                albumModel.setFilterQuery(text)
+                    albumModel.applyFilterFromPaths(imageModel.getActiveDirectories())
+            albumModel.scanAlbums(rawPath)
+
+

@@ -1,0 +1,72 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (891,45)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (953,45)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/&ec=GBRAmgU&_gl=1*fmdgdi*_ga*MjExMjYwNTgxMi4xNzc0MTI3MzM2*_ga_W0LDH41ZCB*czE3NzQ2NTIyMDYkbzIkZzAkdDE3NzQ2NTIyMDckajU5JGwwJGgw' role='button' />
+[2] (149,45)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[3] (149,45)<labs-tailwind-logo  />
+		[4] (149,45)<img  />
+[5] (774,45)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button extendable-button-extended mat-unthemed'>settings />
+	settings
+	Settings
+[6] (500,544)<div class='welcome-page-container welcome-page-container-featured-projects-enabled-tab-view' scrollable='true' />
+	[7] (389,238)<button class='mat-button-toggle-button mat-focus-indicator' id='mat-button-toggle-0-button' role='radio' />
+		[8] (389,238)<span  />
+	[9] (523,238)<button class='mat-button-toggle-button mat-focus-indicator' id='mat-button-toggle-1-button' role='radio' />
+		[10] (523,238)<span  />
+			[11] (523,238)<div  />
+	[12] (207,141)<button aria-label='Open search' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base search-icon-button mat-unthemed' />
+		[13] (208,142)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>search />
+	[14] (300,141)<button aria-label='Grid view' class='mat-button-toggle-button mat-focus-indicator' id='mat-button-toggle-2-button' role='radio' />
+		[15] (277,141)<div  />
+			[16] (277,142)<mat-pseudo-checkbox  />
+		[17] (319,141)<span  />
+			[18] (319,142)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>grid_view />
+	[19] (383,141)<button aria-label='List view' class='mat-button-toggle-button mat-focus-indicator' id='mat-button-toggle-3-button' role='radio' />
+		[20] (383,141)<span  />
+			[21] (383,142)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>view_headline />
+	[22] (518,141)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger project-filter-button mat-mdc-button mat-unthemed' />
+		Most recent
+		arrow_drop_down
+	add
+	Create new
+	Featured notebooks
+	[23] (257,518)<mat-card class='mat-mdc-card mdc-card mat-ripple mat-mdc-tooltip-trigger project-button-card featured-project-card' role='group' />
+		[24] (418,621)<div  />
+			[25] (418,618)<mat-icon aria-label='This project is public and anyone with link can view' class='mat-icon notranslate mat-mdc-tooltip-trigger google-symbols mat-icon-no-color' id='project-02daef6a-9228-42bc-b683-e1eb68bfb26c-sharing-status' role='img'>public />
+		[26] (257,569)<div  />
+			[27] (257,486)<div  />
+				[28] (100,486)<img  />
+				[29] (184,486)<div >Yahoo Sports />
+			[30] (257,551)<div  />
+				[31] (257,551)<span >Bracket Guide To Women's College Basketball />
+			[32] (257,635)<div  />
+				[33] (134,623)<span >Feb 26, 2026 />
+				[34] (195,623)<span >· />
+				[35] (248,623)<span >80 sources />
+	[36] (710,518)<mat-card class='mat-mdc-card mdc-card mat-ripple mat-mdc-tooltip-trigger project-button-card featured-project-card' role='group' />
+		[37] (870,621)<div  />
+			[38] (870,618)<mat-icon aria-label='This project is public and anyone with link can view' class='mat-icon notranslate mat-mdc-tooltip-trigger google-symbols mat-icon-no-color' id='project-3b574528-5f35-47bd-ac10-43999eefe58c-sharing-status' role='img'>public />
+		[39] (710,569)<div  />
+			[40] (710,486)<div  />
+				[41] (553,486)<img  />
+				[42] (637,486)<div >Yahoo Sports />
+			[43] (710,551)<div  />
+				[44] (710,551)<span >Bracket Guide To Men's College Basketball />
+			[45] (710,635)<div  />
+				[46] (587,623)<span >Feb 26, 2026 />
+				[47] (647,623)<span >· />
+				[48] (704,623)<span >158 sources />
+	[49] (863,724)<button aria-label='See all featured notebooks notebooks' class='mdc-button mat-mdc-button-base see-all-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>chevron_right />
+		See all
+		chevron_right
+	Recent notebooks
+	add
+	🏗️
+	[50] (859,947)<project-action-button  />
+		[51] (859,936)<button aria-label='Project Actions Menu' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger project-button-more mat-mdc-button mat-unthemed'>more_vert />
+			more_vert
+
+</current_dom>

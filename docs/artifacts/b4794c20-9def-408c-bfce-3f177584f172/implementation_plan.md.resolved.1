@@ -1,0 +1,36 @@
+# Integrate ScrollBench into Main Build System
+
+## Goal Description
+The "ScrollBench" application is currently a detached standalone project within the repo. The user wants to ensure that pulling the repo allows building both the Main App and ScrollBench without confusion or missing files. We will integrate `test_scrollbench` into the root CMake build system so that [build.ps1](file:///d:/Dev/antigravity/build.ps1) builds both applications simultaneously.
+
+## User Review Required
+> [!IMPORTANT]
+> This change modifies how `ScrollBench` is built. It will now be part of the main `appSamsungGallery` solution. Standalone building of ScrollBench is preserved but the primary method will be via the root build script.
+
+## Proposed Changes
+
+### Build Configuration
+
+#### [MODIFY] [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt)
+- Add `add_subdirectory(test_scrollbench)` to include the nested project.
+- Ensure common dependencies (LibRaw) are available to the subdirectory.
+
+#### [MODIFY] [test_scrollbench/CMakeLists.txt](file:///d:/Dev/antigravity/test_scrollbench/CMakeLists.txt)
+- Wrap project setup (`project()`, `find_package()`, `qt_setup`) in a condition so they only run if built standalone.
+- Guard `add_subdirectory(LibRaw)` to prevent defining `libraw_static` twice (use `if(NOT TARGET libraw_static)`).
+- Update include paths if necessary to rely on root context when integrated.
+- **Set `RUNTIME_OUTPUT_DIRECTORY` to `${CMAKE_CURRENT_BINARY_DIR}` to ensure binary stays in `build/test_scrollbench`**.
+
+#### [MODIFY] [build.ps1](file:///d:/Dev/antigravity/build.ps1)
+- Update the Report section to check for and report the status of `appScrollBench.exe` (or whatever the output binary name is).
+- **Update dependency verification to ensure `avcodec-62.dll` is present**.
+
+## Verification Plan
+
+### Automated Tests
+- Run `.\build.ps1 -Clean` in the terminal.
+- Verify exit code is 0.
+
+### Manual Verification
+- Check that `build/appSamsungGallery.exe` exists.
+- Check that `build/appScrollBench.exe` (or `test_scrollbench/appScrollBench.exe` depending on output path) exists.

@@ -1,0 +1,5 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-05-24T00:03:36+04:00
+Prompt: Check LM Studio direct query result
+
+[2026-05-24T00:03:26+04:00] Timer cancelled: agent received a message during wait.

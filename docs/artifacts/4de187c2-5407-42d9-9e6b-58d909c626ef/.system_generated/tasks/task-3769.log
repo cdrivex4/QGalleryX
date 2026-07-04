@@ -1,0 +1,33 @@
+[graphify extract] scanning C:\just-dub-it2
+[graphify extract] found 246 code, 33 docs, 0 papers, 12 images
+[graphify extract] AST extraction on 246 code files...
+[graphify extract] semantic extraction on 45 files via openrouter...
+[graphify extract] chunk 1/22 done
+[graphify extract] chunk 3/22 done
+[graphify extract] chunk 4/22 done
+[graphify extract] chunk 6/22 done
+[graphify extract] chunk 8/22 done
+[graphify extract] chunk 2/22 done
+[graphify extract] chunk 9/22 done
+[graphify extract] chunk 10/22 done
+[graphify extract] chunk 12/22 done
+[graphify extract] chunk 5/22 done
+[graphify extract] chunk 13/22 done
+[graphify extract] chunk 14/22 done
+[graphify] openrouter returned a hollow response (content=no nodes/edges, output_tokens=29); treating as truncation so adaptive retry can bisect the chunk.
+[graphify] single-file chunk C:\just-dub-it2\tools\MuseTalk\assets\demo\yongen\yongen.jpeg truncated at max_completion_tokens — partial result kept
+[graphify extract] chunk 15/22 done
+[graphify extract] chunk 16/22 done
+[graphify extract] chunk 17/22 done
+[graphify extract] chunk 18/22 done
+[graphify extract] chunk 19/22 done
+[graphify extract] chunk 11/22 done
+[graphify extract] chunk 7/22 done
+[graphify extract] chunk 21/22 done
+[graphify extract] chunk 22/22 done
+[graphify extract] chunk 20/22 done
+[graphify] Deduplicated 253 node(s) (123 exact, 129 fuzzy).
+[graphify extract] wrote C:\just-dub-it2\graphify-out\graph.json: 2098 nodes, 2630 edges, 166 communities
+[graphify extract] wrote C:\just-dub-it2\graphify-out\.graphify_analysis.json
+[graphify extract] tokens: 277,979 in / 20,762 out, est. cost (~openrouter): $0.0000
+[graphify extract] next: run `graphify cluster-only C:\just-dub-it2` to generate GRAPH_REPORT.md and name communities

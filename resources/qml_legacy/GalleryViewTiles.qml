@@ -10,7 +10,7 @@ Item {
     signal imageLoaded(int timeMs)
     
     // Properties
-    property real uiThumbnailSize: appSettings ? appSettings.gridSize : 100
+    property real uiThumbnailSize: appSettings ? appSettings.gridResolution : 100
     property int loadingResolution: appSettings ? appSettings.thumbnailSize : 200
     property string folderPath: ""
     
@@ -37,7 +37,7 @@ Item {
 
     // Zoom State
     property real currentScale: 1.0
-    property real startPinchGridSize: 100
+    property real startPinchGridResolution: 100
     property int zoomTargetIndex: -1
     
     // Timeline State
@@ -181,7 +181,7 @@ Item {
         
         onActiveChanged: {
             if (active) {
-                root.startPinchGridSize = appSettings.gridSize
+                root.startPinchGridResolution = appSettings.gridResolution
                 gridView.interactive = false
                 
                 // Capture target
@@ -196,11 +196,11 @@ Item {
                 }
                 
             } else {
-                var newSize = root.startPinchGridSize * root.currentScale
+                var newSize = root.startPinchGridResolution * root.currentScale
                 newSize = Math.max(20, Math.min(newSize, 400))
                 
                 root.currentScale = 1.0
-                appSettings.gridSize = newSize
+                appSettings.gridResolution = newSize
                 
                 gridView.interactive = true
             }
@@ -213,7 +213,7 @@ Item {
                 // Update cell size immediately for smooth flow?
                 // If we update cellWidth immediately, GridView will reflow continuously.
                 // This is "Tile View" behavior!
-                appSettings.gridSize = root.startPinchGridSize * root.currentScale
+                appSettings.gridResolution = root.startPinchGridResolution * root.currentScale
             }
         }
     }
@@ -226,7 +226,7 @@ Item {
         
         onWheel: (wheel) => {
             if (wheel.modifiers & Qt.ControlModifier) {
-                var oldSize = appSettings.gridSize
+                var oldSize = appSettings.gridResolution
                 var newSize = oldSize
                 
                 if (wheel.angleDelta.y > 0) {
@@ -236,7 +236,7 @@ Item {
                 }
                 
                 if (newSize !== oldSize) {
-                    appSettings.gridSize = newSize
+                    appSettings.gridResolution = newSize
                 }
                 wheel.accepted = true
             } else {

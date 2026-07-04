@@ -1,0 +1,42 @@
+# Drag Selection Implementation Plan
+
+## Goal
+Enable "drag to select" functionality.
+**Interaction**: User Long-Presses an item -> Enters Selection Mode (Item selected) -> Continues to drag pointer -> Selects multiple items (Range).
+
+## Proposed Changes
+
+### [MODIFY] [test_scrollbench/src/ScrollBenchImageModel.cpp/h](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp)
+- Add `Q_INVOKABLE void selectRange(int start, int end)`.
+    - This will select all items between `start` and [end](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h#48-49) (inclusive).
+    - It might perform a "set" operation (clearing others if we want exclusive drag, or just union).
+    - For this feature ("drag a square... once long pressed"), usually implies a temporary range selection during the drag.
+    - We will implement `selectRange(int start, int end, bool add)` or similar. Actually, simpler: `setSelectionRange(int start, int end)` which sets `isSelected = true` for items in range and `false` for others? No, usually we want to add to existing selection or toggle.
+    - Let's stick to: `selectRange(int start, int end)` which *adds* to selection (or sets it for the current drag session).
+    - **Refinement**: To support "rubber band" feel correctly, we usually track an "anchor" (start of drag) and "current" (end of drag). The creation of the range should probably calculate the new state.
+    - Let's add `selectBetween(int indexA, int indexB)` which selects everything between A and B and *preserves* previous selection if needed? Or better:
+    - `setSelection(int start, int end)`: Selects exactly this range (clears others?).
+    - The user said "drag a square".
+    - Let's implement `selectRange(int start, int end)` that marks items `start` to [end](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h#48-49) as selected.
+
+### [MODIFY] [test_scrollbench/qml/MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml)
+- **State**: Add `property int dragSelectionStart: -1`.
+- **Delegate MouseArea**:
+    - `onPressAndHold`:
+        - Set `root.selectionMode = true`.
+        - Set `root.dragSelectionStart = index`.
+        - Select current item.
+    - `onPositionChanged`:
+        - If `dragSelectionStart` is valid (and mouse is held):
+            - Map `mouse` position to `GridView` coordinates.
+            - Call `gridView.indexAt(x, y)`.
+            - If valid index found:
+                - Call `imageModel.selectRange(dragSelectionStart, currentIndex)`.
+    - `onReleased`:
+        - Reset `dragSelectionStart = -1`.
+
+## Verification
+1.  Launch ScrollBench.
+2.  Long Press an item (it turns blue).
+3.  Drag finger/mouse.
+4.  Verify items between start and finger become selected.

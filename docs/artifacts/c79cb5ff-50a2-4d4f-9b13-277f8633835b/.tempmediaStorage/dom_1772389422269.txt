@@ -1,0 +1,166 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Switch branches/tags
+[0] (324,368)<button class='prc-Button-ButtonBase-9n-Xk RefSelectorV1-module__RefSelectorCloseButton__pTwr7 prc-Button-IconButton-fyge7' />
+[1] (190,424)<span  />
+	[2] (56,424)<span  />
+	[3] (206,424)<input aria-label='Filter branches' class='prc-components-Input-IwWrt focus-visible' placeholder='Find a branch...' />
+[4] (80,482)<button class='prc-Button-ButtonBase-9n-Xk TabNav-item prc-TabNav-TabNavLink-u3umI selected prc-TabNav-Selected-LYsaH RefSelector-module__RefSelectorTabLink__NbcT1' id='branch-button' role='tab' />
+	[5] (80,483)<span  />
+		[6] (80,483)<span >Branches />
+[7] (148,482)<button class='prc-Button-ButtonBase-9n-Xk TabNav-item prc-TabNav-TabNavLink-u3umI RefSelector-module__RefSelectorTabLink__NbcT1' id='tag-button' role='tab' />
+	[8] (148,483)<span  />
+		[9] (148,483)<span >Tags />
+[10] (190,549)<li class='prc-ActionList-ActionListItem-So4vC' id='_r_l_' role='menuitemradio' />
+	slim
+	default
+[11] (190,594)<li class='prc-ActionList-ActionListItem-So4vC' id='_r_m_' role='menuitemradio' />
+	legacy
+[12] (190,639)<li class='prc-ActionList-ActionListItem-So4vC' id='_r_n_' role='menuitemradio' />
+	list
+[13] (190,684)<li class='prc-ActionList-ActionListItem-So4vC' id='_r_o_' role='menuitemradio' />
+	nvidia
+[14] (190,756)<a class='prc-ActionList-ActionListContent-KBb8- prc-Link-Link-9ZwDx' href='/crosire/reshade-shaders/branches' id='_r_q_' role='link' />
+	[15] (190,756)<span  />
+		[16] (190,756)<span  />
+			[17] (190,756)<div >View all
+branches />
+Skip to content
+Navigation Menu
+[18] (47,51)<a aria-label='Homepage' class='tmp-mr-lg-3 color-fg-inherit flex-order-2 js-prevent-focus-on-mobile-nav' href='/' />
+[19] (127,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Platform />
+[20] (224,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Solutions />
+[21] (327,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Resources />
+[22] (443,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Open Source />
+[23] (558,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Enterprise />
+[24] (643,51)<a class='NavLink-module__link__EG3d4 MarketingNavigation-module__navLink__hUomM' href='https://github.com/pricing' />
+	[25] (643,51)<span >Pricing />
+[26] (748,51)<button aria-label='Search or jump to…' class='header-search-button placeholder input-button form-control d-flex flex-1 flex-self-stretch flex-items-center no-wrap width-full py-0 pl-2 pr-0 text-left border-0 box-shadow-none' placeholder='Search or jump to...' />
+	[27] (748,51)<div  />
+[28] (809,51)<a class='HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1' href='/login?return_to=https%3A%2F%2Fgithub.com%2Fcrosire%2Freshade-shaders%2Ftree%2Fslim'>Sign in />
+[29] (889,51)<a class='HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1' href='/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=crosire%2Freshade-shaders'>Sign up />
+[30] (953,51)<button class='Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border' id='icon-button-39cced30-714d-4cd0-add4-b3d82c0f06a7' />
+[31] (84,145)<a class='url fn' href='/crosire'>crosire />
+/
+[32] (202,145)<a href='/crosire/reshade-shaders'>reshade-shaders />
+Public
+[33] (672,143)<a aria-label='You must be signed in to change notification settings' class='btn-sm btn' href='/login?return_to=%2Fcrosire%2Freshade-shaders' id='repository-details-watch-button'>Notifications />
+[34] (794,143)<a class='btn-sm btn' href='/login?return_to=%2Fcrosire%2Freshade-shaders' id='fork-button'>Fork />
+	[35] (821,143)<span >420 />
+[36] (913,143)<a aria-label='You must be signed in to star a repository' class='tooltipped tooltipped-sw btn-sm btn' href='/login?return_to=%2Fcrosire%2Freshade-shaders' />
+	[37] (908,143)<span >Star />
+	[38] (940,143)<span >1.1k />
+[39] (68,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item selected' href='/crosire/reshade-shaders' id='code-tab' />
+	[40] (80,223)<span >Code />
+[41] (185,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/crosire/reshade-shaders/pulls' id='pull-requests-tab' />
+	[42] (183,223)<span >Pull requests />
+	[43] (241,223)<span >2 />
+[44] (301,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/crosire/reshade-shaders/wiki' id='wiki-tab' />
+	[45] (313,223)<span >Wiki />
+[46] (387,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/crosire/reshade-shaders/security' id='security-tab' />
+	[47] (399,223)<span >Security />
+[48] (484,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/crosire/reshade-shaders/pulse' id='insights-tab' />
+	[49] (496,223)<span >Insights />
+crosire/reshade-shaders
+[50] (81,313)<button aria-label='slim branch' class='prc-Button-ButtonBase-9n-Xk overview-ref-selector width-full RefSelectorAnchoredOverlay-module__RefSelectorOverlayBtn__a3WK3' id='ref-picker-repos-header-ref-selector' />
+	[51] (81,313)<span  />
+		[52] (69,313)<span  />
+			[53] (69,313)<div  />
+				[54] (52,313)<div  />
+				[55] (79,313)<div  />
+					[56] (79,312)<span >slim />
+[57] (158,313)<a aria-label='Go to Branches page' class='prc-Button-ButtonBase-9n-Xk OverviewContent-module__Button_1__vmS6D' href='/crosire/reshade-shaders/branches' />
+[58] (199,313)<a aria-label='Go to Tags page' class='prc-Button-ButtonBase-9n-Xk OverviewContent-module__Button_1__vmS6D' href='/crosire/reshade-shaders/tags' />
+[59] (492,313)<span  />
+	[60] (405,313)<span  />
+	[61] (499,313)<input aria-label='Go to file' class='prc-components-Input-IwWrt' placeholder='Go to file' role='combobox' />
+[62] (655,313)<button class='prc-Button-ButtonBase-9n-Xk' id='_R_75ab_' />
+	[63] (655,313)<span  />
+		[64] (655,313)<span >Code />
+Folders and files
+Latest commit
+CeeJayDK
+Fix typos in REFERENCE.md (
+#339
+[65] (348,395)<a class='Link--secondary' href='/crosire/reshade-shaders/commit/d71489726fa0c732e862e36044abbf7e2bbb6ba1'>) />
+[66] (475,395)<a aria-label='Commit d714897' class='Link--secondary prc-Link-Link-9ZwDx' href='/crosire/reshade-shaders/commit/d71489726fa0c732e862e36044abbf7e2bbb6ba1'>d714897 />
+·
+History
+[67] (641,395)<a class='prc-Button-ButtonBase-9n-Xk d-none d-lg-flex LinkButton-module__linkButton__nFnov flex-items-center fgColor-default' href='/crosire/reshade-shaders/commits/slim/' />
+	[68] (641,395)<span  />
+		[69] (651,395)<span  />
+			[70] (651,395)<span >932 Commits />
+[71] (370,461)<tr  />
+	Shaders
+	[72] (462,461)<a class='Link--secondary' href='/crosire/reshade-shaders/commit/ee30868391d4ad103db60489820102d8fd40e3c1' title='Add "RESHADE_DEPTH_INPUT_IS_MIRRORED" (#285)'>Add "RESHADE_DEPTH_INPUT_IS_MIRRORED" ( />
+	#285
+	)
+[73] (370,518)<tr  />
+	Textures
+	[74] (399,518)<a class='Link--secondary' href='/crosire/reshade-shaders/commit/ba767e9a1c18bb14bebf68f47bd996187f2af693' title='Remove even more effects'>Remove even more effects />
+[75] (370,576)<tr  />
+	README.md
+	[76] (445,576)<a class='Link--secondary' href='/crosire/reshade-shaders/commit/23e0e5a309c0457d8a7d6179faac5533eb1fe211' title='Add "Contributing" section to readme file'>Add "Contributing" section to readme file />
+[77] (370,633)<tr  />
+	REFERENCE.md
+	[78] (405,633)<a class='Link--secondary' href='/crosire/reshade-shaders/commit/d71489726fa0c732e862e36044abbf7e2bbb6ba1' title='Fix typos in REFERENCE.md (#339)'>Fix typos in REFERENCE.md ( />
+	[79] (507,633)<a class='issue-link js-issue-link' href='https://github.com/crosire/reshade-shaders/pull/339'>#339 />
+	[80] (524,633)<a class='Link--secondary' href='/crosire/reshade-shaders/commit/d71489726fa0c732e862e36044abbf7e2bbb6ba1' title='Fix typos in REFERENCE.md (#339)'>) />
+Repository files navigation
+README
+[81] (682,720)<button aria-label='Outline' class='prc-Button-ButtonBase-9n-Xk OverviewRepoFiles-module__ActionMenu_Button__OKDYV' id='_R_r9ab_' />
+ReShade FX shaders
+[82] (50,828)<a aria-label='Permalink: ReShade FX shaders' class='anchor' href='#reshade-fx-shaders' id='user-content-reshade-fx-shaders' />
+This repository aims to collect post-processing shaders written in the ReShade FX shader language.
+Installation
+About
+A collection of post-processing shaders written for ReShade.
+[83] (791,456)<a class='text-bold' href='https://reshade.me' role='link' title='https://reshade.me'>reshade.me />
+Resources
+[84] (770,508)<a class='Link--muted' href='#readme-ov-file'>Readme />
+[85] (767,549)<a class='Link Link--muted' href='/crosire/reshade-shaders/activity' />
+	[86] (781,549)<span >Activity />
+Stars
+[87] (772,590)<a class='Link Link--muted' href='/crosire/reshade-shaders/stargazers'>stars />
+	[88] (770,590)<strong >1.1k />
+Watchers
+[89] (782,631)<a class='Link Link--muted' href='/crosire/reshade-shaders/watchers'>watching />
+	[90] (766,631)<strong >85 />
+Forks
+[91] (774,672)<a class='Link Link--muted' href='/crosire/reshade-shaders/forks'>forks />
+	[92] (770,672)<strong >420 />
+[93] (784,713)<a class='Link--muted' href='/contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fcrosire%2Freshade-shaders&report=crosire+%28user%29'>Report repository />
+[94] (850,791)<a class='Link--primary no-underline Link d-flex flex-items-center' href='/crosire/reshade-shaders/graphs/contributors'>Contributors />
+	[95] (839,791)<span >34 />
+[96] (747,850)<a href='https://github.com/crosire' />
+	[97] (747,853)<img  />
+[98] (787,850)<a href='https://github.com/Fubaxiusz' />
+	[99] (787,853)<img  />
+[100] (826,850)<a href='https://github.com/FransBouma' />
+	[101] (826,853)<img  />
+[102] (866,850)<a href='https://github.com/Ganossa' />
+	[103] (866,853)<img  />
+[104] (905,850)<a href='https://github.com/bacondither' />
+	[105] (905,853)<img  />
+[106] (945,850)<a href='https://github.com/BlueSkyDefender' />
+	[107] (945,853)<img  />
+[108] (747,906)<a href='https://github.com/CeeJayDK' />
+	[109] (747,910)<img  />
+[110] (787,906)<a href='https://github.com/dddfault' />
+	[111] (787,910)<img  />
+[112] (826,906)<a href='https://github.com/Mortalitas' />
+	[113] (826,910)<img  />
+[114] (866,906)<a href='https://github.com/Daodan317081' />
+	[115] (866,910)<img  />
+[116] (905,906)<a href='https://github.com/xIddqDx' />
+	[117] (905,910)<img  />
+[118] (945,906)<a href='https://github.com/Matsilagi' />
+	[119] (945,910)<img  />
+[120] (747,962)<a href='https://github.com/martymcmodding' />
+	[121] (747,966)<img  />
+[122] (787,962)<a href='https://github.com/Ioxa53' />
+	[123] (787,966)<img  />
+
+</current_dom>

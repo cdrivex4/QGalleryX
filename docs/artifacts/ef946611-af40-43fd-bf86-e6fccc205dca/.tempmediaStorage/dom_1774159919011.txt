@@ -1,0 +1,153 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (57,34)<button aria-label='Expand file tree' class='prc-Button-ButtonBase-9n-Xk ExpandFileTreeButton-module__Button_1__Svs95' />
+	[1] (57,34)<span  />
+		[2] (72,34)<span >Files />
+[3] (183,34)<button aria-label='master branch' class='prc-Button-ButtonBase-9n-Xk ref-selector-class RefSelectorAnchoredOverlay-module__RefSelectorOverlayBtn__a3WK3' id='ref-picker-repos-header-ref-selector' />
+	[4] (183,34)<span  />
+		[5] (168,34)<span  />
+			[6] (168,34)<div  />
+				[7] (134,34)<div  />
+				[8] (181,34)<div  />
+					[9] (181,33)<span >master />
+Breadcrumbs
+[10] (380,33)<a class='Breadcrumb-module__repoLink__O2Nbs prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/tree/master'>qBittorrent-Search-Plugins />
+/
+[11] (529,33)<a class='Breadcrumb-module__directoryLink__kQy_t prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/tree/master/src'>src />
+/
+engines
+/
+[12] (951,34)<button class='prc-Button-ButtonBase-9n-Xk FileNameStickyHeader-module__Button__LSEU_ FileNameStickyHeader-module__GoToTopButton__nxAFn' />
+	[13] (951,34)<span  />
+		[14] (964,34)<span >Top />
+kickasstorrents.py
+fix(kickasstorrent): update regex for html
+[15] (500,77)<tr  />
+	[16] (122,77)<a aria-label='limetorrents.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/limetorrents.png' title='limetorrents.png'>limetorrents.png />
+	[17] (534,77)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/9736cf8c857783d6e052a3d8daeaa285e47cc067' title='feat: add limetorrent engine'>feat: add limetorrent engine />
+[18] (500,135)<tr  />
+	[19] (116,134)<a aria-label='limetorrents.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/limetorrents.py' title='limetorrents.py'>limetorrents.py />
+	[20] (533,134)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/269af5ba369631fc4e33240a6f1e3bd404fd5432' title='Update limetorrents.py 1.1 (#32)
+
+* 1.1 - fixed parsing and updated to allow (open download window) 
+
+The open download button in qbit was not working, made a minor change to "__findTorrents" and updated "download_torrent" to fix this issue.
+
+* Update limetorrents.py - 1.1
+
+Made a minor parsing change, updated download function to fix issue with "open download window" not working.
+
+* Update limetorrents.py - 1.1 
+
+Update resolves issue with "open download window" not working. Minor parsing fix and function updates.
+
+* Update README.md
+
+Limetorrents 1.1'>Update limetorrents.py 1.1 ( />
+	[21] (661,134)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/32'>#32 />
+	[22] (679,134)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/269af5ba369631fc4e33240a6f1e3bd404fd5432' title='Update limetorrents.py 1.1 (#32)
+
+* 1.1 - fixed parsing and updated to allow (open download window) 
+
+The open download button in qbit was not working, made a minor change to "__findTorrents" and updated "download_torrent" to fix this issue.
+
+* Update limetorrents.py - 1.1
+
+Made a minor parsing change, updated download function to fix issue with "open download window" not working.
+
+* Update limetorrents.py - 1.1 
+
+Update resolves issue with "open download window" not working. Minor parsing fix and function updates.
+
+* Update README.md
+
+Limetorrents 1.1'>) />
+[23] (500,192)<tr  />
+	[24] (93,191)<a aria-label='nitro.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/nitro.png' title='nitro.png'>nitro.png />
+	[25] (472,191)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0829918fad0898bc5ed5e13dc969493382deb948' title='feat: Nitro.to'>feat: Nitro.to />
+[26] (500,249)<tr  />
+	[27] (87,249)<a aria-label='nitro.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/nitro.py' title='nitro.py'>nitro.py />
+	[28] (621,249)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[29] (500,306)<tr  />
+	[30] (108,306)<a aria-label='pirateiro.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/pirateiro.png' title='pirateiro.png'>pirateiro.png />
+	[31] (475,306)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/1f6461198dd14a8c8ab956f57859337694f0ea23' title='feat: Pirateiro'>feat: Pirateiro />
+[32] (500,363)<tr  />
+	[33] (102,363)<a aria-label='pirateiro.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/pirateiro.py' title='pirateiro.py'>pirateiro.py />
+	[34] (621,363)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[35] (500,420)<tr  />
+	[36] (95,420)<a aria-label='rarbg.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rarbg.png' title='rarbg.png'>rarbg.png />
+	[37] (482,420)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/ac4af25bd0c87e3e322745545fefeb324d01d3ca' title='feat: Add rarbg'>feat: Add rarbg />
+[38] (500,477)<tr  />
+	[39] (89,477)<a aria-label='rarbg.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rarbg.py' title='rarbg.py'>rarbg.py />
+	[40] (621,477)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[41] (500,534)<tr  />
+	[42] (106,534)<a aria-label='rockbox.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rockbox.png' title='rockbox.png'>rockbox.png />
+	[43] (490,534)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/df508aca571c3fe4abb085d163952d130b96e2cd' title='style: ICO to PNG'>style: ICO to PNG />
+[44] (500,591)<tr  />
+	[45] (100,591)<a aria-label='rockbox.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/rockbox.py' title='rockbox.py'>rockbox.py />
+	[46] (621,591)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/0e44afcab84138f62226acf75654d465523ce4b0' title='refactor: apply better html stripping to all engines'>refactor: apply better html stripping to all engines />
+[47] (500,648)<tr  />
+	[48] (100,648)<a aria-label='snowfl.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/snowfl.png' title='snowfl.png'>snowfl.png />
+	[49] (532,648)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>[ImgBot] Optimize images ( />
+	[50] (657,648)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/26'>#26 />
+	[51] (675,648)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>) />
+[52] (500,705)<tr  />
+	[53] (94,705)<a aria-label='snowfl.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/snowfl.py' title='snowfl.py'>snowfl.py />
+	[54] (455,705)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/6ede3d4d91bfd3662cc6b0dbf355802a87700977' title='revert of #27'>revert of />
+	[55] (510,705)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/27'>#27 />
+[56] (500,762)<tr  />
+	[57] (124,762)<a aria-label='thepiratebay.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/thepiratebay.png' title='thepiratebay.png'>thepiratebay.png />
+	[58] (512,762)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/9f7d6a9a56b95dcb8dab5d45d560d62d38d635c2' title='feat: Add ThePirateBay'>feat: Add ThePirateBay />
+[59] (500,819)<tr  />
+	[60] (118,819)<a aria-label='thepiratebay.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/thepiratebay.py' title='thepiratebay.py'>thepiratebay.py />
+	[61] (574,819)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/236034704696c20a351f3f055625ad74300483d2' title='fix(thepiratebay): Fix WebUI download'>fix(thepiratebay): Fix WebUI download />
+[62] (500,876)<tr  />
+	[63] (135,876)<a aria-label='tntvillagedump.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/tntvillagedump.png' title='tntvillagedump.png'>tntvillagedump.png />
+	[64] (529,876)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/38713c04f66435ff4ad62ec16c74bc55ac17681c' title='feat: Add TNTVillageDump'>feat: Add TNTVillageDump />
+[65] (500,933)<tr  />
+	[66] (128,933)<a aria-label='tntvillagedump.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/tntvillagedump.py' title='tntvillagedump.py'>tntvillagedump.py />
+	[67] (505,933)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/74bd240aa15b8b0d189498426c5e21da0c18bc94' title='chore: code clean up'>chore: code clean up />
+[68] (142,990)<a aria-label='torrentdownload.png, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/engines/torrentdownload.png' title='torrentdownload.png'>torrentdownload.png />
+[ImgBot] Optimize images (
+[69] (657,990)<a class='issue-link js-issue-link' href='https://github.com/LightDestory/qBittorrent-Search-Plugins/pull/26'>#26 />
+[70] (675,990)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/b9047253af8641c708290a199790dcc8457724b8' title='[ImgBot] Optimize images (#26)
+
+*Total -- 218.23kb -> 177.65kb (18.59%)
+
+/src/engines/torrentdownload.png -- 3.53kb -> 1.46kb (58.72%)
+/src/engines/snowfl.png -- 1.95kb -> 1.24kb (36.44%)
+/.github/assets/images/dl_image.png -- 4.73kb -> 3.57kb (24.62%)
+/.github/assets/images/presentation_image.png -- 189.80kb -> 153.20kb (19.28%)
+/src/engines/academictorrents.png -- 0.71kb -> 0.70kb (1.51%)
+/.github/assets/images/support.png -- 17.50kb -> 17.48kb (0.14%)
+
+Signed-off-by: ImgBotApp <ImgBotHelp@gmail.com>
+Co-authored-by: ImgBotApp <ImgBotHelp@gmail.com>'>) />
+
+</current_dom>

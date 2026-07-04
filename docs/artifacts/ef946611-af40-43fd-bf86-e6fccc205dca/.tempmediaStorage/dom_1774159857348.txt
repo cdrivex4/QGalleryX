@@ -1,0 +1,153 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (105,72)<a class='FgNLaf' href='https://www.google.com/webhp?hl=en&ictx=0&sa=X&ved=0ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQpYkNCAs' />
+[1] (328,72)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (553,72)<div  />
+	[3] (550,72)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (550,72)<span  />
+	[5] (581,72)<span  />
+[6] (613,72)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (665,72)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (725,72)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (717,72)<div  />
+		[10] (717,72)<span  />
+[11] (828,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (891,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (948,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3Ddodi-repacks%2Bfavicon%2Burl%2Bpng&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (110,159)<a class='XVMlrc C6AK7c' href='/search?q=dodi-repacks+favicon+url+png&sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n4jMk3q8vipmMjddOH3wzbqg0ydwQ:1774159854471&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&aep=1&ntc=1&sa=X&ved=2ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQ2J8OegQIERAE' />
+	[15] (110,159)<div  />
+		[16] (110,172)<div  />
+			[17] (110,164)<span >AI Mode />
+[18] (188,159)<a class='C6AK7c' role='link' />
+	All
+[19] (261,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n4jMk3q8vipmMjddOH3wzbqg0ydwQ:1774159854471&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&q=dodi-repacks+favicon+url+png&sa=X&ved=2ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQtKgLegQIExAB' />
+	[20] (261,159)<div  />
+		[21] (261,172)<span >Images />
+[22] (352,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n4jMk3q8vipmMjddOH3wzbqg0ydwQ:1774159854471&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&q=dodi-repacks+favicon+url+png&sa=X&ved=2ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQtKgLegQIFBAB' />
+	[23] (352,159)<div  />
+		[24] (352,172)<span >Videos />
+[25] (466,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n4jMk3q8vipmMjddOH3wzbqg0ydwQ:1774159854471&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&q=dodi-repacks+favicon+url+png&sa=X&ved=2ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQs6gLegQIFRAB' />
+	[26] (466,159)<div  />
+		[27] (466,172)<span >Short videos />
+[28] (584,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n4jMk3q8vipmMjddOH3wzbqg0ydwQ:1774159854471&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&q=dodi-repacks+favicon+url+png&sa=X&ved=2ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQs6gLegQIFhAB' />
+	[29] (584,159)<div  />
+		[30] (584,172)<span >Forums />
+[31] (670,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n4jMk3q8vipmMjddOH3wzbqg0ydwQ:1774159854471&q=dodi-repacks+favicon+url+png&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&sa=X&ved=2ahUKEwj_7Zm_7LKTAxWU8LsIHQ3CM4YQ0pQJegQIFxAB' />
+	[32] (670,159)<div  />
+		[33] (670,172)<span >News />
+[34] (758,159)<div class='mTpL7c' role='button' />
+	[35] (758,159)<div  />
+		[36] (758,172)<div  />
+			[37] (747,164)<span >More />
+			[38] (780,164)<span  />
+[39] (858,159)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (858,159)<div  />
+		[41] (858,172)<div  />
+			[42] (846,164)<span >Tools />
+			[43] (880,164)<span  />
+Search Results
+[44] (419,280)<a class='zReHs' href='https://www.pngaaa.com/detail/756255' />
+	[45] (419,310)<h3 >Skyrim Icon Download - Dodi Repacks Png,Skyrim Icon Png />
+	[46] (212,262)<div  />
+		[47] (212,262)<div  />
+			[48] (93,262)<span  />
+				[49] (93,262)<div  />
+					[50] (93,262)<img  />
+			[51] (238,262)<div  />
+				[52] (238,249)<div  />
+					[53] (238,249)<span >pngaaa.com />
+				[54] (238,276)<div  />
+					[55] (238,276)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.pngaaa.com />
+						[56] (323,275)<span class='ylgVCe ob9lvb' role='text'>› detail />
+[57] (377,274)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[58] (377,274)<span  />
+		[59] (377,276)<span  />
+You can free download Skyrim
+icon
+download
+Dodi Repacks Png
+,Skyrim
+Icon Png
+(513x513). The image's backgroud is transparent and in
+PNG
+(Portable Network ...
+[60] (218,412)<a class='vzmbzf' href='https://www.pngaaa.com/detail/756255#:~:text=You%20Can%20Free%20Download%20Skyrim,PNG%20(Portable%20Network%20Graphics)%20Format.' />
+	[61] (218,412)<span >Read more />
+[62] (865,310)<a href='https://www.pngaaa.com/detail/756255' />
+	[63] (865,310)<div  />
+		[64] (865,310)<img  />
+[65] (271,519)<a class='zReHs' href='https://folge.me/tools/favicon-downloader' />
+	[66] (271,545)<h3 >Any Website FavIcon Downloader />
+	[67] (271,497)<div  />
+		[68] (271,497)<div  />
+			[69] (93,497)<span  />
+				[70] (93,497)<div  />
+					[71] (93,497)<img  />
+			[72] (297,497)<div  />
+				[73] (297,484)<div  />
+					[74] (297,484)<span >Folge.me />
+				[75] (297,510)<div  />
+					[76] (297,510)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://folge.me />
+						[77] (350,510)<span class='ylgVCe ob9lvb' role='text'>› All Free Tools › Developer Tools />
+[78] (494,509)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[79] (494,509)<span  />
+		[80] (494,510)<span  />
+Our
+FavIcon
+Downloader is a free online tool that allows you to quickly and easily download
+favicon
+images from any
+website
+. Simply enter the
+URL
+of the ...
+Missing:
+dodi-
+‎
+repacks
+[81] (393,750)<a class='zReHs' href='https://icons8.com/icons/set/favicon' />
+	[82] (393,780)<h3 >Custom Favicons and Favicon.ico Download for Your ... />
+	[83] (238,731)<div  />
+		[84] (238,731)<div  />
+			[85] (93,731)<span  />
+				[86] (93,731)<div  />
+					[87] (93,731)<img  />
+			[88] (264,731)<div  />
+				[89] (264,719)<div  />
+					[90] (264,719)<span >Icons8 />
+				[91] (264,745)<div  />
+					[92] (264,745)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://icons8.com />
+						[93] (327,745)<span class='ylgVCe ob9lvb' role='text'>› icons › set › favicon />
+[94] (430,744)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[95] (430,744)<span  />
+		[96] (430,745)<span  />
+Get high-quality favicons and favicon.ico downloads
+to enhance your website's branding. Easily create and download favicons and favicons for all devices.
+Missing:
+dodi-
+‎
+repacks
+[97] (429,985)<a class='zReHs' href='https://github.com/vincepare/FaviconDownloader'>vincepare/FaviconDownloader: Find and download favicon ... />
+	vincepare/FaviconDownloader: Find and download favicon ...
+	[98] (280,966)<div  />
+		[99] (280,966)<div  />
+			[100] (93,966)<span  />
+				[101] (93,966)<div  />
+					[102] (93,966)<img  />
+			[103] (305,966)<div  />
+				[104] (305,954)<div  />
+					[105] (305,954)<span >GitHub />
+				[106] (305,980)<div  />
+					[107] (305,980)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com
+› vincepare › FaviconDownloader />
+						› vincepare › FaviconDownloader
+
+</current_dom>

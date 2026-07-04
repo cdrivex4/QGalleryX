@@ -141,20 +141,26 @@ void TaskScheduler::clear() {
 
 void TaskScheduler::clear(TaskType type) {
   int removedCount = 0;
+  
+  auto processMap = [&](auto &queues) {
+    for (int i = 0; i < 2; ++i) {
+      for (auto it = queues[i].begin(); it != queues[i].end(); ++it) {
+        for (const auto &task : it.value()) {
+          if (task.onDropped)
+            task.onDropped();
+        }
+        removedCount += it.value().size();
+      }
+      queues[i].clear();
+    }
+  };
+
   if (type == CPU_BOUND) {
     QMutexLocker lock(&m_cpuMutex);
-    for (int i = 0; i < 2; ++i) {
-      for (const auto &queue : m_cpuQueues[i])
-        removedCount += queue.size();
-      m_cpuQueues[i].clear();
-    }
+    processMap(m_cpuQueues);
   } else {
     QMutexLocker lock(&m_ioMutex);
-    for (int i = 0; i < 2; ++i) {
-      for (const auto &queue : m_ioQueues[i])
-        removedCount += queue.size();
-      m_ioQueues[i].clear();
-    }
+    processMap(m_ioQueues);
   }
 
   // Decrement counter by the number of tasks that will now never run
@@ -209,6 +215,9 @@ void TaskScheduler::cpuWorkerLoop() {
           while (!it.value().isEmpty()) {
             task = it.value().takeFirst();
             if (task.isNeeded && !task.isNeeded()) {
+              if (task.onDropped) {
+                task.onDropped();
+              }
               m_activeTaskCount--;
               triggerCountUpdate();
               continue;

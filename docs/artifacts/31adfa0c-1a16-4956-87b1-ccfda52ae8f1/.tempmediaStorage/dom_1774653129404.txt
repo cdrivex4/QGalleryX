@@ -1,0 +1,133 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (882,134)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (950,134)<a aria-label='Google Account: Will Turner  
+(willuorwontu464@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/&ec=GBRAmgU' role='button' />
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+[2] (843,28)<a href='https://x.com/NotebookLM'>X />
+or
+[3] (912,28)<a href='https://discord.com/channels/1124402182171672732/1294057633334165596'>Discord />
+for updates.
+[4] (53,134)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[5] (53,134)<labs-tailwind-logo  />
+		[6] (53,134)<img  />
+[7] (568,134)<input class='title-input mat-title-large ng-untouched ng-pristine ng-valid' />
+[8] (803,134)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>settings />
+	settings
+[9] (152,207)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[10] (944,207)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>share />
+	share
+[11] (174,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted mdc-tab--active mdc-tab-indicator--active' id='mat-tab-group-0-label-0' role='tab' />
+	[12] (174,269)<span  />
+		[13] (174,269)<span >Sources />
+[14] (508,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted' id='mat-tab-group-0-label-1' role='tab' />
+	[15] (508,269)<span  />
+		[16] (508,269)<span >Chat />
+[17] (834,269)<div class='mdc-tab mat-mdc-tab mat-focus-indicator ng-star-inserted' id='mat-tab-group-0-label-2' role='tab' />
+	[18] (834,269)<span  />
+		[19] (834,269)<span >Studio />
+[20] (500,663)<div class='source-panel-content ng-tns-c84049144-0 ng-star-inserted' scrollable='true' />
+	[21] (492,354)<button aria-label='Add source' class='mdc-button mat-mdc-button-base mat-mdc-tooltip-trigger add-source-button ng-tns-c2806627016-2 mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>add
+Add sources />
+		add
+		Add sources
+	search
+	[22] (506,439)<textarea aria-label='Discover sources based on the inputted query' class='mat-mdc-input-element cdk-textarea-autosize query-box-textarea ng-untouched ng-pristine ng-invalid mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored' id='mat-input-1' placeholder='Search the web for new sources' />
+	[23] (99,501)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select corpus-menu-trigger mat-mdc-button mat-unthemed' />
+		language
+		Web
+		keyboard_arrow_down
+	[24] (271,501)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select researcher-menu-trigger mat-mdc-button mat-unthemed' />
+		search_spark
+		Fast Research
+		keyboard_arrow_down
+	arrow_forward
+	Select all sources
+	[25] (933,570)<div  />
+		[26] (933,570)<input aria-label='Select all sources' class='mdc-checkbox__native-control' id='mat-mdc-checkbox-0-input' />
+	[27] (492,632)<div  />
+		[28] (492,632)<button aria-label='Annual-Borrowing-Plan-2025.pdf' class='source-stretched-button ng-tns-c2806627016-2' />
+		[29] (51,632)<div  />
+			[30] (51,632)<div  />
+				[31] (51,632)<div  />
+					[32] (51,632)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-2 mat-unthemed' id='source-item-more-button-6f392070-5f0c-4a50-9ccb-0ee9a5f7c7f1' />
+						[33] (51,632)<div  />
+							[34] (51,629)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-2 icon google-symbols mat-icon-no-color ng-star-inserted pdf-icon-color' role='img'>drive_pdf />
+		Annual-Borrowing-Plan-2025.pdf
+		[35] (933,632)<div  />
+			[36] (933,632)<mat-checkbox  />
+				[37] (933,632)<div  />
+					[38] (933,632)<div  />
+						[39] (933,632)<input aria-label='Annual-Borrowing-Plan-2025.pdf' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-4-input' />
+	[40] (492,699)<div  />
+		[41] (492,699)<button aria-label='Debt-Bulletin-Q4-2024.pdf' class='source-stretched-button ng-tns-c2806627016-2' />
+		[42] (51,699)<div  />
+			[43] (51,699)<div  />
+				[44] (51,699)<div  />
+					[45] (51,699)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-2 mat-unthemed' id='source-item-more-button-75c82de3-0d00-4cd7-91c8-88feb505744c' />
+						[46] (51,699)<div  />
+							[47] (51,696)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-2 icon google-symbols mat-icon-no-color ng-star-inserted pdf-icon-color' role='img'>drive_pdf />
+		Debt-Bulletin-Q4-2024.pdf
+		[48] (933,699)<div  />
+			[49] (933,699)<mat-checkbox  />
+				[50] (933,699)<div  />
+					[51] (933,699)<div  />
+						[52] (933,699)<input aria-label='Debt-Bulletin-Q4-2024.pdf' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-3-input' />
+	[53] (492,766)<div  />
+		[54] (492,766)<button aria-label='Debt-Management-Strategy-2025-27.pdf' class='source-stretched-button ng-tns-c2806627016-2' />
+		[55] (51,766)<div  />
+			[56] (51,766)<div  />
+				[57] (51,766)<div  />
+					[58] (51,766)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-2 mat-unthemed' id='source-item-more-button-e2093e64-8cc1-4ddd-95a3-c46eb03d0e5d' />
+						[59] (51,766)<div  />
+							[60] (51,763)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-2 icon google-symbols mat-icon-no-color ng-star-inserted pdf-icon-color' role='img'>drive_pdf />
+		Debt-Management-Strategy-2025-27.pdf
+		[61] (933,766)<div  />
+			[62] (933,766)<mat-checkbox  />
+				[63] (933,766)<div  />
+					[64] (933,766)<div  />
+						[65] (933,766)<input aria-label='Debt-Management-Strategy-2025-27.pdf' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-6-input' />
+	[66] (51,833)<div  />
+		[67] (51,833)<div  />
+			[68] (51,833)<div  />
+				[69] (51,833)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-2 mat-unthemed' id='source-item-more-button-144c00c6-8dde-438d-934d-a949d4fd5061' />
+					[70] (51,833)<div  />
+						[71] (51,830)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-2 icon google-symbols mat-icon-no-color ng-star-inserted pdf-icon-color' role='img'>drive_pdf />
+	Framework-Secondary-Market-Govt-Securities.pdf
+	[72] (933,833)<div  />
+		[73] (933,833)<mat-checkbox  />
+			[74] (933,833)<div  />
+				[75] (933,833)<div  />
+					[76] (933,833)<input aria-label='Framework-Secondary-Market-Govt-Securities.pdf' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-1-input' />
+	[77] (51,900)<div  />
+		[78] (51,900)<div  />
+			[79] (51,900)<div  />
+				[80] (51,900)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger source-item-more-button ng-tns-c2806627016-2 mat-unthemed' id='source-item-more-button-3b1b6093-43a1-48f3-bf46-7c1e919a5f4a' />
+					[81] (51,900)<div  />
+						[82] (51,897)<mat-icon class='mat-icon notranslate source-item-source-icon ng-tns-c2806627016-2 icon google-symbols mat-icon-no-color ng-star-inserted pdf-icon-color' role='img'>drive_pdf />
+	March-2026-T-Bond-Issuance.pdf
+	[83] (933,900)<div  />
+		[84] (933,900)<mat-checkbox  />
+			[85] (933,900)<div  />
+				[86] (933,900)<div  />
+					[87] (933,900)<input aria-label='March-2026-T-Bond-Issuance.pdf' class='mdc-checkbox__native-control mdc-checkbox--selected' id='mat-mdc-checkbox-5-input' />
+	[88] (51,967)<div  />
+		[89] (51,967)<div  />
+			[90] (51,967)<div  />
+				article
+	NDS-2024-2028.pdf
+	[91] (933,967)<div  />
+		[92] (933,967)<div  />
+			[93] (933,967)<mat-progress-spinner class='mat-mdc-progress-spinner mdc-circular-progress loading-spinner ng-tns-c2806627016-2 mat-primary mdc-circular-progress--indeterminate' role='progressbar' />
+				[94] (933,967)<div  />
+					[95] (933,967)<div  />
+						[96] (925,971)<div  />
+						[97] (940,964)<div  />
+Add source
+
+</current_dom>

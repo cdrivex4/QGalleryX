@@ -1,0 +1,5 @@
+  warning: skill is from graphify 0.8.41, package is 0.9.3. Run 'graphify install' to update.
+  warning: skill is from graphify 0.8.41, package is 0.9.3. Run 'graphify install' to update.
+error: backend 'gemini' requires GEMINI_API_KEY or GOOGLE_API_KEY to be set.
+[graphify extract] scanning D:\Dev\antigravity
+[graphify extract] found 88 code, 4 docs, 0 papers, 0 images

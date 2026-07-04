@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary":  "Robustifying the startup process for JustDubit. The plan involves creating a smarter startup script that: (1) kills stale python/node processes to avoid port conflicts, (2) waits for the API and Webapp to be truly online before launching the browser, and (3) logs startup errors to files for easier debugging.",
+  "updatedAt":  "2026-02-28T04:48:48.343194300Z",
+  "version":  "12"
+}

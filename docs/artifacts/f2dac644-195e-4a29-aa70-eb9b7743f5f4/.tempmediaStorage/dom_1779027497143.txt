@@ -1,0 +1,575 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+import React, { useEffect, useState } from 'react'
+import { TransactionRecord, Persona, Confidence } from '../types'
+import { Decimal } from '../services/Decimal'
+import coa from '../../../../dist/coa.json'
+
+interface TransactionsViewProps {
+  activePersonaId: string | null
+}
+
+// â”€â”€ Searchable Autocomplete Combobox Component for COA Category â”€â”€
+interface CoaComboboxProps {
+  value: string
+  onChange: (code: string) => void
+}
+
+const CoaCombobox: React.FC<CoaComboboxProps> = ({ value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [query, setQuery] = useState('')
+
+  // Map the current code value to its full label display on mount / change
+  const currentAccount = coa.accounts.find(a => a.code === value)
+  const displayLabel = currentAccount ? `${currentAccount.code} - ${currentAccount.label}` : value
+
+  useEffect(() => {
+    // Reset query on value change so it defaults to show full label when not focused
+    setQuery('')
+  }, [value])
+
+  const filteredOptions = coa.accounts.filter(a => {
+    if (a.parent === null) return false
+    const matchStr = `${a.code} ${a.label}`.toLowerCase()
+    return matchStr.includes(query.toLowerCase())
+  })
+
+  return (
+    <div style={{ position: 'relative', flex: 1, minWidth: '220px' }}>
+      <input 
+        type="text"
+        className="form-input"
+        placeholder="Search category (e.g. Electricity, 6310)..."
+        value={isOpen ? query : displayLabel}
+        onChange={e => {
+          setQuery(e.target.value)
+          setIsOpen(true)
+        }}
+        onFocus={() => {
+          setQuery('')
+          setIsOpen(true)
+        }}
+        onBlur={() => {
+          // Brief timeout to let dynamic option clicks execute before panel collapses
+          setTimeout(() => setIsOpen(false), 200)
+        }}
+        style={{ padding: '0.4rem 0.5rem', fontSize: '0.85rem', width: '100%' }}
+      />
+      {isOpen && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          right: 0,
+          background: 'rgba(30, 41, 59, 0.96)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid var(--border-light)',
+          borderRadius: '6px',
+          maxHeight: '220px',
+          overflowY: 'auto',
+          zIndex: 1000,
+          marginTop: '4px',
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.5)'
+        }}>
+          {filteredOptions.length === 0 ? (
+            <div style={{ padding: '0.5rem 0.75rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              No categories found matching "{query}"
+            </div>
+          ) : (
+            filteredOptions.map(acc => (
+              <div 
+                key={acc.code}
+                onMouseDown={() => {
+                  // Use onMouseDown so it triggers before onBlur collapses the combobox
+                  onChange(acc.code)
+                  setIsOpen(false)
+                }}
+                style={{
+                  padding: '0.45rem 0.75rem',
+                  fontSize: '0.8rem',
+                  cursor: 'pointer',
+                  color: 'var(--text-primary)',
+                  transition: 'background 0.15s ease',
+                  borderBottom: '1px solid rgba(255,255,255,0.02)'
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(59, 130, 246, 0.2)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+              >
+                <strong>{acc.code}</strong> - {acc.label}
+              </div>
+            ))
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+const TransactionsView: React.FC<TransactionsViewProps> = ({ activePersonaId }) => {
+  const [activePersona, setActivePersona] = useState<Persona | null>(null)
+  const [transactions, setTransactions] = useState<TransactionRecord[]>([])
+  const [loading, setLoading] = useState(true)
+  
+  // Filters & Search
+  const [search, setSearch] = useState('')
+  const [filterConfidence, setFilterConfidence] = useState<string>('all')
+  const [filterReviewOnly, setFilterReviewOnly] = useState(false)
+  const [filterAccount, setFilterAccount] = useState<string>('all')
+
+  // Editing state
+  const [editingTxId, setEditingTxId] = useState<string | null>(null)
+  const [editCoaCode, setEditCoaCode] = useState('')
+  const [editDesc, setEditDesc] = useState('')
+  const [editDebit, setEditDebit] = useState('')
+  const [editCredit, setEditCredit] = useState('')
+
+  useEffect(() => {
+    loadTransactions()
+  }, [activePersonaId])
+
+  const loadTransactions = async () => {
+    setLoading(true)
+    if (!activePersonaId) {
+      setTransactions([])
+      setLoading(false)
+      return
+    }
+
+    const personas = await window.api.personas.list()
+    const p = personas.find(x => x.id === activePersonaId) as Persona
+    setActivePersona(p || null)
+
+    const txs = await window.api.transactions.list(activePersonaId) as TransactionRecord[]
+    setTransactions(txs)
+    setLoading(false)
+  }
+
+  const handleEditClick = (tx: TransactionRecord) => {
+    setEditingTxId(tx.tx_id)
+    setEditCoaCode(tx.coa_code || '4000') // default to standard cost of sales/revenue
+    setEditDesc(tx.description_clean)
+    setEditDebit(tx.debit || '')
+    setEditCredit(tx.credit || '')
+  }
+
+  const handleSaveEdit = async (txId: string) => {
+    const updated = transactions.map(t => {
+      if (t.tx_id === txId) {
+        const matchingCoa = coa.accounts.find(a => a.code === editCoaCode)
+        const parent = matchingCoa ? coa.accounts.find(a => a.code === matchingCoa.parent) : null
+        
+        return {
+          ...t,
+          description_clean: editDesc,
+          coa_code: editCoaCode,
+          coa_label: matchingCoa?.label || t.coa_label,
+          category_l1: parent?.label || t.category_l1,
+          category_l2: matchingCoa?.label || t.category_l2,
+          debit: editDebit ? new Decimal(editDebit).toString() : null,
+          credit: editCredit ? new Decimal(editCredit).toString() : null,
+          // Since the accountant edited and reviewed it, remove review flag
+          requires_review: false,
+          review_reason: null,
+          confidence: 'high' as Confidence
+        }
+      }
+      return t
+    })
+
+    await window.api.transactions.save(activePersonaId!, updated)
+    setEditingTxId(null)
+    loadTransactions()
+  }
+
+  const handleDelete = async (txId: string) => {
+    if (confirm('Delete this transaction record from the ledger?')) {
+      const filtered = transactions.filter(t => t.tx_id !== txId)
+      await window.api.transactions.save(activePersonaId!, filtered)
+      loadTransactions()
+    }
+  }
+
+  const handleApproveWithoutEdit = async (txId: string) => {
+    const updated = transactions.map(t => {
+      if (t.tx_id === txId) {
+        return {
+          ...t,
+          requires_review: false,
+          review_reason: null
+        }
+      }
+      return t
+    })
+
+    await window.api.transactions.save(activePersonaId!, updated)
+    loadTransactions()
+  }
+
+  const handleApproveAllFlagged = async () => {
+    const flaggedCount = transactions.filter(t => t.requires_review).length
+    if (flaggedCount === 0) return
+
+    if (confirm(`Approve and verify all ${flaggedCount} flagged transactions in this ledger queue?`)) {
+      const updated = transactions.map(t => {
+        if (t.requires_review) {
+          return {
+            ...t,
+            requires_review: false,
+            review_reason: null
+          }
+        }
+        return t
+      })
+
+      await window.api.transactions.save(activePersonaId!, updated)
+      loadTransactions()
+    }
+  }
+
+  if (loading) {
+    return <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>Retrieving ledger books...</div>
+  }
+
+  if (!activePersona) {
+    return (
+      <div className="glass-panel" style={{ textAlign: 'center', padding: '5rem 2rem' }}>
+        <h3>No Profile Context Selected</h3>
+        <p style={{ color: 'var(--text-muted)' }}>Select or configure a profile in the sidebar to review ledger books.</p>
+      </div>
+    )
+  }
+
+  const filtered = transactions.filter(t => {
+    const matchesSearch = t.description_raw.toLowerCase().includes(search.toLowerCase()) ||
+                          t.description_clean.toLowerCase().includes(search.toLowerCase())
+    const matchesConfidence = filterConfidence === 'all' || t.confidence === filterConfidence
+    const matchesReview = !filterReviewOnly || t.requires_review
+    const matchesAccount = filterAccount === 'all' || t.bank_account_number === filterAccount
+
+    return matchesSearch && matchesConfidence && matchesReview && matchesAccount
+  })
+
+  // Flagged queue
+  const reviewQueue = transactions.filter(t => t.requires_review)
+
+  return (
+    <div className="transactions-view animated-fade-in">
+      <div className="view-header-container">
+        <div>
+          <h2 className="view-title">Ledger Books</h2>
+          <p className="view-subtitle">Interactive transaction verification ledger for {activePersona.name}</p>
+        </div>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          {reviewQueue.length > 0 && (
+            <button className="btn btn-success" onClick={handleApproveAllFlagged}>
+              âœ“ Approve All Flagged ({reviewQueue.length})
+            </button>
+          )}
+          <button className="btn btn-secondary" onClick={loadTransactions}>ðŸ”„ Refresh Ledger</button>
+        </div>
+      </div>
+
+      {/* Review Queue Alerts Panel */}
+      {reviewQueue.length > 0 && (
+        <div className="glass-panel animated-fade-in" style={{ borderColor: 'var(--danger)', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
+            <h3 style={{ color: 'var(--danger)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.2rem' }}>
+              âš ï¸ Verification Queue ({reviewQueue.length} items flagged)
+            </h3>
+            <button className="btn btn-success" onClick={handleApproveAllFlagged} style={{ padding: '0.45rem 1rem', fontSize: '0.8rem' }}>
+              âœ“ Approve All Flagged ({reviewQueue.length} items)
+            </button>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {reviewQueue.slice(0, 3).map(tx => {
+              const isEditingCard = editingTxId === tx.tx_id
+              return (
+                <div key={tx.tx_id} className="file-card" style={{ borderLeft: '3px solid var(--danger)', padding: '1rem', background: 'rgba(239, 68, 68, 0.02)' }}>
+                  {isEditingCard ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', width: '80px' }}>Date:</span>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>{tx.raw_date}</span>
+                      </div>
+                      
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', width: '80px' }}>Description:</span>
+                        <input 
+                          type="text" 
+                          className="form-input" 
+                          value={editDesc}
+                          onChange={e => setEditDesc(e.target.value)}
+                          style={{ flex: 1, padding: '0.35rem', fontSize: '0.85rem' }}
+                        />
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', width: '80px' }}>Amounts:</span>
+                        <input 
+                          type="number" 
+                          className="form-input" 
+                          placeholder="Debit"
+                          value={editDebit}
+                          onChange={e => setEditDebit(e.target.value)}
+                          style={{ width: '120px', padding: '0.35rem', fontSize: '0.85rem' }}
+                        />
+                        <input 
+                          type="number" 
+                          className="form-input" 
+                          placeholder="Credit"
+                          value={editCredit}
+                          onChange={e => setEditCredit(e.target.value)}
+                          style={{ width: '120px', padding: '0.35rem', fontSize: '0.85rem' }}
+                        />
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', width: '80px' }}>COA Code:</span>
+                        <CoaCombobox value={editCoaCode} onChange={setEditCoaCode} />
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                        <button className="btn btn-secondary" style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }} onClick={() => setEditingTxId(null)}>
+                          Cancel
+                        </button>
+                        <button className="btn btn-success" style={{ padding: '0.35rem 0.75rem', fontSize: '0.75rem' }} onClick={() => handleSaveEdit(tx.tx_id)}>
+                          âœ“ Save & Verify
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{tx.raw_date}</span>
+                        <h4 style={{ fontSize: '0.9rem', margin: '0.15rem 0' }}>{tx.description_raw}</h4>
+                        
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', margin: '0.25rem 0', flexWrap: 'wrap' }}>
+                          {tx.debit && <span style={{ color: 'var(--danger)', fontSize: '0.8rem', fontWeight: 500 }}>Debit: SCR {new Decimal(tx.debit).toLocaleString()}</span>}
+                          {tx.credit && <span style={{ color: 'var(--success)', fontSize: '0.8rem', fontWeight: 500 }}>Credit: SCR {new Decimal(tx.credit).toLocaleString()}</span>}
+                          {tx.bank_account_number && (
+                            <span style={{ 
+                              fontSize: '0.75rem', 
+                              color: 'var(--text-secondary)', 
+                              background: 'rgba(255,255,255,0.03)', 
+                              padding: '0.15rem 0.45rem', 
+                              borderRadius: '4px', 
+                              border: '1px solid var(--border-light)' 
+                            }}>
+                              Account: #{tx.bank_account_number}
+                            </span>
+                          )}
+                        </div>
+
+                        <span className="review-badge" style={{ fontSize: '0.65rem' }}>Reason: {tx.review_reason}</span>
+                      </div>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <button className="btn btn-secondary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }} onClick={() => handleEditClick(tx)}>
+                          âœï¸ Edit & Reclassify
+                        </button>
+                        <button className="btn btn-success" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }} onClick={() => handleApproveWithoutEdit(tx.tx_id)}>
+                          âœ“ Approve
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+            {reviewQueue.length > 3 && (
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'right', marginTop: '0.5rem' }}>
+                And {reviewQueue.length - 3} more items waiting verification below...
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Filter and Search Bar */}
+      <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem', display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+        <input 
+          type="text" 
+          className="form-input" 
+          placeholder="Search descriptions..." 
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          style={{ flex: 1, minWidth: '200px', padding: '0.5rem 0.75rem', fontSize: '0.85rem' }}
+        />
+
+        {/* Bank Account Connection Filter */}
+        {activePersona.bankAccounts && activePersona.bankAccounts.length > 0 && (
+          <select 
+            className="persona-select" 
+            value={filterAccount} 
+            onChange={e => setFilterAccount(e.target.value)}
+            style={{ width: '180px', padding: '0.5rem' }}
+          >
+            <option value="all">All Accounts</option>
+            {activePersona.bankAccounts.map(acc => (
+              <option key={acc.accountNumber} value={acc.accountNumber}>
+                {acc.label} (##{acc.accountNumber.slice(-4)})
+              </option>
+            ))}
+          </select>
+        )}
+
+        <select 
+          className="persona-select" 
+          value={filterConfidence} 
+          onChange={e => setFilterConfidence(e.target.value)}
+          style={{ width: '160px', padding: '0.5rem' }}
+        >
+          <option value="all">All Confidence</option>
+          <option value="high">High Only</option>
+          <option value="medium">Medium Only</option>
+          <option value="low">Low Only</option>
+        </select>
+
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+          <input 
+            type="checkbox" 
+            checked={filterReviewOnly} 
+            onChange={e => setFilterReviewOnly(e.target.checked)}
+            style={{ width: '16px', height: '16px' }}
+          />
+          Requires Review Only
+        </label>
+      </div>
+
+      {/* Main Ledger Table */}
+      <div className="glass-panel" style={{ padding: '1rem' }}>
+        <div className="table-container">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Cleaned Narration</th>
+                <th>Debit</th>
+                <th>Credit</th>
+                <th>Category (COA)</th>
+                <th>State</th>
+                <th style={{ textAlign: 'right' }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan={7} style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem' }}>
+                    No transactions match the search filters.
+                  </td>
+                </tr>
+              ) : (
+                filtered.map(tx => {
+                  const isEditing = editingTxId === tx.tx_id
+                  return (
+                    <tr key={tx.tx_id}>
+                      <td>{tx.raw_date}</td>
+                      <td>
+                        {isEditing ? (
+                          <input 
+                            type="text" 
+                            className="form-input" 
+                            value={editDesc}
+                            onChange={e => setEditDesc(e.target.value)}
+                            style={{ padding: '0.35rem', fontSize: '0.85rem' }}
+                          />
+                        ) : (
+                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <span style={{ fontWeight: 500 }}>{tx.description_clean}</span>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                              Raw: {tx.description_raw} 
+                              {tx.bank_account_number && ` â€¢ Account: #${tx.bank_account_number}`}
+                            </span>
+                          </div>
+                        )}
+                      </td>
+                      
+                      <td>
+                        {isEditing ? (
+                          <input 
+                            type="number" 
+                            className="form-input" 
+                            placeholder="Debit"
+                            value={editDebit}
+                            onChange={e => setEditDebit(e.target.value)}
+                            style={{ padding: '0.35rem', fontSize: '0.85rem', width: '90px' }}
+                          />
+                        ) : (
+                          <span style={{ color: 'var(--danger)', fontWeight: 500 }}>
+                            {tx.debit ? `${new Decimal(tx.debit).toLocaleString()}` : ''}
+                          </span>
+                        )}
+                      </td>
+
+                      <td>
+                        {isEditing ? (
+                          <input 
+                            type="number" 
+                            className="form-input" 
+                            placeholder="Credit"
+                            value={editCredit}
+                            onChange={e => setEditCredit(e.target.value)}
+                            style={{ padding: '0.35rem', fontSize: '0.85rem', width: '90px' }}
+                          />
+                        ) : (
+                          <span style={{ color: 'var(--success)', fontWeight: 500 }}>
+                            {tx.credit ? `${new Decimal(tx.credit).toLocaleString()}` : ''}
+                          </span>
+                        )}
+                      </td>
+
+                      <td>
+                        {isEditing ? (
+                          <CoaCombobox value={editCoaCode} onChange={setEditCoaCode} />
+                        ) : (
+                          <span className="status-pill medium" style={{ background: 'rgba(255,255,255,0.03)', color: 'var(--text-secondary)', border: '1px solid var(--border-light)' }}>
+                            {tx.coa_code} - {tx.coa_label}
+                          </span>
+                        )}
+                      </td>
+
+                      <td>
+                        {tx.requires_review ? (
+                          <span className="review-badge" title={tx.review_reason || ''}>Review</span>
+                        ) : (
+                          <span className={`status-pill ${tx.confidence}`}>{tx.confidence}</span>
+                        )}
+                      </td>
+
+                      <td style={{ textAlign: 'right' }}>
+                        {isEditing ? (
+                          <div style={{ display: 'flex', gap: '0.35rem', justifyContent: 'flex-end' }}>
+                            <button className="btn btn-success" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }} onClick={() => handleSaveEdit(tx.tx_id)}>
+                              Save
+                            </button>
+                            <button className="btn btn-secondary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }} onClick={() => setEditingTxId(null)}>
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <div style={{ display: 'flex', gap: '0.35rem', justifyContent: 'flex-end' }}>
+                            <button className="btn btn-secondary" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }} onClick={() => handleEditClick(tx)}>
+                              âœï¸ Edit
+                            </button>
+                            <button className="btn btn-danger" style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem' }} onClick={() => handleDelete(tx.tx_id)}>
+                              Delete
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  )
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default TransactionsView
+
+</current_dom>

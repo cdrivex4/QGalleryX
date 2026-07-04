@@ -1,0 +1,84 @@
+ninja: Entering directory `build'
+[1/79] Automatic MOC and UIC for target tst_linkage
+[2/79] Automatic MOC and UIC for target appScrollBench
+[3/79] Automatic MOC and UIC for target tst_imagemodel
+[4/79] Automatic MOC and UIC for target tst_automation
+[5/79] Automatic MOC and UIC for target tst_scheduler
+[6/79] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/DesktopHelper.cpp.obj
+[7/79] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/tst_linkage.cpp.obj
+[8/79] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/TaskScheduler.cpp.obj
+[9/79] Building CXX object CMakeFiles/tst_imagemodel.dir/tst_imagemodel_autogen/mocs_compilation.cpp.obj
+[10/79] Building CXX object CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/src/ImageModel.cpp:15:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[11/79] Building CXX object CMakeFiles/tst_imagemodel.dir/src/DesktopHelper.cpp.obj
+[12/79] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/tst_linkage_autogen/mocs_compilation.cpp.obj
+[13/79] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[14/79] Building CXX object CMakeFiles/tst_imagemodel.dir/src/VideoThumbnailer.cpp.obj
+[15/79] Building CXX object CMakeFiles/tst_scheduler.dir/tst_scheduler_autogen/mocs_compilation.cpp.obj
+[16/79] Building CXX object CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj
+[17/79] Building CXX object CMakeFiles/tst_imagemodel.dir/src/TaskScheduler.cpp.obj
+[18/79] Building CXX object CMakeFiles/tst_scheduler.dir/tests/tst_scheduler.cpp.obj
+[19/79] Running AUTOMOC file extraction for target appScrollBench
+[20/79] Building CXX object CMakeFiles/tst_scheduler.dir/src/TaskScheduler.cpp.obj
+[21/79] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/VideoThumbnailer.cpp.obj
+[22/79] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/tst_automation.cpp.obj
+[23/79] Linking CXX executable tst_imagemodel.exe
+[24/79] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/DesktopHelper.cpp.obj
+[25/79] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/tst_automation_autogen/mocs_compilation.cpp.obj
+[26/79] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/TaskScheduler.cpp.obj
+[27/79] Linking CXX executable tst_scheduler.exe
+[28/79] Running moc --collect-json for target appScrollBench
+[29/45] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj
+[30/45] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[31/45] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/VideoThumbnailer.cpp.obj
+[32/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/TelemetryMonitor.cpp.obj
+[33/45] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj
+[34/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/appScrollBench_autogen/mocs_compilation.cpp.obj
+[35/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/TaskScheduler.cpp.obj
+[36/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[37/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/main_scrollbench.cpp.obj
+[38/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/VideoThumbnailer.cpp.obj
+[39/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/DesktopHelper.cpp.obj
+[40/45] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\tst_automation.exe
+[41/45] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\tst_linkage.exe
+[42/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AsyncImageProvider.cpp.obj
+[43/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/DiagnosticsMonitor.cpp.obj
+[44/45] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AlbumModel.cpp.obj
+D:/Dev/antigravity/src/AlbumModel.cpp: In member function 'void AlbumModel::scanAlbums(const QString&)':
+D:/Dev/antigravity/src/AlbumModel.cpp:259:5: warning: ignoring return value of 'auto QtConcurrent::run(Function&&, Args&& ...) [with Function = AlbumModel::scanAlbums(const QString&)::<lambda()>; Args = {}]', declared with attribute 'nodiscard': 'Use QThreadPool::start(Callable&&) if you don't need the returned QFuture' [-Wunused-result]
+  259 |   });
+      |     ^
+In file included from D:/Qt/6.9.3/mingw_64/include/QtConcurrent/QtConcurrent:14,
+                 from D:/Dev/antigravity/src/AlbumModel.cpp:11:
+D:/Qt/6.9.3/mingw_64/include/QtConcurrent/qtconcurrentrun.h:63:6: note: declared here
+   63 | auto run(Function &&f, Args &&...args)
+      |      ^~~
+[45/45] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+FAILED: D:/Dev/antigravity/test_scrollbench/deploy/appScrollBench.exe 
+C:\WINDOWS\system32\cmd.exe /C "cd . && D:\Qt\Tools\mingw1310_64\bin\c++.exe -O3 -DNDEBUG  test_scrollbench/CMakeFiles/appScrollBench.dir/appScrollBench_autogen/mocs_compilation.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/main_scrollbench.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/ScrollBenchImageModel.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/FileTypeRouter.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/FrameBudgetScheduler.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/TelemetryMonitor.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/FastImageItem.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AsyncImageProvider.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/FileCacheManager.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/TaskScheduler.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/VideoThumbnailer.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/DesktopHelper.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/SystemMonitor.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/LogManager.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/SettingsHelper.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/GroupedProxyModel.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AlbumModel.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/ImageProcessor.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/HardwareAccelerationManager.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/FastVolumeScanner.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/src/DiagnosticsMonitor.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/appscrollbench_qmltyperegistrations.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.qt/rcc/qrc_qmake_ScrollBench.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qmlcache_loader.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp.obj test_scrollbench/CMakeFiles/appScrollBench.dir/.qt/rcc/qrc_appScrollBench_raw_qml_0.cpp.obj -o D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe -Wl,--out-implib,test_scrollbench\libappScrollBench.dll.a -Wl,--major-image-version,0,--minor-image-version,0  D:/Qt/6.9.3/mingw_64/lib/libQt6Concurrent.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Multimedia.a  D:/Qt/6.9.3/mingw_64/lib/libQt6QuickControls2.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Widgets.a  -lpsapi  -ldxgi  -ld3d11  -lpdh  3rdparty/LibRaw/liblibraw_static.a  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/avcodec.lib  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/avformat.lib  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/swscale.lib  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/avutil.lib  D:/Qt/6.9.3/mingw_64/lib/libQt6Quick.a  D:/Qt/6.9.3/mingw_64/lib/libQt6QmlMeta.a  D:/Qt/6.9.3/mingw_64/lib/libQt6QmlWorkerScript.a  D:/Qt/6.9.3/mingw_64/lib/libQt6OpenGL.a  -luser32  D:/Qt/6.9.3/mingw_64/lib/libQt6QmlModels.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Qml.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Network.a  -lshell32  D:/Qt/6.9.3/mingw_64/lib/libQt6Gui.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -ldxguid  -ld3d12  -ldxgi  -ld3d11  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Dev\antigravity\build\test_scrollbench && D:\Qt\Tools\CMake_64\bin\cmake.exe -E copy_if_different D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avcodec-62.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avdevice-62.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avfilter-11.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avformat-62.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avutil-60.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/swresample-6.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/swscale-9.dll D:/Dev/antigravity/test_scrollbench/deploy""
+D:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot open output file D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.

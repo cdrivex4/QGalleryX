@@ -1,0 +1,308 @@
+# Documentation Synchronization and Cleanup Plan
+
+## Goal
+Create a unified, accurate, up-to-date documentation set by auditing all 32 .md files, removing outdated information, and establishing a single source of truth.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **User Identified Issues:**
+> 1. KNOWN_ISSUES.md references issues that "are not present anymore" (static Qt build, LTO, QML caching)
+> 2. Three different walkthroughs with conflicting information:
+>    - `.gemini/brain/*/walkthrough.md` (artifact, just updated)
+>    - [docs/resume/walkthrough.md](file:///d:/Dev/antigravity/docs/resume/walkthrough.md) (refers to obsolete "Test App" merge)
+>    - [docs/README.md](file:///d:/Dev/antigravity/docs/README.md) (more comprehensive project overview)
+> 3. Need to systematically identify and remove obsolete documentation
+
+## Proposed Changes
+
+### Phase 1: Identify Obsolete Documentation
+
+#### Files With Confirmed Outdated Content
+
+##### 1. [docs/KNOWN_ISSUES.md](file:///d:/Dev/antigravity/docs/KNOWN_ISSUES.md)
+**Current Issues (ALL RESOLVED):**
+- ❌ Missing Static Qt Build → RESOLVED: [scripts/setup_static_qt.ps1](file:///d:/Dev/antigravity/scripts/setup_static_qt.ps1) exists and works
+- ❌ MinGW LTO Issues → RESOLVED: LTO working or non-issue
+- ❌ QML Caching → RESOLVED: Fixed in CMakeLists.txt
+
+**Action:** Complete rewrite to document ACTUAL current issues
+
+---
+
+##### 2. [docs/resume/walkthrough.md](file:///d:/Dev/antigravity/docs/resume/walkthrough.md)
+**Outdated Context:**
+- References obsolete "Test App (`appSamsungGalleryTest`)" that no longer exists
+- Describes merging semantic zoom (already complete)
+- Steps 1-3 for folding test app into main (already done)
+
+**Action:** Either update to reflect ScrollBench architecture OR delete (redundant with artifact walkthrough)
+
+---
+
+##### 3. [docs/README.md](file:///d:/Dev/antigravity/docs/README.md)
+**Incomplete/Outdated:**
+- Version history stops at v2.1.0 (missing MFT scanner, FrameBudget, recent work)
+- "Known Issues" section references hardcoded paths, incomplete Albums/Stories
+- Missing ScrollBench architecture explanation
+- No mention of selection/share features in ScrollBench
+
+**Action:** Major update to synchronize with artifact walkthrough
+
+---
+
+### Phase 2: Documentation Hierarchy Strategy
+
+#### Establish Clear Ownership
+
+| File | Purpose | Authority |
+|------|---------|-----------|
+| **[docs/README.md](file:///d:/Dev/antigravity/docs/README.md)** | Project overview, quick start, architecture | Primary project documentation |
+| **[docs/FEATURES.md](file:///d:/Dev/antigravity/docs/FEATURES.md)** | Complete feature list with status | Feature catalog |
+| **[docs/ARCHITECTURE.md](file:///d:/Dev/antigravity/docs/ARCHITECTURE.md)** | Technical architecture | Architecture reference |
+| **[docs/resume/RESUME_WORK.md](file:///d:/Dev/antigravity/docs/resume/RESUME_WORK.md)** | Work plan, priorities | Task planning |
+| **Artifact walkthrough.md** | Current status for AI context | AI session continuity |
+| **Artifact task.md** | Active task checklist | Current work tracking |
+
+#### Deprecate/Consolidate
+
+**Remove or Archive:**
+- [docs/resume/walkthrough.md](file:///d:/Dev/antigravity/docs/resume/walkthrough.md) → Obsolete, contradicts artifact walkthrough
+- [docs/KNOWN_ISSUES.md](file:///d:/Dev/antigravity/docs/KNOWN_ISSUES.md) → Rewrite completely
+
+**Keep But Update:**
+- All other .md files get synchronized updates
+
+---
+
+### Phase 3: Content Standardization
+
+#### Section Template for All Docs
+
+```markdown
+**Last Updated:** YYYY-MM-DD
+**Status:** Current | Outdated | Historical
+
+[!IMPORTANT|WARNING|NOTE]
+Version-specific notes
+```
+
+#### Version History Standard
+
+All version references updated to:
+- v2.1.0: Network & Deployment
+- v2.2.0: MFT Scanning + Frame Budget (current)
+- v3.0.0: (planned) Selection + Share + Editing
+
+---
+
+### Phase 4: Specific File Updates
+
+#### Priority 1: Critical Documentation
+
+##### [docs/KNOWN_ISSUES.md](file:///d:/Dev/antigravity/docs/KNOWN_ISSUES.md)
+**Complete Rewrite:**
+```markdown
+# Known Issues & Workarounds
+
+**Last Updated:** December 28, 2024
+
+## 🔴 Current Issues
+
+### 1. Selection/Share Features Only in ScrollBench
+-   **Issue**: Multi-select and share/resize are fully implemented in ScrollBench but not yet ported to main app
+-   **Workaround**: Use ScrollBench for these features
+-   **Status**: Planned for next release
+-   **Files**: `test_scrollbench/src/ScrollBenchImageModel.cpp`, `test_scrollbench/qml/ShareDialog.qml`
+
+### 2. SystemMonitor Not Displayed in ScrollBench
+-   **Issue**: Performance overlay in ScrollBench shows FPS but not CPU/GPU/RAM metrics
+-   **Root Cause**: PerformanceOverlay.qml not wired to SystemMonitor
+-   **Status**: Easy fix, low priority
+
+### 3. DNG Proprietary Compression Performance
+-   **Issue**: Some DNG files require 120+ seconds to load
+-   **Root Cause**: LibRaw CPU-only demosaicing, no GPU acceleration
+-   **Workaround**: Use embedded JPEG preview or corresponding JPG file
+-   **Status**: Deferred (requires custom GPU shaders)
+
+### 4. Case-Sensitive File Extensions
+-   **Issue**: `.JPG`, `.PNG`, `.MP4` (uppercase) not detected
+-   **Root Cause**: QDirIterator filters are lowercase only
+-   **Workaround**: Manual addition of uppercase variants needed
+-   **Status**: Documented fix in FOLDER_SCANNING_DIAGNOSTIC.md
+
+## ✅ Previously Reported (Now Resolved)
+
+### Fixed in v2.2.0
+- ~~Missing Static Qt Build~~ → `scripts/setup_static_qt.ps1` implemented
+- ~~MinGW LTO Issues~~ → Build system updated
+- ~~QML Caching Conflicts~~ → CMakeLists.txt fixed
+```
+
+---
+
+##### [docs/README.md](file:///d:/Dev/antigravity/docs/README.md)
+**Major Sections to Update:**
+
+**Version History** (add):
+```markdown
+-   **v2.2.0 (Current)** - MFT Scanning & Performance
+    -   **MFT Scanner**: 10-100x faster file enumeration (requires Admin)
+    -   **Frame Budget**: Prevents UI stuttering during heavy operations
+    -   **FileTypeRouter**: Centralized detection for 170+ formats
+    -   **ScrollBench**: Feature-complete test application
+```
+
+**Architecture Section** (expand):
+```markdown
+## 🏗️ Dual-App Architecture
+
+The project uses a two-application strategy:
+
+| Application | Purpose | Status |
+|-------------|---------|--------|
+| **Main App** (`appSamsungGallery.exe`) | Production gallery | ✅ Stable |
+| **ScrollBench** (`appScrollBench.exe`) | Performance testing & feature prototyping | ✅ Feature-complete |
+
+**Development Flow:** Prototype in ScrollBench → Port to Main App
+```
+
+**Known Issues Section** (replace):
+```markdown
+## ⚠️ Known Issues
+
+See [KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md) for detailed list.
+
+**Current Limitations:**
+- Selection/Share features require ScrollBench (porting in progress)
+- DNG proprietary compression has slow performance
+- Case-sensitive file extension matching (uppercase files missed)
+```
+
+---
+
+##### [docs/resume/walkthrough.md](file:///d:/Dev/antigravity/docs/resume/walkthrough.md)
+**Option A: Delete** (redundant with artifact walkthrough)
+**Option B: Repurpose** as "Historical: Semantic Zoom Integration"
+
+**Recommendation:** Delete and consolidate into artifact walkthrough
+
+---
+
+#### Priority 2: Synchronize Feature Status
+
+##### [docs/FEATURES.md](file:///d:/Dev/antigravity/docs/FEATURES.md)
+**Add Missing Sections:**
+
+```markdown
+## 🎯 ScrollBench-Exclusive Features (Awaiting Port)
+
+### Multi-Selection
+- Single-click toggle selection
+- Shift+Click range selection
+- Drag-to-select visual rectangle
+- Select all/clear/invert
+- **Status:** ✅ Fully implemented in ScrollBench
+
+### Share & Resize
+- ShareDialog with 3 presets (Email small, Manual, Original)
+- ResizeEditor with live preview
+- Batch resize support
+- **Status:** ⚠️ UI complete, backend TODO
+
+### Advanced Telemetry
+- Frame budget completion tracking
+- Viewport culling metrics
+- Real-time performance graphs
+- **Status:** ✅ Fully implemented
+
+## 📹 Video Playback
+
+**Status:** ✅ **Fully Implemented** (needs verification testing)
+
+### Implementation Details
+- MediaPlayer with hardware-accelerated decoding (D3D11VA)
+- VideoOutput with QML integration
+- Play/pause/stop controls
+- Timeline scrubbing
+- Audio output with volume control
+- Automatic stop on image change
+
+**Files:**
+- `resources/qml/PhotoViewer.qml` (lines 232-390)
+- `test_scrollbench/qml/PhotoViewerScrollBench.qml` (lines 264-426)
+```
+
+---
+
+#### Priority 3: Documentation Cross-References
+
+**Add to All Files:**
+```markdown
+## 📚 Related Documentation
+
+- **Project Overview:** [README.md](../README.md)
+- **Feature Status:** [FEATURES.md](../FEATURES.md)
+- **Architecture:** [ARCHITECTURE.md](../ARCHITECTURE.md)
+- **Current Work:** [task.md](../../.gemini/antigravity/brain/*/task.md)
+- **Issue Tracker:** [KNOWN_ISSUES.md](../KNOWN_ISSUES.md)
+```
+
+---
+
+### Phase 5: Verification Steps
+
+#### Checklist for Each Updated File
+
+- [ ] Last Updated date current
+- [ ] No references to obsolete "Test App" (use "ScrollBench")
+- [ ] Version numbers accurate (v2.2.0 current)
+- [ ] Cross-references to other docs work
+- [ ] No contradictions with other documentation
+- [ ] Issue status accurate (resolved vs current)
+
+---
+
+## Verification Plan
+
+### Manual Review
+1. User reviews this plan
+2. User confirms which files to update/delete
+3. Execute updates in priority order
+4. User verifies each updated file
+
+### Automated Checks
+```powershell
+# Find all references to obsolete "Test App"
+rg "Test App|appSamsungGalleryTest|MainSemantic" docs/
+
+# Find all version references
+rg "v[0-9]+\.[0-9]+" docs/
+
+# Find hardcoded dates older than Dec 2024
+rg "Updated.*202[0-3]" docs/
+```
+
+---
+
+## Execution Order
+
+1. **Delete/Archive** [docs/resume/walkthrough.md](file:///d:/Dev/antigravity/docs/resume/walkthrough.md) (obsolete)
+2. **Rewrite** [docs/KNOWN_ISSUES.md](file:///d:/Dev/antigravity/docs/KNOWN_ISSUES.md) (all issues resolved or incorrect)
+3. **Update** [docs/README.md](file:///d:/Dev/antigravity/docs/README.md) (add v2.2.0, ScrollBench architecture)
+4. **Update** [docs/FEATURES.md](file:///d:/Dev/antigravity/docs/FEATURES.md) (add ScrollBench features, clarify video status)
+5. **Update** All other docs with version/date corrections
+6. **Final Pass:** Cross-reference check
+
+---
+
+## Notes
+
+**Files Skipped (Historical/Technical, Low Priority):**
+- [docs/STATIC_QT_INFO.md](file:///d:/Dev/antigravity/docs/STATIC_QT_INFO.md) - Technical reference
+- [docs/STATIC_QT_SETUP.md](file:///d:/Dev/antigravity/docs/STATIC_QT_SETUP.md) - Build instructions
+- [docs/FIX_MEMORY_LEAK_REPORT.md](file:///d:/Dev/antigravity/docs/FIX_MEMORY_LEAK_REPORT.md) - Historical diagnosis
+- [docs/FEASIBILITY_GPU_APIS.md](file:///d:/Dev/antigravity/docs/FEASIBILITY_GPU_APIS.md) - Research notes
+
+**Recommendation:** Mark these as "Historical" but keep for reference

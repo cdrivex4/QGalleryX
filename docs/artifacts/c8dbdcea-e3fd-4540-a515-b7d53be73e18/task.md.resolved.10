@@ -1,0 +1,8 @@
+# 'Micro-Sprint' Stability & Status Fix Task List
+
+- [x] Create `reclaim_vram.py` and clear hung processes
+- [x] Offload landmarks to CPU in `preprocessing.py`
+- [/] Implement Hybrid 1-Minute Resume in `lipsync_musetalk.py`
+- [/] Implement Real-Time Character Reader (`\r`) for status updates
+- [ ] Reboot Dashboard and resume from Minute 55 (Chunk 12)
+- [ ] Verify 8-minute 'Micro-Sprints' are completing successfully

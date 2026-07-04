@@ -1,0 +1,49 @@
+# Stage Direction & Meta-Pollution Recovery Plan
+
+The final dub contains meta-commentary from the LLM (e.g., "NOTES:", "CRITICAL CONSTRAINT:") and Whisper hallucinations (e.g., "You" looped during silence). We need to scrub the pipeline's memory and re-run with hardened filters.
+
+## User Review Required
+
+> [!CAUTION]
+> This plan will **discard all existing dubbed audio clips** and the final assembled video for project `1776007462`. We are keeping the "Vocals" and "Background" stems to avoid hours of re-splitting.
+
+## Proposed Changes
+
+### [Component Name] Pipeline Data Restoration
+
+- **Stage 2 (Refine)**: Apply a "Hallucination Sweep" to `transcription_results.json`.
+    - Automatically remove segments that are exactly one common word (like "You", "I", "Thank", "you") with a duration > 5 seconds.
+    - Remove anything in `[...]` or `(...)` that survived Whisper.
+- **Stage 3 (Translate)**: Wipe `translated_segments.json` and `translation_checkpoint.json`.
+- **Stage 4 (TTS)**: Wipe the `tts_segments/` folder.
+- **Stage 6 (Lipsync)**: Wipe the `lipsync_chunks/` folder and `lipsynced_video.mp4`.
+
+---
+
+### [Component Name] AI Stage Hardening
+
+#### [MODIFY] [transcribe.py](file:///c:/just-dub-it2/app/stages/transcribe.py)
+- Implement a `is_hallucination(segment)` check.
+- Filter out segments that match the repetitive "You/I" loop pattern typical of Whisper processing silence.
+
+#### [MODIFY] [translate.py](file:///c:/just-dub-it2/app/stages/translate.py)
+- **Deep Scrubber**: Implement a regex-based `final_clean(text)` function that runs *before* returning the dialogue to the pipeline.
+- It will strip:
+    - All text inside `[...]` or `(...)` or `*...*`.
+    - Known meta-headers: `NOTES:`, `Notes:`, `DIALOGUE:`, `CRITICAL:`, `EXPLANATION:`.
+    - Any lines that look like a technical instruction.
+- **Prompt Isolation**: Update the prompt to tell Llama: "Answer ONLY with the dialogue. Do not include notes, comments, or technical constraints in your response."
+
+## Open Questions
+
+- **Narrator Identification**: Some movies have a narrator that XTTS might interpret differently. Should I keep narrator markers like "NARRATOR:" in the text, or strip them entirely? (Current plan is to strip for a cleaner dub).
+- **Silent Scenes**: There are scenes where "You" was transcribed for 30 seconds. I will remove these entirely. Is there any case where a character actually says just one word for 30 seconds? (Assumption: No).
+
+## Verification Plan
+
+### Automated/Tool Verification
+- Run a `dry_run_filter.py` script against the existing `1776007462` data and print the "Purged" segments to verify nothing real was lost.
+- Review the first 100 segments of the "Clean" translation to ensure no `NOTES:` blocks remain.
+
+### Manual Verification
+- Listen to the first 3 segments of the new TTS generation to confirm the "Stage Directions" are no longer spoken.

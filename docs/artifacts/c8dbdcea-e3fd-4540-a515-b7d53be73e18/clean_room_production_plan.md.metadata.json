@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan to resolve the 4.0GB VRAM deadlock on the 1050 Ti. I will implement 'Extreme Offloading' by patching MuseTalk to delay loading the Whisper model until landmark extraction is complete. I will also perform a system-wide VRAM audit to identify background hogs (Chrome, Docker). Strategy: VRAM Clean Room. Summary: Unlocking the finish line.",
+  "updatedAt": "2026-04-13T20:17:00.477899800Z",
+  "requestFeedback": true
+}

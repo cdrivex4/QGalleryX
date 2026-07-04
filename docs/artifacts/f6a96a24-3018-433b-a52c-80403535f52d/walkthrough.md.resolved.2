@@ -1,0 +1,104 @@
+# ScrollBench - Ready to Run! 🚀
+
+## Executable Path
+
+**Full path to run ScrollBench:**
+```
+d:\Dev\antigravity\test_scrollbench\build\appScrollBench.exe
+```
+
+---
+
+## What Was Fixed
+
+### Scope Error Resolution ✅
+- **Problem**: ThumbnailDelegate couldn't access `thumbResSlider` from PerformanceOverlay (different scopes)
+- **Solution**: Added `property int thumbResolution: 256` to root ApplicationWindow
+- **Result**: All delegates now access `ApplicationWindow.window.thumbResolution`
+
+---
+
+## Features Ready to Test
+
+### 🎯 Performance Optimizations
+1. **Viewport Culling** - Toggle on/off (enabled by default)
+2. **Frame Budget** - Slider from 1-50 uploads/frame (default: 10)
+3. **Thumb Resolution** - 128-512px slider (default 256px marked with ⭐)
+
+### 📊 Real-Time Monitoring
+- **FPS Display** - Color-coded (green ≥55, yellow ≥30, red <30)
+- **Queue Depth** - Visual bar showing pending decodes
+- **Memory Usage** - Live MB counter (Windows)
+- **Frame Completions** - Current frame upload count
+
+###  10,000 Test Items
+- Synthetic colored rectangles (10 distinct colors)
+- Index labels and loaded status indicators
+- Dynamic sizing based on thumb resolution
+
+### 📁 Folder Selection
+- Button in top-right to select real image folders (placeholder for future enhancement)
+
+---
+
+## Testing Workflow
+
+### Baseline (No Optimizations)
+1. Run the exe
+2. **Disable both toggles**: Viewport Culling OFF, Frame Budget OFF
+3. Rapidly scroll through the list
+4. **Expected**: FPS drops, queue spikes to 100+, UI stutters
+
+### Viewport Culling Only
+1. **Enable** Viewport Culling
+2. **Disable** Frame Budget
+3. Rapidly scroll
+4. **Expected**: Queue controlled (<50), FPS improves
+
+### Frame Budget Only
+1. **Disable** Viewport Culling
+2. **Enable** Frame Budget (10 uploads/frame)
+3. Rapidly scroll
+4. **Expected**: FPS stable ≥30, queue grows, delayed thumbnail pops
+
+### Both Optimizations ⭐
+1. **Enable both toggles**
+2. Set frame budget to 10
+3. Keep thumb resolution at 256px
+4. Scroll through entire 10,000 list
+5. **Expected**: 
+   - Normal scroll: FPS ≥60
+   - Fast scroll: FPS ≥30
+   - Queue depth: <50
+   - No UI freezes
+
+### Thumb Resolution Impact
+1. Enable both optimizations
+2. Test at **128px**: Higher FPS (less data per thumb)
+3. Test at **512px**: Lower FPS (4x data per thumb)
+4. **Expected**: Visible FPS difference between sizes
+
+---
+
+## Success Metrics
+
+| Metric | Without Opts | With Opts | Target |
+|--------|-------------|-----------|--------|
+| Normal Scroll FPS | 15-25 | 50-60 | ≥30 |
+| Fast Scroll FPS | 10-15 | 30-40 | ≥20 |
+| Peak Queue | 200+ | 20-50 | <50 |
+| Memory (10k) | 2GB+ | <800MB | <1GB |
+
+---
+
+## Notes
+
+- **Main app unchanged** - This is a separate test application
+- **Full dependencies** - Includes AsyncImageProvider, TaskScheduler, LibRaw, FFmpeg, VideoThumbnailer
+- **Windows only** - Memory monitoring uses Windows APIs
+- **Synthetic data** - Uses colored rectangles, not real images (for consistent testing)
+
+---
+
+**Status**: ✅ Ready to run!  
+**Path**: `d:\Dev\antigravity\test_scrollbench\build\appScrollBench.exe`

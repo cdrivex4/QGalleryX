@@ -30,11 +30,14 @@ public:
   struct Task {
       std::function<void()> run;
       std::function<bool()> isNeeded;
+      std::function<void()> onDropped;
       Task() = default;
       template <typename Callable>
-      Task(Callable r) : run(std::move(r)), isNeeded(nullptr) {}
+      Task(Callable r) : run(std::move(r)), isNeeded(nullptr), onDropped(nullptr) {}
       template <typename Callable1, typename Callable2>
-      Task(Callable1 r, Callable2 i) : run(std::move(r)), isNeeded(std::move(i)) {}
+      Task(Callable1 r, Callable2 i) : run(std::move(r)), isNeeded(std::move(i)), onDropped(nullptr) {}
+      template <typename Callable1, typename Callable2, typename Callable3>
+      Task(Callable1 r, Callable2 i, Callable3 d) : run(std::move(r)), isNeeded(std::move(i)), onDropped(std::move(d)) {}
       operator bool() const { return run != nullptr; }
       void operator()() const { if (run) run(); }
   };

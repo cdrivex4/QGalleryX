@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan to patch the MuseTalk source code for '4GB VRAM Safety'. I will implement direct-to-FP16 loading for all weights, sequential model initialization, and explicit GPU cache flushing during the boot sequence. This resolves the 5.5GB memory spike that is currently deadlocking the 1050 Ti during the final segment of the 1-hour movie. Strategy: Surgical Compression.",
+  "updatedAt": "2026-04-13T18:26:33.313847700Z",
+  "requestFeedback": true
+}

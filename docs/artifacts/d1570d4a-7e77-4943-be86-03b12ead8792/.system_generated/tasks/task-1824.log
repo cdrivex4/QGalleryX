@@ -1,0 +1,7 @@
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'hermes.config.example.json', LF will be replaced by CRLF the next time Git touches it
+[main a30a486] Decouple Master_Staging paths from public config templates
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+ rename hermes.config.json => hermes.config.example.json (62%)
+To https://github.com/cdrivex4/legioncommand.git
+   0a176fe..a30a486  main -> main

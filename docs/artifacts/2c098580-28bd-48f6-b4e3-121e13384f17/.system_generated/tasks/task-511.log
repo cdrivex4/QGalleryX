@@ -1,0 +1,7 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-02T20:28:06+04:00
+Prompt: Check pipeline test status again after 90s
+
+[2026-06-02T20:27:06+04:00] Still waiting. Remaining time: 1m0s
+[2026-06-02T20:27:36+04:00] Still waiting. Remaining time: 30s
+[2026-06-02T20:28:06+04:00] Timer fired.

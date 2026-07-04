@@ -1,0 +1,28 @@
+# Performance Analysis & Optimization Plan
+
+## Goal
+Identify bottlenecks in image loading and rendering to maximize GPU usage and minimize CPU blocking.
+
+## Metrics System
+We will implement a structured logging system to measure:
+1.  **Decode Time**: Time taken by `QImageReader` to read and scale the image (CPU).
+2.  **Texture Upload/Ready Time**: Time from request start to `Image.Ready` status in QML.
+3.  **FPS**: Real-time frame rate during scrolling.
+
+### Implementation Details
+-   **C++ ([AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#25-30))**:
+    -   Use `QElapsedTimer` to measure `reader.read()`.
+    -   Log format: `[PERF][DECODE] <filename> <width>x<height> <ms>`
+-   **QML (`GalleryView`, `PhotoViewer`)**:
+    -   Monitor `onStatusChanged`.
+    -   Log format: `[PERF][QML_LOAD] <filename> <ms>`
+
+## Optimization Strategies (To be discussed after data collection)
+1.  **Texture Caching**: Ensure decoded textures are kept in memory to avoid re-decoding.
+2.  **Asynchronous Texture Upload**: Verify if `QQuickAsyncImageProvider` handles this efficiently.
+3.  **GPU Decoding**: Investigate if we can use hardware acceleration for image decoding (unlikely for standard JPEGs/PNGs without specialized libraries, but critical for Video).
+4.  **Preloading**: Tune `cacheBuffer` in `GridView`.
+
+## Verification
+-   Run the app and scroll vigorously.
+-   Capture logs and analyze the ratio of Decode Time vs Total Load Time.

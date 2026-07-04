@@ -1,0 +1,14 @@
+# Debug Ingestion Pipeline Image Recognition Failures
+
+# Debug Ingestion Pipeline Image Recognition Failures
+
+## Plan
+1. [x] Open http://localhost:5173/ in the browser
+2. [x] Verify application page loaded and check initial console logs
+   - **Finding:** Page fails to load due to `TypeError: Cannot read properties of undefined (reading 'process')` at `Versions` component (`src/App.tsx:198:47`), since Electron-specific properties like `window.electron` are undefined in a standard browser.
+3. [ ] Click on the "Ingest" tab (Blocked by load failure)
+4. [ ] Add a dummy test image
+5. [ ] Click "Run Pipeline"
+6. [ ] Capture and inspect console logs for errors
+7. [ ] Document findings and error details
+

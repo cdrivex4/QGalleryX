@@ -77,10 +77,14 @@ private:
 };
 
 /**
- * @brief Option 2: LMDB implementation (Stub).
+ * @brief Option 2: Memory-Mapped Ring Buffer implementation.
+ * Bypasses filesystem overhead by using a single mmap'd binary log.
  */
-class LmdbCacheDatabase : public ICacheDatabase {
+class MmapCacheDatabase : public ICacheDatabase {
 public:
+    MmapCacheDatabase();
+    ~MmapCacheDatabase() override;
+
     void load(const QString& dbPath) override;
     void save(const QString& dbPath) override;
     bool contains(const QString& key) override;
@@ -91,6 +95,36 @@ public:
     qint64 totalSizeBytes() override;
     QList<QString> getOldestKeys(int limit) override;
     void clear() override;
+
+    // Direct byte access for the ring buffer
+    QByteArray getRawData(const QString& key);
+    void insertRawData(const QString& key, const QString& originalPath, const QString& sizeKey, const QByteArray& data);
+
+private:
+    struct RingHeader {
+        quint32 magic;
+        quint64 head;
+        quint64 tail;
+        quint64 capacity;
+    };
+
+    struct RecordHeader {
+        quint32 keyLen;
+        quint32 dataLen;
+        // followed by key bytes
+        // followed by data bytes
+    };
+
+    QHash<QString, CacheEntry> m_index; // In-memory index
+    QHash<QString, quint64> m_offsets;  // Key -> Offset in mmap
+    
+    uchar* m_mappedData = nullptr;
+    QFile m_file;
+    quint64 m_capacity;
+    QMutex m_mutex;
+    
+    bool advanceHead(quint64 requiredSize);
+    void clearInternal();
 };
 
 /**
@@ -103,9 +137,13 @@ public:
     
     void initialize();
     
-    // Called by AsyncImageProvider
+    // Called by AsyncImageProvider (Legacy / File-based)
     QString getCachedPath(const QString& id, const QSize& requestedSize);
     void registerCacheFile(const QString& id, const QSize& requestedSize, const QString& thumbPath, qint64 sizeBytes);
+    
+    // Direct Byte Access for Mmap Cache (Zero-Copy)
+    QByteArray getCachedData(const QString& id, const QSize& requestedSize);
+    void registerCachedData(const QString& id, const QSize& requestedSize, const QByteArray& data);
     
     // Limit management
     void setMaxDiskCacheSizeMB(int megabytes);

@@ -1,0 +1,26 @@
+
+    case PathRole:
+      return info.path;
+    case CoverPathRole:
+>     return info.coverPaths;
+    case CountRole:
+      return info.count;
+    }
+                    albumMap.insert(key, info);
+                  }
+                  albumMap[key].count++;
+>                 if (albumMap[key].coverPaths.size() < 4)
+>                   albumMap[key].coverPaths.append(fileUri);
+  
+                  int lastSlash = currentDir.lastIndexOf('/');
+                  if (lastSlash < 0 || lastSlash < cleanPath.length())
+              albumMap.insert(key, info);
+            }
+            albumMap[key].count++;
+>           if (albumMap[key].coverPaths.size() < 4)
+>             albumMap[key].coverPaths.append(fileUri);
+  
+            int lastSlash = currentDir.lastIndexOf('/');
+            if (lastSlash < 0 || lastSlash < cleanPath.length())
+
+

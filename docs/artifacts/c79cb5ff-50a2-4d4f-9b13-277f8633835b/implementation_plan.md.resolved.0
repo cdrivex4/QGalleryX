@@ -1,0 +1,20 @@
+# ReShade Shader Installation Implementation Plan
+
+The goal is to provide the missing shader files for the existing ReShade installation in Unreal Tournament 2004.
+
+## Goal Description
+The current UT2004 installation has ReShade (`d3d9.dll`) but lacks the `.fx` shaders. Previous attempts to automate the download of these shaders from GitHub failed due to bot detection. This plan involves using the browser subagent to perform a "manual" download to the user's Downloads folder, and then moving/extracting the files to the game directory.
+
+## Proposed Changes
+
+### ReShade Shaders
+I will download the `reshade-shaders-master.zip` archive and extract its contents to `c:\UnrealTournament2004\System\reshade-shaders`.
+
+- **Source URL:** `https://github.com/crosire/reshade-shaders/archive/refs/heads/master.zip`
+- **Target Folder:** `c:\UnrealTournament2004\System\reshade-shaders`
+
+## Verification Plan
+
+### Manual Verification
+- I will verify the presence of `.fx` files in `c:\UnrealTournament2004\System\reshade-shaders\Shaders`.
+- The user will be asked to launch `Play_ReShade.bat` and press `Home` (or `Scroll Lock`) to see if the shaders appear in the menu.

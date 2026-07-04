@@ -1,0 +1,394 @@
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:235:13: FastImage was not found. Did you add all imports and dependencies? [import]
+            FastImage {
+            ^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:237:17: unknown grouped property scope anchors. [unqualified]
+                anchors.fill: parent
+                ^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:237:17: Type anchors is used but it is not resolved [unresolved-type]
+                anchors.fill: parent
+                ^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:239:17: Could not find property "visible". [missing-property]
+                visible: settings.useFastImage
+                ^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:240:17: Could not find property "source". [missing-property]
+                source: {
+                ^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:247:17: Could not find property "sourceSize". [missing-property]
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                ^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:248:17: Could not find property "fillMode". [missing-property]
+                fillMode: 1 // PreserveAspectCrop
+                ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:249:17: Could not find property "mipmap". [missing-property]
+                mipmap: true 
+                ^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:237:25: Could not find property "fill". [missing-property]
+                anchors.fill: parent
+                        ^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:238:25: Could not find property "margins". [missing-property]
+                anchors.margins: 1
+                        ^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:16:9: Unqualified access [unqualified]
+        imageModel.scanDirectory(path)
+        ^^^^^^^^^^
+Info: Did you mean "imageLoaded"?
+        imageLoaded.scanDirectory(path)
+        ^^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:23:25: Unqualified access [unqualified]
+    property var model: imageModel
+                        ^^^^^^^^^^
+Info: Did you mean "imageLoaded"?
+    property var model: imageLoaded
+                        ^^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:26:45: Unqualified access [unqualified]
+    readonly property real uiThumbnailSize: settings.gridSize
+                                            ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:29:46: Unqualified access [unqualified]
+    readonly property int loadingResolution: settings.thumbnailSize
+                                             ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:69:13: Unqualified access [unqualified]
+            settings.gridSize = Math.max(40, Math.min(settings.gridSize + payload.delta, 400))
+            ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:69:55: Unqualified access [unqualified]
+            settings.gridSize = Math.max(40, Math.min(settings.gridSize + payload.delta, 400))
+                                                      ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:77:14: Unqualified access [unqualified]
+             imageModel.selectAll()
+             ^^^^^^^^^^
+Info: Did you mean "imageLoaded"?
+             imageLoaded.selectAll()
+             ^^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:80:14: Unqualified access [unqualified]
+             imageModel.clearSelection()
+             ^^^^^^^^^^
+Info: Did you mean "imageLoaded"?
+             imageLoaded.clearSelection()
+             ^^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:118:17: Unqualified access [unqualified]
+                imageModel.selectVisualRect(colMin, colMax, rowMin, rowMax, cols)
+                ^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:143:20: Unqualified access [unqualified]
+        cellWidth: settings.gridSize
+                   ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:144:21: Unqualified access [unqualified]
+        cellHeight: settings.gridSize
+                    ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:145:16: Unqualified access [unqualified]
+        model: imageModel
+               ^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:192:31: Unqualified access [unqualified]
+                var oldSize = settings.gridSize
+                              ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:201:21: Unqualified access [unqualified]
+                    settings.gridSize = newSize
+                    ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:208:21: Unqualified access [unqualified]
+            target: settings
+                    ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:228:20: Unqualified access [unqualified]
+            width: grid.cellWidth
+                   ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:229:21: Unqualified access [unqualified]
+            height: grid.cellHeight
+                    ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:231:36: Unqualified access [unqualified]
+            property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
+                                   ^^^^^
+Info: model is implicitly injected into this delegate. Add a required property instead.
+        delegate: Item {
+                  
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:231:66: Unqualified access [unqualified]
+            property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
+                                                                 ^^^^^
+Info: model is implicitly injected into this delegate. Add a required property instead.
+        delegate: Item {
+                  
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:232:34: Unqualified access [unqualified]
+            property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
+                                 ^^^^^
+Info: model is implicitly injected into this delegate. Add a required property instead.
+        delegate: Item {
+                  
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:232:62: Unqualified access [unqualified]
+            property bool isRaw: model.isRaw !== undefined ? model.isRaw : false
+                                                             ^^^^^
+Info: model is implicitly injected into this delegate. Add a required property instead.
+        delegate: Item {
+                  
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:233:39: Unqualified access [unqualified]
+            property bool isSelected: model.isSelected !== undefined ? model.isSelected : false
+                                      ^^^^^
+Info: model is implicitly injected into this delegate. Add a required property instead.
+        delegate: Item {
+                  
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:233:72: Unqualified access [unqualified]
+            property bool isSelected: model.isSelected !== undefined ? model.isSelected : false
+                                                                       ^^^^^
+Info: model is implicitly injected into this delegate. Add a required property instead.
+        delegate: Item {
+                  
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:272:38: Unqualified access [unqualified]
+            property bool isLoading: settings.useFastImage ? imgFast.isLoading : (imgStd.status === Image.Loading)
+                                     ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:272:70: Member "isLoading" not found on type "FastImage" [missing-property]
+            property bool isLoading: settings.useFastImage ? imgFast.isLoading : (imgStd.status === Image.Loading)
+                                                                     ^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:273:43: Unqualified access [unqualified]
+            property string activeSource: settings.useFastImage ? imgFast.source : imgStd.source                
+                                          ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:273:75: Member "source" not found on type "FastImage" [missing-property]
+            property string activeSource: settings.useFastImage ? imgFast.source : imgStd.source                
+                                                                          ^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:239:26: Unqualified access [unqualified]
+                visible: settings.useFastImage
+                         ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:241:26: Unqualified access [unqualified]
+                    if (!settings.useFastImage) return "";
+                         ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:242:25: Unqualified access [unqualified]
+                    if (isSynthetic) {
+                        ^^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:243:61: Unqualified access [unqualified]
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
+                                                            ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        return "image://async/synthetic:" + <id>.model.imageIndex + "?color=" + model.FilePath;
+                                                            ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:243:92: Unqualified access [unqualified]
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
+                                                                                           ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + <id>.model.FilePath;
+                                                                                           ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:245:47: Unqualified access [unqualified]
+                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
+                                              ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    return "image://async/" + <id>.model.filePath + "?idx=" + model.imageIndex;
+                                              ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:245:74: Unqualified access [unqualified]
+                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
+                                                                         ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    return "image://async/" + model.filePath + "?idx=" + <id>.model.imageIndex;
+                                                                         ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:247:37: Unqualified access [unqualified]
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                                    ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:247:61: Unqualified access [unqualified]
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                                                            ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:237:31: Unqualified access [unqualified]
+                anchors.fill: parent
+                              ^^^^^^
+Info: parent is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                anchors.fill: <id>.parent
+                              ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:256:27: Unqualified access [unqualified]
+                visible: !settings.useFastImage
+                          ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:258:25: Unqualified access [unqualified]
+                    if (settings.useFastImage) return "";
+                        ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:259:25: Unqualified access [unqualified]
+                    if (isSynthetic) {
+                        ^^^^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:260:61: Unqualified access [unqualified]
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
+                                                            ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        return "image://async/synthetic:" + <id>.model.imageIndex + "?color=" + model.FilePath;
+                                                            ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:260:92: Unqualified access [unqualified]
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + model.FilePath;
+                                                                                           ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        return "image://async/synthetic:" + model.imageIndex + "?color=" + <id>.model.FilePath;
+                                                                                           ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:262:47: Unqualified access [unqualified]
+                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
+                                              ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    return "image://async/" + <id>.model.filePath + "?idx=" + model.imageIndex;
+                                              ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:262:74: Unqualified access [unqualified]
+                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
+                                                                         ^^^^^
+Info: model is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    return "image://async/" + model.filePath + "?idx=" + <id>.model.imageIndex;
+                                                                         ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:264:37: Unqualified access [unqualified]
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                                    ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:264:61: Unqualified access [unqualified]
+                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                                                            ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:277:30: Unqualified access [unqualified]
+                    visible: isVideo
+                             ^^^^^^^
+Info: isVideo is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    visible: <id>.isVideo
+                             ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:293:61: Unqualified access [unqualified]
+                    color: "#AA000000"; radius: 2; visible: isRaw
+                                                            ^^^^^
+Info: isRaw is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    color: "#AA000000"; radius: 2; visible: <id>.isRaw
+                                                            ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:305:30: Unqualified access [unqualified]
+                    visible: activeSource === "" || isLoading // Fallback for unloaded
+                             ^^^^^^^^^^^^
+Info: activeSource is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    visible: <id>.activeSource === "" || isLoading // Fallback for unloaded
+                             ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:305:53: Unqualified access [unqualified]
+                    visible: activeSource === "" || isLoading // Fallback for unloaded
+                                                    ^^^^^^^^^
+Info: isLoading is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    visible: activeSource === "" || <id>.isLoading // Fallback for unloaded
+                                                    ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:311:34: Unqualified access [unqualified]
+                        visible: isLoading && !isRaw
+                                 ^^^^^^^^^
+Info: isLoading is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        visible: <id>.isLoading && !isRaw
+                                 ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:311:48: Unqualified access [unqualified]
+                        visible: isLoading && !isRaw
+                                               ^^^^^
+Info: isRaw is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        visible: isLoading && !<id>.isRaw
+                                               ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:320:34: Unqualified access [unqualified]
+                        visible: isRaw && isLoading
+                                 ^^^^^
+Info: isRaw is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        visible: <id>.isRaw && isLoading
+                                 ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:320:43: Unqualified access [unqualified]
+                        visible: isRaw && isLoading
+                                          ^^^^^^^^^
+Info: isLoading is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        visible: isRaw && <id>.isLoading
+                                          ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:325:35: Unqualified access [unqualified]
+                        visible: !settings.useFastImage && imgStd.status === Image.Error
+                                  ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:334:30: Unqualified access [unqualified]
+                    opacity: isSelected ? 0.4 : 0
+                             ^^^^^^^^^^
+Info: isSelected is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    opacity: <id>.isSelected ? 0.4 : 0
+                             ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:336:35: Unqualified access [unqualified]
+                    border.width: isSelected ? 3 : 0
+                                  ^^^^^^^^^^
+Info: isSelected is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                    border.width: <id>.isSelected ? 3 : 0
+                                  ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:347:34: Unqualified access [unqualified]
+                        visible: isSelected
+                                 ^^^^^^^^^^
+Info: isSelected is a member of a parent element.
+      You can qualify the access with its id to avoid this warning.
+
+                        visible: <id>.isSelected
+                                 ^^^^^
+      You first have to give the element an idWarning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:367:29: Unqualified access [unqualified]
+                            root.performAction("ToggleSelect", { index: index })
+                            ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:367:73: Unqualified access [unqualified]
+                            root.performAction("ToggleSelect", { index: index })
+                                                                        ^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:369:29: Unqualified access [unqualified]
+                            root.performAction("RangeSelect", { index: index })
+                            ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:369:72: Unqualified access [unqualified]
+                            root.performAction("RangeSelect", { index: index })
+                                                                       ^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:371:29: Unqualified access [unqualified]
+                            root.performAction("Open", { index: index })
+                            ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:371:65: Unqualified access [unqualified]
+                            root.performAction("Open", { index: index })
+                                                                ^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:375:25: Unqualified access [unqualified]
+                        root.performAction("ToggleSelect", { index: index })
+                        ^^^^
+Info: Set "pragma ComponentBehavior: Bound" in order to use IDs from outer components in nested components.
+pragma ComponentBehavior: Bound
+import QtQuick
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:375:69: Unqualified access [unqualified]
+                        root.performAction("ToggleSelect", { index: index })
+                                                                    ^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:383:49: Unqualified access [unqualified]
+        onActiveChanged: if (active) baseSize = settings.gridSize
+                                                ^^^^^^^^
+Warning: D:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml:385:13: Unqualified access [unqualified]
+            settings.gridSize = Math.max(40, Math.min(baseSize * scale, 400))
+            ^^^^^^^^

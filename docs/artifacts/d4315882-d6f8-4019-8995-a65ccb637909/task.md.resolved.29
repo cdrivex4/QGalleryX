@@ -1,0 +1,31 @@
+# Task: Full LTX-2 Pipeline on Windows (Fresh Start)
+
+## Phase 1 — Download Weights (~44 GB from HuggingFace)
+- [x] Rewrite [scripts/download_weights.py](file:///c:/just-dub-it/scripts/download_weights.py) for real LTX-2 assets
+- [x] Download [ltx-2-19b-dev.safetensors](file:///c:/just-dub-it/weights/ltx-2-19b-dev.safetensors) (~35 GB)
+- [x] Download [ltx-2-19b-distilled-lora-384.safetensors](file:///c:/just-dub-it/weights/ltx-2-19b-distilled-lora-384.safetensors) (~700 MB)
+- [x] Download [ltx-2-spatial-upscaler-x2-1.0.safetensors](file:///c:/just-dub-it/weights/ltx-2-spatial-upscaler-x2-1.0.safetensors) (~360 MB)
+- [x] Download [ltx-2-19b-ic-lora-lipdubbing.safetensors](file:///c:/just-dub-it/weights/ltx-2-19b-ic-lora-lipdubbing.safetensors) (~700 MB)
+- [x] Download `gemma-3-12b-it-qat-q4_0-unquantized` (Switched to public mirror)
+
+## Phase 2 — Server: Replace Lite Path with Real JustDubit Pipeline
+- [x] Remove Wav2Lip / sync_engine / ultra-lite blocks from [server.py](file:///c:/just-dub-it/server.py)
+- [/] Add lazy [JustDubitPipeline](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py#95-497) initialization at server startup
+- [ ] Implement [run_justdubit_inference()](file:///c:/just-dub-it/server.py#187-290) using real pipeline
+- [x] Add `/weights_status` endpoint for download progress
+- [x] Keep existing job queue, progress reporting, CORS, PID management
+
+## Phase 3 — Frontend Updates
+- [ ] Add "Speaker Description" input field (feeds prompt)
+- [ ] Add weight download status indicator
+- [ ] Confirm existing upload / job queue / progress UI still works
+
+## Phase 4 — Cleanup
+- [ ] Remove [scripts/sync_engine.py](file:///c:/just-dub-it/scripts/sync_engine.py) (broken placeholder)
+- [ ] Remove [scripts/manual_dub.py](file:///c:/just-dub-it/scripts/manual_dub.py) (broken placeholder)
+- [ ] Remove [wav2lip_model.py](file:///c:/just-dub-it/wav2lip_model.py) (no longer needed)
+
+## Phase 5 — Verification
+- [ ] Confirm imports: [JustDubitPipeline](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py#95-497), `whisper`, CUDA
+- [ ] Run end-to-end test with existing test video
+- [ ] Verify English dubbed output with real lip sync

@@ -1,0 +1,27 @@
+# The "Ancient China" Dialect & Hallucination Fix
+
+You are absolutely right to call this out. I pulled the raw translation data and found segments like:
+- *"Yo, what's up?"*
+- *"Yo, it's over. Your plan was stupid..."*
+
+This completely shatters the immersion of an ancient rural Chinese setting.
+
+## What is going on here?
+
+1. **The Modern Default**: Currently, our AI prompt in `translate.py` simply says: *"You are a professional cinema dubbing translator."* Because we don't tell the LLM *what* film it's translating, it defaults to modern, colloquial American English ("Yo, what's up").
+2. **The Prompt Loop (Segment 18)**: I also spotted a catastrophic failure in Segment 18 where the LLM got confused and started looping the AI prompt template over and over instead of translating:
+   > `Target Duration: 2.0s \n<|assistant|>\nDIALOGUE:  The...`
+
+## Proposed Changes
+
+### [MODIFY] [translate.py](file:///c:/just-dub-it2/app/stages/translate.py)
+
+1. **Environmental Context Injection**: We need to update the `system_instruction` to fiercely enforce the tone. We will change it to:
+   > *"You are a professional cinema dubbing translator. The film is set in ancient, rural China where people believe in ghosts and magic. Use formal, period-appropriate, and rustic language. ABSOLUTELY NO modern slang or colloquialisms (e.g., never say 'Yo')."*
+2. **Fix the Prompt Structure**: The `f"<|system|>..."` tags we used in our last update are confusing this specific Llama model. We need to simplify the prompt structure so it doesn't try to mimic the prompt tags in its output.
+
+## User Review Required
+> [!CAUTION]
+> If we want to change the translation memory to reflect Ancient China, **we will need to throw away the current translations and restart the AI translation stage from Segment 0.** 
+> 
+> Because we haven't reached the Voice Generation (XTTS) stage yet, this is a relatively fast reset. Are you okay with me wiping the translations to inject the "Ancient China" context?

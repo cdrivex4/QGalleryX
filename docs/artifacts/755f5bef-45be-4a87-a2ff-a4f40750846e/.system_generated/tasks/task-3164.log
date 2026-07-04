@@ -1,0 +1,67 @@
+[1/47] Copying appScrollBench qml sources into build dir
+[2/47] Running qmlimportscanner for appScrollBench
+[3/47] Automatic MOC and UIC for target appScrollBench
+[4/47] Running AUTOMOC file extraction for target appScrollBench
+[5/47] Running rcc for resource appScrollBench_raw_qml_0
+[6/47] Running moc --collect-json for target appScrollBench
+[7/47] Automatic QML type registration for target appScrollBench
+[8/47] Generating .rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp, .rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp.aotstats
+[9/47] Generating .rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp.aotstats
+[10/47] Generating .rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp.aotstats
+[11/47] Generating .rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp.aotstats
+[12/47] Generating .rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.aotstats
+[13/47] Generating .rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.aotstats
+[14/47] Generating .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.aotstats
+[15/47] Generating .rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.aotstats
+[16/47] Generating .rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp, .rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp.aotstats
+[17/47] Generating .rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp, .rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp.aotstats
+[18/47] Generating .rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp.aotstats
+[19/47] Generating .rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp, .rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp.aotstats
+[20/47] Generating .rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp.aotstats
+[21/47] Generating .rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp.aotstats
+[22/47] Generating .rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp, .rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp.aotstats
+[23/47] Generating .rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp.aotstats
+[24/47] Building CXX object CMakeFiles/appScrollBench.dir/appscrollbench_qmltyperegistrations.cpp.obj
+[25/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.obj
+[26/47] Building CXX object CMakeFiles/appScrollBench.dir/src/DiagnosticsMonitor.cpp.obj
+[27/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp.obj
+[28/47] Building CXX object CMakeFiles/appScrollBench.dir/src/main_scrollbench.cpp.obj
+[29/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp.obj
+[30/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.obj
+[31/47] Building CXX object CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/AlbumModel.cpp.obj
+D:/Dev/antigravity/src/AlbumModel.cpp: In member function 'void AlbumModel::scanAlbums(const QString&)':
+D:/Dev/antigravity/src/AlbumModel.cpp:259:5: warning: ignoring return value of 'auto QtConcurrent::run(Function&&, Args&& ...) [with Function = AlbumModel::scanAlbums(const QString&)::<lambda()>; Args = {}]', declared with attribute 'nodiscard': 'Use QThreadPool::start(Callable&&) if you don't need the returned QFuture' [-Wunused-result]
+  259 |   });
+      |     ^
+In file included from D:/Qt/6.9.3/mingw_64/include/QtConcurrent/QtConcurrent:14,
+                 from D:/Dev/antigravity/src/AlbumModel.cpp:11:
+D:/Qt/6.9.3/mingw_64/include/QtConcurrent/qtconcurrentrun.h:63:6: note: declared here
+   63 | auto run(Function &&f, Args &&...args)
+      |      ^~~
+[32/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.obj
+[33/47] Building CXX object CMakeFiles/appScrollBench.dir/appScrollBench_autogen/mocs_compilation.cpp.obj
+[34/47] Building CXX object CMakeFiles/appScrollBench.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[35/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.obj
+[36/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp.obj
+[37/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp.obj
+[38/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp.obj
+[39/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp.obj
+[40/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp.obj
+[41/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.qt/rcc/qrc_appScrollBench_raw_qml_0.cpp.obj
+[42/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp.obj
+[43/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp.obj
+[44/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp.obj
+[45/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp.obj
+[46/47] Building CXX object CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp.obj
+[47/47] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+FAILED: D:/Dev/antigravity/test_scrollbench/deploy/appScrollBench.exe 
+C:\WINDOWS\system32\cmd.exe /C "cd . && D:\Qt\Tools\mingw1310_64\bin\c++.exe -O3 -DNDEBUG  CMakeFiles/appScrollBench.dir/appScrollBench_autogen/mocs_compilation.cpp.obj CMakeFiles/appScrollBench.dir/src/main_scrollbench.cpp.obj CMakeFiles/appScrollBench.dir/src/ScrollBenchImageModel.cpp.obj CMakeFiles/appScrollBench.dir/src/FileTypeRouter.cpp.obj CMakeFiles/appScrollBench.dir/src/FrameBudgetScheduler.cpp.obj CMakeFiles/appScrollBench.dir/src/TelemetryMonitor.cpp.obj CMakeFiles/appScrollBench.dir/src/FastImageItem.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/AsyncImageProvider.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/TaskScheduler.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/VideoThumbnailer.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/DesktopHelper.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/SystemMonitor.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/LogManager.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/SettingsHelper.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/GroupedProxyModel.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/AlbumModel.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/ImageProcessor.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/HardwareAccelerationManager.cpp.obj CMakeFiles/appScrollBench.dir/D_/Dev/antigravity/src/FastVolumeScanner.cpp.obj CMakeFiles/appScrollBench.dir/src/DiagnosticsMonitor.cpp.obj CMakeFiles/appScrollBench.dir/appscrollbench_qmltyperegistrations.cpp.obj CMakeFiles/appScrollBench.dir/build/.qt/rcc/qrc_qmake_ScrollBench.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qmlcache_loader.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp.obj CMakeFiles/appScrollBench.dir/build/.qt/rcc/qrc_appScrollBench_raw_qml_0.cpp.obj -o D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe -Wl,--out-implib,libappScrollBench.dll.a -Wl,--major-image-version,0,--minor-image-version,0  D:/Qt/6.9.3/mingw_64/lib/libQt6Concurrent.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Multimedia.a  D:/Qt/6.9.3/mingw_64/lib/libQt6QuickControls2.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Widgets.a  -lpsapi  -ldxgi  -ld3d11  -lpdh  libraw_build/liblibraw_static.a  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/avcodec.lib  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/avformat.lib  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/swscale.lib  D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/lib/avutil.lib  D:/Qt/6.9.3/mingw_64/lib/libQt6Quick.a  D:/Qt/6.9.3/mingw_64/lib/libQt6QmlMeta.a  D:/Qt/6.9.3/mingw_64/lib/libQt6QmlWorkerScript.a  D:/Qt/6.9.3/mingw_64/lib/libQt6OpenGL.a  -luser32  D:/Qt/6.9.3/mingw_64/lib/libQt6QmlModels.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Qml.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Network.a  -lshell32  D:/Qt/6.9.3/mingw_64/lib/libQt6Gui.a  D:/Qt/6.9.3/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -ldxguid  -ld3d12  -ldxgi  -ld3d11  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Dev\antigravity\test_scrollbench\build && D:\Qt\Tools\CMake_64\bin\cmake.exe -E copy_if_different D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avcodec-62.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avdevice-62.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avfilter-11.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avformat-62.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/avutil-60.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/swresample-6.dll D:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/bin/swscale-9.dll D:/Dev/antigravity/test_scrollbench/deploy""
+D:/Qt/Tools/mingw1310_64/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot open output file D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.

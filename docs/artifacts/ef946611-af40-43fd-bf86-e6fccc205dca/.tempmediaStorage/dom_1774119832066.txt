@@ -1,0 +1,216 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Skip to content
+Navigation Menu
+[0] (47,51)<a aria-label='Homepage' class='tmp-mr-lg-3 color-fg-inherit flex-order-2 js-prevent-focus-on-mobile-nav' href='/' />
+[1] (126,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Platform />
+[2] (224,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Solutions />
+[3] (326,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Resources />
+[4] (442,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Open Source />
+[5] (557,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Enterprise />
+[6] (641,51)<a class='NavLink-module__link__EG3d4 MarketingNavigation-module__navLink__hUomM' href='https://github.com/pricing' />
+	[7] (641,51)<span >Pricing />
+[8] (749,51)<button aria-label='Search or jump to…' class='header-search-button placeholder input-button form-control d-flex flex-1 flex-self-stretch flex-items-center no-wrap width-full py-0 pl-2 pr-0 text-left border-0 box-shadow-none' placeholder='Search or jump to...' />
+	[9] (749,51)<div  />
+[10] (809,51)<a class='HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1' href='/login?return_to=https%3A%2F%2Fgithub.com%2FLightDestory%2FqBittorrent-Search-Plugins'>Sign in />
+[11] (890,51)<a class='HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1' href='/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=LightDestory%2FqBittorrent-Search-Plugins'>Sign up />
+[12] (953,51)<button class='Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border' id='icon-button-e4dbf600-337c-40c7-94b5-25e9606ad951' />
+[13] (111,145)<a class='url fn' href='/LightDestory'>LightDestory />
+/
+[14] (300,145)<a href='/LightDestory/qBittorrent-Search-Plugins'>qBittorrent-Search-Plugins />
+Public
+[15] (571,144)<button aria-label='Sponsor LightDestory/qBittorrent-Search-Plugins' class='Button--secondary Button--small Button' id='dialog-show-funding-links-modal-LightDestory-qBittorrent-Search-Plugins' />
+	[16] (571,144)<span  />
+		[17] (571,144)<span  />
+			[18] (583,143)<span >Sponsor />
+[19] (680,143)<a aria-label='You must be signed in to change notification settings' class='btn-sm btn' href='/login?return_to=%2FLightDestory%2FqBittorrent-Search-Plugins' id='repository-details-watch-button'>Notifications />
+[20] (798,143)<a class='btn-sm btn' href='/login?return_to=%2FLightDestory%2FqBittorrent-Search-Plugins' id='fork-button'>Fork />
+	[21] (824,143)<span >21 />
+[22] (913,143)<a aria-label='You must be signed in to star a repository' class='tooltipped tooltipped-sw btn-sm btn' href='/login?return_to=%2FLightDestory%2FqBittorrent-Search-Plugins' />
+	[23] (907,143)<span >Star />
+	[24] (940,143)<span >259 />
+[25] (68,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item selected' href='/LightDestory/qBittorrent-Search-Plugins' id='code-tab' />
+	[26] (79,223)<span >Code />
+[27] (164,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/issues' id='issues-tab' />
+	[28] (162,223)<span >Issues />
+	[29] (198,223)<span >1 />
+[30] (283,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/pulls' id='pull-requests-tab' />
+	[31] (295,223)<span >Pull requests />
+[32] (394,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/actions' id='actions-tab' />
+	[33] (406,223)<span >Actions />
+[34] (490,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/projects' id='projects-tab' />
+	[35] (501,223)<span >Projects />
+[36] (587,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/security' id='security-tab' />
+	[37] (599,223)<span >Security />
+[38] (684,223)<a class='UnderlineNav-item no-wrap js-responsive-underlinenav-item js-selected-navigation-item' href='/LightDestory/qBittorrent-Search-Plugins/pulse' id='insights-tab' />
+	[39] (695,223)<span >Insights />
+[40] (32,301)<button class='prc-Button-ButtonBase-9n-Xk position-relative ExpandFileTreeButton-module__expandButton__hDOcv fgColor-muted prc-Button-IconButton-fyge7' />
+Files
+[41] (138,369)<button aria-label='master branch' class='prc-Button-ButtonBase-9n-Xk react-repos-tree-pane-ref-selector width-full ref-selector-class RefSelectorAnchoredOverlay-module__RefSelectorOverlayBtn__a3WK3' id='ref-picker-repos-header-ref-selector' />
+	[42] (138,369)<span  />
+		[43] (126,369)<span  />
+			[44] (126,369)<div  />
+				[45] (36,369)<div  />
+				[46] (71,369)<div  />
+					[47] (71,368)<span >master />
+[48] (284,369)<button class='prc-Button-ButtonBase-9n-Xk SearchButton-module__IconButton__SBlqu prc-Button-IconButton-fyge7' />
+[49] (158,425)<span  />
+	[50] (32,425)<span  />
+	[51] (166,425)<input aria-label='Go to file' class='prc-components-Input-IwWrt' placeholder='Go to file' role='combobox' />
+[52] (150,743)<div  />
+	[53] (150,487)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='.github-item' role='treeitem' />
+		[54] (150,487)<div  />
+			[55] (24,487)<div  />
+			[56] (158,487)<div  />
+				[57] (47,487)<div  />
+					[58] (47,487)<div  />
+				[59] (170,487)<span  />
+					[60] (85,487)<span >.github />
+	[61] (150,692)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src-item' role='treeitem' />
+		[62] (150,533)<div  />
+			[63] (24,533)<div  />
+			[64] (158,533)<div  />
+				[65] (47,533)<div  />
+					[66] (47,533)<div  />
+				[67] (170,533)<span  />
+					[68] (72,532)<span >src />
+		[69] (150,578)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/engines-item' role='treeitem' />
+			[70] (150,578)<div  />
+				[71] (20,578)<div  />
+					[72] (20,578)<div  />
+						[73] (20,578)<div  />
+				[74] (32,578)<div  />
+				[75] (162,578)<div  />
+					[76] (55,578)<div  />
+						[77] (55,578)<div  />
+					[78] (174,578)<span  />
+						[79] (95,577)<span >engines />
+		[80] (150,624)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/template-item' role='treeitem' />
+			[81] (150,624)<div  />
+				[82] (20,624)<div  />
+					[83] (20,624)<div  />
+						[84] (20,624)<div  />
+				[85] (32,624)<div  />
+				[86] (162,624)<div  />
+					[87] (55,623)<div  />
+						[88] (55,623)<div  />
+					[89] (174,624)<span  />
+						[90] (98,623)<span >template />
+		[91] (150,669)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/helpers.py-item' role='treeitem' />
+			[92] (150,669)<div  />
+				[93] (20,669)<div  />
+					[94] (20,669)<div  />
+						[95] (20,669)<div  />
+				[96] (162,669)<div  />
+					[97] (55,669)<div  />
+					[98] (174,669)<span  />
+						[99] (102,668)<span >helpers.py />
+		[100] (150,714)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/nova2.py-item' role='treeitem' />
+			[101] (150,714)<div  />
+				[102] (20,714)<div  />
+					[103] (20,714)<div  />
+						[104] (20,714)<div  />
+				[105] (162,714)<div  />
+					[106] (55,714)<div  />
+					[107] (174,714)<span  />
+						[108] (98,714)<span >nova2.py />
+		[109] (150,760)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/nova2dl.py-item' role='treeitem' />
+			[110] (150,760)<div  />
+				[111] (20,760)<div  />
+					[112] (20,760)<div  />
+						[113] (20,760)<div  />
+				[114] (162,760)<div  />
+					[115] (55,759)<div  />
+					[116] (174,760)<span  />
+						[117] (104,759)<span >nova2dl.py />
+		[118] (150,805)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/novaprinter.py-item' role='treeitem' />
+			[119] (150,805)<div  />
+				[120] (20,805)<div  />
+					[121] (20,805)<div  />
+						[122] (20,805)<div  />
+				[123] (162,805)<div  />
+					[124] (55,805)<div  />
+					[125] (174,805)<span  />
+						[126] (115,804)<span >novaprinter.py />
+		[127] (150,850)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='src/socks.py-item' role='treeitem' />
+			[128] (150,850)<div  />
+				[129] (20,850)<div  />
+					[130] (20,850)<div  />
+						[131] (20,850)<div  />
+				[132] (162,850)<div  />
+					[133] (55,850)<div  />
+					[134] (174,850)<span  />
+						[135] (96,850)<span >socks.py />
+	[136] (150,896)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='.gitignore-item' role='treeitem' />
+		[137] (150,896)<div  />
+			[138] (158,896)<div  />
+				[139] (47,895)<div  />
+				[140] (170,896)<span  />
+					[141] (92,895)<span >.gitignore />
+	[142] (150,941)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='LICENSE-item' role='treeitem' />
+		[143] (150,941)<div  />
+			[144] (158,941)<div  />
+				[145] (47,941)<div  />
+				[146] (170,941)<span  />
+					[147] (88,940)<span >LICENSE />
+	[148] (150,986)<li class='PRIVATE_TreeView-item prc-TreeView-TreeViewItem-Ter5f' id='README.md-item' role='treeitem' />
+		[149] (150,986)<div  />
+			[150] (158,986)<div  />
+				[151] (47,986)<div  />
+				[152] (170,986)<span  />
+					[153] (101,986)<span >README.md />
+[154] (316,756)<div aria-label='Draggable pane splitter' class='prc-PageLayout-DraggableHandle-9s6B4' role='slider' />
+Breadcrumbs
+[155] (428,301)<a class='Breadcrumb-module__repoLink__O2Nbs prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/tree/master'>qBittorrent-Search-Plugins />
+/
+src
+/
+[156] (608,301)<button class='prc-Button-ButtonBase-9n-Xk ml-2 prc-Button-IconButton-fyge7' />
+Directory actions
+More options
+[157] (969,301)<button class='prc-Button-ButtonBase-9n-Xk CodeViewHeader-module__IconButton__PYSHU prc-Button-IconButton-fyge7' id='_r_1j_' title='More options' />
+Latest commit
+[158] (359,379)<a class='Link__StyledLink-sc-1syctfj-0 prc-Link-Link-9ZwDx' href='/LightDestory' />
+	[159] (356,380)<img  />
+[160] (414,379)<a aria-label='commits by LightDestory' class='Link__StyledLink-sc-1syctfj-0 iIGVMW AuthorAvatar-module__authorHoverableLink__MHTT8 prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/commits?author=LightDestory'>LightDestory />
+[161] (602,378)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893'>Merge remote-tracking branch 'origin/master' />
+[162] (806,379)<a aria-label='Commit 31cccd9' class='Link--secondary prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893'>31cccd9 />
+·
+History
+[163] (938,379)<a class='prc-Button-ButtonBase-9n-Xk d-none d-lg-flex LinkButton-module__linkButton__nFnov flex-items-center fgColor-default' href='/LightDestory/qBittorrent-Search-Plugins/commits/master/src' />
+	[164] (938,379)<span  />
+		[165] (948,379)<span  />
+			[166] (948,378)<span >History />
+Folders and files
+Name
+Last commit message
+Last commit date
+[167] (658,519)<tr  />
+	parent directory
+	[168] (658,519)<a aria-label='Parent directory' class='DirectoryRow-module__PrimerLink__COEaW prc-Link-Link-9ZwDx' href='/LightDestory/qBittorrent-Search-Plugins/tree/master' />
+		[169] (658,519)<div >.. />
+[170] (658,576)<tr  />
+	[171] (398,576)<a aria-label='engines, (Directory)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/tree/master/src/engines' title='engines'>engines />
+	[172] (749,576)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/31cccd9d34367d874597cfbf7b3065a047449893' title='Merge remote-tracking branch 'origin/master''>Merge remote-tracking branch 'origin/master' />
+[173] (658,633)<tr  />
+	[174] (402,633)<a aria-label='template, (Directory)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/tree/master/src/template' title='template'>template />
+	[175] (678,633)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/9f7d6a9a56b95dcb8dab5d45d560d62d38d635c2' title='feat: Add ThePirateBay'>feat: Add ThePirateBay />
+[176] (658,691)<tr  />
+	[177] (406,691)<a aria-label='helpers.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/helpers.py' title='helpers.py'>helpers.py />
+	[178] (687,691)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/07a11f6cfd9c310fb8db7841492a6833a81da1a1' title='chore: update qbit scripts'>chore: update qbit scripts />
+[179] (658,748)<tr  />
+	[180] (402,748)<a aria-label='nova2.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/nova2.py' title='nova2.py'>nova2.py />
+	[181] (687,748)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/07a11f6cfd9c310fb8db7841492a6833a81da1a1' title='chore: update qbit scripts'>chore: update qbit scripts />
+[182] (658,806)<tr  />
+	[183] (408,805)<a aria-label='nova2dl.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/nova2dl.py' title='nova2dl.py'>nova2dl.py />
+	[184] (687,805)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/07a11f6cfd9c310fb8db7841492a6833a81da1a1' title='chore: update qbit scripts'>chore: update qbit scripts />
+[185] (658,863)<tr  />
+	[186] (419,863)<a aria-label='novaprinter.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/novaprinter.py' title='novaprinter.py'>novaprinter.py />
+	[187] (687,863)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/07a11f6cfd9c310fb8db7841492a6833a81da1a1' title='chore: update qbit scripts'>chore: update qbit scripts />
+[188] (658,921)<tr  />
+	[189] (400,920)<a aria-label='socks.py, (File)' class='Link--primary' href='/LightDestory/qBittorrent-Search-Plugins/blob/master/src/socks.py' title='socks.py'>socks.py />
+	[190] (687,920)<a class='Link--secondary' href='/LightDestory/qBittorrent-Search-Plugins/commit/07a11f6cfd9c310fb8db7841492a6833a81da1a1' title='chore: update qbit scripts'>chore: update qbit scripts />
+
+</current_dom>

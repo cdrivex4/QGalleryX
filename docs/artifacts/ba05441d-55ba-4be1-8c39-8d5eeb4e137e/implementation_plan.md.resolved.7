@@ -1,0 +1,14 @@
+# Performance Analysis & Optimization Plan
+
+## Goal
+Identify bottlenecks in image loading and rendering to maximize GPU usage and minimize CPU blocking.
+
+## Metrics System
+We will implement a structured logging system to measure:
+1.  **Decode Time**: Time taken by `QImageReader` to read and scale the image (CPU).
+2.  **Texture Upload/Ready Time**: Time from request start to `Image.Ready` status in QML.
+3.  **FPS**: Real-time frame rate during scrolling.
+
+### Implementation Details
+-   **C++ ([AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#28-44))**:
+-   Capture logs and analyze the ratio of Decode Time vs Total Load Time.

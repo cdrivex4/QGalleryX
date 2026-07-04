@@ -1,0 +1,52 @@
+# Interactive Scene Auditor & Production Telemetry Plan
+
+This plan addresses the "Lipsync Bottleneck" by providing a detailed timing audit and implementing a high-speed "Skip Lipsync" production path. We will also finalize the **Interactive Scene Auditor** to allow instant, localized dub previews.
+
+## 📊 Stage Duration Audit (86-Minute Film on 1050 Ti)
+
+I have analyzed the historical file timestamps to determine exactly where our time is spent:
+
+| Stage | Process | Duration (86m Film) | % of Total |
+| :--- | :--- | :--- | :--- |
+| **S1** | Vocal Separation (Demucs) | ~8 Minutes | 1% |
+| **S2** | Transcription (Whisper) | ~63 Minutes | 5% |
+| **S3** | Translation (Llama CPU) | ~16 Minutes | 1% |
+| **S4** | TTS Synthesis (XTTS) | ~150 Minutes | 13% |
+| **S6** | **Lipsyncing (MuseTalk)** | **~18-22 Hours** | **80%** |
+
+> [!CAUTION]
+> **The Lipsync Trap**: MuseTalk currently processes at ~2 frames per second on your hardware. For an 86-minute film (129,000 frames), this stage alone takes nearly a full day of GPU compute.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **"Skip Lipsync" Production Path**: Given your feedback on resolution vs. time, I am adding a **"Fast Dub"** mode. This will perform Stages 1-5 and immediately output a dubbed video with original visuals, saving you 20+ hours of render time.
+
+## Proposed Changes
+
+### 1. UI Upgrades (Dashboard Enhancements)
+#### [MODIFY] [main_ui.py](file:///c:/just-dub-it2/app/main_ui.py)
+*   **Production Tab**: Add a checkbox: `[ ] Skip Lipsync (Generate Fast Dub)`.
+*   **Auditor Tab**: Implement the **Instant Auditor** with:
+    - **Timeline Slider**: Select `Start Time` (0 to Film Duration).
+    - **Scene Selector**: Link to Master Workspace `1776007462`.
+    - **Deep Preview Toggle**: Option to include Lipsync just for the selected 30s scene.
+
+### 2. Pipeline Optimization
+#### [MODIFY] [pipeline.py](file:///c:/just-dub-it2/app/pipeline.py)
+*   **Skip Logic**: If `skip_lipsync` is True, the pipeline will jump from `S5 (Audio Mix)` directly to `S7 (Finalize)`.
+*   **Data Inheritance**: If a Preview starts with a `master_ws` selected, it will clone existing `translated_segments.json` and `tts_segments/` that fall within the time window.
+
+## Open Questions
+
+*   **Default Behavior**: Should "Skip Lipsync" be ENABLED by default for new imports to prevent accidental 20-hour hangs?
+*   **Auditor Range**: For the interactive sliders, what is your preferred "Default Scene Duration" (e.g., 30s, 60s)?
+
+## Verification Plan
+
+### Automated Tests
+1.  **Fast Path Test**: Run a "Skip Lipsync" job on a 10-second clip and verify it completes in under 2 minutes.
+2.  **Auditor Inheritance**: Verify that a 30s preview correctly finds and copies the corresponding .wav files from the master directory.
+
+### Manual Verification
+1.  **UI Telemetry**: Confirm the new sliders correctly reflect the video's total duration.

@@ -1,0 +1,6 @@
+- `[/]` Phase 1: Benchmarking & Safety Isolation
+    - `[ ]` Create `app/benchmark_translate.py`
+    - `[ ]` Verify tool runs with real data (`workspace/1111`)
+    - `[ ]` Document CPU baseline performance
+    - `[ ]` Test GPU safety measures (CUDA graphs variable, manual cleanup)
+    - `[ ]` Calculate "OOM Intersection" (Safe vs. Unsafe GPU layer count)

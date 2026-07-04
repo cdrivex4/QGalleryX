@@ -1,0 +1,21 @@
+WARNING: Skipping onnxruntime as it is not installed.
+Found existing installation: onnxruntime-gpu 1.17.1
+Uninstalling onnxruntime-gpu-1.17.1:
+  Successfully uninstalled onnxruntime-gpu-1.17.1
+Collecting onnxruntime-gpu==1.17.1
+  Using cached onnxruntime_gpu-1.17.1-cp312-cp312-win_amd64.whl.metadata (4.4 kB)
+Requirement already satisfied: coloredlogs in .\env\Lib\site-packages (from onnxruntime-gpu==1.17.1) (15.0.1)
+Requirement already satisfied: flatbuffers in .\env\Lib\site-packages (from onnxruntime-gpu==1.17.1) (25.12.19)
+Requirement already satisfied: numpy>=1.26.4 in .\env\Lib\site-packages (from onnxruntime-gpu==1.17.1) (1.26.4)
+Requirement already satisfied: packaging in .\env\Lib\site-packages (from onnxruntime-gpu==1.17.1) (26.2)
+Requirement already satisfied: protobuf in .\env\Lib\site-packages (from onnxruntime-gpu==1.17.1) (7.34.1)
+Requirement already satisfied: sympy in .\env\Lib\site-packages (from onnxruntime-gpu==1.17.1) (1.14.0)
+Requirement already satisfied: humanfriendly>=9.1 in .\env\Lib\site-packages (from coloredlogs->onnxruntime-gpu==1.17.1) (10.0)
+Requirement already satisfied: pyreadline3 in .\env\Lib\site-packages (from humanfriendly>=9.1->coloredlogs->onnxruntime-gpu==1.17.1) (3.5.4)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in .\env\Lib\site-packages (from sympy->onnxruntime-gpu==1.17.1) (1.3.0)
+Using cached onnxruntime_gpu-1.17.1-cp312-cp312-win_amd64.whl (148.6 MB)
+Installing collected packages: onnxruntime-gpu
+Successfully installed onnxruntime-gpu-1.17.1
+
+[notice] A new release of pip is available: 26.0.1 -> 26.1.2
+[notice] To update, run: C:\just-dub-it2\env\Scripts\python.exe -m pip install --upgrade pip

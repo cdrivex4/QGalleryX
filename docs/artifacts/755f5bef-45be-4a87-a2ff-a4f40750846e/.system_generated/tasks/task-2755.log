@@ -1,0 +1,4 @@
+[main 64ddaca] Fix duplicated id in Semantic QML view
+ 1 file changed, 5 insertions(+), 38 deletions(-)
+To https://github.com/cdrivex4/antigravity.git
+   0ed5d37..64ddaca  main -> main

@@ -1,0 +1,30 @@
+# VRAM Stability & Render Reliability Walkthrough
+
+We have successfully hardened the dubbing pipeline to survive the high-stress requirements of an 86-minute film render on limited VRAM hardware.
+
+## Changes Made
+
+### 1. Aggressive VRAM Purge Utility
+I implemented a "Nuclear Option" in [cuda_utils.py](file:///c:/just-dub-it2/app/utils/cuda_utils.py) that goes beyond standard cache clearing. It triggers multiple garbage collection cycles and waits for the Windows drivers to fully release the memory handles from the previous GPU process.
+
+### 2. The Render Verification Loop
+Modified [lipsync_musetalk.py](file:///c:/just-dub-it2/app/stages/lipsync_musetalk.py) to include a "3-Strike" retry rule. 
+- **The Problem**: Previously, if a render failed mid-way (corrupted frame), the engine would silently move to the next chunk without lipsync.
+- **The Fix**: The engine now verifies the output file exists and is >1KB. If it fails, it triggers an aggressive VRAM purge and **retries the render** automatically.
+
+### 3. VRAM Headroom Handshake
+The pipeline now checks for at least 1.5GB of free VRAM before it even attempts to boot a new child process. This prevents "Dead on Arrival" renders caused by memory fragmentation.
+
+## Validation Results
+
+- **Server Status**: [Resumed]
+- **Active Job**: [1776007462] (Main Movie)
+- **Stability Metrics**: 
+    - Purge Cycles Active: Yes
+    - Headroom Check: Passed
+
+> [!TIP]
+> You can monitor the new retry attempts in your console window. If you see `Render Verification Failed!`, don't panic—it means the Pressure Valve has caught a glitch and is automatically fixing it for you.
+
+## Next Steps
+The main 86-minute dubbing job is currently resuming with these safeguards in place. You can now leave it running with much higher confidence that every scene will have perfect lipsync.

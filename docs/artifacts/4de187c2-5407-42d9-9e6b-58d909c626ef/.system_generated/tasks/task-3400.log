@@ -1,0 +1,15 @@
+WARNING: TCP connect to (127.0.0.1 : 11434) failed
+WARNING: TCP connect to (::1 : 11434) failed
+
+
+ComputerName           : localhost
+RemoteAddress          : 127.0.0.1
+RemotePort             : 11434
+InterfaceAlias         : Loopback Pseudo-Interface 1
+SourceAddress          : 127.0.0.1
+PingSucceeded          : True
+PingReplyDetails (RTT) : 0 ms
+TcpTestSucceeded       : False
+
+
+

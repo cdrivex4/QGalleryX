@@ -1,0 +1,21 @@
+
+                              clip: true
+  
+                              // Single Image
+>                             Image {
+                                  anchors.fill: parent
+                                  visible: coverPath && coverPath.length === 1
+                                  source: (visible && coverPath.length > 0) ? "image://async/" + coverPath[0] : ""
+                                  sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                                  asynchronous: true
+                                  
+                                  Repeater {
+                                      model: (coverPath && coverPath.length >= 2) ? coverPath : 0
+>                                     Image {
+                                          width: coverContainer.width / 2
+                                          height: coverContainer.height / 2
+                                          source: "image://async/" + modelData
+                                          sourceSize: Qt.size(settings.thumbnailSize, settings.thumbnailSize)
+                                          asynchronous: true
+
+

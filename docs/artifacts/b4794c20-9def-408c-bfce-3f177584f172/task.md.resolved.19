@@ -1,0 +1,17 @@
+# Project Structure and Sync Investigation
+
+- [ ] Investigate current directory structure <!-- id: 0 -->
+    - [x] List root directory contents <!-- id: 1 -->
+    - [ ] List `test_scrollbench` contents <!-- id: 2 -->
+    - [ ] Analyze build files (CMake, QMake, etc.) <!-- id: 3 -->
+- [ ] Check for missing Main App 2.1 files <!-- id: 4 -->
+- [/] Propose and implement structural fixes <!-- id: 5 -->
+    - [/] Ensure distinct build targets for Main App and ScrollBench <!-- id: 6 -->
+    - [x] Verify build configuration <!-- id: 7 -->
+- [ ] Commit and Push changes so they are available on other computers <!-- id: 8 -->
+- [x] Run and Review ScrollBench <!-- id: 9 -->
+- [x] Fix and Push ScrollBench QML issues <!-- id: 10 -->
+- [x] Ensure FFmpeg binaries are tracked <!-- id: 11 -->
+    - [x] Exclude large [avcodec-62.dll](file:///d:/Dev/antigravity/test_scrollbench/avcodec-62.dll) and push rest <!-- id: 12 -->
+    - [x] Add dependency check to [build.ps1](file:///d:/Dev/antigravity/build.ps1) for missing DLLs <!-- id: 13 -->
+    - [x] Use Git LFS to sync [avcodec-62.dll](file:///d:/Dev/antigravity/test_scrollbench/avcodec-62.dll) <!-- id: 14 -->

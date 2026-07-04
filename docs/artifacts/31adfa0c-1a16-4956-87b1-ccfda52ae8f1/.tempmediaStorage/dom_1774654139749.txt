@@ -1,0 +1,212 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (945,101)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (977,101)<a aria-label='Google Account: Will Turner  
+(willuorwontu464@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/&ec=GBRAmgU' role='button' />
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+[2] (672,28)<a href='https://x.com/NotebookLM'>X />
+or
+[3] (703,28)<a href='https://discord.com/channels/1124402182171672732/1294057633334165596'>Discord />
+for updates.
+[4] (25,101)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[5] (25,101)<labs-tailwind-logo  />
+		[6] (25,101)<img  />
+[7] (161,101)<input class='title-input mat-title-large ng-valid ng-dirty ng-touched' />
+[8] (730,101)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[9] (823,101)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed extendable-button-extended'>share />
+	share
+	Share
+[10] (892,101)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed extendable-button-extended'>settings />
+	settings
+	Settings
+[11] (40,179)<span >Sources />
+[12] (374,179)<button class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[13] (374,178)<mat-icon class='mat-icon notranslate material-symbols-outlined google-symbols mat-icon-no-color' role='img'>collapse_content />
+01a_primary_legislation_map.md
+button_magic
+Source guide
+[14] (352,336)<button aria-label='Close source guide' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger open-source-guide-button mat-primary' />
+	[15] (352,336)<mat-icon class='mat-icon notranslate icon google-symbols mat-icon-no-color' role='img'>arrow_drop_up />
+[16] (198,544)<div class='source-guide-rows ng-star-inserted' scrollable='true' />
+	This document serves as a comprehensive
+	inventory of the legal framework
+	governing financial and debt instruments within the Republic of Seychelles, specifically focusing on how current laws intersect with
+	sustainable finance
+	. The text categorizes various statutes, such as the Public Debt Management Act and the Securities Act, to outline the
+	regulatory authority
+	held by entities like the Ministry of Finance, the Central Bank, and the Financial Services Authority. By mapping these existing mandates, the source identifies how
+	sovereign green and blue bonds
+	must fit into established systems for government borrowing and fund accounting. Ultimately, the map highlights critical
+	legislative gaps
+	, noting the absence of official definitions for sustainable expenditures and the lack of formal requirements for the external verification of thematic bonds.
+	Public Debt Management
+	Public Finance Management
+	Securities Capital Markets
+	Sustainable Finance Instruments
+	Legislative Gap Analysis
+[17] (201,863)<div class='scroll-area ng-star-inserted' scrollable='true' />
+	Seychelles Primary Legislation Map — Financial & Debt Instruments
+	Purpose
+	Inventory of all primary legislation, subsidiary instruments (SIs), and regulations relevant to debt issuance, securities markets, and sustainable finance in the Republic of Seychelles.
+[18] (391,557)<div  />
+Chat
+[19] (736,179)<button aria-label='Configure notebook' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger configure-settings-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[20] (736,178)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>tune />
+[21] (762,179)<button aria-label='Chat options' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[22] (762,178)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>more_vert />
+[23] (588,537)<div class='chat-panel-content' scrollable='true' />
+	The immediate strategy involves an alternative arrangement where
+	interested commercial banks operate a buy-back window
+	3
+	.
+	Market-Maker Model
+	: Banks will act as market-makers on a risk-taking basis, providing a
+	two-way quote
+	for the exchange of government securities
+	5
+	6
+	.
+	Pilot Program
+	: The Government, in collaboration with the Central Bank of Seychelles (CBS), plans to launch a
+	6-month pilot retail investor-oriented purchase window
+	[24] (615,270)<button class='xap-inline-dialog citation-marker ng-star-inserted' />
+		[25] (615,270)<span >7 />
+	[26] (632,270)<button class='xap-inline-dialog citation-marker ng-star-inserted' />
+		[27] (632,270)<span >8 />
+	.
+	Full Implementation
+	: This pilot serves as a prelude to a
+	full-scale buyback facility
+	for trading securities through commercial banks, targeted for completion by the
+	end of 2025
+	[28] (675,382)<button class='xap-inline-dialog citation-marker ng-star-inserted' />
+		[29] (675,382)<span >9 />
+	[30] (692,382)<button class='xap-inline-dialog citation-marker ng-star-inserted' />
+		[31] (692,382)<span >10 />
+	.
+	Operational Requirements
+	To support this new arrangement, several frameworks must be established:
+	Code of Conduct
+	: The Ministry of Finance (MoFNPT) and CBS will draft obligations regarding quoting, reporting, and investor protection standards
+	[32] (533,628)<button class='xap-inline-dialog citation-marker ng-star-inserted' />
+		[33] (533,628)<span >11 />
+	.
+	Oversight and Supervision
+	: Procedures will be created to evaluate the conduct of participating banks and take disciplinary action if necessary
+	[34] (524,739)<button class='xap-inline-dialog citation-marker ng-star-inserted' />
+		[35] (524,739)<span >6 />
+	.
+	Securities Settlement
+	: The CBS, as the operator of the securities registry, will manage the settlement of securities exchanged through the buy-back window
+	12
+	.
+	Trade Transparency
+	: Commercial banks must publish
+	daily quotes
+	and report them to the CBS and MoFNPT, while aggregated information will be published on official websites
+	4
+	12
+	.
+[36] (588,793)<button aria-label='Scrolls the chat panel to the bottom' class='mdc-fab mat-mdc-fab-base mat-mdc-fab mat-mdc-button-base mat-mdc-tooltip-trigger jump-to-bottom-button mat-primary' />
+	[37] (588,795)<mat-icon class='mat-icon notranslate jump-to-bottom-button-icon google-symbols mat-icon-no-color' role='img'>keyboard_arrow_down />
+[38] (543,892)<textarea aria-label='Query box' class='cdk-textarea-autosize mat-mdc-autocomplete-trigger query-box-input ng-untouched ng-pristine ng-invalid' placeholder='Start typing...' />
+23 sources
+arrow_forward
+[39] (785,557)<div  />
+Studio
+[40] (978,179)<button aria-label='Collapse studio panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-studio-panel-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[41] (978,178)<mat-icon class='mat-icon notranslate material-symbols-outlined mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>dock_to_left />
+[42] (844,275)<div aria-label='Audio Overview' class='mat-mdc-tooltip-trigger blue create-artifact-button-container mat-label-medium' role='button' />
+	[43] (844,275)<span  />
+		[44] (829,275)<span  />
+			[45] (829,258)<span  />
+				[46] (813,258)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>audio_magic_eraser />
+			[47] (829,292)<span >Audio Overview />
+		[48] (873,275)<div  />
+			[49] (873,275)<button aria-label='Customize Audio Overview' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[50] (873,277)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[51] (938,275)<div aria-label='Slide Deck' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium yellow' role='button' />
+	[52] (938,275)<span  />
+		[53] (921,275)<span  />
+			[54] (921,260)<span  />
+				[55] (907,260)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>tablet />
+				[56] (930,260)<div >BETA />
+			[57] (921,292)<span >Slide Deck />
+		[58] (966,275)<div  />
+			[59] (966,275)<button aria-label='Customize Slide Deck' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[60] (966,277)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[61] (844,364)<div aria-label='Video Overview' class='mat-mdc-tooltip-trigger create-artifact-button-container green mat-label-medium' role='button' />
+	[62] (844,364)<span  />
+		[63] (829,364)<span  />
+			[64] (829,347)<span  />
+				[65] (813,347)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>subscriptions />
+			[66] (829,381)<span >Video Overview />
+		[67] (875,364)<div  />
+			[68] (875,367)<mat-icon class='mat-icon notranslate edit-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color ng-star-inserted' role='img'>chevron_forward />
+[69] (938,364)<div aria-label='Mind Map' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium pink' role='button' />
+	[70] (938,364)<span  />
+		[71] (920,364)<span  />
+			[72] (920,347)<span  />
+				[73] (907,347)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>flowchart />
+			[74] (920,381)<span >Mind Map />
+[75] (844,454)<div aria-label='Reports' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium yellow' role='button' />
+	[76] (844,454)<span  />
+		[77] (823,454)<span  />
+			[78] (823,437)<span  />
+				[79] (813,437)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>auto_tab_group />
+			[80] (823,470)<span >Reports />
+		[81] (875,454)<div  />
+			[82] (875,456)<mat-icon class='mat-icon notranslate edit-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color ng-star-inserted' role='img'>chevron_forward />
+[83] (938,454)<div aria-label='Flashcards' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium orange' role='button' />
+	[84] (938,454)<span  />
+		[85] (922,454)<span  />
+			[86] (922,437)<span  />
+				[87] (907,437)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>cards_star />
+			[88] (922,470)<span >Flashcards />
+		[89] (966,454)<div  />
+			[90] (966,454)<button aria-label='Customize Flashcards' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[91] (966,456)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[92] (844,543)<div aria-label='Quiz' class='mat-mdc-tooltip-trigger create-artifact-button-container cyan mat-label-medium' role='button' />
+	[93] (844,543)<span  />
+		[94] (816,543)<span  />
+			[95] (816,526)<span  />
+				[96] (813,526)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>quiz />
+			[97] (816,560)<span >Quiz />
+		[98] (873,543)<div  />
+			[99] (873,543)<button aria-label='Customize Quiz' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[100] (873,545)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[101] (938,543)<div aria-label='Infographic' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium pink' role='button' />
+	[102] (938,543)<span  />
+		[103] (922,543)<span  />
+			[104] (922,528)<span  />
+				[105] (907,528)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>stacked_bar_chart />
+				[106] (932,528)<div >BETA />
+			[107] (922,560)<span >Infographic />
+		[108] (966,543)<div  />
+			[109] (966,543)<button aria-label='Customize Infographic' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[110] (966,545)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[111] (844,632)<div aria-label='Data Table' class='mat-mdc-tooltip-trigger blue create-artifact-button-container mat-label-medium' role='button' />
+	[112] (844,632)<span  />
+		[113] (828,632)<span  />
+			[114] (828,616)<span  />
+				[115] (813,616)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>table_view />
+			[116] (828,649)<span >Data Table />
+		[117] (873,632)<div  />
+			[118] (873,632)<button aria-label='Customize Data Table' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[119] (873,635)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+edit_fix_auto
+Studio output will be saved here.
+After adding sources, click to add Audio Overview, Study Guide, Mind Map, and more!
+[120] (891,918)<button class='mdc-button mat-mdc-button-base add-note-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>sticky_note_2
+Add note />
+	sticky_note_2
+	Add note
+NotebookLM can be inaccurate; please double check its responses.
+Reply ready.
+
+</current_dom>

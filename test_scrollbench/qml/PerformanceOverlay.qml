@@ -227,7 +227,7 @@ Rectangle {
                         Text { text: "Thumb Resolution: " + Math.round(thumbSlider.value) + "px"; color: "#fff"; font.pixelSize: 12 }
                         Slider {
                             id: thumbSlider
-                            Layout.fillWidth: true; from: 16; to: 512; stepSize: 4
+                            Layout.fillWidth: true; from: 16; to: 128; stepSize: 4
                             value: settings.thumbnailSize
                             onPressedChanged: {
                                 if (!pressed) {
@@ -239,11 +239,15 @@ Rectangle {
 
                     ColumnLayout {
                         Layout.fillWidth: true
-                        Text { text: "Grid Zoom: " + settings.gridSize + "px"; color: "#fff"; font.pixelSize: 12 }
+                        Text { text: "Grid Resolution: " + settings.gridResolution + "px"; color: "#fff"; font.pixelSize: 12 }
                         Slider {
                             Layout.fillWidth: true; from: 20; to: 400; stepSize: 4
-                            value: settings.gridSize
-                            onMoved: settings.gridSize = Math.round(value)
+                            value: settings.gridResolution
+                            onPressedChanged: {
+                                if (!pressed) {
+                                    settings.gridResolution = Math.round(value)
+                                }
+                            }
                         }
                     }
 
@@ -253,7 +257,11 @@ Rectangle {
                         Slider {
                             Layout.fillWidth: true; from: 128; to: 4096; stepSize: 128
                             value: settings.cacheSizeMB
-                            onMoved: settings.cacheSizeMB = Math.round(value)
+                            onPressedChanged: {
+                                if (!pressed) {
+                                    settings.cacheSizeMB = Math.round(value)
+                                }
+                            }
                         }
                     }
 
@@ -263,13 +271,15 @@ Rectangle {
                         Slider {
                             Layout.fillWidth: true; from: 1; to: 32; stepSize: 1
                             value: settings.concurrentThreads
-                            onMoved: {
-                                let oldVal = settings.concurrentThreads
-                                let newVal = Math.round(value)
-                                if (oldVal === newVal) return
-                                settings.concurrentThreads = newVal
-                                restartDialog.revertAction = function() { settings.concurrentThreads = oldVal }
-                                restartDialog.open()
+                            onPressedChanged: {
+                                if (!pressed) {
+                                    let oldVal = settings.concurrentThreads
+                                    let newVal = Math.round(value)
+                                    if (oldVal === newVal) return
+                                    settings.concurrentThreads = newVal
+                                    restartDialog.revertAction = function() { settings.concurrentThreads = oldVal }
+                                    restartDialog.open()
+                                }
                             }
                         }
                     }
@@ -311,7 +321,11 @@ Rectangle {
                                 Layout.fillWidth: true; from: 1; to: 100; stepSize: 1
                                 value: frameBudget.frameBudget
                                 visible: frameBudget.enabled
-                                onMoved: frameBudget.frameBudget = Math.round(value)
+                                onPressedChanged: {
+                                    if (!pressed) {
+                                        frameBudget.frameBudget = Math.round(value)
+                                    }
+                                }
                             }
                         }
 
@@ -412,8 +426,10 @@ Rectangle {
                             Slider {
                                 Layout.fillWidth: true; from: 20; to: 400; stepSize: 1
                                 value: root.thresholdYear
-                                onMoved: {
-                                    root.thresholdYear = Math.round(value)
+                                onPressedChanged: {
+                                    if (!pressed) {
+                                        root.thresholdYear = Math.round(value)
+                                    }
                                 }
                             }
                         }
@@ -424,8 +440,10 @@ Rectangle {
                             Slider {
                                 Layout.fillWidth: true; from: 21; to: 400; stepSize: 1
                                 value: root.thresholdMonth
-                                onMoved: {
-                                    root.thresholdMonth = Math.round(value)
+                                onPressedChanged: {
+                                    if (!pressed) {
+                                        root.thresholdMonth = Math.round(value)
+                                    }
                                 }
                             }
                         }
@@ -436,8 +454,10 @@ Rectangle {
                             Slider {
                                 Layout.fillWidth: true; from: 22; to: 400; stepSize: 1
                                 value: root.thresholdWeek
-                                onMoved: {
-                                    root.thresholdWeek = Math.round(value)
+                                onPressedChanged: {
+                                    if (!pressed) {
+                                        root.thresholdWeek = Math.round(value)
+                                    }
                                 }
                             }
                         }

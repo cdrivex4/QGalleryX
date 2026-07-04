@@ -1,0 +1,80 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (105,72)<a class='FgNLaf' href='https://www.google.com/webhp?hl=en&ictx=0&sa=X&ved=0ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQpYkNCAs' id='_tvS-aYSmN5mSseMPzoOm2AE_1' />
+[1] (328,72)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (553,72)<div  />
+	[3] (550,72)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (550,72)<span  />
+	[5] (581,72)<span  />
+[6] (613,72)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (665,72)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (725,72)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (717,72)<div  />
+		[10] (717,72)<span  />
+[11] (828,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (891,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (948,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3D1337x%2Bmirrors%2Blist%2Bworking&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (109,159)<a class='XVMlrc C6AK7c' href='/search?q=1337x+mirrors+list+working&sca_esv=111f151f5b064434&sxsrf=ANbL-n7MW1mBpcoqjy9-p3Su0fWVIJzc2w:1774122166910&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpV6Bbbmx4QVaoKkiRQ2jlwvCHF0Eqz8cUq4JjDCZnrJG3IQ9hSM-GoYfSAqo_zJgCPZ3VeVfm7NEE9RDH7uFUs6NOt91pBwJZ4jdMV0-XZfbJ24QljgLqsm4s_TPiwNFuSbhMRU9SVtKpTajD_4j43Vkxpfnl03xq0AA-M8wpOB7uz5JbFkD3v-QOSr2sFsfx6-vfpA&aep=1&ntc=1&sa=X&ved=2ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQ2J8OegQIEhAE' />
+	[15] (109,159)<div  />
+		[16] (109,172)<div  />
+			[17] (109,164)<span >AI Mode />
+[18] (185,159)<a class='C6AK7c' role='link' />
+	All
+[19] (277,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n7MW1mBpcoqjy9-p3Su0fWVIJzc2w:1774122166910&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpV6Bbbmx4QVaoKkiRQ2jlwvCHF0Eqz8cUq4JjDCZnrJG3IQ9hSM-GoYfSAqo_zJgCPZ3VeVfm7NEE9RDH7uFUs6NOt91pBwJZ4jdMV0-XZfbJ24QljgLqsm4s_TPiwNFuSbhMRU9SVtKpTajD_4j43Vkxpfnl03xq0AA-M8wpOB7uz5JbFkD3v-QOSr2sFsfx6-vfpA&q=1337x+mirrors+list+working&sa=X&ved=2ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQs6gLegQIGBAB' />
+	[20] (277,159)<div  />
+		[21] (277,172)<span >Short videos />
+[22] (386,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n7MW1mBpcoqjy9-p3Su0fWVIJzc2w:1774122166910&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpV6Bbbmx4QVaoKkiRQ2jlwvCHF0Eqz8cUq4JjDCZnrJG3IQ9hSM-GoYfSAqo_zJgCPZ3VeVfm7NEE9RDH7uFUs6NOt91pBwJZ4jdMV0-XZfbJ24QljgLqsm4s_TPiwNFuSbhMRU9SVtKpTajD_4j43Vkxpfnl03xq0AA-M8wpOB7uz5JbFkD3v-QOSr2sFsfx6-vfpA&q=1337x+mirrors+list+working&sa=X&ved=2ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQtKgLegQIFxAB' />
+	[23] (386,159)<div  />
+		[24] (386,172)<span >Videos />
+[25] (476,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n7MW1mBpcoqjy9-p3Su0fWVIJzc2w:1774122166910&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpV6Bbbmx4QVaoKkiRQ2jlwvCHF0Eqz8cUq4JjDCZnrJG3IQ9hSM-GoYfSAqo_zJgCPZ3VeVfm7NEE9RDH7uFUs6NOt91pBwJZ4jdMV0-XZfbJ24QljgLqsm4s_TPiwNFuSbhMRU9SVtKpTajD_4j43Vkxpfnl03xq0AA-M8wpOB7uz5JbFkD3v-QOSr2sFsfx6-vfpA&q=1337x+mirrors+list+working&sa=X&ved=2ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQs6gLegQIFhAB' />
+	[26] (476,159)<div  />
+		[27] (476,172)<span >Forums />
+[28] (569,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n7MW1mBpcoqjy9-p3Su0fWVIJzc2w:1774122166910&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpV6Bbbmx4QVaoKkiRQ2jlwvCHF0Eqz8cUq4JjDCZnrJG3IQ9hSM-GoYfSAqo_zJgCPZ3VeVfm7NEE9RDH7uFUs6NOt91pBwJZ4jdMV0-XZfbJ24QljgLqsm4s_TPiwNFuSbhMRU9SVtKpTajD_4j43Vkxpfnl03xq0AA-M8wpOB7uz5JbFkD3v-QOSr2sFsfx6-vfpA&q=1337x+mirrors+list+working&sa=X&ved=2ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQtKgLegQIFRAB' />
+	[29] (569,159)<div  />
+		[30] (569,172)<span >Images />
+[31] (653,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n7MW1mBpcoqjy9-p3Su0fWVIJzc2w:1774122166910&q=1337x+mirrors+list+working&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpV6Bbbmx4QVaoKkiRQ2jlwvCHF0Eqz8cUq4JjDCZnrJG3IQ9hSM-GoYfSAqo_zJgCPZ3VeVfm7NEE9RDH7uFUs6NOt91pBwJZ4jdMV0-XZfbJ24QljgLqsm4s_TPiwNFuSbhMRU9SVtKpTajD_4j43Vkxpfnl03xq0AA-M8wpOB7uz5JbFkD3v-QOSr2sFsfx6-vfpA&sa=X&ved=2ahUKEwiE2a-M4LGTAxUZSWwGHc6BCRsQ0pQJegQIExAB' />
+	[32] (653,159)<div  />
+		[33] (653,172)<span >News />
+[34] (739,159)<div class='mTpL7c' role='button' />
+	[35] (739,159)<div  />
+		[36] (739,172)<div  />
+			[37] (728,164)<span >More />
+			[38] (760,164)<span  />
+[39] (836,159)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (836,159)<div  />
+		[41] (836,172)<div  />
+			[42] (824,164)<span >Tools />
+			[43] (857,164)<span  />
+Search Results
+AI overview
+Thinking
+[44] (314,870)<a class='zReHs' href='https://github.com/wesharebytes/1337x-Proxy-List' />
+	[45] (314,901)<h3 >1337x Proxy Site List 2026 [List Updated] />
+	[46] (284,852)<div  />
+		[47] (284,852)<div  />
+			[48] (93,852)<span  />
+				[49] (93,852)<div  />
+					[50] (93,852)<img  />
+			[51] (309,852)<div  />
+				[52] (309,839)<div  />
+					[53] (309,839)<span >GitHub />
+				[54] (309,866)<div  />
+					[55] (309,866)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com />
+						[56] (371,865)<span class='ylgVCe ob9lvb' role='text'>› wesharebytes › 1337x-Proxy-List />
+[57] (521,864)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[58] (521,864)<span  />
+		[59] (521,866)<span  />
+Here is a list of the
+1337x torrent proxy sites
+. We tested all of these 1337x proxy sites and all registered sites were working at the time of writing.
+Read more
+
+</current_dom>

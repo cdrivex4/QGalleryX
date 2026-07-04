@@ -1,0 +1,109 @@
+- [x] Fix ScrollBench Selection (Broken)
+- [x] Fix Index Mismatch / Wrong Image on Click
+- [x] Fix Viewport Load Priority
+- [x] Increase RAW/Video Concurrency (+1 in Provider)
+- [x] Verify FrameBudgetScheduler (Found default too low, increased)
+- [x] Fix Settings Overlay Toggle (Semantic/Grid)
+- [x] Add DateScrubber to Album View
+- [x] Implement Image Editing in Single Image View (Basic Rotation)
+- [x] Project Cleanup (Move redundant files to `_RecycleBin`)
+
+# Task: ScrollBench Improvements
+- [x] Integrate MFT Scanner into ScrollBench
+    - [x] Update `appScrollBench` CMake target
+    - [x] Update [ScrollBenchImageModel](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h#31-32) to use [FastVolumeScanner](file:///d:/Dev/antigravity/src/FastVolumeScanner.h#17-42)
+- [x] **ScrollBench: Fix Album View** <!-- id: 4 -->
+- [x] Verify ScrollBench fixes
+    - [x] Fix build process and startup crash
+    - [x] Restore and standardize Long Press selection (Grid, Semantic, Album)
+    - [x] Implement Selection Action Bar (Select All, Invert, Share)
+    - [x] Enhance Share Dialog (Edit, Export, Resize options)
+    - [x] Verify stability
+- [/] Port Features to Main App
+    - [ ] Update ScrollBench Settings/Stats overlay styles
+
+# Completed Tasks (TDR Fix)
+- [x] Analyze memory dump/crash symptoms (BBADBEEF/TDR)
+- [x] Reduce [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp#95-99) video concurrency (4 -> 1)
+- [x] Port [FrameBudgetScheduler](file:///d:/Dev/antigravity/src/FrameBudgetScheduler.h#9-55) from ScrollBench to Main App
+- [x] Integrate [FrameBudgetScheduler](file:///d:/Dev/antigravity/src/FrameBudgetScheduler.h#9-55) into [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp#95-99)
+- [x] Fix compilation errors in [main.cpp](file:///d:/Dev/antigravity/src/main.cpp) and [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp#95-99) headers
+- [x] Verify Build (Rebuild after syntax fixes)
+- [x] Update Documentation (Completed)
+
+# Task: Outstanding Work - Feature Completion
+
+## 🔴 Critical: Missing Core Features (Code Review Recommended)
+
+### 1. Selection Feature
+- [ ] **Port selection API from ScrollBench to Main App**
+    - [ ] Add selection methods to `src/ImageModel.h/.cpp`
+        - [ ] [toggleSelection(int index)](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#532-543)
+        - [ ] [selectRange(int start, int end)](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#544-567)
+        - [ ] [selectVisualRect(int colMin, colMax, rowMin, rowMax, columns)](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#568-600)
+        - [ ] [selectAll()](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#601-612), [clearSelection()](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#613-624), [invertSelection()](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#625-636)
+        - [ ] [selectedCount()](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#651-659) property
+    - [ ] Add `isSelected` field to ImageModel's ImageItem struct
+- [ ] **Implement drag-to-select in Grid Views**
+    - [ ] Add DragHandler to [GalleryViewSemantic.qml](file:///d:/Dev/antigravity/resources/qml/GalleryViewSemantic.qml)
+    - [ ] Add DragHandler to [GalleryViewTiles.qml](file:///d:/Dev/antigravity/resources/qml/GalleryViewTiles.qml)
+    - [ ] Visual feedback (selection border/checkbox/highlight)
+    - [ ] Calculate grid cell coordinates from drag positions
+- [ ] **Implement drag-to-select in Album View**
+    - [ ] Add selection to `AlbumsView.qml` when folder is opened
+    - [ ] Reuse grid selection logic from gallery views
+
+### 2. Share & Resize Feature
+- [ ] **Port Share Components from ScrollBench**
+    - [ ] Copy [ShareDialog.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/ShareDialog.qml) to `resources/qml/`
+    - [ ] Copy `ResizeEditor.qml` to `resources/qml/`
+    - [ ] Register in CMakeLists.txt QML module
+- [ ] **Backend Implementation**
+    - [ ] Add `getSelectedPaths()` to ImageModel
+    - [ ] Add `getSelectedTotalSizeBytes()` to ImageModel
+    - [ ] Implement `resizeImages()` backend (currently TODO)
+    - [ ] Add file save/export logic
+- [x] **Selection Interaction Fixes** <!-- id: 4 -->
+    - [x] Diagnose why `Ctrl+Click` and `Shift+Click` are failing despite previous changes.
+    - [x] Prototype absolute reliable input handling (MouseArea vs TapHandler).
+    - [x] Implement `Ctrl+Click` (Toggle) and `Shift+Click` (Range) with visually verifiable tests.
+    - [x] Verify selection state persistence during range selection.
+- [ ] **Data Model & Backend** <!-- id: 2 -->
+    - [x] Fix `openInExplorer` argument passing.
+    - [x] Create `tst_linkage` verification tool.
+- [ ] **UI Integration**
+    - [ ] Add "Share" button to main UI (requires selection feature)
+    [ ] Wire Share button to ShareDialog
+    - [ ] Test single image share from PhotoViewer
+    - [ ] Test batch resize with multiple selections
+
+### 3. Image Editing (Standard Images)
+- [ ] **Enhance Crop Functionality**
+    - [ ] Make crop rectangle draggable/resizable in PhotoViewer
+    - [ ] Update `cropImage()` to accept dynamic QRectF (not fixed 25%)
+    - [ ] Add visual preview of crop result
+    - [ ] Add "Save" vs "Save As" option
+- [ ] **Implement Rotation**
+    - [ ] Add `rotateImage(int index, int degrees)` to ImageModel
+    - [ ] Preserve EXIF orientation metadata
+    - [ ] Add rotate buttons to PhotoViewer toolbar
+- [ ] **Optional: Brightness/Contrast**
+    - [ ] Add sliders to PhotoViewer or ImageEditor
+    - [ ] Implement basic image adjustments in ImageModel
+- [ ] **Constraints**
+    - [ ] Disable editing for RAW files (isRaw === true)
+    - [ ] Disable editing for videos (isVideo === true)
+    - [ ] Show "Cannot edit RAW/Video" message
+
+## 🟡 Medium Priority
+
+### 4. Cleanup & Stability
+- [x] Fixed null reference in `Main.qml`
+- [ ] Remove hardcoded test paths (e.g., "I:/")
+- [ ] Verify all build targets compile clean
+
+### 5. Video Playback Verification
+- [ ] Test hardware acceleration is active
+- [ ] Test H.264, H.265, AV1 codec support
+- [ ] Validate audio sync across formats
+- [ ] Test video rotation metadata handling

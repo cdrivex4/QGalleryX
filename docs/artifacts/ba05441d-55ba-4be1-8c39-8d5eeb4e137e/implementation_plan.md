@@ -1,0 +1,20 @@
+# Performance Analysis & Optimization Plan
+
+## Goal
+Identify bottlenecks in image loading and rendering to maximize GPU usage and minimize CPU blocking.
+
+## AlbumView Creation and Integration
+- [ ] **Albums View**:
+    - [ ] **Create AlbumView.qml**: Grid view displaying folders from `AlbumModel`.
+    - [ ] **Integrate into Main.qml**: Replace placeholder in Tab 1 with `AlbumView`.
+    - [ ] **Navigation**: Clicking an album should open `GalleryView` filtered by that folder.
+
+## Metrics System
+We will implement a structured logging system to measure:
+1.  **Decode Time**: Time taken by `QImageReader` to read and scale the image (CPU).
+2.  **Texture Upload/Ready Time**: Time from request start to `Image.Ready` status in QML.
+3.  **FPS**: Real-time frame rate during scrolling.
+
+### Implementation Details
+-   **C++ (`AsyncImageProvider`)**:
+-   Capture logs and analyze the ratio of Decode Time vs Total Load Time.

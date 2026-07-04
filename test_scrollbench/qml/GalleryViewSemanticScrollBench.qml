@@ -25,7 +25,7 @@ Item {
     }
     property bool groupingAuto: true
     
-    readonly property real gridSize: settings.gridSize
+    readonly property real gridResolution: settings.gridResolution
     // DEBOUNCED loading resolution — propagates to delegates only 400ms
     // after the slider stops, preventing a flood of 500+ simultaneous
     // re-requests that crash the thread pool.
@@ -45,11 +45,11 @@ Item {
     function findChildListView() { return list }
     
     // Auto-link grouping mode to grid size using root thresholds
-    onGridSizeChanged: {
+    onGridResolutionChanged: {
         if (groupingAuto) {
-            if (gridSize < root.thresholdYear) groupingMode = 4 // Year
-            else if (gridSize < root.thresholdMonth) groupingMode = 3 // Month
-            else if (gridSize < root.thresholdWeek) groupingMode = 2 // Week
+            if (gridResolution < root.thresholdYear) groupingMode = 4 // Year
+            else if (gridResolution < root.thresholdMonth) groupingMode = 3 // Month
+            else if (gridResolution < root.thresholdWeek) groupingMode = 2 // Week
             else groupingMode = 1 // Day
         }
     }
@@ -58,7 +58,7 @@ Item {
     GroupedProxyModel {
         id: proxyModel
         sourceModel: semanticRoot.model
-        columns: Math.max(1, Math.floor((semanticRoot.width - 40) / (settings.gridSize + 10)))
+        columns: Math.max(1, Math.floor((semanticRoot.width - 40) / (settings.gridResolution + 10)))
         
         groupRole: {
             if (groupingMode === 1) return 260 // SectionDayRole (UserRole + 4)
@@ -89,7 +89,7 @@ Item {
             semanticRoot.lastSelectedIndex = payload.index
             
         } else if (action === "Zoom") {
-            settings.gridSize = Math.max(30, Math.min(settings.gridSize + payload.delta, 400))
+            settings.gridResolution = Math.max(30, Math.min(settings.gridResolution + payload.delta, 400))
         }
     }
 
@@ -178,7 +178,7 @@ Item {
         delegate: Item {
             id: rowDelegate
             width: list.width
-            height: type === 0 ? 40 : settings.gridSize + 12
+            height: type === 0 ? 40 : settings.gridResolution + 12
             
             // These properties are scrutinized by updateVisibleRange via peering
             readonly property int capturedType: type
@@ -211,8 +211,8 @@ Item {
                 Repeater {
                     model: rowDelegate.capturedType === 1 ? rowDelegate.capturedCount : 0
                     delegate: Item {
-                        width: settings.gridSize
-                        height: settings.gridSize
+                        width: settings.gridResolution
+                        height: settings.gridResolution
                         
                         property int sourceIdx: rowDelegate.capturedStart + index
                         
@@ -320,14 +320,14 @@ Item {
             acceptedModifiers: Qt.ControlModifier
             onWheel: (wheel) => {
                 var delta = wheel.angleDelta.y > 0 ? 20 : -20
-                settings.gridSize = Math.max(30, Math.min(settings.gridSize + delta, 400))
+                settings.gridResolution = Math.max(30, Math.min(settings.gridResolution + delta, 400))
             }
         }
 
         PinchHandler {
             property real baseSize
-            onActiveChanged: if (active) baseSize = settings.gridSize
-            onScaleChanged: if (active) settings.gridSize = Math.max(30, Math.min(baseSize * scale, 400))
+            onActiveChanged: if (active) baseSize = settings.gridResolution
+            onScaleChanged: if (active) settings.gridResolution = Math.max(30, Math.min(baseSize * scale, 400))
         }
 
         // Semantic Drag Selection Logic
@@ -381,7 +381,7 @@ Item {
             if (item.y + item.height < contentY1 || item.y > contentY2) continue
             
             if (item.capturedType === 1) { // Row
-                let cellTotal = settings.gridSize + 10 // size + spacing
+                let cellTotal = settings.gridResolution + 10 // size + spacing
                 let startCol = Math.floor((x1 - 20) / cellTotal)
                 let endCol = Math.floor((x2 - 20) / cellTotal)
                 
@@ -390,7 +390,7 @@ Item {
                 for (let c = startCol; c <= endCol; c++) {
                     if (c >= item.capturedCount) break;
                     let cellX = 20 + c * cellTotal
-                    let cellRight = cellX + settings.gridSize
+                    let cellRight = cellX + settings.gridResolution
                     
                     if (cellRight > x1 && cellX < x2) {
                         let sourceIdx = item.capturedStart + c

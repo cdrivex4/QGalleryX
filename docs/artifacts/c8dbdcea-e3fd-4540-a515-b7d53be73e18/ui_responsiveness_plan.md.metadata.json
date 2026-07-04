@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan to resolve the severe UI lag. The 'nvidia-smi' call was found to take ~4 seconds, blocking the 2-second UI refresh loop. The plan involves introducing a background telemetry thread for VRAM caching and reducing the UI refresh frequency to ensure a smooth, responsive experience.",
+  "updatedAt": "2026-04-12T20:30:11.940313900Z",
+  "requestFeedback": true
+}

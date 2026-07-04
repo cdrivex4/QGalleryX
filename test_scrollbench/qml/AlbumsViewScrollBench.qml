@@ -72,6 +72,7 @@ Item {
                                 source: (visible && coverPath.length > 0) ? "image://async/" + coverPath[0] : ""
                                 sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
                                 asynchronous: true
+                                cache: true
                                 fillMode: Image.PreserveAspectCrop
                             }
 
@@ -89,6 +90,7 @@ Item {
                                         source: "image://async/" + modelData
                                         sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
                                         asynchronous: true
+                                        cache: true
                                         fillMode: Image.PreserveAspectCrop
                                     }
                                 }

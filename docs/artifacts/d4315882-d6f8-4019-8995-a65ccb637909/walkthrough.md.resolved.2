@@ -1,0 +1,29 @@
+# JustDubit Lite: Optimized Offline Dubbing
+
+This project implements a high-performance, **100% offline** video dubbing environment with an optimized footprint for local GPUs.
+
+## 🚀 Accomplishments
+- **Premium UI**: Implemented a glassmorphism drag-and-drop interface with language selection and live status updates.
+- **Offline Translation**: Integrated **OpenAI Whisper (Local)** for automated source language detection and translation into English prompts.
+- **Lite Configuration**: Optimized the model footprint (reduction of ~35GB) by skipping Stage 2 upsampling and using the Gemma 3 4B text encoder.
+
+## 🛠️ Components
+### 1. Web Interface
+- **Vite/React**: Modern interface at `http://localhost:5173/`.
+- **FastAPI**: Backend service at `http://127.0.0.1:8000/` managing job queues and weights.
+
+### 2. Model Pipeline
+- **JustDubit LoRA**: Adapted for lip-sync and motion preservation.
+- **Gemma 3 4B**: Efficient local text encoding.
+- **Whisper Base**: Fast local audio transcription.
+
+## 📸 Progress Status
+- [x] Web Interface Live
+- [x] Backend Server Initialized (Whisper Loaded)
+- [/] Model Weights (~25GB) Downloading
+- [ ] Pipeline Full Integration
+
+![Interface Preview](c:\just-dub-it\screenshots\placeholder.png)
+
+> [!NOTE]
+> All processing happens on the local GPU. No data leaves the machine.

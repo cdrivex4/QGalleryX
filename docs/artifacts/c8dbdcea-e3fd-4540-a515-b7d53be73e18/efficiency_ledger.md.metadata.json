@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_OTHER",
+  "summary": "Efficiency ledger comparing the performance and quality of the 'Polluted' CPU runs vs the 'Clean' GPU runs for the 1-hour movie. Quantifies the impact of robot chatter on synthesis time and hardware acceleration on VRAM throughput.",
+  "updatedAt": "2026-04-13T14:03:07.483518700Z"
+}

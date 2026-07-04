@@ -1,0 +1,28 @@
+# Repair qBittorrent Search Plugins
+
+The goal is to fix the failing search engines in qBittorrent by updating outdated plugins and replacing broken ones with a custom search backend.
+
+## Proposed Changes
+
+### Plugin Backups (Completed)
+All existing [.py](file:///C:/Users/curtis/AppData/Local/qBittorrent/nova3/engines/dodi_repacks.py) and `.ico` files in the `engines` directory (except the working ones) have been renamed to `.old` to prevent them from causing errors and to keep a safe backup. **Note:** This is why you are currently seeing the "Search has failed" popup—the broken engines are disabled, and the new ones aren't in place yet!
+
+### 1337x Custom Backend for Repacks
+The official DODI and FitGirl sites are protected by Cloudflare/Turnstile. We will create two new plugins:
+#### [NEW] dodi_repacks.py
+#### [NEW] fitgirl_repacks.py
+These plugins will use `1337x.to` as the search backend, strictly filtering for official uploads by "DODI" and "FitGirl" to ensure safety and reliable magnet links.
+
+### Community Updates
+We will install the latest working versions of the following plugins from active community repositories:
+#### [NEW] academictorrents.py
+#### [NEW] audiobookbay.py
+#### [NEW] dontorrent.py
+#### [NEW] esmeraldatorrent.py
+#### [NEW] glotorrents.py
+#### [NEW] kickasstorrents.py
+#### [NEW] magnetdl.py
+#### [NEW] yts.py
+
+## Verification Plan
+After writing the new [.py](file:///C:/Users/curtis/AppData/Local/qBittorrent/nova3/engines/dodi_repacks.py) files to the `engines` directory, we will manually test them using your local `python.exe` executable to ensure they scrape results correctly. Once validated, you can test them directly within the qBittorrent UI.

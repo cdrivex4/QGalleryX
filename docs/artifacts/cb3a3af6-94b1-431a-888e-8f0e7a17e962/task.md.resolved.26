@@ -1,0 +1,55 @@
+# Architecture V2: "SamsungGallery Reforged"
+
+- [x] **Phase 1: The Foundation (Kernel)**
+  - [x] **Fix Build & Tests** <!-- id: 10 -->
+    - [x] Diagnose and fix `tst_imagemodel` crash
+    - [x] Ensure `ctest` passes reliably
+  - [x] **Implement LogManager** <!-- id: 11 -->
+    - [x] Create `src/LogManager` (Async, RingBuffer)
+    - [x] Integrate into [main.cpp](file:///d:/Dev/antigravity/src/main.cpp)
+  - [x] **Implement TaskScheduler** <!-- id: 12 -->
+    - [x] Create `src/TaskScheduler` (Priority Queue)
+    - [x] Create unit test `tst_scheduler`
+    - [x] Integrate into [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt)
+
+- [x] **Phase 2: Refactoring Components**
+  - [x] **Refactor ImageModel** <!-- id: 20 -->
+    - [x] Replace `QtConcurrent::run` with [TaskScheduler](file:///d:/Dev/antigravity/src/TaskScheduler.h#49-50) (IO_BOUND)
+    - [x] Implement fine-grained batching updates
+  - [x] **Refactor AsyncImageProvider** <!-- id: 21 -->
+    - [x] Update [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-51) to use [TaskScheduler](file:///d:/Dev/antigravity/src/TaskScheduler.h#49-50)
+    - [x] Implement Viewport-aware priority
+
+- [x] **Phase 3: Hardening**
+  - [x] Memory Safety Audit (Smart Pointers)
+  - [x] Crash Handling (LibRaw isolation)
+  - [x] Deployment Script (Self-Extracting exe)
+
+- [x] **Phase 4: Refinements**
+  - [x] **Image Prioritization** <!-- id: 30 -->
+    - [x] [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#34-51): Viewer requests -> Immediate, Thumbnails -> Low
+  - [x] **Task Cancellation**
+    - [x] `TaskScheduler::clear()` on folder change (`ImageModel::scanDirectory`)
+  - [x] **Advanced Hardening**
+    - [x] Video/Raw Dimension Limits (>8K/12K)
+    - [x] RAII for FFmpeg ([VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16))
+  - [x] **UI Polish**
+    - [x] Fix Settings Menu Scroll/Layout
+    - [x] Implement "Current API" feedback in UI
+
+- [x] **Phase 5: GPU Acceleration (D3D11)**
+  - [x] **Research & Init**
+    - [x] [VideoThumbnailer](file:///d:/Dev/antigravity/src/VideoThumbnailer.h#15-16): Init D3D11 `AVHWDeviceContext`
+    - [x] Implement `get_format` callback for D3D11VA
+  - [x] **Implementation**
+    - [x] Pipeline: Decode -> D3D11 Surface -> Transfer -> SwScale -> QImage
+    - [x] Fallback to Software Decoding on failure
+  - [x] **Verification**
+    - [x] Verify lower CPU usage
+    - [x] Verify log output confirmation
+
+
+- [ ] **Phase 6: Bug Fix (D3D11 Instability)**
+  - [x] Thread-safe [initHardware](file:///d:/Dev/antigravity/src/VideoThumbnailer.cpp#69-93) (Mutex)
+  - [ ] Limit concurrent Hardware Decoding (Semaphore)
+  - [ ] Robust error handling for `get_buffer` failure

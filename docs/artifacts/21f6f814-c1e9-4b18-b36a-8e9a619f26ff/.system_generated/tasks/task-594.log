@@ -1,0 +1,7 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-20T02:06:43+04:00
+Prompt: Check if the observational tests background task has finished
+
+[2026-06-20T02:06:28+04:00] Still waiting. Remaining time: 15s
+[2026-06-20T02:06:38+04:00] Still waiting. Remaining time: 5s
+[2026-06-20T02:06:43+04:00] Timer fired.

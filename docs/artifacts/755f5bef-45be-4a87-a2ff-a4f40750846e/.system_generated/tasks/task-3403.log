@@ -1,0 +1,100 @@
+
+                                  return a.date > b.date; // Descending
+                                });
+                      
+>                     applyFilter(); // This calls beginResetModel/endResetModel
+                    });
+                    fastBatchCount = 0;
+                  }
+                }
+              }
+            }
+          }
+          fastScanSuccess = true;
+        }
+      }
+  
+      if (myGen != m_scanGeneration.load())
+        return;
+  
+      if (!fastScanSuccess) {
+        // Fallback
+        QDirIterator it(cleanPath, filters, QDir::Files | QDir::Readable,
+                        QDirIterator::Subdirectories);
+  
+        while (it.hasNext()) {
+          if (myGen != m_scanGeneration.load())
+            return;
+  
+          it.next();                          // Advance iterator
+          QFileInfo fileInfo = it.fileInfo(); // Use cached info
+                }
+              }
+  
+>             applyFilter(); // This calls beginResetModel/endResetModel
+  
+              m_isLoading = false;
+              m_scannedCount = totalFound;
+              m_totalItems = m_items.count();
+              m_remainingItems = m_totalItems;
+              emit remainingItemsChanged();
+              emit isLoadingChanged();
+              emit scannedCountChanged();
+              emit scanComplete(totalFound);
+            });
+      }
+    };
+  
+    TaskScheduler::instance().addTask(task, TaskScheduler::IO_BOUND,
+                                      TaskScheduler::Normal);
+  }
+  
+  void ScrollBenchImageModel::updateVisibleRange() {
+    static constexpr int BUFFER_SIZE =
+        50; // Load 50 items ahead/behind for better coverage
+    if (!m_viewportCullingEnabled) {
+      qDebug() << "[ViewportCulling] DISABLED - skipping range update";
+      return;
+    }
+  
+    if (m_filterQuery != query) {
+      m_filterQuery = query;
+      emit filterQueryChanged();
+>     applyFilter();
+    }
+  }
+  
+  QStringList ScrollBenchImageModel::getActiveDirectories() const {
+    QSet<QString> dirs;
+    for (const auto &item : m_items) {
+      QString dirPath = QFileInfo(item.path).absolutePath();
+      dirs.insert(QDir::fromNativeSeparators(dirPath).toLower());
+    }
+    return dirs.values();
+  }
+  
+> void ScrollBenchImageModel::applyFilter() {
+    beginResetModel();
+    m_items.clear();
+    
+    if (m_filterQuery.isEmpty()) {
+      m_items = m_allItems;
+    } else {
+      // Case insensitive substring matching
+      QString q = m_filterQuery.toLower();
+      for (const auto &item : m_allItems) {
+        if (item.fileName.toLower().contains(q) || item.path.toLower().contains(q)) {
+          m_items.append(item);
+        }
+      }
+    }
+    
+    m_totalItems = m_items.count();
+    m_remainingItems = m_totalItems;
+    endResetModel();
+    emit layoutChanged();
+    emit forceUpdateGridView();
+    emit remainingItemsChanged();
+  }
+
+

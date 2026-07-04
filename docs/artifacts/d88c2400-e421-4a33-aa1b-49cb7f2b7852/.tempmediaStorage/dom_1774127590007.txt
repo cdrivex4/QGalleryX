@@ -1,0 +1,39 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (932,45)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (971,45)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/notebook/5c28b8a5-8057-4e12-bcc0-65f5a0ad3030&ec=GBRAmgU' role='button' />
+[2] (31,45)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[3] (31,45)<labs-tailwind-logo  />
+		[4] (31,45)<img  />
+Loading Notebook...
+[5] (795,45)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[6] (887,45)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed'>settings />
+	settings
+Sources
+[7] (242,123)<button aria-label='Collapse source panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-source-panel-button label-medium-button ng-tns-c1188202019-0 mat-unthemed' />
+	[8] (242,123)<mat-icon class='mat-icon notranslate material-symbols-outlined google-symbols mat-icon-no-color' role='img'>dock_to_right />
+docs
+Saved sources will appear here
+Click Add source above to add PDFs, websites, text, videos, or audio files. Or import a file directly from Google Drive.
+[9] (263,529)<div  />
+Chat
+[10] (908,123)<button aria-label='Chat options' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger label-medium-button ng-tns-c1188202019-0 mat-unthemed ng-star-inserted' />
+	[11] (908,123)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>more_vert />
+[12] (599,442)<button aria-label=' Opens the upload source dialog' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger upload-icon-button mat-unthemed' />
+	[13] (599,442)<mat-icon class='mat-icon notranslate upload-icon google-symbols mat-icon-no-color' role='img'>upload />
+Add a source to get started
+[14] (599,576)<button class='mdc-button mat-mdc-button-base upload-button mdc-button--outlined mat-mdc-outlined-button mat-primary'>Upload a source />
+	Upload a source
+0 sources
+arrow_forward
+[15] (965,123)<button aria-label='Expand studio panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-studio-panel-button label-medium-button ng-tns-c1188202019-0 mat-unthemed ng-star-inserted' />
+	[16] (965,123)<mat-icon class='mat-icon notranslate material-symbols-outlined mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>dock_to_left />
+[17] (965,575)<div  />
+NotebookLM can be inaccurate; please double check its responses.
+
+</current_dom>

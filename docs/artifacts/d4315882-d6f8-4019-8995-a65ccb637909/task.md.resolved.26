@@ -1,0 +1,26 @@
+# Task: Project Setup for Re-dubbing (Lite Edition)
+
+- [x] Clone repository and explore structure
+- [x] Understand project setup and dependencies
+- [x] Create implementation plan (Updates for Lite Mode)
+- [x] Install dependencies and verify environment
+- [x] Prepare project for re-dubbing task
+- [x] Integrate backend and frontend components
+- [x] Refine UI aesthetics (Workstation Layout, Glassmorphism, Google Fonts)
+- [x] Remove all rounded corners (Industrial Aesthetic)
+- [/] Weights Acquisition (Ultra-Lite: Wav2Lip + Gemma Linked)
+- [x] Link local Gemma from LM-Studio cache
+- [/] Implement Edge-TTS for high-quality audio synthesis
+- [ ] Create custom Wav2Lip inference script for Ultra-Lite path
+- [x] Integrate local FFmpeg build (Found at `D:\Dev\antigravity\3rdparty\ffmpeg`)
+- [/] Implement local Whisper (Translation Focus)
+- [ ] Implement local-first skill for large downloads
+- [x] Verify environment setup and PyTorch CUDA installation
+- [/] Initialize model acquisition (Lite Mode)
+- [ ] Implement hardware selection (CPU/GPU) in UI & Backend
+- [ ] Implement advanced job management (Queueing, Kill capability)
+- [ ] Implement enhanced progress visualization in UI
+- [ ] Implement local-first skill for large downloadsirectory selection
+- [x] Implement PID-safe process management & Graceful Shutdown
+- [x] Implement Precision Presets (Fast/Balanced/High)
+- [ ] Integrate UI with pipeline

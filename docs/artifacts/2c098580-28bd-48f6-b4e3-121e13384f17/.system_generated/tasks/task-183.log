@@ -1,0 +1,10 @@
+Successfully scheduled one-shot timer.
+Expected to fire at: 2026-06-02T19:54:40+04:00
+Prompt: Check progress of nvidia-cudnn-cu12 installation
+
+[2026-06-02T19:53:50+04:00] Still waiting. Remaining time: 50s
+[2026-06-02T19:54:00+04:00] Still waiting. Remaining time: 40s
+[2026-06-02T19:54:10+04:00] Still waiting. Remaining time: 30s
+[2026-06-02T19:54:20+04:00] Still waiting. Remaining time: 20s
+[2026-06-02T19:54:30+04:00] Still waiting. Remaining time: 10s
+[2026-06-02T19:54:40+04:00] Timer fired.

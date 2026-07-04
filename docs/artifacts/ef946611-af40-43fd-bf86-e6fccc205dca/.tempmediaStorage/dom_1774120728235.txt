@@ -1,0 +1,143 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (114,75)<a aria-label='Go to Google Home' href='https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40QPAgJ' id='logo' title='Go to Google Home' />
+[1] (429,73)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (662,73)<div  />
+	[3] (660,73)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (660,73)<span  />
+	[5] (684,73)<span  />
+[6] (708,73)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (747,73)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (793,73)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (786,73)<div  />
+		[10] (786,73)<span  />
+[11] (870,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (918,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (961,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3Dsite%253Agithub.com%2BLightDestory%2BqBittorrent-Search-Plugins%2Byts.py&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (95,161)<a class='XVMlrc C6AK7c' href='/search?q=site:github.com+LightDestory+qBittorrent-Search-Plugins+yts.py&sca_esv=111f151f5b064434&sxsrf=ANbL-n4yh5OYV6XpJnGrdHF8ul0zgrA48w:1774120735106&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnd2tSuU9uovWegz6AtklYMUbyObAA7_K6T1DpYAm4aIic4UN-qyXjJexbtS7gxC9OcP4tJTp_ZQAVGroYQADne3Hmbx59-ph-vRQZcwDGKzgIgfCvQ&aep=1&ntc=1&sa=X&ved=2ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40Q2J8OegQIDxAE' />
+	[15] (95,161)<div  />
+		[16] (95,173)<div  />
+			[17] (95,166)<span >AI Mode />
+[18] (153,161)<a class='C6AK7c' role='link' />
+	All
+[19] (209,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n4yh5OYV6XpJnGrdHF8ul0zgrA48w:1774120735106&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnd2tSuU9uovWegz6AtklYMUbyObAA7_K6T1DpYAm4aIic4UN-qyXjJexbtS7gxC9OcP4tJTp_ZQAVGroYQADne3Hmbx59-ph-vRQZcwDGKzgIgfCvQ&q=site:github.com+LightDestory+qBittorrent-Search-Plugins+yts.py&sa=X&ved=2ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40QtKgLegQIFRAB' />
+	[20] (209,161)<div  />
+		[21] (209,173)<span >Images />
+[22] (278,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n4yh5OYV6XpJnGrdHF8ul0zgrA48w:1774120735106&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnd2tSuU9uovWegz6AtklYMUbyObAA7_K6T1DpYAm4aIic4UN-qyXjJexbtS7gxC9OcP4tJTp_ZQAVGroYQADne3Hmbx59-ph-vRQZcwDGKzgIgfCvQ&q=site:github.com+LightDestory+qBittorrent-Search-Plugins+yts.py&sa=X&ved=2ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40QtKgLegQIFBAB' />
+	[23] (278,161)<div  />
+		[24] (278,173)<span >Videos />
+[25] (347,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n4yh5OYV6XpJnGrdHF8ul0zgrA48w:1774120735106&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnd2tSuU9uovWegz6AtklYMUbyObAA7_K6T1DpYAm4aIic4UN-qyXjJexbtS7gxC9OcP4tJTp_ZQAVGroYQADne3Hmbx59-ph-vRQZcwDGKzgIgfCvQ&q=site:github.com+LightDestory+qBittorrent-Search-Plugins+yts.py&sa=X&ved=2ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40Qs6gLegQIEhAB' />
+	[26] (347,161)<div  />
+		[27] (347,173)<span >Forums />
+[28] (436,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n4yh5OYV6XpJnGrdHF8ul0zgrA48w:1774120735106&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnd2tSuU9uovWegz6AtklYMUbyObAA7_K6T1DpYAm4aIic4UN-qyXjJexbtS7gxC9OcP4tJTp_ZQAVGroYQADne3Hmbx59-ph-vRQZcwDGKzgIgfCvQ&q=site:github.com+LightDestory+qBittorrent-Search-Plugins+yts.py&sa=X&ved=2ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40Qs6gLegQIERAB' />
+	[29] (436,161)<div  />
+		[30] (436,173)<span >Short videos />
+[31] (518,161)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n4yh5OYV6XpJnGrdHF8ul0zgrA48w:1774120735106&q=site:github.com+LightDestory+qBittorrent-Search-Plugins+yts.py&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnd2tSuU9uovWegz6AtklYMUbyObAA7_K6T1DpYAm4aIic4UN-qyXjJexbtS7gxC9OcP4tJTp_ZQAVGroYQADne3Hmbx59-ph-vRQZcwDGKzgIgfCvQ&sa=X&ved=2ahUKEwjKqNHh2rGTAxV8SmwGHZd8E40Q0pQJegQIExAB' />
+	[32] (518,161)<div  />
+		[33] (518,173)<span >News />
+[34] (585,161)<div class='mTpL7c' role='button' />
+	[35] (585,161)<div  />
+		[36] (585,173)<div  />
+			[37] (576,166)<span >More />
+			[38] (602,166)<span  />
+[39] (660,161)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (660,161)<div  />
+		[41] (660,173)<div  />
+			[42] (651,166)<span >Tools />
+			[43] (677,166)<span  />
+Search Results
+[44] (225,282)<a class='zReHs' href='https://github.com/qbittorrent/search-plugins/wiki/unofficial-search-plugins' />
+	[45] (176,312)<h3 >Unofficial search plugins />
+	[46] (225,263)<div  />
+		[47] (225,263)<div  />
+			[48] (82,263)<span  />
+				[49] (82,263)<div  />
+					[50] (82,263)<img  />
+			[51] (245,263)<div  />
+				[52] (245,251)<div  />
+					[53] (245,251)<span >GitHub />
+				[54] (245,277)<div  />
+					[55] (245,277)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com />
+						[56] (291,277)<span class='ylgVCe ob9lvb' role='text'>› qbittorrent › search-plugins › wiki />
+[57] (404,276)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[58] (404,276)<span  />
+		[59] (404,277)<span  />
+31 Jan 2026
+—
+Here you can find
+unofficial search engine plugins for qBittorrent
+that are made available by the community.
+[60] (280,384)<a class='vzmbzf' href='https://github.com/qbittorrent/search-plugins/wiki/unofficial-search-plugins#:~:text=Here%20you%20can%20find%20unofficial,made%20available%20by%20the%20community' />
+	[61] (280,384)<span >Read more />
+[62] (178,488)<a class='zReHs' href='https://gist.github.com/fanlushuai/543ebe80f2711fd79ab68f85d9f7a61c' />
+	[63] (150,518)<h3 >qBittorrent plugins />
+	[64] (178,469)<div  />
+		[65] (178,469)<div  />
+			[66] (82,469)<span  />
+				[67] (82,469)<div  />
+					[68] (82,469)<img  />
+			[69] (197,469)<div  />
+				[70] (197,456)<div  />
+					[71] (197,456)<span >Gist />
+				[72] (197,483)<div  />
+					[73] (197,483)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://gist.github.com />
+						[74] (255,482)<span class='ylgVCe ob9lvb' role='text'>› fanlushuai />
+[75] (309,482)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[76] (309,482)<span  />
+		[77] (309,483)<span  />
+Download ZIP.
+qBittorrent plugins
+. Raw. qbit-plugins.txt. https://raw.githubusercontent.com/qbittorrent/search-plugins/master/nova3/engines/rarbg.py.
+[78] (673,589)<a class='vzmbzf' href='https://gist.github.com/fanlushuai/543ebe80f2711fd79ab68f85d9f7a61c#:~:text=qBittorrent%20plugins,https%3A%2F%2Fraw.githubusercontent.com%2Fqbittorrent%2Fsearch%2Dplugins%2Fmaster%2Fnova3%2Fengines%2Frarbg.py' />
+	[79] (673,589)<span >Read more />
+[80] (270,693)<a class='zReHs' href='https://github.com/5hojib/mltb/blob/master/config_sample.py' />
+	[81] (270,723)<h3 >mltb/config_sample.py at master · 5hojib/mltb />
+	[82] (234,675)<div  />
+		[83] (234,675)<div  />
+			[84] (82,675)<span  />
+				[85] (82,675)<div  />
+					[86] (82,675)<img  />
+			[87] (254,675)<div  />
+				[88] (254,662)<div  />
+					[89] (254,662)<span >GitHub />
+				[90] (254,689)<div  />
+					[91] (254,689)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com />
+						[92] (300,688)<span class='ylgVCe ob9lvb' role='text'>› mltb › blob › master › config_sample />
+[93] (422,687)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[94] (422,687)<span  />
+		[95] (422,689)<span  />
+Official Repository: Telegram bot which can download direct links, torrents, nzb, google drive, telegram document, any file/folder from rclone supported ...
+[96] (275,899)<a class='zReHs' href='https://github.com/qbittorrent/qBittorrent/issues/19061' />
+	[97] (275,929)<h3 >Crash after adding search plugin · Issue #19061 />
+	[98] (221,880)<div  />
+		[99] (221,880)<div  />
+			[100] (82,880)<span  />
+				[101] (82,880)<div  />
+					[102] (82,880)<img  />
+			[103] (240,880)<div  />
+				[104] (240,868)<div  />
+					[105] (240,868)<span >GitHub />
+				[106] (240,894)<div  />
+					[107] (240,894)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com />
+						[108] (287,894)<span class='ylgVCe ob9lvb' role='text'>› qbittorrent › qBittorrent › issues />
+[109] (395,893)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[110] (395,893)<span  />
+		[111] (395,894)<span  />
+1 Jun 2023
+—
+After I added a
+search plugin
+, the app crashed. Now, whenever I try to access the
+search plugins
+, it crashes right away.
+Read more
+
+</current_dom>

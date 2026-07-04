@@ -1,0 +1,29 @@
+# Fixing the Botched Rebrand (Careful Approach)
+
+The previous attempt to rigidly rename `test_scrollbench` and `src` throughout the entire codebase using blanket PowerShell regex scripts was too aggressive. It corrupted C++ `#include` paths (e.g., turning `../../src/` into `../../src_QGalleryX_Core/`) and broke the CMake configuration and the [build.ps1](file:///d:/Dev/antigravity/build.ps1) script entirely.
+
+## User Review Required
+
+> [!NOTE]
+> Based on your feedback, **I will absolutely not run any automatic git resets.** We will proceed slowly and manually.
+> 
+> **Identified Staging Commit:**
+> `0725b11` (Staging name migration to QGalleryX)
+> 
+> Please let me know how you would like to selectively pull or overwrite files from this commit.
+
+## Proposed Changes
+
+1. **Identify the Damage**: We will explicitly review what files were broken by the renaming scripts.
+2. **Selective Recovery**: We will pull the correct versions of the broken files (like [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt), [build.ps1](file:///d:/Dev/antigravity/build.ps1), and the source files with broken `#includes`) from commit `0725b11` to manually overwrite the broken ones, exactly as you instruct.
+3. **Safe Renaming**: Any renaming (like the project URL or executable names) will be done manually and verified.
+4. **Official Build Tooling**: Once the code is stable, we will solely execute your [.\build.ps1](file:///d:/Dev/antigravity/build.ps1) script to perform the build and verification.
+
+## Verification Plan
+
+### Automated Tests
+- [.\build.ps1](file:///d:/Dev/antigravity/build.ps1) script will be executed cleanly.
+- `tst_linkage.exe` validation inside the build script must pass cleanly.
+
+### Manual Verification
+- Verify the `QGalleryX-Bench.exe` successfully deploys and runs.

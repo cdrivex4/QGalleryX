@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "Implementation plan to resolve a 'Zombie Process' VRAM deadlock. I will perform a force-kill of all persistent Python 'ghosts' (PID 26964) holding the 4GB 1050 Ti hostage. This clears the 100% CPU lock and allows the 86-minute movie to resume with an empty VRAM buffer. Strategy: Deep Purge.",
+  "updatedAt": "2026-04-13T18:22:00.239567500Z",
+  "requestFeedback": true
+}

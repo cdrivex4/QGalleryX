@@ -1,0 +1,18 @@
+Collecting numpy==1.26.4
+  Using cached numpy-1.26.4-cp312-cp312-win_amd64.whl.metadata (61 kB)
+Using cached numpy-1.26.4-cp312-cp312-win_amd64.whl (15.5 MB)
+Installing collected packages: numpy
+  Attempting uninstall: numpy
+    Found existing installation: numpy 2.4.6
+    Uninstalling numpy-2.4.6:
+      Successfully uninstalled numpy-2.4.6
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+faster-whisper 1.0.3 requires onnxruntime<2,>=1.14, which is not installed.
+insightface 1.0.1 requires onnxruntime, which is not installed.
+pyannote-core 6.0.1 requires numpy>=2.0, but you have numpy 1.26.4 which is incompatible.
+pyannote-metrics 4.0.0 requires numpy>=2.2.2, but you have numpy 1.26.4 which is incompatible.
+pyannote-metrics 4.0.0 requires scipy>=1.15.1, but you have scipy 1.13.0 which is incompatible.
+Successfully installed numpy-1.26.4
+
+[notice] A new release of pip is available: 26.0.1 -> 26.1.2
+[notice] To update, run: C:\just-dub-it2\env\Scripts\python.exe -m pip install --upgrade pip

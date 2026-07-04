@@ -1,0 +1,104 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (971,50)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://gemini.google.com/app&ec=GBRAkgU' role='button' />
+[1] (29,50)<button aria-label='Main menu' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger main-menu-button mat-unthemed' />
+	[2] (29,50)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+[3] (292,50)<a aria-label='New chat' class='bard-logo-container logo-only ng-star-inserted' href='/app' role='button' />
+	[4] (292,50)<bard-logo  />
+		[5] (291,50)<div  />
+			[6] (291,51)<span >Gemini />
+[7] (838,50)<button aria-label='Upgrade' class='mdc-button mat-mdc-button-base ng-tns-c1366055888-9 mdc-button--unelevated mat-mdc-unelevated-button gds-button-tonal mat-unthemed' role='link' />
+	Upgrade to Google AI Plus
+[8] (223,50)<button aria-label='Search' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger search-button ng-tns-c781952902-12 ng-trigger ng-trigger-searchNavButtonVisibilityAnimation mat-unthemed' />
+	[9] (223,50)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+[10] (104,140)<a aria-label='New chat' class='mat-mdc-list-item mdc-list-item mat-ripple mat-mdc-tooltip-trigger side-nav-action-button explicit-gmat-override mat-mdc-list-item-interactive mdc-list-item--with-leading-icon mat-mdc-list-item-single-line mdc-list-item--with-one-line ng-star-inserted' href='/app' />
+	[11] (29,140)<div  />
+		[12] (29,140)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color ng-star-inserted' role='img' />
+	[13] (124,140)<span  />
+		[14] (76,139)<span  />
+			[15] (76,140)<span >New chat />
+[16] (224,140)<button aria-label='Temporary chat' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger temp-chat-button mat-unthemed' />
+	[17] (224,140)<span  />
+[18] (124,196)<a aria-label='My stuff' class='mat-mdc-tooltip-trigger side-nav-entry-button is-scheduled-actions-enabled mat-mdc-tooltip-disabled ng-star-inserted' href='mystuff' />
+	[19] (28,196)<div  />
+		[20] (29,196)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+	[21] (72,196)<div >My stuff />
+[22] (124,269)<a aria-label='Gems' class='mat-mdc-tooltip-trigger side-nav-entry-button is-arrow-icon is-scheduled-actions-enabled mat-mdc-tooltip-disabled ng-star-inserted' href='/gems/view' />
+	[23] (35,269)<div >Gems />
+	[24] (225,269)<div  />
+		[25] (226,269)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+Chats
+[26] (124,397)<a class='mat-ripple mat-mdc-tooltip-trigger conversation ng-tns-c1309079632-8 ng-trigger ng-trigger-conversationListRevealAnimation' href='/app/80f0ea18c1a0221e' role='button' />
+	[27] (124,397)<div >Seychelles Construction Contract Template />
+[28] (124,453)<a class='mat-ripple mat-mdc-tooltip-trigger conversation ng-tns-c1309079632-8 ng-trigger ng-trigger-conversationListRevealAnimation' href='/app/808d75da22834d1a' role='button' />
+	[29] (124,453)<div >"./..." Command Context Explained />
+[30] (125,933)<button aria-label='Settings & help' class='mat-mdc-list-item mdc-list-item mat-mdc-menu-trigger mat-ripple mat-mdc-tooltip-trigger side-nav-action-button explicit-gmat-override mat-mdc-list-item-interactive mdc-list-item--with-leading-icon mat-mdc-tooltip-disabled mat-mdc-list-item-single-line mdc-list-item--with-one-line ng-star-inserted' />
+	[31] (29,933)<div  />
+		[32] (29,933)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color ng-star-inserted' role='img' />
+	[33] (146,933)<span  />
+		[34] (91,933)<span  />
+			[35] (91,933)<span >Settings & help />
+[36] (625,549)<div class='content-container' scrollable='true' />
+	Build AI apps, a new kind of Gem
+	from Google Labs
+	Create and share AI mini-apps and custom workflows with Google Labs. Try a premade Gem to start, or remix to make it your own.
+	Gem manager
+	Premade by Google
+	[37] (906,573)<button aria-label='Show more Gems premade by Google' class='mdc-button mat-mdc-button-base mat-mdc-button ng-tns-c2400289716-17 mat-unthemed ng-star-inserted' />
+		Show more
+	[38] (364,737)<a aria-label='Start a new conversation with Gem: Chess champ' class='template-gallery-card' href='/gem/chess-champ' />
+		[39] (364,656)<div  />
+			[40] (307,656)<bot-logo  />
+				[41] (307,656)<div  />
+					[42] (307,651)<mat-icon class='mat-icon notranslate mat-icon-no-color ng-star-inserted' role='img' />
+			[43] (355,656)<bot-experiment-badge  />
+				[44] (358,657)<xap-status-badge >Experiment />
+		[45] (364,712)<div >Chess champ />
+		[46] (364,773)<div >Play chess with a language model. Make your first move using chess notation to start your match. />
+	[47] (429,648)<button aria-label='More options for "Chess champ" Gem' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger bot-actions-menu-button my-stuff-side-nav mat-unthemed' />
+		[48] (429,648)<mat-icon class='mat-icon notranslate bot-item-menu-icon gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+	[49] (535,737)<a aria-label='Start a new conversation with Gem: Storybook' class='template-gallery-card' href='/gem/storybook' />
+		[50] (535,656)<div  />
+			[51] (478,656)<bot-logo  />
+				[52] (478,656)<div  />
+					[53] (478,656)<mat-icon class='mat-icon notranslate google-symbols mat-ligature-font mat-icon-no-color ng-star-inserted' role='img' />
+			[54] (526,656)<bot-experiment-badge  />
+				[55] (529,657)<xap-status-badge >Experiment />
+		[56] (535,712)<div >Storybook />
+		[57] (535,773)<div >Create a customized picture book, for either children or adults, given a topic, an optional target audience age, and an optional art style for the images. />
+	[58] (600,648)<button aria-label='More options for "Storybook" Gem' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger bot-actions-menu-button my-stuff-side-nav mat-unthemed' />
+		[59] (600,648)<mat-icon class='mat-icon notranslate bot-item-menu-icon gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+	[60] (706,737)<a aria-label='Start a new conversation with Gem: Brainstormer' class='template-gallery-card' href='/gem/brainstormer' />
+		[61] (706,656)<div  />
+			[62] (649,656)<bot-logo  />
+				[63] (649,656)<div  />
+					[64] (649,656)<mat-icon class='mat-icon notranslate google-symbols mat-ligature-font mat-icon-no-color ng-star-inserted' role='img' />
+		[65] (706,712)<div >Brainstormer />
+		[66] (706,773)<div >Find inspiration easily. Fresh ideas for parties, gifts, businesses and more. />
+	[67] (771,648)<button aria-label='More options for "Brainstormer" Gem' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger bot-actions-menu-button my-stuff-side-nav mat-unthemed' />
+		[68] (771,648)<mat-icon class='mat-icon notranslate bot-item-menu-icon gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+	[69] (877,737)<a aria-label='Start a new conversation with Gem: Career guide' class='template-gallery-card' href='/gem/career-guide' />
+		[70] (877,656)<div  />
+			[71] (820,656)<bot-logo  />
+				[72] (820,656)<div  />
+					[73] (820,656)<mat-icon class='mat-icon notranslate google-symbols mat-ligature-font mat-icon-no-color ng-star-inserted' role='img' />
+		[74] (877,712)<div >Career guide />
+		[75] (877,773)<div >Unlock your career potential. Get a detailed plan to refine your skills and achieve your career goals. />
+	[76] (942,648)<button aria-label='More options for "Career guide" Gem' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger bot-actions-menu-button my-stuff-side-nav mat-unthemed' />
+		[77] (942,648)<mat-icon class='mat-icon notranslate bot-item-menu-icon gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+	Coding partner
+	Level up your coding skills. Get the help you need to build your projects and learn as you go.
+	Learning coach
+	Here to help you learn and practice new concepts. Tell me what you'd like to learn, and I'll help you get started.
+	Writing editor
+	Elevate your writing. Get clear, constructive feedback, from grammar to structure.
+	My Gems
+	[78] (362,918)<button aria-label='Notice about shared Gems' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base xap-inline-dialog-click shared-gems-info-button ng-tns-c2400289716-17 mat-unthemed' />
+		[79] (362,917)<mat-icon class='mat-icon notranslate gds-icon-l google-symbols mat-ligature-font mat-icon-no-color' role='img' />
+	[80] (907,918)<button class='mdc-button mat-mdc-button-base bot-creation-button ng-tns-c2400289716-17 mdc-button--unelevated mat-mdc-unelevated-button mat-unthemed' />
+		New Gem
+
+</current_dom>

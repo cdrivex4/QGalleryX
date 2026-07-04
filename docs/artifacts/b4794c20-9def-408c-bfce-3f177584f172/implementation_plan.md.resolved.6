@@ -1,0 +1,34 @@
+# Share/Resize Dialog Integration Plan
+
+## Goal
+Make the **Share Dialog** and **Resize Editor** functional by wiring them to real data from [ScrollBenchImageModel](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#8-10).
+Currently, they are UI shells with placeholder data.
+
+## Proposed Changes
+
+### [MODIFY] [ScrollBenchImageModel.h/cpp](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h)
+- Add user-callable methods to retrieve selection data:
+    - `Q_INVOKABLE QStringList getSelectedPaths()`: Returns paths of all selected items.
+    - `Q_INVOKABLE qint64 getSelectedTotalSizeBytes()`: Returns total file size (sum of `QFileInfo::size`).
+
+### [MODIFY] [MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml)
+- Ensure `ShareDialog` (child of root) can access `imageModel`. (It already can via scope, but explicit passing might be cleaner).
+
+### [MODIFY] [ShareDialog.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/ShareDialog.qml)
+- Update "Resize for Email (Manual)" button:
+    1.  Get selected paths from model.
+    2.  Get total size from model.
+    3.  Set properties on `resizeEditor` before opening.
+
+### [MODIFY] [ResizeEditor.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/ResizeEditor.qml)
+- Remove placeholder JS `originalSizeMB`.
+- Accept `originalSizeBytes` (int64) and convert to display string.
+- Ensure `currentImagePath` correctly loads the preview image (first selected item).
+
+## Verification Plan
+1.  **Select Images**: Select one or more real images in the grid.
+2.  **Open Share**: Click "⋮" (Menu/Share) button.
+3.  **Open Resize**: Click "Resize for Email (Manual)".
+4.  **Verify Preview**: `ResizeEditor` should show the *actual* selected image on the left.
+5.  **Verify Size**: "Size: X MB" should match the real file size (approx).
+6.  **Verify Count**: Title should show correct selected count.

@@ -1,0 +1,43 @@
+[0] (500,500)<div  />
+	SIA Portal
+	Seychelles Infrastructure
+	[1] (123,77)<a class='flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors group' href='/' />
+		[2] (86,77)<span >CEO Dashboard />
+	[3] (123,110)<a class='flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors group' href='/board' />
+		[4] (78,110)<span >Project Board />
+	[5] (123,144)<a class='flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors group' href='/map' />
+		[6] (86,144)<span >GIS Intelligence />
+	Metrics
+	Total Budget
+	SCR 42.5M
+	Active Projects
+	18
+	[7] (123,939)<a class='flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors group' href='/settings' />
+		[8] (59,939)<span >Settings />
+	JS
+	Jitesh Shah
+	CEO, SIA
+	[9] (432,17)<input class='w-full bg-slate-900 border border-slate-800 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-emerald-500/50 transition-all placeholder:text-slate-600' placeholder='Search projects, regions, or contractors...' />
+	[10] (898,17)<button class='p-2 text-slate-400 hover:text-emerald-400 transition-colors rounded-full hover:bg-slate-900 relative' />
+	[11] (961,17)<button class='flex items-center gap-2 bg-emerald-500 px-4 py-2 rounded-lg text-sm font-bold shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all'>New Project />
+	GIS Intelligence
+	7
+	projects mapped
+	[12] (782,48)<button class='flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border bg-orange-500/20 text-orange-400 border-orange-500/30'>Heatmap />
+	[13] (867,48)<button class='flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border bg-slate-900 text-slate-500 border-slate-800'>Historical />
+	[14] (958,48)<select class='bg-slate-950 border border-slate-800 rounded-lg text-xs p-2 text-slate-300 focus:border-emerald-500 outline-none font-bold' />
+	[15] (624,504)<div class='leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom' />
+		[16] (919,934)<div >©
+© />
+			[17] (868,934)<a href='https://leafletjs.com' title='A JavaScript library for interactive maps'>Leaflet />
+			|
+			©
+			[18] (927,934)<a href='https://www.openstreetmap.org/copyright'>OSM />
+			©
+			[19] (975,934)<a href='https://carto.com/'>CARTO />
+	Map Legend
+	On Track (70%+)
+	At Risk (40-70%)
+	Critical / Overdue
+	Historical
+	Circle size = Budget scale

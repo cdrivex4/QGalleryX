@@ -1,0 +1,11 @@
+
+                        FastImage {
+                            visible: settings.useFastImage
+                                if (!settings.useFastImage) return "";
+                            visible: !settings.useFastImage
+                                if (settings.useFastImage) return "";
+                        property bool isLoading: settings.useFastImage ? thumbFast.isLoading : (thumbStd.status === 
+Image.Loading)
+                        property string activeSource: settings.useFastImage ? thumbFast.source : thumbStd.source    
+
+

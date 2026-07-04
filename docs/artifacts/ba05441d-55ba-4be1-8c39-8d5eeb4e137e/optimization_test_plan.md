@@ -1,0 +1,34 @@
+# Optimization & Testing Plan
+
+## Objective
+Maximize GPU utilization and minimize UI stutter during scrolling. Target: 60 FPS constant.
+
+## Current State
+-   **Decoding**: CPU-bound (~30-50ms per image).
+-   **Rendering**: GPU-accelerated (Vulkan/Direct3D).
+-   **Bottleneck**: Texture upload and QML delegate creation.
+
+## Testing Strategy
+1.  **Baseline Run**:
+    -   Launch app with `I:/MY SDCards/dir0064.chk`.
+    -   Scroll from top to bottom as fast as possible.
+    -   Record `[PERF]` logs.
+2.  **Metrics to Watch**:
+    -   `[PERF][DECODE]`: Should be < 50ms.
+    -   `[PERF][QML_LOAD]`: Should be close to Decode time (low overhead).
+    -   **FPS**: Visually check for stutter.
+
+## Optimization Iterations
+### Iteration 1: Aggressive Preloading (Implemented)
+-   **Change**: Increased `cacheBuffer` to `cellHeight * 10`.
+-   **Expected Result**: Smoother scrolling, slightly higher RAM usage.
+
+### Iteration 2: Texture Atlas / Pooling (Future)
+-   If stutter persists, we may need to pool `Image` items or use a `ShaderEffect` to render tiles from a single large texture (complex).
+
+### Iteration 3: GPU Decoding (Future)
+-   Investigate hardware decoders for JPEG (limited support in Qt without plugins).
+
+## Verification
+-   User to run the app and report if "placeholders" appear during fast scrolling.
+-   User to confirm if "duplicates" are still an issue (likely burst shots).

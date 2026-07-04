@@ -1,0 +1,112 @@
+# JustDubit — Full LTX-2 Pipeline on Windows (Fresh Start)
+
+We are abandoning the Wav2Lip "Ultra-Lite" dead-end and running the **real** JustDubit pipeline:
+[JustDubitPipeline](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py#95-497) → LTX-2 19B model → proper audio-visual diffusion dubbing.
+
+The codebase was written for Linux. We adapt it for Windows, download ~40 GB of weights, and wire the existing React UI to the real backend.
+
+---
+
+## ⚠️ User Review Required
+
+> [!IMPORTANT]
+> **~40 GB download required.** The following files will be downloaded from HuggingFace into `c:\just-dub-it\weights\`:
+>
+> | File | Size | Source |
+> |------|------|--------|
+> | `ltx-2-19b-dev.safetensors` | ~35 GB | `Lightricks/LTX-2` |
+> | `ltx-2-19b-distilled-lora-384.safetensors` | ~700 MB | `Lightricks/LTX-2` |
+> | `ltx-2-spatial-upscaler-x2-1.0.safetensors` | ~360 MB | `Lightricks/LTX-2` |
+> | `ltx-2-19b-ic-lora-lipdubbing.safetensors` | ~700 MB | `justdubit/justdubit` |
+> | Gemma `gemma-3-12b-it-qat-q4_0-unquantized` | ~7 GB | `google/` HuggingFace |
+>
+> Total: **~44 GB**. Downloads run in background via `huggingface-hub`. The UI and server stay operational during download.
+
+> [!WARNING]
+> **GTX 1050 Ti VRAM Limit (4 GB).** The full 35 GB model cannot fit in VRAM.
+> We will run in **CPU offload mode** (`device_map="sequential"` / tiling enabled). This is slower but produces correct output — much better than the Wav2Lip placeholder.
+
+---
+
+## Proposed Changes
+
+### Phase 1 — Weight Download Script
+
+#### [MODIFY] [download_weights.py](file:///c:/just-dub-it/scripts/download_weights.py)
+- Remove Wav2Lip / Gemma 4B references.
+- Use `huggingface_hub.hf_hub_download` and `snapshot_download` to pull all 5 required assets into `weights/`.
+- Add a `--resume` flag (huggingface_hub supports resumable downloads natively).
+
+---
+
+### Phase 2 — Windows Path Adaptation
+
+#### [MODIFY] [server.py](file:///c:/just-dub-it/server.py)
+- **Remove** entire Wav2Lip / Ultra-Lite / `sync_engine` block.
+- **Add** `JustDubitPipeline` initialization at startup (lazy-loaded on first job).
+- Replace `run_ultra_lite_inference` with `run_justdubit_inference` which calls:
+  1. Whisper `translate` → English transcript
+  2. Build prompt string: `"{Speaker desc} is speaking English, saying: '{transcript}'"`
+  3. Call `JustDubitPipeline.__call__(...)` with video conditioning = uploaded file
+  4. Encode output with `encode_video()`
+- Use `TilingConfig.default()` for low-VRAM compatibility.
+- Keep existing thread limits, PID management, CORS, job queue — **all unchanged**.
+
+> [!NOTE]
+> `device` parameter from the UI maps to `device=torch.device("cuda")` with CPU offload, or `device=torch.device("cpu")` for full CPU mode.
+
+---
+
+### Phase 3 — Windows Path Fixes
+
+#### [MODIFY] [pipeline_justdubit.py](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/pipeline_justdubit.py)
+- No logic changes needed — the pipeline is device-agnostic.
+- Ensure `TilingConfig.default()` is always passed from `server.py` to enable tiling (required for 4 GB VRAM).
+
+#### [MODIFY] [model_ledger.py](file:///c:/just-dub-it/packages/ltx-pipelines/src/ltx_pipelines/model_ledger.py)
+- Verify Windows path separators work (they do — `pathlib.Path` handles this).
+- No changes expected; confirm on first run.
+
+---
+
+### Phase 4 — Frontend: Keep & Extend
+
+#### [MODIFY] [App.jsx](file:///c:/just-dub-it/webapp/src/App.jsx)
+- **Keep all existing UI** (job queue, progress bars, device/precision toggles, upload).
+- Add a **"Speaker Description"** text field (feeds the prompt: `"The man is speaking..."`) — currently the prompt field is present but unused.
+- Wire `prompt` field to the backend so it reaches `JustDubitPipeline`.
+- Add a **download status indicator** that polls a new `/weights_status` endpoint to show download progress to users.
+
+#### [NEW] `/weights_status` endpoint in server.py
+- Returns JSON with per-file download progress so the UI can show a "Downloading models..." state before the first job can run.
+
+---
+
+## Verification Plan
+
+### Automated
+- `uv run python -c "from ltx_pipelines.pipeline_justdubit import JustDubitPipeline; print('OK')"` — confirms imports work.
+- `uv run python -c "import torch; print(torch.cuda.is_available())"` — confirms CUDA still active.
+
+### Manual
+1. Start server: `uv run python server.py`
+2. Open `http://localhost:5173`
+3. Upload the existing test video (`Erotic.Ghost.Story.1990.mp4`)
+4. Fill "Speaker description": `"The woman is"`
+5. Submit — confirm job progresses through all stages with real status messages
+6. Download and play output — verify English dubbing with lip-sync
+
+---
+
+## What We're Keeping
+- ✅ React UI with job queue, progress, device toggles
+- ✅ FastAPI server structure, CORS, PID management
+- ✅ FFmpeg integration (`D:\Dev\antigravity\3rdparty\ffmpeg`)
+- ✅ CUDA thread limits (4 threads)
+- ✅ Whisper translation (model="base", CUDA)
+
+## What We're Removing
+- ❌ Wav2Lip / Ultra-Lite path
+- ❌ `scripts/sync_engine.py` (broken placeholder)
+- ❌ `scripts/manual_dub.py` (broken placeholder)
+- ❌ MediaPipe / librosa (no longer needed)

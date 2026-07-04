@@ -186,14 +186,18 @@ Item {
             }
 
             // Grid Zoom
-            Text { text: "Grid Zoom: " + Math.round(zoomSlider.value) + "px"; color: "white"; font.pixelSize: 11 }
+            Text { text: "Grid Resolution: " + Math.round(zoomSlider.value) + "px"; color: "white"; font.pixelSize: 11 }
             Slider {
                 id: zoomSlider
                 width: parent.width
                 from: 20; to: 400
                 stepSize: 1
-                value: appSettings.gridSize
-                onMoved: appSettings.gridSize = Math.round(value)
+                value: appSettings.gridResolution
+                onPressedChanged: {
+                    if (!pressed) {
+                        appSettings.gridResolution = Math.round(value)
+                    }
+                }
             }
 
             // Cache Size
@@ -204,7 +208,11 @@ Item {
                 from: 64; to: 2048
                 stepSize: 1
                 value: appSettings.cacheSizeMB
-                onMoved: appSettings.cacheSizeMB = Math.round(value)
+                onPressedChanged: {
+                    if (!pressed) {
+                        appSettings.cacheSizeMB = Math.round(value)
+                    }
+                }
             }
             
             // Threads
@@ -215,7 +223,11 @@ Item {
                 from: 1; to: 16
                 stepSize: 1
                 value: appSettings.concurrentThreads
-                onMoved: appSettings.concurrentThreads = value
+                onPressedChanged: {
+                    if (!pressed) {
+                        appSettings.concurrentThreads = Math.round(value)
+                    }
+                }
             }
 
             // Log Level

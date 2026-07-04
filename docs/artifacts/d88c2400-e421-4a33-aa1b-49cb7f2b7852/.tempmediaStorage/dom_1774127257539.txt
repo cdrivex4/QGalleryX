@@ -1,0 +1,158 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+check
+Selected Gemini 3.1 Pro Preview
+[0] (643,91)<button aria-label='Dismiss' class='dismiss-button ms-button-borderless ms-button-icon ng-star-inserted' />
+	[1] (643,91)<span >close />
+[2] (70,45)<a class='logo-link ng-tns-c3193096957-1' href='/' />
+	[3] (70,45)<ms-logo-icon  />
+[4] (152,45)<button aria-label='View related products' class='mat-mdc-menu-trigger dropdown-trigger ng-tns-c3193096957-1 ms-button-borderless ms-button-icon' />
+	[5] (152,45)<span >expand_more />
+[6] (89,112)<a class='playground-link ng-tns-c1280371744-4 has-home-nav active-override ms-button-borderless active' href='/prompts/new_chat'>Playground />
+	[7] (24,112)<span >chat_spark />
+Enable saving
+[8] (89,213)<a class='ms-button-borderless' href='/apps' />
+	[9] (24,213)<span >design_services />
+	[10] (89,213)<span >Build />
+	[11] (154,213)<span >chevron_right />
+[12] (89,263)<a class='ms-button-borderless' href='/api-keys' />
+	[13] (24,263)<span >speed />
+	[14] (89,263)<span >Dashboard />
+	[15] (154,263)<span >chevron_right />
+[16] (89,313)<a class='ms-button-borderless' href='https://ai.google.dev/gemini-api/docs' />
+	[17] (24,313)<span >developer_guide />
+	[18] (89,313)<span >Documentation />
+	[19] (154,313)<span >arrow_outward />
+[20] (89,821)<button aria-label='What's new' class='ng-tns-c1724974082-3 ms-button-borderless'>What's new />
+	[21] (24,821)<span >notifications />
+[22] (89,866)<button class='ms-button-borderless'>Get API key />
+	[23] (24,866)<span >key />
+[24] (89,911)<button class='mat-mdc-menu-trigger trigger-button ms-button-borderless'>Settings />
+	[25] (24,911)<span >settings />
+[26] (89,956)<button class='account-switcher-button ng-tns-c3193096957-1 ms-button-borderless' />
+	[27] (98,956)<span >js3446389@gmail.com />
+[28] (24,958)<div aria-label='Google Account: Jack Sparrow (js3446389@gmail.com)' class='mat-mdc-tooltip-trigger button-container' role='button' />
+	[29] (24,958)<connect-avatar  />
+		[30] (24,958)<img  />
+[31] (208,45)<button aria-label='Toggle navigation menu' class='mat-mdc-tooltip-trigger navbar-toggle-button ng-tns-c4240324331-6 ms-button-icon ms-button-primary' />
+	[32] (208,45)<span >menu_open />
+Playground
+incognito
+share
+compare_arrows
+add
+[33] (727,45)<button aria-label='View more actions' class='mat-mdc-menu-trigger mat-mdc-tooltip-trigger ng-tns-c4240324331-6 ms-button-borderless ms-button-icon' />
+	[34] (727,45)<span >more_vert />
+Start building with Gemini
+[35] (300,384)<button class='category-card ng-star-inserted' />
+	[36] (277,308)<div  />
+		[37] (248,308)<div  />
+			[38] (248,308)<span >star />
+		[39] (295,308)<h3 >Featured />
+	[40] (300,385)<p >Our top picks including Gemini 3 Pro and Nano Banana Pro. />
+[41] (468,384)<button class='category-card ng-star-inserted' />
+	[42] (468,330)<div  />
+		[43] (415,330)<div  />
+			[44] (415,330)<span >chat_bubble />
+		[45] (486,330)<h3 >Code, Reasoning, and Chat />
+	[46] (468,428)<p >Build chatbots, agents, and code with Gemini 3 Pro and Gemini 3 Flash. />
+[47] (635,384)<button class='category-card ng-star-inserted' />
+	[48] (635,315)<div  />
+		[49] (583,315)<div  />
+			[50] (583,315)<span >image />
+		[51] (653,315)<h3 >Image Generation />
+	[52] (635,386)<p >Create and edit images with Nano Banana and Imagen. />
+[53] (300,623)<button class='category-card ng-star-inserted' />
+	[54] (300,569)<div  />
+		[55] (248,569)<div  />
+			[56] (248,569)<span >movie />
+		[57] (318,569)<h3 >Video Generation />
+	[58] (300,646)<p >Generate videos with Veo models, our state of the art video generation models. />
+[59] (468,623)<button class='category-card ng-star-inserted' />
+	[60] (461,569)<div  />
+		[61] (415,569)<div  />
+			[62] (415,569)<span >mic />
+		[63] (479,569)<h3 >Text to Speech />
+	[64] (468,646)<p >Convert text to speech with lifelike realism using Gemini TTS. />
+[65] (635,623)<button class='category-card ng-star-inserted' />
+	[66] (614,569)<div  />
+		[67] (583,569)<div  />
+			[68] (583,569)<span >bolt />
+		[69] (632,569)<h3 >Real-time />
+	[70] (635,633)<p >Real-time voice and video with Gemini Live. />
+[71] (468,876)<textarea aria-label='Enter a prompt' class='cdk-textarea-autosize textarea ng-pristine ng-valid ng-touched' placeholder='Start typing a prompt, use alt + enter to append' />
+[72] (213,940)<button aria-label='No API key selected' class='xap-inline-dialog paid-api-key-button ms-button-primary' />
+	[73] (213,940)<span >key_off />
+[74] (272,940)<button aria-label='Open tools menu' class='mat-mdc-tooltip-trigger xap-inline-dialog ms-button-primary mat-mdc-tooltip-disabled'>Tools />
+	[75] (255,940)<span >widgets />
+[76] (411,940)<button class='tool-chip-button'>google
+Grounding with Google Search />
+	google
+	Grounding with Google Search
+[77] (514,940)<button aria-label='Remove Grounding with Google Search' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small' />
+	[78] (514,940)<span >close />
+[79] (599,940)<button aria-label='Speech to text' class='mat-mdc-tooltip-trigger ms-button-filter-chip'>mic />
+	mic
+	[80] (599,940)<canvas  />
+[81] (632,940)<button aria-label='Insert images, videos, audio, or files' class='mat-mdc-menu-trigger mat-mdc-tooltip-trigger ms-button-filter-chip' />
+	[82] (632,940)<span >add_circle />
+Run
+Ctrl
+keyboard_return
+Run settings
+[83] (901,42)<button aria-label='Get code' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-small' id='getCodeBtn'>Get code />
+	[84] (879,42)<span >code />
+[85] (953,42)<button aria-label='Reset default settings' class='mat-mdc-tooltip-trigger ms-button-borderless ms-button-icon ms-button-small ng-star-inserted' id='resetSettingsBtn' />
+	[86] (953,42)<span >reset_settings />
+[87] (976,42)<button aria-label='Close run settings panel' class='ms-button-borderless ms-button-icon ms-button-small' />
+	[88] (976,42)<span >close />
+[89] (879,531)<div class='scrollable-area' scrollable='true' />
+	[90] (873,179)<button class='model-selector-card' />
+		[91] (873,111)<span >Gemini 3.1 Pro Preview />
+		[92] (873,149)<span >gemini-3.1-pro-preview />
+		[93] (873,212)<span >Our latest SOTA reasoning model with unprecedented depth and nuance, and powerful multimodal understanding and coding capabilities />
+	[94] (873,344)<button aria-label='System instructions' class='mat-mdc-tooltip-trigger system-instructions-card' />
+		[95] (873,313)<span >System instructions />
+		[96] (873,364)<span >Optional tone and style instructions for the model />
+	[97] (873,471)<button aria-label='No API Key' class='paid-api-key-card' />
+		[98] (873,445)<div  />
+			[99] (837,440)<span >No API Key />
+		[100] (873,491)<span >Switch to a paid API key to unlock higher quota and more features. />
+	Temperature
+	[101] (837,618)<mat-slider  />
+		[102] (837,618)<input class='mdc-slider__input' />
+	[103] (956,618)<input class='slider-number-input small' role='spinbutton' />
+	Media resolution
+	[104] (873,714)<div  />
+		[105] (873,714)<div  />
+			[106] (873,714)<div  />
+				[107] (873,714)<mat-select aria-label='Media resolution' class='mat-mdc-select' id='mat-select-0' role='combobox' />
+					[108] (873,714)<div  />
+						[109] (869,714)<div  />
+							[110] (796,713)<span  />
+								[111] (796,713)<span >Default />
+						[112] (965,714)<div  />
+	Thinking level
+	[113] (873,837)<div  />
+		[114] (873,837)<div  />
+			[115] (873,837)<div  />
+				[116] (873,837)<mat-select aria-label='Thinking Level' class='mat-mdc-select' id='mat-select-1' role='combobox' />
+					[117] (873,837)<div  />
+						[118] (869,837)<div  />
+							[119] (789,836)<span  />
+								[120] (789,836)<span >High />
+						[121] (965,837)<div  />
+	[122] (873,930)<div  />
+		[123] (873,933)<div  />
+			[124] (963,933)<button aria-label='Expand or collapse tools' class='expand-icon ms-button-borderless ms-button-icon' />
+				[125] (963,933)<span >expand_more />
+			[126] (782,933)<p >Tools />
+	Structured outputs
+	[127] (962,990)<button aria-label='Structured outputs' class='mdc-switch mdc-switch--unselected' id='mat-mdc-slide-toggle-0-button' role='switch' />
+		[128] (957,990)<span  />
+			[129] (957,990)<span  />
+	Edit
+
+</current_dom>

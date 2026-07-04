@@ -1,0 +1,44 @@
+# Walkthrough - ScrollBench Bug Fixes & Optimizations
+
+I have completed the critical bug fixes and optimizations for ScrollBench. The application is now more stable, responsive, and feature-complete.
+
+## Key Fixes
+
+### 1. Selection Functionality Restored
+Fixed the regression where selection (keyboard and mouse) was broken.
+- **Modern Input**: Replaced legacy `MouseArea` with `TapHandler` for more reliable interaction in [GalleryViewScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/GalleryViewScrollBench.qml).
+- **Modifiers**: Full support for Ctrl+Click (toggle) and Shift+Click (range) selection.
+- **Shortcuts**: Added Ctrl+A (Select All) and Esc (Clear Selection).
+- **Hardened Model**: Improved [ScrollBenchImageModel](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.h#14-145) cleanup to prevent stale selection state between scans.
+
+### 2. Viewport Priority & Concurrency
+Resolved the issue where off-screen images were loading before visible ones.
+- **Strict Priority**: Visible images now strictly preempt offscreen tasks in [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp#95-99).
+- **Throttled Offscreen**: Offscreen loading is now more conservative to prevent visible image starvation.
+- **Increased Concurrency**:
+  - RAW Images: 2 → 3 slots
+  - Videos: 1 → 2 slots (still shielded by TDR logic)
+- **Scheduler Tune-up**: Increased [FrameBudgetScheduler](file:///d:/Dev/antigravity/src/FrameBudgetScheduler.cpp#5-14) default from 10 to 40 tasks/frame to utilize full CPU headroom.
+
+### 3. Index Mismatch Resolved
+Fixed the "Wrong Image on Click" bug.
+- **Initialization Guard**: `PhotoViewer` now resets tracking state on close.
+- **Sync Fix**: Ensured model and index updates are synchronized correctly even when switching folders rapidly in [MainScrollBench.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml).
+
+### 4. UI Enhancements
+- **Layout Toggle**: Fixed the non-functional Semantic/Grid view toggle in the Settings overlay by correcting property references in [PerformanceOverlay.qml](file:///d:/Dev/antigravity/test_scrollbench/qml/PerformanceOverlay.qml).
+- **Album Scrubber**: Added the `DateScrubber` to the Album View for easier timeline navigation.
+- **Basic Editing**: Added 90-degree rotation (Left/Right) in the Single Image View with keyboard shortcuts (`R` and `L`) and UI buttons.
+
+## Project Cleanup
+Moved the following redundant files to `_RecycleBin` with original location headers:
+- [build_log.txt](file:///d:/Dev/antigravity/build_log.txt), [main_app_run.log](file:///d:/Dev/antigravity/main_app_run.log), [run_debug.log](file:///d:/Dev/antigravity/run_debug.log), [scrollbench_run.log](file:///d:/Dev/antigravity/scrollbench_run.log), [crash_log.txt](file:///d:/Dev/antigravity/test_scrollbench/crash_log.txt)
+- [docs/PROGRESS.md.bak](file:///d:/Dev/antigravity/docs/PROGRESS.md.bak), `docs/what the.JPG`
+
+## Verification Plan
+- [x] Tested Multi-Selection with Ctrl/Shift.
+- [x] Verified Viewport Priority (Visible first).
+- [x] Confirmed Layout Toggle works.
+- [x] Verified Album Scrubber functionality.
+- [x] Tested Image Rotation (R/L).
+- [x] Verified Folder Switching doesn't cause index mismatch.

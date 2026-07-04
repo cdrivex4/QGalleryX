@@ -1,0 +1,139 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (105,72)<a class='FgNLaf' href='https://www.google.com/webhp?hl=en&ictx=0&sa=X&ved=0ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQpYkNCAs' />
+[1] (328,72)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (553,72)<div  />
+	[3] (550,72)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (550,72)<span  />
+	[5] (581,72)<span  />
+[6] (613,72)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (665,72)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (725,72)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (717,72)<div  />
+		[10] (717,72)<span  />
+[11] (828,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (891,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (948,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3D1337x%2Bproxy%2Blist%2Bofficial&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (110,159)<a class='XVMlrc C6AK7c' href='/search?q=1337x+proxy+list+official&sca_esv=111f151f5b064434&sxsrf=ANbL-n5CJQee5u82FuZlF0095uHOe342Nw:1774122277578&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpFZYo9qIX3pM4_jubAu4b8PsyAX1Ds1kNrHyux_TqBaAGg4z_gqQOREzJbphh6uQ5NPIPw2nSYHbG_ctT0nyRXZpDTXywXg_6rJ45khO89vhcsply3jeZKSsVoqqCEMrf5YS4op-AWCcWLATvkOyXWQ9YvA1ycfnLkEvGeSQAUn-hSGJGeAs5APq72rrUSyMf3_HD8Q&aep=1&ntc=1&sa=X&ved=2ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQ2J8OegQIEhAE' />
+	[15] (110,159)<div  />
+		[16] (110,172)<div  />
+			[17] (110,164)<span >AI Mode />
+[18] (188,159)<a class='C6AK7c' role='link' />
+	All
+[19] (262,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CJQee5u82FuZlF0095uHOe342Nw:1774122277578&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpFZYo9qIX3pM4_jubAu4b8PsyAX1Ds1kNrHyux_TqBaAGg4z_gqQOREzJbphh6uQ5NPIPw2nSYHbG_ctT0nyRXZpDTXywXg_6rJ45khO89vhcsply3jeZKSsVoqqCEMrf5YS4op-AWCcWLATvkOyXWQ9YvA1ycfnLkEvGeSQAUn-hSGJGeAs5APq72rrUSyMf3_HD8Q&q=1337x+proxy+list+official&sa=X&ved=2ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQs6gLegQIFxAB' />
+	[20] (262,159)<div  />
+		[21] (262,172)<span >Forums />
+[22] (348,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CJQee5u82FuZlF0095uHOe342Nw:1774122277578&q=1337x+proxy+list+official&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpFZYo9qIX3pM4_jubAu4b8PsyAX1Ds1kNrHyux_TqBaAGg4z_gqQOREzJbphh6uQ5NPIPw2nSYHbG_ctT0nyRXZpDTXywXg_6rJ45khO89vhcsply3jeZKSsVoqqCEMrf5YS4op-AWCcWLATvkOyXWQ9YvA1ycfnLkEvGeSQAUn-hSGJGeAs5APq72rrUSyMf3_HD8Q&sa=X&ved=2ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQ0pQJegQIFBAB' />
+	[23] (348,159)<div  />
+		[24] (348,172)<span >News />
+[25] (434,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CJQee5u82FuZlF0095uHOe342Nw:1774122277578&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpFZYo9qIX3pM4_jubAu4b8PsyAX1Ds1kNrHyux_TqBaAGg4z_gqQOREzJbphh6uQ5NPIPw2nSYHbG_ctT0nyRXZpDTXywXg_6rJ45khO89vhcsply3jeZKSsVoqqCEMrf5YS4op-AWCcWLATvkOyXWQ9YvA1ycfnLkEvGeSQAUn-hSGJGeAs5APq72rrUSyMf3_HD8Q&q=1337x+proxy+list+official&sa=X&ved=2ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQtKgLegQIFRAB' />
+	[26] (434,159)<div  />
+		[27] (434,172)<span >Images />
+[28] (525,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CJQee5u82FuZlF0095uHOe342Nw:1774122277578&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpFZYo9qIX3pM4_jubAu4b8PsyAX1Ds1kNrHyux_TqBaAGg4z_gqQOREzJbphh6uQ5NPIPw2nSYHbG_ctT0nyRXZpDTXywXg_6rJ45khO89vhcsply3jeZKSsVoqqCEMrf5YS4op-AWCcWLATvkOyXWQ9YvA1ycfnLkEvGeSQAUn-hSGJGeAs5APq72rrUSyMf3_HD8Q&q=1337x+proxy+list+official&sa=X&ved=2ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQtKgLegQIFhAB' />
+	[29] (525,159)<div  />
+		[30] (525,172)<span >Videos />
+[31] (639,159)<a class='C6AK7c' href='/search?sca_esv=111f151f5b064434&sxsrf=ANbL-n5CJQee5u82FuZlF0095uHOe342Nw:1774122277578&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpFZYo9qIX3pM4_jubAu4b8PsyAX1Ds1kNrHyux_TqBaAGg4z_gqQOREzJbphh6uQ5NPIPw2nSYHbG_ctT0nyRXZpDTXywXg_6rJ45khO89vhcsply3jeZKSsVoqqCEMrf5YS4op-AWCcWLATvkOyXWQ9YvA1ycfnLkEvGeSQAUn-hSGJGeAs5APq72rrUSyMf3_HD8Q&q=1337x+proxy+list+official&sa=X&ved=2ahUKEwi2pJLB4LGTAxUjTGcHHVYJAcMQs6gLegQIGBAB' />
+	[32] (639,159)<div  />
+		[33] (639,172)<span >Short videos />
+[34] (758,159)<div class='mTpL7c' role='button' />
+	[35] (758,159)<div  />
+		[36] (758,172)<div  />
+			[37] (747,164)<span >More />
+			[38] (780,164)<span  />
+[39] (858,159)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (858,159)<div  />
+		[41] (858,172)<div  />
+			[42] (846,164)<span >Tools />
+			[43] (880,164)<span  />
+Search Results
+[44] (417,280)<a class='zReHs' href='https://www.1337x.tw/' />
+	[45] (417,310)<h3 >1337x | Free Movies, TV Series, Music, Games and Software />
+	[46] (174,262)<div  />
+		[47] (174,262)<div  />
+			[48] (93,262)<span  />
+				[49] (93,262)<div  />
+					[50] (93,262)<img  />
+			[51] (200,262)<div  />
+				[52] (200,249)<div  />
+					[53] (200,249)<span >1337x />
+				[54] (200,276)<div  />
+					[55] (200,276)<cite class='tjvcx GvPZzd cHaqb' role='text'>https://www.1337x.tw />
+[56] (302,274)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[57] (302,274)<span  />
+		[58] (302,276)<span  />
+Try one of the torrent proxies below for full 1337x access.
+1337x proxy are tested every hour for availability
+and sorted by speed and status. A list of all ...
+[59] (595,381)<a class='vzmbzf' href='https://www.1337x.tw/#:~:text=Try%20one%20of%20the%20torrent,all%20unblocked%201337x%20proxy%20sites.' />
+	[60] (595,381)<span >Read more />
+[61] (309,484)<a class='zReHs' href='https://github.com/wesharebytes/1337x-Proxy-List' />
+	[62] (309,514)<h3 >1337x Proxy Site List 2026 [List Updated] />
+	[63] (284,466)<div  />
+		[64] (284,466)<div  />
+			[65] (93,466)<span  />
+				[66] (93,466)<div  />
+					[67] (93,466)<img  />
+			[68] (309,466)<div  />
+				[69] (309,453)<div  />
+					[70] (309,453)<span >GitHub />
+				[71] (309,480)<div  />
+					[72] (309,480)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com />
+						[73] (371,479)<span class='ylgVCe ob9lvb' role='text'>› wesharebytes › 1337x-Proxy-List />
+[74] (521,478)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[75] (521,478)<span  />
+		[76] (521,480)<span  />
+Here is a list of the
+1337x torrent proxy sites
+. We tested all of these 1337x proxy sites and all registered sites were working at the time of writing.
+[77] (454,585)<a class='vzmbzf' href='https://github.com/wesharebytes/1337x-Proxy-List#:~:text=Here%20is%20a%20list%20of,at%20the%20time%20of%20writing.' />
+	[78] (454,585)<span >Read more />
+[79] (372,692)<a class='zReHs' href='https://fastestvpn.com/guides/1337x-proxy/' />
+	[80] (372,718)<h3 >1337x Proxy List 2026 – Updated and Working Links />
+	[81] (257,670)<div  />
+		[82] (257,670)<div  />
+			[83] (93,670)<span  />
+				[84] (93,670)<div  />
+					[85] (93,670)<img  />
+			[86] (283,670)<div  />
+				[87] (283,657)<div  />
+					[88] (283,657)<span >FastestVPN />
+				[89] (283,684)<div  />
+					[90] (283,684)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://fastestvpn.com />
+						[91] (359,683)<span class='ylgVCe ob9lvb' role='text'>› guides › 1337x-proxy />
+[92] (466,683)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[93] (466,683)<span  />
+		[94] (466,684)<span  />
+5 Nov 2025
+—
+Here are the working and updated 1337x proxy list
+to access the original site's library for entertainment content.
+[95] (410,896)<a class='zReHs' href='https://www.reddit.com/r/trackers/comments/1gx4crv/1337x_offical_mirror_sites_list_fastest_clean/' />
+	[96] (410,922)<h3 >1337x Offical Mirror Sites List (Fastest & Clean) : r/trackers />
+	[97] (196,874)<div  />
+		[98] (196,874)<div  />
+			[99] (93,874)<span  />
+				[100] (93,874)<div  />
+					[101] (93,874)<img  />
+			[102] (222,874)<div  />
+				[103] (222,862)<div  />
+					[104] (222,862)<span >Reddit · r/trackers />
+				[105] (222,888)<div  />
+					[106] (222,888)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>10+ comments  ·  1 year ago />
+[107] (344,887)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[108] (344,887)<span  />
+		[109] (344,888)<span  />
+We have compiled a list of working
+1337x proxy and mirror sites
+in 2024. Using these 1337x new site/domain, you can quickly access the website's content even ...
+[110] (661,994)<a class='vzmbzf' href='https://www.reddit.com/r/trackers/comments/1gx4crv/1337x_offical_mirror_sites_list_fastest_clean/#:~:text=To%20help%20users%20access%201337x,is%20blocked%20in%20your%20country.' />
+	[111] (661,994)<span >Read more />
+
+</current_dom>

@@ -1,0 +1,1 @@
+{"id":"9d42d0a9-76fd-43d4-bf69-e7887b4d7161","recipient":"755f5bef-45be-4a87-a2ff-a4f40750846e","sender":"755f5bef-45be-4a87-a2ff-a4f40750846e/task-216","priority":"MESSAGE_PRIORITY_HIGH","timestamp":"2026-06-21T06:39:48.113688700Z","renderDetails":{"messageTitle":"Schedule log collection wakeup: Timer has expired"},"content":"Collect logs from ScrollBench running session"}

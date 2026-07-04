@@ -1,0 +1,8 @@
+Get-Content : Cannot find path 'D:\Dev\antigravity\test_scrollbench\src\AlbumModel.cpp' because it does not exist.
+At line:1 char:1
++ Get-Content .\src\AlbumModel.cpp | Select-String "color" -Context 3,3
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\Dev\antigrav...\AlbumModel.cpp:String) [Get-Content], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 

@@ -1,0 +1,81 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Skip to content
+Navigation Menu
+[0] (47,51)<a aria-label='Homepage' class='tmp-mr-lg-3 color-fg-inherit flex-order-2 js-prevent-focus-on-mobile-nav' href='/' />
+[1] (126,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Platform />
+[2] (224,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Solutions />
+[3] (326,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Resources />
+[4] (442,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Open Source />
+[5] (557,51)<button class='NavDropdown-module__button__PEHWX js-details-target'>Enterprise />
+[6] (641,51)<a class='NavLink-module__link__EG3d4 MarketingNavigation-module__navLink__hUomM' href='https://github.com/pricing' />
+	[7] (641,51)<span >Pricing />
+[8] (749,51)<button aria-label='Search or jump to…' class='header-search-button placeholder input-button form-control d-flex flex-1 flex-self-stretch flex-items-center no-wrap width-full py-0 pl-2 pr-0 text-left border-0 box-shadow-none' placeholder='Search or jump to...' />
+	[9] (749,51)<div  />
+[10] (809,51)<a class='HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded px-2 py-1' href='/login?return_to=https%3A%2F%2Fgithub.com%2Fmanucabral%3Ftab%3Drepositories'>Sign in />
+[11] (890,51)<a class='HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1' href='/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Fmanucabral&source=header'>Sign up />
+[12] (953,51)<button class='Button Button--iconOnly Button--invisible Button--medium AppHeader-button HeaderMenu-link border' id='icon-button-46ab96c0-43a3-4fbf-8292-068d257d0571' />
+[13] (411,169)<a class='UnderlineNav-item js-responsive-underlinenav-item js-selected-navigation-item' href='/manucabral'>Overview />
+[14] (542,169)<a class='UnderlineNav-item js-responsive-underlinenav-item js-selected-navigation-item selected' href='/manucabral?tab=repositories'>Repositories />
+	[15] (596,169)<span >57 />
+[16] (669,169)<a class='UnderlineNav-item js-responsive-underlinenav-item js-selected-navigation-item' href='/manucabral?tab=projects'>Projects />
+[17] (768,169)<a class='UnderlineNav-item js-responsive-underlinenav-item js-selected-navigation-item' href='/manucabral?tab=packages'>Packages />
+[18] (953,146)<details class='details-overlay details-reset position-relative' />
+	[19] (953,146)<summary role='button' />
+		[20] (953,146)<div >More />
+			More
+[21] (178,367)<a class='d-block' href='https://avatars.githubusercontent.com/u/83357673?v=4' />
+	[22] (178,367)<img  />
+🌃
+Manu
+manucabral
+[23] (103,719)<a class='btn btn-block' href='/login?return_to=https%3A%2F%2Fgithub.com%2Fmanucabral%3Ftab%3Drepositories'>Follow />
+[24] (252,719)<a aria-label='Sponsor @manucabral' class='Button--secondary Button--medium Button Button--fullWidth' href='/sponsors/manucabral' id='sponsor-profile-button' />
+	[25] (252,719)<span  />
+		[26] (252,719)<span  />
+			[27] (264,720)<span >Sponsor />
+Software Developer. Python enthusiast.
+[28] (80,835)<a class='Link--secondary no-underline no-wrap' href='https://github.com/manucabral?tab=followers'>followers />
+	[29] (59,835)<span >42 />
+·
+[30] (174,835)<a class='Link--secondary no-underline no-wrap' href='https://github.com/manucabral?tab=following'>following />
+	[31] (144,835)<span >25 />
+Buenos Aires, Argentina
+07:02
+- 16h behind
+Achievements
+[32] (514,249)<input aria-label='Find a repository…' class='form-control width-full focus-visible' id='your-repos-filter' placeholder='Find a repository…' />
+[33] (729,249)<details class='details-reset details-overlay position-relative mt-1 mt-lg-0' id='type-options' />
+	[34] (729,249)<summary class='btn' role='button' />
+		[35] (721,249)<span >Type />
+		[36] (747,252)<span  />
+[37] (831,249)<details class='details-reset details-overlay position-relative mt-1 mt-lg-0' id='language-options' />
+	[38] (831,249)<summary class='btn' role='button' />
+		[39] (823,249)<span >Language />
+		[40] (865,252)<span  />
+[41] (931,249)<details class='details-reset details-overlay position-relative mt-1 mt-lg-0' id='sort-options' />
+	[42] (931,249)<summary class='btn' role='button' />
+		[43] (924,249)<span >Sort />
+		[44] (948,252)<span  />
+[45] (446,349)<a href='/manucabral/EasySubtitlesExtractor'>EasySubtitlesExtractor />
+Public
+MIT License
+Updated
+[46] (445,503)<a href='/manucabral/KanVideoDownloader'>KanVideoDownloader />
+Public
+Simple script to download videos from kan.org.il
+Python
+MIT License
+Updated
+[47] (368,697)<a href='/manucabral/Bolsi'>Bolsi />
+Public
+Aplicación de gestión de gastos personales.
+Python
+Updated
+[48] (424,891)<a href='/manucabral/RichPresencePlus'>RichPresencePlus />
+Public
+A Discord Rich Presence (Discord RPC) application manager for custom desktop or web services activities.
+
+</current_dom>

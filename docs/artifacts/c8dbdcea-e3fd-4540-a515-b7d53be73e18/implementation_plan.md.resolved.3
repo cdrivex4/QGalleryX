@@ -1,0 +1,36 @@
+# End-to-End Test Protocol (Mini-Pipeline)
+
+The goal is to create a "Test Bench" script that exercises every single stage of the dubbing architecture (Stem Split -> Transcribe -> GPU Translate -> TTS -> GPU Lipsync -> Final Mix) on a miniature scale, completing in minutes rather than hours. This allows rapid iteration on translation prompts, TTS voices, and GPU settings without risking a 1-hour render.
+
+## User Review Required
+
+Please review the proposed workflow and provide feedback on the 30-second cutoff. Do you prefer a fixed duration (e.g. 30s) or a specific feature (e.g. automatically finding the first 30 seconds that actually contains dialogue)?
+
+## Proposed Changes
+
+We will introduce a dedicated testing script that hooks directly into the existing `pipeline.py` architecture.
+
+### [NEW] [test_mini_pipeline.py](file:///c:/just-dub-it2/scripts/test_mini_pipeline.py)
+
+We will create a script in a new `scripts/` directory that does the following:
+
+1. **Clip Generation:** Accepts a 1-hour movie file and uses FFmpeg to extract exactly 30 seconds of video (from a timestamp you specify, defaulting to `00:00:20` to skip silent logos).
+2. **Environment Injection:** Loads the isolated `get_env_with_ffmpeg()` to ensure the test runs under the exact same hardware conditions as the main app.
+3. **Pipeline Submission:** Injects the 30-second clip directly into `pipeline.manager.add_job()` as a "testing" job.
+4. **Console Telemetry:** Bypasses the Gradio UI and prints real-time status updates directly to your terminal, blocking until the `final_output.mp4` drops.
+
+### [MODIFY] [README.md](file:///c:/just-dub-it2/README.md) (or Main Doc)
+
+We will document the Test Protocol heavily, providing the exact terminal command to run the mini-pipeline. 
+
+## Open Questions
+
+1. **Duration:** Is 30 seconds the ideal test length for you, or would you prefer 60 seconds to cross multiple MuseTalk chunks?
+2. **Execution:** Do you want this built into the Gradio UI as a "Test Run" button next to "Begin Master Sequence", or do you strictly want it as a backend terminal script?
+
+## Verification Plan
+
+### Automated Tests
+- Run `python scripts/test_mini_pipeline.py target_video.mp4`
+- Verify a `workspace/test_xxx` folder is generated.
+- Verify the final output exists in `output/` and accurately mirrors the full pipeline process.

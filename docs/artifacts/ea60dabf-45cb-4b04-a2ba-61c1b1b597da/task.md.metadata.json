@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_TASK",
+  "summary": "Task checklist for creating a local-first skill that optimizes large package downloads by checking for existing local resources first. Includes skill structure creation, documentation, and testing.",
+  "updatedAt": "2026-02-17T22:25:14.249584800Z"
+}

@@ -1,0 +1,83 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (114,75)<a aria-label='Go to Google Home' href='https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjimObC2LGTAxU0k1YBHevnJZMQPAgJ' id='logo' title='Go to Google Home' />
+[1] (429,73)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (662,73)<div  />
+	[3] (660,73)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (660,73)<span  />
+	[5] (684,73)<span  />
+[6] (708,73)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (747,73)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (793,73)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (786,73)<div  />
+		[10] (786,73)<span  />
+[11] (870,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (918,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (961,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3Dqbittorrent%2Bsearch%2Bplugins%2Bgithub%2Bdodi%2Brepacks&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (95,161)<a class='XVMlrc C6AK7c' href='/search?q=qbittorrent+search+plugins+github+dodi+repacks&sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n64BdYRM2kpQh00pydL6pdIAKHu6A:1774120133566&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpmAsnXCN5UBx17opt8eaTXyCfNeKGeJOJfUwi1MTUzwQIwJlelVIdgOjufMHPjJWrA6m6ijOW-TR8xZctTwt87z_3nGLZwaKtkUxhtE8iHgqH2_42cZlU5mvGutw9qrX_2XYQVylOEkXCUFiMtg-9gRychVdjnw9q74NBMZqECYKY8ROWj1VHg3aQYur3UcmE94pnDg&aep=1&ntc=1&sa=X&ved=2ahUKEwjimObC2LGTAxU0k1YBHevnJZMQ2J8OegQIEhAE' />
+	[15] (95,161)<div  />
+		[16] (95,173)<div  />
+			[17] (95,166)<span >AI Mode />
+[18] (153,161)<a class='C6AK7c' role='link' />
+	All
+[19] (207,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n64BdYRM2kpQh00pydL6pdIAKHu6A:1774120133566&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpmAsnXCN5UBx17opt8eaTXyCfNeKGeJOJfUwi1MTUzwQIwJlelVIdgOjufMHPjJWrA6m6ijOW-TR8xZctTwt87z_3nGLZwaKtkUxhtE8iHgqH2_42cZlU5mvGutw9qrX_2XYQVylOEkXCUFiMtg-9gRychVdjnw9q74NBMZqECYKY8ROWj1VHg3aQYur3UcmE94pnDg&q=qbittorrent+search+plugins+github+dodi+repacks&sa=X&ved=2ahUKEwjimObC2LGTAxU0k1YBHevnJZMQtKgLegQIGBAB' />
+	[20] (207,161)<div  />
+		[21] (207,173)<span >Videos />
+[22] (277,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n64BdYRM2kpQh00pydL6pdIAKHu6A:1774120133566&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpmAsnXCN5UBx17opt8eaTXyCfNeKGeJOJfUwi1MTUzwQIwJlelVIdgOjufMHPjJWrA6m6ijOW-TR8xZctTwt87z_3nGLZwaKtkUxhtE8iHgqH2_42cZlU5mvGutw9qrX_2XYQVylOEkXCUFiMtg-9gRychVdjnw9q74NBMZqECYKY8ROWj1VHg3aQYur3UcmE94pnDg&q=qbittorrent+search+plugins+github+dodi+repacks&sa=X&ved=2ahUKEwjimObC2LGTAxU0k1YBHevnJZMQs6gLegQIFxAB' />
+	[23] (277,161)<div  />
+		[24] (277,173)<span >Forums />
+[25] (348,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n64BdYRM2kpQh00pydL6pdIAKHu6A:1774120133566&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpmAsnXCN5UBx17opt8eaTXyCfNeKGeJOJfUwi1MTUzwQIwJlelVIdgOjufMHPjJWrA6m6ijOW-TR8xZctTwt87z_3nGLZwaKtkUxhtE8iHgqH2_42cZlU5mvGutw9qrX_2XYQVylOEkXCUFiMtg-9gRychVdjnw9q74NBMZqECYKY8ROWj1VHg3aQYur3UcmE94pnDg&q=qbittorrent+search+plugins+github+dodi+repacks&sa=X&ved=2ahUKEwjimObC2LGTAxU0k1YBHevnJZMQtKgLegQIFRAB' />
+	[26] (348,161)<div  />
+		[27] (348,173)<span >Images />
+[28] (436,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n64BdYRM2kpQh00pydL6pdIAKHu6A:1774120133566&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpmAsnXCN5UBx17opt8eaTXyCfNeKGeJOJfUwi1MTUzwQIwJlelVIdgOjufMHPjJWrA6m6ijOW-TR8xZctTwt87z_3nGLZwaKtkUxhtE8iHgqH2_42cZlU5mvGutw9qrX_2XYQVylOEkXCUFiMtg-9gRychVdjnw9q74NBMZqECYKY8ROWj1VHg3aQYur3UcmE94pnDg&q=qbittorrent+search+plugins+github+dodi+repacks&sa=X&ved=2ahUKEwjimObC2LGTAxU0k1YBHevnJZMQs6gLegQIFBAB' />
+	[29] (436,161)<div  />
+		[30] (436,173)<span >Short videos />
+[31] (518,161)<a class='C6AK7c' href='/search?sca_esv=a42c1cc0515498c0&sxsrf=ANbL-n64BdYRM2kpQh00pydL6pdIAKHu6A:1774120133566&q=qbittorrent+search+plugins+github+dodi+repacks&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpmAsnXCN5UBx17opt8eaTXyCfNeKGeJOJfUwi1MTUzwQIwJlelVIdgOjufMHPjJWrA6m6ijOW-TR8xZctTwt87z_3nGLZwaKtkUxhtE8iHgqH2_42cZlU5mvGutw9qrX_2XYQVylOEkXCUFiMtg-9gRychVdjnw9q74NBMZqECYKY8ROWj1VHg3aQYur3UcmE94pnDg&sa=X&ved=2ahUKEwjimObC2LGTAxU0k1YBHevnJZMQ0pQJegQIFhAB' />
+	[32] (518,161)<div  />
+		[33] (518,173)<span >News />
+[34] (585,161)<div class='mTpL7c' role='button' />
+	[35] (585,161)<div  />
+		[36] (585,173)<div  />
+			[37] (576,166)<span >More />
+			[38] (602,166)<span  />
+[39] (660,161)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (660,161)<div  />
+		[41] (660,173)<div  />
+			[42] (651,166)<span >Tools />
+			[43] (677,166)<span  />
+Search Results
+AI overview
+Thinking
+[44] (225,876)<a class='zReHs' href='https://github.com/qbittorrent/search-plugins/wiki/unofficial-search-plugins' />
+	[45] (176,906)<h3 >Unofficial search plugins />
+	[46] (225,858)<div  />
+		[47] (225,858)<div  />
+			[48] (82,858)<span  />
+				[49] (82,858)<div  />
+					[50] (82,858)<img  />
+			[51] (245,858)<div  />
+				[52] (245,845)<div  />
+					[53] (245,845)<span >GitHub />
+				[54] (245,872)<div  />
+					[55] (245,872)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://github.com />
+						[56] (291,871)<span class='ylgVCe ob9lvb' role='text'>› qbittorrent › search-plugins › wiki />
+[57] (404,870)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[58] (404,870)<span  />
+		[59] (404,872)<span  />
+31 Jan 2026
+—
+Here you can find
+unofficial search engine plugins for qBittorrent
+that are made available by the community.
+[60] (280,978)<a class='vzmbzf' href='https://github.com/qbittorrent/search-plugins/wiki/unofficial-search-plugins#:~:text=Here%20you%20can%20find%20unofficial,made%20available%20by%20the%20community' />
+	[61] (280,978)<span >Read more />
+
+</current_dom>

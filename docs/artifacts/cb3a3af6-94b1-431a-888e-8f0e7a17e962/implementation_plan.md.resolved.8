@@ -1,0 +1,45 @@
+# Optimization Plan: RAW Performance
+
+## Goal
+Eliminate "clogging" during RAW file browsing by optimizing the loading pipeline.
+
+## Problem
+Currently, every RAW file is fully developed (debayered, interpolated, color corrected) on the CPU.
+- **Cost**: ~2-5 seconds per image.
+- **RAM**: ~500MB+ per image during processing.
+- **Result**: Scrolling grid causes CPU spike and lag.
+
+## Solution: Embedded Previews
+Most RAW files (CR2, NEF, ARW) contain a full-resolution JPEG preview embedded by the camera.
+- **Cost**: < 50ms per image.
+- **RAM**: Minimal (copying compressed JPEG bytes).
+- **Result**: Instant thumbnail generation.
+
+## Implementation Details
+
+### [AsyncImageProvider.cpp](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp)
+Modify the RAW loading logic:
+
+```cpp
+if (isRaw) {
+    LibRaw RawProcessor;
+    // 1. Try to open file
+    if (RawProcessor.open_file(path) == LIBRAW_SUCCESS) {
+        // 2. Try to unpack THUMBNAIL first (Embedded JPEG)
+        if (RawProcessor.unpack_thumb() == LIBRAW_SUCCESS) {
+             // Extract JPEG data from RawProcessor.imgdata.thumbnail
+             // Create QImage from data
+             return image;
+        }
+    }
+    // 3. Fallback to full decode (Slow) if thumb fails
+}
+```
+
+## "GPU Acceleration" Note
+The user asked for GPU decoding. While D3D11VA doesn't support RAW formats directly, switching to Embedded Preview is functionally superior for browsing speed (it effectively "outsources" the processing to the camera's original DSP).
+For the *Full Viewer*, we can queue a full decode in the background if higher quality is needed.
+
+## UI Updates
+- **Settings**: Added "RAW Acceleration" toggle in [StatsOverlay.qml](file:///d:/Dev/antigravity/resources/qml/StatsOverlay.qml) (connected to [SettingsHelper](file:///d:/Dev/antigravity/src/SettingsHelper.cpp#11-15)).
+- **Badge**: Added "RAW" badge in [GalleryViewTiles.qml](file:///d:/Dev/antigravity/resources/qml/GalleryViewTiles.qml) to differentiate RAW files from JPEGs.

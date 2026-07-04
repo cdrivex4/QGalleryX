@@ -1,0 +1,36 @@
+# UI & Naming Refinement Plan
+
+The goal is to transition the pipeline from generic naming (e.g., `final_1776007462.mp4`) to descriptive naming based on the source file, while enhancing the Production Ledger with direct filesystem access.
+
+## Proposed Changes
+
+### [Component Name] Pipeline Management
+
+#### [MODIFY] [pipeline.py](file:///c:/just-dub-it2/app/pipeline.py)
+- **Modify `Job` class**: Add `source_basename` attribute to store the human-readable filename (e.g., `Inception_2010.mp4`).
+- **Update `add_job`**: Capture the filename from `video_path` before it is copied to the workspace.
+- **Update `_run_translation_job`**: Change the final assembly destination from `final_{id}.mp4` to `{source_basename}_dubbed.mp4`.
+
+---
+
+### [Component Name] User Interface
+
+#### [MODIFY] [main_ui.py](file:///c:/just-dub-it2/app/main_ui.py)
+- **Fix ID Truncation**: Update the `get_status_table` function to display the full Job ID in the telemetry row.
+- **Add 'Open Folder' Logic**:
+    - Implement a server-side `open_output_folder(job_id)` function using `os.startfile` (Windows-specific) to open the specific output location.
+    - Add an "📂" icon to the "Actions" column in the Gradio HTML table.
+    - Wire the icon to call the backend function via Gradio's internal messaging or a dedicated button hidden in the "Maintenance" tab.
+
+## Open Questions
+- **Naming Conflicts**: If the same video is processed twice, the output will overwrite the previous one (e.g., `movie_dubbed.mp4`). Should I add a timestamp or keep it simple?
+- **Folder Opening**: `os.startfile` opens the folder. Would you prefer it selects the file specifically? (e.g., `explorer /select, "folder/file.mp4"`).
+
+## Verification Plan
+
+### Automated/Tool Verification
+- Run a 45s Mini-Test and verify the output folder contains a file named `original_video_dubbed.mp4` (or similar).
+- Verify the UI displays the full Job ID.
+
+### Manual Verification
+- Click the 📂 icon in the UI and confirm Windows Explorer opens to the correct location.

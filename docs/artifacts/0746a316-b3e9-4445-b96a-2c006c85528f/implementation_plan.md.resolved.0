@@ -1,0 +1,27 @@
+# Build System Improvement Plan
+
+## Goal Description
+Enhance the build system to ensure zero stale builds and correct sequential operations. This involves updating [build.ps1](file:///d:/Dev/antigravity/build.ps1) to support a full clean build and verifying [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt) dependencies.
+
+## User Review Required
+> [!IMPORTANT]
+> The [build.ps1](file:///d:/Dev/antigravity/build.ps1) script will be updated to default to a "clean" build for the `autogen` folders, but we might want to add a flag for a **full** clean (removing the entire `build` directory) to guarantee no stale CMake cache artifacts.
+
+## Proposed Changes
+
+### Build Scripts
+#### [MODIFY] [build.ps1](file:///d:/Dev/antigravity/build.ps1)
+- Add a `-Clean` switch to optionally remove the entire `build` directory.
+- Ensure `taskkill` waits for the process to actually exit.
+- Explicitly check for CMake errors at each step.
+
+### CMake Configuration
+#### [MODIFY] [CMakeLists.txt](file:///d:/Dev/antigravity/CMakeLists.txt)
+- (Optional) Ensure `libraw` dependency is correctly linked and included. (Already verified, but will double check if any other defines are needed).
+
+## Verification Plan
+
+### Automated Tests
+- Run [.\build.ps1](file:///d:/Dev/antigravity/build.ps1) and verify it builds successfully.
+- Run `.\build.ps1 -Clean` (if implemented) and verify it re-configures from scratch.
+- Verify the application runs after build.

@@ -1,0 +1,109 @@
+=== MODE: STANDARD DYNAMIC BUILD ===
+  -> Qt Kit: D:\Qt\6.9.3\mingw_64
+==========================================
+   SamsungGallery Build System
+==========================================
+Build Version: 1.0.92
+Timestamp: 2026-07-01 07:52:16
+[0/4] Verifying Dependencies...
+  FFmpeg binaries found.
+[1/4] Checking for running instances...
+  Killing appScrollBench...
+[1.5/4] Verifying File Locks & Recording Hashes...
+  Current Hash (appSamsungGallery.exe): 24112D15CFDE61CDCB02090019C3F05CF8CAA998519ADFA6A6E787B614A878F6
+  Current Hash (appScrollBench.exe): B13D0E09C3AE8041D00AA3B61094D6ECC217C3D7A61B34F463C26C33C3014D58
+[2/4] Cleaned autogen folders & removed old binary.
+[3/4] Building (Release)...
+  -> Configuring...
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:24 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:24 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  test_scrollbench/CMakeLists.txt:44 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  test_scrollbench/CMakeLists.txt:44 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done (4.9s)
+-- Generating done (0.5s)
+-- Build files have been written to: D:/Dev/antigravity/build
+  -> Compiling...
+[1/95] Copying appSamsungGallery qml sources into build dir
+[2/95] Copying appScrollBench qml sources into build dir
+[3/95] Automatic MOC and UIC for target appScrollBenchNet
+[4/93] Automatic MOC and UIC for target tst_scheduler
+[5/91] Automatic MOC and UIC for target tst_imagemodel
+[6/89] Automatic MOC and UIC for target tst_mft
+[7/87] Automatic MOC and UIC for target tst_automation
+[8/86] Automatic MOC and UIC for target tst_linkage
+[9/85] Running qmlimportscanner for appScrollBench
+[10/85] Automatic MOC and UIC for target appScrollBench
+[11/84] Running AUTOMOC file extraction for target appScrollBench
+[12/84] Running moc --collect-json for target appScrollBench
+[13/56] Running rcc for resource appScrollBench_raw_qml_0
+[14/56] Generating .rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.aotstats
+FAILED: test_scrollbench/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp test_scrollbench/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.aotstats D:/Dev/antigravity/build/test_scrollbench/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp D:/Dev/antigravity/build/test_scrollbench/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.aotstats 
+C:\WINDOWS\system32\cmd.exe /C "cd /D D:\Dev\antigravity\build\test_scrollbench && D:\Qt\Tools\CMake_64\bin\cmake.exe -E make_directory D:/Dev/antigravity/build/test_scrollbench/.rcc/qmlcache/appScrollBench_qml && D:\Dev\antigravity\build\.qt\bin\qt_setup_tool_path.bat D:/Qt/6.9.3/mingw_64/bin/qmlcachegen.exe --bare --resource-path /ScrollBench/qml/MainScrollBench.qml -I D:/Dev/antigravity/build/test_scrollbench -I D:/Qt/6.9.3/mingw_64/qml -i D:/Dev/antigravity/build/test_scrollbench/ScrollBench/qmldir --resource D:/Dev/antigravity/build/test_scrollbench/.qt/rcc/qmake_ScrollBench.qrc --resource D:/Dev/antigravity/build/test_scrollbench/.qt/rcc/appScrollBench_raw_qml_0.qrc --dump-aot-stats --module-id=ScrollBench(appScrollBench) -o D:/Dev/antigravity/build/test_scrollbench/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp D:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml"
+Error compiling qml file: D:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml:34:5: error: Property value set multiple times
+D:/Dev/antigravity/test_scrollbench/qml/MainScrollBench.qml:35:5: error: Property value set multiple times
+[15/56] Generating .rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.aotstats
+[16/56] Generating .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.aotstats
+[17/56] Running qmlimportscanner for appSamsungGallery
+[18/56] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[19/56] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+ninja: build stopped: subcommand failed.
+BUILD FAILED!
+Build Failed

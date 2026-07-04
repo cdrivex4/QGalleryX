@@ -1,0 +1,21 @@
+Downloading ruff (11.4MiB)
+Downloading pyright (6.1MiB)
+Downloading numpy (15.1MiB)
+Downloading virtualenv (7.2MiB)
+Downloading cryptography (3.6MiB)
+ Downloaded cryptography
+ Downloaded pyright
+ Downloaded virtualenv
+ Downloaded ruff
+ Downloaded numpy
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 114 packages in 11.93s
+[graphify] chunk 1/1 failed: the 'openai' package is required for this backend but is not installed. Install it with:  uv tool install "graphifyy[openai]" --force  (uv tool), or  pip install openai  (pip/venv install).
+[graphify] WARNING: 1/1 semantic chunk(s) failed — see errors above. Partial results returned.
+[graphify extract] error: all semantic chunks failed for backend 'openai' (1 uncached files) - see per-chunk errors above. If you see 'requires the X package', run `pip install X` and retry.
+[graphify extract] scanning H:\My Drive\UberHermes\hermes-core
+[graphify extract] found 5 code, 1 docs, 0 papers, 0 images
+[graphify extract] AST extraction on 5 code files...
+[graphify extract] semantic extraction on 1 files via openai...

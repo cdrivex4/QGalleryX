@@ -1,0 +1,41 @@
+
+    Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+    Q_PROPERTY(int scannedCount READ scannedCount NOTIFY scannedCountChanged)
+    Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY filterQueryChanged)
+>   Q_PROPERTY(int roleSectionDay READ roleSectionDay CONSTANT)
+>   Q_PROPERTY(int roleSectionWeek READ roleSectionWeek CONSTANT)
+>   Q_PROPERTY(int roleSectionMonth READ roleSectionMonth CONSTANT)
+>   Q_PROPERTY(int roleSectionYear READ roleSectionYear CONSTANT)
+  
+  public:
+    explicit ScrollBenchImageModel(QObject *parent = nullptr);
+    enum Roles {
+      FilePathRole = Qt::UserRole + 1,
+      FileNameRole,
+>     DateSectionRole,
+>     SectionDayRole,
+>     SectionMonthRole,
+>     SectionYearRole,
+>     SectionWeekRole,
+      ExifRole,
+      IsRawRole,
+      IsVideoRole, // Added for video detection
+    QString filterQuery() const { return m_filterQuery; }
+    void setFilterQuery(const QString &query);
+  
+>   int roleSectionDay() const { return SectionDayRole; }
+>   int roleSectionWeek() const { return SectionWeekRole; }
+>   int roleSectionMonth() const { return SectionMonthRole; }
+>   int roleSectionYear() const { return SectionYearRole; }
+  
+    Q_INVOKABLE QStringList getActiveDirectories() const;
+  
+      QString fileName;
+      QString color; // For synthetic test images
+      QDateTime date;
+>     QString sectionDay;
+      bool isLoaded = false;
+      bool isSelected = false;
+      bool isBurst = false;
+
+

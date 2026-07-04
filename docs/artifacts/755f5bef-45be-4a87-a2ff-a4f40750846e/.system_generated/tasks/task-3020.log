@@ -1,0 +1,17 @@
+
+            if (normF.startsWith(cleanPathPrefix, Qt::CaseInsensitive)) {
+              QString ext = QFileInfo(normF).suffix().toLower();
+              if (extensions.contains(ext)) {
+>               QString fileUri = "file:///" + normF;
+                QString currentDir =
+                    QDir::cleanPath(QFileInfo(normF).absolutePath());
+                currentDir = QDir::fromNativeSeparators(currentDir);
+          QFileInfo fileInfo = fileIt.fileInfo();
+          QString filePath = QDir::fromNativeSeparators(
+              QDir::cleanPath(fileInfo.absoluteFilePath()));
+>         QString fileUri = "file:///" + filePath;
+          QString currentDir = QDir::fromNativeSeparators(
+              QDir::cleanPath(fileInfo.dir().absolutePath()));
+  
+
+

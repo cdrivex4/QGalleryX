@@ -1,0 +1,2603 @@
+
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1aafd
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x44
+  Faulting application start time: 0x01dcbb097fcc0e3f
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 1de8a952-a1f7-4f2d-9d9c-47ded1981422
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[1]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-03-24T01:18:31.5690000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1aafd
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x44
+  Faulting application start time: 0x01dcbb097fcc0e3f
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: ffa3ebaf-a274-4ce7-a85f-3cb85f704a04
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[2]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-03-24T01:28:09.1030000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1ae6f
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7700
+  Faulting application start time: 0x01dcc332459df2be
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 4996b959-8fef-4a66-aefc-a62ba2424b66
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[1996]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-04-03T10:27:18.7210000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1ae6f
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x1fe8
+  Faulting application start time: 0x01dd01472ef6ee26
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 775232cf-2e69-4718-8ab4-8404dc374554
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11272]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:32:10.6800000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1ae6f
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x1fe8
+  Faulting application start time: 0x01dd01472ef6ee26
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: d1f11966-0dc5-4531-bba5-d3ca128f1ca7
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11273]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:32:12.4780000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1ae6f
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x1fe8
+  Faulting application start time: 0x01dd01472ef6ee26
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 2665d75a-94a9-4a67-bcd4-12a8fcdfc6c9
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11274]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:32:14.2750000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x69c1ae6f
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x1fe8
+  Faulting application start time: 0x01dd01472ef6ee26
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 8a5510d6-37e4-42b4-b434-23cf9fd14ab4
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11275]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T10:34:03.8470000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37860c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x744
+  Faulting application start time: 0x01dd01487049e618
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: a92002ee-869a-4a6c-b2fb-574fb25067a1
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11277]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:38:39.0210000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37860c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x744
+  Faulting application start time: 0x01dd01487049e618
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 918e9e86-1e49-47b8-b377-e9b759a55921
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11278]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T10:45:10.1960000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8b74
+  Faulting application start time: 0x01dd014aaed8dcda
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 536d925d-a648-42ca-bd85-d0e8c78bc14f
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11281]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:55:59.5430000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8158
+  Faulting application start time: 0x01dd014a9151a96b
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 6471aa81-e460-4f69-a873-30942a453750
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11282]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:56:00.4500000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8b74
+  Faulting application start time: 0x01dd014aaed8dcda
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 9f0f1281-51cf-4c8e-a5eb-acb0df77b7a8
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11283]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:56:01.4660000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8158
+  Faulting application start time: 0x01dd014a9151a96b
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 41b7f49f-0486-460f-b475-965dc12c1965
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11284]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:56:02.3620000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8b74
+  Faulting application start time: 0x01dd014aaed8dcda
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: f8df8176-ab78-4f54-b23a-c82321de68e5
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11285]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:56:03.2910000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8158
+  Faulting application start time: 0x01dd014a9151a96b
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 34bd1ce6-53e9-42b6-93e1-1c2901637e2a
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11286]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T10:56:05.1650000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37895c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8158
+  Faulting application start time: 0x01dd014a9151a96b
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 317f56ce-f67e-4c87-abf5-d0da6f9fb00a
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11287]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T11:00:36.6820000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a378c17
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x9ce4
+  Faulting application start time: 0x01dd014befbf6a19
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: cccee49f-bd6c-4997-b457-4adc76ad611f
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11289]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T11:09:23.0960000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37ad1d
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8aa0
+  Faulting application start time: 0x01dd016034f7b86a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: c130fdf9-a6c2-43ed-ac79-faaab4db6e8b
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11300]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:29:00.3870000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37ad1d
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8aa0
+  Faulting application start time: 0x01dd016034f7b86a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 371c080f-1561-4c84-9245-283f5d20549c
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11301]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:29:02.5760000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37ad1d
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8aa0
+  Faulting application start time: 0x01dd016034f7b86a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: bb7c2f7b-0268-4e0f-96df-4970c61c43ed
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11302]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:29:04.7500000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37ad1d
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8aa0
+  Faulting application start time: 0x01dd016034f7b86a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 29f9d9eb-2e0e-471f-94e1-630a907865a7
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11303]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:29:06.9310000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37ad1d
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8aa0
+  Faulting application start time: 0x01dd016034f7b86a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 72c44677-c204-4f40-96ff-972b3f89a330
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11304]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:29:09.1380000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37ad1d
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8aa0
+  Faulting application start time: 0x01dd016034f7b86a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: a7146fd8-15fc-42d4-a46f-48bdef5c304d
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11305]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T13:30:36.5950000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b165
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x819c
+  Faulting application start time: 0x01dd01631a53ff6e
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 04dd466d-e6ea-4ae2-a513-7f7d4bd2003d
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11308]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:49:10.5700000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b165
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x819c
+  Faulting application start time: 0x01dd01631a53ff6e
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 71dbd6a3-509e-4e34-badc-a8163134781b
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11309]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:49:12.8340000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b165
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x819c
+  Faulting application start time: 0x01dd01631a53ff6e
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 30a073ed-30e7-4a24-882a-23c49b231f09
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11310]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:49:15.0370000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b165
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x819c
+  Faulting application start time: 0x01dd01631a53ff6e
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: da129622-ed83-4aa1-b9c3-629dd4270124
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11311]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:49:17.2700000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b165
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x819c
+  Faulting application start time: 0x01dd01631a53ff6e
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: dcff92f1-6365-4d7f-94df-0d72c0435a47
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11312]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T13:49:19.4490000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b165
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x819c
+  Faulting application start time: 0x01dd01631a53ff6e
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 545f41bf-e334-493d-a6f1-285df86ba2e6
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11313]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T13:51:13.1620000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37b68b
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5548
+  Faulting application start time: 0x01dd01657aa2e36b
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 78eaf26d-1c2c-45f8-b02a-120c898efaeb
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11316]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T14:09:23.2250000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37c792
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x68b8
+  Faulting application start time: 0x01dd016fab17ac60
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 33866777-a9ec-4e61-bae5-8c51f056bd00
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11324]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T15:21:20.9120000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37c792
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x68b8
+  Faulting application start time: 0x01dd016fab17ac60
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 709baf00-7b66-4599-8cf6-ce9f5d4a9978
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11325]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T15:21:23.3590000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37c792
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x68b8
+  Faulting application start time: 0x01dd016fab17ac60
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 80b58f15-0dda-445d-b8d7-36b865c5f12c
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11326]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T15:21:25.5090000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37c792
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x68b8
+  Faulting application start time: 0x01dd016fab17ac60
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: e892da92-1b49-49de-8e09-d0ac74ad2d23
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11327]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T15:21:27.7530000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37c792
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x68b8
+  Faulting application start time: 0x01dd016fab17ac60
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 834f28df-f226-46c2-85c0-ed623b5a974a
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11328]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T15:21:29.8800000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37c792
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x68b8
+  Faulting application start time: 0x01dd016fab17ac60
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: a3810592-f156-4e12-995e-29e1d065be76
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11329]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T15:30:36.5740000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37d535
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8500
+  Faulting application start time: 0x01dd01789a923864
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 15d71f0c-c905-4201-9f82-ec9b56e79dab
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11335]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T16:23:00.2030000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37d535
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8500
+  Faulting application start time: 0x01dd01789a923864
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 34da7084-a6ba-429c-8bbf-9a25af733338
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11336]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T16:23:02.5820000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37d535
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8500
+  Faulting application start time: 0x01dd01789a923864
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: af969f92-426b-41be-98cc-26d61e875ee1
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11337]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-21T16:23:04.7280000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a37d535
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8500
+  Faulting application start time: 0x01dd01789a923864
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 32976612-1db0-472c-9d53-448d2330000a
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11338]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-21T16:23:34.1180000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385664
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23ec
+  Faulting application start time: 0x01dd01c449278ec4
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: a87c058e-eb0e-4e1b-a8e5-aafce4206a44
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11380]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T01:26:15.4540000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385664
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23ec
+  Faulting application start time: 0x01dd01c449278ec4
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: a37b7661-6950-45d1-8c93-47876b05add5
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11381]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T01:26:19.3130000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385664
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23ec
+  Faulting application start time: 0x01dd01c449278ec4
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: f5b7f60a-d0a4-44b7-bb9c-094194c1fad7
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11382]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T01:26:23.1640000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385664
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23ec
+  Faulting application start time: 0x01dd01c449278ec4
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 5fd63150-f367-4533-8e0b-a8e84a441567
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11383]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T01:26:26.9850000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385664
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23ec
+  Faulting application start time: 0x01dd01c449278ec4
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 08218dc2-d125-434e-b8cf-3ead82f13974
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11384]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T01:26:30.7490000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385664
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23ec
+  Faulting application start time: 0x01dd01c449278ec4
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 907b72ba-bd82-45c0-8e54-536f10be63ce
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11385]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-22T01:34:55.7800000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a385ec4
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x52d0
+  Faulting application start time: 0x01dd01f1e732a58a
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 3c1e135f-dbb5-4ce7-a850-aa833d006c95
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11408]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-22T07:00:37.3260000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a57a
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x287c
+  Faulting application start time: 0x01dd01f396680e06
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 19434e82-7270-4790-8b6f-ec9edcf3958b
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11410]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:05:11.3390000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a57a
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x287c
+  Faulting application start time: 0x01dd01f396680e06
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 7f7398fa-d6cf-4768-894c-d74a765cfb3b
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11411]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:05:13.3580000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a57a
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x287c
+  Faulting application start time: 0x01dd01f396680e06
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: c04e3636-a8c7-4086-879e-87b9ffe8291f
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11412]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:05:15.3930000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a57a
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x287c
+  Faulting application start time: 0x01dd01f396680e06
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 56ddac2b-be89-4c00-949f-9575b1e78d95
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11413]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:05:17.4300000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a57a
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x287c
+  Faulting application start time: 0x01dd01f396680e06
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: daba74e9-db51-402f-b0d9-5418d3e9cd16
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11414]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:05:19.6260000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a57a
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x287c
+  Faulting application start time: 0x01dd01f396680e06
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 052384d4-7a2c-4cdf-8d07-424865734192
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11415]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:23:57.9980000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a91e
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8dd0
+  Faulting application start time: 0x01dd01f60f2b2f21
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 5c59fa87-e389-42dd-9ef5-eeccc83e652d
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11416]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:24:00.1070000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a91e
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8dd0
+  Faulting application start time: 0x01dd01f60f2b2f21
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 8a7cc296-3147-4b32-aa85-a7b5a66a8e5c
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11417]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:24:02.2390000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a91e
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8dd0
+  Faulting application start time: 0x01dd01f60f2b2f21
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 57e6199a-fd2d-4b0b-a942-fb9e21ec901b
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11418]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:24:04.4680000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a91e
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8dd0
+  Faulting application start time: 0x01dd01f60f2b2f21
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 97cb3389-6859-488d-b863-dfe72d301958
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11419]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:24:06.5610000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a91e
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8dd0
+  Faulting application start time: 0x01dd01f60f2b2f21
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 887e87ba-ad57-438e-9de1-dcd2ab877879
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11420]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-06-22T07:24:08.6240000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a38a91e
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x8dd0
+  Faulting application start time: 0x01dd01f60f2b2f21
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 4fa0b4d4-25a8-49e3-99d8-1cda85b48982
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[11421]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-22T07:39:26.9230000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4416cc
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x00000000001895ef
+  Faulting process id: 0xf474
+  Faulting application start time: 0x01dd08c59b8360e6
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 6ed7ee1c-fbc4-41ce-8016-e7ca29b91031
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12287]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-06-30T23:30:32.1820000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a442f9c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5220
+  Faulting application start time: 0x01dd09090ab38de1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 72be6104-b9d5-4188-be1e-6566b8121f80
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12323]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T07:37:55.7150000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a442f9c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5220
+  Faulting application start time: 0x01dd09090ab38de1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 015aef13-93c2-4690-a534-6ced8fcdfcc6
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12324]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T07:37:57.5640000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a442f9c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5220
+  Faulting application start time: 0x01dd09090ab38de1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 133941af-edc0-4c6c-bb4a-19f72c870721
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12325]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T07:37:59.4280000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a442f9c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5220
+  Faulting application start time: 0x01dd09090ab38de1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: ede534e3-fcc8-4c21-a518-aa7c51382d02
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12326]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T07:38:01.3000000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a442f9c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5220
+  Faulting application start time: 0x01dd09090ab38de1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 8bf7bbfb-a4b9-48c7-b3cb-adb27e25b7e3
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12327]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T07:38:03.1540000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a442f9c
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x5220
+  Faulting application start time: 0x01dd09090ab38de1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 4f6f7a1c-6a7b-44f8-80ef-70f194ae6a82
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12328]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-01T07:45:25.5710000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7908
+  Faulting application start time: 0x01dd090fbc404170
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: c35b300a-7725-4e3d-878f-778aacc9a6a8
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12357]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:37:00.1010000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7908
+  Faulting application start time: 0x01dd090fbc404170
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: d14685c8-b975-4f4e-bd16-49d42dfbe32a
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12358]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:37:01.8250000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7908
+  Faulting application start time: 0x01dd090fbc404170
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 5499837e-0b99-47ae-bcfe-3522d3adb7bb
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12359]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:37:03.5530000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7908
+  Faulting application start time: 0x01dd090fbc404170
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: e16ea2b1-3aaa-48e3-96d2-5f39dcbf6697
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12360]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:37:05.2570000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7908
+  Faulting application start time: 0x01dd090fbc404170
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 4c15bdfe-a9ab-4e44-81e3-d44a1607cf80
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12361]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:37:06.9990000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x7908
+  Faulting application start time: 0x01dd090fbc404170
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 2ba43218-fd05-4237-9905-f7ee094f560b
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12362]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-01T14:37:09.1710000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0xc9c
+  Faulting application start time: 0x01dd094653782338
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 3d79a650-317d-49fc-a50d-576a7c511b55
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12364]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:43:44.5580000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0xc9c
+  Faulting application start time: 0x01dd094653782338
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 1d9fcaad-eca6-4d50-9c24-c16f8c889529
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12365]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:43:46.3670000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0xc9c
+  Faulting application start time: 0x01dd094653782338
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: d373deab-6050-4a49-a5b0-56076bec81fb
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12366]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:43:48.1840000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0xc9c
+  Faulting application start time: 0x01dd094653782338
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 247e59b1-c35b-40b9-8e33-42d3cf43255f
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12367]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:43:49.9610000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0xc9c
+  Faulting application start time: 0x01dd094653782338
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 926cd299-79da-4b12-b8d9-fd76ed8223a8
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12368]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T14:43:51.7920000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a448f43
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0xc9c
+  Faulting application start time: 0x01dd094653782338
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: f5886e57-31da-4c8f-a094-708450273ea5
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12369]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-01T14:53:26.6870000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a450ed9
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6104
+  Faulting application start time: 0x01dd0959652681ad
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: ed0c0762-ab9a-49f1-a308-802ccf4a1952
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12380]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T17:05:07.8050000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a450ed9
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6104
+  Faulting application start time: 0x01dd0959652681ad
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 946b1a88-a083-4824-b73b-5064980a88f4
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12381]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T17:05:09.6170000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a450ed9
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6104
+  Faulting application start time: 0x01dd0959652681ad
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 9b48a7cb-21ba-41ee-9ad5-0af038edd95c
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12382]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T17:05:11.4150000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a450ed9
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6104
+  Faulting application start time: 0x01dd0959652681ad
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 1a8e7575-3bd5-4802-a6c0-be1341cd4f47
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12383]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T17:05:13.2090000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a450ed9
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6104
+  Faulting application start time: 0x01dd0959652681ad
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 88569a21-2248-4e14-9613-36747decd5dc
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12384]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-01T17:05:15.0120000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a450ed9
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6104
+  Faulting application start time: 0x01dd0959652681ad
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: fe74ff85-19c5-430c-a63c-6d3c17feed60
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12385]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-01T17:15:32.8430000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a456cc8
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6788
+  Faulting application start time: 0x01dd0b9dcf7b6309
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 718a889b-82c3-403f-9e42-2e1e0e9dc6dc
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12676]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T14:24:02.3610000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a456cc8
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6788
+  Faulting application start time: 0x01dd0b9dcf7b6309
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: c535b04b-1e27-4365-8921-303b8114f66f
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12677]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T14:24:04.2550000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a456cc8
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6788
+  Faulting application start time: 0x01dd0b9dcf7b6309
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 196de521-d194-4d40-8b07-f8fdba93ed47
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12678]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T14:24:06.0780000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a456cc8
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6788
+  Faulting application start time: 0x01dd0b9dcf7b6309
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 138a7141-1e12-4910-9ea1-0523ef440b02
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12679]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T14:24:07.9470000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a456cc8
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6788
+  Faulting application start time: 0x01dd0b9dcf7b6309
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 21c80db0-a365-44f8-ad9d-881a219a7076
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12680]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T14:24:10.0890000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a456cc8
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6788
+  Faulting application start time: 0x01dd0b9dcf7b6309
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: d2737cf2-b44d-4094-b4d3-78c97b9b0632
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12681]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-04T14:34:56.1970000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a48f944
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6dbc
+  Faulting application start time: 0x01dd0baeef1b3fc3
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 687829ce-7559-4c6b-83d6-2f63f8246232
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12690]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T16:18:35.7490000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a48f944
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6dbc
+  Faulting application start time: 0x01dd0baeef1b3fc3
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: d969b5fa-9a89-44ca-ba3a-9b7fda99ba53
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12691]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-04T16:24:50.8680000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a48fa47
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6590
+  Faulting application start time: 0x01dd0bb0645100f1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: bb2e951b-9f85-44a3-a323-1674dcce9e12
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12693]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T16:32:53.8800000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a48fa47
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x6590
+  Faulting application start time: 0x01dd0bb0645100f1
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 56095948-aedc-470e-9346-1a4aa7effe73
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12694]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-04T16:33:51.7040000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x614c
+  Faulting application start time: 0x01dd0bb61cb382c5
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 0134e6ef-576d-41f9-9ca5-5a92bd3497d2
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12699]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:10:12.5410000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x614c
+  Faulting application start time: 0x01dd0bb61cb382c5
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 72e82a35-bc52-4c35-93aa-2c15bbbb9e74
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12700]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:10:15.2270000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x614c
+  Faulting application start time: 0x01dd0bb61cb382c5
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 5e3af6fe-9ba8-4635-ac4b-6bbfce6c4267
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12701]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:10:18.1990000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x614c
+  Faulting application start time: 0x01dd0bb61cb382c5
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 8b1a1c49-c3e2-4410-99c6-033ffee8d924
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12702]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:10:20.7810000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x614c
+  Faulting application start time: 0x01dd0bb61cb382c5
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 0c5236ee-35fc-42e9-a5a1-f4e33ca77a90
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12703]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:10:23.5520000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x614c
+  Faulting application start time: 0x01dd0bb61cb382c5
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: d78a55e7-3709-4d66-a6d8-3d09dc50a572
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12704]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:11:52.0840000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23f0
+  Faulting application start time: 0x01dd0bb67424c800
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: b281925a-017a-4ccb-9ae1-d67b8cefd0fe
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12705]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:11:55.5360000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23f0
+  Faulting application start time: 0x01dd0bb67424c800
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 8b43b4d4-a7fc-495a-a992-82d41a41eab3
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12706]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:11:58.3690000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23f0
+  Faulting application start time: 0x01dd0bb67424c800
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: 7c34307a-5ea5-462c-a99a-7c1a654e416a
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12707]:
+    Log Name: Application
+    Source: Application Error
+    Date: 2026-07-04T17:12:00.9560000Z
+    Event ID: 1000
+    Task: Application Crashing Events
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+    User Name: N/A
+    Computer: Quake2
+    Description: 
+> Faulting application name: appScrollBench.exe, version: 0.0.0.0, time stamp: 0x6a4904cb
+  Faulting module name: Qt6Core.dll, version: 6.9.3.0, time stamp: 0x68d37b43
+  Exception code: 0xc0000005
+  Fault offset: 0x0000000000244f2c
+  Faulting process id: 0x23f0
+  Faulting application start time: 0x01dd0bb67424c800
+> Faulting application path: D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+  Faulting module path: D:\Dev\antigravity\test_scrollbench\deploy\Qt6Core.dll
+  Report Id: e0686448-bc10-46d1-941d-65cd2db77b29
+  Faulting package full name: 
+  Faulting package-relative application ID: 
+  
+  Event[12708]:
+    Log Name: Application
+    Source: ESENT
+    Date: 2026-07-04T17:16:50.2360000Z
+    Event ID: 455
+    Task: Logging/Recovery
+    Level: Error
+    Opcode: Info
+    Keyword: Classic
+    User: N/A
+
+

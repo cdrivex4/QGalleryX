@@ -1,0 +1,76 @@
+
+                      Rectangle {
+                          anchors.fill: parent
+                          anchors.margins: 10
+>                         color: "#222"
+                          radius: 8
+                          
+                          Rectangle {
+                              anchors.left: parent.left
+                              anchors.right: parent.right
+                              height: width
+>                             color: "#333"
+                              radius: 8
+                              clip: true
+  
+                              
+                              Text {
+                                  text: name
+>                                 color: "white"
+                                  font.bold: true
+                                  elide: Text.ElideRight
+                                  width: parent.width
+                              
+                              Text {
+                                  text: count + " items"
+>                                 color: "#aaa"
+                                  font.pixelSize: 12
+                              }
+                          }
+              Text {
+                  anchors.centerIn: parent
+                  text: "No Albums Found"
+>                 color: "#666"
+                  visible: grid.count === 0
+                  font.pixelSize: 20
+              }
+                  Rectangle {
+                      Layout.fillWidth: true
+                      height: 50
+>                     color: "#222"
+                      
+                      RowLayout {
+                          anchors.fill: parent
+                          
+                          Text {
+                              text: albumName
+>                             color: "white"
+                              font.bold: true
+                              font.pixelSize: 18
+                          }
+                              onClicked: parent.parent.useSemanticView = !parent.parent.useSemanticView
+                              
+                              background: Rectangle {
+>                                 color: "#333333"; radius: 25
+>                                 border.color: "#444444"; border.width: 1
+                                  opacity: parent.pressed ? 0.7 : 0.9
+                              }
+                              contentItem: Text {
+>                                 text: parent.text; color: "white"; font.bold: true
+                                  horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                              }
+                          }
+                              }
+                              
+                              background: Rectangle {
+>                                 color: "#333333"; radius: 25
+>                                 border.color: "#444444"; border.width: 1
+                                  opacity: parent.pressed ? 0.7 : 0.9
+                              }
+                              contentItem: Text {
+>                                 text: parent.text; color: "white"; font.bold: true
+                                  horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter
+                              }
+                          }
+
+

@@ -1,0 +1,51 @@
+add
+Create notebook
+share
+settings
+Sources
+dock_to_right
+add
+Add sources
+search
+language
+keyboard_arrow_down
+search_spark
+keyboard_arrow_down
+arrow_forward
+docs
+Saved sources will appear here
+Click Add source above to add PDFs, websites, text, videos, or audio files. Or import a file directly from Google Drive.
+Chat
+tune
+more_vert
+upload
+Add a source to get started
+Upload a source
+0 sources
+arrow_forward
+Studio
+dock_to_left
+audio_magic_eraser
+Audio Overview
+tablet
+Slide Deck
+subscriptions
+Video Overview
+flowchart
+Mind Map
+auto_tab_group
+Reports
+cards_star
+Flashcards
+quiz
+Quiz
+stacked_bar_chart
+Infographic
+table_view
+Data Table
+edit_fix_auto
+Studio output will be saved here.
+After adding sources, click to add Audio Overview, Study Guide, Mind Map, and more!
+sticky_note_2
+Add note
+NotebookLM can be inaccurate; please double check its responses.

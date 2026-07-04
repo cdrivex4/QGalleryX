@@ -1,0 +1,42 @@
+# Task: High Performance MFT Scanning
+
+- [x] Research MFT Scanning
+    - [x] Investigate Windows FSCTL APIs for MFT access
+    - [x] Determine Admin privilege requirements
+    - [x] Search for open-source reference implementations (C++)
+- [x] Requirements Analysis
+    - [x] Create Implementation Plan (handling NTFS vs FAT/Network)
+    - [x] Design `FastScanner` abstraction
+- [x] Prototype Implementation
+    - [x] Create [tst_mft.cpp](file:///d:/Dev/antigravity/tests/tst_mft.cpp) to verify MFT access
+    - [x] Benchmark against standard `QDirIterator`
+- [x] Integration
+    - [x] Integrate into [AlbumModel](file:///d:/Dev/antigravity/src/AlbumModel.cpp#9-10)
+    - [x] Add "Run as Admin" manifest if needed
+
+# Task: ScrollBench Improvements
+- [x] Integrate MFT Scanner into ScrollBench
+    - [x] Update `appScrollBench` CMake target
+    - [x] Update [ScrollBenchImageModel](file:///d:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp#17-30) to use [FastVolumeScanner](file:///d:/Dev/antigravity/src/FastVolumeScanner.h#17-42)
+- [x] **ScrollBench: Fix Album View** <!-- id: 4 -->
+- [x] **ScrollBench: Transfer UI Styles** <!-- id: 5 -->
+    - [ ] Port rounded sliders and selectors from Main App
+    - [ ] Update ScrollBench Settings/Stats overlay styles
+
+# Completed Tasks (TDR Fix)
+- [x] Analyze memory dump/crash symptoms (BBADBEEF/TDR)
+- [x] Reduce [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#44-110) video concurrency (4 -> 1)
+- [x] Port [FrameBudgetScheduler](file:///d:/Dev/antigravity/test_scrollbench/src/FrameBudgetScheduler.cpp#5-14) from ScrollBench to Main App
+- [x] Integrate [FrameBudgetScheduler](file:///d:/Dev/antigravity/test_scrollbench/src/FrameBudgetScheduler.cpp#5-14) into [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#44-110)
+- [x] Fix compilation errors in [main.cpp](file:///d:/Dev/antigravity/src/main.cpp) and [AsyncImageProvider](file:///d:/Dev/antigravity/src/AsyncImageProvider.h#44-110) headers
+- [x] Verify Build (Rebuild after syntax fixes)
+- [x] Update Documentation (Completed)
+
+# Task: Outstanding Work
+- [ ] **Cleanup & Stability**
+    - [ ] Fix startup null reference warning in `Main.qml`
+    - [ ] Remove hardcoded test paths (e.g., "I:/")
+- [ ] **Video Playback**
+    - [ ] Implement video player in `PhotoViewer.qml` (replace placeholder)
+    - [ ] Ensure hardware acceleration is used
+    - [ ] Handle video audio muting in gallery view

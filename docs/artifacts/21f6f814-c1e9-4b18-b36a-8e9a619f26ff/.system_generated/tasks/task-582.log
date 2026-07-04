@@ -1,0 +1,29 @@
+Running Cosmological Fit against Planck 2018...
+Planck Torsion Best Fit:  eta_tor = 6.610696e-20
+Planck Torsion 1-sigma Upper Limit: < 3.299906e-16
+Planck Torsion 2-sigma Upper Limit: < 7.210798e-16
+
+Running Compact Object Constraints against PSR J0740+6620...
+  eta =  0.0 | Max Mass = 2.196 M_sun | Max Redshift = 0.330 | 1.4 M_sun Redshift = 0.115
+  eta =  1.8 | Max Mass = 2.185 M_sun | Max Redshift = 0.327 | 1.4 M_sun Redshift = 0.116
+  eta =  3.7 | Max Mass = 2.174 M_sun | Max Redshift = 0.327 | 1.4 M_sun Redshift = 0.117
+  eta =  5.5 | Max Mass = 2.163 M_sun | Max Redshift = 0.324 | 1.4 M_sun Redshift = 0.118
+  eta =  7.4 | Max Mass = 2.151 M_sun | Max Redshift = 0.324 | 1.4 M_sun Redshift = 0.119
+  eta =  9.2 | Max Mass = 2.140 M_sun | Max Redshift = 0.322 | 1.4 M_sun Redshift = 0.119
+  eta = 11.1 | Max Mass = 2.128 M_sun | Max Redshift = 0.321 | 1.4 M_sun Redshift = 0.120
+  eta = 12.9 | Max Mass = 2.116 M_sun | Max Redshift = 0.319 | 1.4 M_sun Redshift = 0.122
+  eta = 14.7 | Max Mass = 2.104 M_sun | Max Redshift = 0.317 | 1.4 M_sun Redshift = 0.123
+  eta = 16.6 | Max Mass = 2.092 M_sun | Max Redshift = 0.316 | 1.4 M_sun Redshift = 0.124
+  eta = 18.4 | Max Mass = 2.081 M_sun | Max Redshift = 0.329 | 1.4 M_sun Redshift = 0.125
+  eta = 20.3 | Max Mass = 2.069 M_sun | Max Redshift = 0.328 | 1.4 M_sun Redshift = 0.126
+  eta = 22.1 | Max Mass = 2.057 M_sun | Max Redshift = 0.327 | 1.4 M_sun Redshift = 0.127
+  eta = 23.9 | Max Mass = 2.045 M_sun | Max Redshift = 0.325 | 1.4 M_sun Redshift = 0.128
+  eta = 25.8 | Max Mass = 2.033 M_sun | Max Redshift = 0.322 | 1.4 M_sun Redshift = 0.129
+  eta = 27.6 | Max Mass = 2.021 M_sun | Max Redshift = 0.322 | 1.4 M_sun Redshift = 0.130
+  eta = 29.5 | Max Mass = 2.009 M_sun | Max Redshift = 0.320 | 1.4 M_sun Redshift = 0.131
+  eta = 31.3 | Max Mass = 1.996 M_sun | Max Redshift = 0.318 | 1.4 M_sun Redshift = 0.133
+  eta = 33.2 | Max Mass = 1.983 M_sun | Max Redshift = 0.316 | 1.4 M_sun Redshift = 0.134
+  eta = 35.0 | Max Mass = 1.971 M_sun | Max Redshift = 0.330 | 1.4 M_sun Redshift = 0.135
+PSR J0740+6620 1-sigma constraint on EoS-softening: eta < 29.25
+
+Observational analysis complete. Plot saved successfully to C:\Users\curtis\.gemini\antigravity-ide\brain\21f6f814-c1e9-4b18-b36a-8e9a619f26ff\ecsk_observational_constraints.png

@@ -1,0 +1,20 @@
+
+    }, Qt::DirectConnection);
+  }
+  
+> void FastImageItem::setFillMode(int mode) {
+>   if (m_fillMode == mode) return;
+>   m_fillMode = mode;
+>   emit fillModeChanged();
+    update();
+  }
+  
+      // Calculate aspect ratio preserving crop
+      QRectF targetRect(0, 0, width(), height());
+      
+>     if (m_fillMode == 1) { // PreserveAspectCrop
+        double itemAspect = width() / height();
+        double imageAspect = (double)m_image.width() / m_image.height();
+        
+
+

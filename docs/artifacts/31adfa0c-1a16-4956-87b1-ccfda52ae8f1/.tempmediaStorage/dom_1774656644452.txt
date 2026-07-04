@@ -1,0 +1,169 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (945,101)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (977,101)<a aria-label='Google Account: Will Turner  
+(willuorwontu464@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/notebook/e24f7ca5-dd81-43ff-b8b3-17c774010c6d&ec=GBRAmgU' role='button' />
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+[2] (672,28)<a href='https://x.com/NotebookLM'>X />
+or
+[3] (703,28)<a href='https://discord.com/channels/1124402182171672732/1294057633334165596'>Discord />
+for updates.
+[4] (25,101)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[5] (25,101)<labs-tailwind-logo  />
+		[6] (25,101)<img  />
+[7] (161,101)<input class='title-input mat-title-large ng-untouched ng-pristine ng-valid' />
+[8] (730,101)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[9] (823,101)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed extendable-button-extended'>share />
+	share
+	Share
+[10] (892,101)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed extendable-button-extended'>settings />
+	settings
+	Settings
+[11] (40,179)<span >Sources />
+[12] (374,179)<button class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[13] (374,178)<mat-icon class='mat-icon notranslate material-symbols-outlined google-symbols mat-icon-no-color' role='img'>collapse_content />
+[14] (145,264)<a class='source-title-link ng-star-inserted'>Official Gazette Republic of Seychelles />
+	Official Gazette Republic of Seychelles
+[15] (362,264)<button aria-label='Open in new tab' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger source-link-button mat-unthemed ng-star-inserted' />
+	[16] (362,264)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>open_in_new />
+button_magic
+Source guide
+[17] (352,342)<button aria-label='Close source guide' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger open-source-guide-button mat-primary' />
+	[18] (352,342)<mat-icon class='mat-icon notranslate icon google-symbols mat-icon-no-color' role='img'>arrow_drop_up />
+[19] (198,547)<div class='source-guide-rows ng-star-inserted' scrollable='true' />
+	This digital platform serves as the
+	authoritative public record
+	for the government of Seychelles, offering a comprehensive archive of the nation's legal and administrative updates. The site organizes critical documents into distinct categories, including
+	legislative acts, proposed bills, and statutory instruments
+	, which allow citizens to track everything from penal code amendments to environmental regulations. By providing a searchable database of
+	official gazettes
+	, the portal ensures that the latest governmental decisions and regulatory changes remain
+	transparent and accessible
+	to the general public. Ultimately, this resource functions as a
+	vital repository for governance
+	, documenting the evolving legal framework and formal announcements of the Republic of Seychelles.
+	Official Gazette
+	Legislative Acts
+	Government Bills
+	Statutory Instruments
+	Republic of Seychelles
+[20] (201,863)<div class='scroll-area ng-star-inserted' scrollable='true' />
+	Official Gazette Republic of Seychelles
+	[21] (70,819)<a class='ng-star-inserted' href='https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.gazette.sc%2F%23main-content'>Skip to main content />
+	[22] (52,864)<a class='ng-star-inserted' href='https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.gazette.sc%2F'>Home />
+	[23] (99,908)<a class='ng-star-inserted' href='https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.gazette.sc%2Fabout-official-gazette'>About the Official Gazette />
+	[24] (107,953)<a class='ng-star-inserted' href='https://www.google.com/url?sa=E&q=https%3A%2F%2Fwww.gazette.sc%2Fhow-publish-gazette'>How to publish in the Gazette />
+	Subscription
+[25] (391,557)<div  />
+Chat
+[26] (736,179)<button aria-label='Configure notebook' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger configure-settings-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[27] (736,178)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>tune />
+[28] (762,179)<button aria-label='Chat options' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[29] (762,178)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>more_vert />
+[30] (588,537)<div class='chat-panel-content' scrollable='true' />
+[31] (543,892)<textarea aria-label='Query box' class='cdk-textarea-autosize mat-mdc-autocomplete-trigger query-box-input ng-untouched ng-pristine ng-invalid' placeholder='Start typing...' />
+44 sources
+arrow_forward
+[32] (785,557)<div  />
+Studio
+[33] (978,179)<button aria-label='Collapse studio panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-studio-panel-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[34] (978,178)<mat-icon class='mat-icon notranslate material-symbols-outlined mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>dock_to_left />
+[35] (844,275)<div aria-label='Audio Overview' class='mat-mdc-tooltip-trigger blue create-artifact-button-container mat-label-medium' role='button' />
+	[36] (844,275)<span  />
+		[37] (829,275)<span  />
+			[38] (829,258)<span  />
+				[39] (813,258)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>audio_magic_eraser />
+			[40] (829,292)<span >Audio Overview />
+		[41] (873,275)<div  />
+			[42] (873,275)<button aria-label='Customize Audio Overview' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[43] (873,277)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[44] (938,275)<div aria-label='Slide Deck' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium yellow' role='button' />
+	[45] (938,275)<span  />
+		[46] (921,275)<span  />
+			[47] (921,260)<span  />
+				[48] (907,260)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>tablet />
+				[49] (930,260)<div >BETA />
+			[50] (921,292)<span >Slide Deck />
+		[51] (966,275)<div  />
+			[52] (966,275)<button aria-label='Customize Slide Deck' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[53] (966,277)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[54] (844,364)<div aria-label='Video Overview' class='mat-mdc-tooltip-trigger create-artifact-button-container green mat-label-medium' role='button' />
+	[55] (844,364)<span  />
+		[56] (829,364)<span  />
+			[57] (829,347)<span  />
+				[58] (813,347)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>subscriptions />
+			[59] (829,381)<span >Video Overview />
+		[60] (875,364)<div  />
+			[61] (875,367)<mat-icon class='mat-icon notranslate edit-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color ng-star-inserted' role='img'>chevron_forward />
+[62] (938,364)<div aria-label='Mind Map' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium pink' role='button' />
+	[63] (938,364)<span  />
+		[64] (920,364)<span  />
+			[65] (920,347)<span  />
+				[66] (907,347)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>flowchart />
+			[67] (920,381)<span >Mind Map />
+[68] (844,454)<div aria-label='Reports' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium yellow' role='button' />
+	[69] (844,454)<span  />
+		[70] (823,454)<span  />
+			[71] (823,437)<span  />
+				[72] (813,437)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>auto_tab_group />
+			[73] (823,470)<span >Reports />
+		[74] (875,454)<div  />
+			[75] (875,456)<mat-icon class='mat-icon notranslate edit-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color ng-star-inserted' role='img'>chevron_forward />
+[76] (938,454)<div aria-label='Flashcards' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium orange' role='button' />
+	[77] (938,454)<span  />
+		[78] (922,454)<span  />
+			[79] (922,437)<span  />
+				[80] (907,437)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>cards_star />
+			[81] (922,470)<span >Flashcards />
+		[82] (966,454)<div  />
+			[83] (966,454)<button aria-label='Customize Flashcards' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[84] (966,456)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[85] (844,543)<div aria-label='Quiz' class='mat-mdc-tooltip-trigger create-artifact-button-container cyan mat-label-medium' role='button' />
+	[86] (844,543)<span  />
+		[87] (816,543)<span  />
+			[88] (816,526)<span  />
+				[89] (813,526)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>quiz />
+			[90] (816,560)<span >Quiz />
+		[91] (873,543)<div  />
+			[92] (873,543)<button aria-label='Customize Quiz' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[93] (873,545)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[94] (938,543)<div aria-label='Infographic' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium pink' role='button' />
+	[95] (938,543)<span  />
+		[96] (922,543)<span  />
+			[97] (922,528)<span  />
+				[98] (907,528)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>stacked_bar_chart />
+				[99] (932,528)<div >BETA />
+			[100] (922,560)<span >Infographic />
+		[101] (966,543)<div  />
+			[102] (966,543)<button aria-label='Customize Infographic' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[103] (966,545)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[104] (844,632)<div aria-label='Data Table' class='mat-mdc-tooltip-trigger blue create-artifact-button-container mat-label-medium' role='button' />
+	[105] (844,632)<span  />
+		[106] (828,632)<span  />
+			[107] (828,616)<span  />
+				[108] (813,616)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>table_view />
+			[109] (828,649)<span >Data Table />
+		[110] (873,632)<div  />
+			[111] (873,632)<button aria-label='Customize Data Table' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[112] (873,635)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[113] (891,762)<div  />
+	[114] (891,762)<button class='mdc-button mat-mdc-button-base artifact-stretched-button mat-mdc-button mat-unthemed' />
+		[115] (891,762)<span  />
+	auto_tab_group
+	Policy Alignment Roadmap: Integrating Sustainable Finance into National Debt and Development Frameworks (2024–2028)
+	Policy Alignment Roadmap · 42 sources ·  21m ago
+	[116] (964,762)<div  />
+		[117] (964,762)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger artifact-more-button mat-unthemed' />
+			[118] (964,762)<mat-icon class='mat-icon notranslate icon google-symbols mat-icon-no-color' role='img'>more_vert />
+[119] (891,918)<button class='mdc-button mat-mdc-button-base add-note-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>sticky_note_2
+Add note />
+	sticky_note_2
+	Add note
+NotebookLM can be inaccurate; please double check its responses.
+
+</current_dom>

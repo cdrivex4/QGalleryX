@@ -1,0 +1,19 @@
+
+      return item.isSelected;
+    case IsBurstRole:
+      return item.isBurst;
+>   case SectionDayRole: {
+      return item.sectionDay;
+    }
+>   case SectionMonthRole: {
+      return item.date.date().toString("MMMM yyyy");
+    }
+>   case SectionYearRole: {
+      return item.date.date().toString("yyyy");
+    }
+>   case SectionWeekRole: {
+      int year = item.date.date().year();
+      int week = item.date.date().weekNumber();
+      return QString("%1 - Week %2").arg(year).arg(week);
+
+

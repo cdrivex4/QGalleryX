@@ -1,0 +1,139 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (945,101)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products' role='button' />
+[1] (977,101)<a aria-label='Google Account: Will Turner  
+(willuorwontu464@gmail.com)' class='gb_B gb_0a gb_1' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://notebooklm.google.com/notebook/e24f7ca5-dd81-43ff-b8b3-17c774010c6d&ec=GBRAmgU' role='button' />
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+[2] (672,28)<a href='https://x.com/NotebookLM'>X />
+or
+[3] (703,28)<a href='https://discord.com/channels/1124402182171672732/1294057633334165596'>Discord />
+for updates.
+[4] (25,101)<a aria-label='NotebookLM Homepage' class='logo-link' href='/' />
+	[5] (25,101)<labs-tailwind-logo  />
+		[6] (25,101)<img  />
+[7] (161,101)<input class='title-input mat-title-large ng-untouched ng-pristine ng-valid' />
+[8] (730,101)<button aria-label='Create notebook' class='mdc-button mat-mdc-button-base create-notebook-button mat-tonal-button mat-unthemed ng-star-inserted'>add />
+	add
+	Create notebook
+[9] (823,101)<button aria-label='Share notebook' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed extendable-button-extended'>share />
+	share
+	Share
+[10] (892,101)<button aria-label='Settings' class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger extendable-button mat-tonal-button mat-unthemed extendable-button-extended'>settings />
+	settings
+	Settings
+Sources
+[11] (243,179)<button aria-label='Collapse source panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-source-panel-button label-medium-button ng-tns-c84049144-0 mat-unthemed' />
+	[12] (243,178)<mat-icon class='mat-icon notranslate material-symbols-outlined google-symbols mat-icon-no-color' role='img'>dock_to_right />
+[13] (133,602)<div class='source-panel-content ng-tns-c84049144-0 ng-star-inserted' scrollable='true' />
+[14] (260,557)<div  />
+Chat
+[15] (692,179)<button aria-label='Configure notebook' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger configure-settings-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[16] (692,178)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>tune />
+[17] (718,179)<button aria-label='Chat options' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[18] (718,178)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>more_vert />
+[19] (500,313)<div class='chat-panel-content' scrollable='true' />
+[20] (456,669)<textarea aria-label='Query box' class='cdk-textarea-autosize mat-mdc-autocomplete-trigger query-box-input ng-untouched ng-dirty ng-valid' placeholder='Start typing...' />
+44 sources
+[21] (700,895)<button aria-label='Submit' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base submit-button outset-focus-ring mat-unthemed' />
+	[22] (700,895)<mat-icon class='mat-icon notranslate mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>arrow_forward />
+[23] (740,557)<div  />
+Studio
+[24] (978,179)<button aria-label='Collapse studio panel' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-tooltip-trigger toggle-studio-panel-button label-medium-button ng-tns-c84049144-0 mat-unthemed ng-star-inserted' />
+	[25] (978,178)<mat-icon class='mat-icon notranslate material-symbols-outlined mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>dock_to_left />
+[26] (811,275)<div aria-label='Audio Overview' class='mat-mdc-tooltip-trigger blue create-artifact-button-container mat-label-medium' role='button' />
+	[27] (811,275)<span  />
+		[28] (793,275)<span  />
+			[29] (793,258)<span  />
+				[30] (769,258)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>audio_magic_eraser />
+			[31] (793,292)<span >Audio Overview />
+		[32] (850,275)<div  />
+			[33] (850,275)<button aria-label='Customize Audio Overview' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[34] (850,277)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[35] (927,275)<div aria-label='Slide Deck' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium yellow' role='button' />
+	[36] (927,275)<span  />
+		[37] (899,275)<span  />
+			[38] (899,260)<span  />
+				[39] (884,260)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>tablet />
+				[40] (908,260)<div >BETA />
+			[41] (899,292)<span >Slide Deck />
+		[42] (966,275)<div  />
+			[43] (966,275)<button aria-label='Customize Slide Deck' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[44] (966,277)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[45] (811,364)<div aria-label='Video Overview' class='mat-mdc-tooltip-trigger create-artifact-button-container green mat-label-medium' role='button' />
+	[46] (811,364)<span  />
+		[47] (792,364)<span  />
+			[48] (792,347)<span  />
+				[49] (769,347)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>subscriptions />
+			[50] (792,381)<span >Video Overview />
+		[51] (853,364)<div  />
+			[52] (853,367)<mat-icon class='mat-icon notranslate edit-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color ng-star-inserted' role='img'>chevron_forward />
+[53] (927,364)<div aria-label='Mind Map' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium pink' role='button' />
+	[54] (927,364)<span  />
+		[55] (897,364)<span  />
+			[56] (897,347)<span  />
+				[57] (884,347)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>flowchart />
+			[58] (897,381)<span >Mind Map />
+[59] (811,454)<div aria-label='Reports' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium yellow' role='button' />
+	[60] (811,454)<span  />
+		[61] (778,454)<span  />
+			[62] (778,437)<span  />
+				[63] (769,437)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>auto_tab_group />
+			[64] (778,470)<span >Reports />
+		[65] (853,454)<div  />
+			[66] (853,456)<mat-icon class='mat-icon notranslate edit-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color ng-star-inserted' role='img'>chevron_forward />
+[67] (927,454)<div aria-label='Flashcards' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium orange' role='button' />
+	[68] (927,454)<span  />
+		[69] (899,454)<span  />
+			[70] (899,437)<span  />
+				[71] (884,437)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>cards_star />
+			[72] (899,470)<span >Flashcards />
+		[73] (966,454)<div  />
+			[74] (966,454)<button aria-label='Customize Flashcards' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[75] (966,456)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[76] (811,543)<div aria-label='Quiz' class='mat-mdc-tooltip-trigger create-artifact-button-container cyan mat-label-medium' role='button' />
+	[77] (811,543)<span  />
+		[78] (772,543)<span  />
+			[79] (772,526)<span  />
+				[80] (769,526)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>quiz />
+			[81] (772,560)<span >Quiz />
+		[82] (850,543)<div  />
+			[83] (850,543)<button aria-label='Customize Quiz' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[84] (850,545)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[85] (927,543)<div aria-label='Infographic' class='mat-mdc-tooltip-trigger create-artifact-button-container mat-label-medium pink' role='button' />
+	[86] (927,543)<span  />
+		[87] (900,543)<span  />
+			[88] (900,528)<span  />
+				[89] (884,528)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>stacked_bar_chart />
+				[90] (911,528)<div >BETA />
+			[91] (900,560)<span >Infographic />
+		[92] (966,543)<div  />
+			[93] (966,543)<button aria-label='Customize Infographic' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[94] (966,545)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[95] (811,632)<div aria-label='Data Table' class='mat-mdc-tooltip-trigger blue create-artifact-button-container mat-label-medium' role='button' />
+	[96] (811,632)<span  />
+		[97] (783,632)<span  />
+			[98] (783,616)<span  />
+				[99] (769,616)<mat-icon class='mat-icon notranslate artifact-icon google-symbols mat-icon-no-color ng-star-inserted' role='img'>table_view />
+			[100] (783,649)<span >Data Table />
+		[101] (850,632)<div  />
+			[102] (850,632)<button aria-label='Customize Data Table' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base edit-button edit-button-always-visible mat-unthemed ng-star-inserted' />
+				[103] (850,635)<mat-icon class='mat-icon notranslate edit-button-icon mat-icon-rtl-mirror google-symbols mat-icon-no-color' role='img'>chevron_forward />
+[104] (869,762)<div  />
+	[105] (869,762)<button class='mdc-button mat-mdc-button-base artifact-stretched-button mat-mdc-button mat-unthemed' />
+		[106] (869,762)<span  />
+	auto_tab_group
+	Policy Alignment Roadmap: Integrating Sustainable Finance into National Debt and Development Frameworks (2024–2028)
+	Policy Alignment Roadmap · 42 sources ·  21m ago
+	[107] (964,762)<div  />
+		[108] (964,762)<button aria-label='More' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base mat-mdc-menu-trigger mat-mdc-tooltip-trigger artifact-more-button mat-unthemed' />
+			[109] (964,762)<mat-icon class='mat-icon notranslate icon google-symbols mat-icon-no-color' role='img'>more_vert />
+[110] (869,918)<button class='mdc-button mat-mdc-button-base add-note-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>sticky_note_2
+Add note />
+	sticky_note_2
+	Add note
+NotebookLM can be inaccurate; please double check its responses.
+
+</current_dom>

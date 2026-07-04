@@ -1,0 +1,19 @@
+
+                              anchors.fill: parent
+                              visible: settings.useFastImage
+>                             source: {
+                                  if (!settings.useFastImage) return "";
+                                  var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
+                              anchors.fill: parent
+                              visible: !settings.useFastImage
+>                             source: {
+                                  if (settings.useFastImage) return "";
+                                  var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
+                          
+                          property bool isLoading: settings.useFastImage ? thumbFast.isLoading : (thumbStd.status === 
+Image.Loading)
+>                         property string activeSource: settings.useFastImage ? thumbFast.source : thumbStd.source    
+                          Rectangle {
+                              anchors.fill: parent; color: "#222"
+
+

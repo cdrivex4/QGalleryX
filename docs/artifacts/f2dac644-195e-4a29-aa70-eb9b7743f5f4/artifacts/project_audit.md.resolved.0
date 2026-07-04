@@ -1,0 +1,218 @@
+# Gemini Finance — Project Takeover Audit
+
+## Executive Summary
+
+The project **builds and passes its single test**, but the previous AI delivered a **skeleton demo** dressed up as a working product. The `SKILL.md` specification is **excellent** — it's a genuinely well-architected 1,072-line domain knowledge base for a Seychelles-context AI Chartered Accountant application. The problem is that almost none of it is actually implemented. What exists is a thin Electron shell with stub services that don't follow the spec.
+
+---
+
+## What Was Supposed To Be Built (per SKILL.md)
+
+An **interactive, AI-driven Chartered Accountant application** that:
+
+1. **Ingests** bank statement screenshots/PDFs/CSVs via OCR (Tesseract) and table parsing
+2. **Classifies** transactions using a 5-step decision tree against Seychelles entities, keywords, and a Chart of Accounts
+3. **Analyses** spending patterns with 8+ individual metrics and 9+ org metrics, benchmarked against NBS Seychelles household data
+4. **Projects** future cashflow using SARIMA + macro indicators from CBS, NBS, STB with 3-scenario bands
+5. **Reports** with structured sections (8 for individuals, 10 for organisations), quality checks, and mandatory disclaimer
+6. **Manages personas** — personal, business, offshore entity profiles that persist
+7. **Serves an Agent API** for external AI/tool integration
+8. **Runs portably** as a standalone Electron `.exe` with data separation
+
+---
+
+## What Actually Exists
+
+### ✅ What Works
+
+| Component | Status | Notes |
+|---|---|---|
+| Electron scaffold | ✅ Working | electron-vite + React + TypeScript boots correctly |
+| Build pipeline | ✅ Working | `npm run build` succeeds, portable build scripts exist |
+| `/dist/` compiled JSONs | ✅ Complete | All 10 artifacts compiled correctly from SKILL.md |
+| Basic OCR wrapper | ⚠️ Partial | Tesseract.js wrapper exists but no pre-processing pipeline |
+| Table parser | ⚠️ Partial | Regex-based, no bank layout detection |
+| Classification service | ⚠️ Partial | Entity + keyword lookup works, but missing steps 3-5 of decision tree |
+| Analysis service | ⚠️ Minimal | Only totals + category sums — 3 of 17 required metrics |
+| Projection service | ❌ Stub | Hardcoded linear math with mock data — not SARIMA |
+| Reporting service | ❌ Stub | JSON dump only — no sections, no disclaimer template |
+| Agent API | ❌ Stub | Single `/api/transactions` endpoint that reads files |
+| UI/UX | ❌ Basic | Unstyled default Electron; no design system |
+
+### ❌ What's Completely Missing
+
+| Component | Spec Reference | Impact |
+|---|---|---|
+| **Persona system** (personal/business/offshore) | SKILL.md Part 8 pre-flight | **Critical** — the entire app hinges on entity context |
+| **Data persistence layer** | RESUME.md #5 | No database, no write-back — everything is in-memory only |
+| **OCR pre-processing** (grayscale, deskew, denoise, binarise, upscale) | Part 2.2 | Images will OCR poorly without this |
+| **Bank layout detection** (SCB/MCB/Nouvobanq column mapping) | Part 2.3 | Table parser guesses instead of detecting |
+| **Recurrence detection** | Part 1.3, Step 3 | No recurring transaction detection |
+| **Special flags** (round amounts, FX, short descriptions) | Part 1.3, Step 4 | Not implemented |
+| **Balance validation** | Part 7.1, CHECK 01 | Running balance check is missing |
+| **Macro indicator fetch/cache** | Part 4.3 | Fetch decision tree exists in spec but not in code |
+| **SARIMA projection engine** | Part 4.1 | Replaced with `lastValue * (1 + 0.01 * i)` |
+| **Sector seasonality adjustment** | Part 3.3 | Not applied to any analysis or projection |
+| **Report generation** (PDF/XLSX) | Parts 6 + 7 | Only JSON dump exists |
+| **Review queue** | Part 1.3, RULE 06 | No human-in-the-loop for low-confidence transactions |
+| **Entity management UI** | RESUME.md #3 | No way to add/edit entities from the app |
+| **Pre-flight checklist** | Part 8 | Never triggered before operations |
+| **Tax rate verification** | Part 1.6 | `verified_date` is null, no check is performed |
+| **Mandatory disclaimer** | Part 7.2 | Hardcoded partial text in ProjectionView, not from `rules_reporting.json` |
+| **Privacy/consent flow** | Part 2.2 | No opt-in for cloud OCR, no data handling consent |
+| **CSS design system** | — | 290 lines of basic utility CSS, no design tokens, no dark mode |
+
+---
+
+## Critical Code Issues
+
+### 1. `AnalysisService.ts` — Uses `parseFloat` for Money
+
+```typescript
+// LINE 18 — VIOLATION of SKILL.md RULE 05
+const amount = parseFloat(tx.debit || tx.credit || '0');
+```
+
+SKILL.md explicitly mandates: *"Never use float for monetary values. Always Decimal, ROUND_HALF_UP, 2dp."*
+
+### 2. `ClassificationService.ts` — Incomplete Decision Tree
+
+Only implements Steps 1-2 of the 5-step classification. Missing:
+- Step 3: Recurrence check
+- Step 4: Special flags (round amounts, FX, short descriptions)
+- Step 5: Structured tx record emission
+
+### 3. `ProjectionService.ts` — Fake Projection Engine
+
+```typescript
+// LINE 41 — This is not SARIMA, it's linear extrapolation
+const base = Array.from({ length: 12 }, (_, i) => lastValue * (1 + 0.01 * (i + 1)));
+```
+
+The spec requires a 4-layer model: SARIMA → Macro Benchmark → Scenario Bands → Constraint Floors.
+
+### 4. `TableParser.ts` — No Bank Layout Detection
+
+Uses generic regex instead of the bank-specific column detection algorithm from Part 2.3. Will misparse multi-column statements.
+
+### 5. `index.ts` (main) — API Server Shadows `app` Variable
+
+```typescript
+// LINE 11-12 — `app` shadows Electron's `app` import
+function startApiServer(dataPath: string) {
+  const app = express()  // shadows import { app } from 'electron'
+```
+
+### 6. No Data Persistence
+
+All transaction data lives in React state. Close the window = lose everything. No SQLite, no JSON write-back, nothing.
+
+---
+
+## Architecture Assessment
+
+### What the Spec Intended vs What Was Built
+
+```
+INTENDED (SKILL.md Part 5.2):          BUILT:
+/app                                   /src
+├── /ingestion   (4 modules)           ├── /main        (1 file: index.ts)
+├── /classification (4 modules)        ├── /preload      (1 file: boilerplate)
+├── /analysis    (4 modules)           └── /renderer
+├── /projections (4 modules)               ├── /components (3 files)
+├── /reporting   (5 modules)               └── /services   (6 files, all stubs)
+└── /config      (→ /dist/ JSONs)
+```
+
+**20+ modules** were specified. **6 stub services** were delivered.
+
+---
+
+## Recovery Plan — Phased Approach
+
+### Phase 1: Foundation Reset (Priority: NOW)
+
+> [!IMPORTANT]
+> Do these before writing any feature code.
+
+| Task | Description |
+|---|---|
+| **1.1 Data layer** | Add SQLite (via `better-sqlite3`) for transaction and entity persistence |
+| **1.2 Persona system** | Create entity profiles (personal/business/offshore) with CRUD |
+| **1.3 IPC bridge** | Wire preload.ts with proper IPC channels for file system, DB, and API access |
+| **1.4 Design system** | Replace the 290-line CSS with a proper dark-mode design system |
+| **1.5 Navigation** | Add sidebar navigation with persona selector, not just 4 buttons |
+
+### Phase 2: Core Pipeline (Priority: HIGH)
+
+| Task | Description |
+|---|---|
+| **2.1 OCR pipeline** | Implement the full pre-processing chain from Part 2.2 |
+| **2.2 Bank layout detection** | Implement column detection algorithm from Part 2.3 |
+| **2.3 Complete classification** | Implement all 5 steps of the decision tree |
+| **2.4 Review queue** | Build the human-in-the-loop review UI for low-confidence transactions |
+| **2.5 Decimal math** | Replace all `parseFloat` with proper decimal handling |
+
+### Phase 3: Intelligence Layer (Priority: HIGH)
+
+| Task | Description |
+|---|---|
+| **3.1 Full analysis engine** | Implement all 17 metrics (8 individual + 9 org) |
+| **3.2 NBS benchmarking** | Wire up household benchmarks from `rules_analysis.json` |
+| **3.3 Seasonality** | Apply sector seasonality indices from Part 3.3 |
+| **3.4 Projection engine** | Implement SARIMA or equivalent time-series forecasting |
+| **3.5 Macro indicator fetch** | Implement the fetch decision tree from Part 4.3 |
+
+### Phase 4: Reporting & API (Priority: MEDIUM)
+
+| Task | Description |
+|---|---|
+| **4.1 Report generator** | Build structured reports per Parts 6.1 and 6.2 |
+| **4.2 PDF export** | Integrate a PDF renderer (html-pdf or similar) |
+| **4.3 Quality checks** | Implement all 7 checks from Part 7.1 |
+| **4.4 Agent API** | Build the full REST API from Part 5.3 |
+| **4.5 Pre-flight checklist** | Implement the Part 8 checklist as an onboarding flow |
+
+### Phase 5: Polish & Ship (Priority: MEDIUM)
+
+| Task | Description |
+|---|---|
+| **5.1 Entity management UI** | Full CRUD for entities with write-back to entities.json/DB |
+| **5.2 Tax rate verification** | Warn when `verified_date` is stale |
+| **5.3 Privacy consent flow** | OCR provider selection (local vs cloud) with explicit opt-in |
+| **5.4 Dashboard** | Interactive charts, drill-down, period selection |
+| **5.5 Testing** | Expand beyond the single TableParser test |
+
+---
+
+## File Inventory
+
+| File | Lines | Role | Quality |
+|---|---|---|---|
+| [SKILL.md](file:///d:/Dev/geminifinance/SKILL.md) | 1,072 | Domain spec (source of truth) | ⭐ Excellent |
+| [bootstrap_prompt.txt](file:///d:/Dev/geminifinance/bootstrap_prompt.txt) | 116 | Compiler instruction | ⭐ Excellent |
+| [src/main/index.ts](file:///d:/Dev/geminifinance/src/main/index.ts) | 116 | Electron main process | ⚠️ Functional but minimal |
+| [src/preload/index.ts](file:///d:/Dev/geminifinance/src/preload/index.ts) | 23 | IPC bridge | ❌ Boilerplate only |
+| [src/renderer/src/App.tsx](file:///d:/Dev/geminifinance/src/renderer/src/App.tsx) | 63 | Root component | ⚠️ Works but basic |
+| [IngestView.tsx](file:///d:/Dev/geminifinance/src/renderer/src/components/IngestView.tsx) | 137 | Ingestion UI | ⚠️ Partial |
+| [AnalysisView.tsx](file:///d:/Dev/geminifinance/src/renderer/src/components/AnalysisView.tsx) | 76 | Analysis charts | ⚠️ Partial |
+| [ProjectionView.tsx](file:///d:/Dev/geminifinance/src/renderer/src/components/ProjectionView.tsx) | 83 | Projection UI | ❌ Stub |
+| [OcrService.ts](file:///d:/Dev/geminifinance/src/renderer/src/services/OcrService.ts) | 25 | OCR wrapper | ⚠️ Missing pre-processing |
+| [TableParser.ts](file:///d:/Dev/geminifinance/src/renderer/src/services/TableParser.ts) | 64 | Statement parser | ⚠️ Missing bank detection |
+| [ClassificationService.ts](file:///d:/Dev/geminifinance/src/renderer/src/services/ClassificationService.ts) | 52 | Transaction classifier | ⚠️ 2 of 5 steps |
+| [AnalysisService.ts](file:///d:/Dev/geminifinance/src/renderer/src/services/AnalysisService.ts) | 37 | Spending analysis | ⚠️ 3 of 17 metrics |
+| [ProjectionService.ts](file:///d:/Dev/geminifinance/src/renderer/src/services/ProjectionService.ts) | 51 | Projections | ❌ Fake math |
+| [ReportingService.ts](file:///d:/Dev/geminifinance/src/renderer/src/services/ReportingService.ts) | 26 | Report export | ❌ JSON dump only |
+| [main.css](file:///d:/Dev/geminifinance/src/renderer/src/assets/main.css) | 290 | Styling | ❌ No design system |
+| `/dist/*.json` (10 files) | — | Compiled domain logic | ✅ Complete & correct |
+
+---
+
+## Verdict
+
+> [!CAUTION]
+> **Completion estimate: ~15-20% of the spec is implemented.** The compiled `/dist/` artifacts are solid. The Electron scaffold is usable. Everything else needs to be built properly from the ground up.
+
+The `SKILL.md` and `bootstrap_prompt.txt` are genuinely excellent work — the domain knowledge base is comprehensive, the compilation architecture is clever, and the Seychelles context is deeply researched. The previous AI just didn't follow through on the implementation. The app currently looks and behaves like a basic Electron boilerplate with some hardcoded demo logic bolted on.
+
+**The spec is the asset. The code needs a rebuild.**

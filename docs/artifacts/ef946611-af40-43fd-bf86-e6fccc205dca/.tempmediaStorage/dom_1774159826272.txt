@@ -1,0 +1,100 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Accessibility links
+Skip to main content
+Accessibility help
+Accessibility feedback
+[0] (105,72)<a class='FgNLaf' href='https://www.google.com/webhp?hl=en&ictx=0&sa=X&ved=0ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQpYkNCAs' />
+[1] (328,72)<textarea aria-label='Search' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (553,72)<div  />
+	[3] (550,72)<div aria-label='Clear' class='M2vV3 vOY7J' role='button' />
+		[4] (550,72)<span  />
+	[5] (581,72)<span  />
+[6] (613,72)<div aria-label='Search by voice' class='XDyW0e' role='button' />
+[7] (665,72)<div aria-label='Search by image' class='nDcEnd' role='button' />
+[8] (725,72)<button aria-label='Search' class='HZVG1b Tg7LZd' />
+	[9] (717,72)<div  />
+		[10] (717,72)<span  />
+[11] (828,73)<a aria-label='Search Labs' class='gb_B' href='https://labs.google.com/search?source=srp' role='button' />
+[12] (891,73)<a aria-label='Google apps' class='gb_B' href='https://www.google.sc/intl/en/about/products?tab=wh' role='button' />
+[13] (948,73)<a aria-label='Google Account: Jack Sparrow  
+(js3446389@gmail.com)' class='gb_B gb_0a' href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://www.google.com/search%3Fq%3Ddodi-repacks%2Bfavicon%2Burl&ec=futura_srp_og_si_72236_p' role='button' />
+Filters and topics
+[14] (109,159)<a class='XVMlrc C6AK7c' href='/search?q=dodi-repacks+favicon+url&sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n5dMtICYaIyafN_G1X7hTe7atzdDA:1774159819780&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnfxrgsCssjzlM59qezx9pUw4gt-vqmoAWwbNu3522qQGPUg2dT54umcX-Uly3xZdwhfDXVWUCOkZUmP8li2DgvyWPJxUmojJsM3aPwnlF9rOvUwTYg&aep=1&ntc=1&sa=X&ved=2ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQ2J8OegQIERAE' />
+	[15] (109,159)<div  />
+		[16] (109,172)<div  />
+			[17] (109,164)<span >AI Mode />
+[18] (185,159)<a class='C6AK7c' role='link' />
+	All
+[19] (256,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n5dMtICYaIyafN_G1X7hTe7atzdDA:1774159819780&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnfxrgsCssjzlM59qezx9pUw4gt-vqmoAWwbNu3522qQGPUg2dT54umcX-Uly3xZdwhfDXVWUCOkZUmP8li2DgvyWPJxUmojJsM3aPwnlF9rOvUwTYg&q=dodi-repacks+favicon+url&sa=X&ved=2ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQtKgLegQIFBAB' />
+	[20] (256,159)<div  />
+		[21] (256,172)<span >Images />
+[22] (345,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n5dMtICYaIyafN_G1X7hTe7atzdDA:1774159819780&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnfxrgsCssjzlM59qezx9pUw4gt-vqmoAWwbNu3522qQGPUg2dT54umcX-Uly3xZdwhfDXVWUCOkZUmP8li2DgvyWPJxUmojJsM3aPwnlF9rOvUwTYg&q=dodi-repacks+favicon+url&sa=X&ved=2ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQtKgLegQIFxAB' />
+	[23] (345,159)<div  />
+		[24] (345,172)<span >Videos />
+[25] (435,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n5dMtICYaIyafN_G1X7hTe7atzdDA:1774159819780&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnfxrgsCssjzlM59qezx9pUw4gt-vqmoAWwbNu3522qQGPUg2dT54umcX-Uly3xZdwhfDXVWUCOkZUmP8li2DgvyWPJxUmojJsM3aPwnlF9rOvUwTYg&q=dodi-repacks+favicon+url&sa=X&ved=2ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQs6gLegQIFRAB' />
+	[26] (435,159)<div  />
+		[27] (435,172)<span >Forums />
+[28] (548,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n5dMtICYaIyafN_G1X7hTe7atzdDA:1774159819780&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnfxrgsCssjzlM59qezx9pUw4gt-vqmoAWwbNu3522qQGPUg2dT54umcX-Uly3xZdwhfDXVWUCOkZUmP8li2DgvyWPJxUmojJsM3aPwnlF9rOvUwTYg&q=dodi-repacks+favicon+url&sa=X&ved=2ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQs6gLegQIExAB' />
+	[29] (548,159)<div  />
+		[30] (548,172)<span >Short videos />
+[31] (653,159)<a class='C6AK7c' href='/search?sca_esv=dad42cd11aae7e69&sxsrf=ANbL-n5dMtICYaIyafN_G1X7hTe7atzdDA:1774159819780&q=dodi-repacks+favicon+url&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3sbM0Xv-BZKE_VrZb6-djVhOtEikQxVPaqfTMUjZRiWtc4eIxdwaGq8rf74gkoZQnfxrgsCssjzlM59qezx9pUw4gt-vqmoAWwbNu3522qQGPUg2dT54umcX-Uly3xZdwhfDXVWUCOkZUmP8li2DgvyWPJxUmojJsM3aPwnlF9rOvUwTYg&sa=X&ved=2ahUKEwiJrdSu7LKTAxV6_7sIHeTtIfIQ0pQJegQIFhAB' />
+	[32] (653,159)<div  />
+		[33] (653,172)<span >News />
+[34] (739,159)<div class='mTpL7c' role='button' />
+	[35] (739,159)<div  />
+		[36] (739,172)<div  />
+			[37] (728,164)<span >More />
+			[38] (760,164)<span  />
+[39] (836,159)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (836,159)<div  />
+		[41] (836,172)<div  />
+			[42] (824,164)<span >Tools />
+			[43] (857,164)<span  />
+Search Results
+AI overview
+AI Overview
+[44] (914,258)<div aria-label='About this result' class='Mtffrd' role='button' />
+dodi-repacks.site
+), the favicon URL is:
+https://dodi-repacks.site
+The site generally uses a WordPress-based structure for its icons.
+[45] (734,425)<button aria-label='Semrush – View related links' class='rBl3me IWyTpf pjvauc' />
+	Semrush
+[46] (487,551)<a aria-label='Top 6 dodi-repacks.site Alternatives & Competitors. Opens in new tab.' class='NDNGvf' href='https://www.semrush.com/website/dodi-repacks.site/competitors/#:~:text=The%20closest%20competitor%20to%20dodi,understand%20more%20about%20dodi%2Drepacks.' />
+Top 6 dodi-repacks.site Alternatives & Competitors
+14 Feb 2026 —
+The closest competitor to dodi-repacks. site are fitgirl-repacks. site, itorrents-igruha.org and gamedrive.org. To understand more...
+Semrush
+[47] (500,710)<div aria-label='Show more AI Overview' class='Jzkafd' role='button' />
+	[48] (487,710)<div  />
+		[49] (487,710)<div >Show more />
+			Show more
+			[50] (538,710)<span  />
+[51] (400,874)<a class='zReHs' href='https://www.reddit.com/r/PiratedGames/comments/1boyvxe/how_to_download_from_dodi_repacks/' />
+	[52] (400,900)<h3 >How to download from DODI repacks? : r/PiratedGames />
+	[53] (201,852)<div  />
+		[54] (201,852)<div  />
+			[55] (93,852)<span  />
+				[56] (93,852)<div  />
+					[57] (93,852)<img  />
+			[58] (227,852)<div  />
+				[59] (227,839)<div  />
+					[60] (227,839)<span >Reddit · r/PiratedGames />
+				[61] (227,866)<div  />
+					[62] (227,866)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>130+ comments  ·  1 year ago />
+[63] (353,864)<div aria-label='About this result' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[64] (353,864)<span  />
+		[65] (353,866)<span  />
+This is the real
+website
+first of all. It will never ask you to disable ad blocker. Then search for a game. Select your way of downloading. If ...
+Read more
+131 answers
+·
+Top answer:
+Go on his site, find a game, click on it, torrent download, are you a human,wait 30 second, ...
+
+</current_dom>

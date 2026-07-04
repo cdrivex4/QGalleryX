@@ -1,0 +1,39 @@
+[ "10:35:27.650" ][HWAccel] Requested mode: SettingsHelper::None
+[ "10:35:27.650" ][HWAccel] CPU decoding selected (no acceleration).
+[ "10:35:27.650" ][HWAccel] CPU Features: "SSE, SSE2, SSE3"
+[Diagnostics] Monitor started - running checks every 1000ms
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "10:35:28.068" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 28.0547 MB | Sys Avail: 29993.6 MB / 65466.5 MB
+[Diagnostics] Attached to ScrollBenchImageModel
+[Diagnostics] Attached to SettingsHelper
+[TaskScheduler] Started 2 CPU threads and 4 IO threads.
+qrc:/ScrollBench/qml/SelectionActionBar.qml:17:5: Unable to assign [undefined] to int
+[ "10:35:29.065" ][SystemMonitor] Stats Update: CPU App: 10.4167 % | Sys: 62.5 % | RAM App: 100.48 MB | Sys Avail: 29954.9 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 100.48 MB (Delta: 100.48 ) | VRAM: 27.4102 MB (Delta: 27.4102 )
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:30.066" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 60.4167 % | RAM App: 102.773 MB | Sys Avail: 29934.5 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:31.070" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 47.6563 % | RAM App: 102.828 MB | Sys Avail: 29955.6 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:32.067" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 47.1354 % | RAM App: 102.918 MB | Sys Avail: 29957.3 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:33.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 45.5729 % | RAM App: 102.938 MB | Sys Avail: 29990.8 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:35:34.062" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 45.3125 % | RAM App: 102.98 MB | Sys Avail: 29988.8 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:35.070" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 50.7813 % | RAM App: 103.016 MB | Sys Avail: 29970.7 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:36.062" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 50.5208 % | RAM App: 102.938 MB | Sys Avail: 29981.9 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:37.070" ][SystemMonitor] Stats Update: CPU App: 2.08333 % | Sys: 60.4167 % | RAM App: 102.93 MB | Sys Avail: 29971.5 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:38.068" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 44.5313 % | RAM App: 102.961 MB | Sys Avail: 29979 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+TelemetryMonitor: Processed 300 frames. Current FPS: 62
+[ "10:35:39.070" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 56.7708 % | RAM App: 102.988 MB | Sys Avail: 29894 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:40.066" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 42.4479 % | RAM App: 103.023 MB | Sys Avail: 29921.4 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"
+[ "10:35:41.069" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 44.2708 % | RAM App: 103.066 MB | Sys Avail: 29936.4 MB / 65466.5 MB
+[Diagnostics] WARNING: "Buffered range only 0 items - might be the '19 items' bug"

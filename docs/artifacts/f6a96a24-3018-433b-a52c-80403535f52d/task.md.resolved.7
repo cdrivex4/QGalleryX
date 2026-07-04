@@ -1,0 +1,30 @@
+# ScrollBench Implementation Tasks
+
+## Phase 1: Core App Structure
+- [ ] Copy GalleryView.qml → GalleryViewScrollBench.qml
+- [ ] Copy PhotoViewer.qml → PhotoViewerScrollBench.qml
+- [ ] Rewrite MainScrollBench.qml with full app structure
+- [ ] Add SettingsHelper integration
+- [ ] Register all components in main_scrollbench.cpp
+
+## Phase 2: Settings & Configuration
+- [ ] Add gridSize property (40-400px zoom)
+- [ ] Add thumbnailSize property (128-512px quality)
+- [ ] Distinguish grid size from thumb resolution
+- [ ] Add viewport culling toggle
+- [ ] Add frame budget settings
+
+## Phase 3: Performance Overlay
+- [ ] Make PerformanceOverlay floating (top-right)
+- [ ] Add toggle in menu
+- [ ] Wire up FPS monitoring
+- [ ] Wire up queue depth tracking
+- [ ] Wire up memory monitoring
+
+## Phase 4: Testing & Verification
+- [ ] Test grid zoom (Ctrl+Wheel)
+- [ ] Test click → PhotoViewer
+- [ ] Test folder selection (recursive)
+- [ ] Test with 1000+ images
+- [ ] Verify performance difference (optimizations on/off)
+- [ ] Deploy and provide binary path

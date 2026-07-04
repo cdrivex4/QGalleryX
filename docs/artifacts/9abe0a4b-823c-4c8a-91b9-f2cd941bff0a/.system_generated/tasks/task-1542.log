@@ -1,0 +1,19 @@
+ninja: Entering directory `build'
+[1/56] Automatic MOC and UIC for target tst_linkage
+[2/55] Automatic MOC and UIC for target appScrollBench
+[3/54] Automatic MOC and UIC for target tst_automation
+[4/53] Automatic MOC and UIC for target tst_imagemodel
+[5/52] Running AUTOMOC file extraction for target appScrollBench
+[6/52] Running moc --collect-json for target appScrollBench
+[7/18] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/VideoThumbnailer.cpp.obj
+[8/18] Building CXX object CMakeFiles/tst_imagemodel.dir/src/VideoThumbnailer.cpp.obj
+[9/18] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/VideoThumbnailer.cpp.obj
+[10/18] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/VideoThumbnailer.cpp.obj
+[11/18] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj
+[12/18] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj
+[13/18] Building CXX object CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj
+[14/18] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\tst_linkage.exe
+[15/18] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\tst_automation.exe
+[16/18] Linking CXX executable tst_imagemodel.exe
+[17/18] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AsyncImageProvider.cpp.obj
+[18/18] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe

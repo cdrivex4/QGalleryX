@@ -1,0 +1,65 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+X
+or
+Discord
+for updates.
+settings
+add
+Create notebook
+share
+Sources
+Chat
+Studio
+add
+Add sources
+search
+language
+Web
+keyboard_arrow_down
+search_spark
+Fast Research
+keyboard_arrow_down
+arrow_forward
+docs
+Saved sources will appear here
+Click Add source above to add PDFs, websites, text, videos, or audio files. Or import a file directly from Google Drive.
+Create Audio and Video Overviews from
+your documents
+search
+[0] (513,368)<textarea aria-label='Discover sources based on the inputted query' class='mat-mdc-input-element cdk-textarea-autosize query-box-textarea ng-untouched ng-pristine ng-invalid mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored' id='mat-input-2' placeholder='Search the web for new sources' />
+[1] (192,423)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select corpus-menu-trigger mat-mdc-button mat-unthemed' />
+	language
+	Web
+	keyboard_arrow_down
+[2] (348,423)<button class='mdc-button mat-mdc-button-base mat-mdc-menu-trigger corpus-select researcher-menu-trigger mat-mdc-button mat-unthemed' />
+	search_spark
+	Fast Research
+	keyboard_arrow_down
+arrow_forward
+or drop your files
+pdf, images, docs, audio,
+[3] (603,593)<span >and more />
+[4] (327,664)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>upload />
+	upload
+	Upload files
+[5] (528,664)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>link
+video_youtube />
+	link
+	video_youtube
+	Websites
+[6] (701,664)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed' />
+	[7] (669,664)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>drive />
+	[8] (713,664)<span  />
+		[9] (713,664)<span >Drive />
+[10] (500,730)<button class='mdc-button mat-mdc-button-base drop-zone-icon-button mdc-button--outlined mat-mdc-outlined-button mat-unthemed'>content_paste />
+	content_paste
+	Copied text
+[11] (863,212)<button aria-label='Close' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base close-button mat-unthemed' />
+	[12] (863,212)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>close />
+
+</current_dom>

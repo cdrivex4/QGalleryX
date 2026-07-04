@@ -1,0 +1,52 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+NotebookLM is currently experiencing issues that may affect the quality of your experience.
+Follow us on
+X
+or
+Discord
+for updates.
+settings
+add
+Create notebook
+share
+Sources
+Chat
+Studio
+[0] (500,663)<div class='source-panel-content ng-tns-c84049144-0 ng-star-inserted' scrollable='true' />
+	add
+	Add sources
+	search
+	language
+	Web
+	keyboard_arrow_down
+	search_spark
+	Fast Research
+	keyboard_arrow_down
+	arrow_forward
+	Select all sources
+	markdown
+	01a_primary_legislation_map.md
+	markdown
+	01b_debt_issuance_review.md
+	markdown
+	01c_regulatory_bodies_map.md
+	markdown
+	02a_icma_principles_mapping.md
+	markdown
+	02b_sids_comparison.md
+	markdown
+	02c_instrument_gap_analysis.md
+[1] (175,220)<button aria-label='Back' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base back-button mat-unthemed' />
+	[2] (175,220)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>arrow_back />
+Paste copied text
+Paste your copied text below to upload as a source in NotebookLM.
+[3] (503,516)<textarea aria-label='Pasted text' class='mat-mdc-input-element copied-text-input-textarea mat-mdc-form-field-textarea-control mat-mdc-form-field-input-control mdc-text-field__input ng-untouched cdk-text-field-autofill-monitored ng-dirty ng-valid' id='mat-input-17' placeholder='Paste text here' scrollable='true' />
+[4] (782,786)<button class='mdc-button mat-mdc-button-base mdc-button--unelevated mat-mdc-unelevated-button mat-primary ng-star-inserted'>Insert />
+	Insert
+[5] (825,214)<button aria-label='Close' class='mdc-icon-button mat-mdc-icon-button mat-mdc-button-base close-button mat-unthemed' />
+	[6] (825,214)<mat-icon class='mat-icon notranslate google-symbols mat-icon-no-color' role='img'>close />
+
+</current_dom>

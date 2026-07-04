@@ -1,0 +1,7 @@
+# Task: Hugging Face Login and Token Generation
+
+- [ ] Open https://huggingface.co/login
+- [ ] Wait for user to log in
+- [ ] Navigate to https://huggingface.co/settings/tokens
+- [ ] Wait for user to be on the token page
+- [ ] Report 'READY'

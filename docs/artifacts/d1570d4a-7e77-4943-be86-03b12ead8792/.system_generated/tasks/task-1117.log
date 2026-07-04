@@ -1,0 +1,6 @@
+[agent] Starting Hermes Agent on node: node-01
+[agent] Polling jobs from: H:/My Drive/UberHermes/Master_Staging/Jobs
+[agent] Job job_1782446219924 -> claimed
+[agent] Executing job: job_1782446219924 (status)
+[agent] Job job_1782446219924 complete.
+[agent] Job job_1782446219924 -> complete

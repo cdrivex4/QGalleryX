@@ -188,8 +188,8 @@ Item {
                 width: parent.width
                 from: 20; to: 400
                 stepSize: 1
-                value: appSettings.gridSize
-                onMoved: appSettings.gridSize = Math.round(value)
+                value: appSettings.gridResolution
+                onMoved: appSettings.gridResolution = Math.round(value)
             }
 
             // Cache Size

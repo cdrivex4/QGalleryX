@@ -63,15 +63,16 @@ void SettingsHelper::setConcurrentThreads(int count) {
   emit concurrentThreadsChanged();
 }
 
-int SettingsHelper::gridSize() const {
+int SettingsHelper::gridResolution() const {
+  // Keep underlying settings key as "gridSize" for backwards compatibility
   return m_settings.value("gridSize", 150).toInt();
 }
 
-void SettingsHelper::setGridSize(int size) {
-  if (gridSize() == size)
+void SettingsHelper::setGridResolution(int size) {
+  if (gridResolution() == size)
     return;
   m_settings.setValue("gridSize", size);
-  emit gridSizeChanged();
+  emit gridResolutionChanged();
 }
 
 int SettingsHelper::logLevel() const {
