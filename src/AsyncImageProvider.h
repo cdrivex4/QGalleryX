@@ -125,6 +125,7 @@ public:
 
 private:
   friend class AsyncImageResponse;
+  friend class VisibleRangeManager;
   static QCache<QString, QImage> m_cache;
   static QMutex m_mutex;
 

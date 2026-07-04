@@ -1,0 +1,27 @@
+ninja: Entering directory `build'
+[1/65] Automatic MOC and UIC for target tst_linkage
+[2/65] Automatic MOC and UIC for target tst_imagemodel
+[3/65] Automatic MOC and UIC for target tst_automation
+[4/65] Automatic MOC and UIC for target appScrollBench
+[5/65] Building CXX object CMakeFiles/tst_imagemodel.dir/src/SettingsHelper.cpp.obj
+[6/65] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/SettingsHelper.cpp.obj
+[7/65] Building CXX object CMakeFiles/tst_imagemodel.dir/tst_imagemodel_autogen/mocs_compilation.cpp.obj
+[8/65] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[9/65] Running AUTOMOC file extraction for target appScrollBench
+[10/65] Building CXX object CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/src/ImageModel.cpp:15:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[11/65] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/tst_linkage_autogen/mocs_compilation.cpp.obj
+[12/65] Building CXX object CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj
+[13/65] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj
+[14/65] Building CXX object 

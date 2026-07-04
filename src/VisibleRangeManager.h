@@ -9,6 +9,7 @@
 #include <QString>
 
 #include <QUrl>
+#include "AsyncImageProvider.h"
 
 class VisibleRangeManager {
 public:
@@ -27,6 +28,8 @@ public:
       qDebug() << "[VRM] Total visible paths:" << m_visiblePaths.size()
                << "Sample:" << *m_visiblePaths.begin();
     }
+    // Wake up the async image provider to evaluate deferred tasks
+    AsyncImageProvider::scheduleStagingProcessing();
   }
 
   bool isPathVisible(const QString &path) {

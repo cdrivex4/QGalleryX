@@ -1,0 +1,95 @@
+ninja: Entering directory `build'
+[1/51] Automatic MOC and UIC for target appScrollBench
+[2/50] Running AUTOMOC file extraction for target appScrollBench
+[3/50] Building CXX object CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj
+FAILED: CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_TESTCASE_BUILDDIR=\"D:/Dev/antigravity/build\" -DQT_TESTCASE_SOURCEDIR=\"D:/Dev/antigravity\" -DQT_TESTLIB_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/tst_imagemodel_autogen/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtTest -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -O3 -DNDEBUG -MD -MT CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj -MF CMakeFiles\tst_imagemodel.dir\src\ImageModel.cpp.obj.d -o CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj -c D:/Dev/antigravity/src/ImageModel.cpp
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/src/ImageModel.cpp:15:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+In file included from D:/Dev/antigravity/src/ImageModel.cpp:22:
+D:/Dev/antigravity/src/VisibleRangeManager.h: In member function 'void VisibleRangeManager::setVisiblePaths(const QSet<QString>&)':
+D:/Dev/antigravity/src/VisibleRangeManager.h:32:50: error: 'static void AsyncImageProvider::scheduleStagingProcessing()' is private within this context
+   32 |     AsyncImageProvider::scheduleStagingProcessing();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from D:/Dev/antigravity/src/VisibleRangeManager.h:12:
+D:/Dev/antigravity/src/AsyncImageProvider.h:143:15: note: declared private here
+  143 |   static void scheduleStagingProcessing();
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~
+[4/50] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj
+FAILED: test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/test_scrollbench/tst_automation_autogen/include -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -O3 -DNDEBUG -MD -MT test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj -MF test_scrollbench\CMakeFiles\tst_automation.dir\src\ScrollBenchImageModel.cpp.obj.d -o test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj -c D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+In file included from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:5:
+D:/Dev/antigravity/src/VisibleRangeManager.h: In member function 'void VisibleRangeManager::setVisiblePaths(const QSet<QString>&)':
+D:/Dev/antigravity/src/VisibleRangeManager.h:32:50: error: 'static void AsyncImageProvider::scheduleStagingProcessing()' is private within this context
+   32 |     AsyncImageProvider::scheduleStagingProcessing();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:2:
+D:/Dev/antigravity/src/AsyncImageProvider.h:143:15: note: declared private here
+  143 |   static void scheduleStagingProcessing();
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~
+[5/50] Running moc --collect-json for target appScrollBench
+[6/16] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj
+FAILED: test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/test_scrollbench/tst_linkage_autogen/include -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -O3 -DNDEBUG -MD -MT test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj -MF test_scrollbench\CMakeFiles\tst_linkage.dir\src\ScrollBenchImageModel.cpp.obj.d -o test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj -c D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+In file included from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:5:
+D:/Dev/antigravity/src/VisibleRangeManager.h: In member function 'void VisibleRangeManager::setVisiblePaths(const QSet<QString>&)':
+D:/Dev/antigravity/src/VisibleRangeManager.h:32:50: error: 'static void AsyncImageProvider::scheduleStagingProcessing()' is private within this context
+   32 |     AsyncImageProvider::scheduleStagingProcessing();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:2:
+D:/Dev/antigravity/src/AsyncImageProvider.h:143:15: note: declared private here
+  143 |   static void scheduleStagingProcessing();
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~
+[7/16] Building CXX object CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj
+FAILED: CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_TESTCASE_BUILDDIR=\"D:/Dev/antigravity/build\" -DQT_TESTCASE_SOURCEDIR=\"D:/Dev/antigravity\" -DQT_TESTLIB_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/tst_imagemodel_autogen/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtTest -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -O3 -DNDEBUG -MD -MT CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj -MF CMakeFiles\tst_imagemodel.dir\src\AsyncImageProvider.cpp.obj.d -o CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj -c D:/Dev/antigravity/src/AsyncImageProvider.cpp
+In file included from D:/Dev/antigravity/src/AsyncImageProvider.cpp:513:
+D:/Dev/antigravity/src/VisibleRangeManager.h: In member function 'void VisibleRangeManager::setVisiblePaths(const QSet<QString>&)':
+D:/Dev/antigravity/src/VisibleRangeManager.h:32:50: error: 'static void AsyncImageProvider::scheduleStagingProcessing()' is private within this context
+   32 |     AsyncImageProvider::scheduleStagingProcessing();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from D:/Dev/antigravity/src/AsyncImageProvider.cpp:1:
+D:/Dev/antigravity/src/AsyncImageProvider.h:143:15: note: declared private here
+  143 |   static void scheduleStagingProcessing();
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~
+[8/16] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj
+FAILED: test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/test_scrollbench/tst_automation_autogen/include -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -O3 -DNDEBUG -MD -MT test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj -MF test_scrollbench\CMakeFiles\tst_automation.dir\__\src\AsyncImageProvider.cpp.obj.d -o test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj -c D:/Dev/antigravity/src/AsyncImageProvider.cpp
+In file included from D:/Dev/antigravity/src/AsyncImageProvider.cpp:513:
+D:/Dev/antigravity/src/VisibleRangeManager.h: In member function 'void VisibleRangeManager::setVisiblePaths(const QSet<QString>&)':
+D:/Dev/antigravity/src/VisibleRangeManager.h:32:50: error: 'static void AsyncImageProvider::scheduleStagingProcessing()' is private within this context
+   32 |     AsyncImageProvider::scheduleStagingProcessing();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from D:/Dev/antigravity/src/AsyncImageProvider.cpp:1:
+D:/Dev/antigravity/src/AsyncImageProvider.h:143:15: note: declared private here
+  143 |   static void scheduleStagingProcessing();
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~
+[9/16] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj
+FAILED: test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/test_scrollbench/tst_linkage_autogen/include -ID:/Dev/antigravity/test_scrollbench/../src -ID:/Dev/antigravity/test_scrollbench/3rdparty/LibRaw -ID:/Dev/antigravity/test_scrollbench/../3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -O3 -DNDEBUG -MD -MT test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj -MF test_scrollbench\CMakeFiles\tst_linkage.dir\__\src\AsyncImageProvider.cpp.obj.d -o test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj -c D:/Dev/antigravity/src/AsyncImageProvider.cpp
+In file included from D:/Dev/antigravity/src/AsyncImageProvider.cpp:513:
+D:/Dev/antigravity/src/VisibleRangeManager.h: In member function 'void VisibleRangeManager::setVisiblePaths(const QSet<QString>&)':
+D:/Dev/antigravity/src/VisibleRangeManager.h:32:50: error: 'static void AsyncImageProvider::scheduleStagingProcessing()' is private within this context
+   32 |     AsyncImageProvider::scheduleStagingProcessing();
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+In file included from D:/Dev/antigravity/src/AsyncImageProvider.cpp:1:
+D:/Dev/antigravity/src/AsyncImageProvider.h:143:15: note: declared private here
+  143 |   static void scheduleStagingProcessing();
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~
+ninja: build stopped: subcommand failed.

@@ -152,9 +152,9 @@ void DiagnosticsMonitor::checkLoadProgress() {
   emit pendingRequestsChanged();
   emit stagedRequestsChanged();
 
-  // Check for stalls
+  // Check for stalls (only if tasks are actively running in the scheduler)
   AsyncImageProvider::checkStalls();
-  if (m_pendingRequests > 0 || m_stagedRequests > 0) {
+  if (m_pendingRequests > 0) {
     // If progress was made or the scheduler is paused (intentional suspension), reset the stall timer
     if (m_loadedItems != prevLoaded || TaskScheduler::instance().isPaused()) {
       m_lastLoadTimestamp = QDateTime::currentDateTime();
@@ -174,6 +174,10 @@ void DiagnosticsMonitor::checkLoadProgress() {
                       .arg(m_pendingRequests)
                       .arg(stuckStr));
     }
+  } else if (m_stagedRequests > 0) {
+    // If we only have staged requests, they are intentionally parked (e.g. low memory + offscreen).
+    // Not a stall.
+    m_lastLoadTimestamp = QDateTime::currentDateTime();
   } else {
     m_lastLoadTimestamp = QDateTime::currentDateTime();
   }
