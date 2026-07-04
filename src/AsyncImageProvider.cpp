@@ -923,18 +923,8 @@ void AsyncImageProvider::processImageTaskInternal(
       }
     }
 
-    DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
+      DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
     if (type == DesktopHelper::Raw) {
-      // Hardware Throttle: If we're offscreen and busy, DON'T even try to
-      // decode RAW. RAW decoding is too expensive to do speculatively on slow
-      // SD cards.
-      // NOTE: We check 'path' (cleaned) for visibility, not 'id' (with
-      // queries)
-      if (!VisibleRangeManager::instance().isPathVisible(path) &&
-          TaskScheduler::instance().activeTaskCount() > 30) {
-        goto deliver; // FINISH with null instead of hanging
-      }
-
       s_rawSemaphore.acquire(1);
       QSemaphoreReleaser releaser(s_rawSemaphore);
       if (!shouldAbort()) {
@@ -980,8 +970,10 @@ void AsyncImageProvider::processImageTaskInternal(
         VideoThumbnailer v;
         SettingsHelper::HWAccel accel =
             static_cast<SettingsHelper::HWAccel>(s_videoAcceleration.load());
-        image = v.extractFrame(path, 0, requestedSize, accel,
-                               c ? c.get() : nullptr);
+        // Pass nullptr for the cancellation token. If we pass the original delegate's token,
+        // it might abort FFmpeg if that specific delegate is destroyed, even if OTHER delegates
+        // are waiting for this coalesced task, resulting in a permanent dead placeholder!
+        image = v.extractFrame(path, 0, requestedSize, accel, nullptr);
       }
     } else {
       QImageReader reader(path);
