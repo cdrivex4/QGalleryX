@@ -688,9 +688,13 @@ void AsyncImageProvider::processStagedRequests() {
         visibleHighPriority.append(req);
       else if (!lowMemory)
         offscreen.append(req);
-      // Only deliver empty for offscreen items when OOM
-      else
-        deliverToPending(cKey, QImage(), 0);
+      else {
+        // We are low on memory and it's offscreen. Don't abort it, just re-queue it!
+        // If it was actually visible but VRM was lagging, it will be admitted next cycle.
+        QMutexLocker lock(&m_stagingMutex);
+        m_stagedRequests.append(req);
+        continue; // Don't count as drive allocation
+      }
 
       driveAllocations[drive] += weight;
     } else {
@@ -796,11 +800,12 @@ void AsyncImageProvider::processImageTaskInternal(
     }
 
     ~DriveConcurrencyGuard() {
+      bool wasActive = false;
       {
         QMutexLocker lock(&s_activeTasksMutex);
-        s_activeTasksMap.remove(taskId);
+        wasActive = (s_activeTasksMap.remove(taskId) > 0);
       }
-      {
+      if (wasActive) {
         QMutexLocker lock(&m_driveStatsMutex);
         int weight = getTaskWeight(taskId);
         m_driveStats[drive].activeWeight =
@@ -831,10 +836,9 @@ void AsyncImageProvider::processImageTaskInternal(
     if (TaskScheduler::instance().isPaused())
       return true;
 
-    // Only abort if the system is totally overwhelmed (>5k tasks)
-    if (TaskScheduler::instance().activeTaskCount() > 5000)
-      return true;
-
+    // We no longer abort purely based on >5k tasks because LIFO queues mean
+    // we would end up aborting the NEWEST, VISIBLE tasks first!
+    // The `isRequestStillNeeded` check above will naturally cull the old offscreen ones.
     return false;
   };
 

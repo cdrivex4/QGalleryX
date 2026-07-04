@@ -1,0 +1,37 @@
+ninja: Entering directory `build'
+[1/1] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+================ ENVIRONMENT SNAPSHOT ================
+OS              : "Windows 10 Version 22H2"
+CPU Arch        : "x86_64" ( 6 logical threads)
+Total System RAM: 65466.5 MB
+GPU detected    : "NVIDIA GeForce GTX 1050 Ti" ( 4004 MB VRAM)
+======================================================
+[ "01:38:09.637" ][HWAccel] Requested mode: SettingsHelper::CUDA
+[ "01:38:09.637" ][HWAccel] Attempting cuda ...
+[ "01:38:09.637" ][HWAccel] SUCCESS: cuda initialized
+[Diagnostics] Monitor started - running checks every 1000ms
+SystemMonitor: Starting monitoring with interval 1000 ms
+[ "01:38:09.722" ][SystemMonitor] Stats Update: CPU App: 0 % | Sys: 0 % | RAM App: 144.641 MB | Sys Avail: 44116.6 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 144.641 MB (Delta: 144.641 ) | VRAM: 46.8047 MB (Delta: 46.8047 )
+[Diagnostics] Attached to ScrollBenchImageModel
+[Diagnostics] Attached to SettingsHelper
+[TaskScheduler] Started 2 CPU threads and 4 IO threads.
+FileCacheManager: Initialized with Memory-Mapped Ring Buffer at "C:/Users/curtis/AppData/Local/appScrollBench/cache/thumbnails/FileCache.mmap"
+qrc:/ScrollBench/qml/MainScrollBench.qml:22:5: QML Settings: Failed to initialize QSettings instance. Status code is: 1
+qrc:/ScrollBench/qml/MainScrollBench.qml:22:5: QML Settings: The following application identifiers have not been set: QList("organizationName", "organizationDomain")
+qrc:/ScrollBench/qml/MainScrollBench.qml:22:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[ "01:38:10.716" ][SystemMonitor] Stats Update: CPU App: 11.4583 % | Sys: 46.6146 % | RAM App: 220.535 MB | Sys Avail: 44055.8 MB / 65466.5 MB
+[SystemMonitor] Resource Update: RAM: 220.535 MB (Delta: 75.8945 ) | VRAM: 74.5898 MB (Delta: 27.7852 )
+[ "01:38:11.721" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 84.375 % | RAM App: 220.789 MB | Sys Avail: 44035.6 MB / 65466.5 MB
+[ "01:38:12.722" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 64.3229 % | RAM App: 221.688 MB | Sys Avail: 44068.3 MB / 65466.5 MB
+[ "01:38:13.722" ][SystemMonitor] Stats Update: CPU App: 0.520833 % | Sys: 49.2188 % | RAM App: 222.285 MB | Sys Avail: 44068.4 MB / 65466.5 MB
+[ "01:38:14.716" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 41.4063 % | RAM App: 222.773 MB | Sys Avail: 44044 MB / 65466.5 MB
+[ "01:38:15.714" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 36.4583 % | RAM App: 222.781 MB | Sys Avail: 44052.2 MB / 65466.5 MB
+[ "01:38:16.721" ][SystemMonitor] Stats Update: CPU App: 1.5625 % | Sys: 41.1458 % | RAM App: 222.781 MB | Sys Avail: 44056 MB / 65466.5 MB
+[ "01:38:17.738" ][SystemMonitor] Stats Update: CPU App: 0.512821 % | Sys: 35.1282 % | RAM App: 222.211 MB | Sys Avail: 44059 MB / 65466.5 MB
+[ "01:38:18.721" ][SystemMonitor] Stats Update: CPU App: 1.0582 % | Sys: 36.2434 % | RAM App: 221.973 MB | Sys Avail: 44059.4 MB / 65466.5 MB
+[ "01:38:19.717" ][SystemMonitor] Stats Update: CPU App: 1.04167 % | Sys: 41.6667 % | RAM App: 221.375 MB | Sys Avail: 44091.4 MB / 65466.5 MB
+TelemetryMonitor: Processed 300 frames. Current FPS: 30
+[ "01:38:20.721" ][SystemMonitor] Stats Update: CPU App: 0.78125 % | Sys: 36.1979 % | RAM App: 220.117 MB | Sys Avail: 44064.3 MB / 65466.5 MB
+[ "01:38:21.721" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 37.2396 % | RAM App: 220.141 MB | Sys Avail: 44070.2 MB / 65466.5 MB
+[ "01:38:22.721" ][SystemMonitor] Stats Update: CPU App: 0.260417 % | Sys: 49.2188 % | RAM App: 220.16 MB | Sys Avail: 44047.7 MB / 65466.5 MB
