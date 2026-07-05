@@ -98,10 +98,16 @@ void FastImageItem::setSourceSize(const QSize &size) {
   if (m_sourceSize == size) return;
   m_sourceSize = size;
   emit sourceSizeChanged();
-  
+
   if (!m_source.isEmpty()) {
+    // Clear the currently displayed image immediately so the delegate shows
+    // a blank/loading state rather than stretching the old-size image.
+    m_image = QImage();
+    m_dirtyTexture = true;
+    update();
+
     QString tmp = m_source;
-    m_source.clear(); // Force a reload
+    m_source.clear(); // Force a fresh request at the new size
     setSource(tmp);
   }
 }

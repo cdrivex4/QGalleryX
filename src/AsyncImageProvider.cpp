@@ -601,6 +601,7 @@ void AsyncImageProvider::scheduleStagingProcessing() {
       Qt::QueuedConnection);
 }
 
+
 void AsyncImageProvider::processStagedRequests() {
   QList<StagedRequest> batch;
   {
@@ -985,95 +986,118 @@ void AsyncImageProvider::processImageTaskInternal(
   }
 
 deliver:
-  // Handle failed loads gracefully with placeholders instead of harsh red boxes
+  // Distinguish between genuinely broken files vs. transient decode failures.
+  // CRITICAL: Only generate and cache placeholders for genuinely broken files!
+  // If we generate a placeholder for a transient failure (OOM, abort, disk hiccup)
+  // it gets cached and permanently blocks future valid load attempts.
+  bool isGenuinelyBroken = false;
   if (image.isNull() && !shouldAbort()) {
     QString realPath = getRealLocalPath(id);
-    bool exists = QFile::exists(realPath);
-    QString readerError;
-    if (exists) {
-      QImageReader reader(realPath);
-      reader.canRead();
-      readerError = reader.errorString();
+    if (!QFile::exists(realPath)) {
+      // File doesn't exist at all - genuinely broken
+      isGenuinelyBroken = true;
+    } else {
+      // File exists, probe it quickly to distinguish format errors from transient I/O
+      QImageReader probe(realPath);
+      probe.setDecideFormatFromContent(true);
+      if (!probe.canRead()) {
+        // Permanent format error (unsupported format, corrupted header)
+        // Exclude video/raw formats which we handle ourselves - probe can't read those
+        QString ext = QFileInfo(realPath).suffix().toLower();
+        bool isMediaFormat = (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" ||
+                              ext == "wmv" || ext == "heic" || ext == "heif" ||
+                              ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
+                              ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
+                              ext == "pef" || ext == "raf");
+        if (!isMediaFormat) {
+          // Standard image format that QImageReader can handle but can't read = corrupt
+          isGenuinelyBroken = true;
+        }
+        // For media formats we handle ourselves, a null image means a transient decode
+        // failure - don't mark as broken, let the next request retry.
+      }
+      // If probe.canRead() == true but image is still null, it was a transient I/O
+      // failure during the actual read - also NOT genuinely broken.
     }
 
     if (s_logLevel > 0) {
       qWarning() << "[AsyncImageProvider] FAILED load. ID:" << id
-                 << "Path:" << realPath << "Exists:" << exists
-                 << "ReaderError:" << readerError;
+                 << "Path:" << getRealLocalPath(id)
+                 << "GenuinelyBroken:" << isGenuinelyBroken;
     }
 
-    QSize imgSize = requestedSize.isValid() ? requestedSize : QSize(200, 200);
-    QString ext = QFileInfo(realPath).suffix().toLower();
+    if (isGenuinelyBroken) {
+      QSize imgSize = requestedSize.isValid() ? requestedSize : QSize(200, 200);
+      QString ext = QFileInfo(getRealLocalPath(id)).suffix().toLower();
 
-    if (ext == "heic" || ext == "heif") {
-      // Draw premium HEIC format placeholder
-      image = QImage(imgSize, QImage::Format_ARGB32_Premultiplied);
-      
-      QLinearGradient gradient(0, 0, 0, imgSize.height());
-      gradient.setColorAt(0, QColor(108, 92, 231)); // Purple
-      gradient.setColorAt(1, QColor(72, 52, 212));  // Dark Purple
-      
-      QPainter painter(&image);
-      painter.setRenderHint(QPainter::Antialiasing);
-      painter.fillRect(image.rect(), gradient);
+      if (ext == "heic" || ext == "heif") {
+        // Draw premium HEIC format placeholder
+        image = QImage(imgSize, QImage::Format_ARGB32_Premultiplied);
 
-      painter.setPen(QPen(QColor(255, 255, 255, 40), 1));
-      painter.drawRect(image.rect().adjusted(0, 0, -1, -1));
+        QLinearGradient gradient(0, 0, 0, imgSize.height());
+        gradient.setColorAt(0, QColor(108, 92, 231)); // Purple
+        gradient.setColorAt(1, QColor(72, 52, 212));  // Dark Purple
 
-      // Draw "HEIC" text in the center
-      painter.setPen(Qt::white);
-      QFont font("Segoe UI", qMax(10, qMin(imgSize.width(), imgSize.height()) / 8), QFont::Bold);
-      painter.setFont(font);
-      painter.drawText(image.rect(), Qt::AlignCenter, "HEIC");
-      
-      // Draw subtle photo outline icon
-      int iconSize = qMin(imgSize.width(), imgSize.height()) / 5;
-      if (iconSize > 10) {
-        int cx = imgSize.width() / 2;
-        int cy = imgSize.height() / 2 - iconSize - 5;
-        QRectF frame(cx - iconSize / 2, cy - iconSize / 2, iconSize, iconSize);
-        painter.setPen(QPen(Qt::white, 2));
-        painter.setBrush(Qt::NoBrush);
-        painter.drawRoundedRect(frame, 3, 3);
-        painter.drawEllipse(QPointF(cx - iconSize / 4, cy - iconSize / 4), 2, 2);
-      }
-    } else {
-      // Draw premium dark grey placeholder with orange warning icon for corrupt/failed files
-      image = QImage(imgSize, QImage::Format_ARGB32_Premultiplied);
-      image.fill(QColor(44, 44, 44));
+        QPainter painter(&image);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.fillRect(image.rect(), gradient);
 
-      QPainter painter(&image);
-      painter.setRenderHint(QPainter::Antialiasing);
+        painter.setPen(QPen(QColor(255, 255, 255, 40), 1));
+        painter.drawRect(image.rect().adjusted(0, 0, -1, -1));
 
-      painter.setPen(QPen(QColor(60, 60, 60), 1));
-      painter.drawRect(image.rect().adjusted(0, 0, -1, -1));
+        painter.setPen(Qt::white);
+        QFont font("Segoe UI", qMax(10, qMin(imgSize.width(), imgSize.height()) / 8), QFont::Bold);
+        painter.setFont(font);
+        painter.drawText(image.rect(), Qt::AlignCenter, "HEIC");
 
-      int size = qMin(imgSize.width(), imgSize.height()) * 0.4;
-      if (size > 8) {
-        int cx = imgSize.width() / 2;
-        int cy = imgSize.height() / 2;
+        int iconSize = qMin(imgSize.width(), imgSize.height()) / 5;
+        if (iconSize > 10) {
+          int cx = imgSize.width() / 2;
+          int cy = imgSize.height() / 2 - iconSize - 5;
+          QRectF frame(cx - iconSize / 2, cy - iconSize / 2, iconSize, iconSize);
+          painter.setPen(QPen(Qt::white, 2));
+          painter.setBrush(Qt::NoBrush);
+          painter.drawRoundedRect(frame, 3, 3);
+          painter.drawEllipse(QPointF(cx - iconSize / 4, cy - iconSize / 4), 2, 2);
+        }
+      } else {
+        // Draw dark grey placeholder with orange warning icon for corrupt/failed files
+        image = QImage(imgSize, QImage::Format_ARGB32_Premultiplied);
+        image.fill(QColor(44, 44, 44));
 
-        QPolygonF triangle;
-        triangle << QPointF(cx, cy - size / 2)
-                 << QPointF(cx - size / 2, cy + size / 2)
-                 << QPointF(cx + size / 2, cy + size / 2);
+        QPainter painter(&image);
+        painter.setRenderHint(QPainter::Antialiasing);
 
-        painter.setBrush(QColor(230, 126, 34, 40)); // Soft orange fill
-        painter.setPen(QPen(QColor(230, 126, 34), qMax(2, size / 10), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        painter.drawPolygon(triangle);
+        painter.setPen(QPen(QColor(60, 60, 60), 1));
+        painter.drawRect(image.rect().adjusted(0, 0, -1, -1));
 
-        // Draw exclamation mark
-        painter.setPen(Qt::NoPen);
-        painter.setBrush(QColor(230, 126, 34));
-        
-        qreal execWidth = qMax(2.0, size * 0.08);
-        qreal execHeight = size * 0.35;
-        painter.drawRoundedRect(QRectF(cx - execWidth / 2, cy - size * 0.12, execWidth, execHeight), execWidth / 2, execWidth / 2);
-        
-        qreal dotSize = qMax(2.0, size * 0.08);
-        painter.drawEllipse(QPointF(cx, cy + size * 0.32), dotSize / 2, dotSize / 2);
+        int size = qMin(imgSize.width(), imgSize.height()) * 0.4;
+        if (size > 8) {
+          int cx = imgSize.width() / 2;
+          int cy = imgSize.height() / 2;
+
+          QPolygonF triangle;
+          triangle << QPointF(cx, cy - size / 2)
+                   << QPointF(cx - size / 2, cy + size / 2)
+                   << QPointF(cx + size / 2, cy + size / 2);
+
+          painter.setBrush(QColor(230, 126, 34, 40));
+          painter.setPen(QPen(QColor(230, 126, 34), qMax(2, size / 10), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+          painter.drawPolygon(triangle);
+
+          painter.setPen(Qt::NoPen);
+          painter.setBrush(QColor(230, 126, 34));
+
+          qreal execWidth = qMax(2.0, size * 0.08);
+          qreal execHeight = size * 0.35;
+          painter.drawRoundedRect(QRectF(cx - execWidth / 2, cy - size * 0.12, execWidth, execHeight), execWidth / 2, execWidth / 2);
+
+          qreal dotSize = qMax(2.0, size * 0.08);
+          painter.drawEllipse(QPointF(cx, cy + size * 0.32), dotSize / 2, dotSize / 2);
+        }
       }
     }
+    // If NOT genuinely broken, image stays null - caller will get QImage() and can retry
   }
 
   if (!image.isNull() && requestedSize.isValid() &&
@@ -1088,8 +1112,13 @@ deliver:
 #endif
 
   if (!image.isNull()) {
+    // Only cache real images or genuinely-broken placeholders.
+    // NEVER cache transient failures so future requests can retry.
     insertCachedImage(id, image, requestedSize);
-    if (s_useDiskCache && !id.startsWith("synthetic:")) {
+    if (isGenuinelyBroken) {
+      // Don't write corrupt-file placeholders to disk cache - they waste space
+      // and disk cache has no TTL to expire them naturally.
+    } else if (s_useDiskCache && !id.startsWith("synthetic:")) {
       QSettings settings("SamsungClone", "Gallery");
       if (settings.value("diskCacheDatabaseType", 0).toInt() == 1) {
         QByteArray ba;

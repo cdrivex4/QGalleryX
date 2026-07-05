@@ -170,7 +170,9 @@ void ScrollBenchImageModel::setVisibleStartIndex(int index) {
     emit visibleRangeChanged();
 
     if (m_viewportCullingEnabled) {
-      if (delta > 10) {
+      // Only cancel pending requests on VERY large jumps (e.g. drag scrubber),
+      // not on initial load or normal scrolling. A delta of < 80 is normal scroll.
+      if (delta > 80) {
         cancelPendingRequests();
       }
       updateVisibleRange();
@@ -677,10 +679,12 @@ void ScrollBenchImageModel::updateVisibleRange() {
 }
 
 void ScrollBenchImageModel::requestThumbnail(int index) {
-  if (index < 0 || index >= m_items.count() || m_items[index].isLoaded) {
+  if (index < 0 || index >= m_items.count())
     return;
-  }
-  // Avoid duplicate requests if already pending
+  // For already-loaded items: skip (the FastImageItem caches and displays them)
+  if (m_items[index].isLoaded)
+    return;
+  // Avoid duplicate in-flight requests
   if (m_activelyRequesting.contains(index))
     return;
   m_activelyRequesting.insert(index);
