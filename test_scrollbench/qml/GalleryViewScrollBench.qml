@@ -105,11 +105,11 @@ Item {
         }
     }
 
-    // Drag-to-Select Handler
     DragHandler {
         id: dragSelect
         target: null
         enabled: !grid.moving && !grid.flicking
+        acceptedModifiers: Qt.NoModifier | Qt.ShiftModifier | Qt.ControlModifier
         
         property point startPos
         property bool isDragging: false
@@ -350,12 +350,12 @@ Item {
                         width: Math.max(16, parent.width * 0.25)
                         height: width
                         radius: width/2
-                        color: "#2196F3"
+                        color: isSelected ? "#2196F3" : "#44000000"
                         anchors.top: parent.top
                         anchors.right: parent.right
                         anchors.margins: 4
-                        visible: isSelected
-                        border.color: "white"
+                        visible: isSelected || root.model.selectedCount > 0
+                        border.color: isSelected ? "white" : "#88ffffff"
                         border.width: 2
                         
                         Text {
@@ -364,6 +364,7 @@ Item {
                             color: "white"
                             font.bold: true
                             font.pixelSize: parent.width * 0.6
+                            visible: isSelected
                         }
                     }
                 }

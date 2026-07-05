@@ -48,6 +48,8 @@
 - ✅ **Placeholder Cache Poisoning on Transient Failure** → `isGenuinelyBroken` flag gates placeholder generation
 - ✅ **setSourceSize Renders Stale Stretched Image** → Clears m_image immediately before re-requesting
 - ✅ **First ~27 Video Thumbs Dropped on Folder Open** → Cancel threshold raised from 10 to 80
+- ✅ **QML Loop Hang on Invert/Drag Select** → Implemented `selectItems` bulk C++ method to prevent n² binding re-evaluations
+- ✅ **Drag-Select Unresponsive** → Added `acceptedModifiers` to `DragHandler` to prevent `Flickable` from stealing input
 
 ## ✅ Previously Fixed (Milestone 1 — 2026-07-04)
 

@@ -881,6 +881,27 @@ void ScrollBenchImageModel::invertSelection() {
   }
 }
 
+void ScrollBenchImageModel::selectItems(const QList<int> &indices) {
+  int minIndex = -1;
+  int maxIndex = -1;
+  bool changed = false;
+  
+  for (int index : indices) {
+    if (index >= 0 && index < m_items.count() && !m_items[index].isSelected) {
+      m_items[index].isSelected = true;
+      changed = true;
+      if (minIndex == -1 || index < minIndex) minIndex = index;
+      if (maxIndex == -1 || index > maxIndex) maxIndex = index;
+    }
+  }
+
+  if (changed) {
+    emit dataChanged(createIndex(minIndex, 0), createIndex(maxIndex, 0),
+                     {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
 void ScrollBenchImageModel::deleteSelected() {
   // Remove items in reverse order to maintain indices
   for (int i = m_items.count() - 1; i >= 0; --i) {

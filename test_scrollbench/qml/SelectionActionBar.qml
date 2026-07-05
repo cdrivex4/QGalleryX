@@ -69,22 +69,8 @@ Rectangle {
             text: "Invert"
             flat: true
             onClicked: {
-                if (root.model && root.model.totalItems > 0) {
-                     // Invert selection by toggling all items 
-                     // OR better: selectRange(0, total-1) then toggle existing? 
-                     // No, C++ toggleSelection toggles state. 
-                     // Efficient way: Clear then select inverse? No.
-                     // Brute force invert for now: Iterate 0 to totalItems
-                     // NOTE: This might be slow for thousands of items. 
-                     // A C++ implementation is preferred for performance, but for verification:
-                     // Let's rely on backend if possible or do a batch.
-                     
-                     // Fallback: Naive client-side iteration (Performance warning)
-                     // console.time("InvertSelection")
-                     for (var i = 0; i < root.model.totalItems; i++) {
-                         root.model.toggleSelection(i)
-                     }
-                     // console.timeEnd("InvertSelection")
+                if (root.model) {
+                     root.model.invertSelection()
                 }
             }
             contentItem: Text { text: parent.text; color: "white"; font.bold: true }

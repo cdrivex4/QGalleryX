@@ -239,8 +239,9 @@ Rectangle {
 
                     ColumnLayout {
                         Layout.fillWidth: true
-                        Text { text: "Grid Resolution: " + settings.gridResolution + "px"; color: "#fff"; font.pixelSize: 12 }
+                        Text { text: "Grid Resolution: " + Math.round(gridResSlider.value) + "px"; color: "#fff"; font.pixelSize: 12 }
                         Slider {
+                            id: gridResSlider
                             Layout.fillWidth: true; from: 20; to: 400; stepSize: 4
                             value: settings.gridResolution
                             onPressedChanged: {
@@ -253,8 +254,9 @@ Rectangle {
 
                     ColumnLayout {
                         Layout.fillWidth: true
-                        Text { text: "Cache Size: " + settings.cacheSizeMB + " MB"; color: "#fff"; font.pixelSize: 12 }
+                        Text { text: "Cache Size: " + Math.round(cacheSizeSlider.value) + " MB"; color: "#fff"; font.pixelSize: 12 }
                         Slider {
+                            id: cacheSizeSlider
                             Layout.fillWidth: true; from: 128; to: 4096; stepSize: 128
                             value: settings.cacheSizeMB
                             onPressedChanged: {
@@ -267,8 +269,9 @@ Rectangle {
 
                     ColumnLayout {
                         Layout.fillWidth: true
-                        Text { text: "Threads: " + settings.concurrentThreads + " (Restart)"; color: "#fff"; font.pixelSize: 12 }
+                        Text { text: "Threads: " + Math.round(threadsSlider.value) + " (Restart)"; color: "#fff"; font.pixelSize: 12 }
                         Slider {
+                            id: threadsSlider
                             Layout.fillWidth: true; from: 1; to: 32; stepSize: 1
                             value: settings.concurrentThreads
                             onPressedChanged: {
@@ -313,11 +316,12 @@ Rectangle {
                                 Switch { checked: frameBudget.enabled; onToggled: frameBudget.enabled = checked }
                             }
                             Text { 
-                                text: "Target: " + frameBudget.frameBudget + " tasks/frame"
+                                text: "Target: " + Math.round(frameBudgetSlider.value) + " tasks/frame"
                                 font.pixelSize: 10; color: "#888"
                                 visible: frameBudget.enabled
                             }
                             Slider {
+                                id: frameBudgetSlider
                                 Layout.fillWidth: true; from: 1; to: 100; stepSize: 1
                                 value: frameBudget.frameBudget
                                 visible: frameBudget.enabled
@@ -422,8 +426,9 @@ Rectangle {
                         
                         ColumnLayout {
                             Layout.fillWidth: true
-                            Text { text: "Year switch < " + root.thresholdYear + "px"; color: "#fff"; font.pixelSize: 11 }
+                            Text { text: "Year switch < " + Math.round(threshYearSlider.value) + "px"; color: "#fff"; font.pixelSize: 11 }
                             Slider {
+                                id: threshYearSlider
                                 Layout.fillWidth: true; from: 20; to: 400; stepSize: 1
                                 value: root.thresholdYear
                                 onPressedChanged: {
@@ -436,8 +441,9 @@ Rectangle {
                         
                         ColumnLayout {
                             Layout.fillWidth: true
-                            Text { text: "Month switch < " + root.thresholdMonth + "px"; color: "#fff"; font.pixelSize: 11 }
+                            Text { text: "Month switch < " + Math.round(threshMonthSlider.value) + "px"; color: "#fff"; font.pixelSize: 11 }
                             Slider {
+                                id: threshMonthSlider
                                 Layout.fillWidth: true; from: 21; to: 400; stepSize: 1
                                 value: root.thresholdMonth
                                 onPressedChanged: {
@@ -450,8 +456,9 @@ Rectangle {
 
                         ColumnLayout {
                             Layout.fillWidth: true
-                            Text { text: "Week switch < " + root.thresholdWeek + "px"; color: "#fff"; font.pixelSize: 11 }
+                            Text { text: "Week switch < " + Math.round(threshWeekSlider.value) + "px"; color: "#fff"; font.pixelSize: 11 }
                             Slider {
+                                id: threshWeekSlider
                                 Layout.fillWidth: true; from: 22; to: 400; stepSize: 1
                                 value: root.thresholdWeek
                                 onPressedChanged: {

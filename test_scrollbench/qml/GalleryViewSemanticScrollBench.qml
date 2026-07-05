@@ -287,9 +287,12 @@ Item {
                             // Scaled Checkmark
                             Rectangle {
                                 width: Math.max(10, parent.width * 0.25); height: width; radius: width/2
-                                color: "#2196F3"; anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 2
-                                visible: parent.isSelected
-                                Text { anchors.centerIn: parent; text: "✓"; color: "white"; font.bold: true; font.pixelSize: parent.width * 0.7 }
+                                color: parent.isSelected ? "#2196F3" : "#44000000"
+                                anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 2
+                                visible: parent.isSelected || semanticRoot.model.selectedCount > 0
+                                border.color: parent.isSelected ? "white" : "#88ffffff"
+                                border.width: 2
+                                Text { anchors.centerIn: parent; text: "✓"; color: "white"; font.bold: true; font.pixelSize: parent.width * 0.7; visible: parent.parent.isSelected }
                             }
                         }
                         
@@ -306,7 +309,7 @@ Item {
                                 }
                             }
                             onPressAndHold: (mouse) => {
-                                root.performAction("ToggleSelect", { index: sourceIdx })
+                                semanticRoot.performAction("ToggleSelect", { index: sourceIdx })
                             }
                         }
                     }
@@ -330,11 +333,12 @@ Item {
             onScaleChanged: if (active) settings.gridResolution = Math.max(30, Math.min(baseSize * scale, 400))
         }
 
-        // Semantic Drag Selection Logic
-        DragHandler {
-            id: dragSelect
-            target: null // Do not move any items
-            enabled: !list.moving && !list.flicking
+    // Semantic Drag Selection Logic
+    DragHandler {
+        id: dragSelect
+        target: null // Do not move any items
+        enabled: !list.moving && !list.flicking
+        acceptedModifiers: Qt.NoModifier | Qt.ShiftModifier | Qt.ControlModifier
             
             property point startPos
             property bool isDragging: false
@@ -368,13 +372,14 @@ Item {
         }
     }
     
-    // Helper functionality to map visual rect to grouped items
     function selectByRect(x1, y1, x2, y2) {
         // Adjust for contentY
         let contentY1 = y1 + list.contentY
         let contentY2 = y2 + list.contentY
         
         let children = list.contentItem.children
+        let indicesToSelect = []
+        
         for (let i = 0; i < children.length; i++) {
             let item = children[i]
             if (!item || !item.hasOwnProperty("capturedType")) continue
@@ -395,11 +400,15 @@ Item {
                     if (cellRight > x1 && cellX < x2) {
                         let sourceIdx = item.capturedStart + c
                         if (!semanticRoot.model.data(semanticRoot.model.index(sourceIdx,0), 409)) {
-                             semanticRoot.model.toggleSelection(sourceIdx)
+                             indicesToSelect.push(sourceIdx)
                         }
                     }
                 }
             }
+        }
+        
+        if (indicesToSelect.length > 0) {
+            semanticRoot.model.selectItems(indicesToSelect)
         }
     }
 

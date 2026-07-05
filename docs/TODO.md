@@ -67,6 +67,16 @@
 - **Problem**: `cancelPendingRequests()` was triggered whenever `delta > 10` items appeared in the visible range. On initial folder selection, the grid jumps from 0 to ~27 visible items (delta > 10), which immediately cancelled all in-flight FFmpeg video decode tasks before they could complete.
 - **Fix**: Cancel threshold raised from `delta > 10` to `delta > 80`. Normal scrolling and initial load never hit this. Only genuine scrubber jumps (100+ items) trigger a cancel.
 
+### Fix 11 — Drag-Select Unresponsive (Flickable Stealing Input)
+- **File**: `test_scrollbench/qml/GalleryViewScrollBench.qml` & `GalleryViewSemanticScrollBench.qml`
+- **Problem**: Users could not draw a selection box. `DragHandler` defaults to `Qt.NoModifier`, meaning holding `Shift` or `Ctrl` ignored the drag, and without modifiers the `Flickable` list simply scrolled.
+- **Fix**: Added `acceptedModifiers: Qt.NoModifier | Qt.ShiftModifier | Qt.ControlModifier` to explicitly allow drag-selection when holding a modifier.
+
+### Fix 12 — Massive UI Hang / Crash on Select All / Invert / Drag Select
+- **File**: `test_scrollbench/src/ScrollBenchImageModel.cpp` & `test_scrollbench/qml/SelectionActionBar.qml`
+- **Problem**: Batch selection operations in QML (like "Invert") were running a Javascript loop that called `toggleSelection(i)` up to 20,000 times. Each call synchronously emitted `selectedCountChanged`, forcing all visible QML delegates to repeatedly re-evaluate their bindings, locking the UI thread.
+- **Fix**: Replaced QML-side JS loops with a new native C++ `selectItems(indices)` method that processes bulk index updates in O(N) time without intermediate signals, and explicitly hooked `invertSelection` directly to the C++ method.
+
 ---
 
 ## Remaining Items (from pipeline_audit.md)

@@ -36,6 +36,7 @@ class ScrollBenchImageModel : public QAbstractListModel {
   Q_PROPERTY(int roleSectionMonth READ roleSectionMonth CONSTANT)
   Q_PROPERTY(int roleSectionYear READ roleSectionYear CONSTANT)
   Q_PROPERTY(int roleSectionType READ roleSectionType CONSTANT)
+  Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)
 
 public:
   explicit ScrollBenchImageModel(QObject *parent = nullptr);
@@ -109,6 +110,7 @@ public:
   Q_INVOKABLE void selectAll();
   Q_INVOKABLE void clearSelection();
   Q_INVOKABLE void invertSelection();
+  Q_INVOKABLE void selectItems(const QList<int> &indices);
   Q_INVOKABLE void deleteSelected();
   Q_INVOKABLE QStringList getSelectedPaths() const;
   Q_INVOKABLE qint64 getSelectedTotalSizeBytes() const;
