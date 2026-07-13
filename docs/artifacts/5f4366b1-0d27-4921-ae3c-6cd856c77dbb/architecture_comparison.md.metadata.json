@@ -1,0 +1,5 @@
+{
+  "summary": "Comprehensive deep-dive comparison of appSamsungGallery vs test_scrollbench. Covers RAM/VRAM/disk caching architecture, stats overlay wiring issues including the 1 FPS bug root cause, a full wiring diagram, and a prioritized checklist of what works in ScrollBench that must be backported to the legacy app.",
+  "updatedAt": "2026-07-11T19:29:46.324494700Z",
+  "userFacing": true
+}

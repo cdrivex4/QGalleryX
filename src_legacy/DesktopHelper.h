@@ -15,6 +15,13 @@ public:
   Q_INVOKABLE void openInExplorer(const QString &path);
   Q_INVOKABLE int getFileType(const QString &path);
 
+  // Generates a preview image to a temp file and returns { "path": tempFilePath, "size": bytes }
+  Q_INVOKABLE QVariantMap generateResizePreview(const QString &sourcePath, int width, int height, int quality, int compression);
+  
+  // Batch process or copy
+  Q_INVOKABLE void exportImages(const QStringList &paths, const QString &destinationDir, int width, int height, int quality, int compression);
+  Q_INVOKABLE void copyFiles(const QStringList &paths, const QString &destinationDir);
+
   // Static helper for C++ usage
   static FileType staticGetFileType(const QString &path);
 };

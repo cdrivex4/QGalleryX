@@ -310,14 +310,25 @@ Item {
                         property string filePath: root.model.data(root.model.index(sourceIndex, 0), ImageModel.FilePathRole)
                         property int fileType: desktopHelper ? desktopHelper.getFileType(filePath) : 0
                         property bool isVideo: fileType === DesktopHelper.Video
+                        property bool isSelected: root.model.data(root.model.index(sourceIndex, 0), ImageModel.IsSelectedRole)
+                        
+                        Connections {
+                            target: root.model
+                            function onSelectedCountChanged() {
+                                isSelected = root.model.data(root.model.index(sourceIndex, 0), ImageModel.IsSelectedRole)
+                            }
+                        }
                         
                         Image {
                             id: img
                             anchors.fill: parent
                             anchors.margins: 1
                             source: filePath ? "image://async/" + filePath : ""
-                            sourceSize.width: root.loadingResolution
-                            sourceSize.height: root.loadingResolution
+                            // Do not bind directly to avoid flashing the grid when setting is tweaked!
+                            Component.onCompleted: {
+                                sourceSize.width = root.loadingResolution
+                                sourceSize.height = root.loadingResolution
+                            }
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
                             cache: true
@@ -348,14 +359,64 @@ Item {
                                 }
                                 Text {
                                     anchors.centerIn: parent
-                                    text: "??????"
+                                    text: "▶️"
                                     color: "white"
+                                    font.pixelSize: Math.max(10, Math.min(24, parent.height * 0.5))
+                                }
+                            }
+                            
+                            // Selection Visuals
+                            Rectangle {
+                                anchors.fill: parent
+                                color: isSelected ? "#440078D7" : "transparent"
+                                border.color: "#0078D7"
+                                border.width: Math.max(1, Math.min(4, parent.width * 0.05))
+                                visible: isSelected
+                            }
+                            
+                            Rectangle {
+                                anchors.top: parent.top
+                                anchors.left: parent.left
+                                anchors.margins: Math.max(2, parent.width * 0.05)
+                                width: Math.max(12, Math.min(24, parent.width * 0.3))
+                                height: width
+                                radius: width / 2
+                                color: isSelected ? "#0078D7" : "#44000000"
+                                border.color: "white"
+                                border.width: 1.5
+                                visible: root.model.selectedCount > 0 || isSelected
+                                
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "✓"
+                                    color: "white"
+                                    font.pixelSize: Math.max(8, parent.width * 0.6)
+                                    font.bold: true
+                                    visible: isSelected
+                                }
+                                
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked: {
+                                        root.model.setData(root.model.index(sourceIndex, 0), !isSelected, ImageModel.IsSelectedRole)
+                                    }
                                 }
                             }
                             
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: root.imageClicked(sourceIndex)
+                                onClicked: {
+                                    if (root.model.selectedCount > 0) {
+                                        root.model.setData(root.model.index(sourceIndex, 0), !isSelected, ImageModel.IsSelectedRole)
+                                    } else {
+                                        root.imageClicked(sourceIndex)
+                                    }
+                                }
+                                onPressAndHold: {
+                                    if (!isSelected) {
+                                        root.model.setData(root.model.index(sourceIndex, 0), true, ImageModel.IsSelectedRole)
+                                    }
+                                }
                             }
                         }
                     }

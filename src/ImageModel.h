@@ -42,15 +42,28 @@ public:
   };
   Q_ENUM(ImageRoles)
 
+  Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY filterQueryChanged)
+  Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)
+
   explicit ImageModel(QObject *parent = nullptr);
 
   Q_INVOKABLE void scanDirectory(const QString &path);
   Q_INVOKABLE bool cropImage(int index, const QRectF &cropRect);
   Q_INVOKABLE QVariantMap getMetadata(int index);
+  Q_INVOKABLE void clearSelection();
+  Q_INVOKABLE QStringList getSelectedPaths() const;
+  Q_INVOKABLE int getProxyIndexForSourceIndex(int sourceIndex) const;
+  Q_INVOKABLE QStringList getActiveDirectories() const;
+
+  int selectedCount() const;
+
+  QString filterQuery() const { return m_filterQuery; }
+  void setFilterQuery(const QString &query);
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   QVariant data(const QModelIndex &index,
                 int role = Qt::DisplayRole) const override;
+  bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
   QHash<int, QByteArray> roleNames() const override;
 
   bool isLoading() const { return m_isLoading; }
@@ -66,13 +79,18 @@ public:
 signals:
   void isLoadingChanged();
   void visibleRangeChanged();
+  void filterQueryChanged();
+  void selectedCountChanged();
 
 private:
   void updateVisiblePaths();
-
   void processPendingUpdates();
+  void applyFilter();
 
   QList<ImageInfo> m_images;
+  QList<ImageInfo> m_allImages;
+  QString m_filterQuery;
+  
   QList<ImageInfo> m_pendingInsertions;
   class QTimer* m_updateTimer = nullptr;
   bool m_isLoading = false;

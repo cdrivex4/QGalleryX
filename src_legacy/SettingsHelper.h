@@ -20,8 +20,8 @@ class SettingsHelper : public QObject {
                  thumbnailSizeChanged)
   Q_PROPERTY(
       int gridResolution READ gridResolution WRITE setGridResolution NOTIFY gridResolutionChanged)
-  Q_PROPERTY(int cacheSizeMB READ cacheSizeMB WRITE setCacheSizeMB NOTIFY
-                 cacheSizeMBChanged)
+  Q_PROPERTY(int cacheSizeMB READ cacheSizeMB WRITE setCacheSizeMB NOTIFY cacheSizeMBChanged)
+  Q_PROPERTY(int diskCacheSizeMB READ diskCacheSizeMB WRITE setDiskCacheSizeMB NOTIFY diskCacheSizeMBChanged)
   Q_PROPERTY(int concurrentThreads READ concurrentThreads WRITE
                  setConcurrentThreads NOTIFY concurrentThreadsChanged)
   Q_PROPERTY(
@@ -47,6 +47,9 @@ public:
 
   int cacheSizeMB() const;
   void setCacheSizeMB(int sizeMB);
+
+  int diskCacheSizeMB() const;
+  void setDiskCacheSizeMB(int sizeMB);
 
   int concurrentThreads() const;
   void setConcurrentThreads(int count);
@@ -76,6 +79,7 @@ signals:
   void thumbnailSizeChanged();
   void gridResolutionChanged();
   void cacheSizeMBChanged();
+  void diskCacheSizeMBChanged();
   void concurrentThreadsChanged();
   void logLevelChanged();
   void rawAccelerationChanged();

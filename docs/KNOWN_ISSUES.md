@@ -1,42 +1,31 @@
 # Known Issues & Workarounds
 
-**Last Updated:** 2026-07-05
+**Last Updated:** 2026-07-13
 
 ---
 
 ## 🔴 Open Issues
 
-### 1. Selection/Share Features Only in ScrollBench
-- **Issue**: Multi-select and share/resize dialogs are fully implemented in ScrollBench but not yet ported to main application
-- **Impact**: Users must use ScrollBench to select multiple images or resize for sharing
-- **Workaround**: Use `appScrollBench.exe` for these features
-- **Status**: Planned for next release (v2.3.0)
+- None identified currently.
 
-### 2. Case-Sensitive File Extension Matching
-- **Issue**: Files with uppercase extensions (`.JPG`, `.PNG`, `.MP4`) may not be detected during directory scanning
-- **Root Cause**: Some QDirIterator filter paths use lowercase patterns only
-- **Workaround**: Manually add uppercase variants to filter lists
-- **Status**: Documented fix available — `docs/FOLDER_SCANNING_DIAGNOSTIC.md`
+## ✅ Fixed This Session (Milestone 4 — 2026-07-13)
 
-### 3. Staging Queue Leak on Abandoned Items
-- **Issue**: Items re-queued to staging under low-memory+offscreen conditions with no subsequent VRM update will accumulate in `m_stagedRequests` indefinitely
-- **Impact**: Memory bloat on very large (100k+) folder scrolls after rapid directional change
-- **Status**: Identified, fix planned (age-out expiry for staged items)
-- **File**: `src/AsyncImageProvider.cpp` — `processStagedRequests()`
+- ✅ **Selection/Share Ported to Main App** → Multi-select, share dialog, and resize editor are now fully integrated into the main gallery view.
+- ✅ **Resize Dialog Nested Sizing Bug** → Fixed `ResizeEditor` breaking its layout when instantiated inside `ShareDialog` by binding it to `Overlay.overlay`.
+- ✅ **Date Scrubber "Abyss" Scrolling** → Replaced explicit `contentY` math with `positionViewAtIndex` to prevent scrolling into uninstantiated lazy-load regions.
+- ✅ **Semantic View Selection Overlay Missing** → Added a QML `Connections` block to dynamically update selection visuals in the Repeater when `selectedCountChanged` fires.
+- ✅ **Album View Inner Search Filter Sync** → Added `onActiveModelChanged` in `Main.qml` to ensure the global search bar text is injected into the local Album directory's model upon entering a folder.
+- ✅ **Corrupted Text/Icons (??? Back)** → Replaced corrupted unicode characters with proper arrow and media icons.
 
-### 4. `isRequestStillNeeded` 2ms Coalesce Window Drop
-- **Issue**: New delegate created for a file within the 2ms `scheduleStagingProcessing` delay window may not yet be registered in `m_pendingResponses`, causing the task to be silently dropped
-- **Impact**: Occasional blank tile on very fast initial renders
-- **Status**: Identified, low frequency, fix planned
+## ✅ Previously Fixed (Milestone 3 — 2026-07-11)
 
-### 5. RAM Cache Key Normalization Mismatch
-- **Issue**: RAM cache key is `id + "_" + WxH`. If requests arrive with different path forms (raw vs `file://` prefixed), they miss the cache and trigger duplicate decodes
-- **Impact**: Wasted CPU/RAM on path format inconsistency
-- **Status**: Identified, low priority
+- ✅ **Case-Sensitive File Extension Matching** → Fixed missing uppercase extension files in scanners
+- ✅ **Staging Queue Leak on Abandoned Items** → Implemented 5s age-out expiry for stalled staged requests
+- ✅ **isRequestStillNeeded 2ms Coalesce Window Drop** → Replaced non-atomic check with atomic abortIfNotNeeded
+- ✅ **RAM Cache Key Normalization Mismatch** → Lowercased Windows path cache keys inside normalizeId
+- ✅ **Disk Cache Size Key Consistency** → Verified existing keys are consistent across implementations
 
----
-
-## ✅ Fixed This Session (Milestone 2 — 2026-07-05)
+## ✅ Previously Fixed (Milestone 2 — 2026-07-05)
 
 - ✅ **LIFO Queue Abort Threshold** → Removed hard 5000-task abort that killed newest visible tasks first
 - ✅ **OOM/VRM Race → Permanent Placeholder** → Offscreen tasks re-queued instead of permanently failed

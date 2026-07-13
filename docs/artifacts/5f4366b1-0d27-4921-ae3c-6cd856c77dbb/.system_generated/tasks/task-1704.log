@@ -1,0 +1,329 @@
+SUCCESS: The process "appSamsungGallery.exe" with PID 16492 has been terminated.
+[1/2] Cleaning additional files...
+[2/2] Cleaning all built files...
+FAILED: clean 
+D:\Qt\Tools\Ninja\ninja.exe  -t clean 
+Cleaning... ninja: error: remove(appSamsungGallery.exe): Access is denied.
+
+303 files.
+ninja: build stopped: subcommand failed.
+[1/278] Copying appSamsungGallery qml resources into build dir
+[2/278] Copying appSamsungGallery qml sources into build dir
+[3/278] Copying appScrollBench qml sources into build dir
+[4/278] Copying appScrollBench qml resources into build dir
+[5/278] Running qmlimportscanner for appScrollBench
+[6/278] Running qmlimportscanner for tst_automation
+[7/278] Running qmlimportscanner for tst_linkage
+[8/278] Automatic MOC and UIC for target libraw_static
+[9/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/libraw_static_autogen/mocs_compilation.cpp.obj
+[10/278] Automatic MOC and UIC for target appScrollBenchNet
+[11/278] Automatic MOC and UIC for target tst_mft
+[12/278] Automatic MOC and UIC for target tst_scheduler
+[13/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/canon_600.cpp.obj
+[14/278] Running qmlimportscanner for appSamsungGallery
+[15/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/decoders_dcraw.cpp.obj
+[16/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/decoders_libraw.cpp.obj
+[17/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/decoders_libraw_dcrdefs.cpp.obj
+[18/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/dng.cpp.obj
+[19/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/fp_dng.cpp.obj
+[20/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/crx.cpp.obj
+[21/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/generic.cpp.obj
+[22/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/fuji_compressed.cpp.obj
+[23/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/olympus14.cpp.obj
+[24/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/load_mfbacks.cpp.obj
+[25/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/kodak_decoders.cpp.obj
+[26/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/pana8.cpp.obj
+[27/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decompressors/losslessjpeg.cpp.obj
+[28/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/sonycc.cpp.obj
+[29/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/smal.cpp.obj
+[30/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/unpack_thumb.cpp.obj
+[31/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/decoders/unpack.cpp.obj
+[32/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/demosaic/ahd_demosaic.cpp.obj
+[33/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/demosaic/aahd_demosaic.cpp.obj
+[34/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/demosaic/misc_demosaic.cpp.obj
+[35/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/demosaic/dht_demosaic.cpp.obj
+[36/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/demosaic/dcb_demosaic.cpp.obj
+[37/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/demosaic/xtrans_demosaic.cpp.obj
+[38/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/libraw_c_api.cpp.obj
+[39/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/integration/dngsdk_glue.cpp.obj
+[40/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/integration/rawspeed_glue.cpp.obj
+[41/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/libraw_datastream.cpp.obj
+[42/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/adobepano.cpp.obj
+[43/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/ciff.cpp.obj
+[44/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/cr3_parser.cpp.obj
+[45/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/epson.cpp.obj
+[46/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/canon.cpp.obj
+[47/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/exif_gps.cpp.obj
+[48/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/hasselblad_model.cpp.obj
+[49/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/fuji.cpp.obj
+[50/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/leica.cpp.obj
+[51/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/kodak.cpp.obj
+[52/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/identify_tools.cpp.obj
+[53/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/identify.cpp.obj
+[54/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/makernotes.cpp.obj
+[55/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/mediumformat.cpp.obj
+[56/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/minolta.cpp.obj
+[57/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/misc_parsers.cpp.obj
+[58/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/normalize_model.cpp.obj
+[59/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/olympus.cpp.obj
+[60/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/nikon.cpp.obj
+[61/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/p1.cpp.obj
+[62/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/pentax.cpp.obj
+[63/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/samsung.cpp.obj
+[64/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/postprocessing/mem_image.cpp.obj
+[65/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/sony.cpp.obj
+[66/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/postprocessing/dcraw_process.cpp.obj
+[67/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/postprocessing/aspect_ratio.cpp.obj
+[68/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/postprocessing/postprocessing_utils.cpp.obj
+[69/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/postprocessing/postprocessing_aux.cpp.obj
+[70/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/preprocessing/preprocessing_ph.cpp.obj
+[71/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/metadata/tiff.cpp.obj
+[72/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/postprocessing/postprocessing_utils_dcrdefs.cpp.obj
+[73/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/preprocessing/subtract_black.cpp.obj
+[74/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/tables/colorconst.cpp.obj
+[75/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/tables/colordata.cpp.obj
+[76/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/tables/wblists.cpp.obj
+[77/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/tables/cameralist.cpp.obj
+[78/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/curves.cpp.obj
+[79/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/preprocessing/ext_preprocess.cpp.obj
+[80/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/decoder_info.cpp.obj
+[81/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/preprocessing/raw2image.cpp.obj
+[82/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/init_close_utils.cpp.obj
+[83/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/phaseone_processing.cpp.obj
+[84/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/open.cpp.obj
+[85/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/read_utils.cpp.obj
+[86/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/x3f/x3f_parse_process.cpp.obj
+[87/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/thumb_utils.cpp.obj
+[88/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/utils_libraw.cpp.obj
+[89/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/utils/utils_dcraw.cpp.obj
+[90/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/x3f/x3f_utils_patched.cpp.obj
+[91/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/write/apply_profile.cpp.obj
+[92/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/write/file_write.cpp.obj
+[93/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/write/tiff_writer.cpp.obj
+[94/278] Building CXX object 3rdparty/LibRaw/CMakeFiles/libraw_static.dir/src/write/write_ph.cpp.obj
+[95/278] Building CXX object CMakeFiles/tst_scheduler.dir/tst_scheduler_autogen/mocs_compilation.cpp.obj
+[96/278] Building CXX object CMakeFiles/tst_scheduler.dir/src/LogManager.cpp.obj
+[97/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBenchNet.dir/appScrollBenchNet_autogen/mocs_compilation.cpp.obj
+[98/278] Building CXX object CMakeFiles/tst_scheduler.dir/tests/tst_scheduler.cpp.obj
+[99/278] Building CXX object CMakeFiles/tst_mft.dir/tst_mft_autogen/mocs_compilation.cpp.obj
+[100/278] Building CXX object CMakeFiles/tst_mft.dir/tests/tst_mft.cpp.obj
+[101/278] Building CXX object CMakeFiles/tst_scheduler.dir/src/TaskScheduler.cpp.obj
+[102/278] Linking CXX static library 3rdparty\LibRaw\liblibraw_static.a
+[103/278] Linking CXX executable tst_scheduler.exe
+[104/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBenchNet.dir/src/main_net_watchdog.cpp.obj
+[105/278] Building CXX object CMakeFiles/tst_mft.dir/src/FastVolumeScanner.cpp.obj
+[106/278] Linking CXX executable tst_mft.exe
+[107/278] Automatic MOC and UIC for target appSamsungGallery
+[108/278] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBenchNet.exe
+[109/278] Automatic MOC and UIC for target tst_automation
+[110/278] Running AUTOMOC file extraction for target appSamsungGallery
+[111/278] Automatic MOC and UIC for target tst_linkage
+[112/278] Running rcc for resource qmake_SamsungGallery
+[113/278] Running rcc for resource appSamsungGallery_raw_qml_0
+[114/278] Automatic MOC and UIC for target tst_imagemodel
+[115/278] Automatic MOC and UIC for target appScrollBench
+[116/278] Generating .rcc/qmlcache/appSamsungGallery_qmlcache_loader.cpp
+[117/278] Running moc --collect-json for target appSamsungGallery
+[118/278] Running AUTOMOC file extraction for target appScrollBench
+[119/278] Running rcc for resource qmake_ScrollBench
+[120/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/FileTypeRouter.cpp.obj
+[121/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/tst_automation.cpp.obj
+[122/278] Running moc --collect-json for target appScrollBench
+[123/278] Running rcc for resource appScrollBench_raw_qml_0
+[124/278] Automatic QML type registration for target appSamsungGallery
+[125/278] Generating .rcc/qmlcache/appScrollBench_qmlcache_loader.cpp
+[126/278] Automatic QML type registration for target appScrollBench
+[127/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryView_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryView_qml.cpp.aotstats
+[128/278] Building CXX object CMakeFiles/tst_imagemodel.dir/tst_imagemodel_autogen/mocs_compilation.cpp.obj
+[129/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp.aotstats
+[130/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewSemantic_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewSemantic_qml.cpp.aotstats
+[131/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewTiles_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewTiles_qml.cpp.aotstats
+[132/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/tst_automation_autogen/mocs_compilation.cpp.obj
+[133/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/DateScrubber_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/DateScrubber_qml.cpp.aotstats
+[134/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp.aotstats
+[135/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp.aotstats
+[136/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/BottomBar_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/BottomBar_qml.cpp.aotstats
+[137/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/UsageGraph_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/UsageGraph_qml.cpp.aotstats
+[138/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/StatsOverlay_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/StatsOverlay_qml.cpp.aotstats
+[139/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/SelectionActionBar_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/SelectionActionBar_qml.cpp.aotstats
+[140/278] Building CXX object CMakeFiles/tst_imagemodel.dir/tests/tst_imagemodel.cpp.obj
+[141/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ShareDialog_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ShareDialog_qml.cpp.aotstats
+[142/278] Generating .rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.aotstats
+[143/278] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ResizeEditor_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ResizeEditor_qml.cpp.aotstats
+[144/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[145/278] Generating .rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp.aotstats
+[146/278] Generating .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.aotstats
+[147/278] Generating .rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp.aotstats
+[148/278] Generating .rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp.aotstats
+[149/278] Generating .rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp, .rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.aotstats
+[150/278] Generating .rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp, .rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp.aotstats
+[151/278] Generating .rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.aotstats
+[152/278] Generating .rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp, .rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp.aotstats
+[153/278] Generating .rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp.aotstats
+[154/278] Generating .rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp, .rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp.aotstats
+[155/278] Generating .rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp, .rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp.aotstats
+[156/278] Generating .rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp.aotstats
+[157/278] Generating .rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp.aotstats
+[158/278] Generating .rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp, .rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp.aotstats
+[159/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/src/ImageModel.cpp:15:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[160/278] Generating .rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp, .rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp.aotstats
+[161/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/SettingsHelper.cpp.obj
+[162/278] Building CXX object CMakeFiles/appSamsungGallery.dir/appSamsungGallery_autogen/mocs_compilation.cpp.obj
+[163/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/AlbumModel.cpp.obj
+D:/Dev/antigravity/src_legacy/AlbumModel.cpp: In member function 'void AlbumModel::scanAlbums(const QString&)':
+D:/Dev/antigravity/src_legacy/AlbumModel.cpp:143:5: warning: ignoring return value of 'auto QtConcurrent::run(Function&&, Args&& ...) [with Function = AlbumModel::scanAlbums(const QString&)::<lambda()>; Args = {}]', declared with attribute 'nodiscard': 'Use QThreadPool::start(Callable&&) if you don't need the returned QFuture' [-Wunused-result]
+  143 |   });
+      |     ^
+In file included from D:/Qt/6.9.3/mingw_64/include/QtConcurrent/QtConcurrent:14,
+                 from D:/Dev/antigravity/src_legacy/AlbumModel.cpp:6:
+D:/Qt/6.9.3/mingw_64/include/QtConcurrent/qtconcurrentrun.h:63:6: note: declared here
+   63 | auto run(Function &&f, Args &&...args)
+      |      ^~~
+[164/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/ImageModel.cpp.obj
+[165/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/GroupedProxyModel.cpp.obj
+[166/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/main.cpp.obj
+[167/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/SystemMonitor.cpp.obj
+[168/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/DesktopHelper.cpp.obj
+[169/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/AsyncImageProvider.cpp.obj
+[170/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj
+[171/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.qt/rcc/qrc_qmake_SamsungGallery.cpp.obj
+[172/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src/ImageProcessor.cpp.obj
+[173/278] Building CXX object CMakeFiles/appSamsungGallery.dir/appsamsunggallery_qmltyperegistrations.cpp.obj
+[174/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/LogManager.cpp.obj
+[175/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/TaskScheduler.cpp.obj
+[176/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_qmlcache_loader.cpp.obj
+[177/278] Building CXX object CMakeFiles/appSamsungGallery.dir/src/FileCacheManager.cpp.obj
+[178/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryView_qml.cpp.obj
+[179/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp.obj
+[180/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewSemantic_qml.cpp.obj
+[181/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewTiles_qml.cpp.obj
+[182/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/DateScrubber_qml.cpp.obj
+[183/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp.obj
+[184/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp.obj
+[185/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/BottomBar_qml.cpp.obj
+[186/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/UsageGraph_qml.cpp.obj
+[187/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/SelectionActionBar_qml.cpp.obj
+[188/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.qt/rcc/qrc_appSamsungGallery_raw_qml_0.cpp.obj
+[189/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/StatsOverlay_qml.cpp.obj
+[190/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ResizeEditor_qml.cpp.obj
+[191/278] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ShareDialog_qml.cpp.obj
+[192/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/DesktopHelper.cpp.obj
+[193/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/VideoThumbnailer.cpp.obj
+[194/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/FileCacheManager.cpp.obj
+[195/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/SettingsHelper.cpp.obj
+[196/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/LogManager.cpp.obj
+[197/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/SystemMonitor.cpp.obj
+[198/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/HardwareAccelerationManager.cpp.obj
+[199/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/TaskScheduler.cpp.obj
+[200/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/FrameBudgetScheduler.cpp.obj
+[201/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/AsyncImageProvider.cpp.obj
+[202/278] Building CXX object CMakeFiles/tst_imagemodel.dir/src/FastVolumeScanner.cpp.obj
+[203/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/FrameBudgetScheduler.cpp.obj
+[204/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/FileTypeRouter.cpp.obj
+[205/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/main_scrollbench.cpp.obj
+[206/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/appScrollBench_autogen/mocs_compilation.cpp.obj
+[207/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/FastImageItem.cpp.obj
+[208/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/TelemetryMonitor.cpp.obj
+[209/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[210/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/FileCacheManager.cpp.obj
+[211/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/DesktopHelper.cpp.obj
+[212/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/VideoThumbnailer.cpp.obj
+[213/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/TaskScheduler.cpp.obj
+[214/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/LogManager.cpp.obj
+[215/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/SettingsHelper.cpp.obj
+[216/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/SystemMonitor.cpp.obj
+[217/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AsyncImageProvider.cpp.obj
+[218/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/GroupedProxyModel.cpp.obj
+[219/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/ImageProcessor.cpp.obj
+[220/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.qt/rcc/qrc_qmake_ScrollBench.cpp.obj
+[221/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/HardwareAccelerationManager.cpp.obj
+[222/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/appscrollbench_qmltyperegistrations.cpp.obj
+[223/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/FastVolumeScanner.cpp.obj
+[224/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/src/DiagnosticsMonitor.cpp.obj
+[225/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qmlcache_loader.cpp.obj
+[226/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/MainScrollBench_qml.cpp.obj
+[227/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/__/src/AlbumModel.cpp.obj
+D:/Dev/antigravity/src/AlbumModel.cpp: In member function 'void AlbumModel::scanAlbums(const QString&)':
+D:/Dev/antigravity/src/AlbumModel.cpp:259:5: warning: ignoring return value of 'auto QtConcurrent::run(Function&&, Args&& ...) [with Function = AlbumModel::scanAlbums(const QString&)::<lambda()>; Args = {}]', declared with attribute 'nodiscard': 'Use QThreadPool::start(Callable&&) if you don't need the returned QFuture' [-Wunused-result]
+  259 |   });
+      |     ^
+In file included from D:/Qt/6.9.3/mingw_64/include/QtConcurrent/QtConcurrent:14,
+                 from D:/Dev/antigravity/src/AlbumModel.cpp:11:
+D:/Qt/6.9.3/mingw_64/include/QtConcurrent/qtconcurrentrun.h:63:6: note: declared here
+   63 | auto run(Function &&f, Args &&...args)
+      |      ^~~
+[228/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/GalleryViewScrollBench_qml.cpp.obj
+[229/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/AlbumsViewScrollBench_qml.cpp.obj
+[230/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/PerformanceOverlay_qml.cpp.obj
+[231/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/GalleryViewSemanticScrollBench_qml.cpp.obj
+[232/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DateScrubber_qml.cpp.obj
+[233/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/PhotoViewerScrollBench_qml.cpp.obj
+[234/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/ShareDialog_qml.cpp.obj
+[235/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/ResizeEditor_qml.cpp.obj
+[236/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/UsageGraph_qml.cpp.obj
+[237/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.qt/rcc/qrc_appScrollBench_raw_qml_0.cpp.obj
+[238/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/VideoFeedbackOverlay_qml.cpp.obj
+[239/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/SelectionActionBar_qml.cpp.obj
+[240/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/BenchmarkRunner_qml.cpp.obj
+[241/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/src/FrameBudgetScheduler.cpp.obj
+[242/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DiagnosticsOverlay_qml.cpp.obj
+[243/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DiagnosticRow_qml.cpp.obj
+[244/278] Building CXX object test_scrollbench/CMakeFiles/appScrollBench.dir/.rcc/qmlcache/appScrollBench_qml/DebugTuner_qml.cpp.obj
+[245/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/DesktopHelper.cpp.obj
+[246/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/TaskScheduler.cpp.obj
+[247/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/GroupedProxyModel.cpp.obj
+[248/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/SettingsHelper.cpp.obj
+[249/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/VideoThumbnailer.cpp.obj
+[250/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/SystemMonitor.cpp.obj
+[251/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/HardwareAccelerationManager.cpp.obj
+[252/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/ImageProcessor.cpp.obj
+[253/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/FileCacheManager.cpp.obj
+[254/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/LogManager.cpp.obj
+[255/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/AsyncImageProvider.cpp.obj
+[256/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/tst_linkage.cpp.obj
+[257/278] Building CXX object test_scrollbench/CMakeFiles/tst_automation.dir/__/src/FastVolumeScanner.cpp.obj
+[258/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/FrameBudgetScheduler.cpp.obj
+[259/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/FileTypeRouter.cpp.obj
+[260/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/DesktopHelper.cpp.obj
+[261/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/GroupedProxyModel.cpp.obj
+[262/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/tst_linkage_autogen/mocs_compilation.cpp.obj
+[263/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/TaskScheduler.cpp.obj
+[264/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/VideoThumbnailer.cpp.obj
+[265/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/src/ScrollBenchImageModel.cpp.obj
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/test_scrollbench/src/ScrollBenchImageModel.cpp:19:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+[266/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/FileCacheManager.cpp.obj
+[267/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/SettingsHelper.cpp.obj
+[268/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/HardwareAccelerationManager.cpp.obj
+[269/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/SystemMonitor.cpp.obj
+[270/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/AsyncImageProvider.cpp.obj
+[271/278] Linking CXX executable tst_imagemodel.exe
+[272/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/ImageProcessor.cpp.obj
+[273/278] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\tst_automation.exe
+[274/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/LogManager.cpp.obj
+[275/278] Linking CXX executable appSamsungGallery.exe
+[276/278] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\appScrollBench.exe
+[277/278] Building CXX object test_scrollbench/CMakeFiles/tst_linkage.dir/__/src/FastVolumeScanner.cpp.obj
+[278/278] Linking CXX executable D:\Dev\antigravity\test_scrollbench\deploy\tst_linkage.exe

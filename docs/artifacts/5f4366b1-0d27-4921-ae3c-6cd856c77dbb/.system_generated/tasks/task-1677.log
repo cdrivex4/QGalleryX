@@ -1,0 +1,20 @@
+[1/34] Automatic MOC and UIC for target appSamsungGallery
+[2/33] Running AUTOMOC file extraction for target appSamsungGallery
+[3/33] Running moc --collect-json for target appSamsungGallery
+[4/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/BottomBar_qml.cpp.obj
+[5/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/UsageGraph_qml.cpp.obj
+[6/14] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj
+FAILED: CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/appSamsungGallery_autogen/include -ID:/Dev/antigravity -ID:/Dev/antigravity/src_legacy -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtQml/6.9.3 -isystem D:/Qt/6.9.3/mingw_64/include/QtQml/6.9.3/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtCore/6.9.3 -isystem D:/Qt/6.9.3/mingw_64/include/QtCore/6.9.3/QtCore -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -isystem D:/Qt/6.9.3/mingw_64/include/QtQuickControls2 -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -O3 -DNDEBUG -MD -MT CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj -MF CMakeFiles\appSamsungGallery.dir\src_legacy\VideoThumbnailer.cpp.obj.d -o CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj -c D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp
+D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp: In member function 'QImage VideoThumbnailer::extractFrame(const QString&, int, const QSize&, std::atomic<bool>*)':
+D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp:218:39: error: 'class TaskScheduler' has no member named 'isPaused'
+  218 |         if (TaskScheduler::instance().isPaused())
+      |                                       ^~~~~~~~
+[7/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/SelectionActionBar_qml.cpp.obj
+[8/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/DateScrubber_qml.cpp.obj
+[9/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp.obj
+[10/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/StatsOverlay_qml.cpp.obj
+[11/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp.obj
+[12/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ShareDialog_qml.cpp.obj
+[13/14] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ResizeEditor_qml.cpp.obj
+ninja: build stopped: subcommand failed.

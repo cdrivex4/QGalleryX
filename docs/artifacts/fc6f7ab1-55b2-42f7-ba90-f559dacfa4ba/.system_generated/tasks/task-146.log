@@ -1,0 +1,44 @@
+hermes : usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]
+At line:1 char:1
++ hermes serve --help 2>&1; hermes api --help 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (usage: hermes [...vider PROVIDER]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]
+              [--worktree] [--accept-hooks] [--skills SKILLS] [--yolo]
+              [--pass-session-id] [--ignore-user-config] [--ignore-rules]
+              [--safe-mode] [--tui] [--cli] [--dev]
+              {chat,model,fallback,secrets,migrate,gateway,proxy,lsp,setup,postinstall,whatsapp,whatsapp-cloud,slack,se
+nd,login,logout,auth,status,cron,webhook,portal,kanban,hooks,doctor,security,dump,debug,backup,checkpoints,import,confi
+g,pairing,skills,bundles,plugins,photon,curator,pets,memory,tools,computer-use,mcp,sessions,insights,claw,version,updat
+e,uninstall,acp,profile,completion,dashboard,desktop,gui,logs,prompt-size}
+              ...
+hermes: error: argument command: invalid choice: 'serve' (choose from 'chat', 'model', 'fallback', 'secrets', 
+'migrate', 'gateway', 'proxy', 'lsp', 'setup', 'postinstall', 'whatsapp', 'whatsapp-cloud', 'slack', 'send', 'login', 
+'logout', 'auth', 'status', 'cron', 'webhook', 'portal', 'kanban', 'hooks', 'doctor', 'security', 'dump', 'debug', 
+'backup', 'checkpoints', 'import', 'config', 'pairing', 'skills', 'bundles', 'plugins', 'photon', 'curator', 'pets', 
+'memory', 'tools', 'computer-use', 'mcp', 'sessions', 'insights', 'claw', 'version', 'update', 'uninstall', 'acp', 
+'profile', 'completion', 'dashboard', 'desktop', 'gui', 'logs', 'prompt-size')
+hermes : usage: hermes [-h] [--version] [-z PROMPT] [-m MODEL] [--provider PROVIDER]
+At line:1 char:27
++ hermes serve --help 2>&1; hermes api --help 2>&1
++                           ~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (usage: hermes [...vider PROVIDER]:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+              [-t TOOLSETS] [--resume SESSION] [--continue [SESSION_NAME]]
+              [--worktree] [--accept-hooks] [--skills SKILLS] [--yolo]
+              [--pass-session-id] [--ignore-user-config] [--ignore-rules]
+              [--safe-mode] [--tui] [--cli] [--dev]
+              {chat,model,fallback,secrets,migrate,gateway,proxy,lsp,setup,postinstall,whatsapp,whatsapp-cloud,slack,se
+nd,login,logout,auth,status,cron,webhook,portal,kanban,hooks,doctor,security,dump,debug,backup,checkpoints,import,confi
+g,pairing,skills,bundles,plugins,photon,curator,pets,memory,tools,computer-use,mcp,sessions,insights,claw,version,updat
+e,uninstall,acp,profile,completion,dashboard,desktop,gui,logs,prompt-size}
+              ...
+hermes: error: argument command: invalid choice: 'api' (choose from 'chat', 'model', 'fallback', 'secrets', 'migrate', 
+'gateway', 'proxy', 'lsp', 'setup', 'postinstall', 'whatsapp', 'whatsapp-cloud', 'slack', 'send', 'login', 'logout', 
+'auth', 'status', 'cron', 'webhook', 'portal', 'kanban', 'hooks', 'doctor', 'security', 'dump', 'debug', 'backup', 
+'checkpoints', 'import', 'config', 'pairing', 'skills', 'bundles', 'plugins', 'photon', 'curator', 'pets', 'memory', 
+'tools', 'computer-use', 'mcp', 'sessions', 'insights', 'claw', 'version', 'update', 'uninstall', 'acp', 'profile', 
+'completion', 'dashboard', 'desktop', 'gui', 'logs', 'prompt-size')

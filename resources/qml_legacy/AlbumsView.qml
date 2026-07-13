@@ -10,6 +10,7 @@ StackView {
     signal imageClicked(int index, var model)
     
     property var model
+    property var activeModel: stack.depth === 1 ? model : (stack.currentItem ? stack.currentItem.activeModel : null)
     
     Component {
         id: albumGridComponent
@@ -127,6 +128,7 @@ StackView {
             id: detailRoot
             property string folderPath
             property string albumName
+            property var activeModel: innerGallery.model
             
             ColumnLayout {
                 anchors.fill: parent
@@ -144,7 +146,7 @@ StackView {
                         spacing: 10
                         
                         Button {
-                            text: "??? Back"
+                            text: "< Back"
                             onClicked: stack.pop()
                         }
                         
@@ -163,9 +165,10 @@ StackView {
                     Layout.fillHeight: true
                     
                     GalleryViewTiles {
+                        id: innerGallery
                         anchors.fill: parent
                         folderPath: detailRoot.folderPath
-                        onImageClicked: (index) => stack.imageClicked(index, model)
+                        onImageClicked: (index) => stack.imageClicked(index, innerGallery.model)
                     }
                 }
             }

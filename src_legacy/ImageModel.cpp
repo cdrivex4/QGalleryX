@@ -9,6 +9,7 @@
 #include <QImageReader>
 #include <QRegularExpression>
 #include <QStandardPaths>
+#include <QStorageInfo>
 #include <algorithm>
 #include <libraw/libraw.h>
 
@@ -78,6 +79,8 @@ QVariant ImageModel::data(const QModelIndex &index, int role) const {
     // Debugging
     return isRaw;
   }
+  case IsSelectedRole:
+    return info.isSelected;
 
   default:
     return QVariant();
@@ -95,6 +98,7 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   roles[SectionWeekRole] = "sectionWeek";
   roles[ExifRole] = "exif";
   roles[IsRawRole] = "isRaw";
+  roles[IsSelectedRole] = "isSelected";
   return roles;
 }
 
@@ -108,6 +112,7 @@ void ImageModel::scanDirectory(const QString &path) {
 
   // Clear current images immediately so UI updates
   beginResetModel();
+  m_allItems.clear();
   m_images.clear();
   endResetModel();
 
@@ -153,6 +158,18 @@ void ImageModel::scanDirectory(const QString &path) {
 
         qDebug() << "Scanning directory:" << cleanPath;
 
+        bool isNetworkPath = false;
+        if (cleanPath.startsWith("\\\\")) {
+          isNetworkPath = true;
+          qDebug() << "[NetworkScan] Detected UNC path:" << cleanPath;
+        } else if (cleanPath.length() >= 3 && cleanPath[1] == ':') {
+          QStorageInfo storage(cleanPath);
+          if (storage.isValid() && storage.device().startsWith("\\\\")) {
+            isNetworkPath = true;
+            qDebug() << "[NetworkScan] Detected mapped network drive:" << cleanPath;
+          }
+        }
+
         QDirIterator it(cleanPath,
                         QStringList()
                             << "*.jpg" << "*.jpeg" << "*.png" << "*.mp4"
@@ -193,11 +210,18 @@ void ImageModel::scanDirectory(const QString &path) {
           batch.append(info);
 
           if (batch.size() >= BATCH_SIZE) {
-            QMetaObject::invokeMethod(this, [this, batch]() {
-              beginInsertRows(QModelIndex(), m_images.count(),
-                              m_images.count() + batch.count() - 1);
-              m_images.append(batch);
-              endInsertRows();
+            QMetaObject::invokeMethod(this, [this, batch, isNetworkPath]() {
+              m_allItems.append(batch);
+              if (!isNetworkPath) {
+                if (m_filterQuery.isEmpty()) {
+                  beginInsertRows(QModelIndex(), m_images.count(),
+                                  m_images.count() + batch.count() - 1);
+                  m_images.append(batch);
+                  endInsertRows();
+                } else {
+                  applyFilter();
+                }
+              }
             });
             batch.clear();
           }
@@ -206,21 +230,25 @@ void ImageModel::scanDirectory(const QString &path) {
         // Append remaining
         if (!batch.isEmpty()) {
           QMetaObject::invokeMethod(this, [this, batch]() {
-            beginInsertRows(QModelIndex(), m_images.count(),
-                            m_images.count() + batch.count() - 1);
-            m_images.append(batch);
-            endInsertRows();
+            m_allItems.append(batch);
+            if (m_filterQuery.isEmpty()) {
+              beginInsertRows(QModelIndex(), m_images.count(),
+                              m_images.count() + batch.count() - 1);
+              m_images.append(batch);
+              endInsertRows();
+            } else {
+              applyFilter();
+            }
           });
         }
 
         // Final Sort and completion
         QMetaObject::invokeMethod(this, [this, timer]() {
-          beginResetModel();
-          std::sort(m_images.begin(), m_images.end(),
+          std::sort(m_allItems.begin(), m_allItems.end(),
                     [](const ImageInfo &a, const ImageInfo &b) {
                       return a.date > b.date;
                     });
-          endResetModel();
+          applyFilter();
 
           m_isLoading = false;
           emit isLoadingChanged();
@@ -289,4 +317,140 @@ QVariantMap ImageModel::getMetadata(int index) {
     }
   }
   return meta;
+}
+
+void ImageModel::setFilterQuery(const QString &query) {
+  if (m_filterQuery != query) {
+    m_filterQuery = query;
+    emit filterQueryChanged();
+    applyFilter();
+  }
+}
+
+void ImageModel::applyFilter() {
+  beginResetModel();
+  if (m_filterQuery.isEmpty()) {
+    m_images = m_allItems;
+  } else {
+    m_images.clear();
+    QString lowerQuery = m_filterQuery.toLower();
+    for (const auto &item : m_allItems) {
+      if (item.fileName.toLower().contains(lowerQuery)) {
+        m_images.append(item);
+      }
+    }
+  }
+  endResetModel();
+}
+
+void ImageModel::clearSelection() {
+  for (int i = 0; i < m_images.count(); ++i) {
+    m_images[i].isSelected = false;
+  }
+  if (!m_images.isEmpty()) {
+    emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ImageModel::selectAll() {
+  for (int i = 0; i < m_images.count(); ++i) {
+    m_images[i].isSelected = true;
+  }
+  if (!m_images.isEmpty()) {
+    emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ImageModel::invertSelection() {
+  for (int i = 0; i < m_images.count(); ++i) {
+    m_images[i].isSelected = !m_images[i].isSelected;
+  }
+  if (!m_images.isEmpty()) {
+    emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ImageModel::selectItems(const QList<int> &indices) {
+  int minIndex = -1;
+  int maxIndex = -1;
+  bool changed = false;
+  
+  for (int index : indices) {
+    if (index >= 0 && index < m_images.count() && !m_images[index].isSelected) {
+      m_images[index].isSelected = true;
+      changed = true;
+      if (minIndex == -1 || index < minIndex) minIndex = index;
+      if (maxIndex == -1 || index > maxIndex) maxIndex = index;
+    }
+  }
+
+  if (changed) {
+    emit dataChanged(createIndex(minIndex, 0), createIndex(maxIndex, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ImageModel::deleteSelected() {
+  for (int i = m_images.count() - 1; i >= 0; --i) {
+    if (m_images[i].isSelected) {
+      beginRemoveRows(QModelIndex(), i, i);
+      m_images.removeAt(i);
+      endRemoveRows();
+    }
+  }
+  emit selectedCountChanged();
+}
+
+QStringList ImageModel::getSelectedPaths() const {
+  QStringList paths;
+  for (const auto &item : m_images) {
+    if (item.isSelected) {
+      paths.append(item.filePath);
+    }
+  }
+  return paths;
+}
+
+qint64 ImageModel::getSelectedTotalSizeBytes() const {
+  qint64 totalBytes = 0;
+  for (const auto &item : m_images) {
+    if (item.isSelected) {
+      QFileInfo fi(item.filePath);
+      totalBytes += fi.size();
+    }
+  }
+  return totalBytes;
+}
+
+QStringList ImageModel::getActiveDirectories() const {
+  QSet<QString> dirs;
+  for (const auto &item : m_images) {
+    QString dirPath = QFileInfo(item.filePath).absolutePath();
+    dirs.insert(QDir::fromNativeSeparators(dirPath).toLower());
+  }
+  return dirs.values();
+}
+
+bool ImageModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+  if (!index.isValid() || index.row() >= m_images.count())
+    return false;
+
+  if (role == IsSelectedRole) {
+    m_images[index.row()].isSelected = value.toBool();
+    emit dataChanged(index, index, {role});
+    emit selectedCountChanged();
+    return true;
+  }
+  return false;
+}
+
+int ImageModel::selectedCount() const {
+  int count = 0;
+  for (const auto &item : m_images) {
+    if (item.isSelected) count++;
+  }
+  return count;
 }

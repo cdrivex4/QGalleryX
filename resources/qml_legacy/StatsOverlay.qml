@@ -201,16 +201,31 @@ Item {
             }
 
             // Cache Size
-            Text { text: "Cache Size: " + Math.round(cacheSlider.value) + " MB"; color: "white"; font.pixelSize: 11 }
+            Text { text: "RAM Cache: " + Math.round(cacheSlider.value) + " MB"; color: "white"; font.pixelSize: 11 }
             Slider {
                 id: cacheSlider
                 width: parent.width
-                from: 64; to: 2048
+                from: 128; to: 4096
                 stepSize: 1
                 value: appSettings.cacheSizeMB
                 onPressedChanged: {
                     if (!pressed) {
                         appSettings.cacheSizeMB = Math.round(value)
+                    }
+                }
+            }
+
+            // Disk Cache Size
+            Text { text: "Disk Cache: " + Math.round(diskCacheSlider.value) + " MB"; color: "white"; font.pixelSize: 11 }
+            Slider {
+                id: diskCacheSlider
+                width: parent.width
+                from: 512; to: 16384
+                stepSize: 256
+                value: appSettings.diskCacheSizeMB
+                onPressedChanged: {
+                    if (!pressed) {
+                        appSettings.diskCacheSizeMB = Math.round(value)
                     }
                 }
             }
@@ -342,9 +357,11 @@ Item {
     
     FrameAnimation {
         running: root.visible
+        onRunningChanged: if (running) root.lastTime = new Date().getTime()
         onTriggered: {
             root.frameCount++
             var now = new Date().getTime()
+            if (root.lastTime === 0) root.lastTime = now
             if (now - root.lastTime >= 1000) {
                 root.fps = root.frameCount
                 root.frameCount = 0

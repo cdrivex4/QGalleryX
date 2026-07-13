@@ -110,7 +110,7 @@ Item {
                     
                     Text {
                         anchors.centerIn: parent
-                        text: "??????"
+                        text: "▶️"
                         font.pixelSize: parent.width * 0.4
                         color: "white"
                     }
@@ -152,8 +152,8 @@ Item {
                     
                     Text {
                         anchors.centerIn: parent
-                        text: img.hasError ? "??????" : "..."
-                        color: "#888"
+                        text: img.hasError ? "⚠️" : "..."
+                        color: "white"
                     }
                 }
                 

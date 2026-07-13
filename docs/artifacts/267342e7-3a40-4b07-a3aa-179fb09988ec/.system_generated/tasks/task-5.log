@@ -1,0 +1,2 @@
+  warning: skill is from graphify 0.8.41, package is 0.9.3. Run 'graphify install' to update.
+error: graph file not found: C:\Users\curtis\.gemini\agy_memory_summaries\graphify-out\graph.json

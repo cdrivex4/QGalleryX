@@ -1,0 +1,45 @@
+[2026-07-11 23:04:35.733] [Thread 21948] Debug: [DIAG] Supported Image Formats: QList("bmp", "cur", "gif", "icns", "ico", "jfif", "jpeg", "jpg", "pbm", "pgm", "png", "ppm", "svg", "svgz", "tga", "tif", "tiff", "wbmp", "webp", "xbm", "xpm")
+[2026-07-11 23:04:36.142] [Thread 21948] Debug: SystemMonitor: Starting monitoring with interval 1000 ms
+[2026-07-11 23:04:36.364] [Thread 21948] Warning: qrc:/SamsungGallery/resources/qml_legacy/Main.qml:20:5: QML Settings: The Settings type from Qt.labs.settings is deprecated and will be removed in a future release. Please use the one from QtCore instead.
+[2026-07-11 23:04:36.608] [Thread 21948] Debug: Loading last folder: I:/MY SDCArds
+[2026-07-11 23:04:36.609] [Thread 21948] Debug: [TaskScheduler] Started 2 CPU threads and 2 IO threads.
+[2026-07-11 23:04:36.609] [Thread 21948] Debug: [TaskScheduler] Cleared all pending tasks.
+[2026-07-11 23:04:36.609] [Thread 21948] Warning: qrc:/SamsungGallery/resources/qml_legacy/ResizeEditor.qml:240: ReferenceError: imageProcessor is not defined
+[2026-07-11 23:04:36.609] [Thread 21948] Warning: qrc:/SamsungGallery/resources/qml_legacy/ResizeEditor.qml:240: ReferenceError: imageProcessor is not defined
+[2026-07-11 23:04:36.609] [Thread 21948] Warning: qrc:/SamsungGallery/resources/qml_legacy/ShareDialog.qml:13:5: Unable to assign [undefined] to bool
+[2026-07-11 23:04:36.609] [Thread 21948] Warning: qrc:/SamsungGallery/resources/qml_legacy/ShareDialog.qml:9: ReferenceError: imageModel is not defined
+[2026-07-11 23:04:36.613] [Thread 12520] Debug: Scanning directory: "I:\\MY SDCArds"
+[2026-07-11 23:04:36.896] [Thread 32148] Warning: Corrupt JPEG data: premature end of data segment
+[2026-07-11 23:04:37.493] [Thread 21948] Debug: [SystemMonitor] Resource Update: RAM: 190.754 MB (Delta: 190.754 ) | VRAM: 11.1211 MB (Delta: 11.1211 )
+[2026-07-11 23:04:39.499] [Thread 21948] Debug: Scanning finished in 2886 ms. Found 8948 items.
+[2026-07-11 23:04:39.598] [Thread 31332] Warning: Corrupt JPEG data: premature end of data segment
+[2026-07-11 23:04:39.666] [Thread 31332] Warning: Invalid SOS parameters for sequential JPEG
+[2026-07-11 23:04:39.756] [Thread 31332] Info: [FFmpeg] Initialized D3D11VA Hardware Acceleration.
+[2026-07-11 23:04:39.781] [Thread 32148] Warning: [FFmpeg] Failed to get HW surface format.
+[2026-07-11 23:04:39.786] [Thread 31332] Warning: [FFmpeg] Failed to get HW surface format.
+[2026-07-11 23:04:39.812] [Thread 32148] Debug: [VideoThumbnailer] Failed to decode frame at 0
+[2026-07-11 23:04:39.816] [Thread 31332] Debug: [VideoThumbnailer] Failed to decode frame at 0
+.\build\appSamsungGallery.exe : [2026-07-11 23:04:39.781] [Thread 32148] Critical: [FFmpeg Error] "Failed setup for 
+format d3d11: hwaccel initialisation returned error."
+At line:1 char:1
++ .\build\appSamsungGallery.exe 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([2026-07-11 23:...eturned error.":String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2026-07-11 23:04:39.781] [Thread 32148] Critical: [FFmpeg Error] "no frame!"
+[2026-07-11 23:04:39.782] [Thread 32148] Critical: [FFmpeg Error] "Missing reference picture, default is 0"
+[2026-07-11 23:04:39.786] [Thread 31332] Critical: [FFmpeg Error] "Failed setup for format d3d11: hwaccel 
+initialisation returned error."
+[2026-07-11 23:04:39.786] [Thread 31332] Critical: [FFmpeg Error] "no frame!"
+[2026-07-11 23:04:39.786] [Thread 31332] Critical: [FFmpeg Error] "Missing reference picture, default is 0"
+[2026-07-11 23:04:40.138] [Thread 21948] Debug: [SystemMonitor] Resource Update: RAM: 438.031 MB (Delta: 247.277 ) | VRAM: 296.082 MB (Delta: 284.961 )
+[2026-07-11 23:04:41.132] [Thread 21948] Debug: [SystemMonitor] Resource Update: RAM: 468.152 MB (Delta: 30.1211 ) | VRAM: 30.1719 MB (Delta: -265.91 )
+[2026-07-11 23:04:41.148] [Thread 31332] Warning: [FFmpeg] Failed to get HW surface format.
+[2026-07-11 23:04:41.148] [Thread 31332] Critical: [FFmpeg Error] "Failed setup for format d3d11: hwaccel 
+initialisation returned error."
+[2026-07-11 23:04:41.148] [Thread 31332] Critical: [FFmpeg Error] "no frame!"
+[2026-07-11 23:04:41.149] [Thread 31332] Critical: [FFmpeg Error] "Missing reference picture, default is 0"
+[2026-07-11 23:04:41.182] [Thread 31332] Debug: [VideoThumbnailer] Failed to decode frame at 0
+[2026-07-11 23:04:44.136] [Thread 21948] Debug: [SystemMonitor] Resource Update: RAM: 318.074 MB (Delta: -150.078 ) | VRAM: 30.7852 MB (Delta: 0.613281 )
+[2026-07-11 23:12:06.919] [Thread 21948] Warning: Retrying to obtain clipboard.

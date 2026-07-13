@@ -13,6 +13,53 @@ int AlbumModel::rowCount(const QModelIndex &parent) const {
   return m_albums.count();
 }
 
+void AlbumModel::setFilterQuery(const QString &query) {
+  if (m_filterQuery != query) {
+    m_filterQuery = query;
+    emit filterQueryChanged();
+    applyFilter();
+  }
+}
+
+void AlbumModel::applyFilter() {
+  beginResetModel();
+  if (m_filterQuery.isEmpty()) {
+    m_albums = m_allAlbums;
+  } else {
+    m_albums.clear();
+    for (const auto &album : m_allAlbums) {
+      if (album.name.contains(m_filterQuery, Qt::CaseInsensitive) || 
+          album.path.contains(m_filterQuery, Qt::CaseInsensitive)) {
+        m_albums.append(album);
+      }
+    }
+  }
+  endResetModel();
+}
+
+void AlbumModel::applyFilterFromPaths(const QStringList &validPaths) {
+  beginResetModel();
+  
+  if (validPaths.isEmpty() && m_filterQuery.isEmpty()) {
+     // If no paths match but query is also empty, show all (query cleared)
+     m_albums = m_allAlbums;
+  } else {
+     m_albums.clear();
+     QSet<QString> validDirs;
+     for (const QString &p : validPaths) {
+         validDirs.insert(QDir::fromNativeSeparators(p).toLower());
+     }
+     
+     for (const auto &album : m_allAlbums) {
+        QString normalizedAlbumPath = QDir::fromNativeSeparators(album.path).toLower();
+        if (validDirs.contains(normalizedAlbumPath)) {
+            m_albums.append(album);
+        }
+     }
+  }
+  endResetModel();
+}
+
 QVariant AlbumModel::data(const QModelIndex &index, int role) const {
   if (!index.isValid() || index.row() < 0 || index.row() >= m_albums.count())
     return QVariant();
@@ -93,9 +140,8 @@ void AlbumModel::scanAlbums(const QString &path) {
       if (batchSize >= 50 || (newAlbum && albumMap.count() <= 5)) {
         QVector<AlbumInfo> currentAlbums = albumMap.values().toVector();
         QMetaObject::invokeMethod(this, [this, currentAlbums]() {
-          beginResetModel();
-          m_albums = currentAlbums;
-          endResetModel();
+          m_allAlbums = currentAlbums;
+          applyFilter();
           // If we have at least one album, we can consider "established" enough
           // to hide overlay
           if (m_albums.count() > 0 && m_isLoading) {
@@ -110,9 +156,9 @@ void AlbumModel::scanAlbums(const QString &path) {
 
     // Final Update
     QMetaObject::invokeMethod(this, [this, albumMap]() {
-      beginResetModel();
-      m_albums = albumMap.values().toVector();
-      endResetModel();
+        QVector<AlbumInfo> finalAlbums = albumMap.values().toVector();
+        m_allAlbums = finalAlbums;
+        applyFilter();
       m_isLoading = false;
       emit isLoadingChanged();
       emit scanFinished();

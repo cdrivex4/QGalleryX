@@ -1,9 +1,11 @@
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
+#include "../src/FileCacheManager.h"
+#include <QBuffer>
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
-#include <QDir>
+#include <QBuffer>
 #include <QElapsedTimer>
 #include <QFileIconProvider>
 #include <QIcon>
@@ -47,11 +49,9 @@ AsyncImageResponse::AsyncImageResponse(const QString &id,
     // Reduce default cache to 256MB to be safer with RAWs
     int cacheSizeMB = settings.value("cacheSizeMB", 256).toInt();
     // Enforce a hard limit for stability
-    if (cacheSizeMB > 1024)
-      cacheSizeMB = 1024;
+    if (cacheSizeMB <= 0)
+      cacheSizeMB = 256;
 
-    AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024 *
-                                        1024); // Size in bytes (approx)
     // Note: Cost is sizeInBytes() / 1024. Wait, let's check insertion.
     // Insertion says: m_cache.insert(key, new QImage(image),
     // image.sizeInBytes() / 1024); So cost is in KB. So setCacheMaxCost should
@@ -178,6 +178,21 @@ void AsyncImageProvider::processImageTask(
 
   path = QDir::toNativeSeparators(path);
 
+  // --- Disk Cache Hit Check ---
+  QByteArray mmapData = FileCacheManager::instance().getCachedData(path, requestedSize);
+  if (!mmapData.isEmpty()) {
+    QImage cachedImg;
+    if (cachedImg.loadFromData(mmapData)) {
+      insertCachedImage(id, cachedImg, requestedSize);
+      QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
+                                Q_ARG(QImage, cachedImg));
+#ifdef Q_OS_WIN
+      CoUninitialize();
+#endif
+      return;
+    }
+  }
+
   if (*cancelled) {
 #ifdef Q_OS_WIN
     CoUninitialize();
@@ -187,7 +202,7 @@ void AsyncImageProvider::processImageTask(
 
   QImage image;
   DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
-  bool isVideo = (type == DesktopHelper::Video);
+  bool isVideo = (type == DesktopHelper::Video) || path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive);
   bool isRaw = (type == DesktopHelper::Raw);
 
   // --- Loading Logic ---
@@ -307,12 +322,8 @@ void AsyncImageProvider::processImageTask(
     }
 
     VideoThumbnailer thumbnailer;
-    image = thumbnailer.extractFrame(path, 0, requestedSize, true);
+    image = thumbnailer.extractFrame(path, 0, requestedSize, cancelled.get());
     s_videoSemaphore.release(1);
-
-    if (image.isNull()) {
-      image = thumbnailer.extractFrame(path, 0, requestedSize, false);
-    }
 
     if (image.isNull()) {
       QFileIconProvider provider;
@@ -363,6 +374,16 @@ void AsyncImageProvider::processImageTask(
       }
     }
     AsyncImageProvider::insertCachedImage(id, image, requestedSize);
+
+    // Write to Disk Cache
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "JPG", 85);
+    FileCacheManager::instance().registerCachedData(path, requestedSize, ba);
+
+    QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
+                              Q_ARG(QImage, image));
   } else if (!isVideo) {
     // Placeholder
     image = QImage(100, 100, QImage::Format_RGB32);

@@ -14,6 +14,14 @@ ApplicationWindow {
 
     property string currentPath: ""
     property int previousTab: 0
+    property var activeModel: (mainLayout.currentIndex === 0 && viewLoader.item) ? viewLoader.item.model : (mainLayout.currentIndex === 1 ? albumsView.activeModel : null)
+    
+    onActiveModelChanged: {
+        if (activeModel) {
+            activeModel.filterQuery = searchField.text
+        }
+    }
+
 
     // Persistence
     Settings {
@@ -80,6 +88,64 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+
+        // Top Bar
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.margins: 10
+            Layout.rightMargin: 20
+            Layout.leftMargin: 20
+            visible: !photoViewer.visible && (mainLayout.currentIndex === 0 || mainLayout.currentIndex === 1)
+            
+            TextField {
+                id: searchField
+                Layout.fillWidth: true
+                placeholderText: "🔍 Filter filenames or folders..."
+                color: "white"
+                font.pixelSize: 14
+                background: Rectangle {
+                    color: "#222"
+                    radius: 8
+                    border.color: searchField.activeFocus ? "#4A90E2" : "#444"
+                }
+                onTextChanged: {
+                    if (window.activeModel) {
+                        window.activeModel.filterQuery = text
+                    }
+                    
+                    // Also filter the global image model so we can extract valid directories for Albums
+                    if (viewLoader.item && viewLoader.item.model) {
+                        viewLoader.item.model.filterQuery = text
+                        
+                        if (mainLayout.currentIndex === 1) {
+                            if (typeof viewLoader.item.model.getActiveDirectories === "function") {
+                                var dirs = viewLoader.item.model.getActiveDirectories()
+                                albumModel.applyFilterFromPaths(dirs)
+                            }
+                        }
+                    }
+                }
+                
+                Button {
+                    text: "✖"
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.rightMargin: 10
+                    visible: searchField.text.length > 0
+                    width: 24
+                    height: 24
+                    background: Rectangle { color: "transparent" }
+                    contentItem: Text {
+                        text: parent.text
+                        color: parent.hovered ? "#FFF" : "#888"
+                        font.pixelSize: 14
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    onClicked: searchField.text = ""
+                }
+            }
+        }
 
         StackLayout {
             id: mainLayout
@@ -202,6 +268,7 @@ ApplicationWindow {
 
             // Tab 1: Albums
             AlbumsView {
+                id: albumsView
                 model: albumModel
                 onImageClicked: (index, model) => {
                     photoViewer.model = model
@@ -211,16 +278,7 @@ ApplicationWindow {
             }
 
 
-            // Tab 2: Stories
-            Item {
-                Text {
-                    anchors.centerIn: parent
-                    text: "Stories Feature Coming Soon"
-                    color: "white"
-                }
-            }
-
-            // Tab 3: Menu
+            // Tab 2: Menu
             Item {
                 ScrollView {
                     anchors.fill: parent
@@ -462,6 +520,49 @@ ApplicationWindow {
         
         // Pass stats to overlay
         onImageLoaded: (timeMs) => statsOverlay.reportLoadTime(timeMs)
+    }
+
+    // Selection Action Bar
+    SelectionActionBar {
+        id: selectionActionBar
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        z: 90
+        
+        model: window.activeModel
+        
+        onClearClicked: {
+            if (window.activeModel) window.activeModel.clearSelection()
+        }
+        
+        onShareClicked: {
+            if (window.activeModel && window.activeModel.selectedCount > 0) {
+                var paths = window.activeModel.getSelectedPaths()
+                shareDialog.targetPaths = paths
+                shareDialog.open()
+            }
+        }
+        
+        onRotateClicked: {
+            if (window.activeModel && window.activeModel.selectedCount > 0) {
+                resizeEditor.targetPaths = window.activeModel.getSelectedPaths()
+                resizeEditor.open()
+            }
+        }
+    }
+    
+    // Share Dialog
+    ShareDialog {
+        id: shareDialog
+        model: window.activeModel
+        anchors.centerIn: parent
+    }
+    
+    // Resize Editor
+    ResizeEditor {
+        id: resizeEditor
+        anchors.centerIn: parent
     }
 
     // Scanning Overlay (Restored Visuals, Non-blocking)

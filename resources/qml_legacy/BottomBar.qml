@@ -15,7 +15,7 @@ Rectangle {
         spacing: 0
 
         Repeater {
-            model: ["Pictures", "Albums", "Stories", "Menu"]
+            model: ["Pictures", "Albums", "Menu"]
             
             Item {
                 Layout.fillWidth: true
@@ -23,17 +23,16 @@ Rectangle {
                 
                 Rectangle {
                     anchors.fill: parent
-                    color: "transparent"
+                    color: ma.pressed ? "#333333" : (ma.containsMouse ? "#222222" : "transparent")
                     
                     ColumnLayout {
                         anchors.centerIn: parent
-                        spacing: 4
+                        spacing: 5
                         
-                        // Icon placeholder (using text for now, would replace with proper icons)
+                        // Icon placeholder
                         Text {
-                            text: modelData === "Pictures" ? "???????" : 
-                                  modelData === "Albums" ? "????" : 
-                                  modelData === "Stories" ? "????" : "???"
+                            text: modelData === "Pictures" ? "🖼️" : 
+                                  modelData === "Albums" ? "📁" : "⚙️"
                             font.pixelSize: 20
                             Layout.alignment: Qt.AlignHCenter
                             color: root.currentIndex === index ? "white" : "#888888"
@@ -46,9 +45,10 @@ Rectangle {
                             Layout.alignment: Qt.AlignHCenter
                         }
                     }
-                    
                     MouseArea {
+                        id: ma
                         anchors.fill: parent
+                        hoverEnabled: true
                         onClicked: root.tabSelected(index)
                     }
                 }

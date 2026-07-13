@@ -360,12 +360,62 @@ void ImageModel::scanDirectory(const QString &path) {
         }
 
         QMetaObject::invokeMethod(this, [this, batch, timer]() {
+          m_allImages = batch;
           m_pendingInsertions = batch;
-          m_updateTimer->start();
-          qDebug() << "Scanning background work finished in" << timer.elapsed() << "ms. Starting batched insertion of" << m_pendingInsertions.count() << "items.";
+          if (!m_filterQuery.isEmpty()) {
+             // If we already have a filter, apply it immediately.
+             m_pendingInsertions.clear();
+             applyFilter();
+             m_isLoading = false;
+             emit isLoadingChanged();
+             qDebug() << "Scanning background work finished with filter applied.";
+          } else {
+             m_updateTimer->start();
+             qDebug() << "Scanning background work finished in" << timer.elapsed() << "ms. Starting batched insertion of" << m_pendingInsertions.count() << "items.";
+          }
         });
       },
       TaskScheduler::IO_BOUND, TaskScheduler::Normal);
+}
+
+void ImageModel::setFilterQuery(const QString &query) {
+  if (m_filterQuery != query) {
+    m_filterQuery = query;
+    emit filterQueryChanged();
+    applyFilter();
+  }
+}
+
+void ImageModel::applyFilter() {
+  m_updateTimer->stop();
+  beginResetModel();
+  m_images.clear();
+  
+  if (m_filterQuery.isEmpty()) {
+    // We could do gradual insertion again, but for now just load all
+    m_images = m_allImages;
+  } else {
+    QString q = m_filterQuery.toLower();
+    for (const auto &item : m_allImages) {
+      if (item.fileName.toLower().contains(q) || item.filePath.toLower().contains(q)) {
+        m_images.append(item);
+      }
+    }
+  }
+  endResetModel();
+  
+  m_pendingInsertions.clear();
+  m_isLoading = false;
+  emit isLoadingChanged();
+}
+
+QStringList ImageModel::getActiveDirectories() const {
+  QSet<QString> dirs;
+  for (const auto &item : m_images) {
+    QString dirPath = QFileInfo(item.filePath).absolutePath();
+    dirs.insert(QDir::fromNativeSeparators(dirPath).toLower());
+  }
+  return dirs.values();
 }
 
 void ImageModel::processPendingUpdates() {

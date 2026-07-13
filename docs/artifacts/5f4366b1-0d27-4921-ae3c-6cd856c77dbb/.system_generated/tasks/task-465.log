@@ -1,0 +1,100 @@
+        }
+    }
+
+
+
+    // Settings / Performance Overlay Drawer
+    Rectangle {
+        id: perfOverlay
+        width: root.overlayWidth
+        height: parent.height
+        x: overlayVisible ? parent.width - width : parent.width
+        y: 0
+        z: 100
+        color: "#1e1e1e"
+        border.color: "#333"
+        border.width: 1
+        visible: x < parent.width
+        
+        Behavior on x { NumberAnimation { duration: 250; easing.type: Easing.OutCubic } }
+        
+        PerformanceOverlay { 
+            anchors.fill: parent 
+            onCloseRequested: root.overlayVisible = false
+        }
+    }
+
+    // Photo Viewer
+    PhotoViewerScrollBench {
+        id: photoViewer
+        anchors.fill: parent
+        visible: root.viewerVisible
+        model: root.viewerModel
+        // Removed currentIndex binding to prevent destruction on swipe
+        onBackClicked: {
+            root.viewerIndex = -1 // Reset local tracking
+            root.viewerVisible = false
+        }
+        onVisibleChanged: { if (visible) photoViewer.forceActiveFocus() }
+        onCurrentIndexChanged: {
+            if (visible && currentIndex >= 0) {
+                root.viewerIndex = currentIndex
+            }
+        }
+        z: 200
+    }
+    
+    // Real-time Diagnostics Overlay
+    DiagnosticsOverlay {
+        id: diagnosticsOverlay
+        visible: settings.showDiagnostics
+        
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.margins: 10 // Base margin
+        
+        anchors.topMargin: 134
+        anchors.leftMargin: 22
+        
+        popupPadding: 22
+        popupWidth: 400
+        
+        width: expanded ? 450 : 300
+        height: expanded ? 500 : 45
+        z: 300
+    }
+
+    // SCANNING PROGRESS INDICATOR (Especially for Network Folders)
+    Rectangle {
+        id: scanIndicator
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 100
+        height: 40
+        width: scanInfoRow.width + 40
+        color: "#AA000000"
+        radius: 20
+        border.color: "#444"
+        visible: imageModel.isLoading
+        z: 150
+
+        Row {
+            id: scanInfoRow
+            anchors.centerIn: parent
+            spacing: 12
+
+            BusyIndicator {
+                width: 24; height: 24
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Text {
+                text: "Scanning folder: <b>" + imageModel.scannedCount + "</b> items discovered..."
+                color: "white"
+                font.pixelSize: 13
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+    }
+}
+

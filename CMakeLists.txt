@@ -19,6 +19,8 @@ qt_add_executable(appSamsungGallery
     src_legacy/VideoThumbnailer.cpp src_legacy/VideoThumbnailer.h
     src_legacy/LogManager.cpp src_legacy/LogManager.h
     src_legacy/TaskScheduler.cpp src_legacy/TaskScheduler.h
+    src/ImageProcessor.cpp src/ImageProcessor.h
+    src/FileCacheManager.cpp src/FileCacheManager.h
 )
 
 qt_add_qml_module(appSamsungGallery
@@ -35,6 +37,9 @@ qt_add_qml_module(appSamsungGallery
         resources/qml_legacy/BottomBar.qml
         resources/qml_legacy/StatsOverlay.qml
         resources/qml_legacy/UsageGraph.qml
+        resources/qml_legacy/SelectionActionBar.qml
+        resources/qml_legacy/ShareDialog.qml
+        resources/qml_legacy/ResizeEditor.qml
 )
 
 # --- LibRaw ---

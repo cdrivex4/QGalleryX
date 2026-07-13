@@ -105,10 +105,17 @@ Item {
             
             onPositionChanged: {
                 if (drag.active) {
-                    // Calculate scroll position
                     var pct = scrubber.y / (root.height - scrubber.height)
-                    // Map to contentY
-                    listView.contentY = pct * (listView.contentHeight - listView.height)
+                    
+                    // If content height is accurate we can use contentY
+                    // but ListView/GridView calculates contentHeight lazily
+                    // which causes out of bounds if setting contentY directly.
+                    // It's safer to map to index and positionViewAtIndex
+                    var maxIndex = listView.count - 1
+                    if (maxIndex >= 0) {
+                        var targetIndex = Math.floor(pct * maxIndex)
+                        listView.positionViewAtIndex(targetIndex, ListView.Beginning)
+                    }
                 }
             }
         }

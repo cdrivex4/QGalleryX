@@ -23,6 +23,8 @@
 #include <QTextStream>
 
 #include "LogManager.h"
+#include "../src/ImageProcessor.h"
+#include "../src/FileCacheManager.h"
 
 // Remove customMessageHandler function completely
 
@@ -30,6 +32,9 @@ int main(int argc, char *argv[]) {
   // Initialize LogManager
   LogManager::instance().setLogFile("application.log");
   qInstallMessageHandler(LogManager::messageHandler);
+
+  // Initialize Disk Cache
+  FileCacheManager::instance().initialize();
 
   // Suppress annoying JPEG warnings (Commented out to restore granularity)
   // QLoggingCategory::setFilterRules("qt.gui.imageio.jpeg.warning=false");
@@ -58,6 +63,7 @@ int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
 
   qmlRegisterType<ImageModel>("SamsungGallery", 1, 0, "ImageModel");
+
   qmlRegisterType<AlbumModel>("SamsungGallery", 1, 0, "AlbumModel");
   qmlRegisterType<GroupedProxyModel>("SamsungGallery", 1, 0,
                                      "GroupedProxyModel");
@@ -87,6 +93,10 @@ int main(int argc, char *argv[]) {
   // Expose DesktopHelper
   DesktopHelper desktopHelper;
   engine.rootContext()->setContextProperty("desktopHelper", &desktopHelper);
+
+  // Expose ImageProcessor
+  ImageProcessor imageProcessor;
+  engine.rootContext()->setContextProperty("imageProcessor", &imageProcessor);
 
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

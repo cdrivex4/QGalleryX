@@ -1,0 +1,12 @@
+ERROR: The process "appSamsungGallery.exe" not found.
+[1/11] Copying appSamsungGallery qml sources into build dir
+[2/11] Running qmlimportscanner for appSamsungGallery
+[3/11] Running rcc for resource appSamsungGallery_raw_qml_0
+[4/11] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp.aotstats
+[5/11] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp.aotstats
+[6/11] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp.aotstats
+[7/11] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.qt/rcc/qrc_appSamsungGallery_raw_qml_0.cpp.obj
+[8/11] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp.obj
+[9/11] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp.obj
+[10/11] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp.obj
+[11/11] Linking CXX executable appSamsungGallery.exe

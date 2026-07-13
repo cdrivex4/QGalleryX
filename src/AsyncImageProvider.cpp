@@ -173,9 +173,7 @@ static QString normalizeId(const QString &id) {
   path = QDir::cleanPath(path);
 
 #ifdef Q_OS_WIN
-  if (path.length() >= 2 && path[1] == ':') {
-    path[0] = path[0].toUpper();
-  }
+  path = path.toLower();
 #endif
 
   return path + query;
@@ -484,6 +482,41 @@ bool AsyncImageProvider::isRequestStillNeeded(const QString &coalesceKey) {
   return false;
 }
 
+bool AsyncImageProvider::abortIfNotNeeded(const QString &coalesceKey) {
+  QList<std::shared_ptr<ResponseTracker>> listenersToAbort;
+  {
+    QMutexLocker locker(&m_pendingMutex);
+    if (!m_pendingResponses.contains(coalesceKey))
+      return true;
+
+    bool needed = false;
+    for (const auto &tracker : m_pendingResponses[coalesceKey]) {
+      if (tracker) {
+        QMutexLocker tLocker(&tracker->mutex);
+        if (tracker->response && !tracker->response->m_cancelled->load()) {
+          needed = true;
+          break;
+        }
+      }
+    }
+
+    if (needed)
+      return false;
+
+    listenersToAbort = m_pendingResponses.take(coalesceKey);
+  }
+
+  for (auto &t : listenersToAbort) {
+    if (t) {
+      QMutexLocker tl(&t->mutex);
+      if (t->response) {
+        QMetaObject::invokeMethod(t->response, "handleDone", Qt::QueuedConnection, Q_ARG(QImage, QImage()), Q_ARG(int, 0));
+      }
+    }
+  }
+  return true;
+}
+
 void AsyncImageProvider::deliverToPending(const QString &coalesceKey,
                                           const QImage &image, int duration) {
   QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
@@ -633,10 +666,19 @@ void AsyncImageProvider::processStagedRequests() {
               return a.timestamp > b.timestamp; // DESC timestamp = newest first
             });
 
+  QDateTime now = QDateTime::currentDateTime();
+  const qint64 STAGE_EXPIRY_MS = 5000; // 5 seconds expiry
+
   for (const auto &req : batch) {
     QString cKey = getCoalesceKey(req.id, req.requestedSize);
-    if (!isRequestStillNeeded(cKey)) {
+
+    // Age-out check: If it has been stuck in staging for > 5s, drop it.
+    if (req.timestamp.msecsTo(now) > STAGE_EXPIRY_MS) {
       deliverToPending(cKey, QImage(), 0);
+      continue;
+    }
+
+    if (abortIfNotNeeded(cKey)) {
       continue;
     }
 
@@ -745,8 +787,8 @@ void AsyncImageProvider::processStagedRequests() {
                 AsyncImageProvider::processImageTask(req.id, req.requestedSize,
                                                      req.cancelled, req.tracker);
               },
-              [cKey]() { return isRequestStillNeeded(cKey); },
-              [cKey]() { AsyncImageProvider::deliverToPending(cKey, QImage(), 0); }),
+              [cKey]() { return AsyncImageProvider::abortIfNotNeeded(cKey); },
+              [cKey]() { /* Abort handled inside abortIfNotNeeded */ }),
           targetPool, TaskScheduler::Immediate, cat);
   }
 

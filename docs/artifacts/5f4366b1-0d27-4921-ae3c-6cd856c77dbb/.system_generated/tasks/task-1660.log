@@ -1,0 +1,104 @@
+[0/1] Re-running CMake...
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:26 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:26 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  test_scrollbench/CMakeLists.txt:44 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  test_scrollbench/CMakeLists.txt:44 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done (6.2s)
+-- Generating done (0.5s)
+-- Build files have been written to: D:/Dev/antigravity/build
+[1/93] Automatic MOC and UIC for target appScrollBenchNet
+[2/91] Automatic MOC and UIC for target appScrollBench
+[3/90] Automatic MOC and UIC for target tst_linkage
+[4/88] Automatic MOC and UIC for target tst_mft
+[5/86] Automatic MOC and UIC for target tst_automation
+[6/84] Running AUTOMOC file extraction for target appScrollBench
+[7/84] Automatic MOC and UIC for target appSamsungGallery
+[8/84] Automatic MOC and UIC for target tst_imagemodel
+[9/82] Automatic MOC and UIC for target tst_scheduler
+[10/80] Running AUTOMOC file extraction for target appSamsungGallery
+[11/80] Running moc --collect-json for target appScrollBench
+[12/45] Running moc --collect-json for target appSamsungGallery
+[13/45] Automatic QML type registration for target appSamsungGallery
+[14/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewTiles_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewTiles_qml.cpp.aotstats
+[15/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/DateScrubber_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/DateScrubber_qml.cpp.aotstats
+[16/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryView_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryView_qml.cpp.aotstats
+[17/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewSemantic_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewSemantic_qml.cpp.aotstats
+[18/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/AlbumsView_qml.cpp.aotstats
+[19/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/BottomBar_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/BottomBar_qml.cpp.aotstats
+[20/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/PhotoViewer_qml.cpp.aotstats
+[21/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/StatsOverlay_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/StatsOverlay_qml.cpp.aotstats
+[22/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/SelectionActionBar_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/SelectionActionBar_qml.cpp.aotstats
+[23/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp.aotstats
+[24/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/UsageGraph_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/UsageGraph_qml.cpp.aotstats
+[25/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ShareDialog_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ShareDialog_qml.cpp.aotstats
+[26/45] Generating .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ResizeEditor_qml.cpp, .rcc/qmlcache/appSamsungGallery_resources/qml_legacy/ResizeEditor_qml.cpp.aotstats
+[27/45] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj
+FAILED: CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICKCONTROLS2_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/appSamsungGallery_autogen/include -ID:/Dev/antigravity -ID:/Dev/antigravity/src_legacy -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtQml/6.9.3 -isystem D:/Qt/6.9.3/mingw_64/include/QtQml/6.9.3/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtCore/6.9.3 -isystem D:/Qt/6.9.3/mingw_64/include/QtCore/6.9.3/QtCore -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtMultimedia -isystem D:/Qt/6.9.3/mingw_64/include/QtQuickControls2 -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -O3 -DNDEBUG -MD -MT CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj -MF CMakeFiles\appSamsungGallery.dir\src_legacy\VideoThumbnailer.cpp.obj.d -o CMakeFiles/appSamsungGallery.dir/src_legacy/VideoThumbnailer.cpp.obj -c D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp
+D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp:90:39: error: 'SettingsHelper::HWAccel' has not been declared
+   90 |                                       SettingsHelper::HWAccel accel,
+      |                                       ^~~~~~~~~~~~~~
+D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp:88:8: error: no declaration matches 'QImage VideoThumbnailer::extractFrame(const QString&, int, const QSize&, int, std::atomic<bool>*)'
+   88 | QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
+      |        ^~~~~~~~~~~~~~~~
+In file included from D:/Dev/antigravity/src_legacy/VideoThumbnailer.cpp:1:
+D:/Dev/antigravity/src_legacy/VideoThumbnailer.h:26:10: note: candidate is: 'QImage VideoThumbnailer::extractFrame(const QString&, int, const QSize&, std::atomic<bool>*)'
+   26 |   QImage extractFrame(const QString &path, int timeMs = 0,
+      |          ^~~~~~~~~~~~
+D:/Dev/antigravity/src_legacy/VideoThumbnailer.h:15:7: note: 'class VideoThumbnailer' defined here
+   15 | class VideoThumbnailer {
+      |       ^~~~~~~~~~~~~~~~
+[28/45] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewTiles_qml.cpp.obj
+[29/45] Building CXX object CMakeFiles/appSamsungGallery.dir/appsamsunggallery_qmltyperegistrations.cpp.obj
+[30/45] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryViewSemantic_qml.cpp.obj
+[31/45] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/GalleryView_qml.cpp.obj
+[32/45] Building CXX object CMakeFiles/appSamsungGallery.dir/build/.rcc/qmlcache/appSamsungGallery_resources/qml_legacy/Main_qml.cpp.obj
+[33/45] Building CXX object CMakeFiles/appSamsungGallery.dir/appSamsungGallery_autogen/mocs_compilation.cpp.obj
+[34/45] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/AsyncImageProvider.cpp.obj
+ninja: build stopped: subcommand failed.

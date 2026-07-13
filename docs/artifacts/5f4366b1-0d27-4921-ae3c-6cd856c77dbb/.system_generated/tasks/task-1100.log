@@ -1,0 +1,5 @@
+[1/34] Automatic MOC and UIC for target appSamsungGallery
+[2/33] Running AUTOMOC file extraction for target appSamsungGallery
+[3/33] Running moc --collect-json for target appSamsungGallery
+[4/5] Building CXX object CMakeFiles/appSamsungGallery.dir/src_legacy/ImageModel.cpp.obj
+[5/5] Linking CXX executable appSamsungGallery.exe

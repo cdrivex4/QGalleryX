@@ -56,11 +56,88 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
   }
 
   // Image
-  if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif" ||
-      ext == "bmp" || ext == "webp" || ext == "heic" || ext == "tiff" ||
-      ext == "tif" || ext == "ico" || ext == "tga") {
+  if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "webp" ||
+      ext == "heic" || ext == "tiff" || ext == "bmp" || ext == "gif") {
     return Image;
   }
 
   return Unknown;
+}
+
+#include <QTemporaryFile>
+#include <QImageReader>
+#include <QImageWriter>
+
+QVariantMap DesktopHelper::generateResizePreview(const QString &sourcePath, int width, int height, int quality, int compression) {
+    QVariantMap result;
+    result["path"] = "";
+    result["size"] = 0;
+
+    QImageReader reader(sourcePath);
+    if (!reader.canRead()) return result;
+
+    QSize originalSize = reader.size();
+    QSize targetSize = originalSize;
+    if (width > 0 && height > 0) {
+        targetSize.scale(width, height, Qt::KeepAspectRatio);
+        reader.setScaledSize(targetSize);
+    }
+
+    QImage img = reader.read();
+    if (img.isNull()) return result;
+
+    QString tempPath = QDir::tempPath() + "/preview_antigravity.jpg";
+    QImageWriter writer(tempPath, "jpg");
+    writer.setQuality(quality);
+    if (compression >= 0) {
+        writer.setCompression(compression);
+    }
+    
+    if (writer.write(img)) {
+        result["path"] = "file:///" + tempPath;
+        result["size"] = QFileInfo(tempPath).size();
+    }
+    return result;
+}
+
+void DesktopHelper::exportImages(const QStringList &paths, const QString &destinationDir, int width, int height, int quality, int compression) {
+    QDir dir(destinationDir);
+    if (!dir.exists()) dir.mkpath(".");
+
+    for (const QString &path : paths) {
+        QFileInfo fi(path);
+        QString destPath = dir.absoluteFilePath(fi.fileName());
+
+        QImageReader reader(path);
+        if (reader.canRead()) {
+            QSize originalSize = reader.size();
+            QSize targetSize = originalSize;
+            if (width > 0 && height > 0) {
+                targetSize.scale(width, height, Qt::KeepAspectRatio);
+                reader.setScaledSize(targetSize);
+            }
+
+            QImage img = reader.read();
+            if (!img.isNull()) {
+                QImageWriter writer(destPath);
+                writer.setQuality(quality);
+                if (compression >= 0) writer.setCompression(compression);
+                writer.write(img);
+            }
+        }
+    }
+}
+
+void DesktopHelper::copyFiles(const QStringList &paths, const QString &destinationDir) {
+    QDir dir(destinationDir);
+    if (!dir.exists()) dir.mkpath(".");
+
+    for (const QString &path : paths) {
+        QFileInfo fi(path);
+        QString destPath = dir.absoluteFilePath(fi.fileName());
+        if (QFile::exists(destPath)) {
+            QFile::remove(destPath);
+        }
+        QFile::copy(path, destPath);
+    }
 }

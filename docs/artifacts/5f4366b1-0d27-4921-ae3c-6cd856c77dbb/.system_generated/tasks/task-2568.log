@@ -1,0 +1,7 @@
+  warning: skill is from graphify 0.8.41, package is 0.9.3. Run 'graphify install' to update.
+Re-extracting code files in . (no LLM needed)...
+[graphify] backed up semantic+curated graph (7 files) -> 2026-07-13/
+[graphify watch] Rebuilt: 1559 nodes, 2635 edges, 88 communities
+[graphify watch] graph.json, graph.html and GRAPH_REPORT.md updated in graphify-out
+Code graph updated. For doc/paper/image changes run /graphify --update in your AI assistant.
+Tip: set GEMINI_API_KEY or GOOGLE_API_KEY to use Gemini for semantic extraction.

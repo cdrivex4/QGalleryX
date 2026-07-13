@@ -1,5 +1,6 @@
 #include "SettingsHelper.h"
 #include "AsyncImageProvider.h"
+#include "../src/FileCacheManager.h"
 #include "LogManager.h"
 #include <QCoreApplication>
 #include <QDebug>
@@ -48,8 +49,21 @@ void SettingsHelper::setCacheSizeMB(int sizeMB) {
   if (cacheSizeMB() == sizeMB)
     return;
   m_settings.setValue("cacheSizeMB", sizeMB);
+  // Also push to AsyncImageProvider immediately (Cost is in KB)
   AsyncImageProvider::setCacheMaxCost(sizeMB * 1024);
   emit cacheSizeMBChanged();
+}
+
+int SettingsHelper::diskCacheSizeMB() const {
+  return m_settings.value("diskCacheSizeMB", 4096).toInt();
+}
+
+void SettingsHelper::setDiskCacheSizeMB(int sizeMB) {
+  if (diskCacheSizeMB() == sizeMB)
+    return;
+  m_settings.setValue("diskCacheSizeMB", sizeMB);
+  FileCacheManager::instance().setMaxDiskCacheSizeMB(sizeMB);
+  emit diskCacheSizeMBChanged();
 }
 
 int SettingsHelper::concurrentThreads() const {

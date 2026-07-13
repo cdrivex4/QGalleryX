@@ -108,7 +108,8 @@ public:
                                std::shared_ptr<ResponseTracker> tracker);
 
   static bool isRequestStillNeeded(const QString &id);
-  static void deliverToPending(const QString &id, const QImage &image,
+  static bool abortIfNotNeeded(const QString &coalesceKey);
+  static void deliverToPending(const QString &coalesceKey, const QImage &image,
                                int duration);
   static QStringList getActiveTaskIds();
   static void processImageTaskInternal(

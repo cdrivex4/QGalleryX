@@ -298,7 +298,7 @@ Item {
                     
                     Text {
                         anchors.centerIn: parent
-                        text: "???"
+                        text: "▶"
                         color: "white"
                         font.pixelSize: 40
                     }
@@ -324,7 +324,7 @@ Item {
                         
                         // Play/Pause Button
                         Text {
-                            text: player.playbackState === MediaPlayer.PlayingState ? "???" : "???"
+                            text: player.playbackState === MediaPlayer.PlayingState ? "⏸" : "▶"
                             color: "white"
                             font.pixelSize: 30
                             MouseArea {
@@ -434,7 +434,7 @@ Item {
         
         Text {
             anchors.centerIn: parent
-            text: "???"
+            text: "‹"
             color: "white"
             font.pixelSize: 40
         }
@@ -453,7 +453,7 @@ Item {
         
         Text {
             anchors.centerIn: parent
-            text: "???"
+            text: "›"
             color: "white"
             font.pixelSize: 40
         }
