@@ -22,6 +22,12 @@ docs/oddlog.txt
 _RecycleBin/
 hermes_test.txt
 
+# Debug Images & Screenshots
+docs/*.JPG
+docs/*.jpg
+docs/*.PNG
+docs/*.png
+
 # Agent Artifacts & Session Logs (contains prompt histories, debug media, and task logs)
 docs/artifacts/
 
