@@ -10,6 +10,10 @@ Item {
     property int loadTime: 0
     property string apiName: "Unknown"
     property int fps: 0
+    property bool isLoading: false
+    property int loadedCount: 0
+    property int totalCount: 0
+    property int activeThreadCount: 0
     
     visible: true // Visible by default for testing
     
@@ -85,6 +89,25 @@ Item {
             spacing: 5
             
             Text { text: "API: " + root.apiName; color: "white"; font.pixelSize: 12 }
+            
+            Text {
+                text: "Status: " + (root.isLoading ? "Scanning..." : "Idle")
+                color: root.isLoading ? "#FFA500" : "#00FF00"
+                font.pixelSize: 12
+            }
+
+            Text {
+                text: "Loaded: " + root.loadedCount + " / " + (root.totalCount > 0 ? root.totalCount : "?")
+                color: "white"
+                font.pixelSize: 12
+                visible: root.isLoading || root.totalCount > 0
+            }
+
+            Text {
+                text: "Active Threads: " + root.activeThreadCount
+                color: "white"
+                font.pixelSize: 12
+            }
             
             Text {
                 text: "Last Load: " + root.loadTime + " ms"

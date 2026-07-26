@@ -344,3 +344,11 @@ SamsungGalleryClone/
 ---
 
 **Note**: This is a work-in-progress project. Some features are incomplete or in placeholder state. See [FEATURES.md](FEATURES.md) and [PROGRESS.md](PROGRESS.md) for detailed information about current capabilities and future plans.
+
+---
+
+## ❤️ Dedication
+
+To Goeffery "Your complaining about not being able to send images via email spured this exploration to a methodology that would intuitavely quell your frustrations, and start my personal journey down this rabbit whole.
+
+Massandra - you had a shit computer and reminded me that one should never compromise scale and optimisation even for the lowest denominator."

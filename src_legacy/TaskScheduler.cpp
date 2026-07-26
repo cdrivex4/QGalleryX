@@ -12,7 +12,7 @@ TaskScheduler &TaskScheduler::instance() {
   return instance;
 }
 
-TaskScheduler::TaskScheduler() : m_running(true), m_sequenceCounter(0) {
+TaskScheduler::TaskScheduler() : m_running(true), m_paused(false), m_sequenceCounter(0) {
   // Determine thread counts
   int cpuCores = std::thread::hardware_concurrency();
 
@@ -87,6 +87,24 @@ void TaskScheduler::clear() {
   qDebug() << "[TaskScheduler] Cleared all pending tasks.";
 }
 
+void TaskScheduler::pause() {
+  m_paused = true;
+}
+
+void TaskScheduler::resume() {
+  m_paused = false;
+  m_cpuCondition.wakeAll();
+  m_ioCondition.wakeAll();
+}
+
+bool TaskScheduler::isPaused() const {
+  return m_paused;
+}
+
+bool TaskScheduler::isRunning() const {
+  return m_running;
+}
+
 void TaskScheduler::cpuWorkerLoop() {
 #ifdef Q_OS_WIN
   SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
@@ -105,12 +123,12 @@ void TaskScheduler::cpuWorkerLoop() {
         }
       }
 
-      while (!hasWork && m_running) {
+      while ((!hasWork || m_paused) && m_running) {
         m_cpuCondition.wait(&m_cpuMutex);
 
         // Re-check after waking up
         hasWork = false;
-        if (m_running) {
+        if (m_running && !m_paused) {
           for (const auto &queue : m_cpuQueue) {
             if (!queue.isEmpty()) {
               hasWork = true;
@@ -169,12 +187,12 @@ void TaskScheduler::ioWorkerLoop() {
         }
       }
 
-      while (!hasWork && m_running) {
+      while ((!hasWork || m_paused) && m_running) {
         m_ioCondition.wait(&m_ioMutex);
 
         // Re-check
         hasWork = false;
-        if (m_running) {
+        if (m_running && !m_paused) {
           for (const auto &queue : m_ioQueue) {
             if (!queue.isEmpty()) {
               hasWork = true;

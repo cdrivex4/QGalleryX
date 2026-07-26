@@ -23,41 +23,33 @@ void AlbumModel::setFilterQuery(const QString &query) {
 
 void AlbumModel::applyFilter() {
   beginResetModel();
-  if (m_filterQuery.isEmpty()) {
-    m_albums = m_allAlbums;
+  
+  if (m_validPaths.isEmpty() && m_filterQuery.isEmpty()) {
+     m_albums = m_allAlbums;
   } else {
-    m_albums.clear();
-    for (const auto &album : m_allAlbums) {
-      if (album.name.contains(m_filterQuery, Qt::CaseInsensitive) || 
-          album.path.contains(m_filterQuery, Qt::CaseInsensitive)) {
-        m_albums.append(album);
-      }
-    }
+     m_albums.clear();
+     QSet<QString> validDirs;
+     for (const QString &p : m_validPaths) {
+         validDirs.insert(QDir::fromNativeSeparators(p).toLower());
+     }
+     
+     for (const auto &album : m_allAlbums) {
+         bool pathMatches = validDirs.contains(album.path.toLower());
+         bool nameMatches = m_filterQuery.isEmpty() ? false : 
+             (album.name.contains(m_filterQuery, Qt::CaseInsensitive) || 
+              album.path.contains(m_filterQuery, Qt::CaseInsensitive));
+         
+         if (pathMatches || nameMatches) {
+             m_albums.append(album);
+         }
+     }
   }
   endResetModel();
 }
 
 void AlbumModel::applyFilterFromPaths(const QStringList &validPaths) {
-  beginResetModel();
-  
-  if (validPaths.isEmpty() && m_filterQuery.isEmpty()) {
-     // If no paths match but query is also empty, show all (query cleared)
-     m_albums = m_allAlbums;
-  } else {
-     m_albums.clear();
-     QSet<QString> validDirs;
-     for (const QString &p : validPaths) {
-         validDirs.insert(QDir::fromNativeSeparators(p).toLower());
-     }
-     
-     for (const auto &album : m_allAlbums) {
-        QString normalizedAlbumPath = QDir::fromNativeSeparators(album.path).toLower();
-        if (validDirs.contains(normalizedAlbumPath)) {
-            m_albums.append(album);
-        }
-     }
-  }
-  endResetModel();
+  m_validPaths = validPaths;
+  applyFilter();
 }
 
 QVariant AlbumModel::data(const QModelIndex &index, int role) const {

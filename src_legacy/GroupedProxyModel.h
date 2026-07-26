@@ -41,6 +41,15 @@ public:
                 int role = Qt::DisplayRole) const override;
   QHash<int, QByteArray> roleNames() const override;
 
+  Q_INVOKABLE int selectedCount() const;
+  Q_INVOKABLE void deleteSelected();
+  Q_INVOKABLE QStringList getSelectedPaths() const;
+  Q_INVOKABLE qint64 getSelectedTotalSizeBytes() const;
+  
+  // Background control
+  Q_INVOKABLE void pauseBackgroundTasks();
+  Q_INVOKABLE void resumeBackgroundTasks();
+
   Q_INVOKABLE QModelIndex getProxyIndexForSourceIndex(int sourceIndex) const;
   Q_INVOKABLE QVariantList getYearDistribution() const;
   Q_INVOKABLE QString getLabelForProxyIndex(int proxyIndex) const;

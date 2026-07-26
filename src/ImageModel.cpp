@@ -95,6 +95,8 @@ QVariant ImageModel::data(const QModelIndex &index, int role) const {
     return info.date;
   case IsBurstRole:
     return info.isBurst;
+  case IsSelectedRole:
+    return info.isSelected;
 
   default:
     return QVariant();
@@ -114,6 +116,7 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   roles[IsRawRole] = "isRaw";
   roles[DateTimeRole] = "dateTime";
   roles[IsBurstRole] = "isBurst";
+  roles[IsSelectedRole] = "isSelected";
   return roles;
 }
 
@@ -509,4 +512,48 @@ QVariantMap ImageModel::getMetadata(int index) {
     meta["Type"] = "Image";
   }
   return meta;
+}
+bool ImageModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+    if (!index.isValid() || index.row() >= m_images.count())
+      return false;
+  
+    if (role == IsSelectedRole) {
+      m_images[index.row()].isSelected = value.toBool();
+      emit dataChanged(index, index, {role});
+      emit selectedCountChanged();
+      return true;
+    }
+    return false;
+}
+
+void ImageModel::clearSelection() {
+    for (int i = 0; i < m_images.count(); ++i) {
+      m_images[i].isSelected = false;
+    }
+    if (!m_images.isEmpty()) {
+      emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
+      emit selectedCountChanged();
+    }
+}
+
+int ImageModel::selectedCount() const {
+    int count = 0;
+    for (const auto &item : m_images) {
+      if (item.isSelected) count++;
+    }
+    return count;
+}
+
+QStringList ImageModel::getSelectedPaths() const {
+    QStringList paths;
+    for (const auto &item : m_images) {
+      if (item.isSelected) {
+        paths.append(item.filePath);
+      }
+    }
+    return paths;
+}
+
+int ImageModel::getProxyIndexForSourceIndex(int sourceIndex) const {
+    return sourceIndex;
 }

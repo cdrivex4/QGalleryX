@@ -51,6 +51,7 @@ private:
 
   bool m_isLoading = false;
   QString m_filterQuery;
+  QStringList m_validPaths;
   QVector<AlbumInfo> m_allAlbums; // Full source of truth
   QVector<AlbumInfo> m_albums;    // Filtered visible items
 };

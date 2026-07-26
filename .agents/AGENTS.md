@@ -8,3 +8,15 @@ When the user asks you to recall something from a past session (e.g., "what did 
 1. Use the `run_command` tool to execute: `graphify query "your question here"`
 2. The working directory for the command MUST be: `C:\Users\curtis\.gemini\agy_memory_summaries\`
 3. Use the output of the query to answer the user's question.
+
+## Build System Rule
+
+When building the 'antigravity' project, you MUST ALWAYS use the build script:
+- **Command:** .\build.ps1
+- **Working directory:** d:\Dev\antigravity
+
+NEVER use raw cmake --build, 
+inja, or Start-Process to build or launch the application directly.
+The build script handles killing instances, cleaning autogen, compiling both ppSamsungGallery and ppScrollBench, deploying Qt dependencies, and verifying binary freshness.
+
+Bypassing the build script risks stale builds, locked binaries, and codebase divergence.

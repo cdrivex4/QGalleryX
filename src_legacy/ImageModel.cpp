@@ -1,14 +1,21 @@
 #include "ImageModel.h"
 #include "TaskScheduler.h"
+#include <QBuffer>
+#include <QDataStream>
+#include <QDate>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QElapsedTimer>
+#include <QFile>
+#include <QSaveFile>
 #include <QFileInfo>
 #include <QImageReader>
 #include <QRegularExpression>
 #include <QStandardPaths>
+#include <QCryptographicHash>
+#include <QtConcurrent>
 #include <QStorageInfo>
 #include <algorithm>
 #include <libraw/libraw.h>
@@ -102,10 +109,20 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   return roles;
 }
 
+#include "../src/FileCacheManager.h"
+
 void ImageModel::scanDirectory(const QString &path) {
   if (m_isLoading) {
     return;
   }
+
+  bool isNetworkPath = path.startsWith("//") || path.startsWith("\\\\");
+  bool wasNetworkPath = m_currentPath.startsWith("//") || m_currentPath.startsWith("\\\\");
+
+  if (wasNetworkPath && !isNetworkPath) {
+      FileCacheManager::instance().clearCache();
+  }
+  m_currentPath = path;
 
   m_isLoading = true;
   emit isLoadingChanged();
@@ -185,20 +202,20 @@ void ImageModel::scanDirectory(const QString &path) {
                             << "*.mts" << "*.m2ts" << "*.ts" << "*.3gp",
                         QDir::Files, QDirIterator::Subdirectories);
 
-        QList<ImageInfo> batch;
-        const int BATCH_SIZE = 100;
+        QList<ImageInfo> fastItems;
         QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
 
+        // === PASS 1: FAST WALK ===
+        // Get paths and fast regex dates, skip expensive stat() calls
         while (it.hasNext()) {
           it.next();
-          QFileInfo fileInfo = it.fileInfo();
           ImageInfo info;
-          info.filePath = fileInfo.absoluteFilePath();
-          info.fileName = fileInfo.fileName();
-          info.size = fileInfo.size();
-          info.date = fileInfo.birthTime(); // Default
+          info.filePath = it.filePath();
+          info.fileName = it.fileName();
+          info.size = 0; // Deferred
+          info.date = QDateTime(); // Deferred if regex fails
 
-          // Optimize: Try parsing filename for date
+          // Optimize: Try parsing filename for date (instant CPU task)
           QRegularExpressionMatch match = dateRegex.match(info.fileName);
           if (match.hasMatch()) {
             QString dateStr = match.captured(1) + match.captured(2);
@@ -206,57 +223,129 @@ void ImageModel::scanDirectory(const QString &path) {
             if (dt.isValid())
               info.date = dt;
           }
+          fastItems.append(info);
+        }
 
-          batch.append(info);
+        // Check folder cache
+        QHash<QString, QPair<qint64, QDateTime>> cachedData;
+        
+        // Generate local cache path based on network folder hash
+        QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/antigravity/folder_caches";
+        QDir().mkpath(cacheDir);
+        QString pathHash = QString(QCryptographicHash::hash(cleanPath.toUtf8(), QCryptographicHash::Md5).toHex());
+        QString cachePath = cacheDir + "/" + pathHash + ".bin";
+        
+        bool fullyCached = false;
 
-          if (batch.size() >= BATCH_SIZE) {
-            QMetaObject::invokeMethod(this, [this, batch, isNetworkPath]() {
-              m_allItems.append(batch);
-              if (!isNetworkPath) {
-                if (m_filterQuery.isEmpty()) {
-                  beginInsertRows(QModelIndex(), m_images.count(),
-                                  m_images.count() + batch.count() - 1);
-                  m_images.append(batch);
-                  endInsertRows();
-                } else {
-                  applyFilter();
+        if (isNetworkPath) {
+            QFile cacheFile(cachePath);
+            if (cacheFile.open(QIODevice::ReadOnly)) {
+                QDataStream in(&cacheFile);
+                int count = 0;
+                in >> count;
+                if (count == fastItems.size()) {
+                    for (int i = 0; i < count; ++i) {
+                        QString p;
+                        qint64 s;
+                        QDateTime d;
+                        in >> p >> s >> d;
+                        cachedData.insert(p, qMakePair(s, d));
+                    }
+                    fullyCached = true;
+                } else if (count > 0 && count < fastItems.size() * 2) {
+                    // Partial cache or slight mismatch, try to resume
+                    for (int i = 0; i < count; ++i) {
+                        QString p;
+                        qint64 s;
+                        QDateTime d;
+                        in >> p >> s >> d;
+                        cachedData.insert(p, qMakePair(s, d));
+                    }
                 }
-              }
-            });
-            batch.clear();
-          }
-        }
-
-        // Append remaining
-        if (!batch.isEmpty()) {
-          QMetaObject::invokeMethod(this, [this, batch]() {
-            m_allItems.append(batch);
-            if (m_filterQuery.isEmpty()) {
-              beginInsertRows(QModelIndex(), m_images.count(),
-                              m_images.count() + batch.count() - 1);
-              m_images.append(batch);
-              endInsertRows();
-            } else {
-              applyFilter();
             }
-          });
         }
 
-        // Final Sort and completion
-        QMetaObject::invokeMethod(this, [this, timer]() {
-          std::sort(m_allItems.begin(), m_allItems.end(),
-                    [](const ImageInfo &a, const ImageInfo &b) {
-                      return a.date > b.date;
-                    });
-          applyFilter();
+        // Fast initial sort based on Regex dates (or empty dates)
+        std::sort(fastItems.begin(), fastItems.end(),
+                  [](const ImageInfo &a, const ImageInfo &b) {
+                    return a.date > b.date;
+                  });
+
+        // Send skeleton grid to UI instantly
+        QMetaObject::invokeMethod(this, [this, fastItems]() {
+          m_allItems = fastItems;
+          applyFilter(); // Emits beginResetModel, drawing the skeletons
+        }, Qt::BlockingQueuedConnection);
+
+        // === PASS 2: METADATA FILL ===
+        bool cacheChanged = false;
+        if (!fullyCached || !isNetworkPath) {
+          for (int i = 0; i < fastItems.size(); ++i) {
+            // Pause logic: Wait if TaskScheduler is paused
+            while (TaskScheduler::instance().isPaused() && TaskScheduler::instance().isRunning()) {
+              QThread::msleep(50);
+            }
+            if (!TaskScheduler::instance().isRunning()) break; // Exit if shutting down
+
+            if (isNetworkPath && cachedData.contains(fastItems[i].filePath)) {
+                fastItems[i].size = cachedData[fastItems[i].filePath].first;
+                fastItems[i].date = cachedData[fastItems[i].filePath].second;
+                continue;
+            }
+
+            QFileInfo fi(fastItems[i].filePath);
+            fastItems[i].size = fi.size();
+            if (fastItems[i].date.isNull()) {
+              fastItems[i].date = fi.birthTime();
+            }
+            cacheChanged = true;
+          }
+        } else {
+            // Fully cached, just apply cache
+            for (int i = 0; i < fastItems.size(); ++i) {
+                fastItems[i].size = cachedData[fastItems[i].filePath].first;
+                fastItems[i].date = cachedData[fastItems[i].filePath].second;
+            }
+        }
+
+        // Save cache if network path and it changed
+        if (isNetworkPath && cacheChanged && TaskScheduler::instance().isRunning()) {
+            QSaveFile cacheFile(cachePath);
+            if (cacheFile.open(QIODevice::WriteOnly)) {
+                QDataStream out(&cacheFile);
+                out << fastItems.size();
+                for (const auto &item : fastItems) {
+                    out << item.filePath << item.size << item.date;
+                }
+                cacheFile.commit();
+            }
+        }
+
+        // Final perfect sort
+        std::sort(fastItems.begin(), fastItems.end(),
+                  [](const ImageInfo &a, const ImageInfo &b) {
+                    return a.date > b.date;
+                  });
+
+        // Final UI commit
+        QMetaObject::invokeMethod(this, [this, fastItems, timer]() {
+          m_allItems = fastItems;
+          applyFilter(); // Reset model with perfect data
 
           m_isLoading = false;
           emit isLoadingChanged();
-          qDebug() << "Scanning finished in" << timer.elapsed() << "ms. Found"
-                   << m_images.count() << "items.";
+          qDebug() << "Two-Pass Scan finished in" << timer.elapsed() << "ms. Total items:" << m_images.count();
         });
       },
       TaskScheduler::IO_BOUND, TaskScheduler::Normal);
+}
+
+void ImageModel::pauseBackgroundTasks() {
+  TaskScheduler::instance().pause();
+}
+
+void ImageModel::resumeBackgroundTasks() {
+  TaskScheduler::instance().resume();
 }
 
 bool ImageModel::cropImage(int index, const QRectF &cropRect) {

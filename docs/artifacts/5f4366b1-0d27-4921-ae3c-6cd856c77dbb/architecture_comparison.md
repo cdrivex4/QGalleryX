@@ -136,11 +136,11 @@ PhotoViewer
 | **File type verification** | ✅ `FileTypeRouter::verifyFileType()` reads magic bytes, not just extension | ❌ Extension only — misses renamed files | 🟡 MED |
 | **`IsVideoRole` as model data** | ✅ Stored in model (`isVideo` field) — no QML-side `DesktopHelper` call per cell | ❌ Calls `desktopHelper.getFileType(filePath)` per cell in QML — **expensive** | 🔴 HIGH |
 | **Sort modes (1–5)** | ✅ `setSortMode()` — Date Asc/Desc, Name, Size, Type | ❌ Always date-descending, no UI to change | 🟡 MED |
-| **Live text search / filter** | ✅ `filterQuery` property — live search in filename | ❌ Not implemented | 🟡 MED |
+| **Live text search / filter** | ✅ `filterQuery` property — live search in filename | ✅ Ported to Legacy App | 🟡 MED |
 | **`rotateSelected()` on model** | ✅ Batch rotate selected images in C++ | ❌ `rotateClicked` signal goes to `resizeEditor.open()` — wrong dialog | 🔴 HIGH |
 | **`cancelScan()`** | ✅ Abort in-progress scan via generation counter | ✅ Legacy also has `++m_scanGeneration` check — works | ✅ |
-| **Selection `selectRange(start, end)`** | ✅ Range select | ❌ Not implemented | 🟡 MED |
-| **Selection visual rect** | ✅ `selectVisualRect()` for rubber-band selection | ❌ Not implemented | 🟢 LOW |
+| **Selection `selectRange(start, end)`** | ✅ Range select | ✅ Ported to Legacy App | 🟡 MED |
+| **Selection visual rect** | ✅ `selectVisualRect()` for rubber-band selection | ✅ Ported to Legacy App | 🟢 LOW |
 | **`getMetadata(index)`** | ✅ Returns EXIF including camera, ISO, aperture | ✅ Also implemented in legacy with LibRaw | ✅ |
 | **`cropImage(index, rect)`** | ✅ | ✅ | ✅ |
 | **`rotateImage(index, deg)`** | ✅ | ❌ Header has it, `.cpp` missing implementation | 🔴 HIGH |

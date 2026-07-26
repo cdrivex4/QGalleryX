@@ -23,6 +23,10 @@ Item {
             if (currentIndex >= 0) {
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
             }
+        } else {
+            if (root.model && typeof root.model.resumeBackgroundTasks === 'function') {
+                root.model.resumeBackgroundTasks()
+            }
         }
     }
 
@@ -240,6 +244,18 @@ Item {
                     
                     onErrorOccurred: (error, errorString) => {
                         console.log("MediaPlayer Error: " + errorString + " (" + error + ")")
+                    }
+                    
+                    onPlaybackStateChanged: {
+                        if (playbackState === MediaPlayer.PlayingState) {
+                            if (root.model && typeof root.model.pauseBackgroundTasks === 'function') {
+                                root.model.pauseBackgroundTasks()
+                            }
+                        } else {
+                            if (root.model && typeof root.model.resumeBackgroundTasks === 'function') {
+                                root.model.resumeBackgroundTasks()
+                            }
+                        }
                     }
                 }
                 

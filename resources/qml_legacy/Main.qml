@@ -117,11 +117,9 @@ ApplicationWindow {
                     if (viewLoader.item && viewLoader.item.model) {
                         viewLoader.item.model.filterQuery = text
                         
-                        if (mainLayout.currentIndex === 1) {
-                            if (typeof viewLoader.item.model.getActiveDirectories === "function") {
-                                var dirs = viewLoader.item.model.getActiveDirectories()
-                                albumModel.applyFilterFromPaths(dirs)
-                            }
+                        if (typeof viewLoader.item.model.getActiveDirectories === "function") {
+                            var dirs = viewLoader.item.model.getActiveDirectories()
+                            albumModel.applyFilterFromPaths(dirs)
                         }
                     }
                 }
@@ -144,6 +142,25 @@ ApplicationWindow {
                     }
                     onClicked: searchField.text = ""
                 }
+            }
+            
+            Button {
+                text: "📁 Scan Folder"
+                font.bold: true
+                font.pixelSize: 14
+                background: Rectangle {
+                    color: parent.hovered ? "#444" : "#333"
+                    radius: 8
+                }
+                contentItem: Text {
+                    text: parent.text
+                    color: "white"
+                    font.bold: parent.font.bold
+                    font.pixelSize: parent.font.pixelSize
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: folderDialog.open()
             }
         }
 
@@ -505,6 +522,9 @@ ApplicationWindow {
         x: parent.width - width - 10
         y: 10
         apiName: appSettings.graphicsApi
+        isLoading: window.activeModel ? window.activeModel.isLoading : false
+        loadedCount: window.activeModel ? window.activeModel.count : 0
+        activeThreadCount: appSettings ? appSettings.concurrentThreads : 0
         z: 100
     }
 

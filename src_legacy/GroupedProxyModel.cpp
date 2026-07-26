@@ -44,6 +44,45 @@ QAbstractListModel *GroupedProxyModel::sourceModel() const {
   return m_sourceModel;
 }
 
+void GroupedProxyModel::deleteSelected() {
+  if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+    im->deleteSelected();
+  }
+}
+
+int GroupedProxyModel::selectedCount() const {
+  if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+    return im->selectedCount();
+  }
+  return 0;
+}
+
+QStringList GroupedProxyModel::getSelectedPaths() const {
+  if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+    return im->getSelectedPaths();
+  }
+  return QStringList();
+}
+
+qint64 GroupedProxyModel::getSelectedTotalSizeBytes() const {
+  if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+    return im->getSelectedTotalSizeBytes();
+  }
+  return 0;
+}
+
+void GroupedProxyModel::pauseBackgroundTasks() {
+  if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+    im->pauseBackgroundTasks();
+  }
+}
+
+void GroupedProxyModel::resumeBackgroundTasks() {
+  if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+    im->resumeBackgroundTasks();
+  }
+}
+
 void GroupedProxyModel::setSourceModel(QAbstractListModel *model) {
   if (m_sourceModel == model)
     return;

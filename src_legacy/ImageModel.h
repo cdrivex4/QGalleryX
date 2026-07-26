@@ -54,6 +54,11 @@ public:
   Q_INVOKABLE void deleteSelected();
   Q_INVOKABLE QStringList getSelectedPaths() const;
   Q_INVOKABLE qint64 getSelectedTotalSizeBytes() const;
+
+  // Background control
+  Q_INVOKABLE void pauseBackgroundTasks();
+  Q_INVOKABLE void resumeBackgroundTasks();
+
   Q_INVOKABLE QStringList getActiveDirectories() const;
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -81,6 +86,8 @@ private:
   QList<ImageInfo> m_images;
   QString m_filterQuery;
   bool m_isLoading = false;
+  QString m_currentPath;
+  int m_activeThreadCount = 0;
 };
 
 #endif // IMAGEMODEL_H

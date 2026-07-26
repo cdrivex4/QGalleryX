@@ -17,6 +17,7 @@ struct ImageInfo {
   QDateTime dateModified;
   qint64 size = 0; // Added size member
   bool isBurst = false;
+  bool isSelected = false;
 };
 
 class ImageModel : public QAbstractListModel {
@@ -38,7 +39,8 @@ public:
     ExifRole,
     IsRawRole,
     DateTimeRole,
-    IsBurstRole
+    IsBurstRole,
+    IsSelectedRole
   };
   Q_ENUM(ImageRoles)
 

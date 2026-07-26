@@ -45,6 +45,12 @@ public:
   // Clear all pending tasks
   void clear();
 
+  // Pause and Resume background processing
+  Q_INVOKABLE void pause();
+  Q_INVOKABLE void resume();
+  bool isPaused() const;
+  bool isRunning() const;
+
 private:
   TaskScheduler();
   ~TaskScheduler();
@@ -75,6 +81,7 @@ private:
   QWaitCondition m_ioCondition;
 
   std::atomic<bool> m_running;
+  std::atomic<bool> m_paused;
   std::atomic<quint64> m_sequenceCounter;
 };
 

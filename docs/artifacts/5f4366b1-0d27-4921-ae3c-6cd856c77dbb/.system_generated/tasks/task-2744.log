@@ -1,0 +1,126 @@
+=== MODE: STANDARD DYNAMIC BUILD ===
+  -> Qt Kit: D:\Qt\6.9.3\mingw_64
+==========================================
+   SamsungGallery Build System
+==========================================
+Build Version: 1.0.114
+Timestamp: 2026-07-14 23:27:01
+[0/4] Verifying Dependencies...
+  FFmpeg binaries found.
+[1/4] Checking for running instances...
+[1.5/4] Verifying File Locks & Recording Hashes...
+  Current Hash (appSamsungGallery.exe): 90158C79341606875D2AC0A7DB75CF93680AD3658E6E6DC2260A2B8FCD7D7E39
+  Current Hash (appScrollBench.exe): 75A3E168641778FCC63977D0C2900B307C614D62D6702C4747AE1E40A62DD913
+[2/4] Cleaned autogen folders & removed old binary.
+[3/4] Building (Release)...
+  -> Configuring...
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:26 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  CMakeLists.txt:26 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0001 is not set: ':/qt/qml/' is the default resource prefix
+  for QML modules.  Check https://doc.qt.io/qt-6/qt-cmake-policy-qtp0001.html
+  for policy details.  Use the qt_policy command to set the policy and
+  suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:740 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  test_scrollbench/CMakeLists.txt:44 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake:3458 (message):
+  Qt policy QTP0004 is not set: You need qmldir files for each extra
+  directory that contains .qml files for your module.  Check
+  https://doc.qt.io/qt-6/qt-cmake-policy-qtp0004.html for policy details.
+  Use the qt_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:3645 (__qt_internal_setup_policy)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:951 (qt6_target_qml_sources)
+  D:/Qt/6.9.3/mingw_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake:1296 (qt6_add_qml_module)
+  test_scrollbench/CMakeLists.txt:44 (qt_add_qml_module)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done (5.2s)
+-- Generating done (0.4s)
+-- Build files have been written to: D:/Dev/antigravity/build
+  -> Compiling...
+[1/91] Automatic MOC and UIC for target tst_mft
+[2/89] Automatic MOC and UIC for target appScrollBench
+[3/88] Automatic MOC and UIC for target appScrollBenchNet
+[4/86] Automatic MOC and UIC for target tst_automation
+[5/84] Automatic MOC and UIC for target tst_scheduler
+[6/82] Automatic MOC and UIC for target tst_imagemodel
+[7/81] Automatic MOC and UIC for target tst_linkage
+[8/79] Running AUTOMOC file extraction for target appScrollBench
+[9/79] Running moc --collect-json for target appScrollBench
+[10/44] Automatic MOC and UIC for target appSamsungGallery
+[11/44] Running AUTOMOC file extraction for target appSamsungGallery
+[12/44] Running moc --collect-json for target appSamsungGallery
+[13/16] Building CXX object CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj
+FAILED: CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj 
+D:\Qt\Tools\mingw1310_64\bin\c++.exe -DLIBRAW_NODLL -DMINGW_HAS_SECURE_API=1 -DQT_CONCURRENT_LIB -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMETA_LIB -DQT_QMLMODELS_LIB -DQT_QMLWORKERSCRIPT_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_TESTCASE_BUILDDIR=\"D:/Dev/antigravity/build\" -DQT_TESTCASE_SOURCEDIR=\"D:/Dev/antigravity\" -DQT_TESTLIB_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 -ID:/Dev/antigravity/build/tst_imagemodel_autogen/include -ID:/Dev/antigravity/3rdparty/LibRaw -ID:/Dev/antigravity/3rdparty/ffmpeg/include -ID:/Dev/antigravity/3rdparty/LibRaw/libraw -isystem D:/Qt/6.9.3/mingw_64/include/QtCore -isystem D:/Qt/6.9.3/mingw_64/include -isystem D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.9.3/mingw_64/include/QtTest -isystem D:/Qt/6.9.3/mingw_64/include/QtConcurrent -isystem D:/Qt/6.9.3/mingw_64/include/QtGui -isystem C:/VulkanSDK/1.3.268.0/Include -isystem D:/Qt/6.9.3/mingw_64/include/QtQuick -isystem D:/Qt/6.9.3/mingw_64/include/QtQml -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlIntegration -isystem D:/Qt/6.9.3/mingw_64/include/QtNetwork -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlMeta -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlModels -isystem D:/Qt/6.9.3/mingw_64/include/QtQmlWorkerScript -isystem D:/Qt/6.9.3/mingw_64/include/QtOpenGL -isystem D:/Qt/6.9.3/mingw_64/include/QtWidgets -O3 -DNDEBUG -MD -MT CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj -MF CMakeFiles\tst_imagemodel.dir\src\ImageModel.cpp.obj.d -o CMakeFiles/tst_imagemodel.dir/src/ImageModel.cpp.obj -c D:/Dev/antigravity/src/ImageModel.cpp
+In file included from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw_datastream.h:38,
+                 from D:/Dev/antigravity/3rdparty/LibRaw/libraw/libraw.h:77,
+                 from D:/Dev/antigravity/src/ImageModel.cpp:15:
+D:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/winsock2.h:15:2: warning: #warning Please include winsock2.h before windows.h [-Wcpp]
+   15 | #warning Please include winsock2.h before windows.h
+      |  ^~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp: In member function 'virtual bool ImageModel::setData(const QModelIndex&, const QVariant&, int)':
+D:/Dev/antigravity/src/ImageModel.cpp:517:17: error: 'IsSelectedRole' was not declared in this scope
+  517 |     if (role == IsSelectedRole) {
+      |                 ^~~~~~~~~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp:518:29: error: 'struct ImageInfo' has no member named 'isSelected'
+  518 |       m_images[index.row()].isSelected = value.toBool();
+      |                             ^~~~~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp: In member function 'void ImageModel::clearSelection()':
+D:/Dev/antigravity/src/ImageModel.cpp:528:19: error: 'struct ImageInfo' has no member named 'isSelected'
+  528 |       m_images[i].isSelected = false;
+      |                   ^~~~~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp:531:82: error: 'IsSelectedRole' was not declared in this scope
+  531 |       emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
+      |                                                                                  ^~~~~~~~~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp:531:23: error: cannot convert '<brace-enclosed initializer list>' to 'const QList<int>&'
+  531 |       emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
+      |            ~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from D:/Qt/6.9.3/mingw_64/include/QtCore/QAbstractListModel:1,
+                 from D:/Dev/antigravity/src/ImageModel.h:4,
+                 from D:/Dev/antigravity/src/ImageModel.cpp:1:
+D:/Qt/6.9.3/mingw_64/include/QtCore/qabstractitemmodel.h:358:40: note:   initializing argument 3 of 'void QAbstractItemModel::dataChanged(const QModelIndex&, const QModelIndex&, const QList<int>&)'
+  358 |                      const QList<int> &roles = QList<int>());
+      |                      ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp: In member function 'int ImageModel::selectedCount() const':
+D:/Dev/antigravity/src/ImageModel.cpp:539:16: error: 'const struct ImageInfo' has no member named 'isSelected'
+  539 |       if (item.isSelected) count++;
+      |                ^~~~~~~~~~
+D:/Dev/antigravity/src/ImageModel.cpp: In member function 'QStringList ImageModel::getSelectedPaths() const':
+D:/Dev/antigravity/src/ImageModel.cpp:547:16: error: 'const struct ImageInfo' has no member named 'isSelected'
+  547 |       if (item.isSelected) {
+      |                ^~~~~~~~~~
+[14/16] Building CXX object CMakeFiles/appSamsungGallery.dir/appSamsungGallery_autogen/mocs_compilation.cpp.obj
+ninja: build stopped: subcommand failed.
+BUILD FAILED!
+Build Failed

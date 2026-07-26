@@ -1,0 +1,12 @@
+[2026-07-14 23:31:24.191] [Thread 22328] Debug: Loading last folder: D:/
+[2026-07-14 23:31:24.216] [Thread 22328] Debug: [TaskScheduler] Started 2 CPU threads and 2 IO threads.
+[2026-07-14 23:31:24.217] [Thread 22328] Debug: [TaskScheduler] Cleared all pending tasks.
+[2026-07-14 23:31:24.224] [Thread 22328] Warning: qrc:/SamsungGallery/resources/qml_legacy/Main.qml:509:9: Unable to assign [undefined] to int
+[2026-07-14 23:31:24.225] [Thread 24324] Debug: Scanning directory: "D:\\"
+[2026-07-14 23:31:24.233] [Thread 24324] Debug: [NetworkScan] Detected mapped network drive: "D:\\"
+[2026-07-14 23:31:24.720] [Thread 22328] Debug: [SystemMonitor] Resource Update: RAM: 146.238 MB (Delta: 146.238 ) | VRAM: 18.1172 MB (Delta: 18.1172 )
+[2026-07-14 23:31:42.437] [Thread 22328] Debug: Opening folder dialog...
+[2026-07-14 23:31:44.176] [Thread 22328] Debug: [SystemMonitor] Resource Update: RAM: 205.781 MB (Delta: 59.543 ) | VRAM: 25.7305 MB (Delta: 7.61328 )
+[2026-07-14 23:31:48.052] [Thread 22328] Debug: Selected folder: D:/winDownloads
+[2026-07-14 23:31:49.690] [Thread 22328] Warning: qrc:/SamsungGallery/resources/qml_legacy/Main.qml:509:9: Unable to assign [undefined] to int
+
