@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_OTHER",
-  "summary": "A technical breakdown of the recent changes to the thumbnail loading architecture, analyzing the before/after state and identifying potential new bottlenecks.",
-  "updatedAt": "2026-06-21T13:29:34.113177500Z",
-  "requestFeedback": true
-}

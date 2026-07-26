@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan to 'Brute Force' the CUDA ignition. I have diagnosed that the smart DLL loading is failing. I will now manually copy the NVIDIA 'Cuda Core' DLLs directly into the AI engine's private folder to force it to see the 1050 Ti. Accuracy: 100%. Persistence: Permanent.",
-  "updatedAt": "2026-04-13T15:17:52.225195400Z",
-  "requestFeedback": true
-}

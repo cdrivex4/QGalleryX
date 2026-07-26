@@ -1,5 +1,0 @@
-# GPU Usage Investigation
-
-- [/] Check for `nvidia-smi` or equivalent tools
-- [ ] Query current GPU usage and processes
-- [ ] Identify processes causing high usage

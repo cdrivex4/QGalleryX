@@ -1,7 +1,0 @@
-  warning: skill is from graphify 0.8.33, package is 0.8.42. Run 'graphify install' to update.
-Re-extracting code files in D:\Dev\antigravity (no LLM needed)...
-  AST extraction: 401/401 files (100%) [6 workers]
-[graphify watch] Rebuilt: 3309 nodes, 5004 edges, 276 communities
-[graphify watch] graph.json, graph.html and GRAPH_REPORT.md updated in D:\Dev\antigravity\graphify-out
-Code graph updated. For doc/paper/image changes run /graphify --update in your AI assistant.
-Tip: set GEMINI_API_KEY or GOOGLE_API_KEY to use Gemini for semantic extraction.

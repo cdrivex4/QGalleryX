@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan for Iteration 3: JNI Registration Deep Dive, focusing on symbol verification, dependency ordering, and forced environment setup.",
-  "updatedAt": "2026-03-14T20:05:13.623253Z",
-  "version": "4"
-}

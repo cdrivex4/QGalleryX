@@ -1,5 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-02T20:12:04+04:00
-Prompt: Check progress of pipeline test run
-
-[2026-06-02T20:10:54+04:00] Timer cancelled: agent received a message during wait.

@@ -1,9 +1,0 @@
-# Verification Checklist
-
-- [x] Navigate to http://localhost:5173/ (or check if already loaded on active page)
-  - *Observation*: The application on http://localhost:5173/ immediately crashes with a `TypeError: Cannot read properties of undefined (reading 'process')` at `Versions` component. This is because the standard browser does not have the Electron preload API (`window.electron` and `window.api`) injected.
-- [ ] Inspect overall glassmorphic design and active tabs
-- [ ] Take screenshots of the UI to verify look and feel
-- [ ] Click 'Entity Profiles' or 'Ingest' tab to confirm functionality
-- [ ] Provide a summary of the findings
-

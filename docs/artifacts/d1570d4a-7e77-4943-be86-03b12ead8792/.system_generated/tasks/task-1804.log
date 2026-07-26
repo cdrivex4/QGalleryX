@@ -1,6 +1,0 @@
-warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
-[main 0a176fe] Extract architecture and spec to README.md
- 1 file changed, 69 insertions(+)
- create mode 100644 README.md
-To https://github.com/cdrivex4/legioncommand.git
-   bfc2355..0a176fe  main -> main

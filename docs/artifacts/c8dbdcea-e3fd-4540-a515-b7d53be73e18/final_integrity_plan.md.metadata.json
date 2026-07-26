@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan to purge corrupt export artifacts and re-trigger the definitive final transcode. I will delete the truncated 0-byte output file and all broken segment chunks to ensure a 100% clean, playable 86-minute result. Strategy: Zero-Error Restart. Summary: Delivering the movie.",
-  "updatedAt": "2026-04-13T20:50:58.315867500Z",
-  "requestFeedback": true
-}

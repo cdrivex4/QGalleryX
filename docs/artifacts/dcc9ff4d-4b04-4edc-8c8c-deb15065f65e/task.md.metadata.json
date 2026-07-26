@@ -1,5 +1,0 @@
-{
-  "artifactType":  "ARTIFACT_TYPE_TASK",
-  "summary":  "This task list tracks the execution of the disk I/O benchmark on the new 16TB drive and the subsequent comparison and context restoration.",
-  "updatedAt":  "2026-04-03T07:52:12.731214300Z"
-}

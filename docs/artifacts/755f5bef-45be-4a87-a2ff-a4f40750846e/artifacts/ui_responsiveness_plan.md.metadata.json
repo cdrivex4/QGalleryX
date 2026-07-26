@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_OTHER",
-  "summary": "A comprehensive architectural review outlining 10 general ways to improve UI responsiveness, 10 specific improvements over the current implementation, and a SWOT analysis of the ScrollBench UI rendering architecture.",
-  "updatedAt": "2026-06-22T03:37:53.459699700Z",
-  "requestFeedback": true
-}

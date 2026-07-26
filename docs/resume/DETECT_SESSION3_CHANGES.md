@@ -8,7 +8,7 @@ Compare current project files to IDE's tracked versions to see what Session 3 ch
 ## 📋 Analysis Method
 
 The Antigravity IDE tracks file versions in:
-`C:\Users\curtis\.gemini\antigravity\code_tracker\active\no_repo\`
+`%USERPROFILE%\.gemini\antigravity\code_tracker\active\no_repo\`
 
 Each file is stored as: `<hash>_<filename>`
 
@@ -57,7 +57,7 @@ test_log.txt
 ```powershell
 # Save this as: check_session3_changes.ps1
 
-$trackedDir = "C:\Users\curtis\.gemini\antigravity\code_tracker\active\no_repo"
+$trackedDir = "%USERPROFILE%\.gemini\antigravity\code_tracker\active\no_repo"
 $projectDir = "D:\Dev\antigravity"
 
 Write-Host "=== Checking for files modified since IDE tracking ===" -ForegroundColor Cyan

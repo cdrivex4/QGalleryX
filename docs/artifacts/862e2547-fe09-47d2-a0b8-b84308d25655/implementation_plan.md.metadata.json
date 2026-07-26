@@ -1,6 +1,0 @@
-{
-  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary":  "Revised implementation plan that splits loading sources: connector weights from the main LTX checkpoint, projector weights from Gemma shard 1 only, and the Gemma backbone via from_pretrained with low_cpu_mem_usage. This avoids the 48GB peak RAM spike.",
-  "updatedAt":  "2026-03-04T19:37:43.434411700Z",
-  "version":  "1"
-}

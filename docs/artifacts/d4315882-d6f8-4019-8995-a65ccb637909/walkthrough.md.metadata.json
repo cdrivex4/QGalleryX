@@ -1,6 +1,0 @@
-{
-  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary":  "Added detail for the resolution of the torch_cpu.dll crashes and the pyrefly.exe zombie process. Documented the ModelLedger and SingleGPUModelBuilder optimizations.",
-  "updatedAt":  "2026-03-02T17:41:57.273057300Z",
-  "version":  "16"
-}

@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Detailed implementation plan for introducing a 5:1 Image-to-Video processing ratio in TaskScheduler.",
-  "updatedAt": "2026-06-21T12:07:32.917802500Z",
-  "requestFeedback": true
-}

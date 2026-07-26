@@ -1,6 +1,0 @@
-- [/] Setup Tracking
-- [ ] Modify `transcribe.py` (Remove `language="en"`, Change `task="translate"`)
-- [ ] Modify `translate.py` (Implement Word Limits calculation)
-- [ ] Modify `audio_mix.py` (Implement ATempo stretch protection)
-- [ ] Modify `main_ui.py` (Add Shutdown Server button)
-- [ ] Purge `workspace/1776007462` to regress the pipeline.

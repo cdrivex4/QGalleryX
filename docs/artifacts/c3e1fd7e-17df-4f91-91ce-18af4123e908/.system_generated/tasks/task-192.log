@@ -1,6 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-01T23:36:09+04:00
-Prompt: Check app.log again for the enqueued job.
-
-[2026-06-01T23:36:04+04:00] Still waiting. Remaining time: 5s
-[2026-06-01T23:36:09+04:00] Timer fired.

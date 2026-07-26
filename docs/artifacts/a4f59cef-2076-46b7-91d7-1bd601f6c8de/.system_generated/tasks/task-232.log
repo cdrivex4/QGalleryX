@@ -1,7 +1,0 @@
-  warning: skill is from graphify 0.8.41, package is 0.9.3. Run 'graphify install' to update.
-  warning: skill is from graphify 0.8.41, package is 0.9.3. Run 'graphify install' to update.
-[graphify extract] scanning D:\Dev\antigravity
-[graphify extract] found 88 code, 0 docs, 0 papers, 0 images
-[graphify extract] AST extraction on 88 code files...
-[graphify] backed up semantic graph (5 files) -> 2026-07-01/
-[graphify extract] wrote D:\Dev\antigravity\graphify-out\graph.json — 1472 nodes, 2788 edges (no clustering)

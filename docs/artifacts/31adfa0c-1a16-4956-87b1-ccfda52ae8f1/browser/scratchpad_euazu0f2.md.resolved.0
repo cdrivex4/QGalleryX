@@ -1,9 +1,0 @@
-# PDF Download Task
-
-## Plan
-- [ ] Navigate to and download Fiji Green Bond Framework PDF: `https://s3.amazonaws.com/fiji-green-bond/Fiji+Green+Bond+Framework.pdf`
-- [ ] Navigate to and download Mauritius Sustainability Guidelines PDF: `https://www.fscmauritius.org/media/132148/guidelines-for-issue-of-corporate-and-green-bonds-in-mauritius.pdf`
-- [ ] Confirm both downloads are completed.
-
-## Progress
-- Initialized plan.

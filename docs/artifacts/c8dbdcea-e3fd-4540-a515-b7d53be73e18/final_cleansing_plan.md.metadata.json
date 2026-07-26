@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan to heal the 1-hour movie from the new 'GPU-induced' pollution (e.g., '2.00s' prepended to dialogue). I will harden the translation prompt, upgrade the parser to strip duration markers, and surgically clean the 1600+ segments to ensure the voice dub is perfect and note-free.",
-  "updatedAt": "2026-04-13T15:54:37.773932800Z",
-  "requestFeedback": true
-}

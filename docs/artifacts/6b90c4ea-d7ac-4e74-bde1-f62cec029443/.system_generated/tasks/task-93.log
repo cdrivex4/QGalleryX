@@ -1,7 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-08T06:57:40+04:00
-Prompt: Check if buffalo_l has finished downloading.
-
-[2026-06-08T06:55:40+04:00] Still waiting. Remaining time: 2m0s
-[2026-06-08T06:56:10+04:00] Still waiting. Remaining time: 1m30s
-[2026-06-08T06:56:27+04:00] Timer cancelled: agent received a message during wait.

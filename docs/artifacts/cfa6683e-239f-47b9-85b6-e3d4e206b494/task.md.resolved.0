@@ -1,8 +1,0 @@
-# Task: Debugging UI Performance and Concurrency Leak
-
-- [/] Research concurrency management in [AsyncImageProvider.cpp](file:///d:/Dev/antigravity/src/AsyncImageProvider.cpp) <!-- id: 0 -->
-- [ ] Research UI thread blockage and [DiagnosticsMonitor](file:///d:/Dev/antigravity/test_scrollbench/src/DiagnosticsMonitor.h#14-167) impact <!-- id: 1 -->
-- [ ] Create Implementation Plan <!-- id: 2 -->
-- [ ] Fix Adaptive I/O admission control leak <!-- id: 3 -->
-- [ ] Optimize GUI thread interaction (throttling updates) <!-- id: 4 -->
-- [ ] Verify fix with performance logs <!-- id: 5 -->

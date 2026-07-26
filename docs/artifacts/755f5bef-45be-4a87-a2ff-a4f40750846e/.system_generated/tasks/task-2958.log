@@ -1,8 +1,0 @@
-Get-Content : Cannot find path 'D:\Dev\antigravity\test_scrollbench\src\AlbumModel.cpp' because it does not exist.
-At line:1 char:1
-+ Get-Content .\src\AlbumModel.cpp | Select-String "applyFilter" -Conte ...
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : ObjectNotFound: (D:\Dev\antigrav...\AlbumModel.cpp:String) [Get-Content], ItemNotFoundEx 
-   ception
-    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
- 

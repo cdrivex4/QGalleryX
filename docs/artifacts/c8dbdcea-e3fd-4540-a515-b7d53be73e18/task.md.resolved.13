@@ -1,8 +1,0 @@
-# Dynamic Granularity Production Tasks
-
-- [x] Implement Recursive Segment Queue in `lipsync_musetalk.py`
-- [x] Implement OOM 'Sense & Shrink' logic (v7.0)
-- [x] Clean GPU of all ghost processes
-- [/] Resume Dashboard and monitor for auto-splitting at Minute 58
-- [ ] Verify total film concatenation
-- [ ] Final Quality Check

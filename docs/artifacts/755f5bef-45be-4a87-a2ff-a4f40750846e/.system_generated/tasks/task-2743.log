@@ -1,9 +1,0 @@
-
-                            width: txtRawS.width + 6; height: txtRawS.height + 2
-                            Text { id: txtRawS; anchors.centerIn: parent; text: "RAW"; color: "#FF9800"; 
-font.pixelSize: 10; font.bold: true }
-                                width: txtRawS.width + 6; height: txtRawS.height + 2
-                                Text { id: txtRawS; anchors.centerIn: parent; text: "RAW"; color: "#FF9800"; 
-font.pixelSize: 10; font.bold: true }
-
-

@@ -1,9 +1,0 @@
-
-ProcessId CommandLine                                                                                                  
---------- -----------                                                                                                  
-    31128 powershell -Command "graphify extract . --no-cluster"                                                        
-    32400 "C:\Users\curtis\AppData\Local\Programs\Python\Python312\Scripts\graphify.exe" extract . --no-cluster        
-    32944 "C:\Users\curtis\AppData\Local\Programs\Python\Python312\python.exe"  "C:\Users\curtis\AppData\Local\Progr...
-    32508 powershell -Command "Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match \"graphify\" } |...
-
-

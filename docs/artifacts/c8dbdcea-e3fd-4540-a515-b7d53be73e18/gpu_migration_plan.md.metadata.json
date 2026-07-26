@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan to forcibly move the 1-hour movie's translation stage (Stage 3) from CPU to GPU as requested. This involves wiping the current 'healed' translation progress and restarting the stage with the GPU flag active to ensure the user can see the GPU performance in action.",
-  "updatedAt": "2026-04-13T02:48:33.544089100Z",
-  "requestFeedback": true
-}

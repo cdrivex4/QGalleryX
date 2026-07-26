@@ -1,7 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Finalized plan for the Interactive Scene Auditor and Selective Lipsync Toggle. Defaulting to 30s previews and Lipsync-ON jobs, with per-job overrides.",
-  "updatedAt": "2026-04-19T06:48:47.596548600Z",
-  "version": "4",
-  "requestFeedback": true
-}

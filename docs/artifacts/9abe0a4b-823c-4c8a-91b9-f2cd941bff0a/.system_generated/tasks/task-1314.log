@@ -1,8 +1,0 @@
-Collecting minidump
-  Downloading minidump-0.0.24-py3-none-any.whl.metadata (467 bytes)
-Downloading minidump-0.0.24-py3-none-any.whl (78 kB)
-Installing collected packages: minidump
-Successfully installed minidump-0.0.24
-
-[notice] A new release of pip is available: 26.1.1 -> 26.1.2
-[notice] To update, run: C:\Users\curtis\AppData\Local\Programs\Python\Python312\python.exe -m pip install --upgrade pip

@@ -1,9 +1,0 @@
-# Mini-Pipeline Test Protocol Execution
-
-- [x] Analyze user constraints (Terminal script, text-dense auto-selection, force chunking/concatenation testing).
-- [/] Develop `scripts/test_mini_pipeline.py`.
-    - [ ] Add logic to parse `segments.json` and find the most text-dense 45-second window.
-    - [ ] Add FFmpeg logic to slice the source video to this 45-second window.
-    - [ ] Monkey-patch `MAX_CHUNK_DURATION` to 15 seconds so the 45s clip generates exactly 3 chunks for concatenation testing.
-    - [ ] Hook into `pipeline.py` to process the job and print terminal progress.
-- [ ] Verify script correctly triggers chunking and concatenates successfully.

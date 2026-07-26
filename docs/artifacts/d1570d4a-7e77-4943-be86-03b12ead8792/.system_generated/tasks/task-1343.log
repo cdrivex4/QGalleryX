@@ -1,9 +1,0 @@
-
-> hermes-core@2.0.0 start
-> node web/server.js
-
-[hermes] Web server running → http://localhost:4242
-[hermes] Node: node-01 (primary)
-[hermes] Drive root: H:/My Drive/UberHermes
-[hermes] Drive accessible: true
-[hermes/chat] error: Invalid model identifier "granite". Please specify a valid downloaded model (e.g., google/gemma-4-26b-a4b-qat@q4_0, google/gemma-4-26b-a4b-qat, gemma-4-26b-a4b-it-qat).

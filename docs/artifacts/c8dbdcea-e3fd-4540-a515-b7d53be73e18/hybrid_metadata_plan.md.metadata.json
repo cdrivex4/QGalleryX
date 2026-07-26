@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan for a 'Hybrid Metadata' system that preserves LLM translation notes while stripping them from the dialogue to fix the 25-hour TTS synthesis bottleneck. Includes a custom 'Project Scrubber' script to migrate polluted data for the 1600+ segments in the 1-hour movie without losing progress.",
-  "updatedAt": "2026-04-13T02:30:32.888622600Z",
-  "requestFeedback": true
-}

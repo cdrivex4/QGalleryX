@@ -1,5 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-02T18:16:33+04:00
-Prompt: Check process command line result
-
-[2026-06-02T18:16:33+04:00] Timer cancelled: agent received a message during wait.

@@ -1,5 +1,0 @@
-warning: in the working copy of 'test_scrollbench/src/FastImageItem.cpp', LF will be replaced by CRLF the next time Git touches it
-[main d01c917] fix: resolve critical C++ use-after-free and race conditions during rapid thumbnail resizing
- 3 files changed, 23 insertions(+), 7 deletions(-)
-To https://github.com/cdrivex4/antigravity.git
-   7f51217..d01c917  main -> main

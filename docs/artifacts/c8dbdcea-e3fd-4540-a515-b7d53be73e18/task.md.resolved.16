@@ -1,5 +1,0 @@
-- [x] Run `deep_clean_workspace.py` to purge 1776007462 cache
-- [ ] Harden `transcription.py` with the 'Ghost Purge' filter
-- [ ] Harden `translate.py` with the 'Deep Scrubber' regex
-- [ ] Reboot server and monitor re-translation
-- [ ] Verify first 10 segments are meta-free

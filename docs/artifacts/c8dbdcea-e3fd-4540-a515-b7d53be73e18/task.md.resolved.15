@@ -1,7 +1,0 @@
-- [x] Modify `Job` class in `pipeline.py` to store `source_basename`
-- [x] Update `PipelineManager.add_job` to capture original filename
-- [x] Update final assembly logic to use `{source_basename}_dubbed.mp4`
-- [x] Fix Job ID display truncation in `main_ui.py`
-- [x] Implement backend `open_folder` functionality in `main_ui.py`
-- [x] Add 📂 icon to UI table and wire to backend
-- [x] Verify name preservation and folder opening

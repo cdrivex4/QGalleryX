@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Comprehensive audit of the just-dub-it2 offline video dubbing pipeline. Covers all 7 pipeline stages with deep analysis of lipsync and translation problems. Compares architectural approach against the JustDubIt SIGGRAPH 2026 research project (joint audio-visual diffusion). Identifies 14 bugs, 8 architectural weaknesses, and provides 12 actionable recommendations ranked by impact and feasibility for GTX 1050 Ti hardware.",
-  "updatedAt": "2026-06-01T16:23:40.577441Z",
-  "requestFeedback": true
-}

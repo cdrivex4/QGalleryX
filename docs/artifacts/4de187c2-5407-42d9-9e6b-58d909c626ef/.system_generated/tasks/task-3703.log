@@ -1,8 +1,0 @@
-[graphify extract] scanning C:\just-dub-it2
-[graphify extract] found 246 code, 33 docs, 0 papers, 12 images
-[graphify extract] AST extraction on 246 code files...
-[graphify extract] semantic extraction on 45 files via lm-studio...
-[graphify extract] chunk 1/22 done
-[graphify] chunk 2/22 failed: Request timed out.
-[graphify extract] chunk 3/22 done
-[graphify extract] chunk 4/22 done

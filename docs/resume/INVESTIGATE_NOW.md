@@ -3,7 +3,7 @@
 ## 🎯 Quick Answer
 
 The Antigravity IDE **tracks 32 files** from your project in:
-`C:\Users\curtis\.gemini\antigravity\code_tracker\active\no_repo\`
+`%USERPROFILE%\.gemini\antigravity\code_tracker\active\no_repo\`
 
 These are baseline versions the IDE is working from.
 

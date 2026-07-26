@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Comprehensive dependency manual mapping all hard-locked version constraints, fragile couplings, and monkey-patches in the just-dub-it2 pipeline. Includes SWOT analysis of 10 improvement options covering codebase refactoring, UI modernization, and pipeline resiliency. Each option is evaluated for feasibility on GTX 1050 Ti 4GB hardware.",
-  "updatedAt": "2026-06-09T18:50:25.948516600Z",
-  "requestFeedback": true
-}

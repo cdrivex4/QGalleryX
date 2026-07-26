@@ -1,5 +1,0 @@
-﻿# ORIGINAL LOCATION: D:\Dev\antigravity\build_log.txt
-# MOVED ON: 2026-01-03
-# REASON: Cleanup
-
-

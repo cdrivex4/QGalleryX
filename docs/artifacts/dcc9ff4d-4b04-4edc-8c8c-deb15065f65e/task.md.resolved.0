@@ -1,6 +1,0 @@
-- [ ] Run `async_io_benchmark.py` on the New 16TB Drive (I:)
-- [ ] Record and analyze the benchmark results (Throughput vs Latency)
-- [ ] Compare with the SSD baseline and previous HDD behavior
-- [ ] Update `io_optimization_report.md` with the new performance data
-- [ ] Update `handover.md` to reflect hardware replacement and project status
-- [ ] Create `walkthrough.md` to summarize the results and current state

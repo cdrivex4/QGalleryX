@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Updated execution plan incorporating all user feedback: localhost endpoint, auto-fallback on JSON errors, Antigravity skill integration, bat file launcher, and queue-first-then-UI workflow.",
-  "updatedAt": "2026-06-18T18:52:17.954478Z",
-  "requestFeedback": true
-}

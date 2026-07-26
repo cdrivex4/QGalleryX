@@ -1,5 +1,0 @@
-Collecting nvidia-cudnn-cu12
-  Downloading nvidia_cudnn_cu12-9.23.0.39-py3-none-win_amd64.whl.metadata (1.9 kB)
-Requirement already satisfied: nvidia-cublas-cu12 in .\env\Lib\site-packages (from nvidia-cudnn-cu12) (12.9.2.10)
-Requirement already satisfied: nvidia-cuda-nvrtc-cu12 in .\env\Lib\site-packages (from nvidia-cublas-cu12->nvidia-cudnn-cu12) (12.9.86)
-Downloading nvidia_cudnn_cu12-9.23.0.39-py3-none-win_amd64.whl (689.7 MB)

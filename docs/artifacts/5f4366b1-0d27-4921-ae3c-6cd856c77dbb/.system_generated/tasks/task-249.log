@@ -1,5 +1,0 @@
-3223727 Fix QML selection logic bugs and DragHandler input stealing
-632aec4 Milestone 1: QFileInfo deferred loading, Mmap cache fixes, and UI tweaks
-9dd700d Milestone: Add interactive HTML verification tracker, fix resolution slider crash bug
-49a1185 Milestone: Resolve path filtering, details panel, settings persistence, and warning dialog reverts
-45f1ca6 Save session progress: Live-toggleable settings, network cache safety, UI style alignments, and search path fixes

@@ -1,6 +1,0 @@
-Demo constructed without error. Let's inspect the dependencies.
-Traceback (most recent call last):
-  File "C:\just-dub-it2\test_gradio_js.py", line 21, in <module>
-    dep = demo.dependencies[0]
-          ^^^^^^^^^^^^^^^^^
-AttributeError: 'Blocks' object has no attribute 'dependencies'

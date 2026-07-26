@@ -1,7 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-21T10:53:35+04:00
-Prompt: Check ScrollBench app logs for active weight leak recovery or drive concurrency events
-
-[2026-06-21T10:53:15+04:00] Still waiting. Remaining time: 20s
-[2026-06-21T10:53:25+04:00] Still waiting. Remaining time: 10s
-[2026-06-21T10:53:35+04:00] Timer fired.

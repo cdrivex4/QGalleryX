@@ -1,5 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-21T10:41:44+04:00
-Prompt: Wait for task-236 build to finish
-
-[2026-06-21T10:41:34+04:00] Timer cancelled: agent received a message during wait.

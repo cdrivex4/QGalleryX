@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Comprehensive walkthrough of the performance and concurrency optimizations implemented to resolve UI slowdowns and restore effective culling.",
-  "updatedAt": "2026-02-10T09:16:52.551137800Z",
-  "version": "2"
-}

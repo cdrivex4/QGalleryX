@@ -1,6 +1,0 @@
-{
-  "summary": "Updated priority plan incorporating all user feedback from artifact review. Covers the gridSize→gridResolution rename, slider fix, batched model insertion, lazy metadata, viewport buffer with background processing, MFT pre-sort, 1GB GPU texture atlas, memory-mapped cache hierarchy, LRU mathematical model, main app pipeline restoration, and corrected stall recovery/activeWeight assessments.",
-  "updatedAt": "2026-07-04T11:12:56.705622Z",
-  "requestFeedback": true,
-  "userFacing": true
-}

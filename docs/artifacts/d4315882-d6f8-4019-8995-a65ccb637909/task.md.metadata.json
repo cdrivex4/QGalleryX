@@ -1,6 +1,0 @@
-{
-  "artifactType":  "ARTIFACT_TYPE_TASK",
-  "summary":  "Updated task list to reflect progress on the Gemma model weight download and the start of hardware benchmarking. Removed Phase 6 placeholder and added detail for weight loading fixes.",
-  "updatedAt":  "2026-03-02T17:35:04.413417800Z",
-  "version":  "37"
-}

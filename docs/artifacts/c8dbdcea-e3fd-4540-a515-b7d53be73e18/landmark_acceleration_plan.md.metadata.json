@@ -1,7 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Final implementation plan to hardware-accelerate landmark extraction by refactoring the image loader to use a generator (saving 100GB+ of potential RAM thrashing) and increasing the CUDA batch size from 1 to 12. I will also explicitly configure ONNX Runtime for CUDA execution on the 1050 Ti. Strategy: Parallel Production. Summary: Turbo-charging the detection.",
-  "updatedAt": "2026-04-14T02:38:25.060521800Z",
-  "version": "1",
-  "requestFeedback": true
-}

@@ -1,6 +1,0 @@
-{
-  "summary": "Proposal to add a workspace rule requiring use of the build.ps1 script for all antigravity builds, never raw cmake.",
-  "updatedAt": "2026-07-14T19:25:27.320150700Z",
-  "requestFeedback": true,
-  "userFacing": true
-}

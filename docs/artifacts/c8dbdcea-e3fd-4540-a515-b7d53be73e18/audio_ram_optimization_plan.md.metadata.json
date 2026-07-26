@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan to resolve the 99% RAM deadlock during the 1-hour audio mix. I will transition the 'Audio Mix' stage from memory-heavy Pydub processing to an efficient FFmpeg concat-filter. This reduces RAM usage by 99%, prevents hard drive thrashing, and ensures the 86-minute movie can finalize in seconds without data loss. Strategy: Memory Bypass.",
-  "updatedAt": "2026-04-13T17:52:46.400497Z",
-  "requestFeedback": true
-}

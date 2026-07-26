@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Detailed implementation plan for three FaceSwap pipeline improvements: Phase-weighted progress bar (faceswap.py threading + ffprobe), rolling-average ETA in the worker status JSON (fs_worker.py), and frame-level resume/checkpoint with smart re-queue on failure (both faceswap.py and fs_worker.py). Includes exact file paths, line-level context, and code snippets for every change.",
-  "updatedAt": "2026-06-09T03:47:24.256259800Z",
-  "requestFeedback": true
-}

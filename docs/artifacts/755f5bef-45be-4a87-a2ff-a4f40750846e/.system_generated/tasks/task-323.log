@@ -1,6 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-21T10:46:02+04:00
-Prompt: Wait for task-321 build to finish
-
-[2026-06-21T10:45:57+04:00] Still waiting. Remaining time: 5s
-[2026-06-21T10:46:03+04:00] Timer fired.

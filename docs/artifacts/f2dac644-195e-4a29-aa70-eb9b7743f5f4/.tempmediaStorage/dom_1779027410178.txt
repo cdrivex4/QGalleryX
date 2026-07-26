@@ -1,8 +1,0 @@
-[0] (500,521)<div  />
-	🖥️
-	Portable Desktop Launcher Required
-	Gemini Finance is a secure, local-first **desktop application**. Because it accesses native OS systems for high-speed offline OCR, local file persistence, and offline ledger audits, it cannot run inside a standard browser tab.
-	# Start dev launcher inside native container
-	$
-	npm run dev
-	The native desktop window will launch automatically once the background processes initialize.

@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan for dynamic hardware profiling, FFmpeg GPU acceleration fallback chain, and memory/IO orchestration to resolve performance issues on high and low-end systems.",
-  "updatedAt": "2026-06-21T07:49:30.549307900Z",
-  "requestFeedback": true
-}

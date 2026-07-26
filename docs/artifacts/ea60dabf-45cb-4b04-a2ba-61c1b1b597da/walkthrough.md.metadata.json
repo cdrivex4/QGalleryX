@@ -1,5 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
-  "summary": "Walkthrough documenting the creation of the local-first skill for Antigravity IDE. The skill helps optimize large package downloads (>500MB) by checking for existing local resources before downloading. Includes skill structure, key features, and usage instructions.",
-  "updatedAt": "2026-02-17T22:28:35.941120400Z"
-}

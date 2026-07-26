@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Plan to fix Ctrl+Click and Shift+Click logic by reverting to MouseArea for robust modifier handling and simplifying the state management.",
-  "updatedAt": "2026-01-14T18:10:28.174222300Z",
-  "version": "4"
-}

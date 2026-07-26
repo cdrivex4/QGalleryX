@@ -1,9 +1,0 @@
-Successfully scheduled one-shot timer.
-Expected to fire at: 2026-06-02T20:15:18+04:00
-Prompt: Check progress of MuseTalk script execution
-
-[2026-06-02T20:14:28+04:00] Still waiting. Remaining time: 50s
-[2026-06-02T20:14:38+04:00] Still waiting. Remaining time: 40s
-[2026-06-02T20:14:48+04:00] Still waiting. Remaining time: 30s
-[2026-06-02T20:14:58+04:00] Still waiting. Remaining time: 20s
-[2026-06-02T20:15:03+04:00] Timer cancelled: agent received a message during wait.

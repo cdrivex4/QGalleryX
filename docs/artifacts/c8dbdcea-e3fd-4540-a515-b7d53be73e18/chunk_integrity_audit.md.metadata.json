@@ -1,6 +1,0 @@
-{
-  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary": "Implementation plan to audit the integrity of the segmented transcode. I will investigate why Chunk 4 skipped the lip-sync and verify if Chunk 5 is actively rendering or stalled. Strategy: Forensic Recovery. Summary: Checking the engine pulse.",
-  "updatedAt": "2026-04-14T11:44:13.211222300Z",
-  "requestFeedback": true
-}

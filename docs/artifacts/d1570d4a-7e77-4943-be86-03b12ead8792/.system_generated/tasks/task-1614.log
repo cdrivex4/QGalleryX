@@ -1,9 +1,0 @@
-
-web\hermes.html:1005:setInterval(() => { document.getElementById('clock').textContent = new 
-Date().toLocaleTimeString('en-GB'); }, 1000);
-web\hermes.html:1143:  setInterval(updateClock, 1000); updateClock();
-web\hermes.html:1148:  setInterval(loadJobs, 10000);
-web\hermes.html:1149:  setInterval(loadInbox, 10000);
-web\hermes.html:1150:  setInterval(loadLiveNodes, 30000);
-
-
