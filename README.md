@@ -274,12 +274,10 @@ This section is designed for the next AI or developer taking over this project.
 - Test on different Windows configurations
 - Verify performance impact of changes
 
-### Pull Request Process
-1. Create feature branch from main
-2. Make changes and add tests
-3. Ensure all tests pass
-4. Submit pull request with detailed description
-5. Respond to code review feedback
+### Privacy & Security
+- Do not commit sensitive data, personal test media (`*.jpg`, `*.png`), or execution logs (`*.log`).
+- Ensure all debug media and local logs remain ignored via `.gitignore`.
+- Sanitize developer-specific paths before committing documentation or scripts.
 
 ## 📄 License
 

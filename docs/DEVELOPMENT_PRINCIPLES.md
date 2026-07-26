@@ -302,6 +302,11 @@ User Action → Main Thread → TaskScheduler → Worker Thread → Signal → M
 - **UNC Path Support**: Use `QUrl::toLocalFile()` for correct `\\Server\Share` handling
 - **File Extension Validation**: Whitelist known image/video formats
 
+### Privacy & Open-Source Security
+- **Strict `.gitignore` Policy**: Local logs (`*.log`, `logs/`), debug screenshots (`docs/*.jpg`, `docs/*.png`), and AI session artifacts (`docs/artifacts/`) are excluded from Git to prevent sensitive user media or private dev logs from reaching public repositories.
+- **Sanitized Documentation & Configurations**: System paths in documentation and scripts use generic environment variables (e.g. `%USERPROFILE%`) instead of hardcoded developer usernames or local drive locations.
+- **Zero Remote Data Leakage**: Image caches, ring buffers, and diagnostic outputs are stored strictly in local user directories (`AppData/Local/cache`) and are never tracked or transmitted remotely.
+
 ### Error Handling
 - **Graceful Degradation**: Software fallback if hardware acceleration fails
 - **User-Visible Errors**: Log technical details, show user-friendly messages
