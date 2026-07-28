@@ -3,17 +3,14 @@
 # 1. Module Linkage (Backend stability)
 # 2. Media Detection (Image, Video, RAW counts)
 # 3. Path Normalization (Sanity check)
-# Uses $PSScriptRoot for portable, folder-rename-safe paths.
 
 param (
     [string]$TargetFolder = "."
 )
 
-$ProjectRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
-
-$LinkageTool = Join-Path $ProjectRoot "test_scrollbench\deploy\tst_linkage.exe"
+$LinkageTool = "d:\Dev\antigravity\test_scrollbench\deploy\tst_linkage.exe"
 if (-not (Test-Path $LinkageTool)) {
-    $LinkageTool = Join-Path $ProjectRoot "build\test_scrollbench\tst_linkage.exe"
+    $LinkageTool = "d:\Dev\antigravity\build\test_scrollbench\tst_linkage.exe"
 }
 
 if (-not (Test-Path $LinkageTool)) {

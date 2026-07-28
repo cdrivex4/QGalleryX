@@ -4,17 +4,14 @@
 # - Viewport Simulation
 # - Selection & Batch Logic
 # - Metadata verification
-# Uses $PSScriptRoot for portable, folder-rename-safe paths.
 
 param (
     [string]$TargetFolder = "."
 )
 
-$ProjectRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
-
-$AutomationTool = Join-Path $ProjectRoot "test_scrollbench\deploy\tst_automation.exe"
+$AutomationTool = "d:\Dev\antigravity\test_scrollbench\deploy\tst_automation.exe"
 if (-not (Test-Path $AutomationTool)) {
-    $AutomationTool = Join-Path $ProjectRoot "build\test_scrollbench\tst_automation.exe"
+    $AutomationTool = "d:\Dev\antigravity\build\test_scrollbench\tst_automation.exe"
 }
 
 if (-not (Test-Path $AutomationTool)) {

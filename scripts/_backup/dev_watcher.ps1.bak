@@ -1,18 +1,12 @@
 # Antigravity Development Watcher
 # Automatically triggers the Matrix Automation Suite on file changes.
-# Uses $PSScriptRoot for portable, folder-rename-safe paths.
 
 param (
     [string]$ScanPath = "D:/Pictures", # Default path to test
-    [string]$SourceDir = (Join-Path $PSScriptRoot "..\src")
+    [string]$SourceDir = "D:/Dev/antigravity/src"
 )
 
-$ProjectRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
-$BuildScript = Join-Path $ProjectRoot "build.ps1"
-$AutomationScript = Join-Path $ProjectRoot "scripts\run_automation_suite.ps1"
-
 Write-Host "`n[Watcher] Monitoring $SourceDir for changes..." -ForegroundColor Cyan
-Write-Host "[Watcher] Project Root: $ProjectRoot"
 Write-Host "[Watcher] Test Target: $ScanPath"
 Write-Host "[Watcher] Press Ctrl+C to stop.`n"
 
@@ -24,13 +18,13 @@ $action = {
     $path = $Event.SourceEventArgs.FullPath
     Write-Host "`n[Change Detected] $path" -ForegroundColor Yellow
     Write-Host "[Action] Rebuilding & Running Matrix Suite..." -ForegroundColor Gray
-
+    
     # 1. Rebuild (Quick incremental)
-    powershell -ExecutionPolicy Bypass -File $using:BuildScript
-
+    powershell -ExecutionPolicy Bypass -File D:/Dev/antigravity/build.ps1
+    
     if ($LASTEXITCODE -eq 0) {
         # 2. Run Automation Matrix
-        powershell -ExecutionPolicy Bypass -File $using:AutomationScript $using:ScanPath
+        powershell -ExecutionPolicy Bypass -File D:/Dev/antigravity/scripts/run_automation_suite.ps1 $ScanPath
     }
     else {
         Write-Host "[Error] Build failed! Check compiler output." -ForegroundColor Red
