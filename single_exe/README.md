@@ -33,8 +33,8 @@ The single_exe build is **integrated into the main build system** and can be bui
 
 When building the project, you can now create **three binaries**:
 
-1. **appSamsungGallery.exe** - Main gallery application (dynamic linking)
-2. **appScrollBench.exe** - ScrollBench test application (dynamic linking)
+1. **QGalleryX.exe** - Main gallery application (dynamic linking)
+2. **QGalleryXBench.exe** - ScrollBench test application (dynamic linking)
 3. **ScrollBenchPortable.exe** - Single portable executable (static linking)
 
 ## How It Works
@@ -77,8 +77,8 @@ Build all three binaries in one command:
 ```
 
 **Output:**
-- `build/appSamsungGallery.exe` - Main app
-- `test_scrollbench/deploy/appScrollBench.exe` - ScrollBench
+- `build/QGalleryX.exe` - Main app
+- `test_scrollbench/deploy/QGalleryXBench.exe` - ScrollBench
 - `single_exe/bin/ScrollBenchPortable.exe` - Portable static build
 
 ### Method 2: Standalone Build
@@ -212,10 +212,10 @@ Result:
 ```
 antigravity/
 ├── src/                    # Main app source
-├── CMakeLists.txt          # Builds: appSamsungGallery.exe
+├── CMakeLists.txt          # Builds: QGalleryX.exe
 │
 ├── test_scrollbench/       # ScrollBench test app
-│   ├── CMakeLists.txt      # Builds: appScrollBench.exe (dynamic)
+│   ├── CMakeLists.txt      # Builds: QGalleryXBench.exe (dynamic)
 │   └── deploy/             # Output with Qt DLLs
 │
 └── single_exe/             # Portable build (SKELETON)

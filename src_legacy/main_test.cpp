@@ -40,12 +40,12 @@ int main(int argc, char *argv[]) {
 
   QGuiApplication app(argc, argv);
 
-  qmlRegisterType<ImageModel>("SamsungGalleryTest", 1, 0, "ImageModel");
-  qmlRegisterType<AlbumModel>("SamsungGalleryTest", 1, 0, "AlbumModel");
-  qmlRegisterType<GroupedProxyModel>("SamsungGalleryTest", 1, 0,
+  qmlRegisterType<ImageModel>("QGalleryXTest", 1, 0, "ImageModel");
+  qmlRegisterType<AlbumModel>("QGalleryXTest", 1, 0, "AlbumModel");
+  qmlRegisterType<GroupedProxyModel>("QGalleryXTest", 1, 0,
                                      "GroupedProxyModel");
-  qmlRegisterType<SettingsHelper>("SamsungGalleryTest", 1, 0, "SettingsHelper");
-  qmlRegisterType<SystemMonitor>("SamsungGalleryTest", 1, 0, "SystemMonitor");
+  qmlRegisterType<SettingsHelper>("QGalleryXTest", 1, 0, "SettingsHelper");
+  qmlRegisterType<SystemMonitor>("QGalleryXTest", 1, 0, "SystemMonitor");
 
   QQmlApplicationEngine engine;
 
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
       []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
 
   // Load MainSemantic.qml directly from resources
-  const QUrl url("qrc:/SamsungGalleryTest/resources/qml_legacy/MainSemantic.qml");
+  const QUrl url("qrc:/QGalleryXTest/resources/qml_legacy/MainSemantic.qml");
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,
       [url](QObject *obj, const QUrl &objUrl) {

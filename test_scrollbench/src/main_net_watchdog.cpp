@@ -29,16 +29,16 @@ void dumpCrashLog() {
 int main(int argc, char *argv[]) {
   std::cout << "===================================================="
             << std::endl;
-  std::cout << "   NetappScrollBench - Diagnostics Watchdog v1.0.7"
+  std::cout << "   QGalleryXBench - Diagnostics Watchdog v1.0.7"
             << std::endl;
   std::cout << "===================================================="
             << std::endl;
 
   // Check if appScrollBench.exe exists in the same directory
-  DWORD dwAttrib = GetFileAttributesA("appScrollBench.exe");
+  DWORD dwAttrib = GetFileAttributesA("QGalleryXBench.exe");
   if (dwAttrib == INVALID_FILE_ATTRIBUTES ||
       (dwAttrib & FILE_ATTRIBUTE_DIRECTORY)) {
-    std::cerr << "ERROR: appScrollBench.exe not found in current directory!"
+    std::cerr << "ERROR: QGalleryXBench.exe not found in current directory!"
               << std::endl;
     std::cerr
         << "Please ensure this watchdog is in the same folder as the main app."
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Build command line: pass through any arguments
-  std::string cmdLine = "appScrollBench.exe";
+  std::string cmdLine = "QGalleryXBench.exe";
   for (int i = 1; i < argc; ++i) {
     cmdLine += " \"";
     cmdLine += argv[i];

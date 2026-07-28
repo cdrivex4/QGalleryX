@@ -7,11 +7,11 @@ Write-Host "`n=== ScrollBench Build ===" -ForegroundColor Cyan
 
 # 1. Kill any running instances
 Write-Host "Stopping any running instances..." -ForegroundColor Yellow
-Stop-Process -Name "appScrollBench" -Force -ErrorAction SilentlyContinue
+Stop-Process -Name "QGalleryXBench" -Force -ErrorAction SilentlyContinue
 Start-Sleep -Milliseconds 500
 
 # 1.5 Verify File Locks for network/remote execution
-$exeFile = ".\deploy\appScrollBench.exe"
+$exeFile = ".\deploy\QGalleryXBench.exe"
 if (Test-Path $exeFile) {
     Write-Host "Verifying file lock on $exeFile..." -ForegroundColor Yellow
     $locked = $true
@@ -53,5 +53,5 @@ Write-Host "Deploying..." -ForegroundColor Cyan
 .\deploy.ps1
 
 Write-Host "`n✅ Build and deploy complete!" -ForegroundColor Green
-Write-Host "Run: .\deploy\appScrollBench.exe" -ForegroundColor Yellow
+Write-Host "Run: .\deploy\QGalleryXBench.exe" -ForegroundColor Yellow
 Write-Host "`nNote: If you suspect stale code, manually delete build directory and reconfigure." -ForegroundColor DarkGray

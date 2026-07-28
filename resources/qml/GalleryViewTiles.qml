@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import SamsungGallery 1.0
+import QGalleryX 1.0
 
 Item {
     id: root

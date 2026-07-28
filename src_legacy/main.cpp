@@ -62,14 +62,14 @@ int main(int argc, char *argv[]) {
 
   QApplication app(argc, argv);
 
-  qmlRegisterType<ImageModel>("SamsungGallery", 1, 0, "ImageModel");
+  qmlRegisterType<ImageModel>("QGalleryX", 1, 0, "ImageModel");
 
-  qmlRegisterType<AlbumModel>("SamsungGallery", 1, 0, "AlbumModel");
-  qmlRegisterType<GroupedProxyModel>("SamsungGallery", 1, 0,
+  qmlRegisterType<AlbumModel>("QGalleryX", 1, 0, "AlbumModel");
+  qmlRegisterType<GroupedProxyModel>("QGalleryX", 1, 0,
                                      "GroupedProxyModel");
-  qmlRegisterType<SettingsHelper>("SamsungGallery", 1, 0, "SettingsHelper");
-  qmlRegisterType<SystemMonitor>("SamsungGallery", 1, 0, "SystemMonitor");
-  qmlRegisterType<DesktopHelper>("SamsungGallery", 1, 0, "DesktopHelper");
+  qmlRegisterType<SettingsHelper>("QGalleryX", 1, 0, "SettingsHelper");
+  qmlRegisterType<SystemMonitor>("QGalleryX", 1, 0, "SystemMonitor");
+  qmlRegisterType<DesktopHelper>("QGalleryX", 1, 0, "DesktopHelper");
 
   QQmlApplicationEngine engine;
 
@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
       []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
 
   // Load Main.qml directly from resources
-  const QUrl url("qrc:/SamsungGallery/resources/qml_legacy/Main.qml");
+  const QUrl url("qrc:/QGalleryX/resources/qml_legacy/Main.qml");
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,
       [url](QObject *obj, const QUrl &objUrl) {

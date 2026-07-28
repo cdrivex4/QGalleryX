@@ -149,15 +149,15 @@ WHY: MFT scanning is instant for local drives. Progressive
 
 ### Run
 ```powershell
-.\Release\appScrollBench.exe
+.\Release\QGalleryXBench.exe
 ```
 
 ### Network Diagnostics (Watchdog)
 If running over a network share where execution is unstable or silent crashes occur:
 ```powershell
-.\Release\appScrollBenchNet.exe
+.\Release\QGalleryXBenchNet.exe
 ```
-**Note:** `appScrollBenchNet.exe` is a temporary debug watchdog. It launches the main app, captures exit codes, holds the terminal open on crash, and dumps `logs/crash.log` contents. This is NOT the main application and should be cleaned up after network diagnostics are completed.
+**Note:** `QGalleryXBenchNet.exe` is a temporary debug watchdog. It launches the main app, captures exit codes, holds the terminal open on crash, and dumps `logs/crash.log` contents. This is NOT the main application and should be cleaned up after network diagnostics are completed.
 
 ### AlbumModel (Folder Scan)
 
@@ -456,7 +456,7 @@ Scan B finishes
 4. **Network Performance Hints:** Use QNetworkInformation to detect slow connections
 ### Maintenance & Debug Tools (Temporary)
 
-- **appScrollBenchNet.exe**: A lightweight Win32 watchdog wrapper for `appScrollBench.exe`. 
+- **QGalleryXBenchNet.exe**: A lightweight Win32 watchdog wrapper for `QGalleryXBench.exe`. 
     - **Purpose**: Diagnostic capture for network-share execution where silent crashes or .ps1 blockages occur.
     - **Cleanup Policy**: This is a non-production debug tool and should be removed once network stability is verified.
     - **Logic**: Uses `CreateProcess` and `WaitForSingleObject` to persist the console on non-zero exits.

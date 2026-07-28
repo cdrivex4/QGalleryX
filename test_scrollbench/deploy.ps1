@@ -14,7 +14,7 @@ $MingwPath = "D:\Qt\Tools\mingw1310_64\bin"
 
 # Kill any running instances
 Write-Host "Stopping any running instances..." -ForegroundColor Yellow
-Stop-Process -Name "appScrollBench" -Force -ErrorAction SilentlyContinue
+Stop-Process -Name "QGalleryXBench" -Force -ErrorAction SilentlyContinue
 Start-Sleep -Milliseconds 500
 
 if ($Clean -and (Test-Path $DeployDir)) {
@@ -28,12 +28,12 @@ if (-not (Test-Path $DeployDir)) {
 
 # Copy executable
 Write-Host "Copying executable..." -ForegroundColor Cyan
-if (Test-Path "$BuildDir\appScrollBench.exe") {
-    Copy-Item "$BuildDir\appScrollBench.exe" $DeployDir -Force
-} elseif (Test-Path "$DeployDir\appScrollBench.exe") {
+if (Test-Path "$BuildDir\QGalleryXBench.exe") {
+    Copy-Item "$BuildDir\QGalleryXBench.exe" $DeployDir -Force
+} elseif (Test-Path "$DeployDir\QGalleryXBench.exe") {
     Write-Host "Executable already in deploy folder." -ForegroundColor Gray
 } else {
-    throw "appScrollBench.exe not found!"
+    throw "QGalleryXBench.exe not found!"
 }
 
 # Deploy Qt dependencies
@@ -41,7 +41,7 @@ Write-Host "Deploying Qt dependencies..." -ForegroundColor Cyan
 & "$QtBinPath\windeployqt.exe" `
     --qmldir qml `
     --release `
-    "$DeployDir\appScrollBench.exe"
+    "$DeployDir\QGalleryXBench.exe"
 
 # Copy MinGW runtime
 Write-Host "Copying MinGW runtime..." -ForegroundColor Cyan
@@ -57,4 +57,4 @@ if (Test-Path $FfmpegBin) {
 }
 
 Write-Host "`n✅ Deployment complete!" -ForegroundColor Green
-Write-Host "Run: .\deploy\appScrollBench.exe" -ForegroundColor Yellow
+Write-Host "Run: .\deploy\QGalleryXBench.exe" -ForegroundColor Yellow

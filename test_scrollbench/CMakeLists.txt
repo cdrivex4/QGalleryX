@@ -8,7 +8,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 endif()
 
 # ScrollBench Test Application  
-qt_add_executable(appScrollBench
+qt_add_executable(QGalleryXBench
     src/main_scrollbench.cpp
     src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
     src/FileTypeRouter.cpp src/FileTypeRouter.h
@@ -32,16 +32,16 @@ qt_add_executable(appScrollBench
     src/DiagnosticsMonitor.cpp src/DiagnosticsMonitor.h
 )
 
-set_target_properties(appScrollBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
+set_target_properties(QGalleryXBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
 
 # appScrollBenchNet - Network Diagnostic Watchdog
-add_executable(appScrollBenchNet src/main_net_watchdog.cpp)
-set_target_properties(appScrollBenchNet PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
+add_executable(QGalleryXBenchNet src/main_net_watchdog.cpp)
+set_target_properties(QGalleryXBenchNet PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
 # No Qt needed for the watchdog to ensure it runs even if Qt is broken
-target_link_libraries(appScrollBenchNet PRIVATE kernel32 user32)
+target_link_libraries(QGalleryXBenchNet PRIVATE kernel32 user32)
 
 
-qt_add_qml_module(appScrollBench
+qt_add_qml_module(QGalleryXBench
     URI ScrollBench
     VERSION 1.0
     QML_FILES
@@ -82,7 +82,7 @@ set(FFMPEG_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/lib")
 set(FFMPEG_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/bin")
 
 # Link everything at once!
-target_link_libraries(appScrollBench
+target_link_libraries(QGalleryXBench
     PRIVATE 
     Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 Qt6::Widgets 
     psapi dxgi d3d11 pdh 
@@ -93,7 +93,7 @@ target_link_libraries(appScrollBench
     ${FFMPEG_LIB_DIR}/avutil.lib
 )
 
-target_include_directories(appScrollBench PRIVATE 
+target_include_directories(QGalleryXBench PRIVATE 
     ../src 
     ${LIBRAW_PATH} 
     ${FFMPEG_INCLUDE_DIR}
@@ -102,10 +102,10 @@ target_include_directories(appScrollBench PRIVATE
 # Copy FFmpeg DLLs post-build
 file(GLOB FFMPEG_DLLS "${FFMPEG_BIN_DIR}/*.dll")
 if (FFMPEG_DLLS)
-    add_custom_command(TARGET appScrollBench POST_BUILD
+    add_custom_command(TARGET QGalleryXBench POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         ${FFMPEG_DLLS}
-        $<TARGET_FILE_DIR:appScrollBench>
+        $<TARGET_FILE_DIR:QGalleryXBench>
     )
 endif()
 # --- Verification & Automation Tools ---

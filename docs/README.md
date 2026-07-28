@@ -1,4 +1,4 @@
-# Samsung Gallery Clone
+# QGalleryX
 
 A modern Qt-based photo gallery application that replicates the functionality and user interface of Samsung's native gallery application. Built with C++ backend and QML frontend for optimal performance and user experience.
 
@@ -21,9 +21,9 @@ A modern Qt-based photo gallery application that replicates the functionality an
 ## 🎯 Project Overview
 
 > [!IMPORTANT]
-> **Development Focus Shift**: As of Jan 2026, the `ScrollBench` verification application (`test_scrollbench/`) is the primary development target. The legacy "Main Application" (`appSamsungGallery`) is maintained as a reference integration target but new features are developed and verified in ScrollBench first.
+> **Development Focus Shift**: As of Jan 2026, the `ScrollBench` verification application (`test_scrollbench/`) is the primary development target. The legacy "Main Application" (`QGalleryX`) is maintained as a reference integration target but new features are developed and verified in ScrollBench first.
 
-Samsung Gallery Clone is a feature-rich photo gallery application designed to provide a smooth, responsive experience for browsing and viewing photos and videos. The application leverages Qt 6's modern capabilities to deliver:
+QGalleryX is a feature-rich photo gallery application designed to provide a smooth, responsive experience for browsing and viewing photos and videos. The application leverages Qt 6's modern capabilities to deliver:
 
 - **High-performance image loading** with asynchronous processing
 - **Touch-friendly interface** optimized for tablets and touch devices
@@ -73,7 +73,7 @@ Samsung Gallery Clone is a feature-rich photo gallery application designed to pr
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd SamsungGalleryClone
+cd QGalleryXClone
 
 # 2. Setup Dependencies
 # Clone LibRaw
@@ -96,7 +96,7 @@ cmake --build . --config Release
 
 # Run the application
 cd Release
-.\appSamsungGallery.exe
+.\QGalleryX.exe
 ```
 
 ### Using PowerShell Scripts
@@ -134,8 +134,8 @@ The project uses a two-application development approach:
 
 | Application | Purpose | Status | Output |
 |-------------|---------|--------|--------|
-| **Main App** | Production gallery | ✅ Stable | `appSamsungGallery.exe` |
-| **ScrollBench** | Performance testing & feature prototyping | ✅ Feature-complete | `appScrollBench.exe` |
+| **Main App** | Production gallery | ✅ Stable | `QGalleryX.exe` |
+| **ScrollBench** | Performance testing & feature prototyping | ✅ Feature-complete | `QGalleryXBench.exe` |
 
 **Development Flow:** 
 ```
@@ -252,7 +252,7 @@ This section is designed for the next AI or developer taking over this project.
 ### 🎯 Immediate Next Steps
 1.  **Fix AsyncImageProvider Leak**: Remove the double-increment of `activeWeight` in `DriveConcurrencyGuard`.
 2.  **Implement Stall Recovery Timer**: Add a periodic timer to `AsyncImageProvider` to trigger `checkStalls()`.
-3.  **Port ScrollBench Features**: Continue porting selection and share dialogs to the main `appSamsungGallery`.
+3.  **Port ScrollBench Features**: Continue porting selection and share dialogs to the main `QGalleryX`.
 
 ## 🤝 Contributing
 
@@ -319,7 +319,7 @@ This project adopts modern C++ best practices to ensure stability and performanc
 ## 🗂️ File Structure
 
 ```
-SamsungGalleryClone/
+QGalleryXClone/
 ├── src/
 │   ├── main.cpp                 # Application Entry
 │   ├── TaskScheduler.cpp/h      # Thread Pool & Priority Queues

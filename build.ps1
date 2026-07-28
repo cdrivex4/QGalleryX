@@ -32,7 +32,7 @@ $env:PATH = "$QtBin;D:\\Qt\\Tools\\mingw1310_64\\bin;D:\\Qt\\Tools\\CMake_64\\bi
 
 # Configuration
 $BuildDir = "build"
-$ExeName = "appSamsungGallery.exe"
+$ExeName = "QGalleryX.exe"
 $ExePath = Join-Path $BuildDir $ExeName
 
 Write-Host "==========================================" -ForegroundColor Cyan
@@ -60,7 +60,7 @@ Write-Host "  FFmpeg binaries found." -ForegroundColor Gray
 
 # Step 1: Kill running instances (Robust)
 Write-Host "[1/4] Checking for running instances..." -ForegroundColor Yellow
-$pNames = @("appSamsungGallery", "appSamsungGalleryTest", "appScrollBench")
+$pNames = @("QGalleryX", "QGalleryXTest", "QGalleryXBench")
 foreach ($pName in $pNames) {
     if (Get-Process -Name $pName -ErrorAction SilentlyContinue) {
         Write-Host "  Killing $pName..." -ForegroundColor Gray
@@ -137,8 +137,8 @@ if ($Clean) {
 }
 else {
     # We remove the autogen folder to force Qt to re-parse QML and Signals
-    if (Test-Path "$BuildDir/appSamsungGallery_autogen") {
-        Remove-Item -Recurse -Force "$BuildDir/appSamsungGallery_autogen" | Out-Null
+    if (Test-Path "$BuildDir/QGalleryX_autogen") {
+        Remove-Item -Recurse -Force "$BuildDir/QGalleryX_autogen" | Out-Null
     }
     Write-Host "[2/4] Cleaned autogen folders & removed old binary." -ForegroundColor Yellow
 }
@@ -176,13 +176,13 @@ try {
     $WindeployQt = "D:\Qt\6.9.3\mingw_64\bin\windeployqt.exe"
     
     # Standard deploy for Main App
-    & $WindeployQt --qmldir $PSScriptRoot/resources/qml --dir $BuildDir $BuildDir/appSamsungGallery.exe --compiler-runtime --no-opengl-sw
+    & $WindeployQt --qmldir $PSScriptRoot/resources/qml --dir $BuildDir $BuildDir/QGalleryX.exe --compiler-runtime --no-opengl-sw
     
     # Standard deploy for ScrollBench (Segregated)
     $ScrollBenchDeployDir = Join-Path $PSScriptRoot "test_scrollbench/deploy"
-    if (Test-Path "$ScrollBenchDeployDir/appScrollBench.exe") {
-        Write-Host "  -> Deploying ScrollBench to test_scrollbench/deploy..." -ForegroundColor Gray
-        & $WindeployQt --qmldir $PSScriptRoot/test_scrollbench/qml --dir $ScrollBenchDeployDir "$ScrollBenchDeployDir/appScrollBench.exe" --compiler-runtime --no-opengl-sw
+    if (Test-Path "$ScrollBenchDeployDir/QGalleryXBench.exe") {
+        Write-Host "  -> Deploying QGalleryXBench to test_scrollbench/deploy..." -ForegroundColor Gray
+        & $WindeployQt --qmldir $PSScriptRoot/test_scrollbench/qml --dir $ScrollBenchDeployDir "$ScrollBenchDeployDir/QGalleryXBench.exe" --compiler-runtime --no-opengl-sw
     }
 }
 catch {

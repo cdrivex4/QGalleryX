@@ -52,15 +52,15 @@ cmake --build . --config Release
 ### Run
 
 ```powershell
-.\Release\appScrollBench.exe
+.\Release\QGalleryXBench.exe
 ```
 
 ### Network Diagnostics (Watchdog)
 If running over a network share where execution is unstable or silent crashes occur:
 ```powershell
-.\Release\appScrollBenchNet.exe
+.\Release\QGalleryXBenchNet.exe
 ```
-**Note:** `appScrollBenchNet.exe` is a temporary debug watchdog. It launches the main app, captures exit codes, holds the terminal open on crash, and dumps `logs/crash.log` contents. This is NOT the main application and should be cleaned up after network diagnostics are completed.
+**Note:** `QGalleryXBenchNet.exe` is a temporary debug watchdog. It launches the main app, captures exit codes, holds the terminal open on crash, and dumps `logs/crash.log` contents. This is NOT the main application and should be cleaned up after network diagnostics are completed.
 
 ## Testing Methodology
 

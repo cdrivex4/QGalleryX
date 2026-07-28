@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $BUILD_DIR = "build"
-$DIST_DIR = "Dist/SamsungGallery"
+$DIST_DIR = "Dist/QGalleryX"
 $QT_BIN_DIR = "D:\Qt\6.9.3\mingw_64\bin"
 $WINDEPLOYQT = "D:\Qt\6.9.3\mingw_64\bin\windeployqt.exe"
 $FFMPEG_BIN = "3rdparty/ffmpeg/bin"
@@ -16,11 +16,11 @@ New-Item -ItemType Directory -Force -Path $DIST_DIR | Out-Null
 
 # 2. Copy Executable
 Write-Host "Copying executable..."
-Copy-Item "$BUILD_DIR/appSamsungGallery.exe" -Destination $DIST_DIR
+Copy-Item "$BUILD_DIR/QGalleryX.exe" -Destination $DIST_DIR
 
 # 3. Run windeployqt
 Write-Host "Running windeployqt..."
-& $WINDEPLOYQT --qmldir "resources/qml_legacy" --dir $DIST_DIR "$DIST_DIR/appSamsungGallery.exe" --release --no-translations --compiler-runtime
+& $WINDEPLOYQT --qmldir "resources/qml_legacy" --dir $DIST_DIR "$DIST_DIR/QGalleryX.exe" --release --no-translations --compiler-runtime
 
 # 4. Copy FFmpeg DLLs
 Write-Host "Copying FFmpeg DLLs..."

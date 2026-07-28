@@ -1,4 +1,4 @@
-# Samsung Gallery Clone - Build and Deployment Guide
+# QGalleryX - Build and Deployment Guide
 
 ## Build System
 
@@ -62,7 +62,7 @@ cmake --build . --config Release
 
 # Run the application
 cd Release
-.\appSamsungGallery.exe
+.\QGalleryX.exe
 ```
 
 #### Method 2: Using PowerShell Scripts (Recommended)
@@ -71,7 +71,7 @@ The project includes a robust PowerShell script for building and deployment:
 
 ```powershell
 # 1. Standard Dynamic Build (Development & Testing)
-# Builds appSamsungGallery.exe (Main) and appScrollBench.exe (Test) linked dynamically to Qt.
+# Builds QGalleryX.exe (Main) and QGalleryXBench.exe (Test) linked dynamically to Qt.
 .\build.ps1
 
 # 2. Clean Build
@@ -94,7 +94,7 @@ To build the Single Executable, you must first setup a static build of Qt. We pr
 ```
 
 **Build Targets:**
-- **Standard Build**: Dynamic linking. Fast iteration. producing `appSamsungGallery.exe`.
+- **Standard Build**: Dynamic linking. Fast iteration. producing `QGalleryX.exe`.
 - **ScrollBench**: Use `test_scrollbench` for performance testing.
 - **Single Exe**: `ScrollBenchPortable.exe`. Native static binary. Ideal for USB drives/deployment without installers.
   - See `single_exe/README.md` for details.
@@ -115,7 +115,7 @@ To build the Single Executable, you must first setup a static build of Qt. We pr
 - `-A x64` - 64-bit architecture
 
 #### Build Artifacts
-- `build/Release/appSamsungGallery.exe` - Main executable
+- `build/Release/QGalleryX.exe` - Main executable
 - `build/Release/` - All compiled binaries and dependencies
 - `deploy/` - Deployment directory with all runtime dependencies
 

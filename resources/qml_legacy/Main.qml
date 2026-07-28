@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import QtQuick.Dialogs
 import Qt.labs.settings
 import Qt.labs.platform
-import SamsungGallery 1.0
+import QGalleryX 1.0
 
 ApplicationWindow {
     id: window

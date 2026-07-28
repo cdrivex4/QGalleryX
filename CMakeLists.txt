@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(SamsungGallery LANGUAGES CXX)
+project(QGalleryX LANGUAGES CXX)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Concurrent Multimedia Gui QuickControls2 Widgets)
 
 qt_standard_project_setup()
 
 # --- Main Application (Stable) ---
-qt_add_executable(appSamsungGallery
+qt_add_executable(QGalleryX
     src_legacy/main.cpp
     src_legacy/ImageModel.cpp src_legacy/ImageModel.h
     src_legacy/AlbumModel.cpp src_legacy/AlbumModel.h
@@ -23,8 +23,8 @@ qt_add_executable(appSamsungGallery
     src/FileCacheManager.cpp src/FileCacheManager.h
 )
 
-qt_add_qml_module(appSamsungGallery
-    URI SamsungGallery
+qt_add_qml_module(QGalleryX
+    URI QGalleryX
     VERSION 2.0
     QML_FILES
         resources/qml_legacy/Main.qml
@@ -73,22 +73,22 @@ set(FFMPEG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/include")
 set(FFMPEG_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/lib")
 set(FFMPEG_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/bin")
 
-target_link_libraries(appSamsungGallery
+target_link_libraries(QGalleryX
     PRIVATE Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 Qt6::Widgets psapi dxgi d3d11 pdh libraw_static
     ${FFMPEG_LIB_DIR}/avcodec.lib
     ${FFMPEG_LIB_DIR}/avformat.lib
     ${FFMPEG_LIB_DIR}/swscale.lib
     ${FFMPEG_LIB_DIR}/avutil.lib
 )
-target_include_directories(appSamsungGallery PRIVATE src_legacy ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
+target_include_directories(QGalleryX PRIVATE src_legacy ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
 
 # Copy FFmpeg DLLs post-build
 file(GLOB FFMPEG_DLLS "${FFMPEG_BIN_DIR}/*.dll")
 if (FFMPEG_DLLS)
-    add_custom_command(TARGET appSamsungGallery POST_BUILD
+    add_custom_command(TARGET QGalleryX POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         ${FFMPEG_DLLS}
-        $<TARGET_FILE_DIR:appSamsungGallery>
+        $<TARGET_FILE_DIR:QGalleryX>
     )
 endif()
 

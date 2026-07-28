@@ -15,29 +15,29 @@ Set-Location $PSScriptRoot
 
 # Configuration
 $BuildDir = "build"
-$ExeName = "appScrollBench.exe"
+$ExeName = "QGalleryXBench.exe"
 $ExePath = Join-Path $BuildDir $ExeName
 
 Write-Host "==========================================" -ForegroundColor Cyan
-Write-Host "   ScrollBench Build System" -ForegroundColor Cyan
+Write-Host "   QGalleryXBench Build System" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 
 # Step 1: Kill running instances
 Write-Host "[1/4] Checking for running instances..." -ForegroundColor Yellow
-if (Get-Process -Name "appScrollBench" -ErrorAction SilentlyContinue) {
-    Write-Host "  Killing appScrollBench..." -ForegroundColor Gray
-    Stop-Process -Name "appScrollBench" -Force -ErrorAction SilentlyContinue
+if (Get-Process -Name "QGalleryXBench" -ErrorAction SilentlyContinue) {
+    Write-Host "  Killing QGalleryXBench..." -ForegroundColor Gray
+    Stop-Process -Name "QGalleryXBench" -Force -ErrorAction SilentlyContinue
     
     # Wait for it to actually die
     $retries = 10
-    while ((Get-Process -Name "appScrollBench" -ErrorAction SilentlyContinue) -and ($retries -gt 0)) {
+    while ((Get-Process -Name "QGalleryXBench" -ErrorAction SilentlyContinue) -and ($retries -gt 0)) {
         Start-Sleep -Milliseconds 500
         $retries--
     }
     
-    if (Get-Process -Name "appScrollBench" -ErrorAction SilentlyContinue) {
-        Write-Host "  FAILED to kill appScrollBench. File might be locked." -ForegroundColor Red
-        taskkill /F /IM "appScrollBench.exe" | Out-Null
+    if (Get-Process -Name "QGalleryXBench" -ErrorAction SilentlyContinue) {
+        Write-Host "  FAILED to kill QGalleryXBench. File might be locked." -ForegroundColor Red
+        taskkill /F /IM "QGalleryXBench.exe" | Out-Null
     }
 }
 
@@ -55,8 +55,8 @@ if ($Clean) {
 }
 else {
     # Remove the autogen folder to force Qt to re-parse QML
-    if (Test-Path "$BuildDir/appScrollBench_autogen") {
-        Remove-Item -Recurse -Force "$BuildDir/appScrollBench_autogen" | Out-Null
+    if (Test-Path "$BuildDir/QGalleryXBench_autogen") {
+        Remove-Item -Recurse -Force "$BuildDir/QGalleryXBench_autogen" | Out-Null
     }
     # ALWAYS remove QML cache to prevent stale code
     if (Test-Path "$BuildDir/.rcc") {

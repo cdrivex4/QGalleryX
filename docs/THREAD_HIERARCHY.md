@@ -1,6 +1,6 @@
 # Application Thread Hierarchy
 
-This document outlines the threading model of the SamsungGallery application to help diagnose performance bottlenecks and understand execution flow.
+This document outlines the threading model of the QGalleryX application to help diagnose performance bottlenecks and understand execution flow.
 
 ## 1. Main Thread (GUI Thread)
 *   **ID**: The initial thread of the process.
@@ -36,4 +36,4 @@ This document outlines the threading model of the SamsungGallery application to 
 *   **Atomic Logging**: We have installed a custom message handler.
 *   **Format**: `[YYYY-MM-DD HH:mm:ss.zzz] [Thread ID] Level: Message`
 *   **Usage**: Run the app from a terminal and redirect output to a file to trace execution order and timing.
-    *   `.\build\appSamsungGallery.exe > log.txt 2>&1`
+    *   `.\build\QGalleryX.exe > log.txt 2>&1`

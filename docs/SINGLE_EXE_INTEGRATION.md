@@ -21,8 +21,8 @@ The project now produces three distinct binaries:
 
 | Target | Output | Location | Qt Linking | Purpose |
 |--------|--------|----------|------------|---------|
-| **Main App** | `appSamsungGallery.exe` | `build/` | Dynamic | Production gallery application |
-| **ScrollBench** | `appScrollBench.exe` | `test_scrollbench/deploy/` | Dynamic | Performance testing application |
+| **Main App** | `QGalleryX.exe` | `build/` | Dynamic | Production gallery application |
+| **ScrollBench** | `QGalleryXBench.exe` | `test_scrollbench/deploy/` | Dynamic | Performance testing application |
 | **Single EXE** | `ScrollBenchPortable.exe` | `single_exe/bin/` | Static* | Portable distribution |
 
 *Static linking requires Qt static build; falls back to optimized dynamic build otherwise
@@ -102,8 +102,8 @@ cmake --build build
 ```
 
 **Result:**
-- `build/appSamsungGallery.exe` + Qt DLLs
-- `test_scrollbench/deploy/appScrollBench.exe` + Qt DLLs
+- `build/QGalleryX.exe` + Qt DLLs
+- `test_scrollbench/deploy/QGalleryXBench.exe` + Qt DLLs
 
 ### With Single EXE (3 Targets)
 
@@ -113,8 +113,8 @@ cmake --build build
 ```
 
 **Result:**
-- `build/appSamsungGallery.exe` + Qt DLLs
-- `test_scrollbench/deploy/appScrollBench.exe` + Qt DLLs  
+- `build/QGalleryX.exe` + Qt DLLs
+- `test_scrollbench/deploy/QGalleryXBench.exe` + Qt DLLs  
 - `single_exe/bin/ScrollBenchPortable.exe` (optimized, static if Qt static available)
 
 ## Verification of Single Executable
