@@ -11,12 +11,12 @@ When the user asks you to recall something from a past session (e.g., "what did 
 
 ## Build System Rule
 
-When building the 'antigravity' project, you MUST ALWAYS use the build script:
+When building the 'QGalleryX' project, you MUST ALWAYS use the build script:
 - **Command:** .\build.ps1
-- **Working directory:** d:\Dev\antigravity
+- **Working directory:** d:\Dev\QGalleryX
 
 NEVER use raw cmake --build, 
 inja, or Start-Process to build or launch the application directly.
-The build script handles killing instances, cleaning autogen, compiling both ppSamsungGallery and ppScrollBench, deploying Qt dependencies, and verifying binary freshness.
+The build script handles killing instances, cleaning autogen, compiling both  QGalleryX and  QGalleryXBench, deploying Qt dependencies, and verifying binary freshness.
 
 Bypassing the build script risks stale builds, locked binaries, and codebase divergence.
