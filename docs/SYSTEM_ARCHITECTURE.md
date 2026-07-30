@@ -25,19 +25,25 @@ This document visualizes the application's architecture, threading model, scan s
           │                                  ▼
           │                    ┌──────────────────────────────┐
           │                    │   AsyncImageProvider         │
-          │                    │  (Thumbnail generation)      │
           │                    │  - LIFO queue                │
           │                    │  - Visible range priority    │
-          │                    └─────────┬────────────────────┘
-          │                              │
-          ▼                              ▼
+          │                    │  - Admission Control         │
+          │                    └─────────┬─────────┬──────────┘
+          │                              │         │
+          │        ┌─────────────────────▼─┐       │
+          │        │   FileCacheManager    │       │
+          │        │  - O(1) Memory Index  │       │
+          │        │  - Hierarchical Hash  │       │
+          │        │  - Mmap DB / Disk     │       │
+          │        └─────────────────────┬─┘       │
+          ▼                              ▼         ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    TaskScheduler (Thread Pool)                  │
 │  ┌──────────────────────┐         ┌──────────────────────┐     │
-│  │  IO-Bound Threads    │         │  CPU-Bound Threads   │     │
+│  │  IO-Bound Threads    │         │  CPU/GPU Threads     │     │
 │  │  - File scanning     │         │  - Image decode      │     │
-│  │  - Network I/O       │         │  - RAW processing    │     │
-│  │  (2 threads)         │         │  (2 threads)         │     │
+│  │  - Network I/O       │         │  - Video D3D11       │     │
+│  │  (2 threads)         │         │  (Max 4 threads)     │     │
 │  └──────────────────────┘         └──────────────────────┘     │
 └─────────────────────────────────────────────────────────────────┘
 ```

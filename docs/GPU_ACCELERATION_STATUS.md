@@ -1,10 +1,15 @@
 # GPU Acceleration Status Report
 
-## Current Implementation (as of 2025-12-25)
+## Current Implementation (as of 2026-07-29)
 
 ### ✅ WHAT IS GPU-ACCELERATED:
 
-#### **Video Decoding Only (via FFmpeg)**
+#### **1. UI Rendering & Interaction (via Qt Quick Scene Graph)**
+- **Backend**: Direct3D 11 (Primary), OpenGL (Fallback), Vulkan (Available but disabled by default)
+- **Status**: ✅ **WORKING** and highly optimized
+- **Usage**: Automatically powers smooth scrolling, opacity masks, dynamic resizing, animations, and the core rendering pipeline.
+
+#### **2. Video Decoding (via FFmpeg)**
 - **Format**: `.mp4`, `.avi`, `.mov`, `.mkv`, etc.
 - **Backend**: D3D11VA (DirectX 11 Video Acceleration)
 - **Status**: ✅ **WORKING** and verified

@@ -31,11 +31,17 @@ This document outlines the key components of the application and their relations
 -   **Used By**: All QML `Image` components using `image://async/` scheme.
 -   **Key Features**: Caching (LRU), Prioritization (Viewer > Grid), D3D11 Video Decodes, RAW Support.
 
-### 4. `TaskScheduler`
+### 4. `FileCacheManager`
+-   **Role**: Provides a high-performance hierarchical disk cache for decoded thumbnails, preventing redundant CPU/GPU decoding on app restarts or folder navigations.
+-   **Dependencies**: `QHash` (O(1) memory index), `QDataStream` (DB serialization).
+-   **Used By**: `AsyncImageProvider` (for instant cache hits).
+-   **Key Features**: Metadata-based identity hashing (path agnostic), `m_knownKeys` O(1) existence checks to prevent disk I/O deadlocks, Atomic Nuke operations.
+
+### 5. `TaskScheduler`
 -   **Role**: Manages separate thread pools for CPU-bound (decoding) and IO-bound (scanning) tasks.
 -   **Features**: Priority Queues, Dynamic Thread Scaling (Sleep on idle).
 
-### 5. `VideoThumbnailer`
+### 6. `VideoThumbnailer`
 -   **Role**: D3D11 Hardware-accelerated video thumbnail generation.
 -   **Dependencies**: `FFmpeg` (avcodec, avformat, swscale, d3d11va), `Direct3D11`.
 -   **Features**: Black Frame Detection, Smart Retry, Software Fallback.

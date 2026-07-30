@@ -36,12 +36,15 @@ cleanup.swsCtx = sws_getContext(...);
 **Issue**: CPU/GPU/RAM stats were tracked but hidden.
 **Fix**: Updated `PerformanceOverlay.qml` to display full system resource metrics.
 
-### 3. Folder Scanning (Pending)
-**Issue**: Upper-case extensions (JPG, MOV) are skipped.
-**Recommendation**: Apply case-insensitive filter fix (next step).
+### 3. Folder Scanning (Fixed)
+**Issue**: Upper-case extensions (JPG, MOV) were skipped.
+**Fix**: Implemented case-insensitive filters in `FastVolumeScanner` and `ImageModel`.
 
-### 4. Task Queue Safety (Verified)
-**Result**: `TaskScheduler` and `AsyncImageProvider` correctly manage object lifecycles using shared pointers and atomic trackers. No task leaks detected.
+### 4. Task Queue Safety & Admission Deadlocks (Fixed)
+**Issue**: When scrolling rapidly over non-existent thumbnails on slow/network drives, `QFile::exists` would block the IO threads. Worse, if a task returned early before properly decrementing `activeWeight` in the Admission Control queue, the UI would permanently deadlock.
+**Fix**: 
+- Added a `DriveConcurrencyGuard` RAII struct in `AsyncImageProvider` to guarantee `activeWeight` is decremented on all return paths.
+- Added an `O(1)` memory index (`m_knownKeys`) in `FileCacheManager` to reject non-existent cache keys instantly, completely bypassing the disk IO hit storm.
 
 ---
 

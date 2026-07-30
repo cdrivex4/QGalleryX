@@ -37,35 +37,33 @@ Once ScrollBench reaches feature parity and proves stable:
 3. Share/Resize → Main app
 4. Verified optimizations → Main app
 
-### Phase 3: Long-Term Strategy (Jan 2026)
-ScrollBench is now the **primary development platform**.
-- **Main App**: Maintained as a legacy reference implementation (`v2.1` frozen).
-- **ScrollBench**: All new features (MFT, Selection, Verify Tool) live here.
+### Phase 3: Codebase Consolidation (July 2026)
+**COMPLETE**: ScrollBench's modernized, high-performance features (MFT, Selection, FastVolumeScanner, Caching) have been merged directly into the `QGalleryX` primary target.
+- **Main App (`QGalleryX`)**: The actively developed, stable production target. It now leverages the `src/` backend alongside the `qml_legacy` UI.
+- **ScrollBench**: Returns to its original purpose as an isolated testing environment (`test_scrollbench`) for experimental modules before they graduate to the main app.
 
 ## Key Differences
 
-| Feature | Main App (Legacy) | ScrollBench (Primary) |
-|---------|-------------------|-----------------------|
-| **Focus** | Reference Impl. | Production Dev |
-| **Stability** | Frozen | Active Dev |
-| **Scanner** | Recursive (Slow) | **MFT / FastVolumeScanner** |
-| **Selection** | Basic | **Unified (Mouse/Touch/Key)** |
-| **Build** | Standard | **+ Linkage Verification** |
+| Feature | QGalleryX (Production) | ScrollBench (Test Bench) |
+|---------|------------------------|--------------------------|
+| **Focus** | Production Release | Experimental Dev |
+| **Stability** | Highly Stable | Fluid |
+| **Scanner** | **MFT / FastVolumeScanner** | Experimental Scanners |
+| **Caching** | **Hierarchical Disk Cache** | Ephemeral / Disabled |
+| **Build** | Standard Deployment | `+ Linkage Verification` |
 
 ## Files Layout
 
 ```
-antigravity/
-├── src/              # Common Backend & Legacy App
-├── resources/qml/    # Legacy UI
-├── test_scrollbench/ # PRIMARY DEVELOPMENT (ScrollBench)
-│   ├── src/          # ScrollBench C++
-│   ├── qml/          # ScrollBench UI
-│   └── deploy/       # Deployment Target
+QGalleryX/
+├── src/              # Modern Backend (MFT, Caching, Schedulers)
+├── src_legacy/       # Legacy models slowly being phased out/migrated
+├── resources/        # Production UI (qml_legacy)
+├── test_scrollbench/ # Isolated Test Bench
 └── docs/             # Shared docs
 ```
 
-## Current Status (Jan 2026)
+## Current Status (July 2026)
 
-**ScrollBench**: v1.0 - Full MFT Integration, Robust Selection, Verification Tooling.
-**Main App**: v2.1 (Legacy) - Reference only.
+**QGalleryX**: v2.5 - Full MFT Integration, Hierarchical Cache, D3D11 Video Decodes, Robust UI.
+**ScrollBench**: Test bench for future experimental refactors.
