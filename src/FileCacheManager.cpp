@@ -85,22 +85,32 @@ qint64 QHashCacheDatabase::totalSizeBytes() {
 
 QList<QString> QHashCacheDatabase::getOldestKeys(int limit) {
     QMutexLocker lock(&m_mutex);
-    QList<QPair<QString, qint64>> sortedList;
-    sortedList.reserve(m_db.size());
     
-    for (auto it = m_db.constBegin(); it != m_db.constEnd(); ++it) {
-        sortedList.append({it.key(), it.value().lastAccessed});
+    struct KeyDate {
+        QString key;
+        qint64 date;
+    };
+    QList<KeyDate> sorted;
+    sorted.reserve(m_db.size());
+    
+    for (auto it = m_db.begin(); it != m_db.end(); ++it) {
+        sorted.append({it.key(), it.value().lastAccessed});
     }
     
-    std::sort(sortedList.begin(), sortedList.end(), [](const auto& a, const auto& b) {
-        return a.second < b.second; // Smallest timestamp first (oldest)
+    std::sort(sorted.begin(), sorted.end(), [](const KeyDate& a, const KeyDate& b) {
+        return a.date < b.date;
     });
     
     QList<QString> result;
-    for (int i = 0; i < qMin(limit, sortedList.size()); ++i) {
-        result.append(sortedList[i].first);
+    for (int i = 0; i < qMin(limit, sorted.size()); ++i) {
+        result.append(sorted[i].key);
     }
     return result;
+}
+
+QList<QString> QHashCacheDatabase::getAllKeys() {
+    QMutexLocker lock(&m_mutex);
+    return m_db.keys();
 }
 
 void QHashCacheDatabase::clear() {
@@ -213,6 +223,10 @@ void MmapCacheDatabase::remove(const QString& key) {
 
 qint64 MmapCacheDatabase::totalSizeBytes() { return 0; } // Managed by ring capacity
 QList<QString> MmapCacheDatabase::getOldestKeys(int limit) { Q_UNUSED(limit); return {}; }
+QList<QString> MmapCacheDatabase::getAllKeys() {
+    QMutexLocker lock(&m_mutex);
+    return m_index.keys();
+}
 void MmapCacheDatabase::clear() {
     QMutexLocker lock(&m_mutex);
     clearInternal();
@@ -384,8 +398,20 @@ FileCacheManager::~FileCacheManager() {
 
 void FileCacheManager::initialize() {
     m_db->load(m_dbPath);
+    rebuildKeyIndex();
     // Run maintenance every 60 seconds
     m_maintenanceTimer->start(60000);
+}
+
+void FileCacheManager::rebuildKeyIndex() {
+    QMutexLocker lock(&m_keyMutex);
+    m_knownKeys.clear();
+    if (!m_db) return;
+    
+    QList<QString> keys = m_db->getAllKeys();
+    for (const QString& k : keys) {
+        m_knownKeys.insert(k);
+    }
 }
 
 void FileCacheManager::setMaxDiskCacheSizeMB(int megabytes) {
@@ -393,12 +419,37 @@ void FileCacheManager::setMaxDiskCacheSizeMB(int megabytes) {
 }
 
 QString FileCacheManager::getCoalesceKey(const QString &id, const QSize &size) {
-    return QString("%1_%2x%3").arg(id).arg(size.width()).arg(size.height());
+    // Strip query strings if present (e.g. from AsyncImageProvider)
+    QString realPath = id;
+    int qIdx = realPath.indexOf('?');
+    if (qIdx != -1) realPath = realPath.left(qIdx);
+    
+    QFileInfo fi(realPath);
+    if (!fi.exists()) {
+        // Fallback for non-local files or virtual paths
+        return QString("%1_%2x%3").arg(id).arg(size.width()).arg(size.height());
+    }
+    
+    return QString("%1_%2_%3_%4x%5")
+        .arg(fi.fileName())
+        .arg(fi.size())
+        .arg(fi.lastModified().toMSecsSinceEpoch())
+        .arg(size.width())
+        .arg(size.height());
 }
 
 QString FileCacheManager::getCachedPath(const QString& id, const QSize& requestedSize) {
     if (!m_canWrite || !m_db) return QString();
     QString key = getCoalesceKey(id, requestedSize);
+    
+    {
+        QMutexLocker lock(&m_keyMutex);
+        if (!m_knownKeys.isEmpty() && !m_knownKeys.contains(key)) {
+            // Fast O(1) reject — key not in DB index
+            return QString();
+        }
+    }
+
     if (m_db->contains(key)) {
         CacheEntry entry = m_db->get(key);
         // "detect and rebuild" - verify the file actually exists on OS disk before returning it
@@ -408,6 +459,10 @@ QString FileCacheManager::getCachedPath(const QString& id, const QSize& requeste
         } else {
             // Rebuild: The file was deleted outside the app, so drop it from the index
             m_db->remove(key);
+            {
+                QMutexLocker lock(&m_keyMutex);
+                m_knownKeys.remove(key);
+            }
             m_dirty = true;
         }
     }
@@ -426,6 +481,10 @@ void FileCacheManager::registerCacheFile(const QString& id, const QSize& request
     entry.fileSizeBytes = sizeBytes;
     
     m_db->insert(key, entry);
+    {
+        QMutexLocker lock(&m_keyMutex);
+        m_knownKeys.insert(key);
+    }
     m_dirty = true;
 }
 
@@ -449,37 +508,55 @@ void FileCacheManager::registerCachedData(const QString& id, const QSize& reques
         QString key = getCoalesceKey(id, requestedSize);
         QString sizeKey = QString("%1x%2").arg(requestedSize.width()).arg(requestedSize.height());
         mmapDb->insertRawData(key, id, sizeKey, data);
+        {
+            QMutexLocker lock(&m_keyMutex);
+            m_knownKeys.insert(key);
+        }
         m_dirty = true;
     }
 }
 
 void FileCacheManager::performMaintenance() {
-    if (!m_canWrite || !m_db) return;
-    if (m_db->totalSizeBytes() > m_maxBytes) {
-        qint64 bytesToFree = m_db->totalSizeBytes() - (m_maxBytes * 0.8); // Free down to 80%
-        
-        QList<QString> oldestKeys = m_db->getOldestKeys(1000); // Check in batches
-        for (const QString& key : oldestKeys) {
-            if (bytesToFree <= 0) break;
-            
-            CacheEntry entry = m_db->get(key); // We can just peek because we're about to delete
+    if (!m_db) return;
+    
+    qint64 currentSize = m_db->totalSizeBytes();
+    if (currentSize <= m_maxBytes) return; // No pruning needed
+    
+    qint64 bytesToFree = currentSize - (m_maxBytes * 0.8); // Free down to 80%
+    QList<QString> oldKeys = m_db->getOldestKeys(100);
+    
+    for (const QString& key : oldKeys) {
+        if (bytesToFree <= 0) break;
+        CacheEntry entry = m_db->get(key);
+        if (QFile::exists(entry.thumbPath)) {
             QFile::remove(entry.thumbPath);
             bytesToFree -= entry.fileSizeBytes;
             m_db->remove(key);
+            {
+                QMutexLocker lock(&m_keyMutex);
+                m_knownKeys.remove(key);
+            }
         }
         m_dirty = true;
     }
     
     if (m_dirty) {
         m_db->save(m_dbPath);
-        m_dirty = false;
     }
 }
 
 void FileCacheManager::clearCache() {
-    m_db->clear();
+    if (m_db) {
+        m_db->clear();
+    }
+    {
+        QMutexLocker lock(&m_keyMutex);
+        m_knownKeys.clear();
+    }
     m_dirty = true;
-    m_db->save(m_dbPath);
+    if (m_db) {
+        m_db->save(m_dbPath);
+    }
     
     QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/thumbnails";
     QDir dir(cacheDir);
@@ -487,4 +564,26 @@ void FileCacheManager::clearCache() {
         dir.removeRecursively();
     }
     QDir().mkpath(cacheDir);
+}
+
+void FileCacheManager::nukeCache() {
+    qInfo() << "[FileCacheManager] NUKE CACHE requested by user. Wiping all database files and thumbnails...";
+    
+    if (m_db) m_db->clear();
+    {
+        QMutexLocker lock(&m_keyMutex);
+        m_knownKeys.clear();
+    }
+    m_dirty = false;
+
+    QFile::remove(m_dbPath);
+    QFile::remove(m_dbPath + ".tmp");
+    
+    QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/thumbnails";
+    QDir dir(cacheDir);
+    if (dir.exists()) dir.removeRecursively();
+    QDir().mkpath(cacheDir);
+
+    if (m_db) m_db->load(m_dbPath);
+    qInfo() << "[FileCacheManager] Nuke Cache complete.";
 }

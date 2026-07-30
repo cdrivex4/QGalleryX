@@ -50,6 +50,7 @@ public:
     // Maintenance
     virtual qint64 totalSizeBytes() = 0;
     virtual QList<QString> getOldestKeys(int limit) = 0;
+    virtual QList<QString> getAllKeys() = 0;
     virtual void clear() = 0;
 };
 
@@ -68,6 +69,7 @@ public:
     
     qint64 totalSizeBytes() override;
     QList<QString> getOldestKeys(int limit) override;
+    QList<QString> getAllKeys() override;
     void clear() override;
 
 private:
@@ -94,6 +96,7 @@ public:
     
     qint64 totalSizeBytes() override;
     QList<QString> getOldestKeys(int limit) override;
+    QList<QString> getAllKeys() override;
     void clear() override;
 
     // Direct byte access for the ring buffer
@@ -148,6 +151,7 @@ public:
     // Limit management
     void setMaxDiskCacheSizeMB(int megabytes);
     void clearCache();
+    void nukeCache();
     
     QString getDbPath() const { return m_dbPath; }
 
@@ -159,6 +163,7 @@ private:
     ~FileCacheManager();
     
     QString getCoalesceKey(const QString &id, const QSize &size);
+    void rebuildKeyIndex();
 
     std::unique_ptr<ICacheDatabase> m_db;
     QString m_dbPath;
@@ -166,6 +171,9 @@ private:
     QTimer* m_maintenanceTimer;
     bool m_dirty = false;
     bool m_canWrite = true;
+    
+    QSet<QString> m_knownKeys;
+    QMutex m_keyMutex;
 };
 
 #endif // FILECACHEMANAGER_H

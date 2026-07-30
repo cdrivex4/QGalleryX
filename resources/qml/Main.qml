@@ -85,7 +85,11 @@ ApplicationWindow {
                 
                 Loader {
                     id: viewLoader
-                    anchors.fill: parent
+                    anchors.top: topHeader.bottom
+                    anchors.topMargin: 10
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
                     sourceComponent: galleryTab.useTiles ? tilesViewComponent : semanticViewComponent
                     
                     Binding {
@@ -120,67 +124,77 @@ ApplicationWindow {
                     }
                 }
                 
-                // Floating Controls
-                ColumnLayout {
-                    anchors.bottom: parent.bottom
+                // Top Header Bar
+                Rectangle {
+                    id: topHeader
+                    anchors.top: parent.top
+                    anchors.left: parent.left
                     anchors.right: parent.right
-                    anchors.margins: 20
-                    anchors.bottomMargin: 80 // Above bottom bar
+                    anchors.margins: 10
+                    height: 50
+                    color: "#252525"
+                    radius: 8
+                    border.color: "#333"
                     z: 99
-                    spacing: 10
-                    width: 150 // Set a fixed width for consistent sizing
-                    
-                    Button {
-                        Layout.fillWidth: true
-                        text: galleryTab.useTiles ? "View: Tiles" : "View: Semantic"
-                        onClicked: galleryTab.useTiles = !galleryTab.useTiles
+
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 5
+                        spacing: 10
                         
-                        background: Rectangle {
-                            color: "#333"
-                            radius: 5
-                            border.color: "#666"
-                        }
-                        contentItem: Text {
-                            text: parent.text
-                            color: "white"
-                            padding: 10
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                    }
-                    
-                    ComboBox {
-                        Layout.fillWidth: true
-                        model: ["Auto", "Day", "Week", "Month", "Year"]
-                        currentIndex: 0
-                        visible: !galleryTab.useTiles
-                        onCurrentIndexChanged: {
-                            if (viewLoader.item) {
-                                viewLoader.item.groupingMode = currentIndex
+                        Item { Layout.fillWidth: true } // Spacer
+                        
+                        Button {
+                            text: galleryTab.useTiles ? "View: Tiles" : "View: Semantic"
+                            onClicked: galleryTab.useTiles = !galleryTab.useTiles
+                            Layout.preferredWidth: 120
+                            
+                            background: Rectangle {
+                                color: "#333"
+                                radius: 5
+                                border.color: "#555"
+                            }
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
                             }
                         }
                         
-                        background: Rectangle {
-                            color: "#333"
-                            radius: 5
-                            border.color: "#666"
-                        }
-                        contentItem: Text {
-                            text: parent.displayText
-                            color: "white"
-                            padding: 10
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                        delegate: ItemDelegate {
-                            width: parent.width
+                        ComboBox {
+                            Layout.preferredWidth: 120
+                            model: ["Auto", "Day", "Week", "Month", "Year"]
+                            currentIndex: 0
+                            visible: !galleryTab.useTiles
+                            onCurrentIndexChanged: {
+                                if (viewLoader.item) {
+                                    viewLoader.item.groupingMode = currentIndex
+                                }
+                            }
+                            
+                            background: Rectangle {
+                                color: "#333"
+                                radius: 5
+                                border.color: "#555"
+                            }
                             contentItem: Text {
-                                text: modelData
+                                text: "Group: " + parent.displayText
                                 color: "white"
-                                font.bold: true
+                                verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignHCenter
                             }
-                            background: Rectangle {
-                                color: parent.highlighted ? "#555" : "#333"
+                            delegate: ItemDelegate {
+                                width: parent.width
+                                contentItem: Text {
+                                    text: modelData
+                                    color: "white"
+                                    font.bold: true
+                                    horizontalAlignment: Text.AlignHCenter
+                                }
+                                background: Rectangle {
+                                    color: parent.highlighted ? "#555" : "#333"
+                                }
                             }
                         }
                     }
