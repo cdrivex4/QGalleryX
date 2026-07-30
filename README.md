@@ -41,7 +41,8 @@ QGalleryX is a feature-rich photo gallery application designed to provide a smoo
 ### Performance Features
 - **Asynchronous image loading** with thread pool management
 - **Memory-efficient caching** with configurable sizes
-- **GPU acceleration** with Direct3D 11 (D3D11VA) for video decoding
+- **GPU Hardware Acceleration** with Direct3D 11 (D3D11VA) for Video decoding
+- **GPU-Accelerated HEIC/HEIF Decoding**: Natively routes High-Efficiency Image Containers through FFmpeg's video pipeline, providing full D3D11 hardware acceleration for HEIC photos.
 - **Smart Video Thumbnails** with Black Frame Detection (skips dark intros)
 - **Background processing** for file operations
 - **Smart resource management** with RAII-based FFmpeg handling

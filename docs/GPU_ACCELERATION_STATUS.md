@@ -9,11 +9,11 @@
 - **Status**: ✅ **WORKING** and highly optimized
 - **Usage**: Automatically powers smooth scrolling, opacity masks, dynamic resizing, animations, and the core rendering pipeline.
 
-#### **2. Video Decoding (via FFmpeg)**
-- **Format**: `.mp4`, `.avi`, `.mov`, `.mkv`, etc.
+#### **2. Video & HEIC Decoding (via FFmpeg)**
+- **Format**: `.mp4`, `.avi`, `.mov`, `.mkv`, `.heic`, `.heif`
 - **Backend**: D3D11VA (DirectX 11 Video Acceleration)
 - **Status**: ✅ **WORKING** and verified
-- **Usage**: Automatic for all video thumbnail generation and playback
+- **Usage**: Automatic for all video thumbnail generation and playback. Because HEIC/HEIF files are essentially HEVC (H.265) video frames in a container, QGalleryX seamlessly routes them through the FFmpeg video pipeline, granting them full hardware-accelerated decoding.
 - **Logs**: 
   ```
   [HWAccel] Successfully initialized d3d11va
