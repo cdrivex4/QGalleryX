@@ -1,4 +1,5 @@
 #include "AlbumModel.h"
+#include "DesktopHelper.h"
 #include "FastVolumeScanner.h"
 #include "TaskScheduler.h"
 #include <QDebug>
@@ -79,15 +80,7 @@ void AlbumModel::scanAlbums(const QString &path) {
     // Normalize path for comparisons
     cleanPath = QDir::fromNativeSeparators(cleanPath);
 
-    bool isNetworkPath =
-        cleanPath.startsWith("//") || cleanPath.startsWith("\\\\");
-    if (!isNetworkPath && cleanPath.length() >= 3 && cleanPath[1] == ':') {
-      QStorageInfo storage(cleanPath.left(3));
-      if (storage.isValid() && (storage.device().startsWith("\\\\") ||
-                                storage.fileSystemType() == "network")) {
-        isNetworkPath = true;
-      }
-    }
+    bool isNetworkPath = DesktopHelper::staticIsNetworkPath(cleanPath);
 
     QMap<QString, AlbumInfo> albumMap;
 

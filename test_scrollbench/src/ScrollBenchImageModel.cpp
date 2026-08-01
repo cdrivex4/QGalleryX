@@ -323,26 +323,7 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
     // - Network SMB enumeration: seconds/minutes
     // For network paths: disable incremental updates to avoid UI thrashing and
     // race conditions
-    bool isNetworkPath = false;
-
-    // Check for UNC path (\\server\share)
-    if (cleanPath.startsWith("\\\\")) {
-      isNetworkPath = true;
-      qDebug() << "[NetworkScan] Detected UNC path:" << cleanPath;
-    } else if (cleanPath.length() >= 3 && cleanPath[1] == ':') {
-      // Check if drive letter is a network drive
-      QStorageInfo storage(cleanPath);
-      if (storage.isValid()) {
-        // On Windows, network drives show up differently in QStorageInfo
-        // Check if the device path suggests network storage
-        QString device = storage.device();
-        if (device.startsWith("\\\\")) {
-          isNetworkPath = true;
-          qDebug() << "[NetworkScan] Detected mapped network drive:"
-                   << cleanPath << "Device:" << device;
-        }
-      }
-    }
+    bool isNetworkPath = DesktopHelper::staticIsNetworkPath(cleanPath);
 
     if (isNetworkPath) {
       qDebug() << "[NetworkScan] Using non-incremental scan strategy for "

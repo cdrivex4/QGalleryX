@@ -399,7 +399,7 @@ Item {
             width: parent.width * 0.8
             height: parent.height * 0.8
             fillMode: Image.PreserveAspectFit
-            source: (root.model && root.currentIndex >= 0 && root.model.data(root.model.index(root.currentIndex, 0), 257).toLowerCase().indexOf(".mp4") === -1) ? "file:///" + root.model.data(root.model.index(root.currentIndex, 0), 257) : "" // FilePathRole
+            source: (root.model && root.currentIndex >= 0 && root.model.data(root.model.index(root.currentIndex, 0), 257).toLowerCase().indexOf(".mp4") === -1) ? "image://async/" + root.model.data(root.model.index(root.currentIndex, 0), 257) : "" // FilePathRole
         }
         
         // Crop Handles (Visual)

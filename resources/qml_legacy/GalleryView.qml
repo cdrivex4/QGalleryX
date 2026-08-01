@@ -93,8 +93,8 @@ Item {
                 id: img
                 anchors.fill: parent
                 anchors.margins: 1
-                // Use custom async provider for optimized thumbnail loading
-                source: isVideo ? "" : "image://async/" + model.filePath 
+                // We now have FFmpeg VideoThumbnailer wired into AsyncImageProvider
+                source: "image://async/" + model.filePath 
                 sourceSize.width: root.loadingResolution
                 sourceSize.height: root.loadingResolution
                 fillMode: Image.PreserveAspectCrop
@@ -102,26 +102,25 @@ Item {
                 cache: true
                 mipmap: true // Enable GPU mipmapping
                 
-                // Video Placeholder
+                // Video Play Icon (Overlay on top of actual thumbnail)
                 Rectangle {
                     anchors.fill: parent
-                    color: "#222"
+                    color: "transparent"
                     visible: isVideo
                     
-                    Text {
+                    Rectangle {
                         anchors.centerIn: parent
-                        text: "▶️"
-                        font.pixelSize: parent.width * 0.4
-                        color: "white"
-                    }
-                    
-                    Text {
-                        anchors.bottom: parent.bottom
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.bottomMargin: 5
-                        text: "Video"
-                        color: "#aaa"
-                        font.pixelSize: 12
+                        width: 30
+                        height: 30
+                        radius: 15
+                        color: "#88000000"
+                        
+                        Text {
+                            anchors.centerIn: parent
+                            text: "▶️"
+                            font.pixelSize: 15
+                            color: "white"
+                        }
                     }
                 }
                 

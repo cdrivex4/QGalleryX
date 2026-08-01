@@ -1,6 +1,6 @@
 # Known Issues & Workarounds
 
-**Last Updated:** 2026-07-13
+**Last Updated:** 2026-08-02
 
 ---
 
@@ -8,7 +8,15 @@
 
 - None identified currently.
 
-## ✅ Fixed This Session (Milestone 4 — 2026-07-13)
+## ✅ Fixed This Session (Milestone 5 — 2026-08-02)
+
+- ✅ **Unified Album & Grid Data Pipeline**: `AlbumModel` now consumes `ImageModel` in-memory (`sourceModel: imageModel`), eliminating duplicate disk walks and thread contention.
+- ✅ **Network Drive Detection Centralized**: Fixed false positive network classification for local NTFS drives (e.g. `I:\`) by probing filesystem type (`DesktopHelper::staticIsNetworkPath`) rather than device path prefix.
+- ✅ **Passive IO Latency Guard & Audit Logger**: Added `PassiveReadLatencyGuard` to measure local file read duration, append anomalies to `%LOCALAPPDATA%/.../disk_latency_audit.log`, and emit non-intrusive QML Toast notifications.
+- ✅ **Stats Overlay Counter Scoping**: Fixed `Loaded: 0 / ?` counter binding scope in `Main.qml`.
+- ✅ **RAW/HEIC Fallback & Edit Overlay**: Added QImageReader fallback for HEIC files without `moov` atoms and routed DNG edit overlay through `image://async/`.
+
+## ✅ Previously Fixed (Milestone 4 — 2026-07-13)
 
 - ✅ **Selection/Share Ported to Main App** → Multi-select, share dialog, and resize editor are now fully integrated into the main gallery view.
 - ✅ **Resize Dialog Nested Sizing Bug** → Fixed `ResizeEditor` breaking its layout when instantiated inside `ShareDialog` by binding it to `Overlay.overlay`.

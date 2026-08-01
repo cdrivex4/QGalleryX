@@ -18,6 +18,8 @@ Dist/
 # Logs & Debug Output
 logs/
 *.log
+scripts/BadClusters/
+scripts/*.log
 docs/oddlog.txt
 _RecycleBin/
 hermes_test.txt

@@ -1,4 +1,5 @@
 #include "AlbumModel.h"
+#include "ImageModel.h"
 #include <QDebug>
 #include <QDirIterator>
 #include <QMap>
@@ -6,6 +7,58 @@
 #include <QtConcurrent>
 
 AlbumModel::AlbumModel(QObject *parent) : QAbstractListModel(parent) {}
+
+void AlbumModel::setSourceModel(ImageModel *model) {
+  if (m_sourceModel != model) {
+    if (m_sourceModel) {
+      disconnect(m_sourceModel, &ImageModel::itemsPopulated, this, &AlbumModel::rebuildFromSourceModel);
+    }
+    m_sourceModel = model;
+    if (m_sourceModel) {
+      connect(m_sourceModel, &ImageModel::itemsPopulated, this, &AlbumModel::rebuildFromSourceModel);
+      rebuildFromSourceModel();
+    }
+    emit sourceModelChanged();
+  }
+}
+
+void AlbumModel::rebuildFromSourceModel() {
+  if (!m_sourceModel) return;
+
+  const auto &items = m_sourceModel->allItems();
+  QMap<QString, AlbumInfo> albumMap;
+
+  for (const auto &item : items) {
+    QFileInfo fi(item.filePath);
+    QString dirPath = QDir::fromNativeSeparators(fi.dir().absolutePath());
+    QString dirName = fi.dir().dirName();
+
+    if (!albumMap.contains(dirPath)) {
+      AlbumInfo info;
+      info.name = dirName;
+      info.path = dirPath;
+      info.count = 0;
+      albumMap[dirPath] = info;
+    }
+
+    albumMap[dirPath].count++;
+    if (albumMap[dirPath].coverPaths.count() < 4) {
+      albumMap[dirPath].coverPaths.append(item.filePath);
+    }
+  }
+
+  QVector<AlbumInfo> newAlbums;
+  for (auto it = albumMap.begin(); it != albumMap.end(); ++it) {
+    newAlbums.append(it.value());
+  }
+
+  m_allAlbums = newAlbums;
+  applyFilter();
+
+  m_isLoading = false;
+  emit isLoadingChanged();
+  emit scanFinished();
+}
 
 int AlbumModel::rowCount(const QModelIndex &parent) const {
   if (parent.isValid())
@@ -84,6 +137,12 @@ QHash<int, QByteArray> AlbumModel::roleNames() const {
 void AlbumModel::scanAlbums(const QString &path) {
   if (path.isEmpty())
     return;
+
+  if (m_sourceModel) {
+    m_sourceModel->scanDirectory(path);
+    rebuildFromSourceModel();
+    return;
+  }
 
   m_isLoading = true;
   emit isLoadingChanged();

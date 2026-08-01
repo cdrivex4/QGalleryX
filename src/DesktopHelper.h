@@ -17,9 +17,11 @@ public:
   Q_INVOKABLE void pauseBackgroundTasks();
   Q_INVOKABLE void resumeBackgroundTasks();
   Q_INVOKABLE void requestRestart();
+  Q_INVOKABLE bool isNetworkPath(const QString &path);
 
-  // Static helper for C++ usage
+  // Static helpers for C++ usage
   static FileType staticGetFileType(const QString &path);
+  static bool staticIsNetworkPath(const QString &path);
 };
 
 #endif // DESKTOPHELPER_H

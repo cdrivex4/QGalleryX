@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
+#include <QStorageInfo>
 #include <QUrl>
 
 // ... keep includes ...
@@ -79,4 +80,38 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
   }
 
   return Unknown;
+}
+
+bool DesktopHelper::isNetworkPath(const QString &path) {
+  return staticIsNetworkPath(path);
+}
+
+bool DesktopHelper::staticIsNetworkPath(const QString &path) {
+  if (path.isEmpty())
+    return false;
+
+  QString cleanPath = QDir::fromNativeSeparators(path);
+
+  // UNC network paths: //server/share or \\server\share
+  if (cleanPath.startsWith("//") || cleanPath.startsWith("\\\\")) {
+    return true;
+  }
+
+  // Drive letter checks (e.g. "I:/..." or "I:\...")
+  if (cleanPath.length() >= 2 && cleanPath[1] == ':') {
+    QString root = cleanPath.left(3);
+    if (!root.endsWith('/')) {
+      root += '/';
+    }
+
+    QStorageInfo storage(root);
+    if (storage.isValid()) {
+      QString fsType = storage.fileSystemType().toLower();
+      if (fsType == "network" || fsType == "cifs" || fsType == "smb" || fsType == "nfs") {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }

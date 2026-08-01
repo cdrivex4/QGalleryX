@@ -21,6 +21,7 @@ qt_add_executable(QGalleryX
     src_legacy/TaskScheduler.cpp src_legacy/TaskScheduler.h
     src/ImageProcessor.cpp src/ImageProcessor.h
     src/FileCacheManager.cpp src/FileCacheManager.h
+    src/PassiveReadLatencyGuard.cpp src/PassiveReadLatencyGuard.h
 )
 
 qt_add_qml_module(QGalleryX
@@ -40,6 +41,7 @@ qt_add_qml_module(QGalleryX
         resources/qml_legacy/SelectionActionBar.qml
         resources/qml_legacy/ShareDialog.qml
         resources/qml_legacy/ResizeEditor.qml
+        resources/qml_legacy/ToastOverlay.qml
 )
 
 # --- LibRaw ---

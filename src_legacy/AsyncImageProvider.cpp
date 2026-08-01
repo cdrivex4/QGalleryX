@@ -1,5 +1,6 @@
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
+#include "../src/PassiveReadLatencyGuard.h"
 #include "../src/FileCacheManager.h"
 #include <QBuffer>
 #include "SystemMonitor.h"
@@ -201,6 +202,9 @@ void AsyncImageProvider::processImageTask(
   }
 
   QImage image;
+  PassiveReadLatencyGuard::ReadScope latencyScope =
+      PassiveReadLatencyGuard::instance().startRead(path, QFileInfo(path).size());
+
   DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
   bool isVideo = (type == DesktopHelper::Video) || path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive);
   bool isRaw = (type == DesktopHelper::Raw);
@@ -362,6 +366,8 @@ void AsyncImageProvider::processImageTask(
           << "Formats:" << QImageReader::supportedImageFormats();
     }
   }
+
+  PassiveReadLatencyGuard::instance().endRead(latencyScope);
 
   // --- Post Processing & Downscaling ---
   if (!image.isNull()) {

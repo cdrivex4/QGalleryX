@@ -12,6 +12,8 @@ struct AlbumInfo {
   int count;
 };
 
+#include "ImageModel.h"
+
 class AlbumModel : public QAbstractListModel {
   Q_OBJECT
 
@@ -25,6 +27,7 @@ public:
 
   Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
   Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY filterQueryChanged)
+  Q_PROPERTY(ImageModel* sourceModel READ sourceModel WRITE setSourceModel NOTIFY sourceModelChanged)
 
   explicit AlbumModel(QObject *parent = nullptr);
 
@@ -32,6 +35,11 @@ public:
   
   QString filterQuery() const { return m_filterQuery; }
   void setFilterQuery(const QString &query);
+
+  ImageModel* sourceModel() const { return m_sourceModel; }
+  void setSourceModel(ImageModel *model);
+
+  Q_INVOKABLE void rebuildFromSourceModel();
 
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   QVariant data(const QModelIndex &index,
@@ -45,10 +53,12 @@ signals:
   void isLoadingChanged();
   void scanFinished();
   void filterQueryChanged();
+  void sourceModelChanged();
 
 private:
   void applyFilter();
 
+  ImageModel *m_sourceModel = nullptr;
   bool m_isLoading = false;
   QString m_filterQuery;
   QStringList m_validPaths;

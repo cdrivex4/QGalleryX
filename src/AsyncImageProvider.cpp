@@ -1017,6 +1017,15 @@ void AsyncImageProvider::processImageTaskInternal(
         // it might abort FFmpeg if that specific delegate is destroyed, even if OTHER delegates
         // are waiting for this coalesced task, resulting in a permanent dead placeholder!
         image = v.extractFrame(path, 0, requestedSize, accel, nullptr);
+        
+        // Fallback for Samsung HEIC files without a moov atom that FFmpeg fails on
+        if (image.isNull() && (path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive))) {
+            QImageReader reader(path);
+            if (requestedSize.isValid())
+                reader.setScaledSize(requestedSize);
+            if (reader.canRead())
+                image = reader.read();
+        }
       }
     } else {
       QImageReader reader(path);

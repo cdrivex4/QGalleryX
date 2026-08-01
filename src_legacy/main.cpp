@@ -25,6 +25,7 @@
 #include "LogManager.h"
 #include "../src/ImageProcessor.h"
 #include "../src/FileCacheManager.h"
+#include "../src/PassiveReadLatencyGuard.h"
 
 // Remove customMessageHandler function completely
 
@@ -97,6 +98,9 @@ int main(int argc, char *argv[]) {
   // Expose ImageProcessor
   ImageProcessor imageProcessor;
   engine.rootContext()->setContextProperty("imageProcessor", &imageProcessor);
+
+  // Expose PassiveReadLatencyGuard
+  engine.rootContext()->setContextProperty("latencyGuard", &PassiveReadLatencyGuard::instance());
 
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

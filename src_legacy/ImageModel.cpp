@@ -1,3 +1,4 @@
+#include "DesktopHelper.h"
 #include "ImageModel.h"
 #include "TaskScheduler.h"
 #include <QBuffer>
@@ -136,9 +137,16 @@ void ImageModel::scanDirectory(const QString &path) {
   // Clear previous pending tasks (e.g. thumbnails from old folder)
   TaskScheduler::instance().clear();
 
+  m_totalCount = 0;
+  m_scanProgress = 0;
+  emit totalCountChanged();
+  emit scanProgressChanged();
+
+  uint64_t currentGen = ++m_scanGeneration;
+
   // Run scanning via TaskScheduler
   TaskScheduler::instance().addTask(
-      [this, path]() {
+      [this, path, currentGen]() {
         QElapsedTimer timer;
         timer.start();
 
@@ -175,17 +183,8 @@ void ImageModel::scanDirectory(const QString &path) {
 
         qDebug() << "Scanning directory:" << cleanPath;
 
-        bool isNetworkPath = false;
-        if (cleanPath.startsWith("\\\\")) {
-          isNetworkPath = true;
-          qDebug() << "[NetworkScan] Detected UNC path:" << cleanPath;
-        } else if (cleanPath.length() >= 3 && cleanPath[1] == ':') {
-          QStorageInfo storage(cleanPath);
-          if (storage.isValid() && storage.device().startsWith("\\\\")) {
-            isNetworkPath = true;
-            qDebug() << "[NetworkScan] Detected mapped network drive:" << cleanPath;
-          }
-        }
+        bool isNetworkPath = DesktopHelper::staticIsNetworkPath(cleanPath);
+        qDebug() << "[NetworkScan]" << (isNetworkPath ? "Network drive:" : "Local drive:") << cleanPath;
 
         QDirIterator it(cleanPath,
                         QStringList()
@@ -207,8 +206,21 @@ void ImageModel::scanDirectory(const QString &path) {
 
         // === PASS 1: FAST WALK ===
         // Get paths and fast regex dates, skip expensive stat() calls
+        int localScanCount = 0;
         while (it.hasNext()) {
+          if (m_scanGeneration != currentGen) {
+              qDebug() << "[ImageModel] Scan cancelled for" << cleanPath;
+              return;
+          }
           it.next();
+          localScanCount++;
+          if (localScanCount % 1000 == 0) {
+              QMetaObject::invokeMethod(this, [this, localScanCount]() {
+                  m_scanProgress = localScanCount;
+                  emit scanProgressChanged();
+              });
+          }
+
           ImageInfo info;
           info.filePath = it.filePath();
           info.fileName = it.fileName();
@@ -225,6 +237,11 @@ void ImageModel::scanDirectory(const QString &path) {
           }
           fastItems.append(info);
         }
+
+        QMetaObject::invokeMethod(this, [this, localScanCount]() {
+            m_totalCount = localScanCount;
+            emit totalCountChanged();
+        });
 
         // Check folder cache
         QHash<QString, QPair<qint64, QDateTime>> cachedData;
@@ -275,12 +292,15 @@ void ImageModel::scanDirectory(const QString &path) {
         QMetaObject::invokeMethod(this, [this, fastItems]() {
           m_allItems = fastItems;
           applyFilter(); // Emits beginResetModel, drawing the skeletons
+          emit itemsPopulated();
         }, Qt::BlockingQueuedConnection);
 
         // === PASS 2: METADATA FILL ===
         bool cacheChanged = false;
         if (!fullyCached || !isNetworkPath) {
           for (int i = 0; i < fastItems.size(); ++i) {
+            if (m_scanGeneration != currentGen) return;
+
             // Pause logic: Wait if TaskScheduler is paused
             while (TaskScheduler::instance().isPaused() && TaskScheduler::instance().isRunning()) {
               QThread::msleep(50);
@@ -331,6 +351,7 @@ void ImageModel::scanDirectory(const QString &path) {
         QMetaObject::invokeMethod(this, [this, fastItems, timer]() {
           m_allItems = fastItems;
           applyFilter(); // Reset model with perfect data
+          emit itemsPopulated();
 
           m_isLoading = false;
           emit isLoadingChanged();

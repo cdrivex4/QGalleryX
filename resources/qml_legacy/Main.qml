@@ -46,6 +46,7 @@ ApplicationWindow {
 
     AlbumModel {
         id: albumModel
+        sourceModel: imageModel
     }
 
     onCurrentPathChanged: {
@@ -498,7 +499,12 @@ ApplicationWindow {
         y: 10
         apiName: appSettings.graphicsApi
         isLoading: window.activeModel ? window.activeModel.isLoading : false
-        loadedCount: window.activeModel ? window.activeModel.count : 0
+        loadedCount: window.activeModel
+            ? (window.activeModel.totalCount === 0
+                ? window.activeModel.scanProgress
+                : window.activeModel.count)
+            : 0
+        totalCount: window.activeModel ? window.activeModel.totalCount : 0
         activeThreadCount: appSettings ? appSettings.concurrentThreads : 0
         z: 100
     }
@@ -596,5 +602,10 @@ ApplicationWindow {
                 font.pixelSize: 14
             }
         }
+    }
+
+    // Toast Notification Overlay for Disk Delay Alerts
+    ToastOverlay {
+        id: toastOverlay
     }
 }
