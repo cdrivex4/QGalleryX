@@ -6,10 +6,12 @@ import QGalleryX 1.0
 StackView {
     id: stack
     initialItem: albumGridComponent
+    clip: true
     
     signal imageClicked(int index, var model)
     
     property var model
+    property real cellSize: 220 // Controllable from outside via slider
     property var activeModel: stack.depth === 1 ? model : (stack.currentItem ? stack.currentItem.activeModel : null)
     
     Component {
@@ -19,6 +21,7 @@ StackView {
                 id: grid
                 anchors.fill: parent
                 anchors.margins: 10
+                clip: true
                 model: stack.model
                 
                 ScrollBar.vertical: ScrollBar {
@@ -26,8 +29,8 @@ StackView {
                     active: true
                 }
                 
-                cellWidth: 220
-                cellHeight: 260
+                cellWidth: stack.cellSize
+                cellHeight: stack.cellSize + 40 // Extra space for name label
                 
                 delegate: Item {
                     width: grid.cellWidth
@@ -128,7 +131,7 @@ StackView {
             id: detailRoot
             property string folderPath
             property string albumName
-            property var activeModel: innerGallery.model
+            property var activeModel: innerGalleryLoader.item ? innerGalleryLoader.item.model : null
             
             ColumnLayout {
                 anchors.fill: parent
@@ -164,11 +167,30 @@ StackView {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     
-                    GalleryViewTiles {
-                        id: innerGallery
+                    Loader {
+                        id: innerGalleryLoader
                         anchors.fill: parent
-                        folderPath: detailRoot.folderPath
-                        onImageClicked: (index) => stack.imageClicked(index, innerGallery.model)
+                        source: window.useTiles ? "GalleryViewTiles.qml" : "GalleryViewSemantic.qml"
+                        
+                        Binding {
+                            target: innerGalleryLoader.item
+                            property: "folderPath"
+                            value: detailRoot.folderPath
+                        }
+                        Binding {
+                            target: innerGalleryLoader.item
+                            property: "groupingMode"
+                            value: window.groupingMode
+                        }
+                    }
+                    
+                    Connections {
+                        target: innerGalleryLoader.item
+                        function onImageClicked(index) {
+                            if (innerGalleryLoader.item && innerGalleryLoader.item.model) {
+                                stack.imageClicked(index, innerGalleryLoader.item.model)
+                            }
+                        }
                     }
                 }
             }

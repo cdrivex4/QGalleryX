@@ -201,6 +201,11 @@ void AsyncImageProvider::processImageTask(
     return;
   }
 
+  // Pause check: Wait while background tasks are paused (e.g. video playback)
+  while (TaskScheduler::instance().isPaused() && TaskScheduler::instance().isRunning()) {
+    QThread::msleep(50);
+  }
+
   QImage image;
   PassiveReadLatencyGuard::ReadScope latencyScope =
       PassiveReadLatencyGuard::instance().startRead(path, QFileInfo(path).size());

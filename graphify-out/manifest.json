@@ -1,7 +1,7 @@
 {
   "build.ps1": {
-    "mtime": 1785315404.7614117,
-    "ast_hash": "611155c3c6998a224b66285fa4b3a85b",
+    "mtime": 1785649732.4271767,
+    "ast_hash": "0d5dbd4ff01cd3f3d85e3716b81593fc",
     "semantic_hash": ""
   },
   "deploy.ps1": {
@@ -40,7 +40,7 @@
     "semantic_hash": "032608f697b8d837c45c46cecfa4524c"
   },
   "src/AlbumModel.cpp": {
-    "mtime": 1785539821.8708096,
+    "mtime": 1785621797.616372,
     "ast_hash": "92d681b62a5074dde7f76e87869e8e73",
     "semantic_hash": ""
   },
@@ -50,7 +50,7 @@
     "semantic_hash": "9024e3a71d15bc81d8d41dfc2a234a7f"
   },
   "src/AsyncImageProvider.cpp": {
-    "mtime": 1785504703.2916229,
+    "mtime": 1785621797.617371,
     "ast_hash": "6a33da6a6d0c4267ac0d695a114fb57e",
     "semantic_hash": ""
   },
@@ -60,17 +60,17 @@
     "semantic_hash": ""
   },
   "src/BuildInfo.h": {
-    "mtime": 1785620440.4973993,
-    "ast_hash": "c5133dea58fd36bb01b76f67e92ca532",
+    "mtime": 1785653249.2424035,
+    "ast_hash": "b4ead794749d50da92d7e7bb49cbe46c",
     "semantic_hash": ""
   },
   "src/DesktopHelper.cpp": {
-    "mtime": 1785539307.1197126,
+    "mtime": 1785621797.6193721,
     "ast_hash": "d6ff075d350ad72305d2650d46d1f28d",
     "semantic_hash": ""
   },
   "src/DesktopHelper.h": {
-    "mtime": 1785539265.7343855,
+    "mtime": 1785621797.6193721,
     "ast_hash": "be0861a84cbb6b67310220655133d090",
     "semantic_hash": ""
   },
@@ -210,18 +210,18 @@
     "semantic_hash": ""
   },
   "src_legacy/AlbumModel.cpp": {
-    "mtime": 1785620323.2682352,
+    "mtime": 1785621797.6213744,
     "ast_hash": "5d5ac302e478fee04946e34943a40d24",
     "semantic_hash": ""
   },
   "src_legacy/AlbumModel.h": {
-    "mtime": 1785620425.9791965,
+    "mtime": 1785621797.6213744,
     "ast_hash": "9e5adff43cd7b061bacbba508326bf9c",
     "semantic_hash": ""
   },
   "src_legacy/AsyncImageProvider.cpp": {
-    "mtime": 1785541457.7733665,
-    "ast_hash": "7eca4cca45212602c37f2e9fdcd4714b",
+    "mtime": 1785623264.8416433,
+    "ast_hash": "4a44660bfb62595436bed23dde830f24",
     "semantic_hash": ""
   },
   "src_legacy/AsyncImageProvider.h": {
@@ -230,17 +230,17 @@
     "semantic_hash": "7dc378f07bc7c7ff8229911111b6c97a"
   },
   "src_legacy/BuildInfo.h": {
-    "mtime": 1785620440.4983985,
-    "ast_hash": "c5133dea58fd36bb01b76f67e92ca532",
+    "mtime": 1785653249.2424035,
+    "ast_hash": "b4ead794749d50da92d7e7bb49cbe46c",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.cpp": {
-    "mtime": 1785539691.8398314,
-    "ast_hash": "cdb2f46a7acb4c0fae41e1ed85f37889",
+    "mtime": 1785621797.6233716,
+    "ast_hash": "e9f0a9440be083ecc1bc74b5c93885f5",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.h": {
-    "mtime": 1785539591.6797514,
+    "mtime": 1785621797.624371,
     "ast_hash": "50876cceb16da5756f2daae27fa04be4",
     "semantic_hash": ""
   },
@@ -255,13 +255,13 @@
     "semantic_hash": ""
   },
   "src_legacy/ImageModel.cpp": {
-    "mtime": 1785620212.97491,
+    "mtime": 1785621797.625372,
     "ast_hash": "065c6a6ca6d39a80099d31085f3fe4ef",
     "semantic_hash": ""
   },
   "src_legacy/ImageModel.h": {
-    "mtime": 1785620145.298726,
-    "ast_hash": "d69de7fb5af7cf13ca8751439c841449",
+    "mtime": 1785621797.6263726,
+    "ast_hash": "3bd36edecdcd85de162ece0a60441449",
     "semantic_hash": ""
   },
   "src_legacy/LogManager.cpp": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "src_legacy/main.cpp": {
-    "mtime": 1785541600.0438542,
-    "ast_hash": "02a62fec36ccb7d145b4f59ae4a3f515",
+    "mtime": 1785649962.5014782,
+    "ast_hash": "09d87b45aa738e077dca9f37280d3805",
     "semantic_hash": ""
   },
   "src_legacy/main_test.cpp": {
@@ -380,7 +380,7 @@
     "semantic_hash": "8fb50acb7be4f09e57cadce4034bbcc8"
   },
   "test_scrollbench/src/ScrollBenchImageModel.cpp": {
-    "mtime": 1785539907.292123,
+    "mtime": 1785621797.627485,
     "ast_hash": "72caf045bf1dd38deae511c8406aa0a4",
     "semantic_hash": ""
   },
@@ -445,13 +445,13 @@
     "semantic_hash": ""
   },
   "src/PassiveReadLatencyGuard.cpp": {
-    "mtime": 1785619638.7301898,
-    "ast_hash": "06f5fa770d3e5eb5be98d5662330bfb3",
+    "mtime": 1785621797.620371,
+    "ast_hash": "d81058ab8663dd75e69ab2aff4004181",
     "semantic_hash": ""
   },
   "src/PassiveReadLatencyGuard.h": {
-    "mtime": 1785541216.9927826,
-    "ast_hash": "775f4dcc2954f42d9ed5e554f9c21f61",
+    "mtime": 1785621797.620371,
+    "ast_hash": "2ecec4fca4eb7dd964497c0c9f1ec1d0",
     "semantic_hash": ""
   }
 }

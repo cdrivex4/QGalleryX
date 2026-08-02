@@ -78,6 +78,21 @@ Item {
                 color: "white"
                 font.pixelSize: 12
             }
+            
+            Button {
+                text: "✖"
+                Layout.preferredWidth: 20
+                Layout.preferredHeight: 20
+                background: Rectangle { color: "transparent" }
+                contentItem: Text {
+                    text: parent.text
+                    color: parent.hovered ? "#FFF" : "#888"
+                    font.pixelSize: 12
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: root.visible = false
+            }
         }
         
         Rectangle { height: 1; width: parent.width; color: "#444" }

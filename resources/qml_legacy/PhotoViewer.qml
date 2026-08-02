@@ -20,12 +20,15 @@ Item {
     onVisibleChanged: {
         if (visible) {
             forceActiveFocus()
+            if (typeof desktopHelper !== "undefined") {
+                desktopHelper.pauseBackgroundTasks()
+            }
             if (currentIndex >= 0) {
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
             }
         } else {
-            if (root.model && typeof root.model.resumeBackgroundTasks === 'function') {
-                root.model.resumeBackgroundTasks()
+            if (typeof desktopHelper !== "undefined") {
+                desktopHelper.resumeBackgroundTasks()
             }
         }
     }
@@ -248,12 +251,12 @@ Item {
                     
                     onPlaybackStateChanged: {
                         if (playbackState === MediaPlayer.PlayingState) {
-                            if (root.model && typeof root.model.pauseBackgroundTasks === 'function') {
-                                root.model.pauseBackgroundTasks()
+                            if (typeof desktopHelper !== 'undefined') {
+                                desktopHelper.pauseBackgroundTasks()
                             }
                         } else {
-                            if (root.model && typeof root.model.resumeBackgroundTasks === 'function') {
-                                root.model.resumeBackgroundTasks()
+                            if (typeof desktopHelper !== 'undefined') {
+                                desktopHelper.resumeBackgroundTasks()
                             }
                         }
                     }

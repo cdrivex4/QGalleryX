@@ -22,18 +22,17 @@ Item {
     // Helper to scan folder
     function scanFolder(path) {
         console.log("[QML_DEBUG] Scanning folder in ImageModel:", path)
-        imageModel.scanDirectory(path)
+        if (root.model) root.model.scanDirectory(path)
     }
 
-    // Models
     ImageModel {
-        id: imageModel
+        id: localImageModel
     }
-    property alias model: imageModel
+    
+    // Model property (passed from parent/Main.qml)
+    property var model: localImageModel
+    property alias activeModel: root.model
 
-    DesktopHelper {
-        id: desktopHelper
-    }
 
     // Zoom State
     property real currentScale: 1.0
@@ -50,7 +49,7 @@ Item {
         anchors.fill: parent
         clip: true
         
-        model: imageModel
+        model: root.model
         
         cellWidth: root.uiThumbnailSize
         cellHeight: root.uiThumbnailSize
@@ -79,7 +78,7 @@ Item {
                 if (root.groupingMode === 3) role = 261; // Month
                 if (root.groupingMode === 4) role = 262; // Year
                 
-                var section = imageModel.data(imageModel.index(index, 0), role)
+                var section = root.model.data(root.model.index(index, 0), role)
                 if (section !== undefined) root.currentSectionLabel = section
             }
         }
@@ -96,7 +95,7 @@ Item {
             // Fetch data
             property string filePath: model.filePath
             property int fileType: desktopHelper ? desktopHelper.getFileType(filePath) : 0
-            property bool isVideo: fileType === DesktopHelper.Video
+            property bool isVideo: fileType === 2 // DesktopHelper.Video
             property bool isSelected: model.isSelected
             
             Component.onCompleted: {
@@ -145,7 +144,7 @@ Item {
                     }
                     Text {
                         anchors.centerIn: parent
-                        text: "▶️"
+                        text: "▶"
                         color: "white"
                         font.pixelSize: Math.max(10, Math.min(24, parent.height * 0.5))
                     }
@@ -303,10 +302,10 @@ Item {
         anchors.centerIn: parent
         text: "No images found."
         color: "#888"
-        visible: imageModel.count === 0
+        visible: root.model ? root.model.count === 0 : true
         font.pixelSize: 18
         
-        onVisibleChanged: console.log("[QML_DEBUG] 'No images found' visible:", visible, "Count:", imageModel.count)
+        onVisibleChanged: console.log("[QML_DEBUG] 'No images found' visible:", visible, "Count:", root.model ? root.model.count : 0)
     }
 
     // Floating Date Header
@@ -319,7 +318,7 @@ Item {
         height: 30
         color: "#AA000000"
         radius: 15
-        visible: root.currentSectionLabel !== "" && imageModel.count > 0
+        visible: root.currentSectionLabel !== "" && (root.model ? root.model.count > 0 : false)
         z: 10
         
         Text {

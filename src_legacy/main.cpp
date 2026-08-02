@@ -70,7 +70,6 @@ int main(int argc, char *argv[]) {
                                      "GroupedProxyModel");
   qmlRegisterType<SettingsHelper>("QGalleryX", 1, 0, "SettingsHelper");
   qmlRegisterType<SystemMonitor>("QGalleryX", 1, 0, "SystemMonitor");
-  qmlRegisterType<DesktopHelper>("QGalleryX", 1, 0, "DesktopHelper");
 
   QQmlApplicationEngine engine;
 
@@ -92,6 +91,7 @@ int main(int argc, char *argv[]) {
   engine.rootContext()->setContextProperty("systemMonitor", &systemMonitor);
 
   // Expose DesktopHelper
+  qmlRegisterUncreatableType<DesktopHelper>("QGalleryX", 1, 0, "DesktopHelper", "Enums only");
   DesktopHelper desktopHelper;
   engine.rootContext()->setContextProperty("desktopHelper", &desktopHelper);
 

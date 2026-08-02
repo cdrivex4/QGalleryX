@@ -240,3 +240,12 @@ if (Test-Path $LinkageTool) {
     }
 }
 
+# Auto-deploy to Dist so user runs fresh code
+Write-Host "[5/5] Deploying to Dist folder..." -ForegroundColor Yellow
+& "$PSScriptRoot\deploy.ps1"
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Warning: Deploy to Dist failed." -ForegroundColor Red
+} else {
+    Write-Host "Successfully deployed to Dist!" -ForegroundColor Green
+}
+

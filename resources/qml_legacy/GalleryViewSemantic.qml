@@ -20,25 +20,26 @@ Item {
     
     // Helper to scan folder
     function scanFolder(path) {
-        imageModel.scanDirectory(path)
+        console.log("[QML_DEBUG] Scanning folder in ImageModel:", path)
+        if (root.model) root.model.scanDirectory(path)
+    }
+
+    ImageModel {
+        id: localImageModel
     }
 
     // Models
-    ImageModel {
-        id: imageModel
-    }
-    property alias model: imageModel
+    // Model property (passed from parent/Main.qml)
+    property var model: localImageModel
+    property alias activeModel: root.model
 
-    DesktopHelper {
-        id: desktopHelper
-    }
 
     // Grouping Mode: 0=Auto, 1=Day, 2=Week, 3=Month, 4=Year
     property int groupingMode: 0
 
     GroupedProxyModel {
         id: proxyModel
-        sourceModel: imageModel
+        sourceModel: root.model
         // Calculate columns based on current grid size
         columns: Math.max(1, Math.floor(root.width / root.uiThumbnailSize))
         
@@ -309,7 +310,7 @@ Item {
                         // Fetch data
                         property string filePath: root.model.data(root.model.index(sourceIndex, 0), ImageModel.FilePathRole)
                         property int fileType: desktopHelper ? desktopHelper.getFileType(filePath) : 0
-                        property bool isVideo: fileType === DesktopHelper.Video
+                        property bool isVideo: fileType === 2 // DesktopHelper.Video
                         property bool isSelected: root.model.data(root.model.index(sourceIndex, 0), ImageModel.IsSelectedRole)
                         
                         Connections {
@@ -359,7 +360,7 @@ Item {
                                 }
                                 Text {
                                     anchors.centerIn: parent
-                                    text: "▶️"
+                                    text: "▶"
                                     color: "white"
                                     font.pixelSize: Math.max(10, Math.min(24, parent.height * 0.5))
                                 }
@@ -429,7 +430,8 @@ Item {
         anchors.centerIn: parent
         text: "No images found."
         color: "#888"
-        visible: imageModel.count === 0
+        visible: root.model ? root.model.count === 0 : true
         font.pixelSize: 18
+        font.bold: true
     }
 }

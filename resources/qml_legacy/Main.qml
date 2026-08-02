@@ -16,6 +16,10 @@ ApplicationWindow {
     property int previousTab: 0
     property var activeModel: (mainLayout.currentIndex === 0 && viewLoader.item) ? viewLoader.item.model : (mainLayout.currentIndex === 1 ? albumsView.activeModel : null)
     
+    // Global view preferences
+    property bool useTiles: false
+    property int groupingMode: 0
+
     onActiveModelChanged: {
         if (activeModel) {
             activeModel.filterQuery = searchField.text
@@ -43,6 +47,10 @@ ApplicationWindow {
     onHeightChanged: if (visible) settings.windowHeight = height
     onXChanged: if (visible) settings.windowX = x
     onYChanged: if (visible) settings.windowY = y
+
+    ImageModel {
+        id: imageModel
+    }
 
     AlbumModel {
         id: albumModel
@@ -90,117 +98,184 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 0
 
-        // Top Bar
-        RowLayout {
+        // Top Bar (opaque background to prevent z-bleed from content below)
+        Rectangle {
+            z: 200
             Layout.fillWidth: true
-            Layout.margins: 10
-            Layout.rightMargin: 20
-            Layout.leftMargin: 20
+            color: "#111"
+            implicitHeight: topBarRow.implicitHeight + 20
             visible: !photoViewer.visible && (mainLayout.currentIndex === 0 || mainLayout.currentIndex === 1)
+
+            RowLayout {
+                id: topBarRow
+                anchors.fill: parent
+                anchors.margins: 10
+                anchors.rightMargin: 20
+                anchors.leftMargin: 20
             
-            TextField {
-                id: searchField
-                Layout.fillWidth: true
-                placeholderText: "🔍 Filter filenames or folders..."
-                color: "white"
-                font.pixelSize: 14
-                background: Rectangle {
-                    color: "#222"
-                    radius: 8
-                    border.color: searchField.activeFocus ? "#4A90E2" : "#444"
-                }
-                onTextChanged: {
-                    if (window.activeModel) {
-                        window.activeModel.filterQuery = text
+                TextField {
+                    id: searchField
+                    Layout.fillWidth: true
+                    placeholderText: "🔍 Filter filenames or folders..."
+                    color: "white"
+                    font.pixelSize: 14
+                    background: Rectangle {
+                        color: "#222"
+                        radius: 8
+                        border.color: searchField.activeFocus ? "#4A90E2" : "#444"
+                    }
+                    onTextChanged: {
+                        if (window.activeModel) {
+                            window.activeModel.filterQuery = text
+                        }
+                        
+                        // Also filter the global image model so we can extract valid directories for Albums
+                        if (viewLoader.item && viewLoader.item.model) {
+                            viewLoader.item.model.filterQuery = text
+                            
+                            if (typeof viewLoader.item.model.getActiveDirectories === "function") {
+                                var dirs = viewLoader.item.model.getActiveDirectories()
+                                albumModel.applyFilterFromPaths(dirs)
+                            }
+                        }
                     }
                     
-                    // Also filter the global image model so we can extract valid directories for Albums
-                    if (viewLoader.item && viewLoader.item.model) {
-                        viewLoader.item.model.filterQuery = text
-                        
-                        if (typeof viewLoader.item.model.getActiveDirectories === "function") {
-                            var dirs = viewLoader.item.model.getActiveDirectories()
-                            albumModel.applyFilterFromPaths(dirs)
+                    Button {
+                        text: "✖"
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.rightMargin: 10
+                        visible: searchField.text.length > 0
+                        width: 24
+                        height: 24
+                        background: Rectangle { color: "transparent" }
+                        contentItem: Text {
+                            text: parent.text
+                            color: parent.hovered ? "#FFF" : "#888"
+                            font.pixelSize: 14
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
                         }
+                        onClicked: searchField.text = ""
                     }
                 }
                 
                 Button {
-                    text: "✖"
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.rightMargin: 10
-                    visible: searchField.text.length > 0
-                    width: 24
-                    height: 24
-                    background: Rectangle { color: "transparent" }
+                    text: "📁 Scan Folder"
+                    font.bold: true
+                    font.pixelSize: 14
+                    background: Rectangle {
+                        color: parent.hovered ? "#444" : "#333"
+                        radius: 8
+                    }
                     contentItem: Text {
                         text: parent.text
-                        color: parent.hovered ? "#FFF" : "#888"
+                        color: "white"
+                        font.bold: parent.font.bold
+                        font.pixelSize: parent.font.pixelSize
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    onClicked: folderDialog.open()
+                }
+                
+                Button {
+                    text: window.useTiles ? "View: Tiles" : "View: Semantic"
+                    onClicked: window.useTiles = !window.useTiles
+                    Layout.preferredWidth: 120
+                    background: Rectangle { color: parent.hovered ? "#444" : "#333"; radius: 8 }
+                    contentItem: Text {
+                        text: parent.text
+                        color: "white"
                         font.pixelSize: 14
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
-                    onClicked: searchField.text = ""
                 }
-            }
-            
-            Button {
-                text: "📁 Scan Folder"
-                font.bold: true
-                font.pixelSize: 14
-                background: Rectangle {
-                    color: parent.hovered ? "#444" : "#333"
-                    radius: 8
-                }
-                contentItem: Text {
-                    text: parent.text
-                    color: "white"
-                    font.bold: parent.font.bold
-                    font.pixelSize: parent.font.pixelSize
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-                onClicked: folderDialog.open()
-            }
-            
-            Button {
-                text: galleryTab.useTiles ? "View: Tiles" : "View: Semantic"
-                onClicked: galleryTab.useTiles = !galleryTab.useTiles
-                Layout.preferredWidth: 120
-                background: Rectangle { color: parent.hovered ? "#444" : "#333"; radius: 8 }
-                contentItem: Text {
-                    text: parent.text
-                    color: "white"
-                    font.pixelSize: 14
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
-            
-            ComboBox {
-                Layout.preferredWidth: 120
-                model: ["Auto", "Day", "Week", "Month", "Year"]
-                currentIndex: 0
-                visible: !galleryTab.useTiles
-                onCurrentIndexChanged: {
-                    if (viewLoader.item) {
-                        viewLoader.item.groupingMode = currentIndex
+                
+                ComboBox {
+                    Layout.preferredWidth: 120
+                    model: ["Auto", "Day", "Week", "Month", "Year"]
+                    currentIndex: window.groupingMode
+                    visible: !window.useTiles
+                    onCurrentIndexChanged: {
+                        window.groupingMode = currentIndex
+                    }
+                    background: Rectangle { color: "#333"; radius: 8; border.color: "#444" }
+                    contentItem: Text {
+                        text: "Group: " + parent.displayText
+                        color: "white"
+                        font.pixelSize: 14
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                    delegate: ItemDelegate {
+                        width: parent.width
+                        contentItem: Text { text: modelData; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter }
+                        background: Rectangle { color: parent.highlighted ? "#555" : "#333" }
                     }
                 }
-                background: Rectangle { color: "#333"; radius: 8; border.color: "#444" }
-                contentItem: Text {
-                    text: "Group: " + parent.displayText
-                    color: "white"
-                    font.pixelSize: 14
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        // Album Size Slider (only visible on Albums tab)
+        RowLayout {
+            z: 100
+            Layout.fillWidth: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
+            Layout.bottomMargin: 4
+            visible: !photoViewer.visible && mainLayout.currentIndex === 1
+            spacing: 10
+
+            Text {
+                text: "Size:"
+                color: "#aaa"
+                font.pixelSize: 12
+            }
+
+            Slider {
+                id: albumSizeSlider
+                Layout.fillWidth: true
+                from: 100
+                to: 400
+                value: 220
+                stepSize: 10
+                onValueChanged: albumsView.cellSize = value
+
+                background: Rectangle {
+                    x: albumSizeSlider.leftPadding
+                    y: albumSizeSlider.topPadding + albumSizeSlider.availableHeight / 2 - height / 2
+                    width: albumSizeSlider.availableWidth
+                    height: 4
+                    radius: 2
+                    color: "#333"
+
+                    Rectangle {
+                        width: albumSizeSlider.visualPosition * parent.width
+                        height: parent.height
+                        color: "#4A90E2"
+                        radius: 2
+                    }
                 }
-                delegate: ItemDelegate {
-                    width: parent.width
-                    contentItem: Text { text: modelData; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter }
-                    background: Rectangle { color: parent.highlighted ? "#555" : "#333" }
+
+                handle: Rectangle {
+                    x: albumSizeSlider.leftPadding + albumSizeSlider.visualPosition * (albumSizeSlider.availableWidth - width)
+                    y: albumSizeSlider.topPadding + albumSizeSlider.availableHeight / 2 - height / 2
+                    width: 16
+                    height: 16
+                    radius: 8
+                    color: albumSizeSlider.pressed ? "#6AB0FF" : "#4A90E2"
+                    border.color: "#222"
+                    border.width: 1
                 }
+            }
+
+            Text {
+                text: Math.round(albumSizeSlider.value) + "px"
+                color: "#aaa"
+                font.pixelSize: 12
+                Layout.preferredWidth: 40
             }
         }
 
@@ -208,6 +283,7 @@ ApplicationWindow {
             id: mainLayout
             Layout.fillWidth: true
             Layout.fillHeight: true
+            clip: true
             currentIndex: bottomBar.currentIndex
             visible: !photoViewer.visible
 
@@ -217,17 +293,20 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 
-                property bool useTiles: false
-                
                 Loader {
                     id: viewLoader
                     anchors.fill: parent
-                    sourceComponent: galleryTab.useTiles ? tilesViewComponent : semanticViewComponent
+                    sourceComponent: window.useTiles ? tilesViewComponent : semanticViewComponent
                     
                     Binding {
                         target: viewLoader.item
                         property: "folderPath"
                         value: window.currentPath
+                    }
+                    Binding {
+                        target: viewLoader.item
+                        property: "groupingMode"
+                        value: window.groupingMode
                     }
                 }
                 
@@ -235,6 +314,7 @@ ApplicationWindow {
                     id: semanticViewComponent
                     GalleryViewSemantic {
                         id: galleryViewSemantic
+                        model: imageModel
                         onImageClicked: (index) => {
                             photoViewer.model = galleryViewSemantic.model
                             photoViewer.currentIndex = index
@@ -248,6 +328,7 @@ ApplicationWindow {
                     id: tilesViewComponent
                     GalleryViewTiles {
                         id: galleryViewTiles
+                        model: imageModel
                         onImageClicked: (index) => {
                             photoViewer.model = galleryViewTiles.model
                             photoViewer.currentIndex = index
@@ -498,13 +579,9 @@ ApplicationWindow {
         x: parent.width - width - 10
         y: 10
         apiName: appSettings.graphicsApi
-        isLoading: window.activeModel ? window.activeModel.isLoading : false
-        loadedCount: window.activeModel
-            ? (window.activeModel.totalCount === 0
-                ? window.activeModel.scanProgress
-                : window.activeModel.count)
-            : 0
-        totalCount: window.activeModel ? window.activeModel.totalCount : 0
+        isLoading: imageModel.isLoading
+        loadedCount: imageModel.totalCount === 0 ? imageModel.scanProgress : imageModel.count
+        totalCount: imageModel.totalCount
         activeThreadCount: appSettings ? appSettings.concurrentThreads : 0
         z: 100
     }
