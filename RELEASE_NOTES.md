@@ -1,3 +1,27 @@
+# Release Notes - v2.3.1 (Media Player Overhaul & Native AV1 FFmpeg Backend)
+
+## 🚀 Highlights
+This release modernizes the full-screen video player UI with custom flat vector icons (`MediaIcon.qml`), fixes mouse hover interaction on the volume slider popup, standardizes slider progress visualization, and forces Qt Multimedia to use our bundled FFmpeg engine for native AV1/VP9 video playback.
+
+## 🛠 New Features & UI Enhancements
+
+### 🎬 Native AV1 & FFmpeg Playback Engine
+- **Independent Video Backend**: Added `qputenv("QT_MEDIA_BACKEND", "ffmpeg")` in `main.cpp`, cutting Windows Media Foundation system dependencies.
+- **AV1, VP9 & MKV Support**: Unlocked native playback for AV1, VP9, WebM, FLV, and TS video files out-of-the-box using our bundled FFmpeg DLLs.
+
+### 🎨 Flat Vector Icons (`MediaIcon.qml`)
+- **Flat Vector Graphics**: Created a dedicated `MediaIcon.qml` Canvas component rendering solid flat white Play (`▶`), Pause (`❚❚`), Speaker (`🔊`), Mute (`🔇`), and Rotate (`↻`) icons.
+- **Emoji Bug Elimination**: Replaced OS text/emoji characters to prevent Windows Segoe UI from rendering blue 3D emoji boxes.
+
+### 🔊 Pop-up Volume Slider & Hover Fix
+- **Combined Hover Hit Region**: Added a non-blocking `combinedHoverArea` spanning both the speaker button and the vertical pop-up volume slider, eliminating premature menu closing.
+- **Inverted Track Styling**: Styled the volume slider with a full white active bar rising from the bottom (`0%` / Mute) up to the handle, leaving the top inactive track grey.
+
+### ⏯ Video Timeline Progress Bar
+- **Elapsed/Remaining Progress**: Updated the horizontal video progress bar so elapsed time (0:00 to handle) is rendered in solid white (`#ffffff`), while remaining video time is rendered in dark grey (`#40ffffff`).
+
+---
+
 # Release Notes - v2.3.0 (Fullscreen Thread Isolation & Image Load Optimization)
 
 ## 🚀 Highlights

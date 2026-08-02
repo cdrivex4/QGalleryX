@@ -66,6 +66,10 @@ int main(int argc, char *argv[]) {
   // without evicting them constantly while swiping.
   qputenv("QML_IMAGE_CACHE_SIZE", "1024");
 
+  // Force Qt Multimedia to use bundled FFmpeg backend for video playback
+  // Unlocks native AV1, VP9, MKV, WebM, FLV, and TS playback out of the box
+  qputenv("QT_MEDIA_BACKEND", "ffmpeg");
+
   QApplication app(argc, argv);
 
   qmlRegisterType<ImageModel>("QGalleryX", 1, 0, "ImageModel");

@@ -42,6 +42,8 @@ qt_add_qml_module(QGalleryX
         resources/qml_legacy/ShareDialog.qml
         resources/qml_legacy/ResizeEditor.qml
         resources/qml_legacy/ToastOverlay.qml
+        resources/qml_legacy/StyledButton.qml
+        resources/qml_legacy/MediaIcon.qml
 )
 
 # --- LibRaw ---

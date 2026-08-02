@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "src/BuildInfo.h": {
-    "mtime": 1785702715.6095421,
-    "ast_hash": "541149462e7c2763cb1a8c65a517278c",
+    "mtime": 1785709101.218572,
+    "ast_hash": "74e257665d35923815e5bf4cddc9e83c",
     "semantic_hash": ""
   },
   "src/DesktopHelper.cpp": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "src_legacy/BuildInfo.h": {
-    "mtime": 1785702715.6095421,
-    "ast_hash": "541149462e7c2763cb1a8c65a517278c",
+    "mtime": 1785709101.2191513,
+    "ast_hash": "74e257665d35923815e5bf4cddc9e83c",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.cpp": {
@@ -295,13 +295,13 @@
     "semantic_hash": "1a880a993764b2416e625b2836d7473e"
   },
   "src_legacy/TaskScheduler.cpp": {
-    "mtime": 1785699625.643968,
-    "ast_hash": "fc65ae1dac7b9da04e110428a6eb680e",
+    "mtime": 1785703266.1519449,
+    "ast_hash": "3619cd136daf00a3f84faef20ede62de",
     "semantic_hash": ""
   },
   "src_legacy/TaskScheduler.h": {
-    "mtime": 1785699625.6445098,
-    "ast_hash": "9c2502a624bbf060090435554fd3d20a",
+    "mtime": 1785703247.4736166,
+    "ast_hash": "23a5e1bc61f43df824ccac70d0169b5d",
     "semantic_hash": ""
   },
   "src_legacy/VideoThumbnailer.cpp": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "src_legacy/main.cpp": {
-    "mtime": 1785702653.4855053,
-    "ast_hash": "985e123f3e5a82f8d33d684d7f7c4153",
+    "mtime": 1785709088.2418928,
+    "ast_hash": "4c1f889dcf90d3690e13bd6b5f0182f7",
     "semantic_hash": ""
   },
   "src_legacy/main_test.cpp": {

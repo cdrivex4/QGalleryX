@@ -266,6 +266,7 @@ Item {
             
             // Video Player
             Item {
+                id: videoContainer
                 anchors.fill: parent
                 visible: isVideo
                 property int currentRotation: filePath ? imageProcessor.getVirtualRotation(filePath) : 0
@@ -282,7 +283,11 @@ Item {
                         }
                         return ""
                     }
-                    audioOutput: AudioOutput {}
+                    audioOutput: AudioOutput {
+                        id: audioOutput
+                        volume: 1.0
+                        muted: false
+                    }
                     videoOutput: videoOutput
                     autoPlay: false
                     
@@ -357,13 +362,13 @@ Item {
                     height: 80
                     radius: 40
                     color: "#80000000"
-                    visible: player.playbackState !== MediaPlayer.PlayingState && root.controlsVisible
+                    visible: isVideo && player.playbackState !== MediaPlayer.PlayingState && root.controlsVisible
                     
-                    Text {
+                    MediaIcon {
                         anchors.centerIn: parent
-                        text: "▶"
-                        color: "white"
-                        font.pixelSize: 40
+                        width: 40
+                        height: 40
+                        iconType: "play"
                     }
                     
                     MouseArea {
@@ -383,19 +388,166 @@ Item {
                     RowLayout {
                         anchors.fill: parent
                         anchors.margins: 15
-                        spacing: 15
+                        spacing: 12
                         
-                        // Play/Pause Button
-                        Text {
-                            text: player.playbackState === MediaPlayer.PlayingState ? "⏸" : "▶"
-                            color: "white"
-                            font.pixelSize: 30
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: player.playbackState === MediaPlayer.PlayingState ? player.pause() : player.play()
+                        // --- ICON SEQUENCE (FAR LEFT): Play, Speaker, Rotate ---
+
+                        // 1. Play/Pause Flat Icon Button
+                        StyledButton {
+                            flatStyle: true
+                            implicitWidth: 38
+                            implicitHeight: 38
+                            onClicked: player.playbackState === MediaPlayer.PlayingState ? player.pause() : player.play()
+                            ToolTip.visible: hovered
+                            ToolTip.text: player.playbackState === MediaPlayer.PlayingState ? "Pause" : "Play"
+
+                            MediaIcon {
+                                anchors.centerIn: parent
+                                width: 22
+                                height: 22
+                                iconType: player.playbackState === MediaPlayer.PlayingState ? "pause" : "play"
                             }
                         }
-                        
+
+                        // 2. Speaker Volume Icon Button + Popup Vertical Slider
+                        Item {
+                            id: volumeControlItem
+                            implicitWidth: 38
+                            implicitHeight: 38
+                            Layout.alignment: Qt.AlignVCenter
+                            z: 200
+
+                            // Combined non-blocking hover area covering speaker button AND popup slider region
+                            MouseArea {
+                                id: combinedHoverArea
+                                x: -5
+                                y: -175
+                                width: parent.width + 10
+                                height: 175 + parent.height
+                                hoverEnabled: true
+                                acceptedButtons: Qt.NoButton // Allows clicks/drags to pass to speakerBtn and volumeSlider
+                            }
+
+                            StyledButton {
+                                id: speakerBtn
+                                anchors.fill: parent
+                                flatStyle: true
+                                onClicked: audioOutput.muted = !audioOutput.muted
+                                ToolTip.visible: speakerBtn.hovered
+                                ToolTip.text: audioOutput.muted ? "Unmute" : "Mute"
+
+                                MediaIcon {
+                                    anchors.centerIn: parent
+                                    width: 22
+                                    height: 22
+                                    iconType: (audioOutput.muted || audioOutput.volume === 0) ? "mute" : "speaker"
+                                }
+                            }
+
+                            // Vertical Volume Slider Popup
+                            Rectangle {
+                                id: volumePopup
+                                anchors.bottom: speakerBtn.top
+                                anchors.bottomMargin: 2
+                                anchors.horizontalCenter: speakerBtn.horizontalCenter
+                                width: 48
+                                height: 170
+                                color: "#E6181818"
+                                radius: 10
+                                border.color: "#50ffffff"
+                                border.width: 1
+                                visible: combinedHoverArea.containsMouse || volumeSlider.pressed || volumeSlider.hovered
+                                z: 100
+
+                                ColumnLayout {
+                                    anchors.fill: parent
+                                    anchors.margins: 8
+                                    spacing: 6
+
+                                    Text {
+                                        text: audioOutput.muted ? "MUTE" : Math.round(audioOutput.volume * 100) + "%"
+                                        color: "#ffffff"
+                                        font.pixelSize: 11
+                                        font.bold: true
+                                        Layout.alignment: Qt.AlignHCenter
+                                    }
+
+                                    Slider {
+                                        id: volumeSlider
+                                        orientation: Qt.Vertical
+                                        Layout.fillHeight: true
+                                        Layout.alignment: Qt.AlignHCenter
+                                        implicitWidth: 26
+                                        from: 0.0
+                                        to: 1.0
+                                        value: audioOutput.muted ? 0.0 : audioOutput.volume
+                                        onMoved: {
+                                            audioOutput.volume = value
+                                            if (value === 0.0) {
+                                                audioOutput.muted = true
+                                            } else if (audioOutput.muted) {
+                                                audioOutput.muted = false
+                                            }
+                                        }
+
+                                        background: Rectangle {
+                                            x: volumeSlider.leftPadding + volumeSlider.availableWidth / 2 - width / 2
+                                            y: volumeSlider.topPadding
+                                            implicitWidth: 6
+                                            implicitHeight: 130
+                                            width: 6
+                                            height: volumeSlider.availableHeight
+                                            radius: 3
+                                            color: "#40ffffff" // Inactive grey track
+
+                                            // White active bar from bottom (0 / mute) up to current volume position
+                                            Rectangle {
+                                                width: parent.width
+                                                height: parent.height * volumeSlider.position
+                                                anchors.bottom: parent.bottom
+                                                color: "#ffffff"
+                                                radius: 3
+                                            }
+                                        }
+
+                                        handle: Rectangle {
+                                            x: volumeSlider.leftPadding + volumeSlider.availableWidth / 2 - width / 2
+                                            y: volumeSlider.topPadding + (1 - volumeSlider.position) * (volumeSlider.availableHeight - height)
+                                            implicitWidth: 18
+                                            implicitHeight: 18
+                                            radius: 9
+                                            color: volumeSlider.pressed ? "#e0e0e0" : "#ffffff"
+                                            border.color: "#30000000"
+                                            border.width: 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // 3. Rotate Video Button Icon
+                        StyledButton {
+                            flatStyle: true
+                            implicitWidth: 38
+                            implicitHeight: 38
+                            ToolTip.visible: hovered
+                            ToolTip.text: "Rotate 90°"
+                            onClicked: {
+                                imageProcessor.rotateImageVirtual(filePath, 90)
+                                imageProcessor.clearImageCache()
+                                videoContainer.currentRotation = imageProcessor.getVirtualRotation(filePath)
+                            }
+
+                            MediaIcon {
+                                anchors.centerIn: parent
+                                width: 22
+                                height: 22
+                                iconType: "rotate"
+                            }
+                        }
+
+                        // --- TIME & POSITION SLIDER ---
+
                         // Current Time
                         Text {
                             text: {
@@ -407,13 +559,45 @@ Item {
                             font.pixelSize: 14
                         }
                         
-                        // Slider
+                        // Position Slider
                         Slider {
+                            id: progressSlider
                             Layout.fillWidth: true
+                            implicitHeight: 24
                             from: 0
-                            to: player.duration
+                            to: player.duration > 0 ? player.duration : 1
                             value: player.position
                             onMoved: player.setPosition(value)
+
+                            background: Rectangle {
+                                x: progressSlider.leftPadding
+                                y: progressSlider.topPadding + progressSlider.availableHeight / 2 - height / 2
+                                implicitWidth: 200
+                                implicitHeight: 6
+                                width: progressSlider.availableWidth
+                                height: 6
+                                radius: 3
+                                color: "#40ffffff" // Inactive grey track (remaining video duration)
+
+                                // Active white bar from 0:00 (left) up to current position handle
+                                Rectangle {
+                                    width: progressSlider.position * parent.width
+                                    height: parent.height
+                                    color: "#ffffff"
+                                    radius: 3
+                                }
+                            }
+
+                            handle: Rectangle {
+                                x: progressSlider.leftPadding + progressSlider.visualPosition * (progressSlider.availableWidth - width)
+                                y: progressSlider.topPadding + progressSlider.availableHeight / 2 - height / 2
+                                implicitWidth: 18
+                                implicitHeight: 18
+                                radius: 9
+                                color: progressSlider.pressed ? "#e0e0e0" : "#ffffff"
+                                border.color: "#30000000"
+                                border.width: 1
+                            }
                         }
                         
                         // Total Time
@@ -425,20 +609,6 @@ Item {
                             }
                             color: "white"
                             font.pixelSize: 14
-                        }
-                        
-                        // Rotate Video Button
-                        Button {
-                            text: "↻ Rotate"
-                            flat: true
-                            contentItem: Text { text: parent.text; color: "white"; font.pixelSize: 14; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
-                            background: Rectangle { color: parent.hovered ? "#44ffffff" : "transparent"; radius: 4 }
-                            onClicked: {
-                                imageProcessor.rotateImageVirtual(filePath, 90)
-                                imageProcessor.clearImageCache()
-                                // Update the property bound to the VideoOutput rotation
-                                parent.parent.parent.currentRotation = imageProcessor.getVirtualRotation(filePath)
-                            }
                         }
                     }
                 }
@@ -482,8 +652,9 @@ Item {
             anchors.margins: 20
             spacing: 20
             
-            Button { 
+            StyledButton { 
                 text: "Save"
+                isAccent: true
                 onClicked: {
                     var rect = Qt.rect(0.25, 0.25, 0.5, 0.5) 
                     if (root.model.cropImage(root.currentIndex, rect)) {
@@ -494,7 +665,7 @@ Item {
                     }
                 }
             }
-            Button { text: "Cancel"; onClicked: root.isEditing = false }
+            StyledButton { text: "Cancel"; onClicked: root.isEditing = false }
         }
     }
 
@@ -649,7 +820,7 @@ Item {
                 
                 Item { Layout.fillHeight: true } // Spacer
                 
-                Button {
+                StyledButton {
                     text: "Close"
                     Layout.alignment: Qt.AlignHCenter
                     onClicked: infoOverlay.visible = false
@@ -668,44 +839,45 @@ Item {
         visible: controlsVisible && !root.isEditing
         z: 1
 
-        Button {
+        StyledButton {
             text: "Back"
+            iconText: "‹"
+            fontSize: 14
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 10
+            anchors.leftMargin: 15
             onClicked: root.backClicked()
         }
         
         RowLayout {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            anchors.rightMargin: 10
+            anchors.rightMargin: 15
             spacing: 10
             
-            Button {
+            StyledButton {
                 text: "Info"
+                iconText: "ℹ"
+                fontSize: 14
                 onClicked: {
                     if (listView.currentItem && listView.currentItem.isVideo) {
-                        // Gather video metadata
                         var m = {}
                         m["Filename"] = listView.currentItem.fileName
                         m["Path"] = listView.currentItem.filePath
-                        // Try to get resolution from video output or metadata
-                        // Note: accessing player directly from delegate is tricky if not exposed
-                        // But we are inside root, we can access model
                         m["Type"] = "Video"
                         infoOverlay.meta = m
                     } else {
-                        // Get image metadata from C++
                         infoOverlay.meta = root.model.getMetadata(root.currentIndex)
                     }
                     infoOverlay.visible = true
                 }
             }
 
-            Button {
+            StyledButton {
                 text: "Edit"
-                visible: listView.currentItem && !listView.currentItem.isVideo // Hide edit for videos
+                iconText: "✏"
+                fontSize: 14
+                visible: listView.currentItem && !listView.currentItem.isVideo
                 onClicked: root.isEditing = true
             }
         }
