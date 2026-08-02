@@ -48,6 +48,7 @@ public:
   // Pause and Resume background processing
   Q_INVOKABLE void pause();
   Q_INVOKABLE void resume();
+  Q_INVOKABLE void pauseBackground(bool pause);
   bool isPaused() const;
   bool isRunning() const;
 
@@ -82,6 +83,7 @@ private:
 
   std::atomic<bool> m_running;
   std::atomic<bool> m_paused;
+  std::atomic<bool> m_backgroundPaused;
   std::atomic<quint64> m_sequenceCounter;
 };
 

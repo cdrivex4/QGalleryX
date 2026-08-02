@@ -268,6 +268,8 @@ Item {
                 }
             }
             
+            Item { width: 1; height: 5 }
+            
             // Threads
             Text { text: "Threads: " + threadSlider.value + " (Restart)"; color: "white"; font.pixelSize: 11 }
             Slider {

@@ -18,6 +18,7 @@
 #include "ImageModel.h"
 #include "SettingsHelper.h"
 #include "SystemMonitor.h"
+#include "TaskScheduler.h"
 
 #include <QFile>
 #include <QTextStream>
@@ -61,6 +62,10 @@ int main(int argc, char *argv[]) {
   else if (api == 4)
     QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
 
+  // Increase QML's internal Image Cache to 1024MB so it can hold ~15 full 4K images
+  // without evicting them constantly while swiping.
+  qputenv("QML_IMAGE_CACHE_SIZE", "1024");
+
   QApplication app(argc, argv);
 
   qmlRegisterType<ImageModel>("QGalleryX", 1, 0, "ImageModel");
@@ -101,6 +106,9 @@ int main(int argc, char *argv[]) {
 
   // Expose PassiveReadLatencyGuard
   engine.rootContext()->setContextProperty("latencyGuard", &PassiveReadLatencyGuard::instance());
+
+  // Expose TaskScheduler
+  engine.rootContext()->setContextProperty("taskScheduler", &TaskScheduler::instance());
 
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,

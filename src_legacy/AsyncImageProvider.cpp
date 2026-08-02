@@ -207,6 +207,7 @@ void AsyncImageProvider::processImageTask(
   }
 
   QImage image;
+  bool cacheable = true;
   PassiveReadLatencyGuard::ReadScope latencyScope =
       PassiveReadLatencyGuard::instance().startRead(path, QFileInfo(path).size());
 
@@ -274,17 +275,13 @@ void AsyncImageProvider::processImageTask(
         // 3. Fallback: Full Decode (SLOW) or Half Decode (Medium)
         if (!loaded) {
           // OOM PROTECTION & PERFORMANCE
-          bool isThumbnail =
-              (requestedSize.width() > 0 && requestedSize.width() < 1000) ||
-              (requestedSize.height() > 0 && requestedSize.height() < 1000);
-
-          if (s_accelerateRaw && isThumbnail) {
-            // Enable half-size decoding for faster fallback
+          // Always use half-size decoding for fallback. A full decode of a 40MP RAW 
+          // takes 3-5 seconds and yields a 12000x8000 image, which we scale down to 4096 anyway.
+          // Half-size decoding is 4x faster and yields 6000x4000, which is plenty for 4K displays.
+          if (s_accelerateRaw) {
             RawProcessor.imgdata.params.half_size = 1;
-          } else if (s_accelerateRaw) {
-            qWarning()
-                << "[LibRaw] Thumbnail failed, forced fallback to full decode:"
-                << path;
+            RawProcessor.imgdata.params.use_camera_wb = 1;
+            qWarning() << "[LibRaw] Thumbnail failed, forced fallback to half-size decode:" << path;
           }
 
           if (RawProcessor.unpack() == LIBRAW_SUCCESS) {
@@ -334,7 +331,15 @@ void AsyncImageProvider::processImageTask(
     image = thumbnailer.extractFrame(path, 0, requestedSize, cancelled.get());
     s_videoSemaphore.release(1);
 
+    if (cancelled && cancelled->load()) {
+#ifdef Q_OS_WIN
+      CoUninitialize();
+#endif
+      return;
+    }
+
     if (image.isNull()) {
+      cacheable = false;
       QFileIconProvider provider;
       QIcon icon = provider.icon(QFileInfo(path));
       if (!icon.isNull()) {
@@ -357,7 +362,19 @@ void AsyncImageProvider::processImageTask(
       } else {
         reader.setScaledSize(requestedSize);
       }
+    } else {
+      // Full Resolution - Limit to 4K to prevent OOM / massive CPU stall on huge images
+      QSize originalSize = reader.size();
+      if (originalSize.isValid()) {
+        const int maxDim = 4096;
+        if (originalSize.width() > maxDim || originalSize.height() > maxDim) {
+          QSize scaledSize = originalSize;
+          scaledSize.scale(maxDim, maxDim, Qt::KeepAspectRatio);
+          reader.setScaledSize(scaledSize);
+        }
+      }
     }
+    
     if (reader.canRead()) {
       image = reader.read();
       if (image.isNull()) {
@@ -381,7 +398,7 @@ void AsyncImageProvider::processImageTask(
     if (virtualRot != 0) {
       QTransform t;
       t.rotate(virtualRot);
-      image = image.transformed(t, Qt::SmoothTransformation);
+      image = image.transformed(t, Qt::FastTransformation);
     }
 
     // OPTIMIZATION: Aggressive Downscaling
@@ -389,21 +406,31 @@ void AsyncImageProvider::processImageTask(
       if (image.width() > requestedSize.width() ||
           image.height() > requestedSize.height()) {
         image = image.scaled(requestedSize, Qt::KeepAspectRatio,
-                             Qt::SmoothTransformation);
+                             Qt::FastTransformation);
+      }
+    } else {
+      // Absolute safety cap for full-screen images to prevent RAM/VRAM exhaustion
+      const int maxDim = 4096;
+      if (image.width() > maxDim || image.height() > maxDim) {
+        image = image.scaled(maxDim, maxDim, Qt::KeepAspectRatio,
+                             Qt::FastTransformation);
       }
     }
     AsyncImageProvider::insertCachedImage(id, image, requestedSize);
 
-    // Write to Disk Cache
-    QByteArray ba;
-    QBuffer buffer(&ba);
-    buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "JPG", 85);
-    FileCacheManager::instance().registerCachedData(path, requestedSize, ba);
+    // Write to Disk Cache ONLY for thumbnails, not for full resolution images
+    if (cacheable && requestedSize.isValid()) {
+      QByteArray ba;
+      QBuffer buffer(&ba);
+      buffer.open(QIODevice::WriteOnly);
+      image.save(&buffer, "JPG", 85);
+      FileCacheManager::instance().registerCachedData(path, requestedSize, ba);
+    }
 
     QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
                               Q_ARG(QImage, image));
   } else if (!isVideo) {
+    cacheable = false;
     // Placeholder
     image = QImage(100, 100, QImage::Format_RGB32);
     image.fill(Qt::yellow);

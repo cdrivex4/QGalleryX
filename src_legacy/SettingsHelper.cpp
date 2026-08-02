@@ -129,6 +129,21 @@ QVariantMap SettingsHelper::getCacheStats() {
   return AsyncImageProvider::getCacheStats();
 }
 
+#include "../src/FileCacheManager.h"
+#include <QFileInfo>
+
+QString SettingsHelper::getDiskCachePath() {
+    return FileCacheManager::instance().getDbPath();
+}
+
+qint64 SettingsHelper::getDiskCacheUsage() {
+    return QFileInfo(FileCacheManager::instance().getDbPath()).size();
+}
+
+void SettingsHelper::nukeDiskCache() {
+    FileCacheManager::instance().nukeCache();
+}
+
 void SettingsHelper::refreshGraphicsInfo(QObject *window) {
   if (!window)
     return;

@@ -102,6 +102,9 @@ public:
   Q_INVOKABLE QString getGpuName(QObject *window = nullptr);
   Q_INVOKABLE void refreshGraphicsInfo(QObject *window = nullptr);
 
+  Q_INVOKABLE QVariantList getCacheFiles() const;
+  Q_INVOKABLE void deleteCacheFile(const QString &fileName);
+
 signals:
   void graphicsApiChanged();
   void graphicsDriverChanged();

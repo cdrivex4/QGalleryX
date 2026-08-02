@@ -63,6 +63,9 @@ public:
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
+  Q_INVOKABLE QString getDiskCachePath();
+  Q_INVOKABLE qint64 getDiskCacheUsage();
+  Q_INVOKABLE void nukeDiskCache();
 
   // Placeholder for GPU info (implementation moved to SystemMonitor or
   // simplified)

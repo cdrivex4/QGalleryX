@@ -20,16 +20,12 @@ Item {
     onVisibleChanged: {
         if (visible) {
             forceActiveFocus()
-            if (typeof desktopHelper !== "undefined") {
-                desktopHelper.pauseBackgroundTasks()
-            }
+            taskScheduler.pauseBackground(true)
             if (currentIndex >= 0) {
                 listView.positionViewAtIndex(currentIndex, ListView.SnapPosition)
             }
         } else {
-            if (typeof desktopHelper !== "undefined") {
-                desktopHelper.resumeBackgroundTasks()
-            }
+            taskScheduler.pauseBackground(false)
         }
     }
 
@@ -145,10 +141,46 @@ Item {
                     height: Math.max(flickable.height, img.height)
                     transformOrigin: Item.Center
 
+                    Timer {
+                        id: prefetchTimer
+                        interval: 300
+                        running: !isVideo && filePath !== "" && !isCurrent
+                        onTriggered: {
+                            if (img.source.toString() === "") {
+                                img.source = "image://async/" + filePath
+                            }
+                        }
+                    }
+
+                    Image {
+                        id: thumbImg
+                        source: (!isVideo && filePath) ? "image://async/" + filePath : ""
+                        sourceSize: Qt.size(256, 256)
+                        width: flickable.width * flickable.zoom
+                        height: flickable.height * flickable.zoom
+                        anchors.centerIn: parent
+                        fillMode: Image.PreserveAspectFit
+                        asynchronous: true
+                        cache: true
+                        mipmap: true
+                        autoTransform: true
+                        opacity: img.status === Image.Ready ? 0 : 1
+                        Behavior on opacity { NumberAnimation { duration: 200 } }
+                    }
+
                     Image {
                         id: img
-                        source: (!isVideo && filePath) ? "image://async/" + filePath : ""
+                        source: (!isVideo && filePath && isCurrent) ? "image://async/" + filePath : ""
                         
+                        Connections {
+                            target: parent.parent.parent // The delegate Item
+                            function onIsCurrentChanged() {
+                                if (isCurrent && !isVideo && filePath !== "") {
+                                    img.source = "image://async/" + filePath
+                                }
+                            }
+                        }
+
                         // Bind size to zoom
                         width: flickable.width * flickable.zoom
                         height: flickable.height * flickable.zoom
@@ -168,6 +200,14 @@ Item {
                                 root.imageLoaded(endTime - startTime)
                             }
                         }
+                    }
+
+                    BusyIndicator {
+                        anchors.centerIn: parent
+                        width: 64
+                        height: 64
+                        running: img.status === Image.Loading && !isVideo
+                        visible: running
                     }
                 }
             }
@@ -252,12 +292,12 @@ Item {
                     
                     onPlaybackStateChanged: {
                         if (playbackState === MediaPlayer.PlayingState) {
-                            if (typeof desktopHelper !== 'undefined') {
-                                desktopHelper.pauseBackgroundTasks()
+                            if (root.model) {
+                                root.model.pauseBackgroundTasks()
                             }
                         } else {
-                            if (typeof desktopHelper !== 'undefined') {
-                                desktopHelper.resumeBackgroundTasks()
+                            if (root.model) {
+                                root.model.resumeBackgroundTasks()
                             }
                         }
                     }

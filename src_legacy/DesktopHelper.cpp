@@ -43,7 +43,7 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
   // Video
   if (ext == "mp4" || ext == "mkv" || ext == "avi" || ext == "mov" ||
       ext == "webm" || ext == "flv" || ext == "vob" || ext == "ogg" ||
-      ext == "ogv" || ext == "mts" || ext == "m2ts" || ext == "ts" ||
+      ext == "ogv" || ext == "mts" || ext == "m2ts" ||
       ext == "3gp") {
     return Video;
   }

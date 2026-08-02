@@ -6,6 +6,8 @@
 #include "FileCacheManager.h"
 #include <QCoreApplication>
 #include <QDebug>
+#include <QDir>
+#include <QFileInfo>
 #include <QProcess>
 #include <QQuickWindow>
 #include <QSGRendererInterface>
@@ -200,6 +202,26 @@ void SettingsHelper::clearDiskCache() { AsyncImageProvider::clearDiskCache(); }
 
 QString SettingsHelper::getDiskCacheLocation() const {
   return FileCacheManager::instance().getDbPath();
+}
+
+QVariantList SettingsHelper::getCacheFiles() const {
+  QVariantList list;
+  QDir cacheDir(FileCacheManager::instance().getDbPath());
+  if (!cacheDir.exists()) return list;
+
+  QFileInfoList files = cacheDir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot, QDir::Size | QDir::Reversed);
+  for (const QFileInfo &file : files) {
+    QVariantMap map;
+    map["name"] = file.fileName();
+    map["sizeMB"] = (file.size() / (1024.0 * 1024.0));
+    list.append(map);
+  }
+  return list;
+}
+
+void SettingsHelper::deleteCacheFile(const QString &fileName) {
+  QDir cacheDir(FileCacheManager::instance().getDbPath());
+  cacheDir.remove(fileName);
 }
 
 QString SettingsHelper::getGpuName(QObject *window) {

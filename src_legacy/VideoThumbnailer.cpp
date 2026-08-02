@@ -182,7 +182,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   }
 
   int retryCount = 0;
-  while (retryCount < 1) { // Removed 3x retry on black frames to stop CPU overloading
+  while (retryCount < 3) { // 3x retry on black frames
     if (cancelled && cancelled->load())
       return QImage();
 
@@ -207,10 +207,12 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
     avcodec_flush_buffers(cleanup.codecCtx);
 
     bool frameFound = false;
-    int maxPackets = 150; // Massively reduced from 2000 to prevent 6s network stalls on bad files
+    int maxPackets = 1500; // Increased to 1500 to prevent normal MP4s with lots of audio from failing
 
     while (maxPackets > 0 &&
            av_read_frame(cleanup.fmtCtx, cleanup.packet) >= 0) {
+      maxPackets--;
+      
       // Periodic cancellation/pause check
       if (maxPackets % 50 == 0) {
         if (cancelled && cancelled->load())
@@ -218,7 +220,6 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
       }
 
       if (cleanup.packet->stream_index == streamIdx) {
-        maxPackets--;
         int ret = avcodec_send_packet(cleanup.codecCtx, cleanup.packet);
         if (ret >= 0) {
           ret = avcodec_receive_frame(cleanup.codecCtx, cleanup.frame);
@@ -234,9 +235,11 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
     if (!frameFound) {
       qWarning() << "[" << timeLogStr
-                 << "][VideoThumbnailer] Failed to find frame after 2000 video "
-                    "packets at"
+                 << "][VideoThumbnailer] Failed to find frame after 150 video packets at"
                  << timeMs << "ms for" << path;
+      retryCount++;
+      timeMs += std::max(2000, (int)((cleanup.fmtCtx->duration / 1000) * 0.1));
+      continue;
     }
 
     if (frameFound) {
@@ -272,36 +275,44 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
       cleanup.swsCtx = sws_getContext(finalFrame->width, finalFrame->height,
                                       (enum AVPixelFormat)finalFrame->format,
-                                      dstW, dstH, AV_PIX_FMT_RGB24,
+                                      dstW, dstH, AV_PIX_FMT_BGRA,
                                       SWS_BILINEAR, nullptr, nullptr, nullptr);
       if (!cleanup.swsCtx)
         return QImage();
 
-      int numBytes = av_image_get_buffer_size(AV_PIX_FMT_RGB24, dstW, dstH, 1);
-      if (cleanup.buffer)
-        av_free(cleanup.buffer);
-      cleanup.buffer = (uint8_t *)av_malloc(numBytes);
+      QImage tmp(dstW, dstH, QImage::Format_RGB32);
+      uint8_t *dst_data[4] = { tmp.bits(), nullptr, nullptr, nullptr };
+      int dst_linesize[4] = { (int)tmp.bytesPerLine(), 0, 0, 0 };
 
-      if (!cleanup.rgbFrame)
-        cleanup.rgbFrame = av_frame_alloc();
-      else
-        av_frame_unref(cleanup.rgbFrame);
-
-      av_image_fill_arrays(cleanup.rgbFrame->data, cleanup.rgbFrame->linesize,
-                           cleanup.buffer, AV_PIX_FMT_RGB24, dstW, dstH, 1);
       sws_scale(cleanup.swsCtx, finalFrame->data, finalFrame->linesize, 0,
-                finalFrame->height, cleanup.rgbFrame->data,
-                cleanup.rgbFrame->linesize);
+                finalFrame->height, dst_data, dst_linesize);
 
-      QImage tmp((const uchar *)cleanup.rgbFrame->data[0], dstW, dstH,
-                 cleanup.rgbFrame->linesize[0], QImage::Format_RGB888);
-      return tmp.copy();
+      // Calculate average brightness to avoid pure black frames
+      long long totalLuminance = 0;
+      int step = std::max(1, dstH / 20); // sample evenly
+      int samples = 0;
+      for (int y = 0; y < dstH; y += step) {
+          const QRgb* line = reinterpret_cast<const QRgb*>(tmp.constScanLine(y));
+          for (int x = 0; x < dstW; x += step) {
+              QRgb pixel = line[x];
+              int r = qRed(pixel);
+              int g = qGreen(pixel);
+              int b = qBlue(pixel);
+              totalLuminance += (r * 299 + g * 587 + b * 114) / 1000;
+              samples++;
+          }
+      }
+      int avgLuminance = samples > 0 ? (totalLuminance / samples) : 0;
+      
+      if (avgLuminance > 15 || retryCount >= 2) {
+          return tmp;
+      }
+      
+      // Black frame detected, retry further into video
+      qDebug() << "[VideoThumbnailer] Black frame detected (Luminance: " << avgLuminance << "). Retrying...";
+      timeMs += std::max(2000, (int)((cleanup.fmtCtx->duration / 1000) * 0.1));
+      retryCount++;
     }
-
-    retryCount++;
-    timeMs = (cleanup.fmtCtx->duration != AV_NOPTS_VALUE)
-                 ? (cleanup.fmtCtx->duration * (0.1 * retryCount)) / 1000
-                 : timeMs + 2000;
   }
 
   return resultImage;

@@ -1,55 +1,56 @@
-# Pre-caching Architecture Plan & Impact Analysis
+# Pre-caching Architecture Plan & Impact Analysis (v2)
 
-Before we write a single line of code, here is exactly what this change entails, what systems it will touch, what the risks are, and what the expected outcomes will be.
+This document outlines the architecture, UI mapping, and fail-safes for the new Background Precaching engine and the user-facing "Snail Mode" control.
 
-## 1. Files & Dependencies Touched
+## 1. UI Integration: The Snail Button
+We will introduce a 3-state toggle button (Snail Icon) in the QML Action Bar next to the "Scan Folder" button. It controls the `precacheMode` exposed by the C++ `ImageModel`.
+
+1. 🐌 **White Snail (Strict Mode / Mode 0):** 
+   - **Behavior:** The precacher timer is disabled.
+   - **Result:** Ultimate battery saver. Zero off-screen processing. The system strictly waits for viewport visibility before decoding.
+2. 🐌 **Yellow Snail (Idle Mode / Mode 1):**
+   - **Behavior:** Dispatches tasks at `Low` priority.
+   - **Result:** Yields to UI. Only processes background thumbnails when the user is completely idle and not scrolling.
+3. 🐌 **Red Snail (Aggressive Mode / Mode 2):**
+   - **Behavior:** Dispatches tasks at `Normal` priority.
+   - **Result:** Saturates CPU cores. Ignores UI throttling and aggressively burns through the folder as fast as the hardware allows.
+
+## 2. Files & Dependencies Touched
 
 ### `TaskScheduler.h` & `TaskScheduler.cpp`
-**What we are changing:**
-- We will modify `addTask()` to accept a new optional parameter: `QString taskKey` (e.g., the file path).
-- We will add a method `hasImmediateTasks()` so external classes can check if the UI is currently demanding resources.
-- We will modify the internal enqueueing logic inside the `m_cpuMutex` lock. Before pushing a task, it will scan existing queues for the `taskKey`.
-- We will inject OS-level thread priority commands (`SetThreadPriority` on Windows) to drop the background worker threads to `THREAD_PRIORITY_BELOW_NORMAL`.
-
-**Dependencies/Risks:**
-- This is the core multi-threading engine for the entire app. Any bugs introduced here (deadlocks or race conditions) will cause the app to freeze.
-- We must ensure that scanning the queues for `taskKey` is O(N) but extremely fast, as holding `m_cpuMutex` blocks all thread dispatches. 
+**Changes:**
+- Modify `addTask()` to accept a new optional parameter: `QString taskKey` (e.g., the file path).
+- Add `hasImmediateTasks()` and `getQueueSize(Priority p)` so external classes can monitor saturation.
+- Update internal enqueueing inside `m_cpuMutex`. Before pushing a task, scan existing queues for `taskKey` and promote it to the higher priority if it already exists in a lower queue.
+- Inject OS-level thread priority commands (`SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL)`) on Windows to drop the background worker threads.
 
 ### `AsyncImageProvider.h` & `.cpp`
-**What we are changing:**
-- We will add a static `precache(const QString &path, const QSize &requestedSize)` method.
-- This method will check `FileCacheManager`. If the thumbnail exists, it safely aborts. If not, it decodes the image (using the existing LibRaw/QImageReader logic) and writes the result strictly to the disk cache.
-- We will update the existing `addTask` calls in this file to pass the image `id` (file path) as the `taskKey`.
-
-**Dependencies/Risks:**
-- We must ensure the `precache` method doesn't inadvertently trigger UI signals or allocate massive `QImage` blocks into the RAM cache needlessly. It should only write to disk and clear RAM immediately to avoid memory leaks.
+**Changes:**
+- Add a static `precache(const QString &path, const QSize &requestedSize)` method.
+- This method checks `FileCacheManager`. If a thumbnail exists, it aborts. If not, it decodes the image, resizes it, and writes the result strictly to the disk cache.
+- Update existing `addTask` calls to pass the image `path` as the `taskKey`.
 
 ### `ImageModel.h` & `.cpp`
-**What we are changing:**
-- We will introduce an `IdlePrecacheWorker` (likely driven by a `QTimer` running on the main thread).
-- After `scanDirectory` finishes loading all files into `m_allItems`, this timer activates.
-- Every ~50ms, it checks `TaskScheduler::hasImmediateTasks()`.
-  - If `true` (user is scrolling), it skips a beat and waits.
-  - If `false` (user is idle), it pops the next 3-5 images from `m_allItems` that are currently off-screen and dispatches them to `TaskScheduler::Low` priority.
+**Changes:**
+- Introduce a `QTimer` based `IdlePrecacheWorker`.
+- Expose `precacheMode` (int 0, 1, 2) to QML via `Q_PROPERTY`.
+- Introduce `std::atomic<uint64_t> m_precacheGeneration`.
 
-**Dependencies/Risks:**
-- `ImageModel` is heavily tied to QML. The timer must be extremely lightweight so it doesn't cause main-thread micro-stutters. By only checking a boolean and pushing a lambda, overhead is virtually zero.
+## 3. The Core Safety Nets (To Prevent Breakages)
 
----
-
-## 2. The Handoff Flow (Expected Behavior)
-
-1. **Idle state:** You open a folder of 1,000 RAW images. The first 20 show up immediately. The precacher begins walking from index 21 to 1,000, adding them to the `Low` priority queue.
-2. **The User Scrolls:** You suddenly jump to index 500. 
-3. **The Interception:** QML demands index 500 at `Immediate` priority.
-4. **The Promotion:** `TaskScheduler` receives the request for index 500. It sees that index 500 is currently sitting in the `Low` queue. It deletes it from the `Low` queue and inserts it into the `Immediate` queue.
-5. **The Throttle:** The precacher realizes `Immediate` tasks are now pending. It goes to sleep.
-6. **The Result:** The UI renders index 500 instantly. When you stop scrolling, the precacher wakes back up and continues filling the disk cache.
-
-## 3. Potential Breakages & Mitigations
-
-| Risk | Mitigation Strategy |
+| Risk | Mitigation Mechanism |
 | :--- | :--- |
-| **Deadlocking the Scheduler** | We will strictly limit `taskKey` deduplication checks to happen inside the existing mutex locks, preventing race conditions where a thread grabs a task right as we promote it. |
-| **Memory Bloat** | Background precaching will only write to the **Disk Cache** (`FileCacheManager`), NOT the RAM cache. This ensures the app doesn't consume gigabytes of RAM while idling in the background. |
-| **UI Stuttering** | We will leave 1 CPU core totally free and lower the OS thread priority. The OS scheduler will mathematically guarantee the UI thread takes precedence. |
+| **Priority Inversion / Duplicate Work** | **TaskKey Promotion:** If the UI suddenly demands a file currently sitting in the `Low` background queue, the `TaskScheduler` will rip the task out of the `Low` queue and instantly promote it to the `Immediate` queue. |
+| **Hang on Mode Switch** | **Generation Tokens:** Clicking the Snail button increments `m_precacheGeneration`. When a queued background task executes, it compares its internal token to the master token. If they mismatch (user changed modes), the task instantly aborts in nanoseconds, safely flushing the queue without processing. |
+| **RAM Bloat (Queue Saturation)** | **Submission Throttle:** When traversing a 50,000-image folder, the worker will check `TaskScheduler::getQueueSize()`. It will only maintain a maximum of 50 tasks in flight at any given time. This keeps RAM usage completely flat, no matter how large the folder is. |
+| **UI Stuttering** | **Hardware Isolation:** The UI runs on the main thread, while the `TaskScheduler` guarantees 1 physical CPU core remains totally idle. `Idle Mode` explicitly pauses itself if `hasImmediateTasks()` is true. |
+
+## 4. Expected Handoff Flow
+
+1. You open a massive folder and click the **Yellow Snail**.
+2. The UI renders the visible items (Immediate Priority).
+3. The precacher looks at the queue, sees it is empty, and pushes the next 50 off-screen images into the `Low` priority queue.
+4. You suddenly jump to index 500. QML demands index 500 at `Immediate` priority.
+5. The precacher detects `Immediate` activity and goes to sleep.
+6. The `TaskScheduler` intercepts index 500. If it was in the `Low` queue, it gets promoted.
+7. The UI renders smoothly. When you stop scrolling, the precacher wakes back up.

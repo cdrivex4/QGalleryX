@@ -97,6 +97,14 @@ void TaskScheduler::resume() {
   m_ioCondition.wakeAll();
 }
 
+void TaskScheduler::pauseBackground(bool pause) {
+  m_backgroundPaused = pause;
+  if (!pause) {
+    m_cpuCondition.wakeAll();
+    m_ioCondition.wakeAll();
+  }
+}
+
 bool TaskScheduler::isPaused() const {
   return m_paused;
 }
@@ -116,8 +124,10 @@ void TaskScheduler::cpuWorkerLoop() {
     {
       QMutexLocker lock(&m_cpuMutex);
       bool hasWork = false;
-      for (const auto &queue : m_cpuQueue) {
-        if (!queue.isEmpty()) {
+      for (auto it = m_cpuQueue.begin(); it != m_cpuQueue.end(); ++it) {
+        if (!it.value().isEmpty()) {
+          if (m_backgroundPaused && it.key() != Immediate)
+            continue;
           hasWork = true;
           break;
         }
@@ -129,8 +139,10 @@ void TaskScheduler::cpuWorkerLoop() {
         // Re-check after waking up
         hasWork = false;
         if (m_running && !m_paused) {
-          for (const auto &queue : m_cpuQueue) {
-            if (!queue.isEmpty()) {
+          for (auto it = m_cpuQueue.begin(); it != m_cpuQueue.end(); ++it) {
+            if (!it.value().isEmpty()) {
+              if (m_backgroundPaused && it.key() != Immediate)
+                continue;
               hasWork = true;
               break;
             }
@@ -147,9 +159,12 @@ void TaskScheduler::cpuWorkerLoop() {
       auto it = m_cpuQueue.begin();
       while (it != m_cpuQueue.end()) {
         if (!it.value().isEmpty()) {
+          if (m_backgroundPaused && it.key() != Immediate) {
+            ++it;
+            continue;
+          }
           task = it.value().dequeue();
           found = true;
-          // Garbage collect empty queues? Not strictly needed for enum keys
           break;
         }
         ++it;
@@ -180,8 +195,10 @@ void TaskScheduler::ioWorkerLoop() {
     {
       QMutexLocker lock(&m_ioMutex);
       bool hasWork = false;
-      for (const auto &queue : m_ioQueue) {
-        if (!queue.isEmpty()) {
+      for (auto it = m_ioQueue.begin(); it != m_ioQueue.end(); ++it) {
+        if (!it.value().isEmpty()) {
+          if (m_backgroundPaused && it.key() != Immediate)
+            continue;
           hasWork = true;
           break;
         }
@@ -190,11 +207,13 @@ void TaskScheduler::ioWorkerLoop() {
       while ((!hasWork || m_paused) && m_running) {
         m_ioCondition.wait(&m_ioMutex);
 
-        // Re-check
+        // Re-check after waking up
         hasWork = false;
         if (m_running && !m_paused) {
-          for (const auto &queue : m_ioQueue) {
-            if (!queue.isEmpty()) {
+          for (auto it = m_ioQueue.begin(); it != m_ioQueue.end(); ++it) {
+            if (!it.value().isEmpty()) {
+              if (m_backgroundPaused && it.key() != Immediate)
+                continue;
               hasWork = true;
               break;
             }
@@ -208,6 +227,10 @@ void TaskScheduler::ioWorkerLoop() {
       auto it = m_ioQueue.begin();
       while (it != m_ioQueue.end()) {
         if (!it.value().isEmpty()) {
+          if (m_backgroundPaused && it.key() != Immediate) {
+            ++it;
+            continue;
+          }
           task = it.value().dequeue();
           found = true;
           break;

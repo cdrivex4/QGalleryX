@@ -157,7 +157,7 @@ void AlbumModel::scanAlbums(const QString &path) {
     QStringList nameFilters;
     nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.bmp" << "*.gif";
 
-    QDirIterator it(cleanPath, nameFilters, QDir::Files,
+    QDirIterator it(cleanPath, nameFilters, QDir::Files | QDir::NoSymLinks,
                     QDirIterator::Subdirectories);
 
     // Batch updates to avoid blocking UI
