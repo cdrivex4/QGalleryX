@@ -2,6 +2,8 @@
 
 A modern Qt-based photo gallery application that replicates the functionality and user interface of Samsung's native gallery application. Built with C++ backend and QML frontend for optimal performance and user experience.
 
+In English - imagine a gallery for photos and videos on a Windows tablet or PC. It looks like Samsung's gallery app and I have gone through great pains to make it as fast and possible on low end hardware and scale to more powerful beasts. Point it to a folder of 20,000+ images and videos and it should show you everything, instantly. You can scroll through thousands of images and videos with no stutter, no lag, and no slowdowns. Pinch to zoom, rotate, pan, view full screen, copy to any folder that one/group of files so you can have , email, vie by albums, and whatever else you expect from a modern photo gallery app. It has a smart video thumbnailer that will find the best frame in a video to use as a thumbnail. It supports RAW files, HEIC/HEIF, videos, GIFs, and more. Infact if you have the HEIC formats the decode for that has been tweaked to use FFMPEG and GPU accleration. 
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Qt](https://img.shields.io/badge/Qt-6.4+-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows-orange.svg)
