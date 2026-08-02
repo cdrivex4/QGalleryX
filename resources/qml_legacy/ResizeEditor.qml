@@ -56,30 +56,65 @@ Dialog {
             spacing: 20
             
             // Left: Preview
-            Rectangle {
+            RowLayout {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.preferredWidth: 2
-                color: "#1a1a1a"
-                border.color: "#3d3d3d"
-                radius: 4
+                spacing: 10
                 
-                Image {
-                    id: previewImage
-                    anchors.fill: parent
-                    anchors.margins: 2
-                    fillMode: Image.PreserveAspectFit
-                    source: resizeEditor.currentImagePath
-                    asynchronous: true
+                // Original View
+                Rectangle {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    color: "#1a1a1a"
+                    border.color: "#3d3d3d"
+                    radius: 4
+                    
+                    Image {
+                        anchors.fill: parent
+                        anchors.margins: 2
+                        fillMode: Image.PreserveAspectFit
+                        source: "image://async/" + resizeEditor.currentImagePath
+                        asynchronous: true
+                    }
+                    
+                    Text {
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 10
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "Before"
+                        color: "#888"
+                        font.pixelSize: 12
+                        font.bold: true
+                    }
                 }
                 
-                Text {
-                    anchors.bottom: parent.bottom
-                    anchors.margins: 10
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: resizeEditor.currentImagePath ? resizeEditor.currentImagePath.substring(resizeEditor.currentImagePath.lastIndexOf('/') + 1) : "No Selection"
-                    color: "#888"
-                    font.pixelSize: 12
+                // Preview View
+                Rectangle {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    color: "#1a1a1a"
+                    border.color: "#3d3d3d"
+                    radius: 4
+                    
+                    Image {
+                        id: previewImage
+                        anchors.fill: parent
+                        anchors.margins: 2
+                        fillMode: Image.PreserveAspectFit
+                        source: resizeEditor.currentImagePath
+                        asynchronous: true
+                    }
+                    
+                    Text {
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 10
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "After Preview"
+                        color: "#888"
+                        font.pixelSize: 12
+                        font.bold: true
+                    }
                 }
             }
             
@@ -158,17 +193,32 @@ Dialog {
                     ColumnLayout {
                         width: parent.width
                         
-                        Text { text: "Quality: " + resizeEditor.quality + "%"; color: "white" }
+                        Text { text: resizeEditor.quality === 101 ? "Quality: Lossless (PNG)" : "Quality: " + resizeEditor.quality + "%"; color: "white" }
                         Slider {
                             id: qualitySlider
                             from: 10; to: 100
                             value: resizeEditor.quality
                             stepSize: 5
                             Layout.fillWidth: true
+                            enabled: !losslessCheck.checked
                             onMoved: {
                                 resizeEditor.quality = value
                                 updateSizeEstimate()
                             }
+                        }
+                        CheckBox {
+                            id: losslessCheck
+                            text: "Lossless Output (No Degradation)"
+                            checked: resizeEditor.quality === 101
+                            onCheckedChanged: {
+                                if (checked) {
+                                    resizeEditor.quality = 101
+                                } else {
+                                    resizeEditor.quality = qualitySlider.value
+                                }
+                                updateSizeEstimate()
+                            }
+                            contentItem: Text { text: parent.text; color: "#aaa"; leftPadding: 26; verticalAlignment: Text.AlignVCenter }
                         }
                     }
                 }

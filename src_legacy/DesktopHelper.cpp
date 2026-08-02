@@ -1,6 +1,7 @@
 #include "DesktopHelper.h"
 #include <QDebug>
-#include <QDesktopServices>
+#include <QSettings>
+#include <QTransform>
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
@@ -85,9 +86,23 @@ QVariantMap DesktopHelper::generateResizePreview(const QString &sourcePath, int 
     QImage img = reader.read();
     if (img.isNull()) return result;
 
-    QString tempPath = QDir::tempPath() + "/preview_antigravity.jpg";
-    QImageWriter writer(tempPath, "jpg");
-    writer.setQuality(quality);
+    QSettings settings("SamsungClone", "VirtualRotations");
+    int virtualRot = settings.value(sourcePath, 0).toInt();
+    if (virtualRot != 0) {
+        QTransform t;
+        t.rotate(virtualRot);
+        img = img.transformed(t, Qt::SmoothTransformation);
+    }
+
+    QString tempPath = QDir::tempPath() + "/preview_cache_" + QString::number(qHash(sourcePath)) + (quality == 101 ? ".png" : ".jpg");
+    QImageWriter writer(tempPath);
+    if (quality == 101) {
+        writer.setFormat("png");
+        writer.setQuality(100);
+    } else {
+        writer.setFormat("jpg");
+        writer.setQuality(quality);
+    }
     if (compression >= 0) {
         writer.setCompression(compression);
     }
@@ -106,6 +121,9 @@ void DesktopHelper::exportImages(const QStringList &paths, const QString &destin
     for (const QString &path : paths) {
         QFileInfo fi(path);
         QString destPath = dir.absoluteFilePath(fi.fileName());
+        if (quality == 101) {
+            destPath = dir.absoluteFilePath(fi.baseName() + ".png");
+        }
 
         QImageReader reader(path);
         if (reader.canRead()) {
@@ -118,8 +136,21 @@ void DesktopHelper::exportImages(const QStringList &paths, const QString &destin
 
             QImage img = reader.read();
             if (!img.isNull()) {
+                QSettings settings("SamsungClone", "VirtualRotations");
+                int virtualRot = settings.value(path, 0).toInt();
+                if (virtualRot != 0) {
+                    QTransform t;
+                    t.rotate(virtualRot);
+                    img = img.transformed(t, Qt::SmoothTransformation);
+                }
+
                 QImageWriter writer(destPath);
-                writer.setQuality(quality);
+                if (quality == 101) {
+                    writer.setFormat("png");
+                    writer.setQuality(100);
+                } else {
+                    writer.setQuality(quality);
+                }
                 if (compression >= 0) writer.setCompression(compression);
                 writer.write(img);
             }

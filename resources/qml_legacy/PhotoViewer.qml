@@ -228,6 +228,7 @@ Item {
             Item {
                 anchors.fill: parent
                 visible: isVideo
+                property int currentRotation: filePath ? imageProcessor.getVirtualRotation(filePath) : 0
                 
                 MediaPlayer {
                     id: player
@@ -295,7 +296,10 @@ Item {
                 
                 VideoOutput {
                     id: videoOutput
-                    anchors.fill: parent
+                    anchors.centerIn: parent
+                    width: (parent.currentRotation % 180 === 0) ? parent.width : parent.height
+                    height: (parent.currentRotation % 180 === 0) ? parent.height : parent.width
+                    rotation: parent.currentRotation
                     fillMode: VideoOutput.PreserveAspectFit
                 }
                 
@@ -381,6 +385,20 @@ Item {
                             }
                             color: "white"
                             font.pixelSize: 14
+                        }
+                        
+                        // Rotate Video Button
+                        Button {
+                            text: "↻ Rotate"
+                            flat: true
+                            contentItem: Text { text: parent.text; color: "white"; font.pixelSize: 14; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+                            background: Rectangle { color: parent.hovered ? "#44ffffff" : "transparent"; radius: 4 }
+                            onClicked: {
+                                imageProcessor.rotateImageVirtual(filePath, 90)
+                                imageProcessor.clearImageCache()
+                                // Update the property bound to the VideoOutput rotation
+                                parent.parent.parent.currentRotation = imageProcessor.getVirtualRotation(filePath)
+                            }
                         }
                     }
                 }

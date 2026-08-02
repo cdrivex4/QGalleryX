@@ -1,6 +1,9 @@
 #include "ImageProcessor.h"
+#include "../src_legacy/AsyncImageProvider.h"
+#include "FileCacheManager.h"
 #include <QDebug>
 #include <QImage>
+#include <QSettings>
 
 ImageProcessor::ImageProcessor(QObject *parent) : QObject(parent) {}
 
@@ -52,4 +55,24 @@ bool ImageProcessor::rotateImage(const QString &sourcePath, int degrees) {
   qDebug() << "ImageProcessor: Successfully rotated" << sourcePath << "by"
            << degrees << "degrees";
   return true;
+}
+
+void ImageProcessor::clearImageCache() {
+  AsyncImageProvider::clearCache();
+  FileCacheManager::instance().clearCache();
+  qDebug() << "ImageProcessor: Image cache cleared (both RAM and Disk).";
+}
+
+void ImageProcessor::rotateImageVirtual(const QString &sourcePath, int degrees) {
+  QSettings settings("SamsungClone", "VirtualRotations");
+  int current = settings.value(sourcePath, 0).toInt();
+  current = (current + degrees) % 360;
+  if (current < 0) current += 360;
+  settings.setValue(sourcePath, current);
+  qDebug() << "ImageProcessor: Virtual rotation set to" << current << "for" << sourcePath;
+}
+
+int ImageProcessor::getVirtualRotation(const QString &sourcePath) {
+  QSettings settings("SamsungClone", "VirtualRotations");
+  return settings.value(sourcePath, 0).toInt();
 }

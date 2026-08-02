@@ -376,6 +376,14 @@ void AsyncImageProvider::processImageTask(
 
   // --- Post Processing & Downscaling ---
   if (!image.isNull()) {
+    QSettings settings("SamsungClone", "VirtualRotations");
+    int virtualRot = settings.value(path, 0).toInt();
+    if (virtualRot != 0) {
+      QTransform t;
+      t.rotate(virtualRot);
+      image = image.transformed(t, Qt::SmoothTransformation);
+    }
+
     // OPTIMIZATION: Aggressive Downscaling
     if (requestedSize.isValid() && !requestedSize.isEmpty()) {
       if (image.width() > requestedSize.width() ||

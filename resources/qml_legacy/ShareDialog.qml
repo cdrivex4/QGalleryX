@@ -1,16 +1,13 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Dialog {
     id: shareDialog
     
-    // Support injected model
-    property var model: imageModel // Default to global, can be overridden
-    
-    // The specific paths to share. If empty, uses model selection.
+    property var model: null
     property var targetPaths: []
-    property bool isSingleMode: targetPaths.length === 1 || (targetPaths.length === 0 && model && model.selectedCount === 1)
     
     title: {
         var count = targetPaths.length > 0 ? targetPaths.length : (model ? model.selectedCount : 0)
@@ -18,36 +15,94 @@ Dialog {
     }
     modal: true
     anchors.centerIn: parent
+    width: 320
     
-    ColumnLayout {
-        spacing: 15
-        width: 300
+    background: Rectangle {
+        color: "#1e1e1e"
+        radius: 8
+        border.color: "#333"
+    }
+
+    // Custom header to override default light title bar
+    header: Rectangle {
+        color: "#2a2a2a"
+        height: 50
+        radius: 8
+        
+        // Hide bottom rounded corners to merge with content
+        Rectangle {
+            anchors.bottom: parent.bottom
+            width: parent.width
+            height: 8
+            color: "#2a2a2a"
+        }
         
         Text {
-            text: "Choose validation action:" // "share functionality ... takes you to another screen where you can decide"
+            anchors.centerIn: parent
+            text: shareDialog.title
+            color: "white"
+            font.pixelSize: 16
+            font.bold: true
+        }
+    }
+
+    FolderDialog {
+        id: folderDialog
+        title: "Select Destination Folder"
+        onAccepted: {
+            var destinationUrl = folderDialog.selectedFolder
+            // Convert file:/// path to native path
+            var destPath = destinationUrl.toString().replace("file:///", "")
+            
+            var paths = shareDialog.targetPaths.length > 0 ? shareDialog.targetPaths : shareDialog.model.getSelectedPaths()
+            if (paths.length === 0) return
+            
+            var cleanPaths = []
+            for (var i = 0; i < paths.length; i++) {
+                cleanPaths.push(paths[i].replace("file:///", "").replace("file:", ""))
+            }
+            
+            desktopHelper.copyFiles(cleanPaths, destPath)
+            
+            // Clear selection after sharing
+            if (shareDialog.model) {
+                shareDialog.model.clearSelection()
+            }
+            shareDialog.close()
+        }
+    }
+    
+    contentItem: ColumnLayout {
+        spacing: 15
+        
+        Text {
+            text: "Choose an action:"
             font.pixelSize: 14
-            color: "#FFFFFF"
+            color: "#aaa"
             Layout.fillWidth: true
+            Layout.bottomMargin: 10
         }
 
-        // Resize for Email Preset
+        // Email Resize Preset
         Button {
             text: "Resize for Email (Small)"
             Layout.fillWidth: true
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: 45
+            background: Rectangle { color: parent.hovered ? "#3d3d3d" : "#333"; radius: 6 }
+            contentItem: Text { text: parent.text; color: "white"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+            
             onClicked: {
-                var paths = shareDialog.targetPaths.length > 0 ? shareDialog.targetPaths : model.getSelectedPaths()
+                var paths = shareDialog.targetPaths.length > 0 ? shareDialog.targetPaths : shareDialog.model.getSelectedPaths()
                 if (paths.length === 0) return
 
-                console.log("Email resize triggered for", paths.length, "images")
-                shareDialog.close()
-                // Directly trigger a batch resize with preset 1024x768
                 var desktopPath = Qt.platform.homePath + "/Desktop/"
                 var cleanPaths = []
                 for (var i = 0; i < paths.length; i++) {
                     cleanPaths.push(paths[i].replace("file:///", "").replace("file:", ""))
                 }
                 desktopHelper.exportImages(cleanPaths, desktopPath, 1024, 768, 80, -1)
+                if (shareDialog.model) shareDialog.model.clearSelection()
+                shareDialog.close()
             }
         }
         
@@ -55,38 +110,32 @@ Dialog {
         Button {
             text: "Resize Manually..."
             Layout.fillWidth: true
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: 45
+            background: Rectangle { color: parent.hovered ? "#3d3d3d" : "#333"; radius: 6 }
+            contentItem: Text { text: parent.text; color: "white"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+            
             onClicked: {
-                var paths = shareDialog.targetPaths.length > 0 ? shareDialog.targetPaths : model.getSelectedPaths()
+                var paths = shareDialog.targetPaths.length > 0 ? shareDialog.targetPaths : shareDialog.model.getSelectedPaths()
                 if (paths.length === 0) return
 
                 shareDialog.close()
                 resizeEditor.targetPaths = paths
-                // For preview, use first image
                 resizeEditor.currentImagePath = paths[0].startsWith("file:") ? paths[0] : "file:///" + paths[0]
-                
-                // If we have explicit targetPaths, we might need a way to get their size if not selected
-                // But usually this comes from the viewer or gallery selection
-                resizeEditor.originalSizeBytes = (shareDialog.targetPaths.length === 0) ? model.getSelectedTotalSizeBytes() : 0 
+                resizeEditor.originalSizeBytes = (shareDialog.targetPaths.length === 0) ? shareDialog.model.getSelectedTotalSizeBytes() : 0 
                 resizeEditor.open()
             }
         }
         
+        // Send to Folder
         Button {
             text: "Send to Folder / Device"
             Layout.fillWidth: true
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: 45
+            background: Rectangle { color: parent.hovered ? "#2196F3" : "#1976D2"; radius: 6 }
+            contentItem: Text { text: parent.text; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+            
             onClicked: {
-                var paths = shareDialog.targetPaths.length > 0 ? shareDialog.targetPaths : model.getSelectedPaths()
-                if (paths.length === 0) return
-                console.log("Copying", paths.length, "original images to Desktop")
-                var desktopPath = Qt.platform.homePath + "/Desktop/"
-                var cleanPaths = []
-                for (var i = 0; i < paths.length; i++) {
-                    cleanPaths.push(paths[i].replace("file:///", "").replace("file:", ""))
-                }
-                desktopHelper.copyFiles(cleanPaths, desktopPath)
-                shareDialog.close()
+                folderDialog.open()
             }
         }
         
@@ -94,19 +143,18 @@ Dialog {
             Layout.fillWidth: true
             height: 1
             color: "#404040"
+            Layout.topMargin: 5
+            Layout.bottomMargin: 5
         }
         
         Button {
             text: "Cancel"
             Layout.fillWidth: true
             Layout.preferredHeight: 40
+            flat: true
+            background: Rectangle { color: parent.hovered ? "#2a2a2a" : "transparent"; radius: 6 }
+            contentItem: Text { text: parent.text; color: "#aaa"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
             onClicked: shareDialog.close()
         }
-    }
-    
-    // Resize Editor
-    ResizeEditor {
-        id: resizeEditor
-        parent: Overlay.overlay
     }
 }

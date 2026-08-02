@@ -36,7 +36,7 @@ QGalleryX is a feature-rich photo gallery application designed to provide a smoo
 ### Core Functionality
 - **Grid-based browsing** with dynamic thumbnail sizing
 - **Full-screen photo viewer** with zoom and navigation
-- **Video file support** (placeholder implementation)
+- **Video file support** with live rotation playback
 - **Date-based organization** with smart grouping
 - **Performance overlay** with real-time statistics
 
@@ -46,6 +46,7 @@ QGalleryX is a feature-rich photo gallery application designed to provide a smoo
 - **GPU Hardware Acceleration** with Direct3D 11 (D3D11VA) for Video decoding
 - **GPU-Accelerated HEIC/HEIF Decoding**: Natively routes High-Efficiency Image Containers through FFmpeg's video pipeline, providing full D3D11 hardware acceleration for HEIC photos.
 - **Smart Video Thumbnails** with Black Frame Detection (skips dark intros)
+- **Non-Destructive Virtual Rotation**: 100% memory-based image and video rotation that guarantees original source files remain untouched.
 - **Background processing** for file operations
 - **Smart resource management** with RAII-based FFmpeg handling
 

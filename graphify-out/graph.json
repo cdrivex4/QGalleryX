@@ -350,7 +350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h",
-      "community": 84,
+      "community": 17,
       "norm_label": "albummodel.h"
     },
     {
@@ -360,7 +360,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albuminfo",
-      "community": 84,
+      "community": 23,
       "norm_label": "albuminfo"
     },
     {
@@ -370,7 +370,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_qstring",
-      "community": 65,
+      "community": 17,
       "norm_label": "qstring"
     },
     {
@@ -380,7 +380,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albuminfo_name",
-      "community": 84,
+      "community": 23,
       "norm_label": "name"
     },
     {
@@ -390,7 +390,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albuminfo_path",
-      "community": 84,
+      "community": 23,
       "norm_label": "path"
     },
     {
@@ -410,7 +410,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albuminfo_coverpaths",
-      "community": 84,
+      "community": 23,
       "norm_label": "coverpaths"
     },
     {
@@ -420,7 +420,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albuminfo_count",
-      "community": 84,
+      "community": 23,
       "norm_label": "count"
     },
     {
@@ -440,7 +440,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qabstractlistmodel",
-      "community": 90,
+      "community": 17,
       "norm_label": "qabstractlistmodel"
     },
     {
@@ -510,7 +510,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_data",
-      "community": 67,
+      "community": 23,
       "norm_label": "data"
     },
     {
@@ -610,7 +610,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_qvector",
-      "community": 58,
+      "community": 17,
       "norm_label": "qvector"
     },
     {
@@ -640,7 +640,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_atomic",
-      "community": 76,
+      "community": 53,
       "norm_label": "atomic"
     },
     {
@@ -690,7 +690,7 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate",
-      "community": 73,
+      "community": 51,
       "norm_label": "queueguardstate"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_drive",
-      "community": 73,
+      "community": 51,
       "norm_label": "drive"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_taskid",
-      "community": 73,
+      "community": 51,
       "norm_label": "taskid"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_executed",
-      "community": 73,
+      "community": 51,
       "norm_label": "executed"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_queueguardstate",
-      "community": 73,
+      "community": 51,
       "norm_label": ".queueguardstate()"
     },
     {
@@ -880,7 +880,7 @@
       "source_location": "L395",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_asyncimageprovider",
-      "community": 53,
+      "community": 0,
       "norm_label": "asyncimageprovider::asyncimageprovider()"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L520",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 51,
+      "community": 20,
       "norm_label": "asyncimageprovider::delivertopending()"
     },
     {
@@ -1060,7 +1060,7 @@
       "source_location": "L619",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 53,
+      "community": 0,
       "norm_label": "asyncimageprovider::schedulestagingprocessing()"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h",
-      "community": 76,
+      "community": 53,
       "norm_label": "asyncimageprovider.h"
     },
     {
@@ -1200,7 +1200,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qmutex",
-      "community": 76,
+      "community": 53,
       "norm_label": "qmutex"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qrunnable",
-      "community": 76,
+      "community": 53,
       "norm_label": "qrunnable"
     },
     {
@@ -1350,7 +1350,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qsize",
-      "community": 81,
+      "community": 58,
       "norm_label": "qsize"
     },
     {
@@ -1450,7 +1450,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qquickasyncimageprovider",
-      "community": 76,
+      "community": 53,
       "norm_label": "qquickasyncimageprovider"
     },
     {
@@ -1610,7 +1610,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qmap",
-      "community": 53,
+      "community": 58,
       "norm_label": "qmap"
     },
     {
@@ -1670,7 +1670,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetask",
-      "community": 67,
+      "community": 35,
       "norm_label": "processimagetask"
     },
     {
@@ -1790,7 +1790,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qcache",
-      "community": 76,
+      "community": 53,
       "norm_label": "qcache"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 51,
+      "community": 20,
       "norm_label": "schedulestagingprocessing"
     },
     {
@@ -1970,7 +1970,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_desktophelper_h_src_desktophelper",
-      "community": 57,
+      "community": 65,
       "norm_label": "desktophelper.h"
     },
     {
@@ -1990,7 +1990,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qobject",
-      "community": 17,
+      "community": 65,
       "norm_label": "qobject"
     },
     {
@@ -2160,7 +2160,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_fastvolumescanner_h",
-      "community": 37,
+      "community": 58,
       "norm_label": "fastvolumescanner.h"
     },
     {
@@ -3320,7 +3320,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qset",
-      "community": 65,
+      "community": 53,
       "norm_label": "qset"
     },
     {
@@ -3360,7 +3360,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_framebudgetscheduler_framebudgetscheduler",
-      "community": 25,
+      "community": 65,
       "norm_label": "framebudgetscheduler::framebudgetscheduler()"
     },
     {
@@ -3610,7 +3610,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h_qelapsedtimer",
-      "community": 67,
+      "community": 58,
       "norm_label": "qelapsedtimer"
     },
     {
@@ -3630,7 +3630,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h_qqueue",
-      "community": 53,
+      "community": 76,
       "norm_label": "qqueue"
     },
     {
@@ -3820,7 +3820,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_sourcemodel",
-      "community": 22,
+      "community": 67,
       "norm_label": "sourcemodel"
     },
     {
@@ -4160,7 +4160,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_h",
-      "community": 17,
+      "community": 65,
       "norm_label": "hardwareaccelerationmanager.h"
     },
     {
@@ -5169,18 +5169,18 @@
       "source_file": "src/ImageProcessor.cpp",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_cpp",
-      "community": 81,
+      "id": "src_imageprocessor_cpp_src_imageprocessor",
+      "community": 73,
       "norm_label": "imageprocessor.cpp"
     },
     {
       "label": "ImageProcessor::ImageProcessor()",
       "file_type": "code",
       "source_file": "src/ImageProcessor.cpp",
-      "source_location": "L5",
+      "source_location": "L8",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_imageprocessor_imageprocessor",
-      "community": 81,
+      "id": "src_imageprocessor_imageprocessor_imageprocessor",
+      "community": 73,
       "norm_label": "imageprocessor::imageprocessor()"
     },
     {
@@ -5189,8 +5189,8 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_cpp_qobject",
-      "community": 139,
+      "id": "src_imageprocessor_cpp_qobject",
+      "community": 73,
       "norm_label": "qobject"
     },
     {
@@ -5199,8 +5199,8 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_cpp_qstring",
-      "community": 141,
+      "id": "src_imageprocessor_cpp_qstring",
+      "community": 73,
       "norm_label": "qstring"
     },
     {
@@ -5209,8 +5209,8 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_cpp_qsize",
-      "community": 140,
+      "id": "src_imageprocessor_cpp_qsize",
+      "community": 73,
       "norm_label": "qsize"
     },
     {
@@ -5219,8 +5219,8 @@
       "source_file": "src/ImageProcessor.h",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_h",
-      "community": 81,
+      "id": "src_imageprocessor_h_src_imageprocessor",
+      "community": 58,
       "norm_label": "imageprocessor.h"
     },
     {
@@ -5229,8 +5229,8 @@
       "source_file": "src/ImageProcessor.h",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_imageprocessor",
-      "community": 81,
+      "id": "src_imageprocessor_imageprocessor",
+      "community": 73,
       "norm_label": "imageprocessor"
     },
     {
@@ -5239,8 +5239,8 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_h_q_object",
-      "community": 142,
+      "id": "src_imageprocessor_h_q_object",
+      "community": 73,
       "norm_label": "q_object"
     },
     {
@@ -5249,8 +5249,8 @@
       "source_file": "src/ImageProcessor.h",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_imageprocessor_public",
-      "community": 81,
+      "id": "src_imageprocessor_imageprocessor_public",
+      "community": 73,
       "norm_label": "public"
     },
     {
@@ -5259,8 +5259,8 @@
       "source_file": "src/ImageProcessor.h",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_imageprocessor_resizeimage",
-      "community": 81,
+      "id": "src_imageprocessor_imageprocessor_resizeimage",
+      "community": 73,
       "norm_label": "resizeimage"
     },
     {
@@ -5269,18 +5269,48 @@
       "source_file": "src/ImageProcessor.h",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_imageprocessor_rotateimage",
-      "community": 81,
+      "id": "src_imageprocessor_imageprocessor_rotateimage",
+      "community": 73,
       "norm_label": "rotateimage"
+    },
+    {
+      "label": "rotateImageVirtual",
+      "file_type": "code",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "src_imageprocessor_imageprocessor_rotateimagevirtual",
+      "community": 73,
+      "norm_label": "rotateimagevirtual"
+    },
+    {
+      "label": "getVirtualRotation",
+      "file_type": "code",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "src_imageprocessor_imageprocessor_getvirtualrotation",
+      "community": 73,
+      "norm_label": "getvirtualrotation"
+    },
+    {
+      "label": "clearImageCache",
+      "file_type": "code",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "src_imageprocessor_imageprocessor_clearimagecache",
+      "community": 73,
+      "norm_label": "clearimagecache"
     },
     {
       "label": "imageProcessingError",
       "file_type": "code",
       "source_file": "src/ImageProcessor.h",
-      "source_location": "L19",
+      "source_location": "L22",
       "_origin": "ast",
-      "id": "d_dev_antigravity_src_imageprocessor_imageprocessor_imageprocessingerror",
-      "community": 81,
+      "id": "src_imageprocessor_imageprocessor_imageprocessingerror",
+      "community": 73,
       "norm_label": "imageprocessingerror"
     },
     {
@@ -5710,7 +5740,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_cpp_src_passivereadlatencyguard",
-      "community": 57,
+      "community": 76,
       "norm_label": "passivereadlatencyguard.cpp"
     },
     {
@@ -5720,7 +5750,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_passivereadlatencyguard",
-      "community": 57,
+      "community": 76,
       "norm_label": "passivereadlatencyguard::passivereadlatencyguard()"
     },
     {
@@ -5730,7 +5760,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_cpp_qobject",
-      "community": 57,
+      "community": 76,
       "norm_label": "qobject"
     },
     {
@@ -5740,7 +5770,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "readscope",
-      "community": 57,
+      "community": 43,
       "norm_label": "readscope"
     },
     {
@@ -5750,7 +5780,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_cpp_qstring",
-      "community": 57,
+      "community": 43,
       "norm_label": "qstring"
     },
     {
@@ -5760,7 +5790,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_cpp_qint64",
-      "community": 57,
+      "community": 43,
       "norm_label": "qint64"
     },
     {
@@ -5780,7 +5810,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats",
-      "community": 57,
+      "community": 43,
       "norm_label": "drivelatencystats"
     },
     {
@@ -5790,7 +5820,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_samplecount",
-      "community": 57,
+      "community": 43,
       "norm_label": "samplecount"
     },
     {
@@ -5800,7 +5830,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_totalms",
-      "community": 57,
+      "community": 43,
       "norm_label": "totalms"
     },
     {
@@ -5810,7 +5840,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_avgms",
-      "community": 57,
+      "community": 43,
       "norm_label": "avgms"
     },
     {
@@ -5820,7 +5850,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_m2",
-      "community": 57,
+      "community": 43,
       "norm_label": "m2"
     },
     {
@@ -5830,7 +5860,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_anomalycount",
-      "community": 57,
+      "community": 43,
       "norm_label": "anomalycount"
     },
     {
@@ -5840,7 +5870,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard",
-      "community": 57,
+      "community": 43,
       "norm_label": "passivereadlatencyguard"
     },
     {
@@ -5850,7 +5880,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_q_object",
-      "community": 57,
+      "community": 43,
       "norm_label": "q_object"
     },
     {
@@ -5860,7 +5890,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_public",
-      "community": 57,
+      "community": 43,
       "norm_label": "public"
     },
     {
@@ -5870,7 +5900,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_startread",
-      "community": 57,
+      "community": 43,
       "norm_label": "startread"
     },
     {
@@ -5880,7 +5910,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_endread",
-      "community": 57,
+      "community": 43,
       "norm_label": "endread"
     },
     {
@@ -5890,7 +5920,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_singlelatencyspike",
-      "community": 57,
+      "community": 43,
       "norm_label": "singlelatencyspike"
     },
     {
@@ -5900,7 +5930,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_drivelatencywarning",
-      "community": 57,
+      "community": 43,
       "norm_label": "drivelatencywarning"
     },
     {
@@ -5910,7 +5940,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_loganomaly",
-      "community": 57,
+      "community": 43,
       "norm_label": "loganomaly"
     },
     {
@@ -5920,7 +5950,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_qmutex",
-      "community": 57,
+      "community": 43,
       "norm_label": "qmutex"
     },
     {
@@ -5930,7 +5960,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_m_mutex",
-      "community": 57,
+      "community": 43,
       "norm_label": "m_mutex"
     },
     {
@@ -5940,7 +5970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_qmap",
-      "community": 57,
+      "community": 43,
       "norm_label": "qmap"
     },
     {
@@ -5950,7 +5980,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_qstring",
-      "community": 57,
+      "community": 43,
       "norm_label": "qstring"
     },
     {
@@ -5960,7 +5990,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_m_drivestats",
-      "community": 57,
+      "community": 43,
       "norm_label": "m_drivestats"
     },
     {
@@ -6030,7 +6060,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_settingshelper_h",
-      "community": 17,
+      "community": 65,
       "norm_label": "settingshelper.h"
     },
     {
@@ -6430,7 +6460,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_settingshelper_settingshelper_getgpuname",
-      "community": 17,
+      "community": 4,
       "norm_label": "getgpuname"
     },
     {
@@ -7640,7 +7670,7 @@
       "source_location": "L80",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpumutex",
-      "community": 67,
+      "community": 3,
       "norm_label": "m_cpumutex"
     },
     {
@@ -7660,7 +7690,7 @@
       "source_location": "L81",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpucondition",
-      "community": 3,
+      "community": 30,
       "norm_label": "m_cpucondition"
     },
     {
@@ -8010,7 +8040,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_visiblerangemanager_h",
-      "community": 65,
+      "community": 53,
       "norm_label": "visiblerangemanager.h"
     },
     {
@@ -8270,7 +8300,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_albummodel_h_src_legacy_albummodel",
-      "community": 58,
+      "community": 17,
       "norm_label": "albummodel.h"
     },
     {
@@ -8620,7 +8650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider",
-      "community": 43,
+      "community": 58,
       "norm_label": "asyncimageprovider.cpp"
     },
     {
@@ -8660,7 +8690,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_asyncimageresponse_texturefactory",
-      "community": 43,
+      "community": 58,
       "norm_label": "asyncimageresponse::texturefactory()"
     },
     {
@@ -8670,7 +8700,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_cpp_qquicktexturefactory",
-      "community": 43,
+      "community": 58,
       "norm_label": "qquicktexturefactory"
     },
     {
@@ -8680,7 +8710,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_asyncimageresponse_cancel",
-      "community": 43,
+      "community": 58,
       "norm_label": "asyncimageresponse::cancel()"
     },
     {
@@ -8750,7 +8780,7 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_asyncimageprovider_setcachemaxcost",
-      "community": 43,
+      "community": 58,
       "norm_label": "asyncimageprovider::setcachemaxcost()"
     },
     {
@@ -8760,7 +8790,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_asyncimageprovider_getcachestats",
-      "community": 43,
+      "community": 58,
       "norm_label": "asyncimageprovider::getcachestats()"
     },
     {
@@ -8770,7 +8800,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_cpp_qvariantmap",
-      "community": 43,
+      "community": 58,
       "norm_label": "qvariantmap"
     },
     {
@@ -8780,7 +8810,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_asyncimageprovider_clearcache",
-      "community": 43,
+      "community": 58,
       "norm_label": "asyncimageprovider::clearcache()"
     },
     {
@@ -8830,7 +8860,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_legacy_asyncimageprovider_h",
-      "community": 76,
+      "community": 53,
       "norm_label": "asyncimageprovider.h"
     },
     {
@@ -9147,7 +9177,7 @@
       "label": "DesktopHelper::DesktopHelper()",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L10",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_desktophelper",
       "community": 52,
@@ -9187,7 +9217,7 @@
       "label": "DesktopHelper::generateResizePreview()",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L70",
+      "source_location": "L71",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_generateresizepreview",
       "community": 52,
@@ -9220,7 +9250,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_h_src_legacy_desktophelper",
-      "community": 52,
+      "community": 58,
       "norm_label": "desktophelper.h"
     },
     {
@@ -9360,7 +9390,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_legacy_groupedproxymodel_groupedproxymodel_getyeardistribution",
-      "community": 67,
+      "community": 11,
       "norm_label": "groupedproxymodel::getyeardistribution()"
     },
     {
@@ -9530,7 +9560,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_legacy_groupedproxymodel_groupedproxymodel_sourcemodel",
-      "community": 90,
+      "community": 11,
       "norm_label": "sourcemodel"
     },
     {
@@ -9540,7 +9570,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_legacy_groupedproxymodel_groupedproxymodel_setsourcemodel",
-      "community": 90,
+      "community": 11,
       "norm_label": "setsourcemodel"
     },
     {
@@ -10000,7 +10030,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_h_src_legacy_imagemodel",
-      "community": 58,
+      "community": 17,
       "norm_label": "imagemodel.h"
     },
     {
@@ -12610,7 +12640,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "src_legacy_main_main",
-      "community": 57,
+      "community": 43,
       "norm_label": "main()"
     },
     {
@@ -13640,7 +13670,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_fastimageitem_h",
-      "community": 65,
+      "community": 19,
       "norm_label": "fastimageitem.h"
     },
     {
@@ -13950,7 +13980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_filetyperouter_h",
-      "community": 65,
+      "community": 53,
       "norm_label": "filetyperouter.h"
     },
     {
@@ -14080,7 +14110,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_framebudgetscheduler",
-      "community": 27,
+      "community": 65,
       "norm_label": "framebudgetscheduler::framebudgetscheduler()"
     },
     {
@@ -14900,7 +14930,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_framebudgetscheduler",
-      "community": 53,
+      "community": 1,
       "norm_label": "framebudgetscheduler"
     },
     {
@@ -14920,7 +14950,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_imageprocessor",
-      "community": 53,
+      "community": 1,
       "norm_label": "imageprocessor"
     },
     {
@@ -16060,7 +16090,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_h",
-      "community": 67,
+      "community": 17,
       "norm_label": "telemetrymonitor.h"
     },
     {
@@ -17140,7 +17170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "community": 17,
+      "community": 65,
       "norm_label": "tst_imagemodel.cpp"
     },
     {
@@ -17150,7 +17180,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel",
-      "community": 17,
+      "community": 65,
       "norm_label": "testimagemodel"
     },
     {
@@ -17160,7 +17190,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel_private",
-      "community": 17,
+      "community": 65,
       "norm_label": ".private()"
     },
     {
@@ -17180,7 +17210,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_mft_cpp",
-      "community": 37,
+      "community": 58,
       "norm_label": "tst_mft.cpp"
     },
     {
@@ -17813,17 +17843,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ImageProcessor.h",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_h",
-      "target": "d_dev_antigravity_src_albummodel_h_qstring",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src_legacy/SystemMonitor.cpp",
       "source_location": "L3",
       "weight": 1.0,
@@ -17949,6 +17968,17 @@
       "source_location": "L5",
       "weight": 1.0,
       "source": "src_filecachemanager_h_src_filecachemanager",
+      "target": "d_dev_antigravity_src_albummodel_h_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_imageprocessor_h_src_imageprocessor",
       "target": "d_dev_antigravity_src_albummodel_h_qstring",
       "confidence_score": 1.0
     },
@@ -18214,6 +18244,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_albummodel_albummodel",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/GroupedProxyModel.h",
@@ -18383,17 +18424,6 @@
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel",
       "target": "qabstractlistmodel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_albummodel_albummodel_data",
       "confidence_score": 1.0
     },
     {
@@ -18985,7 +19015,7 @@
       "source_location": "L3",
       "weight": 1.0,
       "source": "src_asyncimageprovider",
-      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_m_enabled",
+      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_completionsthisframe",
       "confidence_score": 1.0
     },
     {
@@ -20513,17 +20543,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ImageProcessor.h",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_h",
-      "target": "d_dev_antigravity_src_asyncimageprovider_h_qsize",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/FileCacheManager.h",
       "source_location": "L6",
       "weight": 1.0,
@@ -20535,11 +20554,11 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ImageProcessor.cpp",
-      "source_location": "L3",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L5",
       "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_cpp",
-      "target": "d_dev_antigravity_src_asyncimageprovider_h_qimage",
+      "source": "src_imageprocessor_h_src_imageprocessor",
+      "target": "d_dev_antigravity_src_asyncimageprovider_h_qsize",
       "confidence_score": 1.0
     },
     {
@@ -20572,6 +20591,17 @@
       "source_location": "L5",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_fastimageitem_h",
+      "target": "d_dev_antigravity_src_asyncimageprovider_h_qimage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
       "target": "d_dev_antigravity_src_asyncimageprovider_h_qimage",
       "confidence_score": 1.0
     },
@@ -21245,17 +21275,6 @@
       "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetask",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "INFERRED",
@@ -21872,38 +21891,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/ImageProcessor.h",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_h",
-      "target": "qobject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ImageProcessor.h",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_imageprocessor",
-      "target": "qobject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/ImageProcessor.cpp",
-      "source_location": "L5",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "source": "d_dev_antigravity_src_imageprocessor_imageprocessor_imageprocessor",
-      "target": "qobject",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.h",
       "source_location": "L8",
       "weight": 1.0,
@@ -22322,6 +22309,27 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_filecachemanager_h_src_filecachemanager",
+      "target": "qobject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_imageprocessor_h_src_imageprocessor",
+      "target": "qobject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_imageprocessor_imageprocessor",
       "target": "qobject",
       "confidence_score": 1.0
     },
@@ -22849,7 +22857,7 @@
       "source_location": "L6",
       "weight": 1.0,
       "source": "test_scrollbench_src_scrollbenchimagemodel",
-      "target": "d_dev_antigravity_src_fastvolumescanner_fastvolumescanner_getusnjournalstate",
+      "target": "d_dev_antigravity_src_fastvolumescanner_fastvolumescanner_m_hvol",
       "confidence_score": 1.0
     },
     {
@@ -23776,6 +23784,17 @@
       "weight": 1.0,
       "source": "src_filecachemanager_h_src_filecachemanager",
       "target": "src_filecachemanager_qhashcachedatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_filecachemanager_h_src_filecachemanager",
       "confidence_score": 1.0
     },
     {
@@ -25088,6 +25107,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L62",
+      "weight": 1.0,
+      "source": "src_imageprocessor_imageprocessor_clearimagecache",
+      "target": "src_filecachemanager_filecachemanager"
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
       "source_location": "L183",
       "weight": 1.0,
@@ -26170,6 +26200,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_sourcemodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src_legacy/GroupedProxyModel.h",
       "source_location": "L7",
       "weight": 1.0,
@@ -26308,17 +26349,6 @@
       "source_location": "L162",
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
-      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_detectcpufeatures",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_detectcpufeatures",
       "confidence_score": 1.0
     },
@@ -26573,6 +26603,17 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_tryinitialize"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_cpuinfo",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -27752,40 +27793,158 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "d_dev_antigravity_src_settingshelper_h_qsettings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
       "source_location": "L1",
       "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_cpp",
-      "target": "d_dev_antigravity_src_imageprocessor_h",
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_h_src_imageprocessor",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/ImageProcessor.cpp",
-      "source_location": "L5",
+      "source_location": "L60",
       "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_cpp",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_imageprocessor",
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_clearimagecache",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/ImageProcessor.cpp",
-      "source_location": "L7",
+      "source_location": "L75",
       "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_cpp",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_resizeimage",
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_getvirtualrotation",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/ImageProcessor.cpp",
-      "source_location": "L34",
+      "source_location": "L8",
       "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_cpp",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_rotateimage",
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_imageprocessor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_resizeimage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_rotateimage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_rotateimagevirtual",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_imageprocessor_cpp_src_imageprocessor",
+      "target": "src_legacy_asyncimageprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L8",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "src_imageprocessor_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_cpp_qobject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L75",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "src_imageprocessor_imageprocessor_getvirtualrotation",
+      "target": "src_imageprocessor_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_imageprocessor_imageprocessor_resizeimage",
+      "target": "src_imageprocessor_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "src_imageprocessor_imageprocessor_rotateimage",
+      "target": "src_imageprocessor_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L66",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "src_imageprocessor_imageprocessor_rotateimagevirtual",
+      "target": "src_imageprocessor_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.cpp",
+      "source_location": "L10",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "src_imageprocessor_imageprocessor_resizeimage",
+      "target": "src_imageprocessor_cpp_qsize",
       "confidence_score": 1.0
     },
     {
@@ -27794,19 +27953,41 @@
       "source_file": "src/ImageProcessor.h",
       "source_location": "L8",
       "weight": 1.0,
-      "source": "d_dev_antigravity_src_imageprocessor_h",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor",
+      "source": "src_imageprocessor_h_src_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor",
       "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L8",
+      "source_file": "src_legacy/main.cpp",
+      "source_location": "L26",
       "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_imageprocessor_h",
+      "source": "src_legacy_main",
+      "target": "src_imageprocessor_h_src_imageprocessor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/ScrollBenchImageModel.cpp",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "test_scrollbench_src_scrollbenchimagemodel",
+      "target": "src_imageprocessor_h_src_imageprocessor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L9",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_h_q_object",
       "confidence_score": 1.0
     },
     {
@@ -27816,8 +27997,30 @@
       "source_location": "L19",
       "weight": 1.0,
       "context": "field",
-      "source": "d_dev_antigravity_src_imageprocessor_imageprocessor",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_imageprocessingerror",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_clearimagecache",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_getvirtualrotation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L22",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_imageprocessingerror",
       "confidence_score": 1.0
     },
     {
@@ -27827,8 +28030,8 @@
       "source_location": "L10",
       "weight": 1.0,
       "context": "field",
-      "source": "d_dev_antigravity_src_imageprocessor_imageprocessor",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_public",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_public",
       "confidence_score": 1.0
     },
     {
@@ -27838,8 +28041,8 @@
       "source_location": "L13",
       "weight": 1.0,
       "context": "field",
-      "source": "d_dev_antigravity_src_imageprocessor_imageprocessor",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_resizeimage",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_resizeimage",
       "confidence_score": 1.0
     },
     {
@@ -27849,8 +28052,19 @@
       "source_location": "L16",
       "weight": 1.0,
       "context": "field",
-      "source": "d_dev_antigravity_src_imageprocessor_imageprocessor",
-      "target": "d_dev_antigravity_src_imageprocessor_imageprocessor_rotateimage",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_rotateimage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src/ImageProcessor.h",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_imageprocessor_imageprocessor",
+      "target": "src_imageprocessor_imageprocessor_rotateimagevirtual",
       "confidence_score": 1.0
     },
     {
@@ -29999,6 +30213,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src_legacy/DesktopHelper.cpp",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
+      "target": "d_dev_antigravity_src_settingshelper_h_qsettings",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/SystemMonitor.cpp",
@@ -31482,11 +31707,22 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src_legacy/TaskScheduler.h",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_src_legacy_taskscheduler_h",
+      "target": "d_dev_antigravity_src_taskscheduler_h_qwaitcondition",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/main_scrollbench.cpp",
       "source_location": "L12",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpumutex",
+      "target": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpucondition",
       "confidence_score": 1.0
     },
     {
@@ -31497,7 +31733,7 @@
       "source_location": "L3",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_cpp",
-      "target": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpumutex",
+      "target": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpucondition",
       "confidence_score": 1.0
     },
     {
@@ -31508,18 +31744,7 @@
       "source_location": "L8",
       "weight": 1.0,
       "source": "test_scrollbench_src_scrollbenchimagemodel",
-      "target": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpumutex",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src_legacy/TaskScheduler.h",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_src_legacy_taskscheduler_h",
-      "target": "d_dev_antigravity_src_taskscheduler_h_qwaitcondition",
+      "target": "d_dev_antigravity_src_taskscheduler_taskscheduler_m_cpucondition",
       "confidence_score": 1.0
     },
     {
@@ -32848,7 +33073,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L400",
+      "source_location": "L408",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
       "target": "src_legacy_asyncimageprovider_cpp_qimage",
@@ -33194,10 +33419,21 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_legacy_asyncimageprovider_asyncimageprovider_m_mutex",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L130",
+      "source_location": "L161",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_copyfiles",
@@ -33207,7 +33443,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_desktophelper",
@@ -33217,7 +33453,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L102",
+      "source_location": "L117",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_exportimages",
@@ -33227,7 +33463,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L70",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_generateresizepreview",
@@ -33237,7 +33473,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_getfiletype",
@@ -33247,7 +33483,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L144",
+      "source_location": "L175",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_isnetworkpath",
@@ -33257,7 +33493,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_openinexplorer",
@@ -33267,7 +33503,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_staticgetfiletype",
@@ -33277,7 +33513,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L148",
+      "source_location": "L179",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_staticisnetworkpath",
@@ -33298,7 +33534,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_desktophelper",
@@ -33309,7 +33545,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L130",
+      "source_location": "L161",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_copyfiles",
@@ -33320,7 +33556,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L102",
+      "source_location": "L117",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_exportimages",
@@ -33331,7 +33567,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L70",
+      "source_location": "L71",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_generateresizepreview",
@@ -33342,7 +33578,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_getfiletype",
@@ -33353,7 +33589,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L144",
+      "source_location": "L175",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_isnetworkpath",
@@ -33364,7 +33600,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_openinexplorer",
@@ -33375,7 +33611,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_staticgetfiletype",
@@ -33386,7 +33622,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L148",
+      "source_location": "L179",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_staticisnetworkpath",
@@ -33397,7 +33633,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_desktophelper_desktophelper_staticgetfiletype",
@@ -33408,7 +33644,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L70",
+      "source_location": "L71",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_desktophelper_desktophelper_generateresizepreview",
@@ -33419,7 +33655,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L130",
+      "source_location": "L161",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_copyfiles",
@@ -33430,7 +33666,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L102",
+      "source_location": "L117",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_exportimages",
@@ -33442,7 +33678,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_desktophelper_openinexplorer",
       "target": "src_legacy_desktophelper_cpp_qstringlist",
@@ -33607,7 +33843,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_desktophelper_getfiletype",
       "target": "src_legacy_desktophelper_desktophelper_staticgetfiletype"
@@ -33618,7 +33854,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L145",
+      "source_location": "L176",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_desktophelper_isnetworkpath",
       "target": "src_legacy_desktophelper_desktophelper_staticisnetworkpath"
@@ -33842,17 +34078,6 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_legacy_groupedproxymodel_cpp",
       "target": "d_dev_antigravity_src_legacy_groupedproxymodel_h",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_legacy_groupedproxymodel_groupedproxymodel_getyeardistribution",
       "confidence_score": 1.0
     },
     {
@@ -43051,11 +43276,12 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
+      "relation": "imports",
       "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/tst_automation.cpp",
-      "source_location": "L154",
+      "source_location": "L175",
       "weight": 1.0,
+      "context": "import",
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
       "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_main",
       "confidence_score": 1.0
@@ -43071,12 +43297,11 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
+      "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/tst_automation.cpp",
-      "source_location": "L175",
+      "source_location": "L25",
       "weight": 1.0,
-      "context": "import",
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
       "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario",
       "confidence_score": 1.0
@@ -43283,14 +43508,24 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/tst_scheduler.cpp",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_tests_tst_scheduler_cpp",
+      "target": "d_dev_antigravity_tests_tst_scheduler_testtaskscheduler",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "tests/tst_scheduler.cpp",
       "source_location": "L81",
       "weight": 1.0,
-      "context": "import",
       "source": "d_dev_antigravity_tests_tst_scheduler_cpp",
-      "target": "d_dev_antigravity_tests_tst_scheduler_testtaskscheduler",
+      "target": "d_dev_antigravity_tests_tst_scheduler_cpp",
       "confidence_score": 1.0
     },
     {
@@ -43325,5 +43560,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3ca7a8fa1ddaf5ae678a80a7468d4bb0552c05b8"
+  "built_at_commit": "e22592691c3646ef99cbab795a454f0ccf1e8086"
 }

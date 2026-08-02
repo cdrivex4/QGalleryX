@@ -11,6 +11,7 @@ Rectangle {
     signal shareClicked()
     signal clearClicked()
     signal rotateClicked()
+    signal resizeClicked()
     
     // Model binding
     property var model: null
@@ -92,8 +93,7 @@ Rectangle {
             id: resizeBtn
             text: "Resize/Crop"
             flat: true
-            // Resize relies on external signal or can open the dialog if we emit a signal
-            onClicked: resizeEditor.openDialog(root.model, root.model.getSelectedPaths()[0])
+            onClicked: root.resizeClicked()
             contentItem: Text { text: "Resize"; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
             background: Rectangle { color: parent.pressed ? "#22FFFFFF" : "transparent"; radius: 4 }
         }

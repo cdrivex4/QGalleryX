@@ -4,8 +4,17 @@
 
 ## 🔴 High Priority
 
-
-
+### Implement Background Precacher & Priority Handoff
+**Status:** Architecture Designed (See `docs/precache_architecture_plan.md`)
+**Issue:** Large folders lag when scrolling because QML relies strictly on lazy loading visible items.
+**Root Cause:** The `TaskScheduler` lacks a mechanism to safely background-process offscreen files and seamlessly hand off priorities when they come into view.
+**Required Changes:**
+- Modify `TaskScheduler::addTask` to support `taskKey` (file path) for deduplication.
+- Implement `TaskScheduler::hasImmediateTasks()` to act as a UI throttle.
+- Create `AsyncImageProvider::precache()` to write directly to disk without bloating RAM cache.
+- Implement `IdlePrecacheWorker` to slowly dispatch offscreen items to the `Low` priority queue.
+**Performance Impact:**
+- Target: Pre-warm the cache completely without sacrificing UI responsiveness or locking main threads.
 ### DNG Proprietary Compression Support ⏸️ DEFERRED
 **Status:** Paused for future optimization  
 **Issue:** DNG files with `PhotometricInterpretation=32803` take 120+ seconds to load  

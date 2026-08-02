@@ -621,8 +621,22 @@ ApplicationWindow {
                 shareDialog.open()
             }
         }
-        
         onRotateClicked: {
+            if (window.activeModel && window.activeModel.selectedCount > 0) {
+                var paths = window.activeModel.getSelectedPaths()
+                for (var i = 0; i < paths.length; ++i) {
+                    imageProcessor.rotateImageVirtual(paths[i], 90)
+                }
+                imageProcessor.clearImageCache()
+                window.activeModel.clearSelection()
+                // Force a model refresh to show the rotated images
+                if (window.activeModel.scanDirectory) {
+                    window.activeModel.scanDirectory(window.currentPath)
+                }
+            }
+        }
+        
+        onResizeClicked: {
             if (window.activeModel && window.activeModel.selectedCount > 0) {
                 resizeEditor.targetPaths = window.activeModel.getSelectedPaths()
                 resizeEditor.open()
