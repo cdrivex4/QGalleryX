@@ -100,6 +100,7 @@ public:
     void clear() override;
 
     // Direct byte access for the ring buffer
+    bool isMapped() const { return m_mappedData != nullptr; }
     QByteArray getRawData(const QString& key);
     void insertRawData(const QString& key, const QString& originalPath, const QString& sizeKey, const QByteArray& data);
 

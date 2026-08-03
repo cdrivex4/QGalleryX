@@ -8,7 +8,16 @@
 
 - None identified currently.
 
-## ✅ Fixed This Session (Milestone 5 — 2026-08-02)
+## ✅ Fixed This Session (Milestone 6 — 2026-08-03)
+
+- ✅ **TaskScheduler Queue Dequeue Race Condition**: Fixed `0xc0000005` crash in `Qt6Core.dll` caused by iterating `QMap` iterators or calling `dequeue()` on an empty `QQueue` under concurrent worker execution. Replaced map iteration with fixed priority arrays (`{Immediate, High, Normal, Low}`).
+- ✅ **Mmap Cache Network Fallback & Ring Buffer Eviction Freeze**: Fixed infinite loop during ring buffer wrapping (`advanceHead()`) and added automatic fallback to `QHashCacheDatabase` if memory-mapping fails over network/SMB shares.
+- ✅ **Qt 6 Native AV1 & FFmpeg Multimedia Backend**: Added `qputenv("QT_MEDIA_BACKEND", "ffmpeg")` to bypass Windows Media Foundation (WMF) system codec dependencies, enabling out-of-the-box AV1, VP9, WebM, and MKV video playback.
+- ✅ **Deep Copy Cache Retrieval**: Updated `AsyncImageProvider::getCachedImage` to return `img->copy()`, preventing thread race conditions during `m_cache.clear()` RAM purges.
+- ✅ **Corrupt Video & Shell Icon Null Guards**: Added `dstW/dstH` and `tmp.bits()` guards in `VideoThumbnailer.cpp` and wrapped `QFileIconProvider` in `try / catch` to prevent network Shell COM crashes.
+- ✅ **QML Video Rotation Property Scoping**: Replaced brittle `parent.parent.parent.parent` traversal with explicit `videoContainer.currentRotation` ID binding in `PhotoViewer.qml`.
+
+## ✅ Previously Fixed (Milestone 5 — 2026-08-02)
 
 - ✅ **Unified Album & Grid Data Pipeline**: `AlbumModel` now consumes `ImageModel` in-memory (`sourceModel: imageModel`), eliminating duplicate disk walks and thread contention.
 - ✅ **Network Drive Detection Centralized**: Fixed false positive network classification for local NTFS drives (e.g. `I:\`) by probing filesystem type (`DesktopHelper::staticIsNetworkPath`) rather than device path prefix.
@@ -65,6 +74,7 @@
 
 ## 🔗 Related Documentation
 
+- **Network, Concurrency & Memory Audit Guide**: `docs/NETWORK_CONCURRENCY_LESSONS_LEARNED.md`
 - **Full Pipeline Audit**: `docs/artifacts/9abe0a4b-823c-4c8a-91b9-f2cd941bff0a/pipeline_audit.md`
 - **Session Log / TODO**: `docs/TODO.md`
 - **Feature Status**: `docs/FEATURES.md`

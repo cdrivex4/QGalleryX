@@ -76,13 +76,18 @@ void TaskScheduler::addTask(Task task, TaskType type, Priority priority) {
 }
 
 void TaskScheduler::clear() {
+  const Priority priorities[] = {Immediate, High, Normal, Low};
   {
     QMutexLocker lock(&m_cpuMutex);
-    m_cpuQueue.clear();
+    for (Priority p : priorities) {
+      m_cpuQueue[p].clear();
+    }
   }
   {
     QMutexLocker lock(&m_ioMutex);
-    m_ioQueue.clear();
+    for (Priority p : priorities) {
+      m_ioQueue[p].clear();
+    }
   }
   qDebug() << "[TaskScheduler] Cleared all pending tasks.";
 }
@@ -117,57 +122,44 @@ void TaskScheduler::cpuWorkerLoop() {
 #ifdef Q_OS_WIN
   SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
 #endif
+  const Priority priorities[] = {Immediate, High, Normal, Low};
+
   while (m_running) {
     Task task;
     bool found = false;
 
     {
       QMutexLocker lock(&m_cpuMutex);
-      bool hasWork = false;
-      for (auto it = m_cpuQueue.begin(); it != m_cpuQueue.end(); ++it) {
-        if (!it.value().isEmpty()) {
-          if (m_backgroundPaused && it.key() != Immediate)
-            continue;
-          hasWork = true;
-          break;
-        }
-      }
-
-      while ((!hasWork || m_paused) && m_running) {
-        m_cpuCondition.wait(&m_cpuMutex);
-
-        // Re-check after waking up
-        hasWork = false;
-        if (m_running && !m_paused) {
-          for (auto it = m_cpuQueue.begin(); it != m_cpuQueue.end(); ++it) {
-            if (!it.value().isEmpty()) {
-              if (m_backgroundPaused && it.key() != Immediate)
-                continue;
-              hasWork = true;
-              break;
-            }
+      auto checkHasWork = [this, &priorities]() {
+        for (Priority p : priorities) {
+          if (!m_cpuQueue[p].isEmpty()) {
+            if (m_backgroundPaused && p != Immediate)
+              continue;
+            return true;
           }
+        }
+        return false;
+      };
+
+      while (!checkHasWork() && m_running) {
+        if (m_paused && m_running) {
+          m_cpuCondition.wait(&m_cpuMutex);
+        } else if (m_running) {
+          m_cpuCondition.wait(&m_cpuMutex);
         }
       }
 
       if (!m_running)
         break;
 
-      // Find highest priority task
-      // Keys are sorted: 0 (Immediate) ... 3 (Low)
-      // Iterate map keys in ascending order
-      auto it = m_cpuQueue.begin();
-      while (it != m_cpuQueue.end()) {
-        if (!it.value().isEmpty()) {
-          if (m_backgroundPaused && it.key() != Immediate) {
-            ++it;
+      for (Priority p : priorities) {
+        if (!m_cpuQueue[p].isEmpty()) {
+          if (m_backgroundPaused && p != Immediate)
             continue;
-          }
-          task = it.value().dequeue();
+          task = m_cpuQueue[p].dequeue();
           found = true;
           break;
         }
-        ++it;
       }
     }
 
@@ -188,54 +180,44 @@ void TaskScheduler::ioWorkerLoop() {
 #ifdef Q_OS_WIN
   SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
 #endif
+  const Priority priorities[] = {Immediate, High, Normal, Low};
+
   while (m_running) {
     Task task;
     bool found = false;
 
     {
       QMutexLocker lock(&m_ioMutex);
-      bool hasWork = false;
-      for (auto it = m_ioQueue.begin(); it != m_ioQueue.end(); ++it) {
-        if (!it.value().isEmpty()) {
-          if (m_backgroundPaused && it.key() != Immediate)
-            continue;
-          hasWork = true;
-          break;
-        }
-      }
-
-      while ((!hasWork || m_paused) && m_running) {
-        m_ioCondition.wait(&m_ioMutex);
-
-        // Re-check after waking up
-        hasWork = false;
-        if (m_running && !m_paused) {
-          for (auto it = m_ioQueue.begin(); it != m_ioQueue.end(); ++it) {
-            if (!it.value().isEmpty()) {
-              if (m_backgroundPaused && it.key() != Immediate)
-                continue;
-              hasWork = true;
-              break;
-            }
+      auto checkHasWork = [this, &priorities]() {
+        for (Priority p : priorities) {
+          if (!m_ioQueue[p].isEmpty()) {
+            if (m_backgroundPaused && p != Immediate)
+              continue;
+            return true;
           }
+        }
+        return false;
+      };
+
+      while (!checkHasWork() && m_running) {
+        if (m_paused && m_running) {
+          m_ioCondition.wait(&m_ioMutex);
+        } else if (m_running) {
+          m_ioCondition.wait(&m_ioMutex);
         }
       }
 
       if (!m_running)
         break;
 
-      auto it = m_ioQueue.begin();
-      while (it != m_ioQueue.end()) {
-        if (!it.value().isEmpty()) {
-          if (m_backgroundPaused && it.key() != Immediate) {
-            ++it;
+      for (Priority p : priorities) {
+        if (!m_ioQueue[p].isEmpty()) {
+          if (m_backgroundPaused && p != Immediate)
             continue;
-          }
-          task = it.value().dequeue();
+          task = m_ioQueue[p].dequeue();
           found = true;
           break;
         }
-        ++it;
       }
     }
 

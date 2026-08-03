@@ -175,11 +175,14 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   int dstW = cleanup.codecCtx->width;
   int dstH = cleanup.codecCtx->height;
+  if (dstW <= 0 || dstH <= 0) return QImage();
+
   if (targetSize.isValid() && targetSize.width() > 0 && dstH > 0) {
     double aspect = (double)dstW / dstH;
     dstW = targetSize.width();
-    dstH = (int)(dstW / aspect);
+    dstH = std::max(1, (int)(dstW / aspect));
   }
+  if (dstW <= 0 || dstH <= 0) return QImage();
 
   int retryCount = 0;
   while (retryCount < 3) { // 3x retry on black frames
@@ -281,6 +284,8 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
         return QImage();
 
       QImage tmp(dstW, dstH, QImage::Format_RGB32);
+      if (tmp.isNull() || !tmp.bits()) return QImage();
+
       uint8_t *dst_data[4] = { tmp.bits(), nullptr, nullptr, nullptr };
       int dst_linesize[4] = { (int)tmp.bytesPerLine(), 0, 0, 0 };
 
@@ -292,7 +297,9 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
       int step = std::max(1, dstH / 20); // sample evenly
       int samples = 0;
       for (int y = 0; y < dstH; y += step) {
-          const QRgb* line = reinterpret_cast<const QRgb*>(tmp.constScanLine(y));
+          const uchar* scanLine = tmp.constScanLine(y);
+          if (!scanLine) continue;
+          const QRgb* line = reinterpret_cast<const QRgb*>(scanLine);
           for (int x = 0; x < dstW; x += step) {
               QRgb pixel = line[x];
               int r = qRed(pixel);

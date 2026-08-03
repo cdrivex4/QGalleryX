@@ -113,7 +113,10 @@ QImage AsyncImageProvider::getCachedImage(const QString &id,
   QString key = id + "_" + QString::number(size.width()) + "x" +
                 QString::number(size.height());
   if (m_cache.contains(key)) {
-    return *m_cache.object(key);
+    QImage *img = m_cache.object(key);
+    if (img && !img->isNull()) {
+      return img->copy(); // Deep copy prevents crash if m_cache is cleared on another thread
+    }
   }
   return QImage();
 }
@@ -340,11 +343,15 @@ void AsyncImageProvider::processImageTask(
 
     if (image.isNull()) {
       cacheable = false;
-      QFileIconProvider provider;
-      QIcon icon = provider.icon(QFileInfo(path));
-      if (!icon.isNull()) {
-        QSize s = requestedSize.isValid() ? requestedSize : QSize(256, 256);
-        image = icon.pixmap(s).toImage();
+      try {
+        QFileIconProvider provider;
+        QIcon icon = provider.icon(QFileInfo(path));
+        if (!icon.isNull()) {
+          QSize s = requestedSize.isValid() ? requestedSize : QSize(256, 256);
+          image = icon.pixmap(s).toImage();
+        }
+      } catch (...) {
+        qWarning() << "[AsyncImageProvider] Icon provider failed for" << path;
       }
     }
   } else {

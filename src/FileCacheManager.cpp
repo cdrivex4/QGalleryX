@@ -1,6 +1,8 @@
 #include "FileCacheManager.h"
 #include <QStandardPaths>
 #include <QFile>
+#include <QDir>
+#include <QUrl>
 #include <QDataStream>
 #include <QDebug>
 #include <QSettings>
@@ -259,52 +261,38 @@ QByteArray MmapCacheDatabase::getRawData(const QString& key) {
 }
 
 bool MmapCacheDatabase::advanceHead(quint64 requiredSize) {
+    if (!m_mappedData) return false;
     RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
     
-    // Check if we need to wrap
+    if (m_index.isEmpty()) {
+        header->head = sizeof(RingHeader);
+        header->tail = sizeof(RingHeader);
+    }
+    
+    // Check if we need to wrap head to start
     if (header->head + requiredSize > m_capacity) {
-        // Write wrap marker before wrapping, but ONLY if there is enough space!
         if (header->head + sizeof(RecordHeader) <= m_capacity) {
             RecordHeader* wrapMarker = reinterpret_cast<RecordHeader*>(m_mappedData + header->head);
-            wrapMarker->keyLen = 0xFFFFFFFF; // Special value indicating wrap
+            wrapMarker->keyLen = 0xFFFFFFFF; // Special wrap marker
             wrapMarker->dataLen = 0;
-        }
-
-        // If tail is between head and end, we would overwrite tail by wrapping.
-        // We must push tail forward until it's wrapped.
-        while (header->tail >= header->head || header->tail == sizeof(RingHeader)) {
-            if (header->tail >= m_capacity - sizeof(RecordHeader) || header->tail == header->head) {
-                header->tail = sizeof(RingHeader);
-                continue;
-            }
-            RecordHeader* tailRec = reinterpret_cast<RecordHeader*>(m_mappedData + header->tail);
-            if (tailRec->keyLen == 0xFFFFFFFF) {
-                header->tail = sizeof(RingHeader);
-                continue;
-            }
-            if (tailRec->keyLen > 1024 || tailRec->dataLen > 1024*1024*50 || header->tail + sizeof(RecordHeader) + tailRec->keyLen > m_capacity) {
-                clearInternal(); return true; // Corruption guard
-            }
-            QString tailKey = QString::fromUtf8(reinterpret_cast<const char*>(m_mappedData + header->tail + sizeof(RecordHeader)), tailRec->keyLen);
-            m_index.remove(tailKey);
-            m_offsets.remove(tailKey);
-            
-            quint64 nextTail = header->tail + sizeof(RecordHeader) + tailRec->keyLen + tailRec->dataLen;
-            if (nextTail > m_capacity) header->tail = sizeof(RingHeader);
-            else header->tail = nextTail;
         }
         header->head = sizeof(RingHeader); // Wrap head
     }
     
-    // Now check if head pushes tail
-    while (header->head < header->tail && header->head + requiredSize > header->tail) {
+    // Evict old tail entries while head + requiredSize overlaps tail
+    while (!m_index.isEmpty() && header->head <= header->tail && (header->head + requiredSize) > header->tail) {
+        if (header->tail >= m_capacity - sizeof(RecordHeader)) {
+            header->tail = sizeof(RingHeader);
+            continue;
+        }
         RecordHeader* tailRec = reinterpret_cast<RecordHeader*>(m_mappedData + header->tail);
         if (tailRec->keyLen == 0xFFFFFFFF) {
             header->tail = sizeof(RingHeader);
-            continue; // Re-evaluate condition after wrapping
+            continue;
         }
         if (tailRec->keyLen > 1024 || tailRec->dataLen > 1024*1024*50 || header->tail + sizeof(RecordHeader) + tailRec->keyLen > m_capacity) {
-            clearInternal(); return true; // Corruption guard
+            clearInternal();
+            return true;
         }
         QString tailKey = QString::fromUtf8(reinterpret_cast<const char*>(m_mappedData + header->tail + sizeof(RecordHeader)), tailRec->keyLen);
         m_index.remove(tailKey);
@@ -398,6 +386,13 @@ FileCacheManager::~FileCacheManager() {
 
 void FileCacheManager::initialize() {
     m_db->load(m_dbPath);
+    MmapCacheDatabase* mmapDb = dynamic_cast<MmapCacheDatabase*>(m_db.get());
+    if (mmapDb && !mmapDb->isMapped()) {
+        qWarning() << "FileCacheManager: Mmap failed to allocate/map memory. Falling back to QHashCacheDatabase.";
+        m_db = std::make_unique<QHashCacheDatabase>();
+        m_dbPath = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/thumbnails/FileCache.db";
+        m_db->load(m_dbPath);
+    }
     rebuildKeyIndex();
     // Run maintenance every 60 seconds
     m_maintenanceTimer->start(60000);
@@ -424,16 +419,25 @@ QString FileCacheManager::getCoalesceKey(const QString &id, const QSize &size) {
     int qIdx = realPath.indexOf('?');
     if (qIdx != -1) realPath = realPath.left(qIdx);
     
+    // Convert QUrl file:/// paths to native OS file paths
+    QUrl url(realPath);
+    if (url.isValid() && url.isLocalFile()) {
+        realPath = url.toLocalFile();
+    }
+    realPath = QDir::toNativeSeparators(realPath);
+    
     QFileInfo fi(realPath);
     if (!fi.exists()) {
         // Fallback for non-local files or virtual paths
         return QString("%1_%2x%3").arg(id).arg(size.width()).arg(size.height());
     }
     
+    qint64 modTime = fi.lastModified().isValid() ? fi.lastModified().toMSecsSinceEpoch() : 0;
+    
     return QString("%1_%2_%3_%4x%5")
         .arg(fi.fileName())
         .arg(fi.size())
-        .arg(fi.lastModified().toMSecsSinceEpoch())
+        .arg(modTime)
         .arg(size.width())
         .arg(size.height());
 }

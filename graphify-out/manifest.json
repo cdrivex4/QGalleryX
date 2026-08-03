@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "src/BuildInfo.h": {
-    "mtime": 1785709101.218572,
-    "ast_hash": "74e257665d35923815e5bf4cddc9e83c",
+    "mtime": 1785783505.7948031,
+    "ast_hash": "a50d6ce35c4a6b25eb936fc886fbcfe4",
     "semantic_hash": ""
   },
   "src/DesktopHelper.cpp": {
@@ -85,13 +85,13 @@
     "semantic_hash": "e41d4899b8aa1d2d0400a072eb6f3eb1"
   },
   "src/FileCacheManager.cpp": {
-    "mtime": 1785352257.6874206,
-    "ast_hash": "4eca7a2ef463da837cb536dc7f906244",
+    "mtime": 1785783216.367325,
+    "ast_hash": "c7e85c71cb8d82a359e1ce799cfc9fb3",
     "semantic_hash": ""
   },
   "src/FileCacheManager.h": {
-    "mtime": 1785352187.4277494,
-    "ast_hash": "0dcbb6e6999374bcf11335dd8736540c",
+    "mtime": 1785782094.3556156,
+    "ast_hash": "19cec4d8f13c2d9f487718f78a87fae0",
     "semantic_hash": ""
   },
   "src/FrameBudgetScheduler.cpp": {
@@ -220,8 +220,8 @@
     "semantic_hash": ""
   },
   "src_legacy/AsyncImageProvider.cpp": {
-    "mtime": 1785702560.5611794,
-    "ast_hash": "6929a6825a1b5b242fd57937c5776151",
+    "mtime": 1785783495.7627506,
+    "ast_hash": "a7c330771c2124b58552ed991876e095",
     "semantic_hash": ""
   },
   "src_legacy/AsyncImageProvider.h": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "src_legacy/BuildInfo.h": {
-    "mtime": 1785709101.2191513,
-    "ast_hash": "74e257665d35923815e5bf4cddc9e83c",
+    "mtime": 1785783505.7958171,
+    "ast_hash": "a50d6ce35c4a6b25eb936fc886fbcfe4",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.cpp": {
@@ -295,8 +295,8 @@
     "semantic_hash": "1a880a993764b2416e625b2836d7473e"
   },
   "src_legacy/TaskScheduler.cpp": {
-    "mtime": 1785703266.1519449,
-    "ast_hash": "3619cd136daf00a3f84faef20ede62de",
+    "mtime": 1785730336.5320928,
+    "ast_hash": "85bc360227255b79024c3ab6b5ccd97e",
     "semantic_hash": ""
   },
   "src_legacy/TaskScheduler.h": {
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "src_legacy/VideoThumbnailer.cpp": {
-    "mtime": 1785698312.165805,
-    "ast_hash": "5956faf53da9bcf7529c4e3472ddbfcb",
+    "mtime": 1785783483.545094,
+    "ast_hash": "44aaf285673701602605c92700bcedfe",
     "semantic_hash": ""
   },
   "src_legacy/VideoThumbnailer.h": {
