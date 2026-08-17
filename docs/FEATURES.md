@@ -23,9 +23,10 @@
 - **Video Playback** with basic media controls in viewer
 
 ### 3. Performance & Caching Architecture
-- **Persistent Memory-Mapped Ring Buffer (`FileCache.mmap`)**:
-  - Replaces thousands of scattered `.jpg` cache files with a high-speed, contiguous binary ring buffer.
-  - Zero-copy OS memory mapping (`QFile::map`) provides near-zero latency thumbnail retrieval without filesystem fragmentation.
+- **Persistent Append-Only Mmap Database (`FileCache.mmap`)**:
+  - Replaces thousands of scattered `.jpg` cache files with an auto-expanding (512MB-chunk), contiguous memory-mapped binary store.
+  - Zero-copy OS memory mapping (`QFile::map`) provides sub-millisecond thumbnail retrieval without filesystem fragmentation.
+  - Automatic filesystem reconciliation and compaction prune deleted media and reclaim disk space.
 - **$O(1)$ Duplicate Skip & Incremental Crawling**:
   - Re-crawling folders with tens of thousands of items completes in milliseconds by validating cached hashes in memory before touching media on disk.
 - **Live Hot-Folder Monitoring (`QFileSystemWatcher`)**:

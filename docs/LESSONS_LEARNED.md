@@ -98,21 +98,19 @@ Protect shared resources with explicit synchronization primitives (mutexes, atom
 
 ---
 
-## 🌐 6. Network File I/O & Memory-Mapped (`mmap`) Fallbacks
+## 🌐 6. Persistent Memory-Mapped (`mmap`) Database & Zero-Copy Retrieval
 
 ### 💡 Core Principle
-Never assume local filesystem speeds or memory-mapping support when accessing files. Always handle network share latencies, URL encoding, and filesystem restrictions gracefully.
+Disk caching for thumbnail media must be permanent, non-destructive, and scalable across multi-drive photo libraries. Never treat persistent disk caches like ephemeral circular FIFO queues.
 
 ### 🔍 Lessons Learned & Applied
-- **Automatic `mmap` Fallback to Native Cache**:
-  - *The Problem*: Memory-mapping a 1GB ring buffer file (`FileCache.mmap`) over SMB/network shares or restricted permissions raises OS page-fault exceptions (`STATUS_IN_PAGE_ERROR` `0xc0000006`).
-  - *The Fix*: `FileCacheManager` verifies `isMapped()` after loading. If memory mapping fails, it automatically falls back to `QHashCacheDatabase` (Native in-memory index with standard file I/O).
-- **Ring Buffer Capacity Eviction (`advanceHead`)**:
-  - *The Problem*: When the 1GB ring buffer reached capacity after long-term use, an improper `head == tail` check caused an infinite eviction loop.
-  - *The Fix*: Handled empty index states first and bounded eviction loops strictly to active overlapping regions (`!m_index.isEmpty() && head <= tail && (head + requiredSize) > tail`).
-- **URL & Path Normalization**:
-  - *The Problem*: Paths passed as `file:///I:/` or `file://192.168.1.10/` failed `QFileInfo::exists()` and corrupt cache keys.
-  - *The Fix*: Sanitized `QUrl` inputs to native local/UNC file paths (`QUrl::toLocalFile`) and validated `fi.lastModified().isValid()` before converting timestamps.
+- **Append-Only Auto-Growing Mmap Architecture (v3)**:
+  - *The Problem*: An earlier iteration implemented `FileCache.mmap` as a fixed 1.0 GB circular ring buffer. Once 1GB was reached across large libraries (e.g. 45,000 files on D: + 40,000 files on C: = ~1.7 GB), writing Drive C silently wrapped around and erased Drive D's thumbnails, causing mysterious cache misses on scroll.
+  - *The Fix*: Removed circular wrapping and eviction entirely. `FileCache.mmap` is now an append-only binary database that starts at 512 MB and automatically expands in 512 MB chunks as new media is indexed. All crawled thumbnails are permanent and preserved across restarts.
+- **Zero-Copy Kernel Slicing**:
+  - *The Principle*: Pointer dereferences directly into memory-mapped OS pages (`m_mappedData + offset`) provide instant binary slice retrieval with zero syscall overhead. The OS kernel transparently manages physical RAM page residency.
+- **Filesystem Reconciliation & Compaction (`pruneStaleEntries`, `compact`)**:
+  - *The Principle*: When files are deleted or moved on disk outside the app, the DB must mirror the filesystem. A background pass prunes stale index keys, and if orphaned space exceeds 30%, `compact()` rewrites the mmap file in-place to reclaim disk space.
 
 ---
 
@@ -143,6 +141,32 @@ Validate all external inputs, guard against null pointers, and isolate memory sh
 
 ---
 
+## 🧠 9. User-Caught Architectural Misconceptions & AI Bug Log
+
+A critical historical log of instances where the User identified system flaws, misconceptions, and architectural bugs that AI coding assistants missed or introduced:
+
+1. **The Circular Ring Buffer Flaw (User-Caught):**
+   - *AI Misconception*: AI assumed a fixed 1.0 GB circular ring buffer was acceptable for a thumbnail cache.
+   - *User Discovery*: User noticed that after crawling 80,000+ files across C: and D: drives, scrolling previously crawled folders still produced cache misses. User pointed out that disk cache is meant to house ALL parsed data permanently across all drives, not overwrite old drives in a circular loop.
+   - *Resolution*: AI eliminated the ring buffer wrapping and replaced it with auto-growing append-only mmap storage.
+
+2. **Silent Cache Hits & Logging Asymmetry (User-Caught):**
+   - *AI Misconception*: AI left L1 RAM hits and L2 Disk hits completely silent while logging every cache miss, creating a false impression in the terminal that the cache was completely failing.
+   - *User Discovery*: User asked why the console only printed misses despite the crawler finishing.
+   - *Resolution*: Pointed out the 2,052 silent hits in telemetry and added visible, throttled L1/L2 hit logging.
+
+3. **In-Memory Index Startup Desync (User-Caught):**
+   - *AI Misconception*: AI checked `m_knownKeys` in `isCached()` before `rebuildKeyIndex()` had synchronized it with `MmapCacheDatabase::m_index`.
+   - *User Discovery*: User noticed that restarting the app caused the crawler to misjudge whether files were already cached.
+   - *Resolution*: Unified `isCached()` to query `m_db->contains(key)` directly as the authoritative single source of truth.
+
+4. **OSD vs Menu Telemetry Desynchronization (User-Caught):**
+   - *AI Misconception*: AI had different code paths, formats, and missing Rebuild/Nuke controls between the On-Screen Display (OSD) and the Settings Menu.
+   - *User Discovery*: User spotted that the OSD was displaying mismatched data and lacked the re-crawl/rebuild cache triggers present in the Menu.
+   - *Resolution*: Connected both the Menu and OSD to the exact same `appSettings.getTrackedRootPathStats()` backend and added a unified `Rebuild Cache / Re-Crawl` button to the OSD.
+
+---
+
 ## 📋 Comprehensive Audit Checklist
 
 | Principle | Architectural Target | Implementation Rule |
@@ -152,6 +176,6 @@ Validate all external inputs, guard against null pointers, and isolate memory sh
 | **Modular Design** | Decoupled Infrastructure | Keep `TaskScheduler`, `AsyncImageProvider`, and `FileCacheManager` free of UI/model dependencies. |
 | **Library Re-Use** | 3rd-Party API Wrappers | Centralize FFmpeg in `VideoThumbnailer` and OS functions in `DesktopHelper`. |
 | **Thread Safety** | Concurrency & Worker Queues | Rate-limit heavy tasks via Semaphores; iterate fixed priority arrays under mutex lock when dequeuing. |
-| **Network & Mmap** | File I/O & Ring Buffers | Verify `isMapped()`; fall back to `QHashCacheDatabase` on network shares. Bound `advanceHead` ring eviction loops. |
+| **Mmap DB & Caching** | Persistent Storage & Zero-Copy | Auto-expanding append-only mmap log (v3). Zero ring-buffer evictions. Background filesystem reconciliation and compaction. |
 | **Codec Independence**| Qt 6 Multimedia | Set `qputenv("QT_MEDIA_BACKEND", "ffmpeg")` at startup. |
 | **Defensive Memory** | RAM Caching & Decoders | Return `img->copy()` from cache lookups. Validate `dstW/dstH` and wrap OS Shell calls in `try/catch`. |

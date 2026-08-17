@@ -8,6 +8,16 @@
 
 - None identified currently.
 
+## ✅ Fixed This Session (Milestone 7 — v2.3.0 Milestone — 2026-08-18)
+
+- ✅ **Fixed 1GB Circular Ring Buffer Eviction**: Replaced the flawed 1GB circular ring buffer with an auto-expanding (512MB-chunk) append-only binary mmap database (`FileCache.mmap` v3), permanently eliminating the issue where crawling new drives silently erased previously crawled drives.
+- ✅ **Black Box Task Key Deduplication Bug**: Fixed key mismatch in `AsyncImageProvider` that was causing tasks to stall and drop image responses.
+- ✅ **Mmap Index Ground-Truth Crawler Work Queue**: Replaced naive sequential cursor walking with an $O(N)$ index-checked missing work queue (`m_crawlWorkQueue`), guaranteeing zero gaps and persistent state across restarts.
+- ✅ **Filesystem Reconciliation & Compaction Protocol**: Added `FileCacheManager::pruneStaleEntries()` and `compact()` to automatically purge deleted files from the database and reclaim disk space.
+- ✅ **OSD & Menu Cache Telemetry & Controls Synchronization**: Connected both the On-Screen Display (OSD) and the Settings Menu to the exact same backend (`appSettings.getTrackedRootPathStats()`), unified display formats, and added a `Rebuild Cache / Re-Crawl` button to the OSD.
+- ✅ **Transparent FFmpeg Fallback for Corrupt EXIF/JPEG Streams**: Integrated `VideoThumbnailer` fallback directly into `AsyncImageProvider` when `QImageReader` fails on non-standard JPEGs.
+- ✅ **L1 RAM / L2 Disk Hit Visibility & Logging**: Added visible, throttled console logging for L1 RAM and L2 Disk hits to reflect real-time cache throughput.
+
 ## ✅ Fixed This Session (Milestone 6 — 2026-08-03)
 
 - ✅ **TaskScheduler Queue Dequeue Race Condition**: Fixed `0xc0000005` crash in `Qt6Core.dll` caused by iterating `QMap` iterators or calling `dequeue()` on an empty `QQueue` under concurrent worker execution. Replaced map iteration with fixed priority arrays (`{Immediate, High, Normal, Low}`).
