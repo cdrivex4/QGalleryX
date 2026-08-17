@@ -20,3 +20,6 @@ inja, or Start-Process to build or launch the application directly.
 The build script handles killing instances, cleaning autogen, compiling both  QGalleryX and  QGalleryXBench, deploying Qt dependencies, and verifying binary freshness.
 
 Bypassing the build script risks stale builds, locked binaries, and codebase divergence.
+
+## Token-Efficient Builds
+When running a build, ALWAYS redirect the output to a file (e.g., .\build.ps1 > build_output.log 2>&1). This prevents the system from injecting thousands of lines of build logs into the conversation context when the task finishes, saving massive amounts of tokens. Once the background task completes, use Get-Content -Tail 20 build_output.log to check the final status and report it to the user.

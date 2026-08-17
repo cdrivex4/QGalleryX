@@ -30,14 +30,33 @@ void SettingsHelper::setSelectedApi(int api) {
   emit selectedApiChanged();
 }
 
+int SettingsHelper::snapThumbnailResolution(int rawSize) const {
+  static const int kSnapPoints[] = {64, 96, 128, 192, 256, 384};
+  static const int kNumSnap = sizeof(kSnapPoints) / sizeof(kSnapPoints[0]);
+  if (rawSize <= kSnapPoints[0]) return kSnapPoints[0];
+  if (rawSize >= kSnapPoints[kNumSnap - 1]) return kSnapPoints[kNumSnap - 1];
+
+  int closest = kSnapPoints[0];
+  int minDiff = std::abs(rawSize - closest);
+  for (int i = 1; i < kNumSnap; ++i) {
+    int diff = std::abs(rawSize - kSnapPoints[i]);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closest = kSnapPoints[i];
+    }
+  }
+  return closest;
+}
+
 int SettingsHelper::thumbnailSize() const {
-  return m_settings.value("thumbnailSize", 150).toInt();
+  return snapThumbnailResolution(m_settings.value("thumbnailSize", 128).toInt());
 }
 
 void SettingsHelper::setThumbnailSize(int size) {
-  if (thumbnailSize() == size)
+  int snapped = snapThumbnailResolution(size);
+  if (thumbnailSize() == snapped)
     return;
-  m_settings.setValue("thumbnailSize", size);
+  m_settings.setValue("thumbnailSize", snapped);
   emit thumbnailSizeChanged();
 }
 
@@ -103,15 +122,39 @@ void SettingsHelper::setLogLevel(int level) {
 }
 
 bool SettingsHelper::rawAcceleration() const {
-  return m_settings.value("rawAcceleration", true).toBool();
+  QSettings settings("SamsungClone", "Gallery");
+  return settings.value("rawAcceleration", true).toBool();
 }
 
 void SettingsHelper::setRawAcceleration(bool enable) {
-  if (rawAcceleration() == enable)
-    return;
-  m_settings.setValue("rawAcceleration", enable);
+  QSettings settings("SamsungClone", "Gallery");
+  settings.setValue("rawAcceleration", enable);
   AsyncImageProvider::s_accelerateRaw = enable;
   emit rawAccelerationChanged();
+}
+
+int SettingsHelper::scanEngineMode() const {
+  QSettings settings("SamsungClone", "Gallery");
+  return settings.value("scanEngineMode", 0).toInt(); // 0 = Auto, 1 = Force MFT, 2 = Force QDirIterator, 3 = Force Folder DB
+}
+
+void SettingsHelper::setScanEngineMode(int mode) {
+  if (scanEngineMode() == mode)
+    return;
+  QSettings settings("SamsungClone", "Gallery");
+  settings.setValue("scanEngineMode", mode);
+  emit scanEngineModeChanged();
+}
+
+bool SettingsHelper::showLatencyToasts() const {
+  QSettings settings("SamsungClone", "Gallery");
+  return settings.value("showLatencyToasts", true).toBool();
+}
+
+void SettingsHelper::setShowLatencyToasts(bool show) {
+  QSettings settings("SamsungClone", "Gallery");
+  settings.setValue("showLatencyToasts", show);
+  emit showLatencyToastsChanged();
 }
 
 void SettingsHelper::restartApp() {
@@ -120,8 +163,14 @@ void SettingsHelper::restartApp() {
 }
 
 bool SettingsHelper::isApiSupported(int apiValue) {
-  QSGRendererInterface::GraphicsApi api =
-      static_cast<QSGRendererInterface::GraphicsApi>(apiValue);
+  QSGRendererInterface::GraphicsApi api;
+  switch (apiValue) {
+    case 1: api = QSGRendererInterface::Direct3D11; break;
+    case 2: api = QSGRendererInterface::Vulkan; break;
+    case 3: api = QSGRendererInterface::OpenGL; break;
+    case 4: api = QSGRendererInterface::Software; break;
+    default: api = static_cast<QSGRendererInterface::GraphicsApi>(apiValue); break;
+  }
   return QSGRendererInterface::isApiRhiBased(api);
 }
 
@@ -142,6 +191,18 @@ qint64 SettingsHelper::getDiskCacheUsage() {
 
 void SettingsHelper::nukeDiskCache() {
     FileCacheManager::instance().nukeCache();
+}
+
+void SettingsHelper::nukeCacheForPath(const QString &pathPrefix) {
+    FileCacheManager::instance().nukeCacheForPrefix(pathPrefix);
+}
+
+QStringList SettingsHelper::getTrackedRootPaths() {
+    return FileCacheManager::instance().getTrackedRootPaths();
+}
+
+QVariantMap SettingsHelper::getTrackedRootPathStats() {
+    return FileCacheManager::instance().getTrackedRootPathStats();
 }
 
 void SettingsHelper::refreshGraphicsInfo(QObject *window) {

@@ -278,11 +278,4 @@ Dialog {
             resizeEditor.close();
         }
     }
-
-    Component.onCompleted: {
-        imageProcessor.imageProcessingError.connect(function(message) {
-            console.error("Image processing error:", message);
-            // Optionally show a QMessageBox or similar to the user
-        });
-    }
 }

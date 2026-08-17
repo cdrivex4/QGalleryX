@@ -105,11 +105,14 @@ public:
     void insertRawData(const QString& key, const QString& originalPath, const QString& sizeKey, const QByteArray& data);
 
 private:
+    // Version 3: Append-only log. head = next write offset. No tail, no eviction.
     struct RingHeader {
-        quint32 magic;
-        quint64 head;
-        quint64 tail;
-        quint64 capacity;
+        quint32 magic;      // 0x4D4D4150 ('MMAP')
+        quint32 version;    // 3
+        quint64 head;       // Next write position
+        quint64 capacity;   // Current mapped size
+        quint64 entryCount; // Total records written
+        quint64 _reserved;  // Padding (was 'tail' in v2)
     };
 
     struct RecordHeader {
@@ -127,7 +130,7 @@ private:
     quint64 m_capacity;
     QMutex m_mutex;
     
-    bool advanceHead(quint64 requiredSize);
+    bool growFile(quint64 newCapacity); // Expand the mmap file
     void clearInternal();
 };
 
@@ -149,12 +152,35 @@ public:
     QByteArray getCachedData(const QString& id, const QSize& requestedSize);
     void registerCachedData(const QString& id, const QSize& requestedSize, const QByteArray& data);
     
+    // O(1) membership check — no data read, just index lookup
+    bool isCached(const QString& id, const QSize& requestedSize);
+
+    // Filesystem Reconciliation:
+    // Call after a directory scan with the complete set of valid file paths.
+    // Removes any DB entries whose source file no longer exists on disk.
+    // Returns count of entries pruned. Triggers compact() if orphan ratio > 30%.
+    int pruneStaleEntries(const QSet<QString>& validFilePaths, const QSize& thumbSize);
+
+    // Rewrite the mmap to contain only the currently-indexed (valid) entries.
+    // Reclaims space from deleted files. Run in a background thread.
+    void compact();
+
     // Limit management
-    void setMaxDiskCacheSizeMB(int megabytes);
-    void clearCache();
-    void nukeCache();
+    Q_INVOKABLE void setMaxDiskCacheSizeMB(int megabytes);
+    Q_INVOKABLE void clearCache();
+    Q_INVOKABLE void nukeCache();
+    Q_INVOKABLE void nukeCacheForPrefix(const QString& pathPrefix);
+    Q_INVOKABLE QStringList getTrackedRootPaths();
+
+    // Returns per-drive stats: { "D:\\" -> {"count": N, "bytes": B}, ... }
+    // plus "__total__" key for the global DB stats
+    Q_INVOKABLE QVariantMap getTrackedRootPathStats();
     
-    QString getDbPath() const { return m_dbPath; }
+    Q_INVOKABLE QString getDbPath() const { return m_dbPath; }
+    static QString getCacheDirectory();
+
+signals:
+    void cacheCleared();
 
 private slots:
     void performMaintenance();
@@ -175,6 +201,15 @@ private:
     
     QSet<QString> m_knownKeys;
     QMutex m_keyMutex;
+
+    // Per-drive root stats: root path (upper) -> {count, totalBytes}
+    struct RootStat { qint64 count = 0; qint64 bytes = 0; };
+    QMap<QString, RootStat> m_rootStats;
+    QMutex m_rootStatsMutex;
+
+    QString extractRoot(const QString& originalPath) const;
+    void trackRootStat(const QString& originalPath, qint64 bytes);
+    QString getStatsIniPath() const;
 };
 
 #endif // FILECACHEMANAGER_H

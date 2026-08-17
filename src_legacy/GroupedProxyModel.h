@@ -14,6 +14,8 @@ class GroupedProxyModel : public QAbstractListModel {
   Q_PROPERTY(int columns READ columns WRITE setColumns NOTIFY columnsChanged)
   Q_PROPERTY(
       int groupRole READ groupRole WRITE setGroupRole NOTIFY groupRoleChanged)
+  Q_PROPERTY(int precacheMode READ precacheMode WRITE setPrecacheMode NOTIFY precacheModeChanged)
+  Q_PROPERTY(int totalCount READ totalCount NOTIFY totalCountChanged)
 
 public:
   enum ProxyRoles {
@@ -51,13 +53,21 @@ public:
   Q_INVOKABLE void resumeBackgroundTasks();
 
   Q_INVOKABLE QModelIndex getProxyIndexForSourceIndex(int sourceIndex) const;
+  Q_INVOKABLE int getProxyRowForSourceIndex(int sourceIndex) const;
   Q_INVOKABLE QVariantList getYearDistribution() const;
   Q_INVOKABLE QString getLabelForProxyIndex(int proxyIndex) const;
+  Q_INVOKABLE int indexOfPath(const QString &path) const;
+  
+  int precacheMode() const;
+  void setPrecacheMode(int mode);
+  int totalCount() const;
 
 signals:
   void sourceModelChanged();
   void columnsChanged();
   void groupRoleChanged();
+  void precacheModeChanged();
+  void totalCountChanged();
 
 private slots:
   void onSourceModelReset();

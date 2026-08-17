@@ -11,6 +11,10 @@
 #include <QThread>
 #include <iostream>
 
+#ifdef Q_OS_WIN
+#include <Windows.h>
+#endif
+
 #include "AlbumModel.h"
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
@@ -19,6 +23,8 @@
 #include "SettingsHelper.h"
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
+#include "VideoThumbnailer.h"
+#include "ViewportGovernor.h"
 
 #include <QFile>
 #include <QTextStream>
@@ -28,9 +34,42 @@
 #include "../src/FileCacheManager.h"
 #include "../src/PassiveReadLatencyGuard.h"
 
-// Remove customMessageHandler function completely
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <psapi.h>
+
+static void preloadAndLockAllModules() {
+    HANDLE hProcess = GetCurrentProcess();
+    HMODULE hMods[1024];
+    DWORD cbNeeded = 0;
+    if (EnumProcessModules(hProcess, hMods, sizeof(hMods), &cbNeeded)) {
+        DWORD count = cbNeeded / sizeof(HMODULE);
+        for (DWORD i = 0; i < count; i++) {
+            MODULEINFO modInfo;
+            if (GetModuleInformation(hProcess, hMods[i], &modInfo, sizeof(modInfo))) {
+                volatile const char *base = (volatile const char *)modInfo.lpBaseOfDll;
+                size_t size = modInfo.SizeOfImage;
+                for (size_t offset = 0; offset < size; offset += 4096) {
+                    char dummy = base[offset];
+                    Q_UNUSED(dummy);
+                }
+            }
+        }
+    }
+    qDebug() << "[main] Pre-faulted and cached 100% of executable and DLL pages into local RAM.";
+}
+#endif
 
 int main(int argc, char *argv[]) {
+  QCoreApplication::setOrganizationName("SamsungClone");
+  QCoreApplication::setOrganizationDomain("samsungclone.com");
+  QCoreApplication::setApplicationName("Gallery");
+  QCoreApplication::setApplicationVersion("2.0.0");
+
+#ifdef Q_OS_WIN
+  preloadAndLockAllModules();
+#endif
+
   // Initialize LogManager
   LogManager::instance().setLogFile("application.log");
   qInstallMessageHandler(LogManager::messageHandler);
@@ -38,16 +77,14 @@ int main(int argc, char *argv[]) {
   // Initialize Disk Cache
   FileCacheManager::instance().initialize();
 
-  // Suppress annoying JPEG warnings (Commented out to restore granularity)
-  // QLoggingCategory::setFilterRules("qt.gui.imageio.jpeg.warning=false");
+  // Initialize RAM Image Cache capacity (default 512MB)
+  QSettings settings("SamsungClone", "Gallery");
+  int cacheSizeMB = settings.value("cacheSizeMB", 512).toInt();
+  if (cacheSizeMB <= 0) cacheSizeMB = 512;
+  AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024);
 
   // Set style to Basic to allow customization
   QQuickStyle::setStyle("Basic");
-
-  QCoreApplication::setOrganizationName("SamsungClone");
-  QCoreApplication::setOrganizationDomain("samsungclone.com");
-  QCoreApplication::setApplicationName("Gallery");
-  QCoreApplication::setApplicationVersion("2.0.0");
 
   // Set up graphics API before creating QGuiApplication
   SettingsHelper tempHelper;
@@ -71,6 +108,18 @@ int main(int argc, char *argv[]) {
   qputenv("QT_MEDIA_BACKEND", "ffmpeg");
 
   QApplication app(argc, argv);
+
+  // Pre-load media DLL pages (FFmpeg, LibRaw, WIC) asynchronously into RAM at startup
+  // Prevents SMB page fault stalls when running over network shares
+  TaskScheduler::instance().addTask([]() {
+#ifdef Q_OS_WIN
+      CoInitialize(NULL);
+#endif
+      VideoThumbnailer::warmup();
+#ifdef Q_OS_WIN
+      CoUninitialize();
+#endif
+  }, TaskScheduler::IO_BOUND, TaskScheduler::Low, "WarmupMediaDLLs");
 
   qmlRegisterType<ImageModel>("QGalleryX", 1, 0, "ImageModel");
 
@@ -103,6 +152,7 @@ int main(int argc, char *argv[]) {
   qmlRegisterUncreatableType<DesktopHelper>("QGalleryX", 1, 0, "DesktopHelper", "Enums only");
   DesktopHelper desktopHelper;
   engine.rootContext()->setContextProperty("desktopHelper", &desktopHelper);
+  engine.rootContext()->setContextProperty("viewportGovernor", &ViewportGovernor::instance());
 
   // Expose ImageProcessor
   ImageProcessor imageProcessor;
@@ -113,6 +163,9 @@ int main(int argc, char *argv[]) {
 
   // Expose TaskScheduler
   engine.rootContext()->setContextProperty("taskScheduler", &TaskScheduler::instance());
+
+  // Expose FileCacheManager
+  engine.rootContext()->setContextProperty("fileCacheManager", &FileCacheManager::instance());
 
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
@@ -128,6 +181,14 @@ int main(int argc, char *argv[]) {
       },
       Qt::QueuedConnection);
   engine.load(url);
+
+#ifdef Q_OS_WIN
+  // Process-wide UIPI bypass for Drag and Drop.
+  // Avoids calling winId() before app.exec() which crashes Qt 6 RHI.
+  ChangeWindowMessageFilter(WM_DROPFILES, MSGFLT_ADD);
+  ChangeWindowMessageFilter(WM_COPYDATA, MSGFLT_ADD);
+  ChangeWindowMessageFilter(0x0049 /* WM_COPYGLOBALDATA */, MSGFLT_ADD);
+#endif
 
   return app.exec();
 }

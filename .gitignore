@@ -18,6 +18,11 @@ Dist/
 # Logs & Debug Output
 logs/
 *.log
+build_log*.txt
+*.rej
+temp_scan.txt
+test_drag.*
+url_test.cpp
 scripts/BadClusters/
 scripts/*.log
 docs/oddlog.txt
@@ -29,6 +34,9 @@ docs/*.JPG
 docs/*.jpg
 docs/*.PNG
 docs/*.png
+bugs/
+*.XML
+*.xml
 
 # Agent Artifacts & Session Logs (contains prompt histories, debug media, and task logs)
 docs/artifacts/

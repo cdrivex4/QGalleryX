@@ -87,28 +87,71 @@ void GroupedProxyModel::setSourceModel(QAbstractListModel *model) {
   if (m_sourceModel == model)
     return;
 
-  if (m_sourceModel) {
-    disconnect(m_sourceModel, &QAbstractListModel::modelReset, this,
-               &GroupedProxyModel::onSourceModelReset);
-    disconnect(m_sourceModel, &QAbstractListModel::rowsInserted, this,
-               &GroupedProxyModel::onSourceModelReset);
-    disconnect(m_sourceModel, &QAbstractListModel::rowsRemoved, this,
-               &GroupedProxyModel::onSourceModelReset);
-  }
+    if (m_sourceModel) {
+      disconnect(m_sourceModel, &QAbstractListModel::modelReset, this,
+                 &GroupedProxyModel::onSourceModelReset);
+      disconnect(m_sourceModel, &QAbstractListModel::rowsInserted, this,
+                 &GroupedProxyModel::onSourceModelReset);
+      disconnect(m_sourceModel, &QAbstractListModel::rowsRemoved, this,
+                 &GroupedProxyModel::onSourceModelReset);
+                 
+      if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+          disconnect(im, &ImageModel::precacheModeChanged, this, &GroupedProxyModel::precacheModeChanged);
+          disconnect(im, &ImageModel::totalCountChanged, this, &GroupedProxyModel::totalCountChanged);
+      }
+    }
 
   m_sourceModel = model;
 
-  if (m_sourceModel) {
-    connect(m_sourceModel, &QAbstractListModel::modelReset, this,
-            &GroupedProxyModel::onSourceModelReset);
-    connect(m_sourceModel, &QAbstractListModel::rowsInserted, this,
-            &GroupedProxyModel::onSourceModelReset);
-    connect(m_sourceModel, &QAbstractListModel::rowsRemoved, this,
-            &GroupedProxyModel::onSourceModelReset);
-  }
+    if (m_sourceModel) {
+      connect(m_sourceModel, &QAbstractListModel::modelReset, this,
+              &GroupedProxyModel::onSourceModelReset);
+      connect(m_sourceModel, &QAbstractListModel::rowsInserted, this,
+              &GroupedProxyModel::onSourceModelReset);
+      connect(m_sourceModel, &QAbstractListModel::rowsRemoved, this,
+              &GroupedProxyModel::onSourceModelReset);
+              
+      if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+          connect(im, &ImageModel::precacheModeChanged, this, &GroupedProxyModel::precacheModeChanged);
+          connect(im, &ImageModel::totalCountChanged, this, &GroupedProxyModel::totalCountChanged);
+      }
+    }
 
   rebuildIndex();
   emit sourceModelChanged();
+}
+
+int GroupedProxyModel::precacheMode() const {
+    if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+        return im->precacheMode();
+    }
+    return 1;
+}
+
+void GroupedProxyModel::setPrecacheMode(int mode) {
+    if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+        im->setPrecacheMode(mode);
+    }
+}
+
+int GroupedProxyModel::totalCount() const {
+    if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+        return im->totalCount();
+    }
+    return rowCount();
+}
+
+int GroupedProxyModel::indexOfPath(const QString &path) const {
+    if (ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel)) {
+        int sourceIndex = im->indexOfPath(path);
+        if (sourceIndex >= 0) {
+            QModelIndex proxyIdx = getProxyIndexForSourceIndex(sourceIndex);
+            if (proxyIdx.isValid()) {
+                return proxyIdx.row();
+            }
+        }
+    }
+    return -1;
 }
 
 int GroupedProxyModel::columns() const { return m_columns; }
@@ -168,16 +211,22 @@ QHash<int, QByteArray> GroupedProxyModel::roleNames() const {
 
 QModelIndex
 GroupedProxyModel::getProxyIndexForSourceIndex(int sourceIndex) const {
+  int row = getProxyRowForSourceIndex(sourceIndex);
+  if (row >= 0) return index(row, 0);
+  return QModelIndex();
+}
+
+int GroupedProxyModel::getProxyRowForSourceIndex(int sourceIndex) const {
   for (int i = 0; i < m_index.count(); ++i) {
     const IndexItem &item = m_index[i];
     if (item.type == RowItem) {
       if (sourceIndex >= item.sourceStartIndex &&
           sourceIndex < item.sourceStartIndex + item.count) {
-        return index(i, 0);
+        return i;
       }
     }
   }
-  return QModelIndex();
+  return -1;
 }
 
 void GroupedProxyModel::onSourceModelReset() { rebuildIndex(); }

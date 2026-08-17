@@ -214,6 +214,79 @@ ApplicationWindow {
                             font.bold: true
                             Layout.alignment: Qt.AlignHCenter
                         }
+
+                        // --- Compact High-Density System Info & Stats Card (Top of Menu) ---
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 64
+                            color: "#1e1e1e"
+                            radius: 8
+                            border.color: "#383838"
+                            border.width: 1
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.margins: 10
+                                spacing: 12
+
+                                ColumnLayout {
+                                    Layout.fillWidth: true
+                                    spacing: 3
+
+                                    Text {
+                                        text: "GPU: " + (appSettings ? appSettings.getGpuName(window) : "GPU")
+                                        color: "#e0e0e0"
+                                        font.pixelSize: 12
+                                        font.bold: true
+                                        elide: Text.ElideRight
+                                        Layout.fillWidth: true
+                                    }
+
+                                    RowLayout {
+                                        spacing: 12
+                                        Text {
+                                            id: memUsageTextTopSem
+                                            text: "App RAM: " + (systemMonitor ? systemMonitor.memoryUsageMB.toFixed(1) : "0") + " MB"
+                                            color: "#00FFFF"
+                                            font.pixelSize: 11
+                                            font.bold: true
+                                        }
+                                        Text {
+                                            text: "VRAM: " + (systemMonitor ? Math.round(systemMonitor.gpuVramUsedMB) : "0") + " MB"
+                                            color: "#FFA500"
+                                            font.pixelSize: 11
+                                            font.bold: true
+                                        }
+                                        Text {
+                                            text: "Threads: " + (appSettings ? appSettings.concurrentThreads : "0")
+                                            color: "#aaa"
+                                            font.pixelSize: 11
+                                        }
+                                    }
+                                }
+
+                                Rectangle {
+                                    width: 1
+                                    Layout.fillHeight: true
+                                    color: "#383838"
+                                }
+
+                                CheckBox {
+                                    id: statsCheckboxTopSem
+                                    checked: statsOverlay.visible
+                                    onCheckedChanged: statsOverlay.visible = checked
+                                    Layout.alignment: Qt.AlignVCenter
+                                    contentItem: Text {
+                                        text: "Performance\nStats Overlay"
+                                        color: statsCheckboxTopSem.checked ? "#00FF00" : "#ccc"
+                                        font.pixelSize: 11
+                                        font.bold: true
+                                        leftPadding: parent.indicator.width + parent.spacing
+                                        verticalAlignment: Text.AlignVCenter
+                                    }
+                                }
+                            }
+                        }
                         
                         Button {
                             Layout.fillWidth: true
@@ -318,62 +391,6 @@ ApplicationWindow {
                             }
                         }
 
-                        Rectangle {
-                            Layout.fillWidth: true
-                            height: 1
-                            color: "#444"
-                            Layout.topMargin: 10
-                            Layout.bottomMargin: 10
-                        }
-
-                        Text {
-                            text: "System Info"
-                            color: "white"
-                            font.bold: true
-                            font.pixelSize: 16
-                            Layout.alignment: Qt.AlignHCenter
-                        }
-
-                        Text {
-                            text: "GPU: " + appSettings.getGpuName(window)
-                            color: "#ccc"
-                            Layout.fillWidth: true
-                            wrapMode: Text.Wrap
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pixelSize: 13
-                        }
-
-                        Text {
-                            id: memUsageText
-                            text: "Memory: Checking..."
-                            color: "#ccc"
-                            Layout.fillWidth: true
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pixelSize: 13
-                        }
-
-                        Timer {
-                            interval: 2000
-                            running: true
-                            repeat: true
-                            onTriggered: {
-                                memUsageText.text = "Memory: " + systemMonitor.memoryUsageMB.toFixed(1) + " MB"
-                            }
-                        }
-                        
-                        CheckBox {
-                            text: "Show Performance Stats"
-                            checked: statsOverlay.visible
-                            onCheckedChanged: statsOverlay.visible = checked
-                            Layout.alignment: Qt.AlignHCenter
-                            contentItem: Text {
-                                text: parent.text
-                                color: "white"
-                                leftPadding: parent.indicator.width + parent.spacing
-                                verticalAlignment: Text.AlignVCenter
-                            }
-                        }
-                        
                         Item { height: 20; width: 1 } // Bottom Spacer
                     }
                 }
@@ -403,7 +420,29 @@ ApplicationWindow {
         anchors.right: parent.right
         anchors.margins: 10
         apiName: appSettings.graphicsApi
+        scanEngine: imageModel ? imageModel.scanMethod : "Idle"
+        scanDuration: imageModel ? imageModel.scanDurationMs : 0
+        isLoading: imageModel ? imageModel.isLoading : false
+        loadedCount: imageModel ? (imageModel.totalCount === 0 ? imageModel.scanProgress : imageModel.count) : 0
+        totalCount: imageModel ? imageModel.totalCount : 0
+        activeThreadCount: appSettings ? appSettings.concurrentThreads : 0
+        precacheMode: imageModel ? imageModel.precacheMode : 1
+        crawlerIndex: imageModel ? imageModel.crawlerIndex : 0
+        crawlerTotal: imageModel ? imageModel.crawlerTotal : 0
+        crawlerProgress: imageModel ? imageModel.crawlerProgress : 0.0
+        activeJobs: imageModel ? imageModel.activeJobs : 0
         z: 100
+        onRebuildCacheRequested: {
+            if (window.currentPath !== "") {
+                console.log("OSD: Rebuilding cache for: " + window.currentPath)
+                if (imageModel) imageModel.reCrawl()
+                if (semanticView && typeof semanticView.scanFolder === "function") {
+                    semanticView.scanFolder(window.currentPath)
+                }
+            } else {
+                folderDialog.open()
+            }
+        }
     }
 
     // Photo Viewer Overlay (Full Screen)

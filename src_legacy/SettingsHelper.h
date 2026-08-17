@@ -28,9 +28,19 @@ class SettingsHelper : public QObject {
       int logLevel READ logLevel WRITE setLogLevel NOTIFY logLevelChanged)
   Q_PROPERTY(bool rawAcceleration READ rawAcceleration WRITE setRawAcceleration
                  NOTIFY rawAccelerationChanged)
+  Q_PROPERTY(bool showLatencyToasts READ showLatencyToasts WRITE setShowLatencyToasts
+                 NOTIFY showLatencyToastsChanged)
+  Q_PROPERTY(int scanEngineMode READ scanEngineMode WRITE setScanEngineMode
+                 NOTIFY scanEngineModeChanged)
 
 public:
   explicit SettingsHelper(QObject *parent = nullptr);
+
+  int scanEngineMode() const;
+  void setScanEngineMode(int mode);
+
+  bool showLatencyToasts() const;
+  void setShowLatencyToasts(bool show);
 
   QString graphicsApi() const;
   QString graphicsDriver() const;
@@ -60,12 +70,16 @@ public:
   bool rawAcceleration() const;
   void setRawAcceleration(bool enable);
 
+  Q_INVOKABLE int snapThumbnailResolution(int rawSize) const;
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();
   Q_INVOKABLE QString getDiskCachePath();
   Q_INVOKABLE qint64 getDiskCacheUsage();
   Q_INVOKABLE void nukeDiskCache();
+  Q_INVOKABLE void nukeCacheForPath(const QString &pathPrefix);
+  Q_INVOKABLE QStringList getTrackedRootPaths();
+  Q_INVOKABLE QVariantMap getTrackedRootPathStats();
 
   // Placeholder for GPU info (implementation moved to SystemMonitor or
   // simplified)
@@ -86,6 +100,8 @@ signals:
   void concurrentThreadsChanged();
   void logLevelChanged();
   void rawAccelerationChanged();
+  void showLatencyToastsChanged();
+  void scanEngineModeChanged();
 
 private:
   QString m_graphicsApi;

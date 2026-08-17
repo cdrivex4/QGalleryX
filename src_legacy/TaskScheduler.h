@@ -1,6 +1,7 @@
 #ifndef TASKSCHEDULER_H
 #define TASKSCHEDULER_H
 
+#include "RingBufferDispatcher.h"
 #include <QMap>
 #include <QMutex>
 #include <QObject>
@@ -11,6 +12,7 @@
 #include <functional>
 #include <vector>
 
+
 /**
  * @brief The TaskScheduler class manages background work with priorities.
  * It strictly separates IO-bound work (metadata, file access) from
@@ -18,7 +20,15 @@
  */
 class TaskScheduler : public QObject {
   Q_OBJECT
+  Q_PROPERTY(int schedulerGovernor READ getSchedulerGovernor WRITE
+                 setSchedulerGovernor NOTIFY schedulerGovernorChanged)
 public:
+  enum SchedulerGovernor {
+    Governor_FIFO = 0,
+    Governor_LIFO = 1,
+    Governor_Adaptive = 2,
+    Governor_RoundRobin = 3
+  };
   enum TaskType {
     CPU_BOUND, // Image Decoding, Processing
     IO_BOUND   // Metadata read, Directory scan (Fast)
@@ -35,9 +45,9 @@ public:
 
   static TaskScheduler &instance();
 
-  // Add a task to the queue
-  void addTask(Task task, TaskType type = CPU_BOUND,
-               Priority priority = Normal);
+  // Add a task to the queue. Returns true if successfully queued, false if rejected (e.g. shutdown or full)
+  bool addTask(Task task, TaskType type = CPU_BOUND, Priority priority = Normal,
+               const QString &taskKey = "");
 
   // Stop all threads (for shutdown)
   void stop();
@@ -52,17 +62,28 @@ public:
   bool isPaused() const;
   bool isRunning() const;
 
+  int getSchedulerGovernor() const { return m_governor.load(); }
+  void setSchedulerGovernor(int gov);
+
+  int getQueueSize(Priority p) const;
+  bool hasImmediateTasks() const;
+  void waitForImmediateTasksToFinish();
+
 private:
   TaskScheduler();
   ~TaskScheduler();
 
+signals:
+  void schedulerGovernorChanged();
+
+private:
   void cpuWorkerLoop();
   void ioWorkerLoop();
 
 private:
   struct TaskEntry {
     Task task;
-    Priority priority;
+    QString key;
     quint64 sequence; // To maintain FIFO within same priority
   };
 
@@ -71,13 +92,12 @@ private:
 
   // CPU Pool
   std::vector<std::thread> m_cpuThreads;
-  QMap<Priority, QQueue<Task>> m_cpuQueue;
   QMutex m_cpuMutex;
   QWaitCondition m_cpuCondition;
 
   // IO Pool (Usually 1-2 threads)
   std::vector<std::thread> m_ioThreads;
-  QMap<Priority, QQueue<Task>> m_ioQueue;
+  QMap<Priority, QList<TaskEntry>> m_ioQueue;
   QMutex m_ioMutex;
   QWaitCondition m_ioCondition;
 
@@ -85,6 +105,15 @@ private:
   std::atomic<bool> m_paused;
   std::atomic<bool> m_backgroundPaused;
   std::atomic<quint64> m_sequenceCounter;
+  std::atomic<int> m_governor{0};
+
+  std::atomic<int> m_activeCpuThreads{0};
+
+  std::atomic<int> m_urgentTaskCount{0};
+  QMutex m_urgentTaskMutex;
+  QWaitCondition m_urgentTaskCondition;
+
+  RingBufferDispatcher m_dispatcher;
 };
 
 #endif // TASKSCHEDULER_H

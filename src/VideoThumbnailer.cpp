@@ -154,6 +154,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   if (avformat_open_input(&cleanup.fmtCtx, pathStr.c_str(), nullptr, &options) !=
       0) {
     if (options) av_dict_free(&options);
+    cleanup.fmtCtx = nullptr; // Prevent double-free in ~FFmpegCleanup()
     qWarning() << "[" << timeLogStr
                << "][FFmpeg] Failed to open file (or timeout):" << path;
     return QImage();
@@ -207,6 +208,9 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
     dstW = targetSize.width();
     dstH = (int)(dstW / aspect);
   }
+  // Guarantee even dimensions for swscale to prevent heap boundary write overruns
+  dstW = std::max(2, (dstW / 2) * 2);
+  dstH = std::max(2, (dstH / 2) * 2);
 
   int retryCount = 0;
   while (retryCount < 1) { // Removed 3x retry on black frames to stop CPU overloading
@@ -224,12 +228,15 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
       av_seek_frame(cleanup.fmtCtx, streamIdx, timestamp, AVSEEK_FLAG_BACKWARD);
     }
 
-    if (!cleanup.frame)
-      cleanup.frame = av_frame_alloc();
-    if (!cleanup.packet)
-      cleanup.packet = av_packet_alloc();
+    if (cleanup.frame)
+      av_frame_unref(cleanup.frame);
     else
+      cleanup.frame = av_frame_alloc();
+
+    if (cleanup.packet)
       av_packet_unref(cleanup.packet);
+    else
+      cleanup.packet = av_packet_alloc();
 
     avcodec_flush_buffers(cleanup.codecCtx);
 
@@ -295,6 +302,11 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
         finalFrame = cleanup.swFrame;
       }
 
+      if (finalFrame->width <= 0 || finalFrame->height <= 0) {
+        retryCount++;
+        continue;
+      }
+
       if (cleanup.swsCtx) {
         sws_freeContext(cleanup.swsCtx);
         cleanup.swsCtx = nullptr;
@@ -302,30 +314,24 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
       cleanup.swsCtx = sws_getContext(finalFrame->width, finalFrame->height,
                                       (enum AVPixelFormat)finalFrame->format,
-                                      dstW, dstH, AV_PIX_FMT_RGB24,
+                                      dstW, dstH, AV_PIX_FMT_BGRA,
                                       SWS_BILINEAR, nullptr, nullptr, nullptr);
       if (!cleanup.swsCtx)
         return QImage();
 
-      int numBytes = av_image_get_buffer_size(AV_PIX_FMT_RGB24, dstW, dstH, 1);
-      if (cleanup.buffer)
-        av_free(cleanup.buffer);
-      cleanup.buffer = (uint8_t *)av_malloc(numBytes);
+      uint8_t *dst_data[4] = {nullptr};
+      int dst_linesize[4] = {0};
+      int allocRes = av_image_alloc(dst_data, dst_linesize, dstW, dstH, AV_PIX_FMT_BGRA, 32);
+      if (allocRes < 0)
+        return QImage();
 
-      if (!cleanup.rgbFrame)
-        cleanup.rgbFrame = av_frame_alloc();
-      else
-        av_frame_unref(cleanup.rgbFrame);
-
-      av_image_fill_arrays(cleanup.rgbFrame->data, cleanup.rgbFrame->linesize,
-                           cleanup.buffer, AV_PIX_FMT_RGB24, dstW, dstH, 1);
       sws_scale(cleanup.swsCtx, finalFrame->data, finalFrame->linesize, 0,
-                finalFrame->height, cleanup.rgbFrame->data,
-                cleanup.rgbFrame->linesize);
+                finalFrame->height, dst_data, dst_linesize);
 
-      QImage tmp((const uchar *)cleanup.rgbFrame->data[0], dstW, dstH,
-                 cleanup.rgbFrame->linesize[0], QImage::Format_RGB888);
-      return tmp.copy();
+      QImage tmp(dst_data[0], dstW, dstH, dst_linesize[0], QImage::Format_RGB32);
+      QImage frameCopy = tmp.copy();
+      av_freep(&dst_data[0]);
+      return frameCopy;
     }
 
     retryCount++;

@@ -93,6 +93,7 @@ public:
   bool useFastImage() const;
   void setUseFastImage(bool use);
 
+  Q_INVOKABLE int snapThumbnailResolution(int rawSize) const;
   Q_INVOKABLE void restartApp();
   Q_INVOKABLE bool isApiSupported(int apiValue);
   Q_INVOKABLE QVariantMap getCacheStats();

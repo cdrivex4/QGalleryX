@@ -1,17 +1,32 @@
 #ifndef FASTVOLUMESCANNER_H
 #define FASTVOLUMESCANNER_H
 
-#include <QMap>
 #include <QObject>
 #include <QString>
 #include <QVector>
+#include <vector>
+#include <unordered_map>
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
 #include <winioctl.h>
 
-struct FileInfo {
-  QString name;
-  DWORDLONG parentFrn;
-  bool isDir;
+struct VolumeIndexSoA {
+  std::vector<DWORDLONG> frns;
+  std::vector<DWORDLONG> parentFrns;
+  std::vector<uint64_t> fileSizes;
+  std::vector<int64_t> creationTimes;
+  std::vector<uint32_t> nameOffsets;
+  std::vector<uint32_t> nameLengths;
+  std::vector<bool> isDir;
+  std::vector<char> stringPool;
+};
+
+struct ScannedFile {
+    QString path;
+    uint64_t size;
+    int64_t creationTime;
 };
 
 class FastVolumeScanner : public QObject {
@@ -25,18 +40,19 @@ public:
   bool scanVolume(const QString &volumePath);
 
   // Retrieve results
-  QVector<QString> getAllFiles() const;
-  QVector<QString> getAllDirectories() const;
+  QVector<ScannedFile> getScannedFiles() const { return m_scannedFiles; }
+  
+  const VolumeIndexSoA& getIndex() const { return m_soa; }
 
 private:
   HANDLE m_hVol;
-  QMap<DWORDLONG, FileInfo> m_fileMap;
-  QVector<QString> m_files;
-  QVector<QString> m_dirs;
+  QString m_volumeDrive;
+  VolumeIndexSoA m_soa;
+  QVector<ScannedFile> m_scannedFiles;
+  std::unordered_map<DWORDLONG, size_t> m_frnToIndex;
 
   bool openVolume(const QString &volName);
-  bool getUsnJournalState(USN_JOURNAL_DATA &ujData);
-  bool enumerateFiles(const USN_JOURNAL_DATA &ujData);
+  bool enumerateFiles(const QString &volRoot);
   void buildPaths();
 };
 

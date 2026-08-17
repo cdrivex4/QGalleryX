@@ -22,17 +22,25 @@
 - **Performance monitoring** with load time tracking
 - **Video Playback** with basic media controls in viewer
 
-### 3. Performance Optimization
-- **Asynchronous image loading** with thread pool
-- **Memory-efficient caching** with configurable sizes
-- **GPU acceleration** with multiple API support
-- **Optimization Strategy**:
-    - **Adaptive Task Throttling**: Background tasks automatically pause during video playback.
-    - **Visible-First Loading**: Viewport items strictly prioritized over pre-fetch.
-    - **LIFO Queue**: Most recent user actions handled first.
+### 3. Performance & Caching Architecture
+- **Persistent Memory-Mapped Ring Buffer (`FileCache.mmap`)**:
+  - Replaces thousands of scattered `.jpg` cache files with a high-speed, contiguous binary ring buffer.
+  - Zero-copy OS memory mapping (`QFile::map`) provides near-zero latency thumbnail retrieval without filesystem fragmentation.
+- **$O(1)$ Duplicate Skip & Incremental Crawling**:
+  - Re-crawling folders with tens of thousands of items completes in milliseconds by validating cached hashes in memory before touching media on disk.
+- **Live Hot-Folder Monitoring (`QFileSystemWatcher`)**:
+  - Continuously monitors active directories for file additions, deletions, and modifications with debounced real-time UI updates.
+- **Startup RAM Pre-Faulting (`preloadAndLockAllModules`)**:
+  - Preloads all executable and DLL code pages into physical memory at startup, preventing SMB page faults and network drops.
+- **Passive Read Latency Guard**:
+  - Statistical running mean/variance profiling (Welford's algorithm) per drive letter with automatic rate-limiting on congested storage.
+- **Adaptive 3-Ring Priority Throttling**:
+  - Background tasks automatically yield during video playback, rapid scrolling, or CPU contention.
+- **Non-Destructive Virtual Rotation**:
+  - 100% metadata-based image and video rotation that guarantees original source files remain untouched.
 - **Resilient Video Handling**:
-    - **Smart Retry**: Automatically seeks to different timestamps if initial decode fails or returns a black frame.
-    - **Software Fallback**: Degrades to CPU decoding if GPU acceleration fails repeatedly.
+  - **Smart Retry**: Automatically seeks to different timestamps if initial decode fails or returns a black frame.
+  - **Hardware Acceleration**: Full D3D11VA GPU decoding with graceful software fallback.
 
 ### 4. Settings and Configuration
 - **Graphics API selection** (Direct3D11, Vulkan, OpenGL, Software)

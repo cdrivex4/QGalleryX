@@ -95,27 +95,24 @@ Item {
             
             onPressed: {
                 scrubber.isDragging = true
-                listView.interactive = false // Disable list scroll while dragging
+                if (listView) listView.interactive = false
             }
             
             onReleased: {
                 scrubber.isDragging = false
-                listView.interactive = true
+                if (listView) {
+                    listView.interactive = true
+                    listView.returnToBounds()
+                }
             }
             
             onPositionChanged: {
-                if (drag.active) {
-                    var pct = scrubber.y / (root.height - scrubber.height)
-                    
-                    // If content height is accurate we can use contentY
-                    // but ListView/GridView calculates contentHeight lazily
-                    // which causes out of bounds if setting contentY directly.
-                    // It's safer to map to index and positionViewAtIndex
-                    var maxIndex = listView.count - 1
-                    if (maxIndex >= 0) {
-                        var targetIndex = Math.floor(pct * maxIndex)
-                        listView.positionViewAtIndex(targetIndex, ListView.Beginning)
-                    }
+                if (drag.active && listView) {
+                    var trackHeight = Math.max(1, root.height - scrubber.height)
+                    var progress = Math.max(0.0, Math.min(1.0, scrubber.y / trackHeight))
+                    var maxScroll = Math.max(0, listView.contentHeight - listView.height)
+                    listView.contentY = progress * maxScroll
+                    root.updateLabelFromScroll()
                 }
             }
         }
@@ -124,18 +121,30 @@ Item {
     // Current Date Logic
     property string currentDateString: ""
     
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            if (!listView || !proxyModel) return
-            
-            // Find visible item index
-            var idx = listView.indexAt(10, listView.contentY + 50)
-            if (idx !== -1) {
+    function updateLabelFromScroll() {
+        if (!listView) return
+        var idx = -1
+        if (listView.indexAt) {
+            idx = listView.indexAt(listView.width / 2, listView.contentY + (listView.height / 2))
+            if (idx === -1) idx = listView.indexAt(10, listView.contentY + 50)
+        }
+        if (idx !== -1) {
+            if (proxyModel && typeof proxyModel.getLabelForProxyIndex === "function") {
                 root.currentDateString = proxyModel.getLabelForProxyIndex(idx)
+            } else if (listView.model) {
+                var nameVal = ""
+                if (typeof listView.model.data === "function") {
+                    nameVal = listView.model.data(listView.model.index(idx, 0), Qt.UserRole + 1) // NameRole
+                }
+                if (nameVal) root.currentDateString = nameVal.toString()
             }
         }
+    }
+    
+    Timer {
+        interval: 100
+        running: !scrubber.isDragging
+        repeat: true
+        onTriggered: root.updateLabelFromScroll()
     }
 }

@@ -11,11 +11,13 @@ AlbumModel::AlbumModel(QObject *parent) : QAbstractListModel(parent) {}
 void AlbumModel::setSourceModel(ImageModel *model) {
   if (m_sourceModel != model) {
     if (m_sourceModel) {
-      disconnect(m_sourceModel, &ImageModel::itemsPopulated, this, &AlbumModel::rebuildFromSourceModel);
+      disconnect(m_sourceModel, &ImageModel::itemsPopulated, this,
+                 &AlbumModel::rebuildFromSourceModel);
     }
     m_sourceModel = model;
     if (m_sourceModel) {
-      connect(m_sourceModel, &ImageModel::itemsPopulated, this, &AlbumModel::rebuildFromSourceModel);
+      connect(m_sourceModel, &ImageModel::itemsPopulated, this,
+              &AlbumModel::rebuildFromSourceModel);
       rebuildFromSourceModel();
     }
     emit sourceModelChanged();
@@ -23,15 +25,21 @@ void AlbumModel::setSourceModel(ImageModel *model) {
 }
 
 void AlbumModel::rebuildFromSourceModel() {
-  if (!m_sourceModel) return;
+  if (!m_sourceModel)
+    return;
 
   const auto &items = m_sourceModel->allItems();
   QMap<QString, AlbumInfo> albumMap;
 
   for (const auto &item : items) {
-    QFileInfo fi(item.filePath);
-    QString dirPath = QDir::fromNativeSeparators(fi.dir().absolutePath());
-    QString dirName = fi.dir().dirName();
+    QString clean = QDir::fromNativeSeparators(item.filePath);
+    int lastSlash = clean.lastIndexOf('/');
+    if (lastSlash <= 0)
+      continue;
+
+    QString dirPath = clean.left(lastSlash);
+    int prevSlash = dirPath.lastIndexOf('/');
+    QString dirName = (prevSlash >= 0) ? dirPath.mid(prevSlash + 1) : dirPath;
 
     if (!albumMap.contains(dirPath)) {
       AlbumInfo info;
@@ -48,6 +56,7 @@ void AlbumModel::rebuildFromSourceModel() {
   }
 
   QVector<AlbumInfo> newAlbums;
+  newAlbums.reserve(albumMap.size());
   for (auto it = albumMap.begin(); it != albumMap.end(); ++it) {
     newAlbums.append(it.value());
   }
@@ -76,26 +85,28 @@ void AlbumModel::setFilterQuery(const QString &query) {
 
 void AlbumModel::applyFilter() {
   beginResetModel();
-  
+
   if (m_validPaths.isEmpty() && m_filterQuery.isEmpty()) {
-     m_albums = m_allAlbums;
+    m_albums = m_allAlbums;
   } else {
-     m_albums.clear();
-     QSet<QString> validDirs;
-     for (const QString &p : m_validPaths) {
-         validDirs.insert(QDir::fromNativeSeparators(p).toLower());
-     }
-     
-     for (const auto &album : m_allAlbums) {
-         bool pathMatches = validDirs.contains(album.path.toLower());
-         bool nameMatches = m_filterQuery.isEmpty() ? false : 
-             (album.name.contains(m_filterQuery, Qt::CaseInsensitive) || 
-              album.path.contains(m_filterQuery, Qt::CaseInsensitive));
-         
-         if (pathMatches || nameMatches) {
-             m_albums.append(album);
-         }
-     }
+    m_albums.clear();
+    QSet<QString> validDirs;
+    for (const QString &p : m_validPaths) {
+      validDirs.insert(QDir::fromNativeSeparators(p).toLower());
+    }
+
+    for (const auto &album : m_allAlbums) {
+      bool pathMatches = validDirs.contains(album.path.toLower());
+      bool nameMatches =
+          m_filterQuery.isEmpty()
+              ? false
+              : (album.name.contains(m_filterQuery, Qt::CaseInsensitive) ||
+                 album.path.contains(m_filterQuery, Qt::CaseInsensitive));
+
+      if (pathMatches || nameMatches) {
+        m_albums.append(album);
+      }
+    }
   }
   endResetModel();
 }
@@ -207,9 +218,9 @@ void AlbumModel::scanAlbums(const QString &path) {
 
     // Final Update
     QMetaObject::invokeMethod(this, [this, albumMap]() {
-        QVector<AlbumInfo> finalAlbums = albumMap.values().toVector();
-        m_allAlbums = finalAlbums;
-        applyFilter();
+      QVector<AlbumInfo> finalAlbums = albumMap.values().toVector();
+      m_allAlbums = finalAlbums;
+      applyFilter();
       m_isLoading = false;
       emit isLoadingChanged();
       emit scanFinished();

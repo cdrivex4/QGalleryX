@@ -25,10 +25,11 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   // Constructor should be lightweight. Scanning happens via scanDirectory().
   m_visibleStartIndex = -1;
   m_visibleEndIndex = -1;
-  
+
   m_updateTimer = new QTimer(this);
   m_updateTimer->setInterval(16); // ~60fps
-  connect(m_updateTimer, &QTimer::timeout, this, &ImageModel::processPendingUpdates);
+  connect(m_updateTimer, &QTimer::timeout, this,
+          &ImageModel::processPendingUpdates);
 }
 
 int ImageModel::rowCount(const QModelIndex &parent) const {
@@ -240,73 +241,48 @@ void ImageModel::scanDirectory(const QString &path) {
           FastVolumeScanner fastScanner;
           if (fastScanner.scanVolume(cleanPath)) {
             qDebug() << "FastScanner: Success! Filtering results...";
-            QVector<QString> allFiles = fastScanner.getAllFiles();
+            QVector<ScannedFile> scannedFiles = fastScanner.getScannedFiles();
             QString searchPrefix = cleanPath;
             if (!searchPrefix.endsWith("/"))
               searchPrefix += "/";
 
-            // Normalize prefix for case-insensitive check?
-            // MFT returns paths with forward slashes usually (from my
-            // implementation) My implementation resolvePath uses "/" separator.
-
             int itemsFound = 0;
-            for (const QString &f : allFiles) {
+            for (const ScannedFile &sf : scannedFiles) {
               // Check inclusion
-              if (f.startsWith(searchPrefix, Qt::CaseInsensitive)) {
-                // Check Extension
-                QString ext = QFileInfo(f).suffix().toLower();
-                if (extensions.contains(ext)) {
-                  // Create Info
-                  ImageInfo info;
-                  info.filePath = f;
-                  info.fileName =
-                      QFileInfo(f)
-                          .fileName(); // optimization: extract from path string
-                  info.size = 0; // MFT doesn't give size in my current struct?
-                  // Wait, USN record has FileAttributes but maybe not size?
-                  // Standard MFT scan gets size.
-                  // My FastVolumeScanner currently only extracts NAME.
-                  // FIX: I need size for sorting? Or just date?
-                  // Date is birthTime. MFT has CreationTime?
-                  // My FastVolumeScanner only gets names.
+              if (sf.path.startsWith(searchPrefix, Qt::CaseInsensitive)) {
+                // Check Extension directly using standard substring for speed
+                int dotIdx = sf.path.lastIndexOf('.');
+                if (dotIdx > 0) {
+                  QString ext = sf.path.mid(dotIdx + 1).toLower();
+                  if (extensions.contains(ext)) {
+                    ImageInfo info;
+                    info.filePath = sf.path;
+                    int slashIdx = sf.path.lastIndexOf('/');
+                    info.fileName =
+                        slashIdx >= 0 ? sf.path.mid(slashIdx + 1) : sf.path;
+                    info.size = sf.size;
 
-                  // CRITICAL: If I don't have Date or Size, sorting will be
-                  // wrong and metadata missing until loaded. ImageModel relies
-                  // on Date for sorting. QFileInfo(f).birthTime() will access
-                  // disk -> Slows down Scanned? If I stat every file, I lose
-                  // the speed benefit of MFT!
+                    // Convert 100-nanosecond intervals since Jan 1, 1601 to
+                    // QDateTime
+                    if (sf.creationTime > 0) {
+                      qint64 msecsSince1601 = sf.creationTime / 10000;
+                      // 11644473600000 = ms between 1601 and 1970
+                      qint64 msecsSinceEpoch =
+                          msecsSince1601 - 11644473600000LL;
+                      info.date =
+                          QDateTime::fromMSecsSinceEpoch(msecsSinceEpoch);
+                    } else {
+                      info.date = QDateTime::currentDateTime();
+                    }
 
-                  // WizTree gets size/date from MFT.
-                  // I should update FastVolumeScanner to extract Metadata too.
-                  // BUT for now, let's accept that we might need to QFileInfo
-                  // them or just accept QFileInfo cost is still faster than
-                  // FindNextFile recursion? Actually QFileInfo on 100k files is
-                  // slow.
-
-                  // Let's stick to QFileInfo for this iteration to match
-                  // existing logic. It is still faster than recursive directory
-                  // walking usually.
-
-                  // Deferred QFileInfo
-                  // info.size and info.date are left empty to avoid O(n) disk IO
-                  // Fallback to fast date parsing from filename
-
-                  QRegularExpressionMatch match =
-                      dateRegex.match(info.fileName);
-                  if (match.hasMatch()) {
-                    QString dateStr = match.captured(1) + match.captured(2);
-                    QDateTime dt =
-                        QDateTime::fromString(dateStr, "yyyyMMddHHmmss");
-                    if (dt.isValid())
-                      info.date = dt;
+                    batch.append(info);
+                    itemsFound++;
                   }
-
-                  batch.append(info);
-                  itemsFound++;
                 }
               }
             }
-            qDebug() << "FastScanner: Filtered" << itemsFound << "items.";
+            qDebug() << "FastScanner: Filtered" << itemsFound
+                     << "items with instantly loaded metadata.";
             fastScanSuccess = true;
           }
         }
@@ -351,9 +327,8 @@ void ImageModel::scanDirectory(const QString &path) {
           const qint64 BURST_THRESHOLD_MS = 2000;
           for (int i = 0; i < batch.size(); ++i) {
             bool prevNear =
-                (i > 0) &&
-                (std::abs(batch[i].date.msecsTo(batch[i - 1].date)) <
-                 BURST_THRESHOLD_MS);
+                (i > 0) && (std::abs(batch[i].date.msecsTo(batch[i - 1].date)) <
+                            BURST_THRESHOLD_MS);
             bool nextNear =
                 (i < batch.size() - 1) &&
                 (std::abs(batch[i].date.msecsTo(batch[i + 1].date)) <
@@ -366,15 +341,18 @@ void ImageModel::scanDirectory(const QString &path) {
           m_allImages = batch;
           m_pendingInsertions = batch;
           if (!m_filterQuery.isEmpty()) {
-             // If we already have a filter, apply it immediately.
-             m_pendingInsertions.clear();
-             applyFilter();
-             m_isLoading = false;
-             emit isLoadingChanged();
-             qDebug() << "Scanning background work finished with filter applied.";
+            // If we already have a filter, apply it immediately.
+            m_pendingInsertions.clear();
+            applyFilter();
+            m_isLoading = false;
+            emit isLoadingChanged();
+            qDebug()
+                << "Scanning background work finished with filter applied.";
           } else {
-             m_updateTimer->start();
-             qDebug() << "Scanning background work finished in" << timer.elapsed() << "ms. Starting batched insertion of" << m_pendingInsertions.count() << "items.";
+            m_updateTimer->start();
+            qDebug() << "Scanning background work finished in"
+                     << timer.elapsed() << "ms. Starting batched insertion of"
+                     << m_pendingInsertions.count() << "items.";
           }
         });
       },
@@ -393,20 +371,21 @@ void ImageModel::applyFilter() {
   m_updateTimer->stop();
   beginResetModel();
   m_images.clear();
-  
+
   if (m_filterQuery.isEmpty()) {
     // We could do gradual insertion again, but for now just load all
     m_images = m_allImages;
   } else {
     QString q = m_filterQuery.toLower();
     for (const auto &item : m_allImages) {
-      if (item.fileName.toLower().contains(q) || item.filePath.toLower().contains(q)) {
+      if (item.fileName.toLower().contains(q) ||
+          item.filePath.toLower().contains(q)) {
         m_images.append(item);
       }
     }
   }
   endResetModel();
-  
+
   m_pendingInsertions.clear();
   m_isLoading = false;
   emit isLoadingChanged();
@@ -431,7 +410,7 @@ void ImageModel::processPendingUpdates() {
 
   const int BATCH_SIZE = 100; // Insert 100 items per frame
   int count = qMin(BATCH_SIZE, (int)m_pendingInsertions.size());
-  
+
   int startIdx = m_images.size();
   beginInsertRows(QModelIndex(), startIdx, startIdx + count - 1);
   for (int i = 0; i < count; ++i) {
@@ -513,47 +492,50 @@ QVariantMap ImageModel::getMetadata(int index) {
   }
   return meta;
 }
-bool ImageModel::setData(const QModelIndex &index, const QVariant &value, int role) {
-    if (!index.isValid() || index.row() >= m_images.count())
-      return false;
-  
-    if (role == IsSelectedRole) {
-      m_images[index.row()].isSelected = value.toBool();
-      emit dataChanged(index, index, {role});
-      emit selectedCountChanged();
-      return true;
-    }
+bool ImageModel::setData(const QModelIndex &index, const QVariant &value,
+                         int role) {
+  if (!index.isValid() || index.row() >= m_images.count())
     return false;
+
+  if (role == IsSelectedRole) {
+    m_images[index.row()].isSelected = value.toBool();
+    emit dataChanged(index, index, {role});
+    emit selectedCountChanged();
+    return true;
+  }
+  return false;
 }
 
 void ImageModel::clearSelection() {
-    for (int i = 0; i < m_images.count(); ++i) {
-      m_images[i].isSelected = false;
-    }
-    if (!m_images.isEmpty()) {
-      emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0), {IsSelectedRole});
-      emit selectedCountChanged();
-    }
+  for (int i = 0; i < m_images.count(); ++i) {
+    m_images[i].isSelected = false;
+  }
+  if (!m_images.isEmpty()) {
+    emit dataChanged(createIndex(0, 0), createIndex(m_images.count() - 1, 0),
+                     {IsSelectedRole});
+    emit selectedCountChanged();
+  }
 }
 
 int ImageModel::selectedCount() const {
-    int count = 0;
-    for (const auto &item : m_images) {
-      if (item.isSelected) count++;
-    }
-    return count;
+  int count = 0;
+  for (const auto &item : m_images) {
+    if (item.isSelected)
+      count++;
+  }
+  return count;
 }
 
 QStringList ImageModel::getSelectedPaths() const {
-    QStringList paths;
-    for (const auto &item : m_images) {
-      if (item.isSelected) {
-        paths.append(item.filePath);
-      }
+  QStringList paths;
+  for (const auto &item : m_images) {
+    if (item.isSelected) {
+      paths.append(item.filePath);
     }
-    return paths;
+  }
+  return paths;
 }
 
 int ImageModel::getProxyIndexForSourceIndex(int sourceIndex) const {
-    return sourceIndex;
+  return sourceIndex;
 }

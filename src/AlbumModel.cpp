@@ -92,17 +92,17 @@ void AlbumModel::scanAlbums(const QString &path) {
         if (myGen != m_scanGeneration.load())
           return;
 
-        QVector<QString> allFiles = fastScanner.getAllFiles();
+        QVector<ScannedFile> scannedFiles = fastScanner.getScannedFiles();
         QString cleanPathPrefix = cleanPath;
         if (!cleanPathPrefix.endsWith("/"))
           cleanPathPrefix += "/";
 
         int batchCount = 0;
-        for (const QString &f : allFiles) {
+        for (const ScannedFile &sf : scannedFiles) {
           if (myGen != m_scanGeneration.load())
             return;
 
-          QString normF = QDir::fromNativeSeparators(f);
+          QString normF = QDir::fromNativeSeparators(sf.path);
           if (normF.startsWith(cleanPathPrefix, Qt::CaseInsensitive)) {
             QString ext = QFileInfo(normF).suffix().toLower();
             if (extensions.contains(ext)) {

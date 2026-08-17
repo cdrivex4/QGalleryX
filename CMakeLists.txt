@@ -19,9 +19,12 @@ qt_add_executable(QGalleryX
     src_legacy/VideoThumbnailer.cpp src_legacy/VideoThumbnailer.h
     src_legacy/LogManager.cpp src_legacy/LogManager.h
     src_legacy/TaskScheduler.cpp src_legacy/TaskScheduler.h
+    src_legacy/RingBufferDispatcher.cpp src_legacy/RingBufferDispatcher.h
+    src_legacy/ViewportGovernor.cpp src_legacy/ViewportGovernor.h
     src/ImageProcessor.cpp src/ImageProcessor.h
     src/FileCacheManager.cpp src/FileCacheManager.h
     src/PassiveReadLatencyGuard.cpp src/PassiveReadLatencyGuard.h
+    src/FastVolumeScanner.cpp src/FastVolumeScanner.h
 )
 
 qt_add_qml_module(QGalleryX
@@ -44,6 +47,7 @@ qt_add_qml_module(QGalleryX
         resources/qml_legacy/ToastOverlay.qml
         resources/qml_legacy/StyledButton.qml
         resources/qml_legacy/MediaIcon.qml
+        resources/qml_legacy/SvgIcon.qml
 )
 
 # --- LibRaw ---

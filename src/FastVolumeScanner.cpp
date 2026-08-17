@@ -15,7 +15,8 @@ FastVolumeScanner::~FastVolumeScanner() {
 bool FastVolumeScanner::scanVolume(const QString &volumePath) {
   // Extract volume root (e.g., "C:\" -> "\\.\C:")
   QString vol = volumePath.left(3);
-  QString devicePath = "\\\\.\\" + vol.left(2);
+  m_volumeDrive = vol.left(2);
+  QString devicePath = "\\\\.\\" + m_volumeDrive;
 
   if (!openVolume(devicePath)) {
     qWarning() << "FastScanner: Failed to open volume" << devicePath
@@ -23,16 +24,10 @@ bool FastVolumeScanner::scanVolume(const QString &volumePath) {
     return false;
   }
 
-  USN_JOURNAL_DATA ujData;
-  if (!getUsnJournalState(ujData)) {
-    qWarning() << "FastScanner: Failed to query USN Journal";
-    return false;
-  }
-
   QElapsedTimer timer;
   timer.start();
 
-  if (!enumerateFiles(ujData)) {
+  if (!enumerateFiles(vol)) {
     qWarning() << "FastScanner: Failed to enumerate MFT";
     return false;
   }
@@ -48,117 +43,253 @@ bool FastVolumeScanner::scanVolume(const QString &volumePath) {
 }
 
 bool FastVolumeScanner::openVolume(const QString &volName) {
-  m_hVol = CreateFileW((LPCWSTR)volName.utf16(), GENERIC_READ,
-                       FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING,
-                       0, NULL);
+  m_hVol =
+      CreateFileW((LPCWSTR)volName.utf16(), GENERIC_READ,
+                  FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING,
+                  FILE_FLAG_NO_BUFFERING | FILE_FLAG_BACKUP_SEMANTICS, NULL);
   return (m_hVol != INVALID_HANDLE_VALUE);
 }
 
-bool FastVolumeScanner::getUsnJournalState(USN_JOURNAL_DATA &ujData) {
+#include "NtfsMft.h"
+
+bool FastVolumeScanner::enumerateFiles(const QString &volRoot) {
+  NTFS_VOLUME_DATA_BUFFER volData;
   DWORD br;
-  return DeviceIoControl(m_hVol, FSCTL_QUERY_USN_JOURNAL, NULL, 0, &ujData,
-                         sizeof(ujData), &br, NULL);
-}
-
-bool FastVolumeScanner::enumerateFiles(const USN_JOURNAL_DATA &ujData) {
-  MFT_ENUM_DATA enumData;
-  enumData.StartFileReferenceNumber = 0;
-  enumData.LowUsn = 0;
-  enumData.HighUsn = ujData.NextUsn;
-
-  char buffer[65536]; // 64KB buffer
-  DWORD br;
-
-  while (DeviceIoControl(m_hVol, FSCTL_ENUM_USN_DATA, &enumData,
-                         sizeof(enumData), buffer, sizeof(buffer), &br, NULL)) {
-    DWORD offset = sizeof(USN);
-    while (offset < br) {
-      PUSN_RECORD record = (PUSN_RECORD)(buffer + offset);
-
-      // Basic Filter: Skip system files if needed, here we take all valid ones
-      // We only care about normal files and directories
-
-      QString name = QString::fromWCharArray(
-          (wchar_t *)((char *)record + record->FileNameOffset),
-          record->FileNameLength / 2);
-
-      FileInfo info;
-      info.name = name;
-      info.parentFrn = record->ParentFileReferenceNumber;
-      info.isDir = (record->FileAttributes & FILE_ATTRIBUTE_DIRECTORY);
-
-      // Store by FileReferenceNumber (FRN)
-      // FRN is 64-bit ID unique to file
-      m_fileMap.insert(record->FileReferenceNumber, info);
-
-      offset += record->RecordLength;
-    }
-    // Continue from where we left off
-    enumData.StartFileReferenceNumber = *(DWORDLONG *)buffer;
+  if (!DeviceIoControl(m_hVol, FSCTL_GET_NTFS_VOLUME_DATA, NULL, 0, &volData,
+                       sizeof(volData), &br, NULL)) {
+    qWarning() << "Failed to get NTFS volume data.";
+    return false;
   }
 
-  // ERROR_HANDLE_EOF is normal termination
-  return (GetLastError() == ERROR_HANDLE_EOF);
+  uint64_t bytesPerRecord = volData.BytesPerFileRecordSegment;
+  size_t estimatedFiles = volData.MftValidDataLength.QuadPart / bytesPerRecord;
+
+  m_soa.frns.reserve(estimatedFiles);
+  m_soa.parentFrns.reserve(estimatedFiles);
+  m_soa.fileSizes.reserve(estimatedFiles);
+  m_soa.creationTimes.reserve(estimatedFiles);
+  m_soa.nameOffsets.reserve(estimatedFiles);
+  m_soa.nameLengths.reserve(estimatedFiles);
+  m_soa.isDir.reserve(estimatedFiles);
+  m_soa.stringPool.reserve(estimatedFiles * 40);
+  m_frnToIndex.reserve(estimatedFiles);
+
+  DWORD chunkSize = 256 * 1024; // 256 KB
+  void *buffer =
+      VirtualAlloc(NULL, chunkSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+  if (!buffer)
+    return false;
+
+  // 1. Query physical MFT cluster extents via FSCTL_GET_RETRIEVAL_POINTERS
+  struct ExtentRun {
+    LARGE_INTEGER startOffset;
+    uint64_t lengthBytes;
+  };
+  std::vector<ExtentRun> runs;
+
+  QString mftPath = volRoot + "$MFT";
+  HANDLE hMft = CreateFileW((LPCWSTR)mftPath.utf16(), FILE_READ_ATTRIBUTES,
+                            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                            NULL, OPEN_EXISTING, 0, NULL);
+
+  if (hMft != INVALID_HANDLE_VALUE) {
+    STARTING_VCN_INPUT_BUFFER inputVcn = {};
+    DWORD rpBufSize = 64 * 1024; // 64 KB for extents list
+    std::vector<BYTE> rpBuffer(rpBufSize);
+    RETRIEVAL_POINTERS_BUFFER *rp = (RETRIEVAL_POINTERS_BUFFER *)rpBuffer.data();
+
+    if (DeviceIoControl(hMft, FSCTL_GET_RETRIEVAL_POINTERS, &inputVcn, sizeof(inputVcn),
+                        rp, rpBufSize, &br, NULL)) {
+      int64_t currentVcn = rp->StartingVcn.QuadPart;
+      for (DWORD e = 0; e < rp->ExtentCount; ++e) {
+        if (rp->Extents[e].Lcn.QuadPart != (LONGLONG)-1) {
+          int64_t clusterCount = rp->Extents[e].NextVcn.QuadPart - currentVcn;
+          ExtentRun run;
+          run.startOffset.QuadPart = rp->Extents[e].Lcn.QuadPart * volData.BytesPerCluster;
+          run.lengthBytes = clusterCount * volData.BytesPerCluster;
+          runs.push_back(run);
+        }
+        currentVcn = rp->Extents[e].NextVcn.QuadPart;
+      }
+    }
+    CloseHandle(hMft);
+  }
+
+  // 2. Fallback to start LCN if retrieval pointers unavailable
+  if (runs.empty()) {
+    ExtentRun singleRun;
+    singleRun.startOffset.QuadPart = volData.MftStartLcn.QuadPart * volData.BytesPerCluster;
+    singleRun.lengthBytes = volData.MftValidDataLength.QuadPart;
+    runs.push_back(singleRun);
+  }
+
+  uint64_t recordsProcessed = 0;
+  for (const auto &run : runs) {
+    if (!SetFilePointerEx(m_hVol, run.startOffset, NULL, FILE_BEGIN)) {
+      continue;
+    }
+
+    uint64_t bytesReadInRun = 0;
+    while (bytesReadInRun < run.lengthBytes && recordsProcessed < estimatedFiles) {
+      DWORD toRead = (DWORD)std::min((uint64_t)chunkSize, run.lengthBytes - bytesReadInRun);
+      DWORD bytesRead = 0;
+      if (!ReadFile(m_hVol, buffer, toRead, &bytesRead, NULL) || bytesRead == 0) {
+        break;
+      }
+      bytesReadInRun += bytesRead;
+
+    for (DWORD i = 0; i < bytesRead; i += bytesPerRecord) {
+      MFT_RECORD_HEADER *record = (MFT_RECORD_HEADER *)((char *)buffer + i);
+
+      if (record->magic != 0x454C4946) { // "FILE"
+        recordsProcessed++;
+        continue;
+      }
+      if (!(record->flags & 1)) { // In use flag
+        recordsProcessed++;
+        continue;
+      }
+
+      uint64_t frn = record->mftRecordNumber;
+      uint64_t parentFrn = 0;
+      uint64_t fileSize = 0;
+      int64_t creationTime = 0;
+      QString name;
+      bool isDir = (record->flags & 2);
+
+      // Parse attributes
+      uint16_t attrOffset = record->firstAttributeOffset;
+      while (attrOffset < bytesPerRecord) {
+        ATTRIBUTE_HEADER *attr =
+            (ATTRIBUTE_HEADER *)((char *)record + attrOffset);
+        if (attr->type == 0xFFFFFFFF)
+          break; // End of attributes
+
+        if (attr->type == 0x10) { // $STANDARD_INFORMATION
+          if (!attr->nonResident) {
+            RESIDENT_ATTRIBUTE_HEADER *res = (RESIDENT_ATTRIBUTE_HEADER *)attr;
+            STANDARD_INFORMATION *si =
+                (STANDARD_INFORMATION *)((char *)attr + res->valueOffset);
+            creationTime = si->creationTime;
+          }
+        } else if (attr->type == 0x30) { // $FILE_NAME
+          if (!attr->nonResident) {
+            RESIDENT_ATTRIBUTE_HEADER *res = (RESIDENT_ATTRIBUTE_HEADER *)attr;
+            FILE_NAME_ATTRIBUTE *fn =
+                (FILE_NAME_ATTRIBUTE *)((char *)attr + res->valueOffset);
+
+            // Prefer Win32 or DOS+Win32 name spaces (avoid short 8.3 names if
+            // possible)
+            if (name.isEmpty() || fn->nameType == 1 || fn->nameType == 3) {
+              parentFrn = fn->parentDirectory & 0x0000FFFFFFFFFFFFULL;
+              name = QString::fromWCharArray(fn->name, fn->nameLength);
+              // File name attribute also contains realSize!
+              if (fileSize == 0)
+                fileSize = fn->realSize;
+            }
+          }
+        } else if (attr->type == 0x80) { // $DATA
+          if (attr->nonResident) {
+            NON_RESIDENT_ATTRIBUTE_HEADER *nonRes =
+                (NON_RESIDENT_ATTRIBUTE_HEADER *)attr;
+            fileSize = nonRes->realSize;
+          } else {
+            RESIDENT_ATTRIBUTE_HEADER *res = (RESIDENT_ATTRIBUTE_HEADER *)attr;
+            fileSize = res->valueLength;
+          }
+        }
+
+        if (attr->length == 0)
+          break; // Prevent infinite loop on corruption
+        attrOffset += attr->length;
+      }
+
+      if (!name.isEmpty()) {
+        QByteArray utf8Name = name.toUtf8();
+        uint32_t nameOffset = m_soa.stringPool.size();
+        uint32_t nameLength = utf8Name.size();
+        m_soa.stringPool.insert(m_soa.stringPool.end(), utf8Name.constData(),
+                                utf8Name.constData() + nameLength);
+        m_soa.stringPool.push_back('\0');
+
+        size_t index = m_soa.frns.size();
+        m_soa.frns.push_back(frn);
+        m_soa.parentFrns.push_back(parentFrn);
+        m_soa.fileSizes.push_back(fileSize);
+        m_soa.creationTimes.push_back(creationTime);
+        m_soa.nameOffsets.push_back(nameOffset);
+        m_soa.nameLengths.push_back(nameLength);
+        m_soa.isDir.push_back(isDir);
+
+        m_frnToIndex[frn] = index;
+      }
+      recordsProcessed++;
+    }
+  }
+  }
+
+  VirtualFree(buffer, 0, MEM_RELEASE);
+  return true;
 }
 
 void FastVolumeScanner::buildPaths() {
-  m_files.clear();
-  m_dirs.clear();
-  m_files.reserve(m_fileMap.size());
+  m_scannedFiles.clear();
+  m_scannedFiles.reserve(m_soa.frns.size());
 
-  // Reconstruct full paths by walking up the parent chain
-  // This is the CPU intensive part, can be parallelized or cached
+  std::unordered_map<DWORDLONG, QString> pathCache;
+  QString drivePrefix = m_volumeDrive;
+  if (drivePrefix.isEmpty()) drivePrefix = "C:";
 
-  // Optimization: Cache built paths?
-  // Use a temporary cache for parent paths: QMap<FRN, QString> pathCache
-  QMap<DWORDLONG, QString> pathCache;
+  // Pre-seed root FRN 5 (NTFS volume root)
+  pathCache[5] = drivePrefix;
 
   auto resolvePath = [&](DWORDLONG frn, auto &self) -> QString {
-    if (pathCache.contains(frn))
+    if (pathCache.count(frn))
       return pathCache[frn];
 
-    if (!m_fileMap.contains(frn))
-      return ""; // Root or orphan
-
-    const FileInfo &info = m_fileMap[frn];
-    if (info.parentFrn == 0 || info.parentFrn == frn) {
-      // Root detection issues? usually root has specific ID
-      return info.name;
+    if (frn == 5 || frn == 0) {
+      pathCache[frn] = drivePrefix;
+      return drivePrefix;
     }
 
-    QString parentPath = self(info.parentFrn, self);
-    QString fullPath = parentPath + "/" + info.name;
+    auto it = m_frnToIndex.find(frn);
+    if (it == m_frnToIndex.end())
+      return drivePrefix; // Root or orphan
 
-    pathCache.insert(frn, fullPath);
+    size_t index = it->second;
+    DWORDLONG parentFrn = m_soa.parentFrns[index];
+    QString name =
+        QString::fromUtf8(m_soa.stringPool.data() + m_soa.nameOffsets[index],
+                          m_soa.nameLengths[index]);
+
+    if (name.isEmpty() || name == "." || name == "$Root" || parentFrn == frn) {
+      pathCache[frn] = drivePrefix;
+      return drivePrefix;
+    }
+
+    QString parentPath = self(parentFrn, self);
+    QString fullPath;
+    if (parentPath.isEmpty() || parentPath == drivePrefix) {
+      fullPath = drivePrefix + "/" + name;
+    } else {
+      fullPath = parentPath + "/" + name;
+    }
+
+    pathCache[frn] = fullPath;
     return fullPath;
   };
 
-  // Naive iterative approach for now to avoid stack overflow recursion on deep
-  // structures Actually, standard iteration and looking up parent is fast
-  // enough for basic test
+  for (size_t i = 0; i < m_soa.frns.size(); ++i) {
+    if (m_soa.isDir[i])
+      continue;
 
-  QMapIterator<DWORDLONG, FileInfo> i(m_fileMap);
-  while (i.hasNext()) {
-    i.next();
-    const FileInfo &info = i.value();
+    QString fullPath = resolvePath(m_soa.frns[i], resolvePath);
 
-    // We only construct paths for things we care about?
-    // Let's implement full resolution
+    ScannedFile sf;
+    sf.path = fullPath;
+    sf.size = m_soa.fileSizes[i];
+    sf.creationTime = m_soa.creationTimes[i];
 
-    QString fullPath = resolvePath(i.key(), resolvePath);
-
-    // Add Volume Prefix (e.g. C:) ?
-    // m_hVol was opened on volume path. resolvePath builds relative to root of
-    // volume. We should prepend the drive letter if needed, but for now
-    // returned paths are relative to volume root? Actually resolvePath uses "/"
-    // separator. If parent is root, parentPath might be empty.
-
-    if (info.isDir)
-      m_dirs.append(fullPath);
-    else
-      m_files.append(fullPath);
+    m_scannedFiles.append(sf);
   }
 }
-
-QVector<QString> FastVolumeScanner::getAllFiles() const { return m_files; }
-QVector<QString> FastVolumeScanner::getAllDirectories() const { return m_dirs; }

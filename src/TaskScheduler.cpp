@@ -109,6 +109,13 @@ void TaskScheduler::emitCountChanged() {
   emit activeTaskCountChanged();
 }
 
+void TaskScheduler::setSchedulerGovernor(int gov) {
+    if (m_governor.load() != gov) {
+        m_governor.store(gov);
+        emit schedulerGovernorChanged();
+    }
+}
+
 void TaskScheduler::addTask(Task task, TaskType type, Priority priority, TaskCategory category) {
   if (!m_running)
     return;
@@ -122,14 +129,43 @@ void TaskScheduler::addTask(Task task, TaskType type, Priority priority, TaskCat
   }
 
   int catIdx = static_cast<int>(category);
+  int gov = m_governor.load();
+  bool useLifo = false;
+  
+  bool isUrgent = (priority == Immediate || priority == Normal);
+  if (isUrgent) {
+      m_urgentTaskCount++;
+      
+      auto originalRun = task.run;
+      task.run = [this, originalRun]() {
+          if (originalRun) originalRun();
+          m_urgentTaskCount--;
+      };
+      
+      auto originalDrop = task.onDropped;
+      task.onDropped = [this, originalDrop]() {
+          if (originalDrop) originalDrop();
+          m_urgentTaskCount--;
+      };
+  }
+
+  if (gov == Governor_LIFO) {
+      useLifo = true;
+  } else if (gov == Governor_Adaptive) {
+      useLifo = (priority <= Normal);
+  } else {
+      useLifo = false; // FIFO and RoundRobin use standard queueing
+  }
 
   if (type == CPU_BOUND) {
     QMutexLocker lock(&m_cpuMutex);
-    m_cpuQueues[catIdx][priority].prepend(task);
+    if (useLifo) m_cpuQueues[catIdx][priority].prepend(task);
+    else m_cpuQueues[catIdx][priority].append(task);
     m_cpuCondition.wakeOne();
   } else {
     QMutexLocker lock(&m_ioMutex);
-    m_ioQueues[catIdx][priority].prepend(task);
+    if (useLifo) m_ioQueues[catIdx][priority].prepend(task);
+    else m_ioQueues[catIdx][priority].append(task);
     m_ioCondition.wakeOne();
   }
 }
@@ -205,8 +241,13 @@ void TaskScheduler::cpuWorkerLoop() {
       if (!m_running)
         break;
 
-      int turn = m_cpuRatioCounter.fetch_add(1) % 6;
-      int preferredCategory = (turn < 5) ? 0 : 1;
+      int turn = m_cpuRatioCounter.fetch_add(1);
+      int preferredCategory;
+      if (m_governor.load() == Governor_RoundRobin) {
+          preferredCategory = turn % 2; // Strict 1:1 alternating
+      } else {
+          preferredCategory = ((turn % 6) < 5) ? 0 : 1; // 5:1 ratio
+      }
       int fallbackCategory = (preferredCategory == 0) ? 1 : 0;
 
       auto tryPop = [&](int cat) -> bool {
@@ -281,8 +322,13 @@ void TaskScheduler::ioWorkerLoop() {
       if (!m_running)
         break;
 
-      int turn = m_ioRatioCounter.fetch_add(1) % 6;
-      int preferredCategory = (turn < 5) ? 0 : 1;
+      int turn = m_ioRatioCounter.fetch_add(1);
+      int preferredCategory;
+      if (m_governor.load() == Governor_RoundRobin) {
+          preferredCategory = turn % 2;
+      } else {
+          preferredCategory = ((turn % 6) < 5) ? 0 : 1;
+      }
       int fallbackCategory = (preferredCategory == 0) ? 1 : 0;
 
       auto tryPop = [&](int cat) -> bool {

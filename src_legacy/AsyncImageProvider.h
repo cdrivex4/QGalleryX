@@ -11,6 +11,7 @@
 #include <QThreadPool>
 #include <atomic>
 #include <memory>
+#include <QPointer>
 
 class AsyncImageResponse : public QQuickImageResponse {
   Q_OBJECT
@@ -36,6 +37,15 @@ public:
   QQuickImageResponse *
   requestImageResponse(const QString &id, const QSize &requestedSize) override;
 
+  enum CacheLevel { 
+      NotCached = 0, 
+      InRamCache = 1,
+      OnDisk = 2,
+      NotAvailable = 3
+  };
+
+  static CacheLevel checkCacheLevel(const QString &id, const QSize &size);
+
   static QImage getCachedImage(const QString &id, const QSize &size);
   static void insertCachedImage(const QString &id, const QImage &image,
                                 const QSize &size);
@@ -46,14 +56,24 @@ public:
   // Internal worker for task scheduling with re-queue support
   static void processImageTask(QString id, QSize requestedSize,
                                std::shared_ptr<std::atomic<bool>> cancelled,
-                               AsyncImageResponse *response);
+                               AsyncImageResponse *response,
+                               bool isLowPriority = false);
+
+  // Background-only crawler: decodes directly to L2 disk cache.
+  // NEVER touches m_pendingTasks. Safe to call from any thread.
+  static void crawlDecodeToL2(const QString &path, const QSize &requestedSize);
+  static void promoteL2ToL1(const QString &path, const QSize &requestedSize);
 
   static std::atomic<int> s_logLevel;
   static std::atomic<bool> s_accelerateRaw;
+  static std::atomic<int> s_l1Hits;
+  static std::atomic<int> s_l2Hits;
+  static std::atomic<int> s_misses;
 
 private:
   static QCache<QString, QImage> m_cache;
   static QMutex m_mutex;
+  static QHash<QString, QList<QPointer<AsyncImageResponse>>> m_pendingTasks;
 };
 
 #endif // ASYNCIMAGEPROVIDER_H

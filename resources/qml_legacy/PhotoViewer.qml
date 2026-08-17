@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+import QGalleryX 1.0
 
 Item {
     id: root
@@ -16,6 +17,115 @@ Item {
     visible: false
     
     property var startTime: 0
+    
+    function openSingleFile(path) {
+        if (!path || path.length === 0) return;
+        var fName = path.substring(Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\")) + 1);
+        root.model = [{
+            filePath: path,
+            fileName: fName,
+            fileSizeFormatted: "",
+            dateFormatted: "",
+            dimensionsFormatted: ""
+        }];
+        root.currentIndex = 0;
+        root.visible = true;
+    }
+
+    function openWithNeighbors(targetPath, neighborsList) {
+        if (!targetPath || targetPath.length === 0) return;
+        if (!neighborsList || neighborsList.length === 0) {
+            openSingleFile(targetPath);
+            return;
+        }
+
+        var items = [];
+        var targetIndex = 0;
+        var normTarget = targetPath.replace(/\\/g, "/").toLowerCase();
+
+        for (var i = 0; i < neighborsList.length; i++) {
+            var p = neighborsList[i].replace(/\\/g, "/");
+            var fName = p.substring(Math.max(p.lastIndexOf("/"), p.lastIndexOf("\\")) + 1);
+            items.push({
+                filePath: p,
+                fileName: fName,
+                fileSizeFormatted: "",
+                dateFormatted: "",
+                dimensionsFormatted: ""
+            });
+            if (p.toLowerCase() === normTarget) {
+                targetIndex = i;
+            }
+        }
+
+        root.model = items;
+        root.currentIndex = targetIndex;
+        root.visible = true;
+    }
+
+    function getModelCount() {
+        if (!root.model) return 0;
+        if (typeof root.model.rowCount === "function") {
+            return root.model.rowCount();
+        }
+        if (typeof root.model.count === "number") {
+            return root.model.count;
+        }
+        if (Array.isArray(root.model)) {
+            return root.model.length;
+        }
+        return 0;
+    }
+
+    function getCurrentFilePath() {
+        if (!root.model || root.currentIndex < 0) return "";
+        try {
+            if (typeof root.model.data === "function") {
+                // Role 257 is FilePathRole (Qt::UserRole + 1)
+                var p = root.model.data(root.model.index(root.currentIndex, 0), 257);
+                if (p) return p.toString();
+            }
+            if (Array.isArray(root.model) && root.currentIndex < root.model.length) {
+                return root.model[root.currentIndex].filePath || "";
+            }
+            if (listView.currentItem && listView.currentItem.filePath) {
+                return listView.currentItem.filePath;
+            }
+        } catch (e) {
+            console.log("[PhotoViewer] getCurrentFilePath error:", e);
+        }
+        return "";
+    }
+
+    function isVideoFile(path) {
+        if (!path) return false;
+        var lower = path.toLowerCase();
+        return lower.endsWith(".mp4") || lower.endsWith(".avi") || lower.endsWith(".mkv") || lower.endsWith(".mov");
+    }
+
+    function getMetadataForIndex(idx) {
+        if (!root.model) return {};
+        if (typeof root.model.getMetadata === "function") {
+            return root.model.getMetadata(idx);
+        }
+        var curPath = "";
+        var curName = "";
+        if (Array.isArray(root.model) && idx >= 0 && idx < root.model.length) {
+            curPath = root.model[idx].filePath || "";
+            curName = root.model[idx].fileName || "";
+        } else if (listView.currentItem) {
+            curPath = listView.currentItem.filePath || "";
+            curName = listView.currentItem.fileName || "";
+        }
+        var m = {};
+        m["Filename"] = curName !== "" ? curName : curPath.substring(Math.max(curPath.lastIndexOf("/"), curPath.lastIndexOf("\\")) + 1);
+        m["Path"] = curPath;
+        m["Type"] = isVideoFile(curPath) ? "Video" : "Image";
+        if (typeof desktopHelper !== "undefined" && typeof desktopHelper.getFileSizeFormatted === "function") {
+            m["Size"] = desktopHelper.getFileSizeFormatted(curPath);
+        }
+        return m;
+    }
     
     onVisibleChanged: {
         if (visible) {
@@ -77,10 +187,14 @@ Item {
             width: listView.width
             height: listView.height
             
-            property string filePath: model.filePath
-            property string fileName: model.fileName
-            property var fileExt: filePath.split('.').pop().toLowerCase()
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            property string filePath: (typeof model !== "undefined" && model.filePath !== undefined) ? model.filePath : (typeof modelData !== "undefined" && modelData.filePath !== undefined ? modelData.filePath : "")
+            property string fileName: (typeof model !== "undefined" && model.fileName !== undefined) ? model.fileName : (typeof modelData !== "undefined" && modelData.fileName !== undefined ? modelData.fileName : "")
+            property bool isVideo: (desktopHelper ? (desktopHelper.getFileType(filePath) === 2) : false) || 
+                                    (fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov" || 
+                                     fileExt === "webm" || fileExt === "flv" || fileExt === "ts" || fileExt === "m2ts" || 
+                                     fileExt === "mts" || fileExt === "3gp" || fileExt === "wmv" || fileExt === "vob" || 
+                                     fileExt === "ogv" || fileExt === "ogg" || fileExt === "mp3" || fileExt === "wav" || 
+                                     fileExt === "flac" || fileExt === "m4a" || fileExt === "aac" || fileExt === "wma" || fileExt === "opus")
             property bool isCurrent: index === ListView.view.currentIndex
             onIsCurrentChanged: {
                 if (!isCurrent && isVideo) {
@@ -108,6 +222,15 @@ Item {
                 flickable.contentX = (relX * newW) - center.x
                 flickable.contentY = (relY * newH) - center.y
                 flickable.returnToBounds()
+            }
+            
+            function reloadImage() {
+                var p = filePath
+                if (!p) return;
+                img.source = ""
+                thumbImg.source = ""
+                img.source = "image://async/" + p + "?retry=" + Date.now()
+                thumbImg.source = "image://async/" + p + "?retry=" + Date.now()
             }
             
             function togglePlay() {
@@ -172,15 +295,6 @@ Item {
                         id: img
                         source: (!isVideo && filePath && isCurrent) ? "image://async/" + filePath : ""
                         
-                        Connections {
-                            target: parent.parent.parent // The delegate Item
-                            function onIsCurrentChanged() {
-                                if (isCurrent && !isVideo && filePath !== "") {
-                                    img.source = "image://async/" + filePath
-                                }
-                            }
-                        }
-
                         // Bind size to zoom
                         width: flickable.width * flickable.zoom
                         height: flickable.height * flickable.zoom
@@ -275,11 +389,18 @@ Item {
                     id: player
                     source: {
                         if (!isCurrent || !visible || !filePath) return ""
-                        var lower = filePath.toLowerCase()
-                        var isVid = lower.endsWith(".mp4") || lower.endsWith(".avi") || lower.endsWith(".mkv") || lower.endsWith(".mov")
-                        if (isVid) {
+                        if (isVideo) {
                             console.log("PhotoViewer: Loading Video", filePath)
-                            return Qt.resolvedUrl(filePath)
+                            // Convert native path to proper QML file URL
+                            var path = filePath.split('\\').join('/')
+                            if (path.startsWith("//")) {
+                                // Network UNC path: file://server/share/file.mp4
+                                return "file:" + path
+                            } else {
+                                // Local drive path: file:///C:/folder/file.mp4
+                                if (!path.startsWith("/")) path = "/" + path
+                                return "file://" + path
+                            }
                         }
                         return ""
                     }
@@ -297,13 +418,9 @@ Item {
                     
                     onPlaybackStateChanged: {
                         if (playbackState === MediaPlayer.PlayingState) {
-                            if (root.model) {
-                                root.model.pauseBackgroundTasks()
-                            }
+                            taskScheduler.pauseBackground(true)
                         } else {
-                            if (root.model) {
-                                root.model.resumeBackgroundTasks()
-                            }
+                            taskScheduler.pauseBackground(false)
                         }
                     }
                 }
@@ -337,6 +454,20 @@ Item {
                         anchors.fill: parent
                         onClicked: player.play()
                     }
+                }
+                
+                Image {
+                    id: videoThumbPlaceholder
+                    anchors.centerIn: parent
+                    width: (parent.currentRotation % 180 === 0) ? parent.width : parent.height
+                    height: (parent.currentRotation % 180 === 0) ? parent.height : parent.width
+                    rotation: parent.currentRotation
+                    fillMode: Image.PreserveAspectFit
+                    source: (isVideo && filePath) ? "image://async/" + filePath + "?idx=" + root.currentIndex : ""
+                    visible: isVideo && player.playbackState !== MediaPlayer.PlayingState
+                    asynchronous: true
+                    cache: true
+                    autoTransform: true
                 }
                 
                 VideoOutput {
@@ -697,7 +828,7 @@ Item {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.rightMargin: 20
-        visible: root.controlsVisible && !root.isEditing && root.model && root.currentIndex < root.model.rowCount() - 1
+        visible: root.controlsVisible && !root.isEditing && root.currentIndex < root.getModelCount() - 1
         
         Text {
             anchors.centerIn: parent
@@ -720,7 +851,7 @@ Item {
             if (currentIndex > 0) currentIndex--
             event.accepted = true
         } else if (event.key === Qt.Key_Right) {
-            if (currentIndex < model.rowCount() - 1) currentIndex++
+            if (currentIndex < root.getModelCount() - 1) currentIndex++
             event.accepted = true
         } else if (event.key === Qt.Key_Escape) {
             if (root.isEditing) {
@@ -856,19 +987,30 @@ Item {
             spacing: 10
             
             StyledButton {
+                text: "Rotate"
+                iconText: "↻"
+                fontSize: 14
+                onClicked: {
+                    var p = (typeof root.getCurrentFilePath === "function") ? root.getCurrentFilePath() : ""
+                    if (listView.currentItem && listView.currentItem.filePath) {
+                        p = listView.currentItem.filePath
+                    }
+                    if (p) {
+                        imageProcessor.rotateImageVirtual(p, 90)
+                        imageProcessor.clearImageCache()
+                        if (listView.currentItem && typeof listView.currentItem.reloadImage === "function") {
+                            listView.currentItem.reloadImage()
+                        }
+                    }
+                }
+            }
+
+            StyledButton {
                 text: "Info"
                 iconText: "ℹ"
                 fontSize: 14
                 onClicked: {
-                    if (listView.currentItem && listView.currentItem.isVideo) {
-                        var m = {}
-                        m["Filename"] = listView.currentItem.fileName
-                        m["Path"] = listView.currentItem.filePath
-                        m["Type"] = "Video"
-                        infoOverlay.meta = m
-                    } else {
-                        infoOverlay.meta = root.model.getMetadata(root.currentIndex)
-                    }
+                    infoOverlay.meta = root.getMetadataForIndex(root.currentIndex)
                     infoOverlay.visible = true
                 }
             }

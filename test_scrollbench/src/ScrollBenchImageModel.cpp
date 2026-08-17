@@ -359,24 +359,23 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
           return;
 
         qDebug() << "ScrollBench FastScanner: Success! Filtering results...";
-        QVector<QString> allFiles = fastScanner.getAllFiles();
+        QVector<ScannedFile> scannedFiles = fastScanner.getScannedFiles();
         QString searchPrefix = cleanPath;
         if (!searchPrefix.endsWith("/"))
           searchPrefix += "/";
 
         int fastBatchCount = 0;
 
-        for (const QString &f : allFiles) {
+        for (const ScannedFile &sf : scannedFiles) {
           if (myGen != m_scanGeneration.load())
             return;
 
-          QString normalizedF = QDir::fromNativeSeparators(f);
-          if (normalizedF.startsWith(searchPrefix, Qt::CaseInsensitive)) {
-            QString ext = QFileInfo(f).suffix().toLower();
+          if (sf.path.startsWith(searchPrefix, Qt::CaseInsensitive)) {
+            QString ext = QFileInfo(sf.path).suffix().toLower();
             if (extensions.contains(ext)) {
               ImageItem item;
-              item.path = QUrl::fromLocalFile(f).toString();
-              item.fileName = QFileInfo(f).fileName();
+              item.path = QUrl::fromLocalFile(sf.path).toString();
+              item.fileName = QFileInfo(sf.path).fileName();
               item.color = "#444444";
               item.isLoaded = false;
 
@@ -401,10 +400,10 @@ void ScrollBenchImageModel::scanDirectory(const QString &path) {
                 if (dt.isValid()) {
                   item.date = dt;
                 } else {
-                  item.date = QFileInfo(f).birthTime();
+                  item.date = QFileInfo(sf.path).birthTime();
                 }
               } else {
-                item.date = QFileInfo(f).birthTime();
+                item.date = QFileInfo(sf.path).birthTime();
               }
 
               if (!item.date.isValid())
@@ -952,17 +951,14 @@ bool ScrollBenchImageModel::rotateImage(int index, int degrees) {
     m_imageProcessor = new ImageProcessor(this);
   }
 
-  if (m_imageProcessor->rotateImage(item.path, degrees)) {
-    // Increment version
-    m_items[index].version++;
+  m_imageProcessor->rotateImageVirtual(item.path, degrees);
+  m_items[index].version++;
 
-    // Force refresh by emitting dataChanged
-    QModelIndex modelIndex = createIndex(index, 0);
-    emit dataChanged(modelIndex, modelIndex,
-                     {Qt::DisplayRole, ColorRole, VersionRole});
-    return true;
-  }
-  return false;
+  // Force refresh by emitting dataChanged
+  QModelIndex modelIndex = createIndex(index, 0);
+  emit dataChanged(modelIndex, modelIndex,
+                   {Qt::DisplayRole, ColorRole, VersionRole});
+  return true;
 }
 
 void ScrollBenchImageModel::rotateSelected(int degrees) {
@@ -972,12 +968,11 @@ void ScrollBenchImageModel::rotateSelected(int degrees) {
 
   for (int i = 0; i < m_items.count(); ++i) {
     if (m_items[i].isSelected && !m_items[i].isVideo) {
-      if (m_imageProcessor->rotateImage(m_items[i].path, degrees)) {
-        m_items[i].version++;
-        QModelIndex modelIndex = createIndex(i, 0);
-        emit dataChanged(modelIndex, modelIndex,
-                         {Qt::DisplayRole, ColorRole, VersionRole});
-      }
+      m_imageProcessor->rotateImageVirtual(m_items[i].path, degrees);
+      m_items[i].version++;
+      QModelIndex modelIndex = createIndex(i, 0);
+      emit dataChanged(modelIndex, modelIndex,
+                       {Qt::DisplayRole, ColorRole, VersionRole});
     }
   }
 }

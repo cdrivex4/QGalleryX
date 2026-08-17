@@ -111,7 +111,16 @@ foreach ($file in $CheckFiles) {
         }
         
         # Record Hash
-        $hash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+        $hash = "UNKNOWN"
+        try {
+            if (Get-Command Get-FileHash -ErrorAction SilentlyContinue) {
+                $hash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+            } elseif (Test-Path $file) {
+                $hash = (Get-Item $file).LastWriteTimeUtc.Ticks.ToString()
+            }
+        } catch {
+            $hash = (Get-Item $file).LastWriteTimeUtc.Ticks.ToString()
+        }
         $InitialHashes[$file] = $hash
         Write-Host "  Current Hash ($($file | Split-Path -Leaf)): $hash" -ForegroundColor Gray
     }
@@ -197,9 +206,18 @@ Write-Host "[4/4] Finalizing and Verifying Freshness..." -ForegroundColor Yellow
 $FreshnessMet = $true
 foreach ($file in $CheckFiles) {
     if (Test-Path $file) {
-        $finalHash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+        $finalHash = "UNKNOWN"
+        try {
+            if (Get-Command Get-FileHash -ErrorAction SilentlyContinue) {
+                $finalHash = (Get-FileHash -Path $file -Algorithm SHA256).Hash
+            } elseif (Test-Path $file) {
+                $finalHash = (Get-Item $file).LastWriteTimeUtc.Ticks.ToString()
+            }
+        } catch {
+            $finalHash = (Get-Item $file).LastWriteTimeUtc.Ticks.ToString()
+        }
         if ($InitialHashes.ContainsKey($file)) {
-            if ($finalHash -eq $InitialHashes[$file]) {
+            if ($finalHash -ne "UNKNOWN" -and $finalHash -eq $InitialHashes[$file]) {
                 Write-Host "  WARNING: Binary is STALE (Hash unchanged): $($file | Split-Path -Leaf)" -ForegroundColor Red
                 $FreshnessMet = $false
             }

@@ -4,6 +4,7 @@
 #include <cmath>
 #include <pdh.h>
 #include <pdhmsg.h>
+#include "TaskScheduler.h"
 
 
 #ifdef Q_OS_WIN
@@ -115,6 +116,19 @@ void SystemMonitor::updateStats() {
       m_lastLogMemoryMB = m_memoryUsageMB;
       m_lastLogVramMB = m_gpuVramUsedMB;
     }
+  }
+
+  // Periodic Queue Logging (Every 2 seconds)
+  static int tick = 0;
+  if (++tick >= 2) {
+      int q0 = TaskScheduler::instance().getQueueSize(TaskScheduler::Immediate);
+      int q1 = TaskScheduler::instance().getQueueSize(TaskScheduler::High);
+      int q2 = TaskScheduler::instance().getQueueSize(TaskScheduler::Normal);
+      if (q0 > 0 || q1 > 0 || q2 > 0) {
+          qDebug() << "[TaskScheduler] Pending Image Tasks -> Immediate:" << q0 
+                   << "| Lookahead:" << q1 << "| Precache:" << q2;
+      }
+      tick = 0;
   }
 }
 
@@ -239,8 +253,47 @@ double SystemMonitor::getGpuUsage() {
     }
   }
   return maxUsage;
-#endif
+#else
   return 0.0;
+#endif
+}
+
+bool SystemMonitor::isSlowMedia(const QString &path) {
+  QString type = getStorageType(path);
+  return (type == "SD_CARD" || type == "NETWORK_SHARE");
+}
+
+QString SystemMonitor::getStorageType(const QString &path) {
+#ifdef Q_OS_WIN
+  QString cleanPath = path;
+  if (cleanPath.startsWith("file:///", Qt::CaseInsensitive)) {
+    cleanPath = cleanPath.mid(8);
+  }
+  
+  if (cleanPath.startsWith("//") || cleanPath.startsWith("\\\\")) {
+    return "NETWORK_SHARE";
+  }
+
+  wchar_t root[4] = {L'C', L':', L'\\', L'\0'};
+  if (cleanPath.length() >= 2 && cleanPath[1] == L':') {
+    root[0] = cleanPath[0].toUpper().toLatin1();
+  }
+
+  UINT driveType = GetDriveTypeW(root);
+  switch (driveType) {
+    case DRIVE_REMOVABLE:
+      return "SD_CARD";
+    case DRIVE_REMOTE:
+      return "NETWORK_SHARE";
+    case DRIVE_FIXED:
+      return "NVME_SATA_SSD";
+    default:
+      return "UNKNOWN";
+  }
+#else
+  Q_UNUSED(path);
+  return "NVME_SATA_SSD";
+#endif
 }
 
 QString SystemMonitor::getGpuName() {

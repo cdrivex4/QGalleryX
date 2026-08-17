@@ -14,8 +14,12 @@ ApplicationWindow {
 
     property string currentPath: ""
     property int previousTab: 0
+    property bool openedViaDrop: false
     property var activeModel: (mainLayout.currentIndex === 0 && viewLoader.item) ? viewLoader.item.model : (mainLayout.currentIndex === 1 ? albumsView.activeModel : null)
     
+    // Global keyboard handling for seamless Windows Explorer style caret navigation
+    Keys.forwardTo: [photoViewer.visible ? photoViewer : (window.activeGrid ? window.activeGrid : searchField)]
+
     // Global view preferences
     property bool useTiles: false
     property int groupingMode: 0
@@ -52,14 +56,64 @@ ApplicationWindow {
         id: imageModel
     }
 
+    Connections {
+        target: imageModel
+        function onPassOneCompleted(scanId) { window.syncPendingFileToModel() }
+        function onItemsPopulated(scanId) { window.syncPendingFileToModel() }
+        function onCountChanged() {
+            if (window.pendingFileToOpen !== "" || (photoViewer.visible && photoViewer.model !== imageModel)) {
+                window.syncPendingFileToModel()
+            }
+        }
+        function onIsLoadingChanged() {
+            if (!imageModel.isLoading && (window.pendingFileToOpen !== "" || (photoViewer.visible && photoViewer.model !== imageModel))) {
+                window.syncPendingFileToModel()
+            }
+        }
+    }
+
+    function syncPendingFileToModel() {
+        if (!photoViewer.visible || !imageModel || imageModel.count === 0) return;
+        
+        var activePath = (typeof photoViewer.getCurrentFilePath === "function") 
+                         ? photoViewer.getCurrentFilePath() : "";
+        if (activePath === "" && window.pendingFileToOpen !== "") {
+            activePath = window.pendingFileToOpen;
+        }
+        if (activePath === "") return;
+
+        var idx = imageModel.indexOfPath(activePath);
+        if (idx !== -1) {
+            photoViewer.model = imageModel;
+            photoViewer.currentIndex = idx;
+            window.pendingFileToOpen = "";
+            console.log("[Main.qml] Upgraded PhotoViewer model to full folder with " + imageModel.count + " images at index " + idx);
+        }
+    }
+
     AlbumModel {
         id: albumModel
         sourceModel: imageModel
     }
 
+    function formatScanPath(rawPath) {
+        if (!rawPath || rawPath.length === 0) return "Scan Folder"
+        var str = rawPath.toString()
+        str = str.replace(/^(file:\/{3})|(file:)/, "")
+        var isNetwork = str.startsWith("\\\\") || str.startsWith("//")
+        str = str.replace(/\\+/g, "\\").replace(/\//g, "\\")
+        if (isNetwork && !str.startsWith("\\\\")) {
+            str = "\\" + str
+        }
+        return str
+    }
+
     onCurrentPathChanged: {
         if (currentPath !== "") {
-            albumModel.scanAlbums(currentPath)
+            console.log("[Main.qml] Path changed to:", currentPath)
+            if (imageModel) {
+                imageModel.scanDirectory(currentPath)
+            }
         }
     }
 
@@ -161,22 +215,105 @@ ApplicationWindow {
                 }
                 
                 Button {
-                    text: "📁 Scan Folder"
-                    font.bold: true
-                    font.pixelSize: 14
+                    id: scanBtn
+                    Layout.preferredWidth: 180
+                    Layout.maximumWidth: 200
                     background: Rectangle {
                         color: parent.hovered ? "#444" : "#333"
                         radius: 8
                     }
                     contentItem: Text {
-                        text: parent.text
+                        text: "📁 " + window.formatScanPath(window.currentPath)
                         color: "white"
-                        font.bold: parent.font.bold
-                        font.pixelSize: parent.font.pixelSize
+                        font.bold: true
+                        font.pixelSize: 13
+                        elide: Text.ElideRight
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                     }
                     onClicked: folderDialog.open()
+                    ToolTip.visible: hovered && window.currentPath !== ""
+                    ToolTip.text: window.currentPath
+                }
+
+                Item {
+                    id: snailContainer
+                    Layout.preferredWidth: 48
+                    Layout.preferredHeight: 48
+
+                    Canvas {
+                        id: progressRing
+                        anchors.fill: parent
+                        visible: imageModel && imageModel.precacheMode !== 0
+
+                        onPaint: {
+                            var ctx = getContext("2d");
+                            ctx.clearRect(0, 0, width, height);
+                            var centerX = width / 2;
+                            var centerY = height / 2;
+                            var radius = width / 2 - 3;
+                            
+                            // Background ring track
+                            ctx.beginPath();
+                            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                            ctx.lineWidth = 3;
+                            ctx.strokeStyle = "#333333";
+                            ctx.stroke();
+                            
+                            // Progress arc
+                            if (imageModel && imageModel.crawlerTotal > 0) {
+                                var progress = imageModel.crawlerProgress;
+                                var startAngle = -Math.PI / 2;
+                                var endAngle = startAngle + (progress * 2 * Math.PI);
+                                
+                                ctx.beginPath();
+                                ctx.arc(centerX, centerY, radius, startAngle, endAngle, false);
+                                ctx.lineWidth = 3;
+                                ctx.strokeStyle = imageModel.precacheMode === 1 ? "#FFD700" : "#FF4444";
+                                ctx.stroke();
+                            }
+                        }
+
+                        Connections {
+                            target: imageModel ? imageModel : null
+                            function onCrawlerProgressChanged() { progressRing.requestPaint() }
+                            function onPrecacheModeChanged() { progressRing.requestPaint() }
+                        }
+                    }
+
+                    Button {
+                        id: snailButton
+                        anchors.centerIn: parent
+                        width: 38
+                        height: 38
+                        property int mode: imageModel ? imageModel.precacheMode : 1
+                        
+                        background: Rectangle {
+                            color: parent.hovered ? "#444" : "#222"
+                            radius: 19
+                        }
+                        contentItem: SvgIcon {
+                            iconName: "snail"
+                            size: 20
+                            color: snailButton.mode === 0 ? "white" : (snailButton.mode === 1 ? "yellow" : "red")
+                            anchors.centerIn: parent
+                        }
+                        onClicked: {
+                            if (imageModel) {
+                                var newMode = (imageModel.precacheMode + 1) % 3
+                                imageModel.precacheMode = newMode
+                                viewportGovernor.batterySaverMode = (newMode === 0)
+                            }
+                        }
+                        ToolTip.visible: hovered
+                        ToolTip.text: {
+                            if (!imageModel) return ""
+                            if (mode === 0) return "Battery Saver (Offscreen Crawler Paused)"
+                            var pct = Math.round(imageModel.crawlerProgress * 100)
+                            var modeStr = (mode === 1) ? "Yellow (Lookahead Window)" : "Red (Aggressive Full Crawler)"
+                            return modeStr + "\nOffscreen Crawled: " + imageModel.crawlerIndex + " / " + imageModel.crawlerTotal + " (" + pct + "%)\nActive In-Flight Tasks: " + imageModel.activeJobs
+                        }
+                    }
                 }
                 
                 Button {
@@ -354,6 +491,13 @@ ApplicationWindow {
 
             // Tab 2: Menu
             Item {
+                id: menuTabItem
+                onVisibleChanged: {
+                    if (visible && typeof cacheStatsRepeater !== "undefined") {
+                        cacheStatsRepeater.refreshStats()
+                    }
+                }
+
                 ScrollView {
                     anchors.fill: parent
                     anchors.margins: 20
@@ -374,23 +518,101 @@ ApplicationWindow {
                             font.bold: true
                             Layout.alignment: Qt.AlignHCenter
                         }
+
+                        // --- Compact High-Density System Info & Stats Card (Top of Menu) ---
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 64
+                            color: "#1e1e1e"
+                            radius: 8
+                            border.color: "#383838"
+                            border.width: 1
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.margins: 10
+                                spacing: 12
+
+                                ColumnLayout {
+                                    Layout.fillWidth: true
+                                    spacing: 3
+
+                                    Text {
+                                        text: "GPU: " + (appSettings ? appSettings.getGpuName(window) : "GPU")
+                                        color: "#e0e0e0"
+                                        font.pixelSize: 12
+                                        font.bold: true
+                                        elide: Text.ElideRight
+                                        Layout.fillWidth: true
+                                    }
+
+                                    RowLayout {
+                                        spacing: 12
+                                        Text {
+                                            id: memUsageTextTop
+                                            text: "App RAM: " + (systemMonitor ? systemMonitor.memoryUsageMB.toFixed(1) : "0") + " MB"
+                                            color: "#00FFFF"
+                                            font.pixelSize: 11
+                                            font.bold: true
+                                        }
+                                        Text {
+                                            text: "VRAM: " + (systemMonitor ? Math.round(systemMonitor.gpuVramUsedMB) : "0") + " MB"
+                                            color: "#FFA500"
+                                            font.pixelSize: 11
+                                            font.bold: true
+                                        }
+                                        Text {
+                                            text: "Threads: " + (appSettings ? appSettings.concurrentThreads : "0")
+                                            color: "#aaa"
+                                            font.pixelSize: 11
+                                        }
+                                    }
+                                }
+
+                                Rectangle {
+                                    width: 1
+                                    Layout.fillHeight: true
+                                    color: "#383838"
+                                }
+
+                                CheckBox {
+                                    id: statsCheckboxTop
+                                    checked: statsOverlay.visible
+                                    onCheckedChanged: statsOverlay.visible = checked
+                                    Layout.alignment: Qt.AlignVCenter
+                                    contentItem: Text {
+                                        text: "Performance\nStats Overlay"
+                                        color: statsCheckboxTop.checked ? "#00FF00" : "#ccc"
+                                        font.pixelSize: 11
+                                        font.bold: true
+                                        leftPadding: parent.indicator.width + parent.spacing
+                                        verticalAlignment: Text.AlignVCenter
+                                    }
+                                }
+                            }
+                        }
                         
-                        Button {
+                        StyledButton {
                             Layout.fillWidth: true
                             text: "Select Folder"
+                            iconText: "📁"
+                            fontSize: 14
                             onClicked: {
                                 console.log("Opening folder dialog...")
                                 folderDialog.open()
                             }
                         }
                         
-                        Button {
+                        StyledButton {
                             Layout.fillWidth: true
                             text: "Rebuild Cache"
+                            iconText: "⟳"
+                            fontSize: 14
                             onClicked: {
                                 if (window.currentPath !== "") {
                                     console.log("Rebuilding cache for: " + window.currentPath)
-                                    if (viewLoader.item) {
+                                    if (imageModel) imageModel.reCrawl()
+                                    if (viewLoader.item && typeof viewLoader.item.scanFolder === "function") {
                                         viewLoader.item.scanFolder(window.currentPath)
                                     }
                                 } else {
@@ -399,6 +621,113 @@ ApplicationWindow {
                             }
                         }
                         
+                        StyledButton {
+                            Layout.fillWidth: true
+                            text: "NUKE ALL CACHE DB & FILES"
+                            iconText: "💥"
+                            fontBold: true
+                            backgroundColor: "#882222"
+                            hoverColor: "#AA2E2E"
+                            pressedColor: "#661818"
+                            onClicked: {
+                                if (appSettings) {
+                                    appSettings.nukeDiskCache()
+                                    cacheStatsRepeater.refreshStats()
+                                }
+                            }
+                        }
+
+                        // --- Per-Drive Cache DB Breakdown ---
+                        Text {
+                            text: "Cache DB Storage & Drives"
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: 16
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+
+                        Text {
+                            text: "DB File: " + (appSettings ? appSettings.getDiskCachePath() : "")
+                            color: "#888"
+                            font.pixelSize: 11
+                            wrapMode: Text.Wrap
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
+                        }
+
+                        ColumnLayout {
+                            id: cacheStatsContainer
+                            Layout.fillWidth: true
+                            spacing: 8
+
+                            Repeater {
+                                id: cacheStatsRepeater
+                                property var statsMap: ({})
+                                property var statKeys: []
+
+                                function refreshStats() {
+                                    if (appSettings && typeof appSettings.getTrackedRootPathStats === "function") {
+                                        var res = appSettings.getTrackedRootPathStats()
+                                        statsMap = res
+                                        statKeys = Object.keys(res)
+                                    }
+                                }
+
+                                Component.onCompleted: refreshStats()
+
+                                model: statKeys
+                                delegate: Rectangle {
+                                    Layout.fillWidth: true
+                                    height: 48
+                                    color: "#252525"
+                                    radius: 8
+                                    border.color: "#3d3d3d"
+
+                                    property var itemData: cacheStatsRepeater.statsMap[modelData]
+                                    property int count: itemData ? (itemData.count || 0) : 0
+                                    property real mb: itemData ? ((itemData.bytes || 0) / (1024 * 1024)) : 0.0
+
+                                    RowLayout {
+                                        anchors.fill: parent
+                                        anchors.margins: 10
+                                        spacing: 12
+
+                                        Text {
+                                            text: modelData === "__total__" ? "Total Cache Stats" : ("Drive: " + modelData)
+                                            color: modelData === "__total__" ? "#FFD700" : "white"
+                                            font.bold: true
+                                            font.pixelSize: 13
+                                            Layout.preferredWidth: 130
+                                        }
+
+                                        Text {
+                                            text: count + " items (" + mb.toFixed(1) + " MB)"
+                                            color: "#aaa"
+                                            font.pixelSize: 12
+                                            Layout.fillWidth: true
+                                        }
+
+                                        StyledButton {
+                                            text: modelData === "__total__" ? "Refresh" : "Nuke"
+                                            iconText: modelData === "__total__" ? "⟳" : "🗑"
+                                            visible: count > 0 || modelData === "__total__"
+                                            Layout.preferredWidth: 85
+                                            Layout.preferredHeight: 30
+                                            fontSize: 12
+                                            onClicked: {
+                                                if (modelData === "__total__") {
+                                                    cacheStatsRepeater.refreshStats()
+                                                } else {
+                                                    appSettings.nukeCacheForPath(modelData)
+                                                    cacheStatsRepeater.refreshStats()
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         Rectangle {
                             Layout.fillWidth: true
                             height: 1
@@ -466,10 +795,10 @@ ApplicationWindow {
                             
                             Repeater {
                                 model: [
-                                    {name: "Direct3D 11", value: 2}, // QSGRendererInterface::Direct3D11
-                                    {name: "Vulkan", value: 3},      // QSGRendererInterface::Vulkan
-                                    {name: "OpenGL", value: 1},      // QSGRendererInterface::OpenGL
-                                    {name: "Software", value: 5}     // QSGRendererInterface::Software
+                                    {name: "Direct3D 11", value: 1},
+                                    {name: "Vulkan", value: 2},
+                                    {name: "OpenGL", value: 3},
+                                    {name: "Software", value: 4}
                                 ]
                                 
                                 Text {
@@ -481,62 +810,6 @@ ApplicationWindow {
                             }
                         }
 
-                        Rectangle {
-                            Layout.fillWidth: true
-                            height: 1
-                            color: "#444"
-                            Layout.topMargin: 10
-                            Layout.bottomMargin: 10
-                        }
-
-                        Text {
-                            text: "System Info"
-                            color: "white"
-                            font.bold: true
-                            font.pixelSize: 16
-                            Layout.alignment: Qt.AlignHCenter
-                        }
-
-                        Text {
-                            text: "GPU: " + appSettings.getGpuName(window)
-                            color: "#ccc"
-                            Layout.fillWidth: true
-                            wrapMode: Text.Wrap
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pixelSize: 13
-                        }
-
-                        Text {
-                            id: memUsageText
-                            text: "Memory: Checking..."
-                            color: "#ccc"
-                            Layout.fillWidth: true
-                            horizontalAlignment: Text.AlignHCenter
-                            font.pixelSize: 13
-                        }
-
-                        Timer {
-                            interval: 2000
-                            running: true
-                            repeat: true
-                            onTriggered: {
-                                memUsageText.text = "Memory: " + systemMonitor.memoryUsageMB.toFixed(1) + " MB"
-                            }
-                        }
-                        
-                        CheckBox {
-                            text: "Show Performance Stats"
-                            checked: statsOverlay.visible
-                            onCheckedChanged: statsOverlay.visible = checked
-                            Layout.alignment: Qt.AlignHCenter
-                            contentItem: Text {
-                                text: parent.text
-                                color: "white"
-                                leftPadding: parent.indicator.width + parent.spacing
-                                verticalAlignment: Text.AlignVCenter
-                            }
-                        }
-                        
                         Item { height: 20; width: 1 } // Bottom Spacer
                     }
                 }
@@ -553,6 +826,9 @@ ApplicationWindow {
                     window.previousTab = mainLayout.currentIndex
                 }
                 mainLayout.currentIndex = index
+                if (index === 2 && typeof cacheStatsRepeater !== "undefined") {
+                    cacheStatsRepeater.refreshStats()
+                }
             }
         }
     }
@@ -579,11 +855,29 @@ ApplicationWindow {
         x: parent.width - width - 10
         y: 10
         apiName: appSettings.graphicsApi
+        scanEngine: imageModel ? imageModel.scanMethod : "Idle"
+        scanDuration: imageModel ? imageModel.scanDurationMs : 0
         isLoading: imageModel.isLoading
         loadedCount: imageModel.totalCount === 0 ? imageModel.scanProgress : imageModel.count
         totalCount: imageModel.totalCount
         activeThreadCount: appSettings ? appSettings.concurrentThreads : 0
+        precacheMode: imageModel ? imageModel.precacheMode : 1
+        crawlerIndex: imageModel ? imageModel.crawlerIndex : 0
+        crawlerTotal: imageModel ? imageModel.crawlerTotal : 0
+        crawlerProgress: imageModel ? imageModel.crawlerProgress : 0.0
+        activeJobs: imageModel ? imageModel.activeJobs : 0
         z: 100
+        onRebuildCacheRequested: {
+            if (window.currentPath !== "") {
+                console.log("OSD: Rebuilding cache for: " + window.currentPath)
+                if (imageModel) imageModel.reCrawl()
+                if (viewLoader.item && typeof viewLoader.item.scanFolder === "function") {
+                    viewLoader.item.scanFolder(window.currentPath)
+                }
+            } else {
+                folderDialog.open()
+            }
+        }
     }
 
     // Photo Viewer Overlay (Full Screen)
@@ -593,7 +887,26 @@ ApplicationWindow {
         visible: false
         z: 10 // Ensure it's on top
         onBackClicked: {
+            var lastActivePath = (typeof photoViewer.getCurrentFilePath === "function") 
+                                 ? photoViewer.getCurrentFilePath() : ""
             visible = false
+            
+            if (window.openedViaDrop) {
+                window.openedViaDrop = false
+                bottomBar.currentIndex = 0
+            }
+            
+            if (window.activeGrid && imageModel && lastActivePath !== "") {
+                var gridIdx = imageModel.indexOfPath(lastActivePath)
+                if (gridIdx !== -1) {
+                    if (viewLoader.item && typeof viewLoader.item.caretIndex !== "undefined") {
+                        viewLoader.item.caretIndex = gridIdx
+                    }
+                }
+                window.activeGrid.forceActiveFocus()
+            } else if (window.activeGrid) {
+                window.activeGrid.forceActiveFocus()
+            }
         }
         
         // Pass stats to overlay
@@ -698,5 +1011,167 @@ ApplicationWindow {
     // Toast Notification Overlay for Disk Delay Alerts
     ToastOverlay {
         id: toastOverlay
+    }
+
+    function urlToPath(urlStr) {
+        if (!urlStr) return "";
+        var str = urlStr.toString();
+        if (str.startsWith("file:///")) {
+            str = str.substring(8);
+        } else if (str.startsWith("file://")) {
+            str = str.substring(7);
+        } else if (str.startsWith("file:")) {
+            str = str.substring(5);
+        }
+        return decodeURIComponent(str).replace(/\//g, "\\");
+    }
+
+    function isDirectoryPath(path) {
+        if (!path || path.length === 0) return false;
+        if (typeof desktopHelper !== "undefined" && typeof desktopHelper.isDirectory === "function") {
+            return desktopHelper.isDirectory(path);
+        }
+        var extIdx = path.lastIndexOf(".");
+        var slashIdx = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"));
+        return extIdx === -1 || extIdx < slashIdx;
+    }
+
+    function handleDroppedFiles(paths) {
+        if (!paths || paths.length === 0) return;
+        var firstPath = paths[0];
+        firstPath = firstPath.replace(/\\/g, "/");
+
+        console.log("[Main.qml] Handling dropped path:", firstPath);
+        if (typeof toastOverlay !== "undefined" && typeof toastOverlay.showToast === "function") {
+            toastOverlay.showToast("Dropped: " + firstPath);
+        }
+
+        var isDir = window.isDirectoryPath(firstPath);
+        var folder = firstPath;
+        if (!isDir) {
+            var lastSlash = firstPath.lastIndexOf("/");
+            if (lastSlash !== -1) {
+                folder = firstPath.substring(0, lastSlash);
+            }
+        }
+        if (folder.length > 0 && folder[folder.length - 1] === ':') {
+            folder += "/";
+        }
+
+        if (!isDir) {
+            window.openedViaDrop = true;
+            console.log("[Main.qml] Discovered immediate neighbors for 0ms navigation:", firstPath);
+            var neighbors = (typeof desktopHelper !== "undefined" && typeof desktopHelper.getAdjacentFiles === "function")
+                            ? desktopHelper.getAdjacentFiles(firstPath, 15) : [];
+            if (neighbors.length > 0) {
+                photoViewer.openWithNeighbors(firstPath, neighbors);
+            } else {
+                photoViewer.openSingleFile(firstPath);
+            }
+            window.pendingFileToOpen = firstPath;
+
+            if (window.activeModel) {
+                var idx = window.activeModel.indexOfPath(firstPath);
+                if (idx !== -1) {
+                    photoViewer.model = window.activeModel;
+                    photoViewer.currentIndex = idx;
+                    window.pendingFileToOpen = "";
+                }
+            }
+        }
+
+        if (window.currentPath !== folder) {
+            console.log("[Main.qml] Updating currentPath to folder:", folder);
+            window.currentPath = folder;
+            settings.lastFolder = folder;
+        } else if (imageModel) {
+            console.log("[Main.qml] Forcing scanDirectory on dropped folder:", folder);
+            imageModel.scanDirectory(folder);
+        }
+    }
+
+    // Prominent Red Center Drop Zone Overlay
+    Rectangle {
+        id: dropZoneOverlay
+        anchors.centerIn: parent
+        width: Math.min(parent.width * 0.7, 560)
+        height: Math.min(parent.height * 0.5, 340)
+        radius: 20
+        color: dropArea.containsDrag ? "#f2e60000" : "#d9cc0000" // Vibrant red, brighter on drag
+        border.color: "#ffffff"
+        border.width: dropArea.containsDrag ? 4 : 2
+        visible: Boolean(dropArea.containsDrag || (window.currentPath === "") || (window.activeModel && window.activeModel.totalCount === 0 && !imageModel.isLoading))
+        z: 9999
+
+        Behavior on color { ColorAnimation { duration: 150 } }
+
+        ColumnLayout {
+            anchors.centerIn: parent
+            spacing: 16
+
+            Text {
+                text: "📁"
+                font.pixelSize: 56
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            Text {
+                text: "RED DROP ZONE"
+                color: "#ffffff"
+                font.pixelSize: 24
+                font.bold: true
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            Text {
+                text: "Drag & drop files or folders anywhere here to open"
+                color: "#ffffff"
+                font.pixelSize: 15
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            Rectangle {
+                Layout.alignment: Qt.AlignHCenter
+                width: 180
+                height: 42
+                radius: 10
+                color: mouseAreaBrowse.containsMouse ? "#ffffff" : "#f0f0f0"
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "Browse Folder"
+                    color: "#cc0000"
+                    font.bold: true
+                    font.pixelSize: 14
+                }
+
+                MouseArea {
+                    id: mouseAreaBrowse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: folderDialog.open()
+                }
+            }
+        }
+    }
+
+    DropArea {
+        id: dropArea
+        anchors.fill: parent
+        onEntered: (drag) => {
+            if (drag.hasUrls) {
+                drag.accept(Qt.CopyAction)
+            }
+        }
+        onDropped: (drop) => {
+            if (drop.hasUrls) {
+                var urls = []
+                for (var i = 0; i < drop.urls.length; i++) {
+                    urls.push(window.urlToPath(drop.urls[i].toString()))
+                }
+                window.handleDroppedFiles(urls)
+            }
+        }
     }
 }

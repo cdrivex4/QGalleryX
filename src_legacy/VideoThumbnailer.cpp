@@ -2,7 +2,8 @@
 #include "TaskScheduler.h"
 #include <QDateTime>
 #include <QDebug>
-#include <QFileInfo>
+#include <QPainter>
+#include <QLinearGradient>
 
 extern "C" {
 #include <libavcodec/avcodec.h>
@@ -80,7 +81,15 @@ static const int MAX_HW_FAILURES = 3;
 
 VideoThumbnailer::VideoThumbnailer() {
   av_log_set_callback(ffmpegLogCallback);
-  av_log_set_level(AV_LOG_WARNING);
+  av_log_set_level(AV_LOG_ERROR);
+}
+
+void VideoThumbnailer::warmup() {
+  av_log_set_callback(ffmpegLogCallback);
+  av_log_set_level(AV_LOG_ERROR);
+  const AVCodec *codec = avcodec_find_decoder(AV_CODEC_ID_H264);
+  Q_UNUSED(codec);
+  qDebug() << "[VideoThumbnailer] Pre-loaded FFmpeg decoders and DLL pages into RAM.";
 }
 
 VideoThumbnailer::~VideoThumbnailer() {}
@@ -127,7 +136,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   std::string pathStr = path.toStdString();
 
-  TimeoutData timeoutData = {QElapsedTimer(), cancelled, 5000}; // 5s timeout
+  TimeoutData timeoutData = {QElapsedTimer(), cancelled, 1000}; // 1s timeout
   timeoutData.timer.start();
 
   cleanup.fmtCtx = avformat_alloc_context();
@@ -141,6 +150,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   if (avformat_open_input(&cleanup.fmtCtx, pathStr.c_str(), nullptr, &options) !=
       0) {
     if (options) av_dict_free(&options);
+    cleanup.fmtCtx = nullptr; // Prevent double-free in ~FFmpegCleanup()
     qWarning() << "[" << timeLogStr
                << "][FFmpeg] Failed to open file (or timeout):" << path;
     return QImage();
@@ -156,8 +166,39 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   int streamIdx = av_find_best_stream(cleanup.fmtCtx, AVMEDIA_TYPE_VIDEO, -1,
                                       -1, nullptr, 0);
-  if (streamIdx < 0)
+  if (streamIdx < 0) {
+    // Check if it is an audio file (e.g. OGG, MP3, WAV, FLAC, M4A, AAC, OPUS)
+    int audioStreamIdx = av_find_best_stream(cleanup.fmtCtx, AVMEDIA_TYPE_AUDIO, -1, -1, nullptr, 0);
+    if (audioStreamIdx >= 0) {
+      int w = (targetSize.isValid() && targetSize.width() > 0) ? targetSize.width() : 256;
+      int h = (targetSize.isValid() && targetSize.height() > 0) ? targetSize.height() : 256;
+      QImage audioTile(w, h, QImage::Format_RGB32);
+      audioTile.fill(QColor("#181a20"));
+      QPainter p(&audioTile);
+      p.setRenderHint(QPainter::Antialiasing);
+
+      // Sleek gradient background
+      QLinearGradient grad(0, 0, w, h);
+      grad.setColorAt(0.0, QColor("#2a1b3d"));
+      grad.setColorAt(1.0, QColor("#141824"));
+      p.fillRect(audioTile.rect(), grad);
+
+      // Music Note Emoji / Icon
+      p.setPen(QColor("#c084fc"));
+      p.setFont(QFont("Segoe UI Emoji", std::max(16, w / 4), QFont::Bold));
+      p.drawText(QRect(0, h / 6, w, h / 2), Qt::AlignCenter, "🎵");
+
+      // File Extension badge
+      p.setPen(QColor("#e2e8f0"));
+      p.setFont(QFont("Segoe UI", std::max(9, w / 14), QFont::Bold));
+      int dot = path.lastIndexOf('.');
+      QString ext = dot >= 0 ? path.mid(dot + 1).toUpper() : "AUDIO";
+      p.drawText(QRect(0, (h * 5) / 8, w, h / 4), Qt::AlignCenter, ext);
+
+      return audioTile;
+    }
     return QImage();
+  }
 
   AVStream *stream = cleanup.fmtCtx->streams[streamIdx];
   const AVCodec *decoder = avcodec_find_decoder(stream->codecpar->codec_id);
@@ -175,37 +216,43 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   int dstW = cleanup.codecCtx->width;
   int dstH = cleanup.codecCtx->height;
-  if (dstW <= 0 || dstH <= 0) return QImage();
-
   if (targetSize.isValid() && targetSize.width() > 0 && dstH > 0) {
     double aspect = (double)dstW / dstH;
     dstW = targetSize.width();
-    dstH = std::max(1, (int)(dstW / aspect));
+    dstH = (int)(dstW / aspect);
   }
-  if (dstW <= 0 || dstH <= 0) return QImage();
+  // Guarantee even dimensions for swscale to prevent heap boundary write overruns
+  dstW = std::max(2, (dstW / 2) * 2);
+  dstH = std::max(2, (dstH / 2) * 2);
 
   int retryCount = 0;
   while (retryCount < 3) { // 3x retry on black frames
     if (cancelled && cancelled->load())
       return QImage();
 
-    // Smart seek to skip fade-ins and guarantee a representative frame instantly
-    if (timeMs <= 0 && cleanup.fmtCtx->duration != AV_NOPTS_VALUE) {
-      timeMs = (cleanup.fmtCtx->duration / 1000) * 0.15;
+    bool isHeic = path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive);
+    if (!isHeic) {
+      // Smart seek to skip fade-ins and guarantee a representative frame instantly
+      if (timeMs <= 0 && cleanup.fmtCtx->duration != AV_NOPTS_VALUE) {
+        timeMs = (cleanup.fmtCtx->duration / 1000) * 0.15;
+      }
+
+      if (timeMs > 0) {
+        int64_t timestamp = (int64_t)timeMs * 1000;
+        timestamp = av_rescale_q(timestamp, {1, 1000000}, stream->time_base);
+        av_seek_frame(cleanup.fmtCtx, streamIdx, timestamp, AVSEEK_FLAG_BACKWARD);
+      }
     }
 
-    if (timeMs > 0) {
-      int64_t timestamp = (int64_t)timeMs * 1000;
-      timestamp = av_rescale_q(timestamp, {1, 1000000}, stream->time_base);
-      av_seek_frame(cleanup.fmtCtx, streamIdx, timestamp, AVSEEK_FLAG_BACKWARD);
-    }
-
-    if (!cleanup.frame)
-      cleanup.frame = av_frame_alloc();
-    if (!cleanup.packet)
-      cleanup.packet = av_packet_alloc();
+    if (cleanup.frame)
+      av_frame_unref(cleanup.frame);
     else
+      cleanup.frame = av_frame_alloc();
+
+    if (cleanup.packet)
       av_packet_unref(cleanup.packet);
+    else
+      cleanup.packet = av_packet_alloc();
 
     avcodec_flush_buffers(cleanup.codecCtx);
 
@@ -271,6 +318,11 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
         finalFrame = cleanup.swFrame;
       }
 
+      if (finalFrame->width <= 0 || finalFrame->height <= 0) {
+        retryCount++;
+        continue;
+      }
+
       if (cleanup.swsCtx) {
         sws_freeContext(cleanup.swsCtx);
         cleanup.swsCtx = nullptr;
@@ -283,23 +335,25 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
       if (!cleanup.swsCtx)
         return QImage();
 
-      QImage tmp(dstW, dstH, QImage::Format_RGB32);
-      if (tmp.isNull() || !tmp.bits()) return QImage();
-
-      uint8_t *dst_data[4] = { tmp.bits(), nullptr, nullptr, nullptr };
-      int dst_linesize[4] = { (int)tmp.bytesPerLine(), 0, 0, 0 };
+      uint8_t *dst_data[4] = {nullptr};
+      int dst_linesize[4] = {0};
+      int allocRes = av_image_alloc(dst_data, dst_linesize, dstW, dstH, AV_PIX_FMT_BGRA, 32);
+      if (allocRes < 0)
+        return QImage();
 
       sws_scale(cleanup.swsCtx, finalFrame->data, finalFrame->linesize, 0,
                 finalFrame->height, dst_data, dst_linesize);
+
+      QImage tmp(dst_data[0], dstW, dstH, dst_linesize[0], QImage::Format_RGB32);
+      QImage frameCopy = tmp.copy();
+      av_freep(&dst_data[0]);
 
       // Calculate average brightness to avoid pure black frames
       long long totalLuminance = 0;
       int step = std::max(1, dstH / 20); // sample evenly
       int samples = 0;
       for (int y = 0; y < dstH; y += step) {
-          const uchar* scanLine = tmp.constScanLine(y);
-          if (!scanLine) continue;
-          const QRgb* line = reinterpret_cast<const QRgb*>(scanLine);
+          const QRgb* line = reinterpret_cast<const QRgb*>(frameCopy.constScanLine(y));
           for (int x = 0; x < dstW; x += step) {
               QRgb pixel = line[x];
               int r = qRed(pixel);
@@ -311,8 +365,8 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
       }
       int avgLuminance = samples > 0 ? (totalLuminance / samples) : 0;
       
-      if (avgLuminance > 15 || retryCount >= 2) {
-          return tmp;
+      if (isHeic || avgLuminance > 15 || retryCount >= 2) {
+          return frameCopy;
       }
       
       // Black frame detected, retry further into video

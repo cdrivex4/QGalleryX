@@ -9,7 +9,9 @@
 #include <QStorageInfo>
 #include <QUrl>
 
-// ... keep includes ...
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
 
 DesktopHelper::DesktopHelper(QObject *parent) : QObject(parent) {}
 
@@ -46,7 +48,8 @@ void DesktopHelper::resumeBackgroundTasks() {
 
 void DesktopHelper::requestRestart() {
   qDebug() << "DesktopHelper: Restarting application...";
-  QProcess::startDetached(QCoreApplication::applicationFilePath(), QCoreApplication::arguments());
+  QProcess::startDetached(QCoreApplication::applicationFilePath(),
+                          QCoreApplication::arguments());
   QCoreApplication::quit();
 }
 
@@ -55,27 +58,56 @@ int DesktopHelper::getFileType(const QString &path) {
 }
 
 DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
-  QString ext = QFileInfo(path).suffix().toLower();
+  int dotIdx = path.lastIndexOf('.');
+  if (dotIdx == -1 || dotIdx == path.length() - 1)
+    return Unknown;
+
+  QStringView ext = QStringView(path).mid(dotIdx + 1);
 
   // Video
-  if (ext == "mp4" || ext == "mkv" || ext == "avi" || ext == "mov" ||
-      ext == "webm" || ext == "flv" || ext == "vob" || ext == "ogg" ||
-      ext == "ogv" || ext == "mts" || ext == "m2ts" ||
-      ext == "3gp") {
+  if (ext.compare(u"mp4", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"mkv", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"avi", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"mov", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"webm", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"flv", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"vob", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"ogg", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"ogv", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"mts", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"m2ts", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"ts", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"3gp", Qt::CaseInsensitive) == 0) {
     return Video;
   }
 
   // Raw
-  if (ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
-      ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
-      ext == "pef" || ext == "raf") {
+  if (ext.compare(u"arw", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"cr2", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"dng", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"nef", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"sr2", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"srf", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"orf", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"rw2", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"pef", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"raf", Qt::CaseInsensitive) == 0) {
     return Raw;
   }
 
   // Image
-  if (ext == "jpg" || ext == "jpeg" || ext == "png" || ext == "gif" ||
-      ext == "bmp" || ext == "webp" || ext == "heic" || ext == "tiff" ||
-      ext == "tif" || ext == "ico" || ext == "tga") {
+  if (ext.compare(u"jpg", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"jpeg", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"png", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"webp", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"heic", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"heif", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"tiff", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"tif", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"bmp", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"gif", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"ico", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"tga", Qt::CaseInsensitive) == 0) {
     return Image;
   }
 
@@ -104,13 +136,31 @@ bool DesktopHelper::staticIsNetworkPath(const QString &path) {
       root += '/';
     }
 
-    QStorageInfo storage(root);
-    if (storage.isValid()) {
-      QString fsType = storage.fileSystemType().toLower();
-      if (fsType == "network" || fsType == "cifs" || fsType == "smb" || fsType == "nfs") {
+#ifdef Q_OS_WIN
+    QChar driveLetter = cleanPath[0].toUpper();
+    if (driveLetter >= 'A' && driveLetter <= 'Z') {
+      static UINT s_driveTypeCache[26] = {0};
+      int idx = driveLetter.unicode() - 'A';
+      UINT driveType = s_driveTypeCache[idx];
+      if (driveType == 0) {
+        driveType = GetDriveTypeW((const wchar_t *)root.utf16());
+        s_driveTypeCache[idx] = driveType;
+      }
+      if (driveType == DRIVE_REMOTE || driveType == DRIVE_REMOVABLE ||
+          driveType == DRIVE_CDROM) {
         return true;
       }
     }
+#else
+    QStorageInfo storage(root);
+    if (storage.isValid()) {
+      QString fsType = storage.fileSystemType().toLower();
+      if (fsType == "network" || fsType == "cifs" || fsType == "smb" ||
+          fsType == "nfs") {
+        return true;
+      }
+    }
+#endif
   }
 
   return false;

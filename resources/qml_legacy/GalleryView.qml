@@ -13,6 +13,7 @@ Item {
 
     ImageModel {
         id: imageModel
+        loadingResolution: root.loadingResolution
     }
     property alias model: imageModel
 
@@ -32,43 +33,105 @@ Item {
     GridView {
         id: grid
         anchors.fill: parent
+        clip: true
+        focus: true
+        keyNavigationEnabled: false
+        
+        Component.onCompleted: grid.forceActiveFocus()
+
+        Keys.onPressed: (event) => {
+            var cols = Math.max(1, Math.floor(grid.width / grid.cellWidth))
+            var rowsPerPage = Math.max(1, Math.floor(grid.height / grid.cellHeight))
+            var pageStep = rowsPerPage * cols
+            var count = grid.count
+
+            if (count === 0) return
+            if (grid.currentIndex < 0) grid.currentIndex = 0
+
+            if (event.key === Qt.Key_Left) {
+                grid.currentIndex = Math.max(0, grid.currentIndex - 1)
+                grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Right) {
+                grid.currentIndex = Math.min(count - 1, grid.currentIndex + 1)
+                grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Up) {
+                if (grid.currentIndex < cols) {
+                    searchField.forceActiveFocus()
+                } else {
+                    grid.currentIndex = Math.max(0, grid.currentIndex - cols)
+                    grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                }
+                event.accepted = true
+            } else if (event.key === Qt.Key_Down) {
+                if (grid.currentIndex >= count - cols) {
+                    bottomBar.focusTab(0)
+                } else {
+                    grid.currentIndex = Math.min(count - 1, grid.currentIndex + cols)
+                    grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                }
+                event.accepted = true
+            } else if (event.key === Qt.Key_PageUp) {
+                grid.currentIndex = Math.max(0, grid.currentIndex - pageStep)
+                grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                event.accepted = true
+            } else if (event.key === Qt.Key_PageDown) {
+                grid.currentIndex = Math.min(count - 1, grid.currentIndex + pageStep)
+                grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Home) {
+                grid.currentIndex = 0
+                grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                event.accepted = true
+            } else if (event.key === Qt.Key_End) {
+                grid.currentIndex = count - 1
+                grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
+                if (grid.currentIndex >= 0 && grid.currentIndex < count) {
+                    root.imageClicked(grid.currentIndex)
+                }
+                event.accepted = true
+            } else if (event.key === Qt.Key_Tab) {
+                bottomBar.focusTab(0)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Backtab) {
+                if (groupCombo.visible) groupCombo.forceActiveFocus()
+                else viewModeBtn.forceActiveFocus()
+                event.accepted = true
+            }
+        }
+
+        property real lastContentY: 0
+        function updateViewportNow() {
+            var sIdx = indexAt(width / 2, contentY)
+            var eIdx = indexAt(width / 2, contentY + height)
+
+            if (typeof viewportGovernor !== "undefined" && sIdx !== -1 && eIdx !== -1 && root.model) {
+                viewportGovernor.updateViewport(sIdx, eIdx, root.model.count, contentY - lastContentY)
+                root.model.visibleStartIndex = sIdx
+                root.model.visibleEndIndex = eIdx
+            }
+        }
+
+        onContentYChanged: {
+            updateViewportNow()
+            lastContentY = contentY
+        }
+        
+        onCountChanged: {
+            Qt.callLater(updateViewportNow)
+        }
+        
+        onHeightChanged: Qt.callLater(updateViewportNow)
+        onWidthChanged: Qt.callLater(updateViewportNow)
         cellWidth: uiThumbnailSize
         cellHeight: uiThumbnailSize
         model: imageModel
-        clip: true
         
         // Increased cacheBuffer to utilize available memory and improve scrolling performance
         cacheBuffer: cellHeight * 10
-        
-        // Dynamic Section Headers (Semantic Zoom) - TEMPORARILY DISABLED FOR STABILITY
-        // section.property: root.currentSectionRole
-        // section.criteria: ViewSection.FullString
-        // section.delegate: Component {
-        //     Rectangle {
-        //         width: grid.width
-        //         height: 40
-        //         color: "#000000" // Solid background for readability
-        //         opacity: 0.9
-        //         z: 2 
-        //         
-        //         Text {
-        //             anchors.left: parent.left
-        //             anchors.leftMargin: 15
-        //             anchors.verticalCenter: parent.verticalCenter
-        //             text: section
-        //             color: "white"
-        //             font.bold: true
-        //             font.pixelSize: 18
-        //         }
-        //         
-        //         Rectangle {
-        //             anchors.bottom: parent.bottom
-        //             width: parent.width
-        //             height: 1
-        //             color: "#333"
-        //         }
-        //     }
-        // }
         
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AlwaysOn
@@ -94,7 +157,7 @@ Item {
                 anchors.fill: parent
                 anchors.margins: 1
                 // We now have FFmpeg VideoThumbnailer wired into AsyncImageProvider
-                source: "image://async/" + model.filePath 
+                source: "image://async/" + model.filePath + "?idx=" + index
                 sourceSize.width: root.loadingResolution
                 sourceSize.height: root.loadingResolution
                 fillMode: Image.PreserveAspectCrop
@@ -155,10 +218,36 @@ Item {
                         color: "white"
                     }
                 }
+
+                // Windows Explorer Single File Focus / Caret Highlight Box
+                Rectangle {
+                    anchors.fill: parent
+                    color: index === grid.currentIndex ? "#443B82F6" : (isSelected ? "#440078D7" : "transparent")
+                    border.color: index === grid.currentIndex ? "#38BDF8" : (isSelected ? "#0078D7" : "transparent")
+                    border.width: index === grid.currentIndex ? 3 : (isSelected ? 2 : 0)
+                    radius: 2
+                    z: 15
+                    visible: index === grid.currentIndex || isSelected
+
+                    // High-contrast inner white ring
+                    Rectangle {
+                        anchors.fill: parent
+                        anchors.margins: 1
+                        color: "transparent"
+                        border.color: "#FFFFFF"
+                        border.width: 1
+                        radius: 1
+                        opacity: 0.6
+                        visible: index === grid.currentIndex
+                    }
+                }
                 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: root.imageClicked(index) // Pass index
+                    onClicked: {
+                        grid.currentIndex = index
+                        root.imageClicked(index)
+                    }
                 }
             }
         }
@@ -254,7 +343,7 @@ Item {
         text: "No images found.\nCheck folder permissions or select a different folder."
         color: "#888"
         horizontalAlignment: Text.AlignHCenter
-        visible: imageModel.count === 0
+        visible: imageModel ? (imageModel.count === 0 && !imageModel.isLoading) : false
         font.pixelSize: 18
     }
 }

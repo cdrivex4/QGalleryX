@@ -24,8 +24,10 @@ class ImageModel : public QAbstractListModel {
   Q_OBJECT
 
   Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
-  Q_PROPERTY(int visibleStartIndex READ visibleStartIndex WRITE setVisibleStartIndex NOTIFY visibleRangeChanged)
-  Q_PROPERTY(int visibleEndIndex READ visibleEndIndex WRITE setVisibleEndIndex NOTIFY visibleRangeChanged)
+  Q_PROPERTY(int visibleStartIndex READ visibleStartIndex WRITE
+                 setVisibleStartIndex NOTIFY visibleRangeChanged)
+  Q_PROPERTY(int visibleEndIndex READ visibleEndIndex WRITE setVisibleEndIndex
+                 NOTIFY visibleRangeChanged)
 
 public:
   enum ImageRoles {
@@ -44,7 +46,8 @@ public:
   };
   Q_ENUM(ImageRoles)
 
-  Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY filterQueryChanged)
+  Q_PROPERTY(QString filterQuery READ filterQuery WRITE setFilterQuery NOTIFY
+                 filterQueryChanged)
   Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectedCountChanged)
 
   explicit ImageModel(QObject *parent = nullptr);
@@ -65,14 +68,15 @@ public:
   int rowCount(const QModelIndex &parent = QModelIndex()) const override;
   QVariant data(const QModelIndex &index,
                 int role = Qt::DisplayRole) const override;
-  bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+  bool setData(const QModelIndex &index, const QVariant &value,
+               int role = Qt::EditRole) override;
   QHash<int, QByteArray> roleNames() const override;
 
   bool isLoading() const { return m_isLoading; }
-  
+
   int visibleStartIndex() const { return m_visibleStartIndex; }
   void setVisibleStartIndex(int index);
-  
+
   int visibleEndIndex() const { return m_visibleEndIndex; }
   void setVisibleEndIndex(int index);
 
@@ -92,9 +96,9 @@ private:
   QList<ImageInfo> m_images;
   QList<ImageInfo> m_allImages;
   QString m_filterQuery;
-  
+
   QList<ImageInfo> m_pendingInsertions;
-  class QTimer* m_updateTimer = nullptr;
+  class QTimer *m_updateTimer = nullptr;
   bool m_isLoading = false;
   int m_visibleStartIndex = -1;
   int m_visibleEndIndex = -1;

@@ -21,8 +21,16 @@ class TaskScheduler : public QObject {
   Q_OBJECT
   Q_PROPERTY(
       int activeTaskCount READ activeTaskCount NOTIFY activeTaskCountChanged)
+  Q_PROPERTY(int schedulerGovernor READ getSchedulerGovernor WRITE setSchedulerGovernor NOTIFY schedulerGovernorChanged)
 
 public:
+  enum SchedulerGovernor {
+      Governor_FIFO = 0,
+      Governor_LIFO = 1,
+      Governor_Adaptive = 2,
+      Governor_RoundRobin = 3
+  };
+
   static TaskScheduler &instance();
   void pause();
   void resume();
@@ -50,6 +58,10 @@ public:
 
   int activeTaskCount() const;
   bool isPaused() const { return m_isPaused.load(); }
+  bool hasUrgentTasks() const { return m_urgentTaskCount.load() > 0; }
+
+  int getSchedulerGovernor() const { return m_governor.load(); }
+  void setSchedulerGovernor(int gov);
 
   void addTask(Task task, TaskType type = CPU_BOUND,
                Priority priority = Normal, TaskCategory category = ImageTask);
@@ -62,6 +74,7 @@ public:
 
 signals:
   void activeTaskCountChanged();
+  void schedulerGovernorChanged();
 
 private slots:
   void emitCountChanged();
@@ -72,7 +85,9 @@ private:
   void triggerCountUpdate();
 
   std::atomic<int> m_activeTaskCount{0};
+  std::atomic<int> m_urgentTaskCount{0};
   std::atomic<bool> m_updatePending{false};
+  std::atomic<int> m_governor{0}; // Default to FIFO
 
   // CPU Pool
   std::vector<std::thread> m_cpuThreads;

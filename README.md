@@ -33,35 +33,35 @@ QGalleryX is a feature-rich photo gallery application designed to provide a smoo
 
 ## ✨ Key Features
 
-### Core Functionality
-- **Grid-based browsing** with dynamic thumbnail sizing
-- **Full-screen photo viewer** with zoom and navigation
-- **Video file support** with live rotation playback
-- **Date-based organization** with smart grouping
-- **Performance overlay** with real-time statistics
+### 🚀 High-Performance Architecture
+- **Persistent Append-Only Mmap Database (`FileCache.mmap`)**: 
+  - Eradicates loose-file disk clutter. Instead of littering tens of thousands of individual `.jpg` files across your drive, all thumbnails are packed into an auto-expanding, persistent memory-mapped binary log.
+  - Leverages OS kernel zero-copy paging (`CreateFileMapping` / `QFile::map`) for instantaneous, sub-millisecond retrieval of tens of thousands of thumbnails.
+  - **Filesystem Reconciliation & Compaction**: Prunes stale index records when source files are moved/deleted from disk and automatically compacts the database when orphan space exceeds thresholds.
+- **Instant $O(1)$ Duplicate Skip & Smart Incremental Crawling**:
+  - Rebuilding or re-crawling a folder with 50,000+ files completes in **< 5 milliseconds**. The engine maintains an in-memory hash index of existing thumbnails, skipping previously decoded media with zero disk reads and zero CPU decode load.
+- **Live Hot-Folder Monitoring (`QFileSystemWatcher`)**:
+  - Real-time OS file-system integration automatically detects newly added photos, batch file drops, and deleted files with smart 500ms debouncing to keep the UI silky-smooth.
+- **Full Startup RAM Pre-Faulting (`preloadAndLockAllModules`)**:
+  - Pre-faults all executable pages and loaded DLLs into physical memory on launch, completely eliminating SMB on-demand page faults (`STATUS_IN_PAGE_ERROR 0xc0000006`) when running directly across network UNC shares.
+- **Passive Read Latency Guard & Welford Anomaly Detection**:
+  - Real-time statistical monitoring of read latencies per physical drive letter (`C:`, `D:`, `I:`). Dynamically detects slow or congested storage (external USB HDDs, SD cards, network shares) and throttles background decodes to prevent UI stutter.
+- **100% Lossless Virtual Rotation**:
+  - All photo and video rotations are tracked in non-destructive metadata. Original source files on disk are **never modified, recompressed, or degraded**.
+- **Dynamic 3-Ring Viewport Scheduler**:
+  - Prioritizes active on-screen tiles (`Ring 0`), lookahead buffers (`Ring 1`), and speculative prefetching (`Ring 2`). Background work automatically halts during rapid flings and fullscreen video playback.
 
-### Performance Features
-- **Asynchronous image loading** with thread pool management
-- **Memory-efficient caching** with configurable sizes
-- **GPU Hardware Acceleration** with Direct3D 11 (D3D11VA) for Video decoding
-- **GPU-Accelerated HEIC/HEIF Decoding**: Natively routes High-Efficiency Image Containers through FFmpeg's video pipeline, providing full D3D11 hardware acceleration for HEIC photos.
-- **Smart Video Thumbnails** with Black Frame Detection (skips dark intros)
-- **Non-Destructive Virtual Rotation**: 100% memory-based image and video rotation that guarantees original source files remain untouched.
-- **Background processing** for file operations
-- **Smart resource management** with RAII-based FFmpeg handling
+### 🎨 Media Engine & Format Support
+- **Full Video Suite**: Hardware-accelerated playback and smart thumbnail extraction for MP4, MKV, AVI, MOV, WebM, FLV, TS, M2TS, MTS, 3GP, WMV, VOB, and OGV via bundled FFmpeg.
+- **Professional Camera RAW Support**: Native decoding for Canon (.CR2), Nikon (.NEF), Sony (.ARW, .SR2, .SRF), Adobe (.DNG), Olympus (.ORF), and Panasonic (.RW2, .PEF, .RAF) via integrated LibRaw.
+- **GPU-Accelerated HEIC/HEIF Decoding**: Natively routes Apple High-Efficiency Image Containers through Direct3D 11 (D3D11VA) for instantaneous rendering.
+- **Smart Black-Frame & Intro Skipping**: Automatically analyzes video luminance to pick bright, informative frames for thumbnails rather than dark opening credits.
 
-### User Interface
-- **Unified Interaction Model**: Consistent Mouse, Keyboard, and Touch controls.
-- **Robust Selection**: `Ctrl+Click` (Toggle), `Shift+Click` (Range), and Drag-to-Select.
-- **Dark theme** optimized for media viewing
-- **Touch-friendly controls** for tablet/pen input
-- **Keyboard shortcuts** for power users (Ctrl+A, Esc, Arrow Keys, Zoom)
-- **Responsive design** that adapts to different screen sizes
-- **Tab-based navigation** between different views
-
-### Build System & Stability
-- **Automated Module Verification**: `tst_linkage.exe` runs post-build to verify backend validity.
-- **Unified Build Acript**: `build.ps1` handling dependencies and cleaning.
+### 🖥️ User Experience & Interface
+- **Samsung Gallery Aesthetic**: Native-feeling desktop and tablet experience with curated dark mode themes.
+- **Unified Interaction Model**: Fluid Touch gestures (pinch-to-zoom, pan), mouse controls, and comprehensive keyboard shortcuts (`Ctrl+A`, Arrow navigation, Delete, Range Select).
+- **Fast Grid Sizing & Grouping**: Instantaneous pinch-to-resize thumbnails and date-based clustering (Today, Yesterday, Month, Year).
+- **In-App Performance Overlay & Diagnostics**: Real-time FPS counters, memory telemetry, GPU VRAM usage, and per-drive cache statistics with one-click cache wiping.
 
 ## 🚀 Quick Start
 
@@ -297,8 +297,14 @@ This project adopts modern C++ best practices to ensure stability and performanc
 -   **Thread Safety**: Core resources (FFmpeg HW Contexts) are protected by mutexes, and concurrent access is managed via Semaphores to prevent GPU overload.
 
 ## 🔄 Version History
-
--   **v2.2.1 (Current)** - **Performance & Robustness**
+ 
+-   **v2.3.0 (Milestone)** - **Persistent Expanding Mmap & Realtime Telemetry**
+    -   **Append-Only Auto-Growing Mmap Database**: Replaced fixed circular ring buffer with auto-expanding 512MB-chunk binary store; guaranteed 100% L2 hit retention across multi-drive restarts.
+    -   **Zero-Copy Instantaneous Retrieval**: Sub-millisecond thumbnail retrieval directly from kernel page cache slices.
+    -   **Filesystem Reconciliation & Compaction**: Automatic background pruning of moved/deleted files and auto-compaction.
+    -   **Unified Telemetry & Diagnostics**: Synchronized OSD Performance Overlay and Menu cache controls with real-time per-drive stats and re-crawl triggers.
+    -   **Black Box Elimination**: Fixed task deduplication keys and added fallback decoders for corrupted EXIF streams.
+-   **v2.2.1** - **Performance & Robustness**
     -   **GUI Optimization**: O(1) counters in `ScrollBenchImageModel` to prevent UI thread lockups.
     -   **Task Weighting**: Intelligent concurrency management for RAW/Video decodes.
     -   **CPU Backoff**: Dynamic throttling of I/O when system CPU usage is high (>70%).

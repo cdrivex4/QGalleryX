@@ -8,6 +8,7 @@ Item {
     // Signals
     signal imageClicked(int index)
     signal imageLoaded(int timeMs)
+    signal sectionChanged(string section)
     
     // Properties
     property real uiThumbnailSize: appSettings ? appSettings.gridResolution : 100
@@ -28,11 +29,23 @@ Item {
         id: localImageModel
     }
 
-    // Models
     // Model property (passed from parent/Main.qml)
     property var model: localImageModel
     property alias activeModel: root.model
+    property alias grid: listView
+    property alias gridView: listView
+    property int caretIndex: 0
 
+    function ensureCaretVisible() {
+        if (proxyModel && root.model && root.model.count > 0) {
+            var proxyRow = proxyModel.getProxyRowForSourceIndex(root.caretIndex)
+            if (proxyRow >= 0) {
+                listView.positionViewAtIndex(proxyRow, ListView.Contain)
+            }
+        }
+    }
+
+    onCaretIndexChanged: ensureCaretVisible()
 
     // Grouping Mode: 0=Auto, 1=Day, 2=Week, 3=Month, 4=Year
     property int groupingMode: 0
@@ -71,17 +84,10 @@ Item {
         
         var item = listView.itemAt(contentX, contentY)
         if (item) {
-            // Check if it's a row delegate (has rowStartIndex property)
-            // Note: item is the Loader's loaded item (Rectangle or Item)
-            // But itemAt returns the Delegate (Loader).
-            // So we check item.item (the loaded component)
-            
             var loadedItem = item.item
             if (loadedItem && loadedItem.hasOwnProperty("rowStartIndex")) {
-                // It's a row
                 var rowLocalX = contentX - item.x
                 var col = Math.floor(rowLocalX / loadedItem.itemSize)
-                // Clamp col
                 col = Math.max(0, Math.min(col, loadedItem.rowCount - 1))
                 return loadedItem.rowStartIndex + col
             }
@@ -100,13 +106,125 @@ Item {
             id: listView
             anchors.fill: parent
             model: proxyModel
+            focus: true
+            keyNavigationEnabled: false
+
+            Component.onCompleted: listView.forceActiveFocus()
+
+            Keys.onPressed: (event) => {
+                var cols = Math.max(1, proxyModel.columns)
+                var rowsPerPage = Math.max(1, Math.floor(listView.height / (listView.width / cols)))
+                var pageStep = rowsPerPage * cols
+                var count = root.model ? root.model.count : 0
+
+                if (count === 0) return
+                if (root.caretIndex < 0) root.caretIndex = 0
+
+                if (event.key === Qt.Key_Left) {
+                    root.caretIndex = Math.max(0, root.caretIndex - 1)
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Right) {
+                    root.caretIndex = Math.min(count - 1, root.caretIndex + 1)
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Up) {
+                    if (root.caretIndex < cols) {
+                        searchField.forceActiveFocus()
+                    } else {
+                        root.caretIndex = Math.max(0, root.caretIndex - cols)
+                    }
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Down) {
+                    if (root.caretIndex >= count - cols) {
+                        bottomBar.focusTab(0)
+                    } else {
+                        root.caretIndex = Math.min(count - 1, root.caretIndex + cols)
+                    }
+                    event.accepted = true
+                } else if (event.key === Qt.Key_PageUp) {
+                    root.caretIndex = Math.max(0, root.caretIndex - pageStep)
+                    event.accepted = true
+                } else if (event.key === Qt.Key_PageDown) {
+                    root.caretIndex = Math.min(count - 1, root.caretIndex + pageStep)
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Home) {
+                    root.caretIndex = 0
+                    event.accepted = true
+                } else if (event.key === Qt.Key_End) {
+                    root.caretIndex = count - 1
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                    if (root.caretIndex >= 0 && root.caretIndex < count) {
+                        root.imageClicked(root.caretIndex)
+                    }
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Space) {
+                    if (root.model && typeof root.model.toggleSelection === "function") {
+                        root.model.toggleSelection(root.caretIndex)
+                    }
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Tab) {
+                    bottomBar.focusTab(0)
+                    event.accepted = true
+                } else if (event.key === Qt.Key_Backtab) {
+                    if (groupCombo.visible) groupCombo.forceActiveFocus()
+                    else viewModeBtn.forceActiveFocus()
+                    event.accepted = true
+                }
+            }
             
             // Visual Scaling
             scale: root.currentScale
-            transformOrigin: Item.Center // Will be updated by PinchHandler
+            transformOrigin: Item.Center
             
-            // Performance
-            cacheBuffer: 1000
+            // Dynamic cacheBuffer optimized for 100k+ items
+            cacheBuffer: Math.min(viewport.height * 2, 500)
+
+            property real lastContentY: 0
+            property real cellHeight: root.width / proxyModel.columns
+
+            function updateViewportNow() {
+                var sIdx = indexAt(width / 2, contentY)
+                var eIdx = indexAt(width / 2, contentY + height)
+                
+                if (sIdx === -1) {
+                    // Approximate fallback for semantic view
+                    sIdx = Math.max(0, Math.floor(contentY / cellHeight) * 3)
+                }
+                if (eIdx === -1) {
+                    eIdx = Math.min(root.model ? root.model.count - 1 : 0, sIdx + Math.ceil(height / cellHeight) * 3 + 6)
+                }
+
+                if (typeof viewportGovernor !== "undefined" && root.model) {
+                    viewportGovernor.updateViewport(sIdx, eIdx, root.model.count, contentY - lastContentY)
+                    root.model.visibleStartIndex = sIdx
+                    root.model.visibleEndIndex = eIdx
+                }
+            }
+
+            onContentYChanged: {
+                updateViewportNow()
+                
+                var centerIdx = indexAt(width / 2, contentY + height / 2)
+                if (centerIdx !== -1 && root.model) {
+                    // Section roles: 0x0106 = Day, 0x0107 = Month, 0x0108 = Year
+                    var sectionStr = ""
+                    if (root.uiThumbnailSize < 80) sectionStr = root.model.data(root.model.index(centerIdx, 0), 0x0108) 
+                    else if (root.uiThumbnailSize < 150) sectionStr = root.model.data(root.model.index(centerIdx, 0), 0x0107) 
+                    else sectionStr = root.model.data(root.model.index(centerIdx, 0), 0x0106)
+                    
+                    if (sectionStr !== "") {
+                        root.sectionChanged(sectionStr)
+                    }
+                }
+                
+                lastContentY = contentY
+            }
+            
+            onCountChanged: {
+                Qt.callLater(updateViewportNow)
+            }
+            onHeightChanged: Qt.callLater(updateViewportNow)
+            onWidthChanged: Qt.callLater(updateViewportNow)
             
             // ScrollBar
             ScrollBar.vertical: ScrollBar {
@@ -306,6 +424,7 @@ Item {
                         height: itemSize
                         
                         property int sourceIndex: rowStartIndex + index
+                        property bool isCaretActive: root.caretIndex === sourceIndex
                         
                         // Fetch data
                         property string filePath: root.model.data(root.model.index(sourceIndex, 0), ImageModel.FilePathRole)
@@ -324,21 +443,33 @@ Item {
                             id: img
                             anchors.fill: parent
                             anchors.margins: 1
-                            source: filePath ? "image://async/" + filePath : ""
-                            // Do not bind directly to avoid flashing the grid when setting is tweaked!
-                            Component.onCompleted: {
-                                sourceSize.width = root.loadingResolution
-                                sourceSize.height = root.loadingResolution
-                            }
+                            sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                            source: filePath ? "image://async/" + filePath + "?idx=" + sourceIndex : ""
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true
                             cache: true
                             
+                            property int retries: 0
                             property real startTime: 0
                             onSourceChanged: startTime = new Date().getTime()
                             
+                            Timer {
+                                id: retryTimer
+                                interval: 1000 + (Math.random() * 2000)
+                                repeat: false
+                                onTriggered: {
+                                    var original = filePath ? "image://async/" + filePath + "?idx=" + sourceIndex : ""
+                                    parent.source = ""
+                                    parent.source = original + "&retry=" + parent.retries
+                                }
+                            }
+                            
                             onStatusChanged: {
-                                if (status === Image.Ready) {
+                                if (status === Image.Error && retries < 3) {
+                                    retries++
+                                    retryTimer.start()
+                                } else if (status === Image.Ready) {
+                                    retries = 0
                                     var endTime = new Date().getTime()
                                     var duration = endTime - startTime
                                     if (startTime > 0) {
@@ -366,13 +497,27 @@ Item {
                                 }
                             }
                             
-                            // Selection Visuals
+                            // Windows Explorer Single File Focus / Caret Highlight Box
                             Rectangle {
                                 anchors.fill: parent
-                                color: isSelected ? "#440078D7" : "transparent"
-                                border.color: "#0078D7"
-                                border.width: Math.max(1, Math.min(4, parent.width * 0.05))
-                                visible: isSelected
+                                color: isCaretActive ? "#443B82F6" : (isSelected ? "#440078D7" : "transparent")
+                                border.color: isCaretActive ? "#38BDF8" : (isSelected ? "#0078D7" : "transparent")
+                                border.width: isCaretActive ? 3 : (isSelected ? 2 : 0)
+                                radius: 2
+                                z: 15
+                                visible: isCaretActive || isSelected
+
+                                // High-contrast inner white ring so caret is unmistakably visible on dark/light images
+                                Rectangle {
+                                    anchors.fill: parent
+                                    anchors.margins: 1
+                                    color: "transparent"
+                                    border.color: "#FFFFFF"
+                                    border.width: 1
+                                    radius: 1
+                                    opacity: 0.6
+                                    visible: isCaretActive
+                                }
                             }
                             
                             Rectangle {
@@ -399,6 +544,7 @@ Item {
                                 MouseArea {
                                     anchors.fill: parent
                                     onClicked: {
+                                        root.caretIndex = sourceIndex
                                         root.model.setData(root.model.index(sourceIndex, 0), !isSelected, ImageModel.IsSelectedRole)
                                     }
                                 }
@@ -407,6 +553,7 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    root.caretIndex = sourceIndex
                                     if (root.model.selectedCount > 0) {
                                         root.model.setData(root.model.index(sourceIndex, 0), !isSelected, ImageModel.IsSelectedRole)
                                     } else {
@@ -414,6 +561,7 @@ Item {
                                     }
                                 }
                                 onPressAndHold: {
+                                    root.caretIndex = sourceIndex
                                     if (!isSelected) {
                                         root.model.setData(root.model.index(sourceIndex, 0), true, ImageModel.IsSelectedRole)
                                     }
@@ -430,7 +578,7 @@ Item {
         anchors.centerIn: parent
         text: "No images found."
         color: "#888"
-        visible: root.model ? root.model.count === 0 : true
+        visible: root.model ? (root.model.count === 0 && !root.model.isLoading) : false
         font.pixelSize: 18
         font.bold: true
     }

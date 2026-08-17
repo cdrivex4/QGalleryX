@@ -23,6 +23,10 @@ public:
   Q_INVOKABLE void copyFiles(const QStringList &paths, const QString &destinationDir);
 
   Q_INVOKABLE bool isNetworkPath(const QString &path);
+  Q_INVOKABLE bool isDirectory(const QString &path);
+  Q_INVOKABLE qint64 getFileSize(const QString &path);
+  Q_INVOKABLE QString urlToLocalFile(const QString &url);
+  Q_INVOKABLE QStringList getAdjacentFiles(const QString &filePath, int neighborWindow = 15);
 
   // Static helper for C++ usage
   static FileType staticGetFileType(const QString &path);

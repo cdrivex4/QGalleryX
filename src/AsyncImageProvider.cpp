@@ -1,18 +1,19 @@
 #include "AsyncImageProvider.h"
 #include "DesktopHelper.h"
+#include "FileCacheManager.h"
 #include "FrameBudgetScheduler.h"
+#include "HardwareAccelerationManager.h"
 #include "SystemMonitor.h"
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
-#include "FileCacheManager.h"
+#include <QBuffer>
 #include <QCryptographicHash>
 #include <QDateTime>
-#include <QBuffer>
 #include <QDebug>
 #include <QDir>
 #include <QElapsedTimer>
 #include <QFileIconProvider>
-#include "HardwareAccelerationManager.h"
+
 extern "C" {
 #include <libavutil/pixfmt.h>
 }
@@ -20,19 +21,19 @@ extern "C" {
 extern "C" {
 #include <libavutil/pixfmt.h>
 }
+#include <QCoreApplication>
 #include <QIcon>
 #include <QImageReader>
+#include <QLinearGradient>
 #include <QMutex>
 #include <QMutexLocker>
 #include <QPainter>
-#include <QLinearGradient>
 #include <QSet>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QThread>
 #include <QUrl>
 #include <QVariant>
-#include <QCoreApplication>
 #include <QtCore/QEventLoop>
 #include <QtCore/QSemaphore>
 #include <QtCore/QTimer>
@@ -43,6 +44,7 @@ extern "C" {
 #include <algorithm>
 #include <cstdio>
 #include <libraw/libraw.h>
+
 
 #ifdef Q_OS_WIN
 #include <objbase.h>
@@ -56,11 +58,14 @@ static QSemaphore *getVideoSemaphore() {
   if (!sem) {
     int cores = std::thread::hardware_concurrency();
     int threads = 1;
-    if (cores >= 8) threads = 3;
-    else if (cores >= 6) threads = 2;
-    
+    if (cores >= 8)
+      threads = 3;
+    else if (cores >= 6)
+      threads = 2;
+
     // Give a bump if hardware decoding is enabled (offloads CPU)
-    if (HardwareAccelerationManager::instance().pixelFormat() != AV_PIX_FMT_NONE) {
+    if (HardwareAccelerationManager::instance().pixelFormat() !=
+        AV_PIX_FMT_NONE) {
       threads += 1;
     }
     // Cap strictly to avoid GPU TDRs and network saturation
@@ -103,12 +108,14 @@ struct QueueGuardState {
     if (!executed.load()) {
       QMutexLocker lock(&AsyncImageProvider::m_driveStatsMutex);
       int weight = AsyncImageProvider::getTaskWeight(taskId);
-      AsyncImageProvider::m_driveStats[drive].activeWeight =
-          qMax(0, AsyncImageProvider::m_driveStats[drive].activeWeight - weight);
-      
+      AsyncImageProvider::m_driveStats[drive].activeWeight = qMax(
+          0, AsyncImageProvider::m_driveStats[drive].activeWeight - weight);
+
       QString timeStr = QDateTime::currentDateTime().toString("HH:mm:ss.zzz");
-      qWarning() << "[" << timeStr << "][AdaptiveIO] Leaked weight recovered for cleared task:" << taskId
-                 << "Weight:" << weight << "New Active Weight:" << AsyncImageProvider::m_driveStats[drive].activeWeight;
+      qWarning() << "[" << timeStr
+                 << "][AdaptiveIO] Leaked weight recovered for cleared task:"
+                 << taskId << "Weight:" << weight << "New Active Weight:"
+                 << AsyncImageProvider::m_driveStats[drive].activeWeight;
     }
   }
 };
@@ -122,17 +129,18 @@ static QString getCoalesceKey(const QString &normalizedId, const QSize &size) {
       .arg(size.height());
 }
 
-  static QString normalizePath(const QString &p) {
-    QString res = p;
-    int idx = res.indexOf("?idx=");
-    if (idx != -1) res = res.left(idx);
-    
-    if (res.startsWith("file://")) {
-      QUrl url(res);
-      return url.toLocalFile().toLower();
-    }
-    return QDir::toNativeSeparators(res).toLower();
+static QString normalizePath(const QString &p) {
+  QString res = p;
+  int idx = res.indexOf("?idx=");
+  if (idx != -1)
+    res = res.left(idx);
+
+  if (res.startsWith("file://")) {
+    QUrl url(res);
+    return url.toLocalFile().toLower();
   }
+  return QDir::toNativeSeparators(res).toLower();
+}
 
 static QString normalizeId(const QString &id) {
   if (id.startsWith("synthetic:"))
@@ -208,12 +216,13 @@ static QString getDiskCachePath(const QString &id, const QSize &size) {
   // Hash includes LastModified to invalidate cache when file changes!
   QString key =
       nId + "_" + QString::number(fi.lastModified().toMSecsSinceEpoch()) + "_" +
-      QString::number(size.width()) + "x" + QString::number(size.height());
+      QString::number(fi.size()) + "_" + QString::number(size.width()) + "x" +
+      QString::number(size.height());
 
   QString hash =
       QCryptographicHash::hash(key.toUtf8(), QCryptographicHash::Md5).toHex();
-  return cacheDir + "/" + hash + "_" + QString::number(size.width()) +
-         "x" + QString::number(size.height()) + ".jpg";
+  return cacheDir + "/" + hash + "_" + QString::number(size.width()) + "x" +
+         QString::number(size.height()) + ".jpg";
 }
 
 int AsyncImageProvider::getTaskWeight(const QString &id) {
@@ -398,9 +407,8 @@ AsyncImageProvider::AsyncImageProvider() : QQuickAsyncImageProvider() {
 
   // Periodic timer to rescue stalled tasks (e.g. slow network shares)
   QTimer *stallTimer = new QTimer(qApp);
-  QObject::connect(stallTimer, &QTimer::timeout, []() {
-    AsyncImageProvider::checkStalls();
-  });
+  QObject::connect(stallTimer, &QTimer::timeout,
+                   []() { AsyncImageProvider::checkStalls(); });
   stallTimer->start(5000); // Check every 5 seconds
 }
 
@@ -451,8 +459,10 @@ void AsyncImageResponse::handleDone(QImage image, int duration) {
 
   QPointer<AsyncImageResponse> self(this);
   auto finishTask = [self, image]() {
-    if (!self) return;
-    if (self->m_cancelled->load()) return;
+    if (!self)
+      return;
+    if (self->m_cancelled->load())
+      return;
     self->m_image = image;
     emit self->finished();
   };
@@ -510,7 +520,9 @@ bool AsyncImageProvider::abortIfNotNeeded(const QString &coalesceKey) {
     if (t) {
       QMutexLocker tl(&t->mutex);
       if (t->response) {
-        QMetaObject::invokeMethod(t->response, "handleDone", Qt::QueuedConnection, Q_ARG(QImage, QImage()), Q_ARG(int, 0));
+        QMetaObject::invokeMethod(t->response, "handleDone",
+                                  Qt::QueuedConnection, Q_ARG(QImage, QImage()),
+                                  Q_ARG(int, 0));
       }
     }
   }
@@ -534,8 +546,9 @@ void AsyncImageProvider::deliverToPending(const QString &coalesceKey,
   for (const auto &tracker : listeners) {
     QMutexLocker tLocker(&tracker->mutex);
     if (tracker->response) {
-      QMetaObject::invokeMethod(tracker->response, "handleDone", Qt::QueuedConnection,
-                                Q_ARG(QImage, image), Q_ARG(int, duration));
+      QMetaObject::invokeMethod(tracker->response, "handleDone",
+                                Qt::QueuedConnection, Q_ARG(QImage, image),
+                                Q_ARG(int, duration));
     }
   }
 
@@ -572,7 +585,8 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   QImage cached = getCachedImage(normalizedId, requestedSize);
   if (!cached.isNull()) {
     s_cacheHits++;
-    // Use QueuedConnection so the caller has time to connect to the finished() signal!
+    // Use QueuedConnection so the caller has time to connect to the finished()
+    // signal!
     QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
                               Q_ARG(QImage, cached), Q_ARG(int, 0));
     return response;
@@ -585,7 +599,8 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   bool alreadyPending = false;
   {
     QMutexLocker locker(&m_pendingMutex);
-    if (m_pendingResponses.contains(cKey) && !m_pendingResponses[cKey].isEmpty()) {
+    if (m_pendingResponses.contains(cKey) &&
+        !m_pendingResponses[cKey].isEmpty()) {
       alreadyPending = true;
     }
     m_pendingResponses[cKey].append(response->m_tracker);
@@ -593,7 +608,9 @@ AsyncImageProvider::requestImageResponse(const QString &id,
 
   if (alreadyPending) {
     if (s_logLevel > 0) {
-      qDebug() << "[AsyncImageProvider] Coalesced request, already pending/running:" << normalizedId;
+      qDebug()
+          << "[AsyncImageProvider] Coalesced request, already pending/running:"
+          << normalizedId;
     }
     return response;
   }
@@ -634,7 +651,6 @@ void AsyncImageProvider::scheduleStagingProcessing() {
       Qt::QueuedConnection);
 }
 
-
 void AsyncImageProvider::processStagedRequests() {
   QList<StagedRequest> batch;
   {
@@ -672,11 +688,7 @@ void AsyncImageProvider::processStagedRequests() {
   for (const auto &req : batch) {
     QString cKey = getCoalesceKey(req.id, req.requestedSize);
 
-    // Age-out check: If it has been stuck in staging for > 5s, drop it.
-    if (req.timestamp.msecsTo(now) > STAGE_EXPIRY_MS) {
-      deliverToPending(cKey, QImage(), 0);
-      continue;
-    }
+    // Removed STAGE_EXPIRY_MS check to prevent dropping thumbnails under load
 
     if (abortIfNotNeeded(cKey)) {
       continue;
@@ -694,7 +706,7 @@ void AsyncImageProvider::processStagedRequests() {
     int weight = getTaskWeight(req.id);
     int currentWeight = stats.activeWeight + driveAllocations.value(drive, 0);
 
-    bool isVisible = vrm.isPathVisible(req.id);
+    bool isVisible = (vrm.visiblePathCount() == 0) || vrm.isPathVisible(req.id);
 
     // Base limit (conservative)
     int limit =
@@ -702,13 +714,14 @@ void AsyncImageProvider::processStagedRequests() {
 
     bool canAdmit = false;
     if (isVisible) {
-      // Visible items can use BURST capacity (e.g. +12 for network, +6 for local)
+      // Visible items can use BURST capacity (e.g. +12 for network, +6 for
+      // local)
       int burst = stats.isNetwork ? 12 : 6;
-      
+
       // EXPRESS LANE: Give light tasks (JPEGs) an extra massive burst so they
       // don't get stuck behind heavy long-running FFmpeg video decodes.
       if (weight == 1) {
-          burst += (stats.isNetwork ? 40 : 20);
+        burst += (stats.isNetwork ? 40 : 20);
       }
 
       if (currentWeight + weight <= limit + burst)
@@ -732,8 +745,9 @@ void AsyncImageProvider::processStagedRequests() {
       else if (!lowMemory)
         offscreen.append(req);
       else {
-        // We are low on memory and it's offscreen. Don't abort it, just re-queue it!
-        // If it was actually visible but VRM was lagging, it will be admitted next cycle.
+        // We are low on memory and it's offscreen. Don't abort it, just
+        // re-queue it! If it was actually visible but VRM was lagging, it will
+        // be admitted next cycle.
         QMutexLocker lock(&m_stagingMutex);
         m_stagedRequests.append(req);
         continue; // Don't count as drive allocation
@@ -773,51 +787,60 @@ void AsyncImageProvider::processStagedRequests() {
   // Submit Visible - Now filtered by Admission Control
   for (const auto &req : visibleHighPriority) {
     auto guard = incrementActive(req.id);
-    TaskScheduler::TaskType targetPool = (getTaskWeight(req.id) >= 4) ? TaskScheduler::CPU_BOUND : TaskScheduler::IO_BOUND;
-    
+    TaskScheduler::TaskType targetPool = (getTaskWeight(req.id) >= 4)
+                                             ? TaskScheduler::CPU_BOUND
+                                             : TaskScheduler::IO_BOUND;
+
     QString ext = QFileInfo(getRealLocalPath(req.id)).suffix().toLower();
-    bool isVideo = (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" || ext == "wmv");
-    TaskScheduler::TaskCategory cat = isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
+    bool isVideo = (ext == "mp4" || ext == "mov" || ext == "mkv" ||
+                    ext == "avi" || ext == "wmv");
+    TaskScheduler::TaskCategory cat =
+        isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
 
     QString cKey = getCoalesceKey(req.id, req.requestedSize);
-        TaskScheduler::instance().addTask(
-          TaskScheduler::Task(
-              [req, guard]() {
-                guard->executed.store(true);
-                AsyncImageProvider::processImageTask(req.id, req.requestedSize,
-                                                     req.cancelled, req.tracker);
-              },
-              [cKey]() { return AsyncImageProvider::abortIfNotNeeded(cKey); },
-              [cKey]() { /* Abort handled inside abortIfNotNeeded */ }),
-          targetPool, TaskScheduler::Immediate, cat);
+    TaskScheduler::instance().addTask(
+        TaskScheduler::Task(
+            [req, guard]() {
+              guard->executed.store(true);
+              AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                   req.cancelled, req.tracker);
+            },
+            [cKey]() { return AsyncImageProvider::abortIfNotNeeded(cKey); },
+            [cKey]() { /* Abort handled inside abortIfNotNeeded */ }),
+        targetPool, TaskScheduler::Immediate, cat);
   }
 
   // Submit Offscreen
   for (const auto &req : offscreen) {
     auto guard = incrementActive(req.id);
-    TaskScheduler::TaskType targetPool = (getTaskWeight(req.id) >= 4) ? TaskScheduler::CPU_BOUND : TaskScheduler::IO_BOUND;
+    TaskScheduler::TaskType targetPool = (getTaskWeight(req.id) >= 4)
+                                             ? TaskScheduler::CPU_BOUND
+                                             : TaskScheduler::IO_BOUND;
 
     QString ext = QFileInfo(getRealLocalPath(req.id)).suffix().toLower();
-    bool isVideo = (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" || ext == "wmv");
-    TaskScheduler::TaskCategory cat = isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
+    bool isVideo = (ext == "mp4" || ext == "mov" || ext == "mkv" ||
+                    ext == "avi" || ext == "wmv");
+    TaskScheduler::TaskCategory cat =
+        isVideo ? TaskScheduler::VideoTask : TaskScheduler::ImageTask;
 
     QString cKey = getCoalesceKey(req.id, req.requestedSize);
     TaskScheduler::instance().addTask(
         TaskScheduler::Task(
-          [req, guard]() {
-            guard->executed.store(true);
-            AsyncImageProvider::processImageTask(req.id, req.requestedSize,
-                                                 req.cancelled, req.tracker);
-          },
-          [cKey]() { return isRequestStillNeeded(cKey); },
-          [cKey]() { AsyncImageProvider::deliverToPending(cKey, QImage(), 0); }
-        ),
+            [req, guard]() {
+              guard->executed.store(true);
+              AsyncImageProvider::processImageTask(req.id, req.requestedSize,
+                                                   req.cancelled, req.tracker);
+            },
+            [cKey]() { return isRequestStillNeeded(cKey); },
+            [cKey]() {
+              AsyncImageProvider::deliverToPending(cKey, QImage(), 0);
+            }),
         targetPool, TaskScheduler::Normal, cat);
   }
 
   // Do NOT blindly schedule staging processing if tasks are queued,
-  // this causes a 2ms spin loop on the UI thread when admission control is full.
-  // The pump is fully event-driven now via ~DriveConcurrencyGuard!
+  // this causes a 2ms spin loop on the UI thread when admission control is
+  // full. The pump is fully event-driven now via ~DriveConcurrencyGuard!
 }
 
 void AsyncImageProvider::processImageTaskInternal(
@@ -826,8 +849,9 @@ void AsyncImageProvider::processImageTaskInternal(
 
   QString cKey = getCoalesceKey(id, requestedSize);
 
-  // CRITICAL FIX: Drive concurrency accounting MUST happen before ANY early returns,
-  // otherwise we leak activeWeight and permanently lock the Admission Control queue!
+  // CRITICAL FIX: Drive concurrency accounting MUST happen before ANY early
+  // returns, otherwise we leak activeWeight and permanently lock the Admission
+  // Control queue!
   struct DriveConcurrencyGuard {
     QString drive;
     QString taskId;
@@ -868,20 +892,21 @@ void AsyncImageProvider::processImageTaskInternal(
 
   auto shouldAbort = [&]() {
     // CRITICAL FIX: Do NOT check the initial `c->load()` here!
-    // Because requests are coalesced, the FIRST caller (c) might have been 
-    // cancelled (scrolled off screen), but a NEW caller (scrolled back on screen) 
-    // might be actively waiting for this exact coalesceKey!
-    // Note: The scheduler already checks this before admitting the task, but we 
-    // check it one last time just in case it was cancelled during lock acquisition.
+    // Because requests are coalesced, the FIRST caller (c) might have been
+    // cancelled (scrolled off screen), but a NEW caller (scrolled back on
+    // screen) might be actively waiting for this exact coalesceKey! Note: The
+    // scheduler already checks this before admitting the task, but we check it
+    // one last time just in case it was cancelled during lock acquisition.
     if (!isRequestStillNeeded(cKey))
       return true;
-      
+
     if (TaskScheduler::instance().isPaused())
       return true;
 
     // We no longer abort purely based on >5k tasks because LIFO queues mean
     // we would end up aborting the NEWEST, VISIBLE tasks first!
-    // The `isRequestStillNeeded` check above will naturally cull the old offscreen ones.
+    // The `isRequestStillNeeded` check above will naturally cull the old
+    // offscreen ones.
     return false;
   };
 
@@ -943,7 +968,8 @@ void AsyncImageProvider::processImageTaskInternal(
 
     // 1. Worker-side Disk Cache check (Optimized hit)
     if (s_useDiskCache && !id.startsWith("synthetic:")) {
-      QByteArray mmapData = FileCacheManager::instance().getCachedData(id, requestedSize);
+      QByteArray mmapData =
+          FileCacheManager::instance().getCachedData(id, requestedSize);
       if (!mmapData.isEmpty()) {
         if (image.loadFromData(mmapData)) {
           insertCachedImage(id, image, requestedSize);
@@ -952,7 +978,8 @@ void AsyncImageProvider::processImageTaskInternal(
           return;
         }
       } else {
-        QString dp = FileCacheManager::instance().getCachedPath(id, requestedSize);
+        QString dp =
+            FileCacheManager::instance().getCachedPath(id, requestedSize);
         if (!dp.isEmpty()) {
           if (image.load(dp)) {
             // Update RAM cache with consistent key
@@ -966,7 +993,7 @@ void AsyncImageProvider::processImageTaskInternal(
       }
     }
 
-      DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
+    DesktopHelper::FileType type = DesktopHelper::staticGetFileType(path);
     if (type == DesktopHelper::Raw) {
       s_rawSemaphore.acquire(1);
       QSemaphoreReleaser releaser(s_rawSemaphore);
@@ -1005,7 +1032,9 @@ void AsyncImageProvider::processImageTaskInternal(
         } catch (...) {
         }
       }
-    } else if (type == DesktopHelper::Video || path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive)) {
+    } else if (type == DesktopHelper::Video ||
+               path.endsWith(".heic", Qt::CaseInsensitive) ||
+               path.endsWith(".heif", Qt::CaseInsensitive)) {
       QSemaphore *sem = getVideoSemaphore();
       sem->acquire(1);
       QSemaphoreReleaser releaser(sem);
@@ -1013,18 +1042,21 @@ void AsyncImageProvider::processImageTaskInternal(
         VideoThumbnailer v;
         SettingsHelper::HWAccel accel =
             static_cast<SettingsHelper::HWAccel>(s_videoAcceleration.load());
-        // Pass nullptr for the cancellation token. If we pass the original delegate's token,
-        // it might abort FFmpeg if that specific delegate is destroyed, even if OTHER delegates
-        // are waiting for this coalesced task, resulting in a permanent dead placeholder!
+        // Pass nullptr for the cancellation token. If we pass the original
+        // delegate's token, it might abort FFmpeg if that specific delegate is
+        // destroyed, even if OTHER delegates are waiting for this coalesced
+        // task, resulting in a permanent dead placeholder!
         image = v.extractFrame(path, 0, requestedSize, accel, nullptr);
-        
-        // Fallback for Samsung HEIC files without a moov atom that FFmpeg fails on
-        if (image.isNull() && (path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive))) {
-            QImageReader reader(path);
-            if (requestedSize.isValid())
-                reader.setScaledSize(requestedSize);
-            if (reader.canRead())
-                image = reader.read();
+
+        // Fallback for Samsung HEIC files without a moov atom that FFmpeg fails
+        // on
+        if (image.isNull() && (path.endsWith(".heic", Qt::CaseInsensitive) ||
+                               path.endsWith(".heif", Qt::CaseInsensitive))) {
+          QImageReader reader(path);
+          if (requestedSize.isValid())
+            reader.setScaledSize(requestedSize);
+          if (reader.canRead())
+            image = reader.read();
         }
       }
     } else {
@@ -1039,8 +1071,8 @@ void AsyncImageProvider::processImageTaskInternal(
 deliver:
   // Distinguish between genuinely broken files vs. transient decode failures.
   // CRITICAL: Only generate and cache placeholders for genuinely broken files!
-  // If we generate a placeholder for a transient failure (OOM, abort, disk hiccup)
-  // it gets cached and permanently blocks future valid load attempts.
+  // If we generate a placeholder for a transient failure (OOM, abort, disk
+  // hiccup) it gets cached and permanently blocks future valid load attempts.
   bool isGenuinelyBroken = false;
   if (image.isNull() && !shouldAbort()) {
     QString realPath = getRealLocalPath(id);
@@ -1048,27 +1080,31 @@ deliver:
       // File doesn't exist at all - genuinely broken
       isGenuinelyBroken = true;
     } else {
-      // File exists, probe it quickly to distinguish format errors from transient I/O
+      // File exists, probe it quickly to distinguish format errors from
+      // transient I/O
       QImageReader probe(realPath);
       probe.setDecideFormatFromContent(true);
       if (!probe.canRead()) {
         // Permanent format error (unsupported format, corrupted header)
-        // Exclude video/raw formats which we handle ourselves - probe can't read those
+        // Exclude video/raw formats which we handle ourselves - probe can't
+        // read those
         QString ext = QFileInfo(realPath).suffix().toLower();
-        bool isMediaFormat = (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" ||
-                              ext == "wmv" || ext == "heic" || ext == "heif" ||
-                              ext == "arw" || ext == "cr2" || ext == "dng" || ext == "nef" ||
-                              ext == "sr2" || ext == "srf" || ext == "orf" || ext == "rw2" ||
-                              ext == "pef" || ext == "raf");
+        bool isMediaFormat =
+            (ext == "mp4" || ext == "mov" || ext == "mkv" || ext == "avi" ||
+             ext == "wmv" || ext == "heic" || ext == "heif" || ext == "arw" ||
+             ext == "cr2" || ext == "dng" || ext == "nef" || ext == "sr2" ||
+             ext == "srf" || ext == "orf" || ext == "rw2" || ext == "pef" ||
+             ext == "raf");
         if (!isMediaFormat) {
-          // Standard image format that QImageReader can handle but can't read = corrupt
+          // Standard image format that QImageReader can handle but can't read =
+          // corrupt
           isGenuinelyBroken = true;
         }
-        // For media formats we handle ourselves, a null image means a transient decode
-        // failure - don't mark as broken, let the next request retry.
+        // For media formats we handle ourselves, a null image means a transient
+        // decode failure - don't mark as broken, let the next request retry.
       }
-      // If probe.canRead() == true but image is still null, it was a transient I/O
-      // failure during the actual read - also NOT genuinely broken.
+      // If probe.canRead() == true but image is still null, it was a transient
+      // I/O failure during the actual read - also NOT genuinely broken.
     }
 
     if (s_logLevel > 0) {
@@ -1097,7 +1133,9 @@ deliver:
         painter.drawRect(image.rect().adjusted(0, 0, -1, -1));
 
         painter.setPen(Qt::white);
-        QFont font("Segoe UI", qMax(10, qMin(imgSize.width(), imgSize.height()) / 8), QFont::Bold);
+        QFont font("Segoe UI",
+                   qMax(10, qMin(imgSize.width(), imgSize.height()) / 8),
+                   QFont::Bold);
         painter.setFont(font);
         painter.drawText(image.rect(), Qt::AlignCenter, "HEIC");
 
@@ -1105,14 +1143,17 @@ deliver:
         if (iconSize > 10) {
           int cx = imgSize.width() / 2;
           int cy = imgSize.height() / 2 - iconSize - 5;
-          QRectF frame(cx - iconSize / 2, cy - iconSize / 2, iconSize, iconSize);
+          QRectF frame(cx - iconSize / 2, cy - iconSize / 2, iconSize,
+                       iconSize);
           painter.setPen(QPen(Qt::white, 2));
           painter.setBrush(Qt::NoBrush);
           painter.drawRoundedRect(frame, 3, 3);
-          painter.drawEllipse(QPointF(cx - iconSize / 4, cy - iconSize / 4), 2, 2);
+          painter.drawEllipse(QPointF(cx - iconSize / 4, cy - iconSize / 4), 2,
+                              2);
         }
       } else {
-        // Draw dark grey placeholder with orange warning icon for corrupt/failed files
+        // Draw dark grey placeholder with orange warning icon for
+        // corrupt/failed files
         image = QImage(imgSize, QImage::Format_ARGB32_Premultiplied);
         image.fill(QColor(44, 44, 44));
 
@@ -1133,7 +1174,8 @@ deliver:
                    << QPointF(cx + size / 2, cy + size / 2);
 
           painter.setBrush(QColor(230, 126, 34, 40));
-          painter.setPen(QPen(QColor(230, 126, 34), qMax(2, size / 10), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+          painter.setPen(QPen(QColor(230, 126, 34), qMax(2, size / 10),
+                              Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
           painter.drawPolygon(triangle);
 
           painter.setPen(Qt::NoPen);
@@ -1141,14 +1183,18 @@ deliver:
 
           qreal execWidth = qMax(2.0, size * 0.08);
           qreal execHeight = size * 0.35;
-          painter.drawRoundedRect(QRectF(cx - execWidth / 2, cy - size * 0.12, execWidth, execHeight), execWidth / 2, execWidth / 2);
+          painter.drawRoundedRect(QRectF(cx - execWidth / 2, cy - size * 0.12,
+                                         execWidth, execHeight),
+                                  execWidth / 2, execWidth / 2);
 
           qreal dotSize = qMax(2.0, size * 0.08);
-          painter.drawEllipse(QPointF(cx, cy + size * 0.32), dotSize / 2, dotSize / 2);
+          painter.drawEllipse(QPointF(cx, cy + size * 0.32), dotSize / 2,
+                              dotSize / 2);
         }
       }
     }
-    // If NOT genuinely broken, image stays null - caller will get QImage() and can retry
+    // If NOT genuinely broken, image stays null - caller will get QImage() and
+    // can retry
   }
 
   if (!image.isNull() && requestedSize.isValid() &&
@@ -1180,7 +1226,8 @@ deliver:
       } else {
         QString dp = getDiskCachePath(id, requestedSize);
         if (image.save(dp, "JPG", 80)) {
-          FileCacheManager::instance().registerCacheFile(id, requestedSize, dp, QFile(dp).size());
+          FileCacheManager::instance().registerCacheFile(id, requestedSize, dp,
+                                                         QFile(dp).size());
         }
       }
     }

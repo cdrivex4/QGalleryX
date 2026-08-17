@@ -10,7 +10,7 @@ Write-Host "--- Starting Deployment ---" -ForegroundColor Cyan
 
 # 1. Clean Dist Dir
 if (Test-Path $DIST_DIR) {
-    Remove-Item -Recurse -Force $DIST_DIR
+    Remove-Item -Recurse -Force $DIST_DIR -ErrorAction SilentlyContinue
 }
 New-Item -ItemType Directory -Force -Path $DIST_DIR | Out-Null
 

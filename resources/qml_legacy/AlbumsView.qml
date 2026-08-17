@@ -13,35 +13,109 @@ StackView {
     property var model
     property real cellSize: 220 // Controllable from outside via slider
     property var activeModel: stack.depth === 1 ? model : (stack.currentItem ? stack.currentItem.activeModel : null)
+    property var activeGrid: stack.currentItem ? (stack.currentItem.grid || stack.currentItem.activeGrid) : null
     
     Component {
         id: albumGridComponent
         Item {
+            property alias grid: grid
             GridView {
                 id: grid
                 anchors.fill: parent
                 anchors.margins: 10
                 clip: true
                 model: stack.model
-                
+                focus: true
+                keyNavigationEnabled: false
+
+                Component.onCompleted: grid.forceActiveFocus()
+
+                Keys.onPressed: (event) => {
+                    var cols = Math.max(1, Math.floor(grid.width / grid.cellWidth))
+                    var rowsPerPage = Math.max(1, Math.floor(grid.height / grid.cellHeight))
+                    var pageStep = rowsPerPage * cols
+                    var count = grid.count
+
+                    if (count === 0) return
+                    if (grid.currentIndex < 0) grid.currentIndex = 0
+
+                    if (event.key === Qt.Key_Left) {
+                        grid.currentIndex = Math.max(0, grid.currentIndex - 1)
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_Right) {
+                        grid.currentIndex = Math.min(count - 1, grid.currentIndex + 1)
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_Up) {
+                        grid.currentIndex = Math.max(0, grid.currentIndex - cols)
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_Down) {
+                        grid.currentIndex = Math.min(count - 1, grid.currentIndex + cols)
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_PageUp) {
+                        grid.currentIndex = Math.max(0, grid.currentIndex - pageStep)
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_PageDown) {
+                        grid.currentIndex = Math.min(count - 1, grid.currentIndex + pageStep)
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_Home) {
+                        grid.currentIndex = 0
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_End) {
+                        grid.currentIndex = count - 1
+                        grid.positionViewAtIndex(grid.currentIndex, GridView.Contain)
+                        event.accepted = true
+                    } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
+                        if (grid.currentIndex >= 0 && grid.currentIndex < count) {
+                            var targetPath = grid.currentItem ? grid.currentItem.albumPath : ""
+                            var targetName = grid.currentItem ? grid.currentItem.albumName : ""
+                            if (targetPath) {
+                                stack.push(albumDetailComponent, { folderPath: targetPath, albumName: targetName })
+                            }
+                        }
+                        event.accepted = true
+                    }
+                }
+
                 ScrollBar.vertical: ScrollBar {
                     policy: ScrollBar.AlwaysOn
                     active: true
                 }
-                
+
                 cellWidth: stack.cellSize
                 cellHeight: stack.cellSize + 40 // Extra space for name label
-                
+
                 delegate: Item {
                     width: grid.cellWidth
                     height: grid.cellHeight
-                    
+                    property string albumPath: path
+                    property string albumName: name
+
                     Rectangle {
                         anchors.fill: parent
                         anchors.margins: 10
-                        color: "#222"
+                        color: index === grid.currentIndex ? "#2A3B55" : "#222"
                         radius: 8
-                        
+                        border.color: index === grid.currentIndex ? "#38BDF8" : "transparent"
+                        border.width: index === grid.currentIndex ? 3 : 0
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -2
+                            color: "transparent"
+                            border.color: "#FFFFFF"
+                            border.width: 1
+                            radius: 10
+                            opacity: 0.6
+                            visible: index === grid.currentIndex
+                        }
+
                         Rectangle {
                             id: coverContainer
                             anchors.top: parent.top
@@ -67,7 +141,7 @@ StackView {
                                 anchors.fill: parent
                                 columns: 2
                                 visible: coverPath && coverPath.length >= 2
-                                
+
                                 Repeater {
                                     model: (coverPath && coverPath.length >= 2) ? coverPath : 0
                                     Image {
@@ -81,7 +155,7 @@ StackView {
                                 }
                             }
                         }
-                        
+
                         Column {
                             anchors.top: coverContainer.bottom
                             anchors.left: parent.left
@@ -89,7 +163,7 @@ StackView {
                             anchors.bottom: parent.bottom
                             anchors.margins: 8
                             spacing: 4
-                            
+
                             Text {
                                 text: name
                                 color: "white"
@@ -97,22 +171,32 @@ StackView {
                                 elide: Text.ElideRight
                                 width: parent.width
                             }
-                            
+
                             Text {
                                 text: count + " items"
                                 color: "#aaa"
                                 font.pixelSize: 12
                             }
                         }
-                        
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
+                                grid.currentIndex = index
                                 stack.push(albumDetailComponent, { folderPath: path, albumName: name })
                             }
                         }
                     }
                 }
+            }
+            
+            DateScrubber {
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                
+                listView: grid
+                proxyModel: null
             }
             
             Text {
@@ -132,6 +216,7 @@ StackView {
             property string folderPath
             property string albumName
             property var activeModel: innerGalleryLoader.item ? innerGalleryLoader.item.model : null
+            property var activeGrid: innerGalleryLoader.item ? (innerGalleryLoader.item.grid || innerGalleryLoader.item.gridView) : null
             
             ColumnLayout {
                 anchors.fill: parent
@@ -148,8 +233,10 @@ StackView {
                         anchors.margins: 10
                         spacing: 10
                         
-                        Button {
-                            text: "< Back"
+                        StyledButton {
+                            text: "Back"
+                            iconText: "‹"
+                            fontSize: 14
                             onClicked: stack.pop()
                         }
                         

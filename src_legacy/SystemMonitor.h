@@ -36,6 +36,10 @@ public:
   Q_INVOKABLE void startMonitoring(int intervalMs = 1000);
   Q_INVOKABLE void stopMonitoring();
 
+  // Storage Media Detection
+  Q_INVOKABLE static bool isSlowMedia(const QString &path);
+  Q_INVOKABLE static QString getStorageType(const QString &path);
+
 signals:
   void cpuUsageChanged();
   void memoryUsageChanged();

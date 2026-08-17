@@ -171,25 +171,25 @@ Item {
             spacing: 8
             
             // Thumbnail Resolution
-            Text { text: "Thumb Resolution: " + Math.round(resSlider.value) + "px"; color: "white"; font.pixelSize: 11 }
+            Text { text: "Thumb Resolution: " + appSettings.thumbnailSize + "px"; color: "white"; font.pixelSize: 11 }
             Slider {
                 id: resSlider
                 width: parent.width
-                from: 20; to: 400
+                from: 64; to: 384
                 stepSize: 1
                 value: appSettings.thumbnailSize
-                onMoved: appSettings.thumbnailSize = Math.round(value)
+                onMoved: appSettings.thumbnailSize = appSettings.snapThumbnailResolution(value)
             }
 
             // Grid Zoom
-            Text { text: "Grid Zoom: " + Math.round(zoomSlider.value) + "px"; color: "white"; font.pixelSize: 11 }
+            Text { text: "Grid Zoom: " + appSettings.gridResolution + "px"; color: "white"; font.pixelSize: 11 }
             Slider {
                 id: zoomSlider
                 width: parent.width
-                from: 20; to: 400
+                from: 64; to: 384
                 stepSize: 1
-                value: appSettings.gridSize
-                onMoved: appSettings.gridSize = Math.round(value)
+                value: appSettings.gridResolution
+                onMoved: appSettings.gridResolution = appSettings.snapThumbnailResolution(value)
             }
 
             // Cache Size

@@ -15,6 +15,10 @@ Item {
         toastAnim.restart()
     }
 
+    function showToast(msg) {
+        showMessage(msg, false)
+    }
+
     Rectangle {
         id: toastRect
         property color borderColor: "#555555"
@@ -79,10 +83,12 @@ Item {
         target: typeof latencyGuard !== "undefined" ? latencyGuard : null
 
         function onSingleLatencySpike(fileName, latencyMs) {
+            if (typeof appSettings !== "undefined" && !appSettings.showLatencyToasts) return
             toastRoot.showMessage("'" + fileName + "' took a little long to find/load (" + latencyMs + "ms)", false)
         }
 
         function onDriveLatencyWarning(driveRoot, spikeCount) {
+            if (typeof appSettings !== "undefined" && !appSettings.showLatencyToasts) return
             toastRoot.showMessage("You might have disk issues bruh! (" + driveRoot + " has " + spikeCount + " slow reads)", true)
         }
     }

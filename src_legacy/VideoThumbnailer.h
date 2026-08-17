@@ -17,6 +17,8 @@ public:
   VideoThumbnailer();
   ~VideoThumbnailer();
 
+  static void warmup();
+
   /**
    * @brief Extracts a frame from the video at the specified timestamp.
    * @param path File path to the video.

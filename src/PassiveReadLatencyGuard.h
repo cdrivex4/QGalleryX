@@ -1,4 +1,4 @@
-﻿#ifndef PASSIVEREADLATENCYGUARD_H
+#ifndef PASSIVEREADLATENCYGUARD_H
 #define PASSIVEREADLATENCYGUARD_H
 
 #include <QElapsedTimer>
@@ -32,9 +32,14 @@ public:
     ReadScope startRead(const QString &filePath, qint64 fileSize);
     void endRead(ReadScope &scope);
 
+    Q_INVOKABLE int recommendedConcurrency() const;
+    Q_INVOKABLE int throttleDelayMs() const;
+    Q_INVOKABLE bool isCongested() const;
+
 signals:
     void singleLatencySpike(const QString &fileName, qint64 latencyMs);
     void driveLatencyWarning(const QString &driveRoot, int spikeCount);
+    void concurrencyChanged(int newConcurrency);
 
 private:
     explicit PassiveReadLatencyGuard(QObject *parent = nullptr);
@@ -42,6 +47,9 @@ private:
 
     QMutex m_mutex;
     QMap<QString, DriveLatencyStats> m_driveStats;
+    std::atomic<int> m_recommendedConcurrency{4};
+    std::atomic<int> m_throttleDelayMs{0};
+    std::atomic<int> m_consecutiveFastReads{0};
 };
 
 #endif // PASSIVEREADLATENCYGUARD_H
