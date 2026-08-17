@@ -1,14 +1,22 @@
 # Known Issues & Workarounds
 
-**Last Updated:** 2026-08-02
+**Last Updated:** 2026-08-18
 
 ---
 
-## 🔴 Open Issues
+## 🔴 Open Issues & Active Investigations
 
-- None identified currently.
+- 🟡 **Outstanding Cache Misses on Specific Edge-Case Assets**: Investigating intermittent cache misses occurring after crawler passes (e.g. non-standard color spaces, deeply nested filenames, or transient file locks during background crawls).
 
-## ✅ Fixed This Session (Milestone 7 — v2.3.0 Milestone — 2026-08-18)
+## ✅ Fixed This Session (Milestone 8 — v2.3.1 Milestone — 2026-08-18)
+
+- ✅ **Prefix-Scoped Cache Reconciliation & Compaction Crash**: Fixed global cross-drive cache purging in `FileCacheManager::pruneStaleEntries()` by strictly scoping deletions to `folderPrefix`, preventing other drives (`C:`, `D:`, `I:`) from being wiped, and eliminated unsafe mid-run mmap unmapping.
+- ✅ **Instant Folder DB Metadata Loading**: Added $< 5\text{ms}$ instant UI rendering on drive/folder selection from existing `.bin` caches with parallel non-blocking MFT verification.
+- ✅ **Single Source of Truth (SSOT) File Type Pipeline**: Unified all supported extensions and wildcard filters across `DesktopHelper`, `ImageModel`, and UI delegates via `DesktopHelper::supportedExtensions()` and `supportedNameFilters()`.
+- ✅ **TypeScript `.ts` vs MPEG Transport Stream Disambiguation**: Added `0x47` header sync-byte verification in `DesktopHelper::staticGetFileType()` to reject TypeScript source code files (`use-history.ts`, `index.ts`) from being processed as videos.
+- ✅ **Dynamic DXGI Multi-Adapter Enumeration**: Implemented dynamic adapter iteration across all DXGI devices to support remote desktop / AnyDesk sessions with software rasterizer filtering.
+
+## ✅ Previously Fixed (Milestone 7 — v2.3.0 Milestone — 2026-08-18)
 
 - ✅ **Fixed 1GB Circular Ring Buffer Eviction**: Replaced the flawed 1GB circular ring buffer with an auto-expanding (512MB-chunk) append-only binary mmap database (`FileCache.mmap` v3), permanently eliminating the issue where crawling new drives silently erased previously crawled drives.
 - ✅ **Black Box Task Key Deduplication Bug**: Fixed key mismatch in `AsyncImageProvider` that was causing tasks to stall and drop image responses.

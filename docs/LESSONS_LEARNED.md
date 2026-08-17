@@ -172,6 +172,16 @@ A critical historical log of instances where the User identified system flaws, m
    - *User Discovery*: User spotted that the OSD was displaying mismatched data and lacked the re-crawl/rebuild cache triggers present in the Menu.
    - *Resolution*: Connected both the Menu and OSD to the exact same `appSettings.getTrackedRootPathStats()` backend and added a unified `Rebuild Cache / Re-Crawl` button to the OSD.
 
+5. **Cross-Drive Global Cache Wiping & Mid-Run Compaction Crash (User-Caught):**
+   - *AI Misconception*: AI implemented `pruneStaleEntries` by checking the entire database against only the active folder's file list, assuming any key not present belonged to deleted files. This caused scanning drive `I:\` to immediately wipe all 200,000+ cached entries for `C:\` and `D:\`, followed by a compaction that unmapped the active `FileCache.mmap` under running worker threads, causing a `0xc0000005` crash.
+   - *User Discovery*: User reported instant cache misses on previously parsed drives and a crash when switching directories.
+   - *Resolution*: Scoped `pruneStaleEntries(folderPrefix, ...)` strictly to the scanned path prefix, added `QFile::exists` validation, and eliminated unsafe mid-run mmap unmapping.
+
+6. **File Type Descrepancy & TypeScript `.ts` vs MPEG-TS Collision (User-Caught):**
+   - *AI Misconception*: Scanner, crawler, filmstrip, and decoder used hardcoded, divergent extension lists (e.g. missing `heif`, `tif`, `cr3`), and blindly treated `.ts` files as MPEG Transport Stream videos.
+   - *User Discovery*: User spotted log misses: `[Cache] MISS - decoding Video/HEIC "use-history.ts"`.
+   - *Resolution*: Established `DesktopHelper` as the authoritative Single Source of Truth (`supportedExtensions()`, `supportedNameFilters()`), and added `0x47` header sync-byte verification to reject TypeScript/text files at zero CPU cost.
+
 ---
 
 ## 🛠️ 10. AI-Discovered Bugs & Technical Deep-Dives

@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1963 nodes · 3046 edges · 209 communities (92 shown, 117 thin omitted)
+- 1963 nodes · 3047 edges · 209 communities (92 shown, 117 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 188 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `45cf13f3`
+- Built from commit: `4c5f56c4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -270,8 +270,8 @@ Cohesion: 0.03
 Nodes (61): MetadataUpdate, QFileSystemWatcher, QReadWriteLock, queue, quint32, atomic, Q_ENUM, Q_INVOKABLE (+53 more)
 
 ### Community 7 - "Component 7"
-Cohesion: 0.15
-Nodes (13): AsyncImageResponse, cancel, handleDone, m_cancelled, m_id, m_image, m_requestedSize, m_tracker (+5 more)
+Cohesion: 0.17
+Nodes (12): AsyncImageResponse, cancel, handleDone, m_cancelled, m_id, m_image, m_requestedSize, m_tracker (+4 more)
 
 ### Community 8 - "Component 8"
 Cohesion: 0.05
@@ -419,7 +419,7 @@ Nodes (6): dumpCrashLog, processLog, setLogFile, setLogLevel, setMaxRingBufferSi
 
 ### Community 46 - "Community 46"
 Cohesion: 0.09
-Nodes (21): AlbumInfo, count, coverPaths, name, path, AlbumModel, applyFilterFromPaths, data (+13 more)
+Nodes (21): AlbumInfo, count, coverPaths, name, path, AlbumModel, applyFilterFromPaths, filterNeedsReapply (+13 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.18
@@ -470,16 +470,16 @@ Cohesion: 0.08
 Nodes (32): ReadScope, qint64, QObject, QString, DriveLatencyStats, anomalyCount, avgMs, m2 (+24 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.19
-Nodes (7): QString, QImage, QElapsedTimer, QObject, main(), preloadAndLockAllModules(), QSettings
+Cohesion: 0.24
+Nodes (4): QImage, main(), preloadAndLockAllModules(), QSettings
 
 ### Community 65 - "Community 65"
-Cohesion: 0.18
+Cohesion: 0.15
 Nodes (8): QSize, FrameBudgetScheduler, ImageProcessor, QTimer, main(), AsyncImageProvider::AsyncImageProvider(), AsyncImageProvider::scheduleStagingProcessing(), QHash
 
 ### Community 66 - "Community 66"
-Cohesion: 0.23
-Nodes (5): QVector, QList, QPointer, QAbstractListModel, QDateTime
+Cohesion: 0.24
+Nodes (7): QString, QVector, QList, QElapsedTimer, QPointer, QAbstractListModel, QObject
 
 ### Community 67 - "Community 67"
 Cohesion: 0.20
@@ -506,12 +506,12 @@ Cohesion: 0.28
 Nodes (4): VisibleRangeManager, m_mutex, m_visiblePaths, isPathVisible
 
 ### Community 80 - "Community 80"
-Cohesion: 0.27
-Nodes (9): atomic, QMap, QQueue, condition_variable, QTextStream, thread, vector, QFile (+1 more)
+Cohesion: 0.33
+Nodes (6): QQueue, condition_variable, QTextStream, thread, QFile, QDateTime
 
 ### Community 81 - "Community 81"
-Cohesion: 0.22
-Nodes (6): m_allAlbums, m_groupRole, GlobalExceptionHandler(), main(), EXCEPTION_POINTERS, LONG
+Cohesion: 0.20
+Nodes (7): data, m_workDuration, onSourceModelReset, GlobalExceptionHandler(), main(), EXCEPTION_POINTERS, LONG
 
 ### Community 82 - "Community 82"
 Cohesion: 0.40
@@ -542,8 +542,8 @@ Cohesion: 0.18
 Nodes (11): ResponseTracker, mutex, response, AsyncImageProvider::processImageTask(), AsyncImageProvider::queueRequest(), atomic, shared_ptr, QueueGuardState (+3 more)
 
 ### Community 91 - "Community 91"
-Cohesion: 0.33
-Nodes (4): QCache, QMutex, QQuickAsyncImageProvider, QRunnable
+Cohesion: 0.23
+Nodes (8): atomic, QCache, QMap, QMutex, QQuickAsyncImageProvider, QRunnable, vector, QWaitCondition
 
 ### Community 92 - "Community 92"
 Cohesion: 0.17
@@ -558,21 +558,21 @@ Cohesion: 0.50
 Nodes (3): AsyncImageProvider, ScrollBenchImageModel, SettingsHelper
 
 ## Knowledge Gaps
-- **662 isolated node(s):** `name`, `path`, `coverPaths`, `count`, `public` (+657 more)
+- **661 isolated node(s):** `name`, `path`, `coverPaths`, `count`, `public` (+656 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **117 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `QTimer` connect `Community 65` to `Component 1`, `Community 66`, `Community 34`, `Community 36`, `Component 6`, `Community 104`, `Community 59`, `Community 72`, `Component 10`, `Component 12`, `Community 80`, `Community 81`, `Community 23`, `Community 25`, `Community 27`, `Community 29`, `Community 30`, `Community 57`?**
-  _High betweenness centrality (0.127) - this node is a cross-community bridge._
+- **Why does `QTimer` connect `Community 65` to `Component 1`, `Community 66`, `Community 34`, `Community 36`, `Component 6`, `Community 104`, `Community 72`, `Component 10`, `Community 91`, `Component 12`, `Community 81`, `Community 23`, `Community 25`, `Community 27`, `Community 29`, `Community 30`, `Community 57`?**
+  _High betweenness centrality (0.129) - this node is a cross-community bridge._
 - **Why does `ScrollBenchImageModel` connect `Component 1` to `Community 65`, `Community 66`, `Community 47`, `Community 15`, `Community 49`?**
   _High betweenness centrality (0.097) - this node is a cross-community bridge._
 - **Why does `ImageModel` connect `Component 6` to `Community 65`, `Community 66`, `Community 98`, `Community 72`, `Community 75`, `Community 83`, `Community 87`, `Community 88`, `Community 89`?**
   _High betweenness centrality (0.077) - this node is a cross-community bridge._
 - **What connects `name`, `path`, `coverPaths` to the rest of the system?**
-  _662 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _661 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Component 0` be split into smaller, more focused modules?**
   _Cohesion score 0.05519480519480519 - nodes in this community are weakly interconnected._
 - **Should `Component 1` be split into smaller, more focused modules?**

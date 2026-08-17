@@ -370,7 +370,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_qstring",
-      "community": 59,
+      "community": 66,
       "norm_label": "qstring"
     },
     {
@@ -510,7 +510,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_data",
-      "community": 46,
+      "community": 81,
       "norm_label": "data"
     },
     {
@@ -630,7 +630,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_m_allalbums",
-      "community": 81,
+      "community": 46,
       "norm_label": "m_allalbums"
     },
     {
@@ -640,7 +640,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_atomic",
-      "community": 80,
+      "community": 91,
       "norm_label": "atomic"
     },
     {
@@ -1390,7 +1390,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_workduration",
-      "community": 7,
+      "community": 81,
       "norm_label": "m_workduration"
     },
     {
@@ -1610,7 +1610,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qmap",
-      "community": 80,
+      "community": 91,
       "norm_label": "qmap"
     },
     {
@@ -2010,7 +2010,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_desktophelper_h_src_desktophelper",
-      "community": 59,
+      "community": 66,
       "norm_label": "desktophelper.h"
     },
     {
@@ -2030,7 +2030,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qobject",
-      "community": 59,
+      "community": 66,
       "norm_label": "qobject"
     },
     {
@@ -2240,7 +2240,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_fastvolumescanner_h_src_fastvolumescanner",
-      "community": 59,
+      "community": 66,
       "norm_label": "fastvolumescanner.h"
     },
     {
@@ -2260,7 +2260,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_fastvolumescanner_h_vector",
-      "community": 80,
+      "community": 91,
       "norm_label": "vector"
     },
     {
@@ -3780,7 +3780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h",
-      "community": 59,
+      "community": 66,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -4000,7 +4000,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h_qelapsedtimer",
-      "community": 59,
+      "community": 66,
       "norm_label": "qelapsedtimer"
     },
     {
@@ -4370,7 +4370,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_onsourcemodelreset",
-      "community": 22,
+      "community": 81,
       "norm_label": "onsourcemodelreset"
     },
     {
@@ -4430,7 +4430,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_m_grouprole",
-      "community": 81,
+      "community": 22,
       "norm_label": "m_grouprole"
     },
     {
@@ -4930,7 +4930,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_imagemodel_h_qdatetime",
-      "community": 66,
+      "community": 80,
       "norm_label": "qdatetime"
     },
     {
@@ -6000,7 +6000,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_src_passivereadlatencyguard",
-      "community": 59,
+      "community": 66,
       "norm_label": "passivereadlatencyguard.h"
     },
     {
@@ -7230,7 +7230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_systemmonitor_h",
-      "community": 66,
+      "community": 65,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -7710,7 +7710,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_taskscheduler_h_src_taskscheduler",
-      "community": 80,
+      "community": 91,
       "norm_label": "taskscheduler.h"
     },
     {
@@ -8070,7 +8070,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_taskscheduler_h_qwaitcondition",
-      "community": 80,
+      "community": 91,
       "norm_label": "qwaitcondition"
     },
     {
@@ -8570,7 +8570,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_cpp",
-      "community": 66,
+      "community": 80,
       "norm_label": "main.cpp"
     },
     {
@@ -8580,7 +8580,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_main",
-      "community": 66,
+      "community": 80,
       "norm_label": "main()"
     },
     {
@@ -8590,7 +8590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_test_cpp",
-      "community": 66,
+      "community": 65,
       "norm_label": "main_test.cpp"
     },
     {
@@ -8600,7 +8600,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_test_main",
-      "community": 66,
+      "community": 65,
       "norm_label": "main()"
     },
     {
@@ -12320,7 +12320,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_ringbufferdispatcher_h_src_legacy_ringbufferdispatcher",
-      "community": 80,
+      "community": 91,
       "norm_label": "ringbufferdispatcher.h"
     },
     {
@@ -13720,7 +13720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_taskscheduler_h_src_legacy_taskscheduler",
-      "community": 80,
+      "community": 91,
       "norm_label": "taskscheduler.h"
     },
     {
@@ -16490,7 +16490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_h",
-      "community": 59,
+      "community": 66,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -18440,7 +18440,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_h",
-      "community": 59,
+      "community": 66,
       "norm_label": "telemetrymonitor.h"
     },
     {
@@ -20791,6 +20791,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_albummodel_albummodel_data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/TelemetryMonitor.h",
       "source_location": "L9",
       "weight": 1.0,
@@ -20840,17 +20851,6 @@
       "weight": 1.0,
       "source": "src_legacy_imagemodel_h_src_legacy_imagemodel",
       "target": "d_dev_antigravity_src_albummodel_h_qvector",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_albummodel_albummodel_m_allalbums",
       "confidence_score": 1.0
     },
     {
@@ -21387,7 +21387,7 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_asyncimageprovider",
-      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_setframebudget",
+      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_taskreadydeferred",
       "confidence_score": 1.0
     },
     {
@@ -23011,6 +23011,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_workduration",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/AsyncImageProvider.h",
@@ -23799,17 +23810,6 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest",
       "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest",
-      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -29700,6 +29700,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_onsourcemodelreset",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.h",
       "source_location": "L14",
       "weight": 1.0,
@@ -29716,17 +29727,6 @@
       "weight": 1.0,
       "source": "src_legacy_groupedproxymodel_h_src_legacy_groupedproxymodel",
       "target": "d_dev_antigravity_src_groupedproxymodel_h_qpointer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_m_grouprole",
       "confidence_score": 1.0
     },
     {
@@ -52077,14 +52077,24 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/tst_automation.cpp",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/tst_automation.cpp",
       "source_location": "L175",
       "weight": 1.0,
-      "context": "import",
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
       "confidence_score": 1.0
     },
     {
@@ -52265,7 +52275,7 @@
       "source_location": "L75",
       "weight": 1.0,
       "source": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel_private",
+      "target": "d_dev_antigravity_tests_tst_imagemodel_cpp",
       "confidence_score": 1.0
     },
     {
@@ -52306,7 +52316,7 @@
       "source_location": "L81",
       "weight": 1.0,
       "source": "d_dev_antigravity_tests_tst_scheduler_cpp",
-      "target": "d_dev_antigravity_tests_tst_scheduler_testtaskscheduler_testpriority",
+      "target": "d_dev_antigravity_tests_tst_scheduler_cpp",
       "confidence_score": 1.0
     },
     {
@@ -52341,5 +52351,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "45cf13f3e9901f67790011030b1e47ee1e1e4f05"
+  "built_at_commit": "4c5f56c42c2a0eab9439043c731db65e14ab37eb"
 }

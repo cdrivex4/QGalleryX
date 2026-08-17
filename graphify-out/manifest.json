@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "src/BuildInfo.h": {
-    "mtime": 1787005346.5131867,
-    "ast_hash": "203051a7db72d429f88179809b5e9d39",
+    "mtime": 1787005763.1112888,
+    "ast_hash": "9f478ad40d6df21a28fa4c6d36454d82",
     "semantic_hash": ""
   },
   "src/DesktopHelper.cpp": {
@@ -230,8 +230,8 @@
     "semantic_hash": ""
   },
   "src_legacy/BuildInfo.h": {
-    "mtime": 1787005346.5140812,
-    "ast_hash": "203051a7db72d429f88179809b5e9d39",
+    "mtime": 1787005763.1122897,
+    "ast_hash": "9f478ad40d6df21a28fa4c6d36454d82",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.cpp": {
