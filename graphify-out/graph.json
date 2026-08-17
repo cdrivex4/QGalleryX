@@ -350,7 +350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h",
-      "community": 87,
+      "community": 66,
       "norm_label": "albummodel.h"
     },
     {
@@ -370,7 +370,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_qstring",
-      "community": 87,
+      "community": 66,
       "norm_label": "qstring"
     },
     {
@@ -440,7 +440,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qabstractlistmodel",
-      "community": 87,
+      "community": 66,
       "norm_label": "qabstractlistmodel"
     },
     {
@@ -520,7 +520,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_rolenames",
-      "community": 59,
+      "community": 46,
       "norm_label": "rolenames"
     },
     {
@@ -610,7 +610,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h_qvector",
-      "community": 87,
+      "community": 66,
       "norm_label": "qvector"
     },
     {
@@ -760,7 +760,7 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "src_asyncimageprovider_getcoalescekey",
-      "community": 92,
+      "community": 35,
       "norm_label": "getcoalescekey()"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qsize",
-      "community": 90,
+      "community": 92,
       "norm_label": "qsize"
     },
     {
@@ -790,7 +790,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "src_asyncimageprovider_normalizeid",
-      "community": 92,
+      "community": 57,
       "norm_label": "normalizeid()"
     },
     {
@@ -820,7 +820,7 @@
       "source_location": "L228",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_gettaskweight",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageprovider::gettaskweight()"
     },
     {
@@ -850,7 +850,7 @@
       "source_location": "L260",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_getdriveroot",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageprovider::getdriveroot()"
     },
     {
@@ -910,7 +910,7 @@
       "source_location": "L419",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageresponse_asyncimageresponse",
-      "community": 90,
+      "community": 92,
       "norm_label": "asyncimageresponse::~asyncimageresponse()"
     },
     {
@@ -960,7 +960,7 @@
       "source_location": "L448",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageresponse_handledone",
-      "community": 57,
+      "community": 92,
       "norm_label": "asyncimageresponse::handledone()"
     },
     {
@@ -970,7 +970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qimage",
-      "community": 57,
+      "community": 92,
       "norm_label": "qimage"
     },
     {
@@ -990,7 +990,7 @@
       "source_location": "L495",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_abortifnotneeded",
-      "community": 57,
+      "community": 92,
       "norm_label": "asyncimageprovider::abortifnotneeded()"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L532",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 20,
+      "community": 80,
       "norm_label": "asyncimageprovider::delivertopending()"
     },
     {
@@ -1020,7 +1020,7 @@
       "source_location": "L569",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_requestimageresponse",
-      "community": 92,
+      "community": 80,
       "norm_label": "asyncimageprovider::requestimageresponse()"
     },
     {
@@ -1030,7 +1030,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qquickimageresponse",
-      "community": 92,
+      "community": 80,
       "norm_label": "qquickimageresponse"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "L1267",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_getcachedimage",
-      "community": 90,
+      "community": 92,
       "norm_label": "asyncimageprovider::getcachedimage()"
     },
     {
@@ -1110,7 +1110,7 @@
       "source_location": "L1278",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_insertcachedimage",
-      "community": 57,
+      "community": 92,
       "norm_label": "asyncimageprovider::insertcachedimage()"
     },
     {
@@ -1350,7 +1350,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qsize",
-      "community": 87,
+      "community": 65,
       "norm_label": "qsize"
     },
     {
@@ -1520,7 +1520,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_requestimageresponse",
-      "community": 20,
+      "community": 80,
       "norm_label": "requestimageresponse"
     },
     {
@@ -1530,7 +1530,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_getcachedimage",
-      "community": 92,
+      "community": 80,
       "norm_label": "getcachedimage"
     },
     {
@@ -1560,7 +1560,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_getcachestats",
-      "community": 20,
+      "community": 59,
       "norm_label": "getcachestats"
     },
     {
@@ -1670,7 +1670,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetask",
-      "community": 20,
+      "community": 35,
       "norm_label": "processimagetask"
     },
     {
@@ -1700,7 +1700,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 20,
+      "community": 35,
       "norm_label": "delivertopending"
     },
     {
@@ -1720,7 +1720,7 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
-      "community": 20,
+      "community": 35,
       "norm_label": "processimagetaskinternal"
     },
     {
@@ -1740,7 +1740,7 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_stagedrequestcount",
-      "community": 59,
+      "community": 20,
       "norm_label": "stagedrequestcount"
     },
     {
@@ -1880,7 +1880,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest",
-      "community": 20,
+      "community": 80,
       "norm_label": "queuerequest"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 20,
+      "community": 80,
       "norm_label": "schedulestagingprocessing"
     },
     {
@@ -2010,7 +2010,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_desktophelper_h_src_desktophelper",
-      "community": 58,
+      "community": 81,
       "norm_label": "desktophelper.h"
     },
     {
@@ -2030,7 +2030,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qobject",
-      "community": 91,
+      "community": 81,
       "norm_label": "qobject"
     },
     {
@@ -2230,7 +2230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_fastvolumescanner_h_src_fastvolumescanner",
-      "community": 87,
+      "community": 66,
       "norm_label": "fastvolumescanner.h"
     },
     {
@@ -2700,7 +2700,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_filecachemanager_h_src_filecachemanager",
-      "community": 87,
+      "community": 65,
       "norm_label": "filecachemanager.h"
     },
     {
@@ -3020,7 +3020,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qhash",
-      "community": 87,
+      "community": 65,
       "norm_label": "qhash"
     },
     {
@@ -3260,7 +3260,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qfile",
-      "community": 66,
+      "community": 81,
       "norm_label": "qfile"
     },
     {
@@ -3630,7 +3630,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qset",
-      "community": 13,
+      "community": 65,
       "norm_label": "qset"
     },
     {
@@ -3770,7 +3770,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h",
-      "community": 91,
+      "community": 81,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -3990,7 +3990,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h_qelapsedtimer",
-      "community": 91,
+      "community": 81,
       "norm_label": "qelapsedtimer"
     },
     {
@@ -4010,7 +4010,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h_qqueue",
-      "community": 91,
+      "community": 81,
       "norm_label": "qqueue"
     },
     {
@@ -4250,7 +4250,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_setgrouprole",
-      "community": 59,
+      "community": 22,
       "norm_label": "setgrouprole"
     },
     {
@@ -4270,7 +4270,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_data",
-      "community": 22,
+      "community": 59,
       "norm_label": "data"
     },
     {
@@ -4460,7 +4460,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_cpp",
-      "community": 13,
+      "community": 23,
       "norm_label": "hardwareaccelerationmanager.cpp"
     },
     {
@@ -4470,7 +4470,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_detectcpufeatures",
-      "community": 13,
+      "community": 23,
       "norm_label": "detectcpufeatures()"
     },
     {
@@ -4490,7 +4490,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_hardwareaccelerationmanager",
-      "community": 13,
+      "community": 23,
       "norm_label": "hardwareaccelerationmanager::hardwareaccelerationmanager()"
     },
     {
@@ -4540,7 +4540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_h",
-      "community": 91,
+      "community": 23,
       "norm_label": "hardwareaccelerationmanager.h"
     },
     {
@@ -4550,7 +4550,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager",
-      "community": 13,
+      "community": 23,
       "norm_label": "hardwareaccelerationmanager"
     },
     {
@@ -4570,7 +4570,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_public",
-      "community": 13,
+      "community": 59,
       "norm_label": "public"
     },
     {
@@ -4580,7 +4580,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
-      "community": 13,
+      "community": 23,
       "norm_label": "setmode"
     },
     {
@@ -4590,7 +4590,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_devicecontext",
-      "community": 13,
+      "community": 23,
       "norm_label": "devicecontext"
     },
     {
@@ -4600,7 +4600,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_pixelformat",
-      "community": 13,
+      "community": 23,
       "norm_label": "pixelformat"
     },
     {
@@ -4610,7 +4610,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_currentmodename",
-      "community": 13,
+      "community": 23,
       "norm_label": "currentmodename"
     },
     {
@@ -4620,7 +4620,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_cpuinfo",
-      "community": 13,
+      "community": 23,
       "norm_label": "cpuinfo"
     },
     {
@@ -4630,7 +4630,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_cleanup",
-      "community": 13,
+      "community": 23,
       "norm_label": "cleanup"
     },
     {
@@ -4640,7 +4640,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_tryinitialize",
-      "community": 13,
+      "community": 23,
       "norm_label": "tryinitialize"
     },
     {
@@ -4660,7 +4660,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_currentmode",
-      "community": 13,
+      "community": 23,
       "norm_label": "m_currentmode"
     },
     {
@@ -4680,7 +4680,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_devicectx",
-      "community": 13,
+      "community": 23,
       "norm_label": "m_devicectx"
     },
     {
@@ -4700,7 +4700,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_pixfmt",
-      "community": 59,
+      "community": 23,
       "norm_label": "m_pixfmt"
     },
     {
@@ -4720,7 +4720,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_mutex",
-      "community": 13,
+      "community": 23,
       "norm_label": "m_mutex"
     },
     {
@@ -4800,7 +4800,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_imagemodel_cpp_qstring",
-      "community": 23,
+      "community": 71,
       "norm_label": "qstring"
     },
     {
@@ -4840,7 +4840,7 @@
       "source_location": "L440",
       "_origin": "ast",
       "id": "src_imagemodel_imagemodel_getmetadata",
-      "community": 23,
+      "community": 71,
       "norm_label": "imagemodel::getmetadata()"
     },
     {
@@ -4850,7 +4850,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_imagemodel_cpp_qvariantmap",
-      "community": 23,
+      "community": 71,
       "norm_label": "qvariantmap"
     },
     {
@@ -4870,7 +4870,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_imagemodel_h_src_imagemodel",
-      "community": 87,
+      "community": 66,
       "norm_label": "imagemodel.h"
     },
     {
@@ -5030,7 +5030,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "src_imagemodel_imagemodel_scandirectory",
-      "community": 23,
+      "community": 71,
       "norm_label": "scandirectory"
     },
     {
@@ -5120,7 +5120,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "src_imagemodel_imagemodel_setfilterquery",
-      "community": 23,
+      "community": 71,
       "norm_label": "setfilterquery"
     },
     {
@@ -5290,7 +5290,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "src_imagemodel_imagemodel_applyfilter",
-      "community": 23,
+      "community": 71,
       "norm_label": "applyfilter"
     },
     {
@@ -5570,7 +5570,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_logmanager_h",
-      "community": 66,
+      "community": 81,
       "norm_label": "logmanager.h"
     },
     {
@@ -5740,7 +5740,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_logmanager_h_qtextstream",
-      "community": 66,
+      "community": 81,
       "norm_label": "qtextstream"
     },
     {
@@ -5820,7 +5820,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_logmanager_h_thread",
-      "community": 66,
+      "community": 81,
       "norm_label": "thread"
     },
     {
@@ -5890,7 +5890,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_logmanager_h_condition_variable",
-      "community": 66,
+      "community": 81,
       "norm_label": "condition_variable"
     },
     {
@@ -5930,7 +5930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_cpp_src_passivereadlatencyguard",
-      "community": 58,
+      "community": 81,
       "norm_label": "passivereadlatencyguard.cpp"
     },
     {
@@ -5940,7 +5940,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_passivereadlatencyguard_passivereadlatencyguard",
-      "community": 58,
+      "community": 81,
       "norm_label": "passivereadlatencyguard::passivereadlatencyguard()"
     },
     {
@@ -5950,7 +5950,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_cpp_qobject",
-      "community": 58,
+      "community": 81,
       "norm_label": "qobject"
     },
     {
@@ -5990,7 +5990,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_src_passivereadlatencyguard",
-      "community": 91,
+      "community": 81,
       "norm_label": "passivereadlatencyguard.h"
     },
     {
@@ -6000,7 +6000,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats",
-      "community": 80,
+      "community": 58,
       "norm_label": "drivelatencystats"
     },
     {
@@ -6010,7 +6010,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_samplecount",
-      "community": 80,
+      "community": 58,
       "norm_label": "samplecount"
     },
     {
@@ -6020,7 +6020,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_totalms",
-      "community": 80,
+      "community": 58,
       "norm_label": "totalms"
     },
     {
@@ -6030,7 +6030,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_avgms",
-      "community": 80,
+      "community": 58,
       "norm_label": "avgms"
     },
     {
@@ -6040,7 +6040,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_m2",
-      "community": 80,
+      "community": 58,
       "norm_label": "m2"
     },
     {
@@ -6050,7 +6050,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_drivelatencystats_anomalycount",
-      "community": 80,
+      "community": 58,
       "norm_label": "anomalycount"
     },
     {
@@ -8400,7 +8400,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_videothumbnailer_videothumbnailer",
-      "community": 13,
+      "community": 87,
       "norm_label": "videothumbnailer"
     },
     {
@@ -8410,7 +8410,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_videothumbnailer_videothumbnailer_extractframe",
-      "community": 13,
+      "community": 87,
       "norm_label": "extractframe"
     },
     {
@@ -8420,7 +8420,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_videothumbnailer_videothumbnailer_getmetadata",
-      "community": 13,
+      "community": 87,
       "norm_label": "getmetadata"
     },
     {
@@ -8430,7 +8430,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_videothumbnailer_videothumbnailer_initffmpeg",
-      "community": 13,
+      "community": 87,
       "norm_label": "initffmpeg"
     },
     {
@@ -8700,7 +8700,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_albummodel_h_src_legacy_albummodel",
-      "community": 87,
+      "community": 66,
       "norm_label": "albummodel.h"
     },
     {
@@ -10620,7 +10620,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_h_src_legacy_imagemodel",
-      "community": 87,
+      "community": 66,
       "norm_label": "imagemodel.h"
     },
     {
@@ -11840,7 +11840,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_legacy_logmanager_h",
-      "community": 66,
+      "community": 81,
       "norm_label": "logmanager.h"
     },
     {
@@ -14410,7 +14410,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_viewportgovernor_h_src_legacy_viewportgovernor",
-      "community": 91,
+      "community": 87,
       "norm_label": "viewportgovernor.h"
     },
     {
@@ -16470,7 +16470,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_h",
-      "community": 91,
+      "community": 81,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -17250,7 +17250,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_h",
-      "community": 87,
+      "community": 65,
       "norm_label": "scrollbenchimagemodel.h"
     },
     {
@@ -17260,7 +17260,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_framebudgetscheduler",
-      "community": 87,
+      "community": 65,
       "norm_label": "framebudgetscheduler"
     },
     {
@@ -17280,7 +17280,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_imageprocessor",
-      "community": 87,
+      "community": 65,
       "norm_label": "imageprocessor"
     },
     {
@@ -18420,7 +18420,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_h",
-      "community": 91,
+      "community": 81,
       "norm_label": "telemetrymonitor.h"
     },
     {
@@ -19480,7 +19480,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_linkage_cpp",
-      "community": 87,
+      "community": 65,
       "norm_label": "tst_linkage.cpp"
     },
     {
@@ -19490,7 +19490,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_linkage_main",
-      "community": 87,
+      "community": 65,
       "norm_label": "main()"
     },
     {
@@ -20412,6 +20412,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_albummodel_albuminfo_coverpaths",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/AlbumModel.h",
@@ -20765,17 +20776,6 @@
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel",
       "target": "qabstractlistmodel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_albummodel_albummodel_rolenames",
       "confidence_score": 1.0
     },
     {
@@ -21367,7 +21367,7 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_asyncimageprovider",
-      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_paused",
+      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_cpp",
       "confidence_score": 1.0
     },
     {
@@ -23495,6 +23495,17 @@
       "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_getcachestats",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -23691,17 +23702,6 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
       "target": "src_filecachemanager_filecachemanager"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_stagedrequestcount",
-      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -29652,7 +29652,7 @@
       "source_location": "L6",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_setgrouprole",
+      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_data",
       "confidence_score": 1.0
     },
     {
@@ -30031,6 +30031,17 @@
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_public",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "INFERRED",
@@ -30040,17 +30051,6 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_tryinitialize"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_pixfmt",
-      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -52010,7 +52010,7 @@
       "source_location": "L175",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_threads",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_rawacc",
       "confidence_score": 1.0
     },
     {
@@ -52174,24 +52174,14 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "tests/tst_imagemodel.cpp",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports",
-      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "tests/tst_imagemodel.cpp",
       "source_location": "L75",
       "weight": 1.0,
+      "context": "import",
       "source": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel_private",
+      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel",
       "confidence_score": 1.0
     },
     {
@@ -52232,7 +52222,7 @@
       "source_location": "L81",
       "weight": 1.0,
       "source": "d_dev_antigravity_tests_tst_scheduler_cpp",
-      "target": "d_dev_antigravity_tests_tst_scheduler_testtaskscheduler_testpriority",
+      "target": "d_dev_antigravity_tests_tst_scheduler_testtaskscheduler_private",
       "confidence_score": 1.0
     },
     {
@@ -52267,5 +52257,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1d321629cd6ac0b2a616afc33489de314524c09a"
+  "built_at_commit": "395bd717fc5088c35275bf7deb9d74fba5697371"
 }

@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1961 nodes · 3041 edges · 204 communities (89 shown, 115 thin omitted)
+- 1961 nodes · 3040 edges · 205 communities (91 shown, 114 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 186 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1d321629`
+- Built from commit: `395bd717`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -73,6 +73,7 @@
 - [[_COMMUNITY_Community 57|Community 57]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 65|Community 65]]
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
 - [[_COMMUNITY_Community 68|Community 68]]
@@ -234,7 +235,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (204 total, 115 thin omitted)
+## Communities (205 total, 114 thin omitted)
 
 ### Community 0 - "Component 0"
 Cohesion: 0.06
@@ -289,8 +290,8 @@ Cohesion: 0.08
 Nodes (27): RootStat, QSet, QSize, FileCacheManager, cacheCleared, getCachedPath, getCoalesceKey, isCached (+19 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.07
-Nodes (37): detectCPUFeatures(), HardwareAccelerationManager, cleanup, cpuInfo, currentModeName, deviceContext, HardwareAccelerationManager::HardwareAccelerationManager(), m_currentMode (+29 more)
+Cohesion: 0.12
+Nodes (18): atomic, AVCodecContext, HWAccel, QElapsedTimer, QImage, QSize, QString, QVariantMap (+10 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.13
@@ -318,7 +319,7 @@ Nodes (23): FastImageItem, FastImageItem::FastImageItem(), fillModeChanged, isLo
 
 ### Community 20 - "Community 20"
 Cohesion: 0.07
-Nodes (35): AsyncImageProvider, clearCache, clearDiskCache, deliverToPending, getActiveTaskIds, getCacheStats, m_cache, m_driveStats (+27 more)
+Nodes (28): AsyncImageProvider, clearCache, clearDiskCache, getActiveTaskIds, m_cache, m_driveStats, m_driveStatsMutex, m_mutex (+20 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.07
@@ -326,11 +327,11 @@ Nodes (19): SystemMonitor, cpuUsageChanged, gpuUsageChanged, gpuVramTotalMBChang
 
 ### Community 22 - "Community 22"
 Cohesion: 0.11
-Nodes (24): GroupedProxyModel, columns, columnsChanged, data, getLabelForProxyIndex, GroupedProxyModel::GroupedProxyModel(), groupRole, groupRoleChanged (+16 more)
+Nodes (24): GroupedProxyModel, columns, columnsChanged, getLabelForProxyIndex, GroupedProxyModel::GroupedProxyModel(), groupRole, groupRoleChanged, m_columns (+16 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.40
-Nodes (6): QString, QVariantMap, applyFilter, ImageModel::getMetadata(), scanDirectory, setFilterQuery
+Cohesion: 0.22
+Nodes (14): detectCPUFeatures(), HardwareAccelerationManager, cleanup, cpuInfo, currentModeName, deviceContext, HardwareAccelerationManager::HardwareAccelerationManager(), m_currentMode (+6 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.06
@@ -377,8 +378,8 @@ Cohesion: 0.07
 Nodes (51): CacheLevel, AsyncImageProvider, checkCacheLevel, clearCache, crawlDecodeToL2, getCachedImage, getCacheStats, insertCachedImage (+43 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.43
-Nodes (8): abortIfNotNeeded, checkStalls, getDriveRoot, getTaskWeight, isRequestStillNeeded, processStagedRequests, AsyncImageProvider::checkStalls(), AsyncImageProvider::processStagedRequests()
+Cohesion: 0.26
+Nodes (12): abortIfNotNeeded, checkStalls, deliverToPending, getDriveRoot, getTaskWeight, isRequestStillNeeded, processImageTask, processImageTaskInternal (+4 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.06
@@ -413,8 +414,8 @@ Cohesion: 0.22
 Nodes (6): dumpCrashLog, processLog, setLogFile, setLogLevel, setMaxRingBufferSize, writerLoop
 
 ### Community 46 - "Community 46"
-Cohesion: 0.09
-Nodes (21): AlbumInfo, count, coverPaths, name, path, AlbumModel, applyFilterFromPaths, data (+13 more)
+Cohesion: 0.08
+Nodes (22): AlbumInfo, count, coverPaths, name, path, AlbumModel, applyFilterFromPaths, data (+14 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.18
@@ -457,28 +458,32 @@ Cohesion: 0.14
 Nodes (24): FileType, QObject, QString, QStringList, QVariantList, DesktopHelper, DesktopHelper::DesktopHelper(), DesktopHelper::getAdjacentFiles() (+16 more)
 
 ### Community 57 - "Community 57"
-Cohesion: 0.11
-Nodes (15): QSemaphore, AsyncImageProvider::abortIfNotNeeded(), AsyncImageProvider::clearDiskCache(), AsyncImageProvider::getActiveTaskIds(), AsyncImageProvider::getCacheStats(), AsyncImageProvider::insertCachedImage(), AsyncImageProvider::setFrameScheduler(), AsyncImageResponse::handleDone() (+7 more)
+Cohesion: 0.12
+Nodes (14): QSemaphore, AsyncImageProvider::clearDiskCache(), AsyncImageProvider::getActiveTaskIds(), AsyncImageProvider::getCacheStats(), AsyncImageProvider::getDriveRoot(), AsyncImageProvider::getTaskWeight(), AsyncImageProvider::setFrameScheduler(), AsyncImageResponse::textureFactory() (+6 more)
 
 ### Community 58 - "Community 58"
-Cohesion: 0.10
-Nodes (26): ReadScope, qint64, QObject, QString, atomic, Q_OBJECT, QMap, QMutex (+18 more)
+Cohesion: 0.08
+Nodes (30): ReadScope, qint64, QString, DriveLatencyStats, anomalyCount, avgMs, m2, sampleCount (+22 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.18
-Nodes (8): roleNames, stagedRequestCount, setGroupRole, m_pixFmt, GlobalExceptionHandler(), main(), EXCEPTION_POINTERS, LONG
+Cohesion: 0.20
+Nodes (7): getCacheStats, data, public, GlobalExceptionHandler(), main(), EXCEPTION_POINTERS, LONG
+
+### Community 65 - "Community 65"
+Cohesion: 0.22
+Nodes (5): QSize, FrameBudgetScheduler, ImageProcessor, QHash, QSet
 
 ### Community 66 - "Community 66"
-Cohesion: 0.20
-Nodes (7): QList, QPointer, condition_variable, QTextStream, thread, QFile, QDateTime
+Cohesion: 0.22
+Nodes (6): QString, QVector, QList, QPointer, QAbstractListModel, QDateTime
 
 ### Community 67 - "Community 67"
 Cohesion: 0.20
 Nodes (10): qint64, ImageInfo, date, dateModified, dateTaken, fileName, filePath, isBurst (+2 more)
 
 ### Community 71 - "Community 71"
-Cohesion: 0.19
-Nodes (12): QObject, QRectF, QStringList, clearSelection, cropImage, ImageModel::getActiveDirectories(), ImageModel::getSelectedPaths(), ImageModel::ImageModel() (+4 more)
+Cohesion: 0.15
+Nodes (18): QObject, QRectF, QString, QStringList, QVariantMap, applyFilter, clearSelection, cropImage (+10 more)
 
 ### Community 72 - "Community 72"
 Cohesion: 0.07
@@ -497,8 +502,12 @@ Cohesion: 0.28
 Nodes (4): VisibleRangeManager, m_mutex, m_visiblePaths, isPathVisible
 
 ### Community 80 - "Community 80"
-Cohesion: 0.33
-Nodes (6): DriveLatencyStats, anomalyCount, avgMs, m2, sampleCount, totalMs
+Cohesion: 0.29
+Nodes (7): getCachedImage, queueRequest, requestImageResponse, scheduleStagingProcessing, AsyncImageProvider::deliverToPending(), AsyncImageProvider::requestImageResponse(), QQuickImageResponse
+
+### Community 81 - "Community 81"
+Cohesion: 0.17
+Nodes (10): QElapsedTimer, QQueue, condition_variable, QTextStream, thread, TestImageModel, QObject, QFile (+2 more)
 
 ### Community 85 - "Community 85"
 Cohesion: 0.09
@@ -509,8 +518,8 @@ Cohesion: 0.40
 Nodes (6): QModelIndex, QVariant, data, processPendingUpdates, rowCount, setData
 
 ### Community 87 - "Community 87"
-Cohesion: 0.15
-Nodes (10): QString, QVector, QImage, QSize, FrameBudgetScheduler, ImageProcessor, QAbstractListModel, QHash (+2 more)
+Cohesion: 0.18
+Nodes (7): QImage, VideoThumbnailer, extractFrame, getMetadata, initFFmpeg, main(), preloadAndLockAllModules()
 
 ### Community 88 - "Community 88"
 Cohesion: 0.40
@@ -521,16 +530,16 @@ Cohesion: 0.67
 Nodes (3): QByteArray, QHash, roleNames
 
 ### Community 90 - "Community 90"
-Cohesion: 0.21
-Nodes (14): insertCachedImage, ResponseTracker, mutex, response, AsyncImageProvider::getCachedImage(), AsyncImageProvider::processImageTask(), AsyncImageProvider::processImageTaskInternal(), AsyncImageProvider::queueRequest() (+6 more)
+Cohesion: 0.24
+Nodes (11): insertCachedImage, ResponseTracker, mutex, response, AsyncImageProvider::processImageTask(), AsyncImageProvider::processImageTaskInternal(), AsyncImageProvider::queueRequest(), atomic (+3 more)
 
 ### Community 91 - "Community 91"
-Cohesion: 0.19
-Nodes (11): atomic, QCache, QMap, QMutex, QElapsedTimer, QQueue, QObject, QQuickAsyncImageProvider (+3 more)
+Cohesion: 0.27
+Nodes (8): atomic, QCache, QMap, QMutex, QQuickAsyncImageProvider, QRunnable, vector, QWaitCondition
 
 ### Community 92 - "Community 92"
 Cohesion: 0.17
-Nodes (15): getCachedImage, AsyncImageProvider::DriveStats::update(), AsyncImageProvider::getDriveRoot(), AsyncImageProvider::getTaskWeight(), AsyncImageProvider::isRequestStillNeeded(), AsyncImageProvider::requestImageResponse(), QQuickImageResponse, QString (+7 more)
+Nodes (15): AsyncImageProvider::abortIfNotNeeded(), AsyncImageProvider::DriveStats::update(), AsyncImageProvider::getCachedImage(), AsyncImageProvider::insertCachedImage(), AsyncImageProvider::isRequestStillNeeded(), AsyncImageResponse::~AsyncImageResponse(), AsyncImageResponse::handleDone(), QImage (+7 more)
 
 ### Community 99 - "Community 99"
 Cohesion: 0.67
@@ -541,20 +550,20 @@ Cohesion: 0.50
 Nodes (3): AsyncImageProvider, ScrollBenchImageModel, SettingsHelper
 
 ## Knowledge Gaps
-- **660 isolated node(s):** `name`, `path`, `coverPaths`, `count`, `public` (+655 more)
+- **660 isolated node(s):** `name`, `path`, `count`, `public`, `setFilterQuery` (+655 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **115 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **114 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `QTimer` connect `Community 29` to `Component 1`, `Community 66`, `Community 34`, `Community 36`, `Component 6`, `Community 104`, `Community 59`, `Community 91`, `Community 72`, `Component 12`, `Component 10`, `Community 20`, `Community 87`, `Community 25`, `Community 27`, `Community 30`, `Community 57`?**
-  _High betweenness centrality (0.136) - this node is a cross-community bridge._
-- **Why does `ScrollBenchImageModel` connect `Component 1` to `Community 47`, `Community 15`, `Community 49`, `Community 87`, `Community 29`?**
+- **Why does `QTimer` connect `Community 29` to `Community 65`, `Community 66`, `Component 1`, `Community 34`, `Community 36`, `Component 6`, `Community 104`, `Community 59`, `Community 72`, `Component 10`, `Component 12`, `Community 91`, `Community 80`, `Community 81`, `Community 25`, `Community 27`, `Community 30`, `Community 57`?**
+  _High betweenness centrality (0.134) - this node is a cross-community bridge._
+- **Why does `ScrollBenchImageModel` connect `Component 1` to `Community 65`, `Community 66`, `Community 47`, `Community 15`, `Community 49`, `Community 29`?**
   _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Why does `DiagnosticsMonitor` connect `Component 2` to `Community 33`, `Community 69`, `Community 70`, `Community 104`, `Community 91`?**
+- **Why does `DiagnosticsMonitor` connect `Component 2` to `Community 33`, `Community 69`, `Community 70`, `Community 104`, `Community 81`?**
   _High betweenness centrality (0.074) - this node is a cross-community bridge._
-- **What connects `name`, `path`, `coverPaths` to the rest of the system?**
+- **What connects `name`, `path`, `count` to the rest of the system?**
   _660 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Component 0` be split into smaller, more focused modules?**
   _Cohesion score 0.05519480519480519 - nodes in this community are weakly interconnected._
