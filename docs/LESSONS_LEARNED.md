@@ -174,6 +174,28 @@ A critical historical log of instances where the User identified system flaws, m
 
 ---
 
+## 🛠️ 10. AI-Discovered Bugs & Technical Deep-Dives
+
+Key systemic bugs and low-level concurrency failures diagnosed and resolved by AI analysis during codebase audits:
+
+1. **Task Deduplication Key Poisoning ("The Black Box Bug"):**
+   - *Discovery*: Traced a pervasive bug where grid cells intermittently rendered as empty black boxes. When QML retried a failed or slow thumbnail request with `?retry=1`, the un-stripped query string formed a mismatched deduplication key in `m_pendingTasks`. If the initial decode failed, attached child responses were dropped without executing their callbacks, permanently leaving the UI item in an un-rendered state.
+   - *Fix*: Standardized URL parameter stripping across `AsyncImageProvider` prior to task deduplication mapping and ensured fallback error signals always emit `handleDone(QImage())`.
+
+2. **QImageReader Corrupted EXIF / Non-Standard JPEG Silent Failures:**
+   - *Discovery*: Certain JPEG files with non-standard EXIF markers or malformed ICC profiles consistently failed in Qt's `QImageReader` with generic read errors, despite being completely playable in FFmpeg.
+   - *Fix*: Implemented an automatic transparent fallback in `AsyncImageProvider`: if `QImageReader` fails, the task automatically routes the file through `VideoThumbnailer` (FFmpeg software decode), recovering the image seamlessly.
+
+3. **TaskScheduler Queue Dequeue Iterator Invalidation (`0xc0000005` Access Violation):**
+   - *Discovery*: Multi-threaded stress testing revealed that calling `dequeue()` on an empty `QQueue` or iterating `QMap` structures while worker threads were modifying tasks caused pointer corruption in `Qt6Core.dll`.
+   - *Fix*: Replaced dynamic map lookups with a fixed, pre-allocated array of priority queues (`{Immediate, High, Normal, Low}`) and enclosed the dequeue operation in strict atomic emptiness re-checks under mutex lock.
+
+4. **Shallow `QImage` Reference Purge Race (Use-After-Free):**
+   - *Discovery*: `QImage` utilizes implicit sharing (copy-on-write). When the background RAM monitor thread called `m_cache.clear()`, the refcount of the internal image buffer dropped to zero while the QML render thread was concurrently reading the pixel scanlines.
+   - *Fix*: Mandated explicit `img->copy()` deep-copy returns across all cache lookup boundaries.
+
+---
+
 ## 📋 Comprehensive Audit Checklist
 
 | Principle | Architectural Target | Implementation Rule |
