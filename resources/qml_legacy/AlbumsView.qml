@@ -133,6 +133,7 @@ StackView {
                                 source: (visible && coverPath.length > 0) ? "image://async/" + coverPath[0] : ""
                                 sourceSize: Qt.size(appSettings.thumbnailSize, appSettings.thumbnailSize)
                                 asynchronous: true
+                                cache: true
                                 fillMode: Image.PreserveAspectCrop
                             }
 
@@ -150,6 +151,7 @@ StackView {
                                         source: "image://async/" + modelData
                                         sourceSize: Qt.size(appSettings.thumbnailSize, appSettings.thumbnailSize)
                                         asynchronous: true
+                                        cache: true
                                         fillMode: Image.PreserveAspectCrop
                                     }
                                 }

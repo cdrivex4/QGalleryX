@@ -13,7 +13,7 @@ class SystemMonitor : public QObject {
       double gpuVramUsedMB READ gpuVramUsedMB NOTIFY gpuVramUsedMBChanged)
   Q_PROPERTY(
       double gpuVramTotalMB READ gpuVramTotalMB NOTIFY gpuVramTotalMBChanged)
-  Q_PROPERTY(QString gpuName READ gpuName CONSTANT)
+  Q_PROPERTY(QString gpuName READ gpuName NOTIFY gpuNameChanged)
 
 public:
   explicit SystemMonitor(QObject *parent = nullptr);
@@ -46,6 +46,7 @@ signals:
   void gpuUsageChanged();
   void gpuVramUsedMBChanged();
   void gpuVramTotalMBChanged();
+  void gpuNameChanged();
 
 private slots:
   void updateStats();

@@ -207,17 +207,44 @@ double SystemMonitor::getMemoryUsageMB() {
 
 double SystemMonitor::getGpuUsage() {
 #ifdef Q_OS_WIN
-  // 1. Update VRAM (DXGI)
+  // 1. Dynamically enumerate all DXGI adapters to query active VRAM
   ComPtr<IDXGIFactory4> factory;
   if (SUCCEEDED(CreateDXGIFactory1(IID_PPV_ARGS(&factory)))) {
-    ComPtr<IDXGIAdapter3> adapter;
-    if (SUCCEEDED(factory->EnumAdapters(
-            0, reinterpret_cast<IDXGIAdapter **>(adapter.GetAddressOf())))) {
-      DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
-      if (SUCCEEDED(adapter->QueryVideoMemoryInfo(
-              0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo))) {
-        m_gpuVramUsedMB = videoMemoryInfo.CurrentUsage / (1024.0 * 1024.0);
-        m_gpuVramTotalMB = videoMemoryInfo.Budget / (1024.0 * 1024.0);
+    UINT adapterIndex = 0;
+    ComPtr<IDXGIAdapter> adapter;
+    SIZE_T maxBudget = 0;
+    double usedMB = 0.0;
+    double totalMB = 0.0;
+    QString currentBestName;
+
+    while (factory->EnumAdapters(adapterIndex, adapter.GetAddressOf()) != DXGI_ERROR_NOT_FOUND) {
+      ComPtr<IDXGIAdapter3> adapter3;
+      if (SUCCEEDED(adapter.As(&adapter3))) {
+        DXGI_ADAPTER_DESC1 desc;
+        adapter3->GetDesc1(&desc);
+        bool isSoftware = (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) || 
+                          QString::fromWCharArray(desc.Description).contains("Basic Render", Qt::CaseInsensitive);
+
+        DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
+        if (SUCCEEDED(adapter3->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo))) {
+          if (!isSoftware && (videoMemoryInfo.Budget > maxBudget || maxBudget == 0)) {
+            maxBudget = videoMemoryInfo.Budget;
+            usedMB = videoMemoryInfo.CurrentUsage / (1024.0 * 1024.0);
+            totalMB = videoMemoryInfo.Budget / (1024.0 * 1024.0);
+            currentBestName = QString::fromWCharArray(desc.Description);
+          }
+        }
+      }
+      adapter.Reset();
+      adapterIndex++;
+    }
+
+    if (totalMB > 0) {
+      m_gpuVramUsedMB = usedMB;
+      m_gpuVramTotalMB = totalMB;
+      if (!currentBestName.isEmpty() && currentBestName != m_gpuName) {
+        m_gpuName = currentBestName;
+        emit gpuNameChanged();
       }
     }
   }
@@ -252,6 +279,7 @@ double SystemMonitor::getGpuUsage() {
       }
     }
   }
+
   return maxUsage;
 #else
   return 0.0;
@@ -303,17 +331,34 @@ QString SystemMonitor::getGpuName() {
     return "DXGI Error";
   }
 
+  QString bestName = "Unknown GPU";
+  SIZE_T maxDedicatedVram = 0;
+  UINT adapterIndex = 0;
   ComPtr<IDXGIAdapter1> adapter;
-  if (SUCCEEDED(factory->EnumAdapters1(0, &adapter))) {
+
+  while (factory->EnumAdapters1(adapterIndex, &adapter) != DXGI_ERROR_NOT_FOUND) {
     DXGI_ADAPTER_DESC1 desc;
     if (SUCCEEDED(adapter->GetDesc1(&desc))) {
-      // Store total VRAM from description as fallback/baseline
-      m_gpuVramTotalMB = desc.DedicatedVideoMemory / (1024.0 * 1024.0);
-      return QString::fromWCharArray(desc.Description);
+      // Skip software rasterizers unless no physical adapter is found
+      bool isSoftware = (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) || 
+                        QString::fromWCharArray(desc.Description).contains("Basic Render", Qt::CaseInsensitive);
+      
+      if (!isSoftware && desc.DedicatedVideoMemory >= maxDedicatedVram) {
+        maxDedicatedVram = desc.DedicatedVideoMemory;
+        bestName = QString::fromWCharArray(desc.Description);
+        m_gpuVramTotalMB = desc.DedicatedVideoMemory / (1024.0 * 1024.0);
+      } else if (bestName == "Unknown GPU") {
+        bestName = QString::fromWCharArray(desc.Description);
+        m_gpuVramTotalMB = desc.DedicatedVideoMemory / (1024.0 * 1024.0);
+      }
     }
+    adapter.Reset();
+    adapterIndex++;
   }
-  return "Unknown GPU";
+
+  return bestName;
 #else
   return "Platform Not Supported";
 #endif
 }
+
