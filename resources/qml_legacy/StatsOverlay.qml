@@ -586,6 +586,70 @@ Item {
                     }
                 }
             }
+
+            Rectangle { width: parent.width; height: 1; color: "#383838"; visible: true }
+
+            Text { text: "Connected Devices & Drives:"; color: "#e0e0e0"; font.pixelSize: 12; font.bold: true }
+
+            Repeater {
+                id: mountedDrivesRepeater
+                model: (typeof desktopHelper !== "undefined" && typeof desktopHelper.getMountedDrives === "function") ? desktopHelper.getMountedDrives() : []
+                delegate: Rectangle {
+                    width: parent.width
+                    height: 38
+                    color: "#1e222a"
+                    border.color: "#2f3846"
+                    radius: 6
+
+                    property string root: modelData.rootPath || ""
+                    property string dName: modelData.name || ""
+                    property string dType: modelData.driveType || "FIXED"
+                    property real freeGB: (modelData.bytesFree || 0) / (1024 * 1024 * 1024)
+                    property real totalGB: (modelData.bytesTotal || 0) / (1024 * 1024 * 1024)
+
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 6
+                        spacing: 8
+
+                        Rectangle {
+                            width: 32
+                            height: 20
+                            radius: 3
+                            color: dType === "REMOVABLE" ? "#1a3a2a" : (dType === "REMOTE" ? "#3a2a1a" : "#1a2a3a")
+                            border.color: dType === "REMOVABLE" ? "#00FF7F" : (dType === "REMOTE" ? "#FFA500" : "#38BDF8")
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: dType === "REMOVABLE" ? "USB" : (dType === "REMOTE" ? "NET" : "DRV")
+                                color: dType === "REMOVABLE" ? "#00FF7F" : (dType === "REMOTE" ? "#FFA500" : "#38BDF8")
+                                font.pixelSize: 9
+                                font.bold: true
+                            }
+                        }
+
+                        Column {
+                            Layout.fillWidth: true
+                            spacing: 1
+
+                            Text {
+                                text: (dName.length > 0 && dName !== root ? dName + " (" + root + ")" : root)
+                                color: "white"
+                                font.pixelSize: 11
+                                font.bold: true
+                                elide: Text.ElideRight
+                                width: parent.width
+                            }
+
+                            Text {
+                                text: freeGB.toFixed(1) + " GB free / " + totalGB.toFixed(1) + " GB (" + (modelData.fileSystemType || "") + ")"
+                                color: "#888"
+                                font.pixelSize: 9
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     

@@ -520,7 +520,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_rolenames",
-      "community": 46,
+      "community": 59,
       "norm_label": "rolenames"
     },
     {
@@ -690,7 +690,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate",
-      "community": 90,
+      "community": 92,
       "norm_label": "queueguardstate"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_drive",
-      "community": 90,
+      "community": 92,
       "norm_label": "drive"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_taskid",
-      "community": 90,
+      "community": 92,
       "norm_label": "taskid"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_executed",
-      "community": 90,
+      "community": 92,
       "norm_label": "executed"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_queueguardstate",
-      "community": 90,
+      "community": 92,
       "norm_label": ".queueguardstate()"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qsize",
-      "community": 92,
+      "community": 90,
       "norm_label": "qsize"
     },
     {
@@ -800,7 +800,7 @@
       "source_location": "L190",
       "_origin": "ast",
       "id": "src_asyncimageprovider_getreallocalpath",
-      "community": 92,
+      "community": 90,
       "norm_label": "getreallocalpath()"
     },
     {
@@ -810,7 +810,7 @@
       "source_location": "L202",
       "_origin": "ast",
       "id": "src_asyncimageprovider_getdiskcachepath",
-      "community": 92,
+      "community": 90,
       "norm_label": "getdiskcachepath()"
     },
     {
@@ -910,7 +910,7 @@
       "source_location": "L419",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageresponse_asyncimageresponse",
-      "community": 92,
+      "community": 90,
       "norm_label": "asyncimageresponse::~asyncimageresponse()"
     },
     {
@@ -960,7 +960,7 @@
       "source_location": "L448",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageresponse_handledone",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageresponse::handledone()"
     },
     {
@@ -970,7 +970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qimage",
-      "community": 92,
+      "community": 57,
       "norm_label": "qimage"
     },
     {
@@ -990,7 +990,7 @@
       "source_location": "L495",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_abortifnotneeded",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageprovider::abortifnotneeded()"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L532",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 65,
+      "community": 20,
       "norm_label": "asyncimageprovider::delivertopending()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_location": "L846",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
-      "community": 92,
+      "community": 90,
       "norm_label": "asyncimageprovider::processimagetaskinternal()"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "L1267",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_getcachedimage",
-      "community": 92,
+      "community": 90,
       "norm_label": "asyncimageprovider::getcachedimage()"
     },
     {
@@ -1110,7 +1110,7 @@
       "source_location": "L1278",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_insertcachedimage",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageprovider::insertcachedimage()"
     },
     {
@@ -1240,7 +1240,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse",
-      "community": 34,
+      "community": 7,
       "norm_label": "asyncimageresponse"
     },
     {
@@ -1250,7 +1250,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qquickimageresponse",
-      "community": 34,
+      "community": 7,
       "norm_label": "qquickimageresponse"
     },
     {
@@ -1280,7 +1280,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_public",
-      "community": 34,
+      "community": 7,
       "norm_label": "public"
     },
     {
@@ -1290,7 +1290,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_run",
-      "community": 34,
+      "community": 7,
       "norm_label": "run"
     },
     {
@@ -1300,7 +1300,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_texturefactory",
-      "community": 34,
+      "community": 7,
       "norm_label": "texturefactory"
     },
     {
@@ -1310,7 +1310,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_cancel",
-      "community": 34,
+      "community": 7,
       "norm_label": "cancel"
     },
     {
@@ -1320,7 +1320,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_handledone",
-      "community": 34,
+      "community": 7,
       "norm_label": "handledone"
     },
     {
@@ -1340,7 +1340,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_id",
-      "community": 34,
+      "community": 7,
       "norm_label": "m_id"
     },
     {
@@ -1350,7 +1350,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qsize",
-      "community": 17,
+      "community": 87,
       "norm_label": "qsize"
     },
     {
@@ -1360,7 +1360,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_requestedsize",
-      "community": 34,
+      "community": 7,
       "norm_label": "m_requestedsize"
     },
     {
@@ -1380,7 +1380,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_image",
-      "community": 34,
+      "community": 7,
       "norm_label": "m_image"
     },
     {
@@ -1390,7 +1390,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_workduration",
-      "community": 34,
+      "community": 7,
       "norm_label": "m_workduration"
     },
     {
@@ -1420,7 +1420,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_cancelled",
-      "community": 34,
+      "community": 7,
       "norm_label": "m_cancelled"
     },
     {
@@ -1430,7 +1430,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_tracker",
-      "community": 34,
+      "community": 7,
       "norm_label": "m_tracker"
     },
     {
@@ -1520,7 +1520,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_requestimageresponse",
-      "community": 65,
+      "community": 20,
       "norm_label": "requestimageresponse"
     },
     {
@@ -1540,7 +1540,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_insertcachedimage",
-      "community": 92,
+      "community": 90,
       "norm_label": "insertcachedimage"
     },
     {
@@ -1670,7 +1670,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetask",
-      "community": 35,
+      "community": 20,
       "norm_label": "processimagetask"
     },
     {
@@ -1700,7 +1700,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 35,
+      "community": 20,
       "norm_label": "delivertopending"
     },
     {
@@ -1720,7 +1720,7 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
-      "community": 35,
+      "community": 20,
       "norm_label": "processimagetaskinternal"
     },
     {
@@ -1740,7 +1740,7 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_stagedrequestcount",
-      "community": 20,
+      "community": 59,
       "norm_label": "stagedrequestcount"
     },
     {
@@ -1820,7 +1820,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qlist",
-      "community": 87,
+      "community": 66,
       "norm_label": "qlist"
     },
     {
@@ -1880,7 +1880,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest",
-      "community": 65,
+      "community": 20,
       "norm_label": "queuerequest"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 65,
+      "community": 20,
       "norm_label": "schedulestagingprocessing"
     },
     {
@@ -1954,6 +1954,26 @@
       "norm_label": "qstring"
     },
     {
+      "label": "DesktopHelper::getAdjacentFiles()",
+      "file_type": "code",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "src_desktophelper_desktophelper_getadjacentfiles",
+      "community": 56,
+      "norm_label": "desktophelper::getadjacentfiles()"
+    },
+    {
+      "label": "QStringList",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_desktophelper_cpp_qstringlist",
+      "community": 56,
+      "norm_label": "qstringlist"
+    },
+    {
       "label": "FileType",
       "file_type": "code",
       "source_file": "",
@@ -1962,6 +1982,26 @@
       "id": "src_desktophelper_cpp_filetype",
       "community": 56,
       "norm_label": "filetype"
+    },
+    {
+      "label": "DesktopHelper::getMountedDrives()",
+      "file_type": "code",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L221",
+      "_origin": "ast",
+      "id": "src_desktophelper_desktophelper_getmounteddrives",
+      "community": 56,
+      "norm_label": "desktophelper::getmounteddrives()"
+    },
+    {
+      "label": "QVariantList",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_desktophelper_cpp_qvariantlist",
+      "community": 56,
+      "norm_label": "qvariantlist"
     },
     {
       "label": "DesktopHelper.h",
@@ -2014,10 +2054,60 @@
       "norm_label": "public"
     },
     {
-      "label": "openInExplorer",
+      "label": "Q_ENUM",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_desktophelper_h_q_enum",
+      "community": 56,
+      "norm_label": "q_enum"
+    },
+    {
+      "label": "urlToLocalFile",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
       "source_location": "L15",
+      "_origin": "ast",
+      "id": "src_desktophelper_desktophelper_urltolocalfile",
+      "community": 56,
+      "norm_label": "urltolocalfile"
+    },
+    {
+      "label": "Q_INVOKABLE",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_desktophelper_h_q_invokable",
+      "community": 56,
+      "norm_label": "q_invokable"
+    },
+    {
+      "label": "QStringList",
+      "file_type": "code",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_desktophelper_desktophelper_qstringlist",
+      "community": 56,
+      "norm_label": "qstringlist"
+    },
+    {
+      "label": "QVariantList",
+      "file_type": "code",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "src_desktophelper_desktophelper_qvariantlist",
+      "community": 56,
+      "norm_label": "qvariantlist"
+    },
+    {
+      "label": "openInExplorer",
+      "file_type": "code",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L18",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_openinexplorer",
       "community": 56,
@@ -2027,7 +2117,7 @@
       "label": "getFileType",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L16",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_getfiletype",
       "community": 56,
@@ -2037,7 +2127,7 @@
       "label": "pauseBackgroundTasks",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L17",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_pausebackgroundtasks",
       "community": 56,
@@ -2047,7 +2137,7 @@
       "label": "resumeBackgroundTasks",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L18",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_resumebackgroundtasks",
       "community": 56,
@@ -2057,7 +2147,7 @@
       "label": "requestRestart",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L19",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_requestrestart",
       "community": 56,
@@ -2067,7 +2157,7 @@
       "label": "isNetworkPath",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L20",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_isnetworkpath",
       "community": 56,
@@ -2077,7 +2167,7 @@
       "label": "staticGetFileType",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L23",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_staticgetfiletype",
       "community": 56,
@@ -2087,7 +2177,7 @@
       "label": "staticIsNetworkPath",
       "file_type": "code",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L24",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_staticisnetworkpath",
       "community": 56,
@@ -2140,7 +2230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_fastvolumescanner_h_src_fastvolumescanner",
-      "community": 91,
+      "community": 87,
       "norm_label": "fastvolumescanner.h"
     },
     {
@@ -2480,7 +2570,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_cpp_qstring",
-      "community": 7,
+      "community": 17,
       "norm_label": "qstring"
     },
     {
@@ -2500,7 +2590,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_cpp_qlist",
-      "community": 7,
+      "community": 17,
       "norm_label": "qlist"
     },
     {
@@ -2550,7 +2640,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_cpp_qsize",
-      "community": 7,
+      "community": 12,
       "norm_label": "qsize"
     },
     {
@@ -2600,7 +2690,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_cpp_qset",
-      "community": 7,
+      "community": 12,
       "norm_label": "qset"
     },
     {
@@ -2610,7 +2700,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_filecachemanager_h_src_filecachemanager",
-      "community": 17,
+      "community": 87,
       "norm_label": "filecachemanager.h"
     },
     {
@@ -2830,7 +2920,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_load",
-      "community": 7,
+      "community": 17,
       "norm_label": "load"
     },
     {
@@ -2840,7 +2930,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_save",
-      "community": 7,
+      "community": 17,
       "norm_label": "save"
     },
     {
@@ -2850,7 +2940,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_contains",
-      "community": 7,
+      "community": 17,
       "norm_label": "contains"
     },
     {
@@ -2880,7 +2970,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_remove",
-      "community": 7,
+      "community": 17,
       "norm_label": "remove"
     },
     {
@@ -2900,7 +2990,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_getoldestkeys",
-      "community": 7,
+      "community": 17,
       "norm_label": "getoldestkeys"
     },
     {
@@ -2910,7 +3000,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_getallkeys",
-      "community": 7,
+      "community": 17,
       "norm_label": "getallkeys"
     },
     {
@@ -2920,7 +3010,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "src_filecachemanager_qhashcachedatabase_clear",
-      "community": 16,
+      "community": 17,
       "norm_label": "clear"
     },
     {
@@ -2930,7 +3020,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qhash",
-      "community": 17,
+      "community": 87,
       "norm_label": "qhash"
     },
     {
@@ -2960,7 +3050,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qmutex",
-      "community": 14,
+      "community": 17,
       "norm_label": "qmutex"
     },
     {
@@ -2990,7 +3080,7 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_load",
-      "community": 7,
+      "community": 14,
       "norm_label": "load"
     },
     {
@@ -3010,7 +3100,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_contains",
-      "community": 7,
+      "community": 14,
       "norm_label": "contains"
     },
     {
@@ -3020,7 +3110,7 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_get",
-      "community": 14,
+      "community": 17,
       "norm_label": "get"
     },
     {
@@ -3030,7 +3120,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_insert",
-      "community": 14,
+      "community": 17,
       "norm_label": "insert"
     },
     {
@@ -3040,7 +3130,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_remove",
-      "community": 7,
+      "community": 14,
       "norm_label": "remove"
     },
     {
@@ -3060,7 +3150,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_getoldestkeys",
-      "community": 7,
+      "community": 17,
       "norm_label": "getoldestkeys"
     },
     {
@@ -3070,7 +3160,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "src_filecachemanager_mmapcachedatabase_getallkeys",
-      "community": 7,
+      "community": 17,
       "norm_label": "getallkeys"
     },
     {
@@ -3260,7 +3350,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_initialize",
-      "community": 12,
+      "community": 16,
       "norm_label": "initialize"
     },
     {
@@ -3270,7 +3360,7 @@
       "source_location": "L148",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_getcachedpath",
-      "community": 7,
+      "community": 12,
       "norm_label": "getcachedpath"
     },
     {
@@ -3310,7 +3400,7 @@
       "source_location": "L156",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_iscached",
-      "community": 7,
+      "community": 12,
       "norm_label": "iscached"
     },
     {
@@ -3320,7 +3410,7 @@
       "source_location": "L162",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_prunestaleentries",
-      "community": 7,
+      "community": 12,
       "norm_label": "prunestaleentries"
     },
     {
@@ -3330,7 +3420,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_compact",
-      "community": 12,
+      "community": 16,
       "norm_label": "compact"
     },
     {
@@ -3360,7 +3450,7 @@
       "source_location": "L171",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_nukecache",
-      "community": 16,
+      "community": 12,
       "norm_label": "nukecache"
     },
     {
@@ -3450,7 +3540,7 @@
       "source_location": "L192",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_getcoalescekey",
-      "community": 7,
+      "community": 12,
       "norm_label": "getcoalescekey"
     },
     {
@@ -3460,7 +3550,7 @@
       "source_location": "L193",
       "_origin": "ast",
       "id": "src_filecachemanager_filecachemanager_rebuildkeyindex",
-      "community": 12,
+      "community": 16,
       "norm_label": "rebuildkeyindex"
     },
     {
@@ -4030,7 +4120,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_getproxyindexforsourceindex",
-      "community": 59,
+      "community": 22,
       "norm_label": "groupedproxymodel::getproxyindexforsourceindex()"
     },
     {
@@ -4080,7 +4170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_h",
-      "community": 87,
+      "community": 66,
       "norm_label": "groupedproxymodel.h"
     },
     {
@@ -4160,7 +4250,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_setgrouprole",
-      "community": 22,
+      "community": 59,
       "norm_label": "setgrouprole"
     },
     {
@@ -4300,7 +4390,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_h_qpointer",
-      "community": 87,
+      "community": 66,
       "norm_label": "qpointer"
     },
     {
@@ -4610,7 +4700,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_pixfmt",
-      "community": 13,
+      "community": 59,
       "norm_label": "m_pixfmt"
     },
     {
@@ -5340,7 +5430,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_imageprocessor_h_src_imageprocessor",
-      "community": 87,
+      "community": 53,
       "norm_label": "imageprocessor.h"
     },
     {
@@ -9594,6 +9684,26 @@
       "norm_label": "desktophelper::getadjacentfiles()"
     },
     {
+      "label": "DesktopHelper::getMountedDrives()",
+      "file_type": "code",
+      "source_file": "src_legacy/DesktopHelper.cpp",
+      "source_location": "L374",
+      "_origin": "ast",
+      "id": "src_legacy_desktophelper_desktophelper_getmounteddrives",
+      "community": 52,
+      "norm_label": "desktophelper::getmounteddrives()"
+    },
+    {
+      "label": "QVariantList",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_legacy_desktophelper_cpp_qvariantlist",
+      "community": 52,
+      "norm_label": "qvariantlist"
+    },
+    {
       "label": "DesktopHelper.h",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.h",
@@ -9744,10 +9854,20 @@
       "norm_label": "qstringlist"
     },
     {
+      "label": "QVariantList",
+      "file_type": "code",
+      "source_file": "src_legacy/DesktopHelper.h",
+      "source_location": "L30",
+      "_origin": "ast",
+      "id": "src_legacy_desktophelper_desktophelper_qvariantlist",
+      "community": 52,
+      "norm_label": "qvariantlist"
+    },
+    {
       "label": "staticGetFileType",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.h",
-      "source_location": "L32",
+      "source_location": "L33",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_staticgetfiletype",
       "community": 52,
@@ -9757,7 +9877,7 @@
       "label": "staticIsNetworkPath",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.h",
-      "source_location": "L33",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_staticisnetworkpath",
       "community": 52,
@@ -9920,7 +10040,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_groupedproxymodel_h_src_legacy_groupedproxymodel",
-      "community": 87,
+      "community": 66,
       "norm_label": "groupedproxymodel.h"
     },
     {
@@ -17130,7 +17250,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_h",
-      "community": 29,
+      "community": 87,
       "norm_label": "scrollbenchimagemodel.h"
     },
     {
@@ -17140,7 +17260,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_framebudgetscheduler",
-      "community": 29,
+      "community": 87,
       "norm_label": "framebudgetscheduler"
     },
     {
@@ -17160,7 +17280,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_imageprocessor",
-      "community": 29,
+      "community": 87,
       "norm_label": "imageprocessor"
     },
     {
@@ -19360,7 +19480,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_linkage_cpp",
-      "community": 29,
+      "community": 87,
       "norm_label": "tst_linkage.cpp"
     },
     {
@@ -19370,7 +19490,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_linkage_main",
-      "community": 29,
+      "community": 87,
       "norm_label": "main()"
     },
     {
@@ -19420,7 +19540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tests_tst_mft",
-      "community": 91,
+      "community": 37,
       "norm_label": "tst_mft.cpp"
     },
     {
@@ -20498,17 +20618,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_albummodel_albummodel",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/GroupedProxyModel.h",
@@ -20656,6 +20765,17 @@
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel",
       "target": "qabstractlistmodel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_albummodel_albummodel_rolenames",
       "confidence_score": 1.0
     },
     {
@@ -21247,7 +21367,7 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_asyncimageprovider",
-      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_framebudgetchanged",
+      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_paused",
       "confidence_score": 1.0
     },
     {
@@ -23580,7 +23700,7 @@
       "source_location": "L2",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
+      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_stagedrequestcount",
       "confidence_score": 1.0
     },
     {
@@ -23696,7 +23816,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L56",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "src_desktophelper_cpp_src_desktophelper",
+      "target": "src_desktophelper_desktophelper_getadjacentfiles",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L108",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_getfiletype",
@@ -23706,7 +23836,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L117",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "src_desktophelper_cpp_src_desktophelper",
+      "target": "src_desktophelper_desktophelper_getmounteddrives",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L169",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_isnetworkpath",
@@ -23726,7 +23866,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L39",
+      "source_location": "L91",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_pausebackgroundtasks",
@@ -23736,7 +23876,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L49",
+      "source_location": "L101",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_requestrestart",
@@ -23746,7 +23886,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L44",
+      "source_location": "L96",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_resumebackgroundtasks",
@@ -23756,7 +23896,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L60",
+      "source_location": "L112",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_staticgetfiletype",
@@ -23766,10 +23906,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L121",
+      "source_location": "L173",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_staticisnetworkpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "src_desktophelper_cpp_src_desktophelper",
+      "target": "src_desktophelper_desktophelper_urltolocalfile",
       "confidence_score": 1.0
     },
     {
@@ -23809,10 +23959,10 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L56",
+      "source_location": "L47",
       "weight": 1.0,
       "context": "parameter_type",
-      "source": "src_desktophelper_desktophelper_getfiletype",
+      "source": "src_desktophelper_desktophelper_getadjacentfiles",
       "target": "src_desktophelper_cpp_qstring",
       "confidence_score": 1.0
     },
@@ -23820,7 +23970,29 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L117",
+      "source_location": "L108",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "src_desktophelper_desktophelper_getfiletype",
+      "target": "src_desktophelper_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L236",
+      "weight": 1.0,
+      "source": "src_desktophelper_desktophelper_getmounteddrives",
+      "target": "src_desktophelper_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L169",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_desktophelper_desktophelper_isnetworkpath",
@@ -23842,7 +24014,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L60",
+      "source_location": "L112",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_desktophelper_desktophelper_staticgetfiletype",
@@ -23853,7 +24025,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L121",
+      "source_location": "L173",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_desktophelper_desktophelper_staticisnetworkpath",
@@ -23864,11 +24036,55 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L60",
+      "source_location": "L39",
+      "weight": 1.0,
+      "context": "parameter_type",
+      "source": "src_desktophelper_desktophelper_urltolocalfile",
+      "target": "src_desktophelper_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L47",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "src_desktophelper_desktophelper_getadjacentfiles",
+      "target": "src_desktophelper_cpp_qstringlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "src_desktophelper_desktophelper_getadjacentfiles",
+      "target": "src_desktophelper_desktophelper_urltolocalfile"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L112",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_desktophelper_desktophelper_staticgetfiletype",
       "target": "src_desktophelper_cpp_filetype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.cpp",
+      "source_location": "L221",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "src_desktophelper_desktophelper_getmounteddrives",
+      "target": "src_desktophelper_cpp_qvariantlist",
       "confidence_score": 1.0
     },
     {
@@ -23928,7 +24144,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L16",
+      "source_location": "L19",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -23939,7 +24155,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L20",
+      "source_location": "L23",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -23950,7 +24166,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L15",
+      "source_location": "L18",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -23961,7 +24177,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L17",
+      "source_location": "L20",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -23983,7 +24199,29 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L19",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_desktophelper_desktophelper",
+      "target": "src_desktophelper_desktophelper_qstringlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L17",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_desktophelper_desktophelper",
+      "target": "src_desktophelper_desktophelper_qvariantlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L22",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -23994,7 +24232,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -24005,7 +24243,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L23",
+      "source_location": "L26",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
@@ -24016,11 +24254,44 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.h",
-      "source_location": "L24",
+      "source_location": "L27",
       "weight": 1.0,
       "context": "field",
       "source": "src_desktophelper_desktophelper",
       "target": "src_desktophelper_desktophelper_staticisnetworkpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L15",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_desktophelper_desktophelper",
+      "target": "src_desktophelper_desktophelper_urltolocalfile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L13",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_desktophelper_desktophelper",
+      "target": "src_desktophelper_h_q_enum",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/DesktopHelper.h",
+      "source_location": "L16",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_desktophelper_desktophelper",
+      "target": "src_desktophelper_h_q_invokable",
       "confidence_score": 1.0
     },
     {
@@ -24622,7 +24893,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L57",
+      "source_location": "L109",
       "weight": 1.0,
       "source": "src_desktophelper_desktophelper_getfiletype",
       "target": "src_desktophelper_desktophelper_staticgetfiletype"
@@ -24633,7 +24904,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L118",
+      "source_location": "L170",
       "weight": 1.0,
       "source": "src_desktophelper_desktophelper_isnetworkpath",
       "target": "src_desktophelper_desktophelper_staticisnetworkpath"
@@ -29078,17 +29349,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_getproxyindexforsourceindex",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/GroupedProxyModel.h",
@@ -29382,6 +29642,17 @@
       "context": "field",
       "source": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel",
       "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_sourcemodelchanged",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_setgrouprole",
       "confidence_score": 1.0
     },
     {
@@ -29778,7 +30049,7 @@
       "source_location": "L7",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
+      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_pixfmt",
       "confidence_score": 1.0
     },
     {
@@ -37890,6 +38161,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
+      "source_location": "L374",
+      "weight": 1.0,
+      "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
+      "target": "src_legacy_desktophelper_desktophelper_getmounteddrives",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src_legacy/DesktopHelper.cpp",
       "source_location": "L234",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
@@ -38031,6 +38312,17 @@
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_getfiletype",
+      "target": "src_legacy_desktophelper_cpp_qstring",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src_legacy/DesktopHelper.cpp",
+      "source_location": "L389",
+      "weight": 1.0,
+      "source": "src_legacy_desktophelper_desktophelper_getmounteddrives",
       "target": "src_legacy_desktophelper_cpp_qstring",
       "confidence_score": 1.0
     },
@@ -38178,6 +38470,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src_legacy/DesktopHelper.cpp",
+      "source_location": "L374",
+      "weight": 1.0,
+      "context": "return_type",
+      "source": "src_legacy_desktophelper_desktophelper_getmounteddrives",
+      "target": "src_legacy_desktophelper_cpp_qvariantlist",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.h",
@@ -38312,6 +38615,17 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.h",
+      "source_location": "L30",
+      "weight": 1.0,
+      "context": "field",
+      "source": "src_legacy_desktophelper_desktophelper",
+      "target": "src_legacy_desktophelper_desktophelper_qvariantlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "src_legacy/DesktopHelper.h",
       "source_location": "L19",
       "weight": 1.0,
       "context": "field",
@@ -38323,7 +38637,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.h",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0,
       "context": "field",
       "source": "src_legacy_desktophelper_desktophelper",
@@ -38334,7 +38648,7 @@
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.h",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0,
       "context": "field",
       "source": "src_legacy_desktophelper_desktophelper",
@@ -51696,7 +52010,7 @@
       "source_location": "L175",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_diskcache",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_threads",
       "confidence_score": 1.0
     },
     {
@@ -51860,14 +52174,24 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/tst_imagemodel.cpp",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_tests_tst_imagemodel_cpp",
+      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "tests/tst_imagemodel.cpp",
       "source_location": "L75",
       "weight": 1.0,
-      "context": "import",
       "source": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel",
+      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel_private",
       "confidence_score": 1.0
     },
     {
@@ -51943,5 +52267,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fdd32fb720960df5167a26cdd428ba2aff9db7c3"
+  "built_at_commit": "1d321629cd6ac0b2a616afc33489de314524c09a"
 }

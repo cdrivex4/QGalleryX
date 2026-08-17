@@ -12,6 +12,9 @@ public:
   enum FileType { Unknown, Image, Video, Raw };
   Q_ENUM(FileType)
 
+  Q_INVOKABLE QString urlToLocalFile(const QString &url);
+  Q_INVOKABLE QStringList getAdjacentFiles(const QString &filePath, int neighborWindow = 15);
+  Q_INVOKABLE QVariantList getMountedDrives();
   Q_INVOKABLE void openInExplorer(const QString &path);
   Q_INVOKABLE int getFileType(const QString &path);
   Q_INVOKABLE void pauseBackgroundTasks();

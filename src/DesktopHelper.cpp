@@ -36,6 +36,58 @@ void DesktopHelper::openInExplorer(const QString &path) {
   process.startDetached();
 }
 
+QString DesktopHelper::urlToLocalFile(const QString &urlString) {
+  QUrl url(urlString);
+  if (url.isLocalFile()) {
+    return url.toLocalFile();
+  }
+  return urlString;
+}
+
+QStringList DesktopHelper::getAdjacentFiles(const QString &filePath, int neighborWindow) {
+  QStringList result;
+  if (filePath.isEmpty()) return result;
+
+  QString cleanPath = urlToLocalFile(filePath);
+  QFileInfo fileInfo(cleanPath);
+  QDir dir = fileInfo.dir();
+
+  QStringList nameFilters;
+  nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.heic" << "*.mp4"
+              << "*.avi" << "*.mov" << "*.webm" << "*.flv" << "*.ts"
+              << "*.m2ts" << "*.mts" << "*.3gp" << "*.wmv" << "*.vob"
+              << "*.arw" << "*.cr2" << "*.dng" << "*.nef" << "*.raf";
+
+  QStringList files = dir.entryList(nameFilters, QDir::Files | QDir::NoSymLinks,
+                                    QDir::Name | QDir::IgnoreCase);
+  if (files.isEmpty()) {
+    result.append(cleanPath);
+    return result;
+  }
+
+  QString targetName = fileInfo.fileName();
+  int targetIdx = -1;
+  for (int i = 0; i < files.size(); ++i) {
+    if (files[i].compare(targetName, Qt::CaseInsensitive) == 0) {
+      targetIdx = i;
+      break;
+    }
+  }
+
+  if (targetIdx == -1) {
+    result.append(cleanPath);
+    return result;
+  }
+
+  int startIdx = qMax(0, targetIdx - neighborWindow);
+  int endIdx = qMin(files.size() - 1, targetIdx + neighborWindow);
+
+  for (int i = startIdx; i <= endIdx; ++i) {
+    result.append(dir.absoluteFilePath(files[i]));
+  }
+  return result;
+}
+
 void DesktopHelper::pauseBackgroundTasks() {
   TaskScheduler::instance().pause();
   qDebug() << "DesktopHelper: Paused background tasks.";
@@ -165,3 +217,49 @@ bool DesktopHelper::staticIsNetworkPath(const QString &path) {
 
   return false;
 }
+
+QVariantList DesktopHelper::getMountedDrives() {
+  QVariantList drives;
+  const auto volumes = QStorageInfo::mountedVolumes();
+  for (const QStorageInfo &storage : volumes) {
+    if (!storage.isValid() || !storage.isReady())
+      continue;
+
+    QString rootPath = QDir::toNativeSeparators(storage.rootPath());
+    if (rootPath.endsWith('\\') && rootPath.length() > 3) {
+      rootPath.chop(1);
+    }
+
+    QVariantMap drive;
+    drive["rootPath"] = rootPath;
+    drive["name"] = storage.name().isEmpty() ? rootPath : storage.name();
+    drive["displayName"] = QString("%1 (%2)").arg(storage.name().isEmpty() ? "Local Disk" : storage.name(), rootPath);
+    drive["fileSystemType"] = QString::fromLatin1(storage.fileSystemType());
+    drive["bytesTotal"] = storage.bytesTotal();
+    drive["bytesAvailable"] = storage.bytesAvailable();
+    drive["bytesFree"] = storage.bytesFree();
+    drive["isReadOnly"] = storage.isReadOnly();
+
+    QString type = "FIXED";
+#ifdef Q_OS_WIN
+    if (rootPath.length() >= 2 && rootPath[1] == ':') {
+      QString rootWin = rootPath.left(2) + "\\";
+      UINT dType = GetDriveTypeW((const wchar_t *)rootWin.utf16());
+      switch (dType) {
+        case DRIVE_REMOVABLE: type = "REMOVABLE"; break; // USB / SD Card
+        case DRIVE_FIXED:     type = "FIXED"; break;     // Internal NVMe / SATA
+        case DRIVE_REMOTE:    type = "REMOTE"; break;    // Network share / SMB
+        case DRIVE_CDROM:     type = "CDROM"; break;
+        case DRIVE_RAMDISK:   type = "RAMDISK"; break;
+        default:              type = "UNKNOWN"; break;
+      }
+    } else if (rootPath.startsWith("\\\\")) {
+      type = "REMOTE";
+    }
+#endif
+    drive["driveType"] = type;
+    drives.append(drive);
+  }
+  return drives;
+}
+

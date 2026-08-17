@@ -370,3 +370,49 @@ QStringList DesktopHelper::getAdjacentFiles(const QString &filePath,
   }
   return result;
 }
+
+QVariantList DesktopHelper::getMountedDrives() {
+  QVariantList drives;
+  const auto volumes = QStorageInfo::mountedVolumes();
+  for (const QStorageInfo &storage : volumes) {
+    if (!storage.isValid() || !storage.isReady())
+      continue;
+
+    QString rootPath = QDir::toNativeSeparators(storage.rootPath());
+    if (rootPath.endsWith('\\') && rootPath.length() > 3) {
+      rootPath.chop(1);
+    }
+
+    QVariantMap drive;
+    drive["rootPath"] = rootPath;
+    drive["name"] = storage.name().isEmpty() ? rootPath : storage.name();
+    drive["displayName"] = QString("%1 (%2)").arg(storage.name().isEmpty() ? "Local Disk" : storage.name(), rootPath);
+    drive["fileSystemType"] = QString::fromLatin1(storage.fileSystemType());
+    drive["bytesTotal"] = storage.bytesTotal();
+    drive["bytesAvailable"] = storage.bytesAvailable();
+    drive["bytesFree"] = storage.bytesFree();
+    drive["isReadOnly"] = storage.isReadOnly();
+
+    QString type = "FIXED";
+#ifdef Q_OS_WIN
+    if (rootPath.length() >= 2 && rootPath[1] == ':') {
+      QString rootWin = rootPath.left(2) + "\\";
+      UINT dType = GetDriveTypeW((const wchar_t *)rootWin.utf16());
+      switch (dType) {
+        case DRIVE_REMOVABLE: type = "REMOVABLE"; break; // USB / SD Card
+        case DRIVE_FIXED:     type = "FIXED"; break;     // Internal NVMe / SATA
+        case DRIVE_REMOTE:    type = "REMOTE"; break;    // Network share / SMB
+        case DRIVE_CDROM:     type = "CDROM"; break;
+        case DRIVE_RAMDISK:   type = "RAMDISK"; break;
+        default:              type = "UNKNOWN"; break;
+      }
+    } else if (rootPath.startsWith("\\\\")) {
+      type = "REMOTE";
+    }
+#endif
+    drive["driveType"] = type;
+    drives.append(drive);
+  }
+  return drives;
+}
+

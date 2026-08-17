@@ -60,18 +60,18 @@
     "semantic_hash": ""
   },
   "src/BuildInfo.h": {
-    "mtime": 1786999995.765443,
-    "ast_hash": "8d01a2527f13f91d300e16817c9bbad1",
+    "mtime": 1787001297.646346,
+    "ast_hash": "2d3fc92e3ab0907aa1e010819d8d8952",
     "semantic_hash": ""
   },
   "src/DesktopHelper.cpp": {
-    "mtime": 1786998686.3667467,
-    "ast_hash": "223db9dad2f1c4dab1ca6d044b90fef9",
+    "mtime": 1787001288.4724944,
+    "ast_hash": "4f3180c3a6eb73f17c9e41bf977c2e06",
     "semantic_hash": ""
   },
   "src/DesktopHelper.h": {
-    "mtime": 1785621797.6193721,
-    "ast_hash": "be0861a84cbb6b67310220655133d090",
+    "mtime": 1787001096.0165348,
+    "ast_hash": "cd2146e66f12885bd7cc10f4c22ad579",
     "semantic_hash": ""
   },
   "src/FastVolumeScanner.cpp": {
@@ -230,18 +230,18 @@
     "semantic_hash": ""
   },
   "src_legacy/BuildInfo.h": {
-    "mtime": 1786999995.7664437,
-    "ast_hash": "8d01a2527f13f91d300e16817c9bbad1",
+    "mtime": 1787001297.6473453,
+    "ast_hash": "2d3fc92e3ab0907aa1e010819d8d8952",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.cpp": {
-    "mtime": 1786998686.3807478,
-    "ast_hash": "62d09668cd75d13b33ac9225ab197794",
+    "mtime": 1787001085.9893813,
+    "ast_hash": "cfb53e36b1aecf8b6ba8445d8de2b1b9",
     "semantic_hash": ""
   },
   "src_legacy/DesktopHelper.h": {
-    "mtime": 1786998686.3822618,
-    "ast_hash": "2777908cc383c72bd5e09d5d11836b2f",
+    "mtime": 1787001070.0839083,
+    "ast_hash": "f3bef0abbb08de393b97fd7de52ff7ea",
     "semantic_hash": ""
   },
   "src_legacy/GroupedProxyModel.cpp": {

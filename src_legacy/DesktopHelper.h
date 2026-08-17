@@ -27,6 +27,7 @@ public:
   Q_INVOKABLE qint64 getFileSize(const QString &path);
   Q_INVOKABLE QString urlToLocalFile(const QString &url);
   Q_INVOKABLE QStringList getAdjacentFiles(const QString &filePath, int neighborWindow = 15);
+  Q_INVOKABLE QVariantList getMountedDrives();
 
   // Static helper for C++ usage
   static FileType staticGetFileType(const QString &path);
