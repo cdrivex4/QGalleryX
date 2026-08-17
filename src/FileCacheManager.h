@@ -156,10 +156,9 @@ public:
     bool isCached(const QString& id, const QSize& requestedSize);
 
     // Filesystem Reconciliation:
-    // Call after a directory scan with the complete set of valid file paths.
-    // Removes any DB entries whose source file no longer exists on disk.
-    // Returns count of entries pruned. Triggers compact() if orphan ratio > 30%.
-    int pruneStaleEntries(const QSet<QString>& validFilePaths, const QSize& thumbSize);
+    // Call after a directory scan with the complete set of valid file paths for THAT folder.
+    // Only prunes files strictly within folderPrefix whose source file is confirmed missing on disk.
+    int pruneStaleEntries(const QString& folderPrefix, const QSet<QString>& validFilePaths, const QSize& thumbSize);
 
     // Rewrite the mmap to contain only the currently-indexed (valid) entries.
     // Reclaims space from deleted files. Run in a background thread.

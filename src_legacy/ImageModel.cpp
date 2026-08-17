@@ -124,16 +124,90 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
 
 void ImageModel::scanDirectory(const QString &path) {
   uint64_t currentGen = ++m_scanGeneration;
-
-  m_currentPath = path;
+  m_scanId++;
   m_isLoading = true;
   emit isLoadingChanged();
 
-  // Clear current images immediately so UI updates
-  beginResetModel();
-  m_allItems.clear();
-  m_images.clear();
-  endResetModel();
+  QString cleanPath;
+  QUrl url(path);
+  if (url.isValid() && url.isLocalFile()) {
+    cleanPath = url.toLocalFile();
+  } else {
+    cleanPath = path;
+  }
+
+  // Handle odd edge case: /C:/Users... which QUrl might return
+  if (cleanPath.startsWith("/") && cleanPath.length() > 2 && cleanPath[2] == ':') {
+    cleanPath = cleanPath.mid(1);
+  }
+
+  cleanPath = QDir::cleanPath(cleanPath);
+  cleanPath = QDir::toNativeSeparators(cleanPath);
+
+  if (cleanPath.length() > 1 && cleanPath[1] == ':') {
+    cleanPath[0] = cleanPath[0].toUpper();
+  }
+  // Drive roots (e.g. "X:\", "C:\") MUST keep their trailing slash on Windows
+  // otherwise Win32 treats "X:" as a relative path to the drive's CWD!
+  if (cleanPath.length() == 2 && cleanPath[1] == ':') {
+    cleanPath += "\\";
+  } else if (cleanPath.length() > 3 && cleanPath.endsWith('\\')) {
+    cleanPath.chop(1);
+  }
+
+  // --- STEP 1: INSTANT CACHED LOAD FROM FOLDER DB (0ms UI Display) ---
+  QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+  QDir().mkpath(cacheDir);
+  QString pathHash = QString(QCryptographicHash::hash(cleanPath.toLower().toUtf8(), QCryptographicHash::Md5).toHex());
+  QString cachePath = cacheDir + "/" + pathHash + ".bin";
+
+  QList<ImageInfo> instantCachedItems;
+  QFile cacheFile(cachePath);
+  if (cacheFile.open(QIODevice::ReadOnly)) {
+    QDataStream in(&cacheFile);
+    int count = 0;
+    in >> count;
+    instantCachedItems.reserve(count);
+    for (int i = 0; i < count; ++i) {
+      QString p;
+      qint64 s;
+      QDateTime d;
+      in >> p >> s >> d;
+      ImageInfo info;
+      info.filePath = p;
+      int slashIdx = p.lastIndexOf('/');
+      if (slashIdx < 0) slashIdx = p.lastIndexOf('\\');
+      info.fileName = slashIdx >= 0 ? p.mid(slashIdx + 1) : p;
+      info.size = s;
+      info.date = d;
+      instantCachedItems.append(info);
+    }
+    cacheFile.close();
+  }
+
+  if (!instantCachedItems.isEmpty()) {
+    m_allItems = instantCachedItems;
+    m_totalCount = m_allItems.size();
+    m_scanProgress = m_allItems.size();
+    m_scanMethod = "Folder DB (Instant Cached)";
+    emit totalCountChanged();
+    emit scanProgressChanged();
+    emit scanMethodChanged();
+    applyFilter();
+    emit itemsPopulated(m_scanId);
+    emit passOneCompleted(m_scanId);
+    qDebug() << "[ImageModel] Loaded" << m_allItems.size() << "cached items instantly for:" << cleanPath;
+  } else {
+    // Clear current images only if no cache exists
+    beginResetModel();
+    m_allItems.clear();
+    m_images.clear();
+    endResetModel();
+    m_totalCount = 0;
+    m_scanProgress = 0;
+    emit totalCountChanged();
+    emit scanProgressChanged();
+  }
 
   // Reset background crawler state
   m_crawlWorkQueue.clear();
@@ -141,47 +215,14 @@ void ImageModel::scanDirectory(const QString &path) {
   m_crawledCount.store(0);
   m_crawlPassComplete = false;
 
-  // Clear previous pending tasks and RAM cache
+  // Clear previous pending tasks (keep RAM cache warm)
   TaskScheduler::instance().clear();
-  AsyncImageProvider::clearCache();
 
-  m_totalCount = 0;
-  m_scanProgress = 0;
-  emit totalCountChanged();
-  emit scanProgressChanged();
-
-  // Run scanning via TaskScheduler
+  // Run live MFT / filesystem scanning via TaskScheduler
   TaskScheduler::instance().addTask(
-      [this, path, currentGen]() {
+      [this, cleanPath, currentGen, cachePath]() {
         QElapsedTimer timer;
         timer.start();
-
-        QString cleanPath;
-        QUrl url(path);
-        if (url.isValid() && url.isLocalFile()) {
-          cleanPath = url.toLocalFile();
-        } else {
-          cleanPath = path;
-        }
-
-        // Handle odd edge case: /C:/Users... which QUrl might return
-        if (cleanPath.startsWith("/") && cleanPath.length() > 2 && cleanPath[2] == ':') {
-          cleanPath = cleanPath.mid(1);
-        }
-
-        cleanPath = QDir::cleanPath(cleanPath);
-        cleanPath = QDir::toNativeSeparators(cleanPath);
-
-        if (cleanPath.length() > 1 && cleanPath[1] == ':') {
-          cleanPath[0] = cleanPath[0].toUpper();
-        }
-        // Drive roots (e.g. "X:\", "C:\") MUST keep their trailing slash on Windows
-        // otherwise Win32 treats "X:" as a relative path to the drive's CWD!
-        if (cleanPath.length() == 2 && cleanPath[1] == ':') {
-          cleanPath += "\\";
-        } else if (cleanPath.length() > 3 && cleanPath.endsWith('\\')) {
-          cleanPath.chop(1);
-        }
 
         if (!QDir(cleanPath).exists()) {
           qWarning() << "Directory does not exist:" << cleanPath;
@@ -466,7 +507,7 @@ void ImageModel::scanDirectory(const QString &path) {
                   });
 
         // Final UI commit
-        QMetaObject::invokeMethod(this, [this, fastItems, timer, currentGen]() {
+        QMetaObject::invokeMethod(this, [this, cleanPath, fastItems, timer, currentGen]() {
           if (m_scanGeneration != currentGen) return;
           m_allItems = fastItems;
           applyFilter();
@@ -501,12 +542,12 @@ void ImageModel::scanDirectory(const QString &path) {
           // Reconcile DB against actual filesystem:
           // Any entry in the mmap whose source file is no longer on disk gets pruned.
           // Run in background — doesn't block the UI or the crawler.
-          QThreadPool::globalInstance()->start([fastItems, res]() {
+          QThreadPool::globalInstance()->start([cleanPath, fastItems, res]() {
             QSet<QString> validPaths;
             validPaths.reserve(fastItems.size());
             for (const auto &item : fastItems)
               validPaths.insert(item.filePath);
-            FileCacheManager::instance().pruneStaleEntries(validPaths, QSize(res, res));
+            FileCacheManager::instance().pruneStaleEntries(cleanPath, validPaths, QSize(res, res));
           });
 
           // Promote already-cached files into L1 RAM simultaneously

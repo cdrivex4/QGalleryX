@@ -796,16 +796,20 @@ void FileCacheManager::nukeCacheForPrefix(const QString& pathPrefix) {
     qInfo() << "[FileCacheManager] Nuked" << removed << "entries for prefix:" << pathPrefix;
 }
 
-int FileCacheManager::pruneStaleEntries(const QSet<QString>& validFilePaths, const QSize& thumbSize) {
-    if (!m_canWrite || !m_db) return 0;
+int FileCacheManager::pruneStaleEntries(const QString& folderPrefix, const QSet<QString>& validFilePaths, const QSize& thumbSize) {
+    if (!m_canWrite || !m_db || folderPrefix.isEmpty()) return 0;
 
-    // Build the set of valid keys from the current file list
+    QString cleanPrefix = QDir::cleanPath(folderPrefix);
+    cleanPrefix = QDir::toNativeSeparators(cleanPrefix);
+    if (!cleanPrefix.endsWith('\\')) cleanPrefix += "\\";
+
+    // Build the set of valid keys from the current file list for fast lookup
     QSet<QString> validKeys;
     validKeys.reserve(validFilePaths.size());
     for (const QString& path : validFilePaths)
         validKeys.insert(getCoalesceKey(path, thumbSize));
 
-    // Walk the in-memory index — remove anything whose key isn't in validKeys
+    // Walk the in-memory index — only examine entries matching cleanPrefix
     QList<QString> allKeys;
     {
         QMutexLocker lock(&m_keyMutex);
@@ -816,30 +820,29 @@ int FileCacheManager::pruneStaleEntries(const QSet<QString>& validFilePaths, con
     qint64 orphanedBytes = 0;
 
     for (const QString& key : allKeys) {
-        if (!validKeys.contains(key)) {
-            CacheEntry entry = m_db->get(key);
-            orphanedBytes += entry.fileSizeBytes;
-            m_db->remove(key);
-            {
-                QMutexLocker lock(&m_keyMutex);
-                m_knownKeys.remove(key);
+        CacheEntry entry = m_db->get(key);
+        if (entry.originalPath.isEmpty()) continue;
+
+        QString entryPath = QDir::toNativeSeparators(entry.originalPath);
+        // CRITICAL GUARD: Only evaluate entries that strictly belong to the scanned folder prefix!
+        // Entries from other folders, other drives (C:, D:, I:, etc.) are NEVER touched!
+        if (entryPath.startsWith(cleanPrefix, Qt::CaseInsensitive)) {
+            if (!validKeys.contains(key) && !QFile::exists(entry.originalPath)) {
+                orphanedBytes += entry.fileSizeBytes;
+                m_db->remove(key);
+                {
+                    QMutexLocker lock(&m_keyMutex);
+                    m_knownKeys.remove(key);
+                }
+                pruned++;
             }
-            pruned++;
         }
     }
 
     if (pruned > 0) {
-        qInfo() << "[FileCacheManager] Pruned" << pruned << "stale entries ("
-                << orphanedBytes / 1024 << "KB orphaned). Valid:" << validKeys.size();
+        qInfo() << "[FileCacheManager] Safely pruned" << pruned << "deleted entries from" << cleanPrefix
+                << "(" << orphanedBytes / 1024 << "KB orphaned).";
         m_dirty = true;
-
-        // Trigger compaction if orphaned bytes > 30% of current file size
-        qint64 fileSize = QFileInfo(m_dbPath).size();
-        if (fileSize > 0 && orphanedBytes > fileSize * 0.30) {
-            qInfo() << "[FileCacheManager] Orphan ratio >" << (orphanedBytes * 100 / fileSize)
-                    << "% — scheduling compaction.";
-            QTimer::singleShot(2000, this, &FileCacheManager::compact);
-        }
     }
     return pruned;
 }
