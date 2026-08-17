@@ -98,19 +98,26 @@ Protect shared resources with explicit synchronization primitives (mutexes, atom
 
 ---
 
-## 🌐 6. Persistent Memory-Mapped (`mmap`) Database & Zero-Copy Retrieval
+## 🌐 6. Network File I/O, Persistent Mmap Database & Zero-Copy Retrieval
 
 ### 💡 Core Principle
-Disk caching for thumbnail media must be permanent, non-destructive, and scalable across multi-drive photo libraries. Never treat persistent disk caches like ephemeral circular FIFO queues.
+Never assume local filesystem speeds or memory-mapping support when accessing files. Always handle network share latencies, URL encoding, and filesystem restrictions gracefully, while ensuring persistent disk storage is permanent, non-destructive, and scalable across multi-drive photo libraries.
 
 ### 🔍 Lessons Learned & Applied
-- **Append-Only Auto-Growing Mmap Architecture (v3)**:
-  - *The Problem*: An earlier iteration implemented `FileCache.mmap` as a fixed 1.0 GB circular ring buffer. Once 1GB was reached across large libraries (e.g. 45,000 files on D: + 40,000 files on C: = ~1.7 GB), writing Drive C silently wrapped around and erased Drive D's thumbnails, causing mysterious cache misses on scroll.
-  - *The Fix*: Removed circular wrapping and eviction entirely. `FileCache.mmap` is now an append-only binary database that starts at 512 MB and automatically expands in 512 MB chunks as new media is indexed. All crawled thumbnails are permanent and preserved across restarts.
+- **Evolution from Ring Buffer (v2) to Append-Only Expanding Mmap Database (v3)**:
+  - *The Initial Battle (v1/v2 Ring Buffer)*: When `FileCache.mmap` was initially built as a 1.0 GB circular ring buffer, hitting capacity after long-term use caused an infinite eviction loop due to an improper `head == tail` check. We fixed the infinite loop by bounding eviction strictly to active overlapping regions (`!m_index.isEmpty() && head <= tail && (head + requiredSize) > tail`).
+  - *The Deeper Architectural Battle (v2 Ring Buffer Flaw)*: Even with the eviction loop fixed, a circular ring buffer inherently capped total library thumbnail storage at 1GB. Once a user crawled Drive D (45,000 files, ~900MB) and then crawled Drive C (40,000 files, ~800MB), writing Drive C silently wrapped around and erased Drive D's thumbnails, producing unexpected cache misses when scrolling back through Drive D.
+  - *The Definitive Resolution (v3 Append-Only Mmap)*: Removed circular wrapping and eviction entirely. `FileCache.mmap` is now an append-only binary database that starts at 512 MB and automatically expands in 512 MB chunks as new media is indexed. All crawled thumbnails are permanent, indexed $O(1)$, and preserved across restarts.
 - **Zero-Copy Kernel Slicing**:
   - *The Principle*: Pointer dereferences directly into memory-mapped OS pages (`m_mappedData + offset`) provide instant binary slice retrieval with zero syscall overhead. The OS kernel transparently manages physical RAM page residency.
 - **Filesystem Reconciliation & Compaction (`pruneStaleEntries`, `compact`)**:
   - *The Principle*: When files are deleted or moved on disk outside the app, the DB must mirror the filesystem. A background pass prunes stale index keys, and if orphaned space exceeds 30%, `compact()` rewrites the mmap file in-place to reclaim disk space.
+- **Automatic `mmap` Fallback to Native Cache**:
+  - *The Problem*: Memory-mapping a large file (`FileCache.mmap`) over SMB/network shares or restricted permissions raises OS page-fault exceptions (`STATUS_IN_PAGE_ERROR` `0xc0000006`).
+  - *The Fix*: `FileCacheManager` verifies `isMapped()` after loading. If memory mapping fails, it automatically falls back to `QHashCacheDatabase` (Native in-memory index with standard file I/O).
+- **URL & Path Normalization**:
+  - *The Problem*: Paths passed as `file:///I:/` or `file://192.168.1.10/` failed `QFileInfo::exists()` and corrupted cache keys.
+  - *The Fix*: Sanitized `QUrl` inputs to native local/UNC file paths (`QUrl::toLocalFile`), collapsed double slashes with `QDir::cleanPath()`, and converted all paths to native lowercase separators (`QDir::toNativeSeparators().toLower()`) to ensure 100% hash key consistency across all engines (MFT, QDirIterator, QML).
 
 ---
 
