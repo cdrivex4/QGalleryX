@@ -52,11 +52,7 @@ QStringList DesktopHelper::getAdjacentFiles(const QString &filePath, int neighbo
   QFileInfo fileInfo(cleanPath);
   QDir dir = fileInfo.dir();
 
-  QStringList nameFilters;
-  nameFilters << "*.jpg" << "*.jpeg" << "*.png" << "*.heic" << "*.mp4"
-              << "*.avi" << "*.mov" << "*.webm" << "*.flv" << "*.ts"
-              << "*.m2ts" << "*.mts" << "*.3gp" << "*.wmv" << "*.vob"
-              << "*.arw" << "*.cr2" << "*.dng" << "*.nef" << "*.raf";
+  const QStringList &nameFilters = supportedNameFilters();
 
   QStringList files = dir.entryList(nameFilters, QDir::Files | QDir::NoSymLinks,
                                     QDir::Name | QDir::IgnoreCase);
@@ -109,6 +105,35 @@ int DesktopHelper::getFileType(const QString &path) {
   return staticGetFileType(path);
 }
 
+const QStringList& DesktopHelper::supportedExtensions() {
+  static const QStringList s_extensions = {
+      // Images
+      "jpg", "jpeg", "png", "webp", "heic", "heif", "tiff", "tif", "bmp", "gif", "ico", "tga", "avif", "jfif",
+      // Videos & Audio
+      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogg", "ogv", "mp3", "wav", "flac", "m4a", "aac", "wma", "opus", "mts", "m2ts", "ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
+      // RAW Formats
+      "arw", "cr2", "cr3", "dng", "nef", "nrw", "orf", "rw2", "pef", "raf", "sr2", "srf", "kdc", "dcr", "raw"
+  };
+  return s_extensions;
+}
+
+const QStringList& DesktopHelper::supportedNameFilters() {
+  static const QStringList s_filters = []() {
+    QStringList filters;
+    const auto& exts = supportedExtensions();
+    filters.reserve(exts.size());
+    for (const QString& ext : exts) {
+      filters.append("*." + ext);
+    }
+    return filters;
+  }();
+  return s_filters;
+}
+
+bool DesktopHelper::isSupportedFile(const QString &filePath) {
+  return staticGetFileType(filePath) != Unknown;
+}
+
 DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
   int dotIdx = path.lastIndexOf('.');
   if (dotIdx == -1 || dotIdx == path.length() - 1)
@@ -116,7 +141,7 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
 
   QStringView ext = QStringView(path).mid(dotIdx + 1);
 
-  // Video
+  // Video & Audio Media
   if (ext.compare(u"mp4", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"mkv", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"avi", Qt::CaseInsensitive) == 0 ||
@@ -126,24 +151,40 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
       ext.compare(u"vob", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"ogg", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"ogv", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"mp3", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"wav", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"flac", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"m4a", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"aac", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"wma", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"opus", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"mts", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"m2ts", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"ts", Qt::CaseInsensitive) == 0 ||
-      ext.compare(u"3gp", Qt::CaseInsensitive) == 0) {
+      ext.compare(u"3gp", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"wmv", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"m4v", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"mpg", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"mpeg", Qt::CaseInsensitive) == 0) {
     return Video;
   }
 
   // Raw
   if (ext.compare(u"arw", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"cr2", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"cr3", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"dng", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"nef", Qt::CaseInsensitive) == 0 ||
-      ext.compare(u"sr2", Qt::CaseInsensitive) == 0 ||
-      ext.compare(u"srf", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"nrw", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"orf", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"rw2", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"pef", Qt::CaseInsensitive) == 0 ||
-      ext.compare(u"raf", Qt::CaseInsensitive) == 0) {
+      ext.compare(u"raf", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"sr2", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"srf", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"kdc", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"dcr", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"raw", Qt::CaseInsensitive) == 0) {
     return Raw;
   }
 
@@ -159,7 +200,9 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
       ext.compare(u"bmp", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"gif", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"ico", Qt::CaseInsensitive) == 0 ||
-      ext.compare(u"tga", Qt::CaseInsensitive) == 0) {
+      ext.compare(u"tga", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"avif", Qt::CaseInsensitive) == 0 ||
+      ext.compare(u"jfif", Qt::CaseInsensitive) == 0) {
     return Image;
   }
 

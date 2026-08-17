@@ -22,7 +22,10 @@ public:
   Q_INVOKABLE void requestRestart();
   Q_INVOKABLE bool isNetworkPath(const QString &path);
 
-  // Static helpers for C++ usage
+  // Single Source of Truth for File Types & Supported Extensions
+  static const QStringList& supportedExtensions();
+  static const QStringList& supportedNameFilters();
+  static bool isSupportedFile(const QString &filePath);
   static FileType staticGetFileType(const QString &path);
   static bool staticIsNetworkPath(const QString &path);
 };

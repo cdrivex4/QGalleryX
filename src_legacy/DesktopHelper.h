@@ -29,7 +29,10 @@ public:
   Q_INVOKABLE QStringList getAdjacentFiles(const QString &filePath, int neighborWindow = 15);
   Q_INVOKABLE QVariantList getMountedDrives();
 
-  // Static helper for C++ usage
+  // Single Source of Truth for File Types & Supported Extensions
+  static const QStringList& supportedExtensions();
+  static const QStringList& supportedNameFilters();
+  static bool isSupportedFile(const QString &filePath);
   static FileType staticGetFileType(const QString &path);
   static bool staticIsNetworkPath(const QString &path);
 };

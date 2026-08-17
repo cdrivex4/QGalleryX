@@ -245,12 +245,8 @@ void ImageModel::scanDirectory(const QString &path) {
         bool isNetworkPath = DesktopHelper::staticIsNetworkPath(cleanPath);
         qDebug() << "[Scan]" << (isNetworkPath ? "Network path:" : "Local path:") << cleanPath;
 
-        static const QStringList extensions = {
-            "jpg", "jpeg", "png",  "mp4",  "mkv",  "avi", "mov",  "arw", "cr2",
-            "dng", "nef",  "webp", "heic", "tiff", "bmp", "gif",  "ico", "tga",
-            "sr2", "srf",  "orf",  "rw2",  "pef",  "raf", "webm", "flv", "vob",
-            "ogg", "ogv",  "mp3",  "wav",  "flac", "m4a", "aac",  "wma", "opus",
-            "mts", "m2ts", "ts",   "3gp"};
+        const QStringList &extensions = DesktopHelper::supportedExtensions();
+        const QStringList &nameFilters = DesktopHelper::supportedNameFilters();
 
         QList<ImageInfo> fastItems;
         QRegularExpression dateRegex("(\\d{8})_(\\d{6})");
@@ -301,21 +297,7 @@ void ImageModel::scanDirectory(const QString &path) {
 
         // === Fallback to QDirIterator if MFT unavailable ===
         if (!fastScanSuccess) {
-          QDirIterator it(cleanPath,
-                          QStringList()
-                              << "*.jpg" << "*.jpeg" << "*.png" << "*.mp4"
-                              << "*.mkv" << "*.avi" << "*.mov"
-                              << "*.arw" << "*.cr2" << "*.dng" << "*.nef"
-                              << "*.webp" << "*.heic"
-                              << "*.tiff"
-                              << "*.bmp" << "*.gif" << "*.ico" << "*.tga"
-                              << "*.sr2" << "*.srf" << "*.orf" << "*.rw2"
-                              << "*.pef" << "*.raf"
-                              << "*.webm" << "*.flv" << "*.vob" << "*.ogg"
-                              << "*.ogv" << "*.mp3" << "*.wav" << "*.flac"
-                              << "*.m4a" << "*.aac" << "*.wma" << "*.opus"
-                              << "*.mts" << "*.m2ts" << "*.3gp",
-                          QDir::Files, QDirIterator::Subdirectories);
+          QDirIterator it(cleanPath, nameFilters, QDir::Files, QDirIterator::Subdirectories);
 
           int localScanCount = 0;
           int nextBatchThreshold = 40;
