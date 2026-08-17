@@ -97,13 +97,24 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
       ext.compare(u"opus", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"mts", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"m2ts", Qt::CaseInsensitive) == 0 ||
-      ext.compare(u"ts", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"3gp", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"wmv", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"m4v", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"mpg", Qt::CaseInsensitive) == 0 ||
       ext.compare(u"mpeg", Qt::CaseInsensitive) == 0) {
     return Video;
+  }
+
+  // Disambiguate MPEG-TS Video (.ts) vs TypeScript Code (.ts)
+  if (ext.compare(u"ts", Qt::CaseInsensitive) == 0) {
+    QFile f(path);
+    if (f.open(QIODevice::ReadOnly)) {
+      char header[1];
+      if (f.read(header, 1) == 1 && static_cast<unsigned char>(header[0]) == 0x47) {
+        return Video; // Valid MPEG Transport Stream sync byte (0x47)
+      }
+    }
+    return Unknown; // TypeScript source code or text file
   }
 
   // Raw

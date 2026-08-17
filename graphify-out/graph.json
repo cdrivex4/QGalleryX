@@ -350,7 +350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_h",
-      "community": 81,
+      "community": 66,
       "norm_label": "albummodel.h"
     },
     {
@@ -630,7 +630,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_m_allalbums",
-      "community": 46,
+      "community": 81,
       "norm_label": "m_allalbums"
     },
     {
@@ -880,7 +880,7 @@
       "source_location": "L404",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_asyncimageprovider",
-      "community": 23,
+      "community": 65,
       "norm_label": "asyncimageprovider::asyncimageprovider()"
     },
     {
@@ -1060,7 +1060,7 @@
       "source_location": "L636",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 23,
+      "community": 65,
       "norm_label": "asyncimageprovider::schedulestagingprocessing()"
     },
     {
@@ -1350,7 +1350,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qsize",
-      "community": 91,
+      "community": 65,
       "norm_label": "qsize"
     },
     {
@@ -1987,7 +1987,7 @@
       "label": "DesktopHelper::getMountedDrives()",
       "file_type": "code",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L264",
+      "source_location": "L275",
       "_origin": "ast",
       "id": "src_desktophelper_desktophelper_getmounteddrives",
       "community": 56,
@@ -2240,7 +2240,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_fastvolumescanner_h_src_fastvolumescanner",
-      "community": 80,
+      "community": 59,
       "norm_label": "fastvolumescanner.h"
     },
     {
@@ -2710,7 +2710,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_filecachemanager_h_src_filecachemanager",
-      "community": 66,
+      "community": 65,
       "norm_label": "filecachemanager.h"
     },
     {
@@ -3030,7 +3030,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qhash",
-      "community": 66,
+      "community": 65,
       "norm_label": "qhash"
     },
     {
@@ -3780,7 +3780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h",
-      "community": 81,
+      "community": 59,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -4430,7 +4430,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_m_grouprole",
-      "community": 22,
+      "community": 81,
       "norm_label": "m_grouprole"
     },
     {
@@ -7230,7 +7230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_systemmonitor_h",
-      "community": 81,
+      "community": 66,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -8570,7 +8570,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_cpp",
-      "community": 81,
+      "community": 66,
       "norm_label": "main.cpp"
     },
     {
@@ -8580,7 +8580,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_main",
-      "community": 81,
+      "community": 66,
       "norm_label": "main()"
     },
     {
@@ -8590,7 +8590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_test_cpp",
-      "community": 81,
+      "community": 66,
       "norm_label": "main_test.cpp"
     },
     {
@@ -8600,7 +8600,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_test_main",
-      "community": 81,
+      "community": 66,
       "norm_label": "main()"
     },
     {
@@ -9647,7 +9647,7 @@
       "label": "DesktopHelper::generateResizePreview()",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L154",
+      "source_location": "L165",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_generateresizepreview",
       "community": 52,
@@ -9687,7 +9687,7 @@
       "label": "DesktopHelper::getAdjacentFiles()",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L355",
+      "source_location": "L366",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_getadjacentfiles",
       "community": 52,
@@ -9697,7 +9697,7 @@
       "label": "DesktopHelper::getMountedDrives()",
       "file_type": "code",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L409",
+      "source_location": "L420",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_desktophelper_getmounteddrives",
       "community": 52,
@@ -13320,7 +13320,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_systemmonitor_h_src_legacy_systemmonitor",
-      "community": 23,
+      "community": 65,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -14970,7 +14970,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_main",
-      "community": 66,
+      "community": 59,
       "norm_label": "main.cpp"
     },
     {
@@ -14980,7 +14980,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "src_legacy_main_preloadandlockallmodules",
-      "community": 66,
+      "community": 59,
       "norm_label": "preloadandlockallmodules()"
     },
     {
@@ -14990,7 +14990,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "src_legacy_main_main",
-      "community": 66,
+      "community": 59,
       "norm_label": "main()"
     },
     {
@@ -16020,7 +16020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_fastimageitem_h",
-      "community": 59,
+      "community": 19,
       "norm_label": "fastimageitem.h"
     },
     {
@@ -17290,7 +17290,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_qtimer",
-      "community": 23,
+      "community": 65,
       "norm_label": "qtimer"
     },
     {
@@ -19230,7 +19230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "community": 59,
+      "community": 81,
       "norm_label": "main_scrollbench.cpp"
     },
     {
@@ -19240,7 +19240,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_globalexceptionhandler",
-      "community": 59,
+      "community": 81,
       "norm_label": "globalexceptionhandler()"
     },
     {
@@ -19250,7 +19250,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "long",
-      "community": 59,
+      "community": 81,
       "norm_label": "long"
     },
     {
@@ -19260,7 +19260,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "exception_pointers",
-      "community": 59,
+      "community": 81,
       "norm_label": "exception_pointers"
     },
     {
@@ -19270,7 +19270,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_signalhandler",
-      "community": 59,
+      "community": 81,
       "norm_label": "signalhandler()"
     },
     {
@@ -19280,7 +19280,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_crashhandler",
-      "community": 59,
+      "community": 81,
       "norm_label": "crashhandler()"
     },
     {
@@ -19320,7 +19320,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_main",
-      "community": 13,
+      "community": 81,
       "norm_label": "main()"
     },
     {
@@ -19330,7 +19330,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "community": 23,
+      "community": 65,
       "norm_label": "tst_automation.cpp"
     },
     {
@@ -19490,7 +19490,7 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_automation_main",
-      "community": 23,
+      "community": 65,
       "norm_label": "main()"
     },
     {
@@ -20413,17 +20413,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_albummodel_albuminfo_name",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/HardwareAccelerationManager.cpp",
       "source_location": "L6",
       "weight": 1.0,
@@ -20857,6 +20846,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_albummodel_albummodel_m_allalbums",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/AsyncImageProvider.h",
       "source_location": "L13",
       "weight": 1.0,
@@ -20939,17 +20939,6 @@
       "weight": 1.0,
       "source": "src_taskscheduler_h_src_taskscheduler",
       "target": "d_dev_antigravity_src_albummodel_h_atomic",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "src_asyncimageprovider",
       "confidence_score": 1.0
     },
     {
@@ -21398,7 +21387,7 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_asyncimageprovider",
-      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_m_completionsthisframe",
+      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_setframebudget",
       "confidence_score": 1.0
     },
     {
@@ -23812,6 +23801,17 @@
       "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -23856,7 +23856,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L264",
+      "source_location": "L275",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_getmounteddrives",
@@ -23866,7 +23866,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L212",
+      "source_location": "L223",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_isnetworkpath",
@@ -23936,7 +23936,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L216",
+      "source_location": "L227",
       "weight": 1.0,
       "source": "src_desktophelper_cpp_src_desktophelper",
       "target": "src_desktophelper_desktophelper_staticisnetworkpath",
@@ -24012,7 +24012,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L279",
+      "source_location": "L290",
       "weight": 1.0,
       "source": "src_desktophelper_desktophelper_getmounteddrives",
       "target": "src_desktophelper_cpp_qstring",
@@ -24022,7 +24022,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L212",
+      "source_location": "L223",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_desktophelper_desktophelper_isnetworkpath",
@@ -24066,7 +24066,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L216",
+      "source_location": "L227",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_desktophelper_desktophelper_staticisnetworkpath",
@@ -24121,7 +24121,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L264",
+      "source_location": "L275",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_desktophelper_desktophelper_getmounteddrives",
@@ -24956,7 +24956,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/DesktopHelper.cpp",
-      "source_location": "L213",
+      "source_location": "L224",
       "weight": 1.0,
       "source": "src_desktophelper_desktophelper_isnetworkpath",
       "target": "src_desktophelper_desktophelper_staticisnetworkpath"
@@ -29444,17 +29444,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_groupedproxymodel_h",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/GroupedProxyModel.h",
@@ -29730,6 +29719,17 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_m_grouprole",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/HardwareAccelerationManager.cpp",
@@ -29873,6 +29873,17 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_hardwareaccelerationmanager",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_cleanup"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_hardwareaccelerationmanager",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -30092,17 +30103,6 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_tryinitialize"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_mutex",
-      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -38143,7 +38143,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L254",
+      "source_location": "L265",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_copyfiles",
@@ -38163,7 +38163,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L206",
+      "source_location": "L217",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_exportimages",
@@ -38173,7 +38173,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L154",
+      "source_location": "L165",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_generateresizepreview",
@@ -38183,7 +38183,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L355",
+      "source_location": "L366",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_getadjacentfiles",
@@ -38193,7 +38193,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L280",
+      "source_location": "L291",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_getfilesize",
@@ -38213,7 +38213,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L409",
+      "source_location": "L420",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_getmounteddrives",
@@ -38223,7 +38223,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L274",
+      "source_location": "L285",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_isdirectory",
@@ -38233,7 +38233,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L270",
+      "source_location": "L281",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_isnetworkpath",
@@ -38273,7 +38273,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L291",
+      "source_location": "L302",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_staticisnetworkpath",
@@ -38283,7 +38283,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L347",
+      "source_location": "L358",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_cpp_src_legacy_desktophelper",
       "target": "src_legacy_desktophelper_desktophelper_urltolocalfile",
@@ -38315,7 +38315,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L254",
+      "source_location": "L265",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_copyfiles",
@@ -38326,7 +38326,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L206",
+      "source_location": "L217",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_exportimages",
@@ -38337,7 +38337,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L154",
+      "source_location": "L165",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_generateresizepreview",
@@ -38348,7 +38348,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L355",
+      "source_location": "L366",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_getadjacentfiles",
@@ -38359,7 +38359,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L280",
+      "source_location": "L291",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_getfilesize",
@@ -38382,7 +38382,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L424",
+      "source_location": "L435",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_desktophelper_getmounteddrives",
       "target": "src_legacy_desktophelper_cpp_qstring",
@@ -38392,7 +38392,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L274",
+      "source_location": "L285",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_isdirectory",
@@ -38403,7 +38403,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L270",
+      "source_location": "L281",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_isnetworkpath",
@@ -38447,7 +38447,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L291",
+      "source_location": "L302",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_staticisnetworkpath",
@@ -38458,7 +38458,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L347",
+      "source_location": "L358",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_urltolocalfile",
@@ -38480,7 +38480,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L154",
+      "source_location": "L165",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_desktophelper_desktophelper_generateresizepreview",
@@ -38491,7 +38491,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L254",
+      "source_location": "L265",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_copyfiles",
@@ -38502,7 +38502,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L206",
+      "source_location": "L217",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_desktophelper_desktophelper_exportimages",
@@ -38513,7 +38513,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L355",
+      "source_location": "L366",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_desktophelper_desktophelper_getadjacentfiles",
@@ -38535,7 +38535,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L280",
+      "source_location": "L291",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_desktophelper_desktophelper_getfilesize",
@@ -38546,7 +38546,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L409",
+      "source_location": "L420",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_desktophelper_desktophelper_getmounteddrives",
@@ -38789,7 +38789,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/DesktopHelper.cpp",
-      "source_location": "L271",
+      "source_location": "L282",
       "weight": 1.0,
       "source": "src_legacy_desktophelper_desktophelper_isnetworkpath",
       "target": "src_legacy_desktophelper_desktophelper_staticisnetworkpath"
@@ -52077,24 +52077,14 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/tst_automation.cpp",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports",
-      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/tst_automation.cpp",
       "source_location": "L175",
       "weight": 1.0,
+      "context": "import",
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_diskcache",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario",
       "confidence_score": 1.0
     },
     {
@@ -52275,7 +52265,7 @@
       "source_location": "L75",
       "weight": 1.0,
       "source": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "target": "d_dev_antigravity_tests_tst_imagemodel_cpp",
+      "target": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel_private",
       "confidence_score": 1.0
     },
     {
@@ -52316,7 +52306,7 @@
       "source_location": "L81",
       "weight": 1.0,
       "source": "d_dev_antigravity_tests_tst_scheduler_cpp",
-      "target": "d_dev_antigravity_tests_tst_scheduler_cpp",
+      "target": "d_dev_antigravity_tests_tst_scheduler_testtaskscheduler_testpriority",
       "confidence_score": 1.0
     },
     {
@@ -52351,5 +52341,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d9b9f8b288172a50ef23ab3ba827be5e041f0087"
+  "built_at_commit": "45cf13f3e9901f67790011030b1e47ee1e1e4f05"
 }

@@ -1,16 +1,16 @@
 # Graph Report - QGalleryX  (2026-08-18)
 
 ## Corpus Check
-- 97 files · ~58,206 words
+- 97 files · ~58,306 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1963 nodes · 3047 edges · 209 communities (91 shown, 118 thin omitted)
+- 1963 nodes · 3046 edges · 209 communities (92 shown, 117 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 188 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d9b9f8b2`
+- Built from commit: `45cf13f3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -87,6 +87,7 @@
 - [[_COMMUNITY_Community 78|Community 78]]
 - [[_COMMUNITY_Community 79|Community 79]]
 - [[_COMMUNITY_Community 80|Community 80]]
+- [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
 - [[_COMMUNITY_Community 83|Community 83]]
 - [[_COMMUNITY_Community 85|Community 85]]
@@ -228,17 +229,17 @@
   src/AsyncImageProvider.cpp → test_scrollbench/src/ScrollBenchImageModel.h
 - `FrameBudgetScheduler::FrameBudgetScheduler()` --references--> `QTimer`  [INFERRED]
   src/FrameBudgetScheduler.cpp → test_scrollbench/src/ScrollBenchImageModel.h
+- `main()` --references--> `HardwareAccelerationManager`  [EXTRACTED]
+  test_scrollbench/src/main_scrollbench.cpp → src/HardwareAccelerationManager.h
 - `onDirectoryChanged` --references--> `QTimer`  [INFERRED]
   src_legacy/ImageModel.h → test_scrollbench/src/ScrollBenchImageModel.h
 - `AsyncImageProvider::scheduleStagingProcessing()` --references--> `QTimer`  [EXTRACTED]
   src/AsyncImageProvider.cpp → test_scrollbench/src/ScrollBenchImageModel.h
-- `scheduleStagingProcessing` --references--> `QTimer`  [EXTRACTED]
-  src/AsyncImageProvider.h → test_scrollbench/src/ScrollBenchImageModel.h
 
 ## Import Cycles
 - None detected.
 
-## Communities (209 total, 118 thin omitted)
+## Communities (209 total, 117 thin omitted)
 
 ### Community 0 - "Component 0"
 Cohesion: 0.06
@@ -293,8 +294,8 @@ Cohesion: 0.08
 Nodes (27): RootStat, QSet, QSize, FileCacheManager, cacheCleared, getCachedPath, getCoalesceKey, isCached (+19 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.06
-Nodes (39): detectCPUFeatures(), HardwareAccelerationManager, cleanup, cpuInfo, currentModeName, deviceContext, HardwareAccelerationManager::HardwareAccelerationManager(), m_currentMode (+31 more)
+Cohesion: 0.07
+Nodes (38): detectCPUFeatures(), HardwareAccelerationManager, cleanup, cpuInfo, currentModeName, deviceContext, HardwareAccelerationManager::HardwareAccelerationManager(), m_currentMode (+30 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.13
@@ -317,7 +318,7 @@ Cohesion: 0.17
 Nodes (11): ICacheDatabase, clear, contains, get, getAllKeys, getOldestKeys, insert, load (+3 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.08
+Cohesion: 0.09
 Nodes (23): FastImageItem, FastImageItem::FastImageItem(), fillModeChanged, isLoadingChanged, m_dirtyTexture, m_fillMode, m_image, m_isLoading (+15 more)
 
 ### Community 20 - "Community 20"
@@ -329,12 +330,12 @@ Cohesion: 0.07
 Nodes (19): SystemMonitor, cpuUsageChanged, gpuUsageChanged, gpuVramTotalMBChanged, gpuVramUsedMBChanged, m_availableSystemMemoryMB, m_cpuUsage, m_gpuName (+11 more)
 
 ### Community 22 - "Community 22"
-Cohesion: 0.10
-Nodes (25): GroupedProxyModel, columns, columnsChanged, data, getLabelForProxyIndex, GroupedProxyModel::GroupedProxyModel(), groupRole, groupRoleChanged (+17 more)
+Cohesion: 0.11
+Nodes (24): GroupedProxyModel, columns, columnsChanged, data, getLabelForProxyIndex, GroupedProxyModel::GroupedProxyModel(), groupRole, groupRoleChanged (+16 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.13
-Nodes (14): dumpCrashLog(), main(), QTimer, main(), MatrixRunner, m_targetFolder, TestScenario, diskCache (+6 more)
+Cohesion: 0.17
+Nodes (10): dumpCrashLog(), main(), MatrixRunner, m_targetFolder, TestScenario, diskCache, name, rawAcc (+2 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.06
@@ -417,8 +418,8 @@ Cohesion: 0.22
 Nodes (6): dumpCrashLog, processLog, setLogFile, setLogLevel, setMaxRingBufferSize, writerLoop
 
 ### Community 46 - "Community 46"
-Cohesion: 0.08
-Nodes (22): AlbumInfo, count, coverPaths, name, path, AlbumModel, applyFilterFromPaths, data (+14 more)
+Cohesion: 0.09
+Nodes (21): AlbumInfo, count, coverPaths, name, path, AlbumModel, applyFilterFromPaths, data (+13 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.18
@@ -469,12 +470,16 @@ Cohesion: 0.08
 Nodes (32): ReadScope, qint64, QObject, QString, DriveLatencyStats, anomalyCount, avgMs, m2 (+24 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.15
-Nodes (8): QString, QImage, QElapsedTimer, GlobalExceptionHandler(), EXCEPTION_POINTERS, LONG, QObject, QSettings
+Cohesion: 0.19
+Nodes (7): QString, QImage, QElapsedTimer, QObject, main(), preloadAndLockAllModules(), QSettings
+
+### Community 65 - "Community 65"
+Cohesion: 0.18
+Nodes (8): QSize, FrameBudgetScheduler, ImageProcessor, QTimer, main(), AsyncImageProvider::AsyncImageProvider(), AsyncImageProvider::scheduleStagingProcessing(), QHash
 
 ### Community 66 - "Community 66"
-Cohesion: 0.27
-Nodes (8): QVector, QList, QPointer, QAbstractListModel, QHash, QDateTime, main(), preloadAndLockAllModules()
+Cohesion: 0.23
+Nodes (5): QVector, QList, QPointer, QAbstractListModel, QDateTime
 
 ### Community 67 - "Community 67"
 Cohesion: 0.20
@@ -501,8 +506,12 @@ Cohesion: 0.28
 Nodes (4): VisibleRangeManager, m_mutex, m_visiblePaths, isPathVisible
 
 ### Community 80 - "Community 80"
-Cohesion: 0.25
+Cohesion: 0.27
 Nodes (9): atomic, QMap, QQueue, condition_variable, QTextStream, thread, vector, QFile (+1 more)
+
+### Community 81 - "Community 81"
+Cohesion: 0.22
+Nodes (6): m_allAlbums, m_groupRole, GlobalExceptionHandler(), main(), EXCEPTION_POINTERS, LONG
 
 ### Community 82 - "Community 82"
 Cohesion: 0.40
@@ -533,8 +542,8 @@ Cohesion: 0.18
 Nodes (11): ResponseTracker, mutex, response, AsyncImageProvider::processImageTask(), AsyncImageProvider::queueRequest(), atomic, shared_ptr, QueueGuardState (+3 more)
 
 ### Community 91 - "Community 91"
-Cohesion: 0.29
-Nodes (5): QCache, QMutex, QSize, QQuickAsyncImageProvider, QRunnable
+Cohesion: 0.33
+Nodes (4): QCache, QMutex, QQuickAsyncImageProvider, QRunnable
 
 ### Community 92 - "Community 92"
 Cohesion: 0.17
@@ -549,21 +558,21 @@ Cohesion: 0.50
 Nodes (3): AsyncImageProvider, ScrollBenchImageModel, SettingsHelper
 
 ## Knowledge Gaps
-- **660 isolated node(s):** `path`, `coverPaths`, `count`, `public`, `setFilterQuery` (+655 more)
+- **662 isolated node(s):** `name`, `path`, `coverPaths`, `count`, `public` (+657 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **118 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **117 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `QTimer` connect `Community 23` to `Community 65`, `Component 1`, `Community 66`, `Community 34`, `Community 36`, `Component 6`, `Community 104`, `Community 59`, `Community 72`, `Component 10`, `Component 12`, `Community 80`, `Community 81`, `Community 25`, `Community 27`, `Community 29`, `Community 30`, `Community 57`?**
-  _High betweenness centrality (0.128) - this node is a cross-community bridge._
-- **Why does `ScrollBenchImageModel` connect `Component 1` to `Community 65`, `Community 66`, `Community 15`, `Community 47`, `Community 49`, `Community 23`?**
+- **Why does `QTimer` connect `Community 65` to `Component 1`, `Community 66`, `Community 34`, `Community 36`, `Component 6`, `Community 104`, `Community 59`, `Community 72`, `Component 10`, `Component 12`, `Community 80`, `Community 81`, `Community 23`, `Community 25`, `Community 27`, `Community 29`, `Community 30`, `Community 57`?**
+  _High betweenness centrality (0.127) - this node is a cross-community bridge._
+- **Why does `ScrollBenchImageModel` connect `Component 1` to `Community 65`, `Community 66`, `Community 47`, `Community 15`, `Community 49`?**
   _High betweenness centrality (0.097) - this node is a cross-community bridge._
-- **Why does `ImageModel` connect `Component 6` to `Community 66`, `Community 98`, `Community 72`, `Community 75`, `Community 83`, `Community 87`, `Community 23`, `Community 88`, `Community 89`?**
+- **Why does `ImageModel` connect `Component 6` to `Community 65`, `Community 66`, `Community 98`, `Community 72`, `Community 75`, `Community 83`, `Community 87`, `Community 88`, `Community 89`?**
   _High betweenness centrality (0.077) - this node is a cross-community bridge._
-- **What connects `path`, `coverPaths`, `count` to the rest of the system?**
-  _660 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `name`, `path`, `coverPaths` to the rest of the system?**
+  _662 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Component 0` be split into smaller, more focused modules?**
   _Cohesion score 0.05519480519480519 - nodes in this community are weakly interconnected._
 - **Should `Component 1` be split into smaller, more focused modules?**
