@@ -33,10 +33,29 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   connect(&m_folderWatcher, &QFileSystemWatcher::directoryChanged, this, &ImageModel::onDirectoryChanged);
 
   connect(&FileCacheManager::instance(), &FileCacheManager::cacheCleared, this, [this]() {
-    m_crawlWorkQueue.clear();
-    m_crawlQueueIndex.store(0);
-    m_crawledCount.store(0);
-    m_crawlPassComplete = false;
+    // Detect that the active DB was nuked/cleared and immediately reset the aggressive crawler
+    if (!m_allItems.isEmpty()) {
+      int res = m_loadingResolution;
+      QSize thumbSize(res, res);
+      QList<QString> missing;
+      missing.reserve(m_allItems.size());
+      for (const auto &item : m_allItems) {
+        if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
+          missing.append(item.filePath);
+      }
+      m_crawlWorkQueue = std::move(missing);
+      m_crawlQueueIndex.store(0);
+      m_crawledCount.store(0);
+      m_crawlPassComplete = m_crawlWorkQueue.isEmpty();
+      m_crawlDbFull = false;
+      qDebug() << "[ImageModel] Cache nuked! Automatically re-armed aggressive crawler with"
+               << m_crawlWorkQueue.size() << "items for current folder/drive.";
+    } else {
+      m_crawlWorkQueue.clear();
+      m_crawlQueueIndex.store(0);
+      m_crawledCount.store(0);
+      m_crawlPassComplete = false;
+    }
     emit crawlerProgressChanged();
   });
 }

@@ -788,11 +788,36 @@ void FileCacheManager::nukeCacheForPrefix(const QString& pathPrefix) {
         settings.remove(root);
     }
 
-    if (removed > 0) {
-        m_dirty = true;
-        m_db->save(m_dbPath);
-        emit cacheCleared();
+    // Wipe serialized folder metadata databases (.bin) that match this root prefix
+    QString folderCacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+    QDir folderDir(folderCacheDir);
+    if (folderDir.exists()) {
+        QFileInfoList binFiles = folderDir.entryInfoList(QStringList() << "*.bin", QDir::Files);
+        for (const auto& binInfo : binFiles) {
+            QFile bf(binInfo.absoluteFilePath());
+            if (bf.open(QIODevice::ReadOnly)) {
+                QDataStream in(&bf);
+                int count = 0;
+                in >> count;
+                if (count > 0) {
+                    QString samplePath;
+                    qint64 s;
+                    QDateTime d;
+                    in >> samplePath >> s >> d;
+                    if (extractRoot(samplePath) == root) {
+                        bf.close();
+                        QFile::remove(binInfo.absoluteFilePath());
+                        continue;
+                    }
+                }
+                bf.close();
+            }
+        }
     }
+
+    m_dirty = true;
+    m_db->save(m_dbPath);
+    emit cacheCleared();
     qInfo() << "[FileCacheManager] Nuked" << removed << "entries for prefix:" << pathPrefix;
 }
 
