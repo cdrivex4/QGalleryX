@@ -493,10 +493,10 @@ QString FileCacheManager::getCoalesceKey(const QString &id, const QSize &size) {
     // Fast CPU-only MD5 hash of normalized file path — ZERO network SMB roundtrips!
     QString pathHash = QString::fromUtf8(QCryptographicHash::hash(realPath.toUtf8(), QCryptographicHash::Md5).toHex());
 
-    // Single unified thumbnail bucket ONLY for grid/overview/semantic thumbnail sizes (width & height <= 384px).
-    // Full photo viewer requests (size is invalid, empty, or >384px) MUST NOT return _thumb
+    // Single unified thumbnail bucket ONLY for grid/overview/semantic thumbnail sizes (width & height <= 512px).
+    // Full photo viewer requests (size is invalid, empty, or >512px) MUST NOT return _thumb
     // so they decode the full-resolution original image!
-    if (size.isValid() && !size.isEmpty() && size.width() <= 384 && size.height() <= 384) {
+    if (size.isValid() && !size.isEmpty() && size.width() <= 512 && size.height() <= 512) {
         return QString("%1_thumb").arg(pathHash);
     }
 

@@ -510,7 +510,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_data",
-      "community": 81,
+      "community": 46,
       "norm_label": "data"
     },
     {
@@ -620,7 +620,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_albummodel_albummodel_m_albums",
-      "community": 46,
+      "community": 81,
       "norm_label": "m_albums"
     },
     {
@@ -690,7 +690,7 @@
       "source_location": "L98",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate",
-      "community": 90,
+      "community": 92,
       "norm_label": "queueguardstate"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_drive",
-      "community": 90,
+      "community": 92,
       "norm_label": "drive"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_taskid",
-      "community": 90,
+      "community": 92,
       "norm_label": "taskid"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_executed",
-      "community": 90,
+      "community": 92,
       "norm_label": "executed"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "src_asyncimageprovider_queueguardstate_queueguardstate",
-      "community": 90,
+      "community": 92,
       "norm_label": ".queueguardstate()"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qsize",
-      "community": 92,
+      "community": 90,
       "norm_label": "qsize"
     },
     {
@@ -800,7 +800,7 @@
       "source_location": "L190",
       "_origin": "ast",
       "id": "src_asyncimageprovider_getreallocalpath",
-      "community": 92,
+      "community": 90,
       "norm_label": "getreallocalpath()"
     },
     {
@@ -810,7 +810,7 @@
       "source_location": "L202",
       "_origin": "ast",
       "id": "src_asyncimageprovider_getdiskcachepath",
-      "community": 92,
+      "community": 90,
       "norm_label": "getdiskcachepath()"
     },
     {
@@ -880,7 +880,7 @@
       "source_location": "L404",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_asyncimageprovider",
-      "community": 65,
+      "community": 23,
       "norm_label": "asyncimageprovider::asyncimageprovider()"
     },
     {
@@ -910,7 +910,7 @@
       "source_location": "L419",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageresponse_asyncimageresponse",
-      "community": 92,
+      "community": 90,
       "norm_label": "asyncimageresponse::~asyncimageresponse()"
     },
     {
@@ -960,7 +960,7 @@
       "source_location": "L448",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageresponse_handledone",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageresponse::handledone()"
     },
     {
@@ -970,7 +970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_asyncimageprovider_cpp_qimage",
-      "community": 92,
+      "community": 57,
       "norm_label": "qimage"
     },
     {
@@ -990,7 +990,7 @@
       "source_location": "L495",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_abortifnotneeded",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageprovider::abortifnotneeded()"
     },
     {
@@ -1000,7 +1000,7 @@
       "source_location": "L532",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 29,
+      "community": 20,
       "norm_label": "asyncimageprovider::delivertopending()"
     },
     {
@@ -1060,7 +1060,7 @@
       "source_location": "L636",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 65,
+      "community": 23,
       "norm_label": "asyncimageprovider::schedulestagingprocessing()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_location": "L846",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
-      "community": 92,
+      "community": 90,
       "norm_label": "asyncimageprovider::processimagetaskinternal()"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "L1267",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_getcachedimage",
-      "community": 92,
+      "community": 90,
       "norm_label": "asyncimageprovider::getcachedimage()"
     },
     {
@@ -1110,7 +1110,7 @@
       "source_location": "L1278",
       "_origin": "ast",
       "id": "src_asyncimageprovider_asyncimageprovider_insertcachedimage",
-      "community": 92,
+      "community": 57,
       "norm_label": "asyncimageprovider::insertcachedimage()"
     },
     {
@@ -1370,7 +1370,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_h_qimage",
-      "community": 59,
+      "community": 66,
       "norm_label": "qimage"
     },
     {
@@ -1390,7 +1390,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_workduration",
-      "community": 81,
+      "community": 7,
       "norm_label": "m_workduration"
     },
     {
@@ -1520,7 +1520,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_requestimageresponse",
-      "community": 29,
+      "community": 20,
       "norm_label": "requestimageresponse"
     },
     {
@@ -1540,7 +1540,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_insertcachedimage",
-      "community": 92,
+      "community": 90,
       "norm_label": "insertcachedimage"
     },
     {
@@ -1670,7 +1670,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetask",
-      "community": 35,
+      "community": 20,
       "norm_label": "processimagetask"
     },
     {
@@ -1700,7 +1700,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_delivertopending",
-      "community": 35,
+      "community": 20,
       "norm_label": "delivertopending"
     },
     {
@@ -1720,7 +1720,7 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
-      "community": 35,
+      "community": 20,
       "norm_label": "processimagetaskinternal"
     },
     {
@@ -1740,7 +1740,7 @@
       "source_location": "L121",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_stagedrequestcount",
-      "community": 20,
+      "community": 81,
       "norm_label": "stagedrequestcount"
     },
     {
@@ -1880,7 +1880,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_queuerequest",
-      "community": 29,
+      "community": 20,
       "norm_label": "queuerequest"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_schedulestagingprocessing",
-      "community": 29,
+      "community": 20,
       "norm_label": "schedulestagingprocessing"
     },
     {
@@ -2010,7 +2010,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_desktophelper_h_src_desktophelper",
-      "community": 66,
+      "community": 59,
       "norm_label": "desktophelper.h"
     },
     {
@@ -2030,7 +2030,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qobject",
-      "community": 66,
+      "community": 59,
       "norm_label": "qobject"
     },
     {
@@ -3780,7 +3780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h",
-      "community": 66,
+      "community": 80,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -4000,7 +4000,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_framebudgetscheduler_h_qelapsedtimer",
-      "community": 66,
+      "community": 80,
       "norm_label": "qelapsedtimer"
     },
     {
@@ -4180,7 +4180,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_h",
-      "community": 66,
+      "community": 59,
       "norm_label": "groupedproxymodel.h"
     },
     {
@@ -4330,7 +4330,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_getlabelforproxyindex",
-      "community": 22,
+      "community": 81,
       "norm_label": "getlabelforproxyindex"
     },
     {
@@ -4370,7 +4370,7 @@
       "source_location": "L54",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_onsourcemodelreset",
-      "community": 81,
+      "community": 22,
       "norm_label": "onsourcemodelreset"
     },
     {
@@ -4400,7 +4400,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_groupedproxymodel_h_qpointer",
-      "community": 66,
+      "community": 59,
       "norm_label": "qpointer"
     },
     {
@@ -4930,7 +4930,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_imagemodel_h_qdatetime",
-      "community": 80,
+      "community": 66,
       "norm_label": "qdatetime"
     },
     {
@@ -7230,7 +7230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_systemmonitor_h",
-      "community": 65,
+      "community": 59,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -8400,7 +8400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_videothumbnailer_h",
-      "community": 59,
+      "community": 66,
       "norm_label": "videothumbnailer.h"
     },
     {
@@ -8590,7 +8590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_test_cpp",
-      "community": 65,
+      "community": 59,
       "norm_label": "main_test.cpp"
     },
     {
@@ -8600,7 +8600,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "d_dev_antigravity_src_main_test_main",
-      "community": 65,
+      "community": 59,
       "norm_label": "main()"
     },
     {
@@ -9127,7 +9127,7 @@
       "label": "normalizeRamKey()",
       "file_type": "code",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L328",
+      "source_location": "L326",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_normalizeramkey",
       "community": 34,
@@ -9720,7 +9720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_desktophelper_h_src_legacy_desktophelper",
-      "community": 59,
+      "community": 66,
       "norm_label": "desktophelper.h"
     },
     {
@@ -10557,7 +10557,7 @@
       "label": "ImageModel::getMetadata()",
       "file_type": "code",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L577",
+      "source_location": "L619",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_imagemodel_getmetadata",
       "community": 72,
@@ -10587,7 +10587,7 @@
       "label": "ImageModel::getSelectedPaths()",
       "file_type": "code",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L704",
+      "source_location": "L746",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_imagemodel_getselectedpaths",
       "community": 72,
@@ -10617,7 +10617,7 @@
       "label": "ImageModel::getActiveDirectories()",
       "file_type": "code",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L725",
+      "source_location": "L767",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_imagemodel_getactivedirectories",
       "community": 72,
@@ -10627,7 +10627,7 @@
       "label": "ImageModel::validateCacheCoverage()",
       "file_type": "code",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L974",
+      "source_location": "L1016",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_imagemodel_validatecachecoverage",
       "community": 72,
@@ -13320,7 +13320,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_systemmonitor_h_src_legacy_systemmonitor",
-      "community": 65,
+      "community": 23,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -14350,7 +14350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_videothumbnailer_h_src_legacy_videothumbnailer",
-      "community": 59,
+      "community": 66,
       "norm_label": "videothumbnailer.h"
     },
     {
@@ -14970,7 +14970,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_main",
-      "community": 59,
+      "community": 66,
       "norm_label": "main.cpp"
     },
     {
@@ -14980,7 +14980,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "src_legacy_main_preloadandlockallmodules",
-      "community": 59,
+      "community": 66,
       "norm_label": "preloadandlockallmodules()"
     },
     {
@@ -14990,7 +14990,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "src_legacy_main_main",
-      "community": 59,
+      "community": 66,
       "norm_label": "main()"
     },
     {
@@ -16490,7 +16490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_h",
-      "community": 66,
+      "community": 80,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -17290,7 +17290,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_qtimer",
-      "community": 65,
+      "community": 23,
       "norm_label": "qtimer"
     },
     {
@@ -19320,7 +19320,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_main",
-      "community": 81,
+      "community": 13,
       "norm_label": "main()"
     },
     {
@@ -19330,7 +19330,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "community": 65,
+      "community": 23,
       "norm_label": "tst_automation.cpp"
     },
     {
@@ -19490,7 +19490,7 @@
       "source_location": "L154",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_tst_automation_main",
-      "community": 65,
+      "community": 23,
       "norm_label": "main()"
     },
     {
@@ -19520,7 +19520,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_imagemodel_cpp",
-      "community": 100,
+      "community": 59,
       "norm_label": "tst_imagemodel.cpp"
     },
     {
@@ -19530,7 +19530,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel",
-      "community": 100,
+      "community": 59,
       "norm_label": "testimagemodel"
     },
     {
@@ -19540,7 +19540,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "d_dev_antigravity_tests_tst_imagemodel_testimagemodel_private",
-      "community": 100,
+      "community": 59,
       "norm_label": ".private()"
     },
     {
@@ -20791,17 +20791,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_albummodel_albummodel_data",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "test_scrollbench/src/TelemetryMonitor.h",
       "source_location": "L9",
       "weight": 1.0,
@@ -20851,6 +20840,17 @@
       "weight": 1.0,
       "source": "src_legacy_imagemodel_h_src_legacy_imagemodel",
       "target": "d_dev_antigravity_src_albummodel_h_qvector",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_albummodel_albummodel_m_albums",
       "confidence_score": 1.0
     },
     {
@@ -21387,7 +21387,7 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_asyncimageprovider",
-      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_taskreadydeferred",
+      "target": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_cpp",
       "confidence_score": 1.0
     },
     {
@@ -23011,17 +23011,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageresponse_m_workduration",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "defines",
       "confidence": "EXTRACTED",
       "source_file": "src/AsyncImageProvider.h",
@@ -23722,6 +23711,17 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_processimagetaskinternal",
       "target": "src_filecachemanager_filecachemanager"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_asyncimageprovider_asyncimageprovider_stagedrequestcount",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -28355,7 +28355,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L436",
+      "source_location": "L432",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_checkcachelevel",
       "target": "src_filecachemanager_filecachemanager"
@@ -28377,7 +28377,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L535",
+      "source_location": "L531",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
       "target": "src_filecachemanager_filecachemanager"
@@ -28388,7 +28388,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L401",
+      "source_location": "L397",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_promotel2tol1",
       "target": "src_filecachemanager_filecachemanager"
@@ -28399,7 +28399,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L249",
+      "source_location": "L247",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_requestimageresponse",
       "target": "src_filecachemanager_filecachemanager"
@@ -28421,7 +28421,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L780",
+      "source_location": "L822",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_processprecachetick",
       "target": "src_filecachemanager_filecachemanager"
@@ -28432,7 +28432,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L512",
+      "source_location": "L206",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_scandirectory",
       "target": "src_filecachemanager_filecachemanager"
@@ -29704,7 +29704,7 @@
       "source_location": "L6",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_onsourcemodelreset",
+      "target": "d_dev_antigravity_src_groupedproxymodel_groupedproxymodel_getlabelforproxyindex",
       "confidence_score": 1.0
     },
     {
@@ -29873,17 +29873,6 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_hardwareaccelerationmanager",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_cleanup"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
-      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_hardwareaccelerationmanager",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -30103,6 +30092,17 @@
       "weight": 1.0,
       "source": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_setmode",
       "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_tryinitialize"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test_scrollbench/src/main_scrollbench.cpp",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "d_dev_antigravity_test_scrollbench_src_main_scrollbench_cpp",
+      "target": "d_dev_antigravity_src_hardwareaccelerationmanager_hardwareaccelerationmanager_m_pixfmt",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -32326,7 +32326,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L560",
+      "source_location": "L556",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
       "target": "src_passivereadlatencyguard_passivereadlatencyguard"
@@ -32337,7 +32337,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L796",
+      "source_location": "L838",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_processprecachetick",
       "target": "src_passivereadlatencyguard_passivereadlatencyguard"
@@ -36972,7 +36972,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L415",
+      "source_location": "L411",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_checkcachelevel",
@@ -36982,7 +36982,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L453",
+      "source_location": "L449",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_clearcache",
@@ -37002,7 +37002,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L355",
+      "source_location": "L351",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_getcachedimage",
@@ -37012,7 +37012,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L442",
+      "source_location": "L438",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_getcachestats",
@@ -37022,7 +37022,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L368",
+      "source_location": "L364",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage",
@@ -37032,7 +37032,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L459",
+      "source_location": "L455",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
@@ -37042,7 +37042,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L376",
+      "source_location": "L372",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_promotel2tol1",
@@ -37062,7 +37062,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L410",
+      "source_location": "L406",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_setcachemaxcost",
@@ -37123,7 +37123,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L328",
+      "source_location": "L326",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_cpp_src_legacy_asyncimageprovider",
       "target": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37210,7 +37210,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L415",
+      "source_location": "L411",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_checkcachelevel",
@@ -37232,7 +37232,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L355",
+      "source_location": "L351",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_getcachedimage",
@@ -37243,7 +37243,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L368",
+      "source_location": "L364",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage",
@@ -37254,7 +37254,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L459",
+      "source_location": "L455",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
@@ -37265,7 +37265,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L376",
+      "source_location": "L372",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_promotel2tol1",
@@ -37287,7 +37287,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L328",
+      "source_location": "L326",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37298,7 +37298,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L415",
+      "source_location": "L411",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_checkcachelevel",
@@ -37320,7 +37320,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L355",
+      "source_location": "L351",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_getcachedimage",
@@ -37331,7 +37331,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L368",
+      "source_location": "L364",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage",
@@ -37343,7 +37343,7 @@
       "context": "parameter_type",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L459",
+      "source_location": "L455",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
       "target": "src_legacy_asyncimageprovider_cpp_qsize",
@@ -37353,7 +37353,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L376",
+      "source_location": "L372",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_promotel2tol1",
@@ -37375,7 +37375,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L328",
+      "source_location": "L326",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37409,7 +37409,7 @@
       "context": "return_type",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L355",
+      "source_location": "L351",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_getcachedimage",
       "target": "src_legacy_asyncimageprovider_cpp_qimage",
@@ -37419,7 +37419,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L368",
+      "source_location": "L364",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage",
@@ -37431,7 +37431,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L751",
+      "source_location": "L747",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
       "target": "src_legacy_asyncimageprovider_cpp_qimage",
@@ -37442,7 +37442,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L228",
+      "source_location": "L226",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_requestimageresponse",
       "target": "src_legacy_asyncimageprovider_cpp_qimage",
@@ -37475,7 +37475,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L417",
+      "source_location": "L413",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_checkcachelevel",
       "target": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37486,7 +37486,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L358",
+      "source_location": "L354",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_getcachedimage",
       "target": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37497,7 +37497,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L372",
+      "source_location": "L368",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage",
       "target": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37508,7 +37508,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L378",
+      "source_location": "L374",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_promotel2tol1",
       "target": "src_legacy_asyncimageprovider_normalizeramkey",
@@ -37518,7 +37518,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L415",
+      "source_location": "L411",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_checkcachelevel",
@@ -37529,7 +37529,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L442",
+      "source_location": "L438",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_getcachestats",
@@ -37540,7 +37540,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L459",
+      "source_location": "L455",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
@@ -37551,7 +37551,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L459",
+      "source_location": "L455",
       "weight": 1.0,
       "context": "generic_arg",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
@@ -37562,7 +37562,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L459",
+      "source_location": "L455",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
@@ -38079,7 +38079,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L235",
+      "source_location": "L233",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_requestimageresponse",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_getcachedimage"
@@ -38090,7 +38090,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L258",
+      "source_location": "L256",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_requestimageresponse",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage"
@@ -38101,7 +38101,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L289",
+      "source_location": "L287",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_requestimageresponse",
       "target": "src_legacy_viewportgovernor_viewportgovernor"
@@ -38123,7 +38123,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L542",
+      "source_location": "L538",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_processimagetask",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage"
@@ -38134,7 +38134,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/AsyncImageProvider.cpp",
-      "source_location": "L405",
+      "source_location": "L401",
       "weight": 1.0,
       "source": "src_legacy_asyncimageprovider_asyncimageprovider_promotel2tol1",
       "target": "src_legacy_asyncimageprovider_asyncimageprovider_insertcachedimage"
@@ -39761,7 +39761,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L627",
+      "source_location": "L669",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_applyfilter",
@@ -39771,7 +39771,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L643",
+      "source_location": "L685",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_clearselection",
@@ -39781,7 +39781,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L559",
+      "source_location": "L601",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_cropimage",
@@ -39801,7 +39801,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L693",
+      "source_location": "L735",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_deleteselected",
@@ -39811,7 +39811,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L725",
+      "source_location": "L767",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_getactivedirectories",
@@ -39821,7 +39821,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L577",
+      "source_location": "L619",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_getmetadata",
@@ -39831,7 +39831,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L704",
+      "source_location": "L746",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_getselectedpaths",
@@ -39841,7 +39841,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L714",
+      "source_location": "L756",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_getselectedtotalsizebytes",
@@ -39861,7 +39861,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L755",
+      "source_location": "L797",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_indexofpath",
@@ -39871,7 +39871,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L663",
+      "source_location": "L705",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_invertselection",
@@ -39881,7 +39881,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L942",
+      "source_location": "L984",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_ondirectorychanged",
@@ -39891,7 +39891,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L551",
+      "source_location": "L593",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_pausebackgroundtasks",
@@ -39901,7 +39901,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L920",
+      "source_location": "L962",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_processmetadatatick",
@@ -39911,7 +39911,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L767",
+      "source_location": "L809",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_processprecachetick",
@@ -39921,7 +39921,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L962",
+      "source_location": "L1004",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_recrawl",
@@ -39931,7 +39931,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L555",
+      "source_location": "L597",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_resumebackgroundtasks",
@@ -39971,7 +39971,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L653",
+      "source_location": "L695",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_selectall",
@@ -39981,7 +39981,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L747",
+      "source_location": "L789",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_selectedcount",
@@ -39991,7 +39991,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L673",
+      "source_location": "L715",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_selectitems",
@@ -40001,7 +40001,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L734",
+      "source_location": "L776",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_setdata",
@@ -40011,7 +40011,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L619",
+      "source_location": "L661",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_setfilterquery",
@@ -40021,7 +40021,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L923",
+      "source_location": "L965",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_setloadingresolution",
@@ -40031,7 +40031,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L925",
+      "source_location": "L967",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_setprecachemode",
@@ -40041,7 +40041,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L921",
+      "source_location": "L963",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_setvisibleendindex",
@@ -40051,7 +40051,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L922",
+      "source_location": "L964",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_setvisiblestartindex",
@@ -40061,7 +40061,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L974",
+      "source_location": "L1016",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_cpp_src_legacy_imagemodel",
       "target": "src_legacy_imagemodel_imagemodel_validatecachecoverage",
@@ -40105,7 +40105,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L696",
+      "source_location": "L738",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_deleteselected",
       "target": "src_legacy_imagemodel_cpp_qmodelindex",
@@ -40126,7 +40126,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L734",
+      "source_location": "L776",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_setdata",
@@ -40148,7 +40148,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L734",
+      "source_location": "L776",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_setdata",
@@ -40193,7 +40193,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L586",
+      "source_location": "L628",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_getmetadata",
       "target": "src_legacy_imagemodel_cpp_qstring",
@@ -40203,7 +40203,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L755",
+      "source_location": "L797",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_indexofpath",
@@ -40214,7 +40214,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L942",
+      "source_location": "L984",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_ondirectorychanged",
@@ -40236,7 +40236,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L619",
+      "source_location": "L661",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_setfilterquery",
@@ -40247,7 +40247,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L559",
+      "source_location": "L601",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_cropimage",
@@ -40258,7 +40258,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L577",
+      "source_location": "L619",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_imagemodel_imagemodel_getmetadata",
@@ -40269,7 +40269,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L974",
+      "source_location": "L1016",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_imagemodel_imagemodel_validatecachecoverage",
@@ -40280,7 +40280,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L673",
+      "source_location": "L715",
       "weight": 1.0,
       "context": "parameter_type",
       "source": "src_legacy_imagemodel_imagemodel_selectitems",
@@ -40291,7 +40291,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L704",
+      "source_location": "L746",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_imagemodel_imagemodel_getselectedpaths",
@@ -40302,7 +40302,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L725",
+      "source_location": "L767",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_imagemodel_imagemodel_getactivedirectories",
@@ -40313,7 +40313,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L714",
+      "source_location": "L756",
       "weight": 1.0,
       "context": "return_type",
       "source": "src_legacy_imagemodel_imagemodel_getselectedtotalsizebytes",
@@ -40325,7 +40325,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L779",
+      "source_location": "L821",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_processprecachetick",
       "target": "src_legacy_imagemodel_cpp_qint64",
@@ -41718,7 +41718,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L956",
+      "source_location": "L998",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_ondirectorychanged",
       "target": "src_legacy_imagemodel_imagemodel_scandirectory"
@@ -41729,7 +41729,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src_legacy/ImageModel.cpp",
-      "source_location": "L950",
+      "source_location": "L992",
       "weight": 1.0,
       "source": "src_legacy_imagemodel_imagemodel_ondirectorychanged",
       "target": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_qtimer"
@@ -52094,7 +52094,7 @@
       "source_location": "L175",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_name",
       "confidence_score": 1.0
     },
     {
@@ -52351,5 +52351,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4c5f56c42c2a0eab9439043c731db65e14ab37eb"
+  "built_at_commit": "eff55098c224d52ebb39b9392b1b7467bf0d18c4"
 }

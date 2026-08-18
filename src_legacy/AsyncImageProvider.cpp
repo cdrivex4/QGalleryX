@@ -191,15 +191,13 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   cleanId = QUrl::fromPercentEncoding(cleanId.toUtf8());
 
   int modelIdx = -1;
-  int retryIndex = cleanId.indexOf("?idx=");
-  if (retryIndex != -1) {
-    modelIdx = cleanId.mid(retryIndex + 5).toInt();
-    cleanId = cleanId.left(retryIndex);
-  } else {
-    retryIndex = cleanId.indexOf("?retry=");
-    if (retryIndex != -1) {
-      cleanId = cleanId.left(retryIndex);
+  int qIdx = cleanId.indexOf('?');
+  if (qIdx != -1) {
+    int idxPos = cleanId.indexOf("idx=");
+    if (idxPos != -1) {
+      modelIdx = cleanId.mid(idxPos + 4).toInt();
     }
+    cleanId = cleanId.left(qIdx);
   }
 
   // Canonicalize file:/// URIs to uniform local path
@@ -244,8 +242,8 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   }
 
   // 2. Check L2 Memory-Mapped Disk Cache Synchronously (0ms instant hit from crawler for thumbnails ONLY!)
-  // Full photo viewer requests (size is invalid, empty, or >384px) must decode the full-resolution original image.
-  if (requestedSize.isValid() && !requestedSize.isEmpty() && requestedSize.width() <= 384 && requestedSize.height() <= 384) {
+  // Full photo viewer requests (size is invalid, empty, or >512px) must decode the full-resolution original image.
+  if (requestedSize.isValid() && !requestedSize.isEmpty() && requestedSize.width() <= 512 && requestedSize.height() <= 512) {
     QByteArray mmapData = FileCacheManager::instance().getCachedData(cleanId, requestedSize);
     if (!mmapData.isEmpty()) {
       QImage diskImg;
@@ -328,10 +326,8 @@ AsyncImageProvider::requestImageResponse(const QString &id,
 static QString normalizeRamKey(const QString &id, const QSize &size) {
   QString cleanId = id;
   cleanId = QUrl::fromPercentEncoding(cleanId.toUtf8());
-  int retryIndex = cleanId.indexOf("?idx=");
-  if (retryIndex != -1) cleanId = cleanId.left(retryIndex);
-  retryIndex = cleanId.indexOf("?retry=");
-  if (retryIndex != -1) cleanId = cleanId.left(retryIndex);
+  int qIdx = cleanId.indexOf('?');
+  if (qIdx != -1) cleanId = cleanId.left(qIdx);
 
   if (cleanId.startsWith("file:", Qt::CaseInsensitive)) {
     QUrl url(cleanId);
@@ -343,7 +339,7 @@ static QString normalizeRamKey(const QString &id, const QSize &size) {
   cleanId = QDir::cleanPath(cleanId);
   cleanId = QDir::toNativeSeparators(cleanId).toLower();
 
-  if (size.isValid() && !size.isEmpty() && size.width() <= 384 && size.height() <= 384) {
+  if (size.isValid() && !size.isEmpty() && size.width() <= 512 && size.height() <= 512) {
     return cleanId + "_thumb";
   }
   if (size.isValid() && !size.isEmpty()) {

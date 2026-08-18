@@ -196,9 +196,35 @@ void ImageModel::scanDirectory(const QString &path) {
     applyFilter();
     emit itemsPopulated(m_scanId);
     emit passOneCompleted(m_scanId);
-    qDebug() << "[ImageModel] Loaded" << m_allItems.size() << "cached items instantly for:" << cleanPath;
+
+    // Build crawler work queue and launch RAM promotion immediately at t=0ms
+    int res = m_loadingResolution;
+    QSize thumbSize(res, res);
+    QList<QString> missing;
+    missing.reserve(m_allItems.size());
+    for (const auto &item : m_allItems) {
+      if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
+        missing.append(item.filePath);
+    }
+    m_crawlWorkQueue = std::move(missing);
+    m_crawlQueueIndex.store(0);
+    m_crawledCount.store(0);
+    m_crawlPassComplete = m_crawlWorkQueue.isEmpty();
+    m_crawlDbFull = false;
+    emit crawlerProgressChanged();
+
+    // Start background promotion of L2 disk mmap to L1 RAM immediately
+    QThreadPool::globalInstance()->start([items = m_allItems, res]() {
+      QSize sz(res, res);
+      for (const auto &item : items) {
+        AsyncImageProvider::promoteL2ToL1(item.filePath, sz);
+      }
+    });
+
+    qDebug() << "[ImageModel] Loaded" << m_allItems.size() << "cached items instantly for:" << cleanPath
+             << "(" << m_crawlWorkQueue.size() << "uncached)";
   } else {
-    // Clear current images only if no cache exists
+    // Clear current images only if no cache exists (Cold Path)
     beginResetModel();
     m_allItems.clear();
     m_images.clear();
@@ -207,15 +233,13 @@ void ImageModel::scanDirectory(const QString &path) {
     m_scanProgress = 0;
     emit totalCountChanged();
     emit scanProgressChanged();
+    m_crawlWorkQueue.clear();
+    m_crawlQueueIndex.store(0);
+    m_crawledCount.store(0);
+    m_crawlPassComplete = false;
   }
 
-  // Reset background crawler state
-  m_crawlWorkQueue.clear();
-  m_crawlQueueIndex.store(0);
-  m_crawledCount.store(0);
-  m_crawlPassComplete = false;
-
-  // Clear previous pending tasks (keep RAM cache warm)
+  // Clear previous pending worker tasks (keep RAM cache warm)
   TaskScheduler::instance().clear();
 
   // Run live MFT / filesystem scanning via TaskScheduler
@@ -488,19 +512,38 @@ void ImageModel::scanDirectory(const QString &path) {
                     return a.date > b.date;
                   });
 
-        // Final UI commit
-        QMetaObject::invokeMethod(this, [this, cleanPath, fastItems, timer, currentGen]() {
+        // Final UI commit & reconciliation
+        QMetaObject::invokeMethod(this, [this, cleanPath, fastItems, timer, currentGen, fastScanSuccess, method]() {
           if (m_scanGeneration != currentGen) return;
-          m_allItems = fastItems;
-          applyFilter();
+
+          bool filesChanged = true;
+          if (fastItems.size() == m_allItems.size()) {
+            filesChanged = false;
+            for (int i = 0; i < fastItems.size(); ++i) {
+              if (fastItems[i].filePath != m_allItems[i].filePath) {
+                filesChanged = true;
+                break;
+              }
+            }
+          }
+
+          if (filesChanged) {
+            m_allItems = fastItems;
+            applyFilter();
+            m_totalCount = m_allItems.size();
+            m_scanProgress = m_allItems.size();
+            emit totalCountChanged();
+            emit scanProgressChanged();
+            emit itemsPopulated(m_scanId);
+          }
+
           m_isLoading = false;
-          m_scanProgress = m_allItems.size();
-          m_totalCount = m_allItems.size();
+          m_scanMethod = fastScanSuccess ? "Direct MFT (Verified)" : method;
+          m_scanDurationMs = (int)timer.elapsed();
           emit isLoadingChanged();
-          emit scanProgressChanged();
-          emit totalCountChanged();
-          emit itemsPopulated(m_scanId);
-          qDebug() << "[ImageModel] Completed directory scan in" << timer.elapsed() << "ms. Total items:" << m_allItems.size();
+          emit scanMethodChanged();
+
+          qDebug() << "[ImageModel] Verified directory scan in" << timer.elapsed() << "ms. Total items:" << m_allItems.size();
 
           // Build precise work queue: ask the mmap index which files are genuinely absent.
           // This is O(N) hash lookups with zero disk I/O — ground truth, no cursor math.
@@ -515,15 +558,14 @@ void ImageModel::scanDirectory(const QString &path) {
           m_crawlWorkQueue = std::move(missing);
           m_crawlQueueIndex.store(0);
           m_crawledCount.store(0);
-          m_crawlPassComplete = false;
+          m_crawlPassComplete = m_crawlWorkQueue.isEmpty();
           m_crawlDbFull = false;
           qDebug() << "[Crawler] Work queue ready:" << m_crawlWorkQueue.size()
                    << "uncached /" << fastItems.size() << "total.";
           emit crawlerProgressChanged();
 
           // Reconcile DB against actual filesystem:
-          // Any entry in the mmap whose source file is no longer on disk gets pruned.
-          // Run in background — doesn't block the UI or the crawler.
+          // Only prune entries in cleanPath whose source files were deleted
           QThreadPool::globalInstance()->start([cleanPath, fastItems, res]() {
             QSet<QString> validPaths;
             validPaths.reserve(fastItems.size());
