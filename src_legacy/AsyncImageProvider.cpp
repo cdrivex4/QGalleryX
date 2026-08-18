@@ -233,9 +233,10 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   QImage cached = getCachedImage(cleanId, requestedSize);
   if (!cached.isNull()) {
     int hits = s_l1Hits.fetch_add(1, std::memory_order_relaxed) + 1;
-    if (hits % 50 == 0 || hits <= 5) {
+    if (s_logLevel > 1 || hits % 50 == 0 || hits <= 5) {
       qDebug() << "[Cache] L1 RAM HIT (" << hits << "hits)" << QFileInfo(cleanId).fileName();
     }
+    // Individual, unbatched delivery to Qt Quick render engine
     QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
                               Q_ARG(QImage, cached));
     return response;
@@ -249,11 +250,12 @@ AsyncImageProvider::requestImageResponse(const QString &id,
       QImage diskImg;
       if (diskImg.loadFromData(mmapData)) {
         int hits = s_l2Hits.fetch_add(1, std::memory_order_relaxed) + 1;
-        if (hits % 25 == 0 || hits <= 5) {
+        if (s_logLevel > 1 || hits % 25 == 0 || hits <= 5) {
           qDebug() << "[Cache] L2 MMAP DISK HIT (" << hits << "hits)" << QFileInfo(cleanId).fileName()
                    << "(" << mmapData.size() / 1024 << "KB slice)";
         }
         insertCachedImage(cleanId, diskImg, requestedSize);
+        // Individual, unbatched delivery to Qt Quick render engine
         QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
                                   Q_ARG(QImage, diskImg));
         return response;
