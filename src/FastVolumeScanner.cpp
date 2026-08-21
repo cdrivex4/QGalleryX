@@ -13,6 +13,12 @@ FastVolumeScanner::~FastVolumeScanner() {
 }
 
 bool FastVolumeScanner::scanVolume(const QString &volumePath) {
+#ifdef _WIN32
+  HANDLE hCurThread = GetCurrentThread();
+  int oldPriority = GetThreadPriority(hCurThread);
+  SetThreadPriority(hCurThread, THREAD_PRIORITY_BELOW_NORMAL);
+#endif
+
   // Extract volume root (e.g., "C:\" -> "\\.\C:")
   QString vol = volumePath.left(3);
   m_volumeDrive = vol.left(2);
@@ -21,6 +27,9 @@ bool FastVolumeScanner::scanVolume(const QString &volumePath) {
   if (!openVolume(devicePath)) {
     qWarning() << "FastScanner: Failed to open volume" << devicePath
                << "(Admin rights required?)";
+#ifdef _WIN32
+    SetThreadPriority(hCurThread, oldPriority);
+#endif
     return false;
   }
 
@@ -29,6 +38,9 @@ bool FastVolumeScanner::scanVolume(const QString &volumePath) {
 
   if (!enumerateFiles(vol)) {
     qWarning() << "FastScanner: Failed to enumerate MFT";
+#ifdef _WIN32
+    SetThreadPriority(hCurThread, oldPriority);
+#endif
     return false;
   }
 
@@ -39,6 +51,9 @@ bool FastVolumeScanner::scanVolume(const QString &volumePath) {
   qDebug() << "FastScanner: Path Reconstruction took" << timer.elapsed()
            << "ms";
 
+#ifdef _WIN32
+  SetThreadPriority(hCurThread, oldPriority);
+#endif
   return true;
 }
 
@@ -243,7 +258,8 @@ void FastVolumeScanner::buildPaths() {
   // Pre-seed root FRN 5 (NTFS volume root)
   pathCache[5] = drivePrefix;
 
-  auto resolvePath = [&](DWORDLONG frn, auto &self) -> QString {
+  auto resolvePath = [&](DWORDLONG frn, int depth, auto &self) -> QString {
+    if (depth > 64) return drivePrefix; // Guard against circular MFT loops / deep recursion stack overflow
     if (pathCache.count(frn))
       return pathCache[frn];
 
@@ -257,17 +273,25 @@ void FastVolumeScanner::buildPaths() {
       return drivePrefix; // Root or orphan
 
     size_t index = it->second;
+    if (index >= m_soa.parentFrns.size())
+      return drivePrefix;
+
     DWORDLONG parentFrn = m_soa.parentFrns[index];
+    uint32_t nameOffset = m_soa.nameOffsets[index];
+    uint32_t nameLength = m_soa.nameLengths[index];
+    if (nameOffset + nameLength > m_soa.stringPool.size())
+      return drivePrefix;
+
     QString name =
-        QString::fromUtf8(m_soa.stringPool.data() + m_soa.nameOffsets[index],
-                          m_soa.nameLengths[index]);
+        QString::fromUtf8(m_soa.stringPool.data() + nameOffset,
+                          nameLength);
 
     if (name.isEmpty() || name == "." || name == "$Root" || parentFrn == frn) {
       pathCache[frn] = drivePrefix;
       return drivePrefix;
     }
 
-    QString parentPath = self(parentFrn, self);
+    QString parentPath = self(parentFrn, depth + 1, self);
     QString fullPath;
     if (parentPath.isEmpty() || parentPath == drivePrefix) {
       fullPath = drivePrefix + "/" + name;
@@ -283,7 +307,7 @@ void FastVolumeScanner::buildPaths() {
     if (m_soa.isDir[i])
       continue;
 
-    QString fullPath = resolvePath(m_soa.frns[i], resolvePath);
+    QString fullPath = resolvePath(m_soa.frns[i], 0, resolvePath);
 
     ScannedFile sf;
     sf.path = fullPath;

@@ -242,26 +242,8 @@ AsyncImageProvider::requestImageResponse(const QString &id,
     return response;
   }
 
-  // 2. Check L2 Memory-Mapped Disk Cache Synchronously (0ms instant hit from crawler for thumbnails ONLY!)
-  // Full photo viewer requests (size is invalid, empty, or >512px) must decode the full-resolution original image.
-  if (requestedSize.isValid() && !requestedSize.isEmpty() && requestedSize.width() <= 512 && requestedSize.height() <= 512) {
-    QByteArray mmapData = FileCacheManager::instance().getCachedData(cleanId, requestedSize);
-    if (!mmapData.isEmpty()) {
-      QImage diskImg;
-      if (diskImg.loadFromData(mmapData)) {
-        int hits = s_l2Hits.fetch_add(1, std::memory_order_relaxed) + 1;
-        if (s_logLevel > 1 || hits % 25 == 0 || hits <= 5) {
-          qDebug() << "[Cache] L2 MMAP DISK HIT (" << hits << "hits)" << QFileInfo(cleanId).fileName()
-                   << "(" << mmapData.size() / 1024 << "KB slice)";
-        }
-        insertCachedImage(cleanId, diskImg, requestedSize);
-        // Individual, unbatched delivery to Qt Quick render engine
-        QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
-                                  Q_ARG(QImage, diskImg));
-        return response;
-      }
-    }
-  }
+  // 2. L2 Memory-Mapped Disk Cache and RAW/Video/Image Decoding are strictly offloaded
+  // to TaskScheduler worker threads to guarantee 0ms main GUI thread decompression latency.
 
   QString key = cleanId + "_" + QString::number(requestedSize.width()) + "x" +
                 QString::number(requestedSize.height());

@@ -22,13 +22,20 @@ TaskScheduler::TaskScheduler()
   int settingsThreads = settings.value("concurrentThreads", -1).toInt();
 
   int cpuWorkerCount;
+  int ioWorkerCount;
   if (settingsThreads > 0) {
     cpuWorkerCount = settingsThreads;
+    ioWorkerCount = (cpuCores <= 4) ? 1 : 2;
   } else {
-    cpuWorkerCount = std::max(2, cpuCores - 1);
+    // Permanently reserve threads for the UI thread, Scene Graph, and OS compositor
+    if (cpuCores <= 4) {
+      cpuWorkerCount = 2;
+      ioWorkerCount = 1;
+    } else {
+      cpuWorkerCount = std::max(2, cpuCores - 2);
+      ioWorkerCount = 2;
+    }
   }
-
-  int ioWorkerCount = 2;
 
   for (int i = 0; i < cpuWorkerCount; ++i) {
     m_cpuThreads.emplace_back(&TaskScheduler::cpuWorkerLoop, this);
@@ -179,29 +186,13 @@ void TaskScheduler::cpuWorkerLoop() {
         break;
 
       RingBufferDispatcher::DispatchEntry entry;
-      if (m_dispatcher.pop(entry, m_governor.load())) {
-        // Skip background tasks if background is paused
-        if (m_backgroundPaused &&
-            entry.priority != RingBufferDispatcher::Ring0_Immediate) {
-          // Re-queue the task — pop() is destructive, can't just skip
-          m_dispatcher.push(entry.task, entry.priority, entry.key);
-          m_cpuCondition.wait(&m_cpuMutex, 100); // Back off to avoid spin
-          continue;
-        }
-
-        // Starvation Protection
-        if (entry.priority == RingBufferDispatcher::Ring2_Precache &&
-            m_activeCpuThreads.load() >=
-                std::max(1, static_cast<int>(m_cpuThreads.size()) - 1)) {
-          // Re-queue it (push back) and continue
-          m_dispatcher.push(entry.task, entry.priority, entry.key);
-          continue;
-        }
-
+      bool allowBg = !m_backgroundPaused.load(std::memory_order_relaxed);
+      if (m_dispatcher.pop(entry, m_governor.load(), allowBg)) {
         task = entry.task;
         found = true;
       }
     }
+
 
     if (found && task) {
       m_activeCpuThreads++;
@@ -213,8 +204,10 @@ void TaskScheduler::cpuWorkerLoop() {
       } catch (...) {
         std::cerr << "[TaskScheduler] CPU Task Unknown Exception" << std::endl;
       }
+      task = nullptr;
       m_activeCpuThreads--;
     } else if (!found && m_running) {
+
       QMutexLocker lock(&m_cpuMutex);
       m_cpuCondition.wait(&m_cpuMutex, 50);
     }

@@ -406,8 +406,19 @@ Item {
                     }
                     audioOutput: AudioOutput {
                         id: audioOutput
-                        volume: 1.0
-                        muted: false
+                        volume: (typeof appSettings !== "undefined") ? appSettings.mediaVolume : 1.0
+                        muted: (typeof appSettings !== "undefined") ? appSettings.mediaMuted : false
+
+                        onVolumeChanged: {
+                            if (typeof appSettings !== "undefined" && appSettings.mediaVolume !== volume) {
+                                appSettings.mediaVolume = volume
+                            }
+                        }
+                        onMutedChanged: {
+                            if (typeof appSettings !== "undefined" && appSettings.mediaMuted !== muted) {
+                                appSettings.mediaMuted = muted
+                            }
+                        }
                     }
                     videoOutput: videoOutput
                     autoPlay: false

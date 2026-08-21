@@ -23,6 +23,13 @@ Item {
     // Loading Resolution (Quality/Performance setting)
     property int loadingResolution: appSettings.thumbnailSize
     
+    // Dynamically downsample the loaded texture to match the UI grid size, saving massive VRAM
+    property int effectiveLoadingResolution: {
+        if (uiThumbnailSize <= 48) return 64
+        if (uiThumbnailSize <= 128) return 128
+        return 256
+    }
+    
     // Dynamic Section Role based on Zoom Level
     property string currentSectionRole: {
         if (uiThumbnailSize < 80) return "sectionYear"
@@ -104,6 +111,7 @@ Item {
         }
 
         property real lastContentY: 0
+        property real lastViewportY: 0
         function updateViewportNow() {
             var sIdx = indexAt(width / 2, contentY)
             var eIdx = indexAt(width / 2, contentY + height)
@@ -116,9 +124,15 @@ Item {
         }
 
         onContentYChanged: {
-            updateViewportNow()
+            if (Math.abs(contentY - lastViewportY) >= cellHeight * 0.5) {
+                lastViewportY = contentY
+                updateViewportNow()
+            }
             lastContentY = contentY
         }
+        
+        onMovementEnded: updateViewportNow()
+        onFlickEnded: updateViewportNow()
         
         onCountChanged: {
             Qt.callLater(updateViewportNow)
@@ -130,8 +144,11 @@ Item {
         cellHeight: uiThumbnailSize
         model: imageModel
         
-        // Increased cacheBuffer to utilize available memory and improve scrolling performance
-        cacheBuffer: cellHeight * 10
+        // Qt 6 Delegate Pooling: Recycles QML items instead of allocating/destroying on scroll
+        reuseItems: true
+        
+        // Bounded cacheBuffer to prevent thousands of off-screen items when zoomed out
+        cacheBuffer: Math.min(300, cellHeight * 3)
         
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AlwaysOn
@@ -148,22 +165,20 @@ Item {
             width: grid.cellWidth
             height: grid.cellHeight
             
-            // Case-insensitive check
-            property var fileExt: model.filePath.split('.').pop().toLowerCase()
-            property bool isVideo: fileExt === "mp4" || fileExt === "mkv" || fileExt === "avi" || fileExt === "mov"
+            // Direct C++ Role Access (Zero JS string splitting overhead)
+            readonly property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
 
             Image {
                 id: img
                 anchors.fill: parent
                 anchors.margins: 1
-                // We now have FFmpeg VideoThumbnailer wired into AsyncImageProvider
                 source: "image://async/" + model.filePath + "?idx=" + index
-                sourceSize.width: root.loadingResolution
-                sourceSize.height: root.loadingResolution
+                sourceSize.width: root.effectiveLoadingResolution
+                sourceSize.height: root.effectiveLoadingResolution
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
                 cache: true
-                mipmap: true // Enable GPU mipmapping
+                mipmap: false // Avoid GPU mipmap generation overhead on dynamic tiles
                 
                 // Video Play Icon (Overlay on top of actual thumbnail)
                 Rectangle {
@@ -188,24 +203,6 @@ Item {
                 }
                 
                 property bool hasError: status === Image.Error
-                property real loadStartTime: 0
-                
-                Component.onCompleted: loadStartTime = new Date().getTime()
-                
-                property bool hasReported: false
-                
-                onStatusChanged: {
-                    if (status === Image.Ready && !hasReported) {
-                        hasReported = true
-                        if (loadStartTime === 0) {
-                            // Loaded instantly (cached) or before Component.onCompleted
-                            root.imageLoaded(0)
-                        } else {
-                            var timeTaken = new Date().getTime() - loadStartTime
-                            root.imageLoaded(timeTaken)
-                        }
-                    }
-                }
                 
                 Rectangle {
                     anchors.fill: parent
@@ -334,7 +331,7 @@ Item {
         }
         onScaleChanged: (delta) => {
             var newSize = appSettings.gridResolution * (1 + (delta - 1) * 0.5) // Dampen sensitivity
-            appSettings.gridResolution = Math.max(40, Math.min(newSize, 400))
+            appSettings.gridResolution = Math.max(32, Math.min(newSize, 256))
         }
     }
     

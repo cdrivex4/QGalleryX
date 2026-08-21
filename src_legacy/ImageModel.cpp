@@ -25,6 +25,21 @@
 #include <algorithm>
 #include <libraw/libraw.h>
 
+static QList<ImageInfo> filterImageList(const QList<ImageInfo> &items, const QString &query) {
+  if (query.isEmpty()) {
+    return items;
+  }
+  QList<ImageInfo> result;
+  result.reserve(items.size());
+  QString lowerQuery = query.toLower();
+  for (const auto &item : items) {
+    if (item.fileName.toLower().contains(lowerQuery) || item.filePath.toLower().contains(lowerQuery)) {
+      result.append(item);
+    }
+  }
+  return result;
+}
+
 ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   m_precacheTimer = new QTimer(this);
   connect(m_precacheTimer, &QTimer::timeout, this, &ImageModel::processPrecacheTick);
@@ -32,6 +47,7 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
 
   connect(&m_folderWatcher, &QFileSystemWatcher::directoryChanged, this, &ImageModel::onDirectoryChanged);
 
+  // Pass 'this' as context object so Qt automatically unregisters connection on destruction
   connect(&FileCacheManager::instance(), &FileCacheManager::cacheCleared, this, [this]() {
     // Detect that the active DB was nuked/cleared and immediately reset the aggressive crawler
     if (!m_allItems.isEmpty()) {
@@ -43,7 +59,10 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
         if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
           missing.append(item.filePath);
       }
-      m_crawlWorkQueue = std::move(missing);
+      {
+        QMutexLocker lock(&m_crawlMutex);
+        m_crawlWorkQueue = std::move(missing);
+      }
       m_crawlQueueIndex.store(0);
       m_crawledCount.store(0);
       m_crawlPassComplete = m_crawlWorkQueue.isEmpty();
@@ -51,6 +70,7 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
       qDebug() << "[ImageModel] Cache nuked! Automatically re-armed aggressive crawler with"
                << m_crawlWorkQueue.size() << "items for current folder/drive.";
     } else {
+      QMutexLocker lock(&m_crawlMutex);
       m_crawlWorkQueue.clear();
       m_crawlQueueIndex.store(0);
       m_crawledCount.store(0);
@@ -58,6 +78,24 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
     }
     emit crawlerProgressChanged();
   });
+}
+
+ImageModel::~ImageModel() {
+  m_aliveToken->store(false);
+  m_scanGeneration++;
+  m_precacheGeneration++;
+  m_filterGeneration++;
+
+  if (m_precacheTimer) {
+    m_precacheTimer->stop();
+  }
+
+  if (!m_folderWatcher.directories().isEmpty()) {
+    m_folderWatcher.removePaths(m_folderWatcher.directories());
+  }
+
+  QMutexLocker lock(&m_crawlMutex);
+  m_crawlWorkQueue.clear();
 }
 
 int ImageModel::rowCount(const QModelIndex &parent) const {
@@ -116,6 +154,8 @@ QVariant ImageModel::data(const QModelIndex &index, int role) const {
   case IsRawRole: {
     return DesktopHelper::staticGetFileType(info.filePath) == DesktopHelper::Raw;
   }
+  case IsVideoRole:
+    return info.isVideo;
   case IsSelectedRole:
     return info.isSelected;
 
@@ -136,6 +176,7 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   roles[ExifRole] = "exif";
   roles[IsRawRole] = "isRaw";
   roles[IsSelectedRole] = "isSelected";
+  roles[IsVideoRole] = "isVideo";
   return roles;
 }
 
@@ -160,6 +201,9 @@ void ImageModel::scanDirectory(const QString &path) {
     cleanPath = cleanPath.mid(1);
   }
 
+  auto alive = m_aliveToken;
+  QPointer<ImageModel> safeThis(this);
+
   cleanPath = QDir::cleanPath(cleanPath);
   cleanPath = QDir::toNativeSeparators(cleanPath);
 
@@ -175,7 +219,14 @@ void ImageModel::scanDirectory(const QString &path) {
   }
 
   // --- STEP 1: INSTANT CACHED LOAD FROM FOLDER DB (0ms UI Display) ---
-  QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+  QString cacheDir;
+  QStringList args = QCoreApplication::arguments();
+  int cacheDirIdx = args.indexOf("--cache-dir");
+  if (cacheDirIdx != -1 && cacheDirIdx + 1 < args.size()) {
+      cacheDir = args.at(cacheDirIdx + 1) + "/folder_caches";
+  } else {
+      cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+  }
   QDir().mkpath(cacheDir);
   QString pathHash = QString(QCryptographicHash::hash(cleanPath.toLower().toUtf8(), QCryptographicHash::Md5).toHex());
   QString cachePath = cacheDir + "/" + pathHash + ".bin";
@@ -199,51 +250,92 @@ void ImageModel::scanDirectory(const QString &path) {
       info.fileName = slashIdx >= 0 ? p.mid(slashIdx + 1) : p;
       info.size = s;
       info.date = d;
+      info.isVideo = (DesktopHelper::staticGetFileType(p) == DesktopHelper::Video);
       instantCachedItems.append(info);
     }
     cacheFile.close();
   }
 
+  // FIX 4: Spot-check .bin validity — reject stale cache if >2 out of 5 random entries are missing.
+  // This catches the case where a user deleted files since the last scan and the .bin
+  // is serving ghost entries that produce placeholder tiles.
+  if (!instantCachedItems.isEmpty() && instantCachedItems.size() >= 5) {
+    int missingCount = 0;
+    int step = instantCachedItems.size() / 5;
+    for (int probe = 0; probe < 5; ++probe) {
+      if (!QFile::exists(instantCachedItems[probe * step].filePath))
+        ++missingCount;
+    }
+    if (missingCount > 2) {
+      qWarning() << "[ImageModel] .bin folder cache is stale (" << missingCount << "/5 spot-check entries missing)."
+                 << "Discarding instant cache and falling through to cold MFT scan.";
+      instantCachedItems.clear();
+    }
+  }
+
   if (!instantCachedItems.isEmpty()) {
-    m_allItems = instantCachedItems;
+    beginResetModel();
+    m_allItems = std::move(instantCachedItems);
+    if (m_filterQuery.isEmpty()) {
+      m_images = m_allItems;
+    } else {
+      m_images = filterImageList(m_allItems, m_filterQuery);
+    }
+    endResetModel();
+
     m_totalCount = m_allItems.size();
     m_scanProgress = m_allItems.size();
     m_scanMethod = "Folder DB (Instant Cached)";
     emit totalCountChanged();
     emit scanProgressChanged();
     emit scanMethodChanged();
-    applyFilter();
     emit itemsPopulated(m_scanId);
     emit passOneCompleted(m_scanId);
 
-    // Build crawler work queue and launch RAM promotion immediately at t=0ms
+    // Build crawler work queue in background thread so UI thread is never blocked
     int res = m_loadingResolution;
-    QSize thumbSize(res, res);
-    QList<QString> missing;
-    missing.reserve(m_allItems.size());
-    for (const auto &item : m_allItems) {
-      if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
-        missing.append(item.filePath);
-    }
-    m_crawlWorkQueue = std::move(missing);
-    m_crawlQueueIndex.store(0);
-    m_crawledCount.store(0);
-    m_crawlPassComplete = m_crawlWorkQueue.isEmpty();
-    m_crawlDbFull = false;
-    emit crawlerProgressChanged();
-
-    // Start background promotion of L2 disk mmap to L1 RAM immediately
-    QThreadPool::globalInstance()->start([items = m_allItems, res]() {
-      QSize sz(res, res);
+    uint64_t curGen = m_scanGeneration.load();
+    QThreadPool::globalInstance()->start([alive, safeThis, items = m_allItems, res, curGen]() {
+      if (!alive->load() || !safeThis || safeThis->m_scanGeneration != curGen) return;
+      QSize thumbSize(res, res);
+      QList<QString> missing;
+      missing.reserve(items.size());
       for (const auto &item : items) {
-        AsyncImageProvider::promoteL2ToL1(item.filePath, sz);
+        if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
+          missing.append(item.filePath);
+      }
+      if (!alive->load() || !safeThis || safeThis->m_scanGeneration != curGen) return;
+      {
+        QMutexLocker lock(&safeThis->m_crawlMutex);
+        safeThis->m_crawlWorkQueue = std::move(missing);
+      }
+      safeThis->m_crawlQueueIndex.store(0);
+      safeThis->m_crawledCount.store(0);
+      safeThis->m_crawlPassComplete = safeThis->m_crawlWorkQueue.isEmpty();
+      safeThis->m_crawlDbFull = false;
+      QMetaObject::invokeMethod(safeThis, [alive, safeThis]() {
+        if (!alive->load() || !safeThis) return;
+        emit safeThis->crawlerProgressChanged();
+      }, Qt::QueuedConnection);
+    });
+
+    // Viewport-bounded L2->L1 promotion
+    int visStart = m_visibleStartIndex;
+    int visEnd   = m_visibleEndIndex;
+    QThreadPool::globalInstance()->start([alive, items = m_allItems, res, visStart, visEnd]() {
+      if (!alive->load()) return;
+      QSize sz(res, res);
+      int start = std::max(0, visStart - 500);
+      int end   = std::min((int)items.size() - 1, visEnd + 500);
+      for (int i = start; i <= end; ++i) {
+        if (!alive->load()) return;
+        AsyncImageProvider::promoteL2ToL1(items[i].filePath, sz);
       }
     });
 
-    qDebug() << "[ImageModel] Loaded" << m_allItems.size() << "cached items instantly for:" << cleanPath
-             << "(" << m_crawlWorkQueue.size() << "uncached)";
+    qDebug() << "[ImageModel] Loaded" << m_allItems.size() << "cached items instantly for:" << cleanPath;
   } else {
-    // Clear current images only if no cache exists (Cold Path)
+    // Cold Path: no .bin cache exists (or it was discarded as stale)
     beginResetModel();
     m_allItems.clear();
     m_images.clear();
@@ -252,38 +344,45 @@ void ImageModel::scanDirectory(const QString &path) {
     m_scanProgress = 0;
     emit totalCountChanged();
     emit scanProgressChanged();
-    m_crawlWorkQueue.clear();
+    {
+      QMutexLocker lock(&m_crawlMutex);
+      m_crawlWorkQueue.clear();
+    }
     m_crawlQueueIndex.store(0);
     m_crawledCount.store(0);
     m_crawlPassComplete = false;
   }
+
 
   // Clear previous pending worker tasks (keep RAM cache warm)
   TaskScheduler::instance().clear();
 
   // Run live MFT / filesystem scanning via TaskScheduler
   TaskScheduler::instance().addTask(
-      [this, cleanPath, currentGen, cachePath]() {
+      [alive, safeThis, cleanPath, currentGen, cachePath]() mutable {
+        if (!alive->load() || !safeThis) return;
         QElapsedTimer timer;
         timer.start();
 
         if (!QDir(cleanPath).exists()) {
           qWarning() << "Directory does not exist:" << cleanPath;
-          QMetaObject::invokeMethod(this, [this]() {
-            m_isLoading = false;
-            emit isLoadingChanged();
-          });
+          QMetaObject::invokeMethod(safeThis, [alive, safeThis]() {
+            if (!alive->load() || !safeThis) return;
+            safeThis->m_isLoading = false;
+            emit safeThis->isLoadingChanged();
+          }, Qt::QueuedConnection);
           return;
         }
 
         qDebug() << "Scanning directory:" << cleanPath;
 
-        QMetaObject::invokeMethod(this, [this, cleanPath]() {
-          if (!m_folderWatcher.directories().isEmpty()) {
-            m_folderWatcher.removePaths(m_folderWatcher.directories());
+        QMetaObject::invokeMethod(safeThis, [alive, safeThis, cleanPath]() {
+          if (!alive->load() || !safeThis) return;
+          if (!safeThis->m_folderWatcher.directories().isEmpty()) {
+            safeThis->m_folderWatcher.removePaths(safeThis->m_folderWatcher.directories());
           }
-          m_folderWatcher.addPath(cleanPath);
-        });
+          safeThis->m_folderWatcher.addPath(cleanPath);
+        }, Qt::QueuedConnection);
 
         bool isNetworkPath = DesktopHelper::staticIsNetworkPath(cleanPath);
         qDebug() << "[Scan]" << (isNetworkPath ? "Network path:" : "Local path:") << cleanPath;
@@ -308,7 +407,7 @@ void ImageModel::scanDirectory(const QString &path) {
             if (!searchPrefix.endsWith("/")) searchPrefix += "/";
 
             for (const ScannedFile &sf : scannedFiles) {
-              if (m_scanGeneration != currentGen) return;
+              if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) return;
               QString sfNorm = QDir::fromNativeSeparators(sf.path).toLower();
               if (sfNorm.startsWith(searchPrefix)) {
                 int dotIdx = sfNorm.lastIndexOf('.');
@@ -328,6 +427,7 @@ void ImageModel::scanDirectory(const QString &path) {
                     } else {
                       info.date = QDateTime::currentDateTime();
                     }
+                    info.isVideo = (DesktopHelper::staticGetFileType(info.filePath) == DesktopHelper::Video);
                     fastItems.append(info);
                   }
                 }
@@ -345,7 +445,7 @@ void ImageModel::scanDirectory(const QString &path) {
           int localScanCount = 0;
           int nextBatchThreshold = 40;
           while (it.hasNext()) {
-            if (m_scanGeneration != currentGen) {
+            if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) {
                 qDebug() << "[ImageModel] Scan cancelled for" << cleanPath;
                 return;
             }
@@ -367,6 +467,7 @@ void ImageModel::scanDirectory(const QString &path) {
             info.fileName = it.fileName();
             info.size = 0; // Deferred
             info.date = QDateTime(); // Deferred if regex fails
+            info.isVideo = (DesktopHelper::staticGetFileType(info.filePath) == DesktopHelper::Video);
 
             // Optimize: Try parsing filename for date (instant CPU task)
             QRegularExpressionMatch match = dateRegex.match(info.fileName);
@@ -388,33 +489,40 @@ void ImageModel::scanDirectory(const QString &path) {
                 else nextBatchThreshold += 20000;
 
                 QList<ImageInfo> batchItems = fastItems;
-                QMetaObject::invokeMethod(this, [this, batchItems, localScanCount, currentGen]() {
-                    if (m_scanGeneration != currentGen) return;
-                    m_allItems = batchItems;
-                    applyFilter();
-                    m_scanProgress = localScanCount;
-                    emit scanProgressChanged();
-                    emit itemsPopulated(m_scanId);
+                QMetaObject::invokeMethod(safeThis, [alive, safeThis, batchItems, localScanCount, currentGen]() {
+                    if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) return;
+                    safeThis->m_allItems = batchItems;
+                    safeThis->applyFilter();
+                    safeThis->m_scanProgress = localScanCount;
+                    emit safeThis->scanProgressChanged();
+                    emit safeThis->itemsPopulated(safeThis->m_scanId);
                 }, Qt::QueuedConnection);
             } else if (localScanCount % 200 == 0) {
-                QMetaObject::invokeMethod(this, [this, localScanCount, currentGen]() {
-                    if (m_scanGeneration != currentGen) return;
-                    m_scanProgress = localScanCount;
-                    emit scanProgressChanged();
+                QMetaObject::invokeMethod(safeThis, [alive, safeThis, localScanCount, currentGen]() {
+                    if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) return;
+                    safeThis->m_scanProgress = localScanCount;
+                    emit safeThis->scanProgressChanged();
                 }, Qt::QueuedConnection);
             }
           }
         }
 
-        QMetaObject::invokeMethod(this, [this, fastItems, currentGen]() {
-            if (m_scanGeneration != currentGen) return;
-            m_totalCount = fastItems.size();
-            emit totalCountChanged();
-        });
+        QMetaObject::invokeMethod(safeThis, [alive, safeThis, fastItems, currentGen]() {
+            if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) return;
+            safeThis->m_totalCount = fastItems.size();
+            emit safeThis->totalCountChanged();
+        }, Qt::QueuedConnection);
 
         // Universal Folder Metadata Database (both local & network)
         QHash<QString, QPair<qint64, QDateTime>> cachedData;
-        QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+        QString cacheDir;
+        QStringList args = QCoreApplication::arguments();
+        int cacheDirIdx = args.indexOf("--cache-dir");
+        if (cacheDirIdx != -1 && cacheDirIdx + 1 < args.size()) {
+            cacheDir = args.at(cacheDirIdx + 1) + "/folder_caches";
+        } else {
+            cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+        }
         QDir().mkpath(cacheDir);
         QString pathHash = QString(QCryptographicHash::hash(cleanPath.toLower().toUtf8(), QCryptographicHash::Md5).toHex());
         QString cachePath = cacheDir + "/" + pathHash + ".bin";
@@ -463,28 +571,45 @@ void ImageModel::scanDirectory(const QString &path) {
         }
         int scanDuration = (int)timer.elapsed();
 
+        // Pre-filter skeleton on background worker thread
+        QString filter = safeThis ? safeThis->m_filterQuery : QString();
+        QList<ImageInfo> filteredSkeleton = filterImageList(fastItems, filter);
+
         // Send skeleton grid to UI instantly
-        QMetaObject::invokeMethod(this, [this, fastItems, currentGen, method, scanDuration]() {
-          if (m_scanGeneration != currentGen) return;
-          m_allItems = fastItems;
-          m_scanMethod = method;
-          m_scanDurationMs = scanDuration;
-          emit scanMethodChanged();
-          applyFilter();
-          emit itemsPopulated(m_scanId);
-          emit passOneCompleted(m_scanId);
+        std::shared_ptr<std::atomic<bool>> skelAlive = alive;
+        QPointer<ImageModel> skelSafeThis = safeThis;
+        QMetaObject::invokeMethod(skelSafeThis, [skelAlive, skelSafeThis, fastItems, filteredSkeleton = std::move(filteredSkeleton), currentGen, method, scanDuration]() mutable {
+          if (!skelAlive->load() || !skelSafeThis || skelSafeThis->m_scanGeneration != currentGen) return;
+          skelSafeThis->beginResetModel();
+          skelSafeThis->m_allItems = std::move(fastItems);
+          skelSafeThis->m_images = std::move(filteredSkeleton);
+          skelSafeThis->endResetModel();
+
+          skelSafeThis->m_totalCount = skelSafeThis->m_allItems.size();
+          skelSafeThis->m_scanProgress = skelSafeThis->m_allItems.size();
+          skelSafeThis->m_scanMethod = method;
+          skelSafeThis->m_scanDurationMs = scanDuration;
+          emit skelSafeThis->totalCountChanged();
+          emit skelSafeThis->scanProgressChanged();
+          emit skelSafeThis->scanMethodChanged();
+          emit skelSafeThis->itemsPopulated(skelSafeThis->m_scanId);
+          emit skelSafeThis->passOneCompleted(skelSafeThis->m_scanId);
         }, Qt::QueuedConnection);
 
         // === PASS 2: METADATA FILL ===
         bool cacheChanged = false;
         if (!fullyCached && !fastScanSuccess) {
           for (int i = 0; i < fastItems.size(); ++i) {
-            if (m_scanGeneration != currentGen) return;
+            if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) return;
 
             while (TaskScheduler::instance().isPaused() && TaskScheduler::instance().isRunning()) {
               QThread::msleep(50);
             }
             if (!TaskScheduler::instance().isRunning()) break;
+
+            if (i > 0 && i % 500 == 0) {
+              QThread::msleep(1); // Yield IO to foreground image decoders
+            }
 
             if (cachedData.contains(fastItems[i].filePath)) {
                 fastItems[i].size = cachedData[fastItems[i].filePath].first;
@@ -511,7 +636,7 @@ void ImageModel::scanDirectory(const QString &path) {
         }
 
         // Persist universal folder cache database
-        if ((cacheChanged || !fullyCached || fastScanSuccess) && TaskScheduler::instance().isRunning() && m_scanGeneration == currentGen) {
+        if ((cacheChanged || !fullyCached || fastScanSuccess) && TaskScheduler::instance().isRunning() && alive->load() && safeThis && safeThis->m_scanGeneration == currentGen) {
             QSaveFile outCache(cachePath);
             if (outCache.open(QIODevice::WriteOnly)) {
                 QDataStream out(&outCache);
@@ -523,23 +648,39 @@ void ImageModel::scanDirectory(const QString &path) {
             }
         }
 
-        if (m_scanGeneration != currentGen) return;
+        if (!alive->load() || !safeThis || safeThis->m_scanGeneration != currentGen) return;
 
-        // Final perfect sort
+        // Final perfect sort (on background IO worker thread)
         std::sort(fastItems.begin(), fastItems.end(),
                   [](const ImageInfo &a, const ImageInfo &b) {
                     return a.date > b.date;
                   });
 
+        // Build crawler work queue on background thread
+        int res = safeThis ? safeThis->m_loadingResolution : 200;
+        QSize thumbSize(res, res);
+        QList<QString> missing;
+        missing.reserve(fastItems.size());
+        for (const auto &item : fastItems) {
+          if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
+            missing.append(item.filePath);
+        }
+
+        // Pre-filter on background worker thread
+        QString currentFilter = safeThis ? safeThis->m_filterQuery : QString();
+        QList<ImageInfo> finalFiltered = filterImageList(fastItems, currentFilter);
+
         // Final UI commit & reconciliation
-        QMetaObject::invokeMethod(this, [this, cleanPath, fastItems, timer, currentGen, fastScanSuccess, method]() {
-          if (m_scanGeneration != currentGen) return;
+        std::shared_ptr<std::atomic<bool>> uiAlive = alive;
+        QPointer<ImageModel> uiSafeThis = safeThis;
+        QMetaObject::invokeMethod(uiSafeThis, [uiAlive, uiSafeThis, cleanPath, fastItems = std::move(fastItems), finalFiltered = std::move(finalFiltered), missing = std::move(missing), timer, currentGen, fastScanSuccess, method, res]() mutable {
+          if (!uiAlive->load() || !uiSafeThis || uiSafeThis->m_scanGeneration != currentGen) return;
 
           bool filesChanged = true;
-          if (fastItems.size() == m_allItems.size()) {
+          if (fastItems.size() == uiSafeThis->m_allItems.size()) {
             filesChanged = false;
             for (int i = 0; i < fastItems.size(); ++i) {
-              if (fastItems[i].filePath != m_allItems[i].filePath) {
+              if (fastItems[i].filePath != uiSafeThis->m_allItems[i].filePath) {
                 filesChanged = true;
                 break;
               }
@@ -547,62 +688,65 @@ void ImageModel::scanDirectory(const QString &path) {
           }
 
           if (filesChanged) {
-            m_allItems = fastItems;
-            applyFilter();
-            m_totalCount = m_allItems.size();
-            m_scanProgress = m_allItems.size();
-            emit totalCountChanged();
-            emit scanProgressChanged();
-            emit itemsPopulated(m_scanId);
+            uiSafeThis->beginResetModel();
+            uiSafeThis->m_allItems = std::move(fastItems);
+            uiSafeThis->m_images = std::move(finalFiltered);
+            uiSafeThis->endResetModel();
+
+            uiSafeThis->m_totalCount = uiSafeThis->m_allItems.size();
+            uiSafeThis->m_scanProgress = uiSafeThis->m_allItems.size();
+            emit uiSafeThis->totalCountChanged();
+            emit uiSafeThis->scanProgressChanged();
+            emit uiSafeThis->itemsPopulated(uiSafeThis->m_scanId);
           }
 
-          m_isLoading = false;
-          m_scanMethod = fastScanSuccess ? "Direct MFT (Verified)" : method;
-          m_scanDurationMs = (int)timer.elapsed();
-          emit isLoadingChanged();
-          emit scanMethodChanged();
+          uiSafeThis->m_isLoading = false;
+          uiSafeThis->m_scanMethod = fastScanSuccess ? "Direct MFT (Verified)" : method;
+          uiSafeThis->m_scanDurationMs = (int)timer.elapsed();
+          emit uiSafeThis->isLoadingChanged();
+          emit uiSafeThis->scanMethodChanged();
 
-          qDebug() << "[ImageModel] Verified directory scan in" << timer.elapsed() << "ms. Total items:" << m_allItems.size();
+          qDebug() << "[ImageModel] Verified directory scan in" << timer.elapsed() << "ms. Total items:" << uiSafeThis->m_allItems.size();
 
-          // Build precise work queue: ask the mmap index which files are genuinely absent.
-          // This is O(N) hash lookups with zero disk I/O — ground truth, no cursor math.
-          int res = m_loadingResolution;
-          QSize thumbSize(res, res);
-          QList<QString> missing;
-          missing.reserve(fastItems.size());
-          for (const auto &item : fastItems) {
-            if (!FileCacheManager::instance().isCached(item.filePath, thumbSize))
-              missing.append(item.filePath);
+          {
+            QMutexLocker lock(&uiSafeThis->m_crawlMutex);
+            uiSafeThis->m_crawlWorkQueue = std::move(missing);
           }
-          m_crawlWorkQueue = std::move(missing);
-          m_crawlQueueIndex.store(0);
-          m_crawledCount.store(0);
-          m_crawlPassComplete = m_crawlWorkQueue.isEmpty();
-          m_crawlDbFull = false;
-          qDebug() << "[Crawler] Work queue ready:" << m_crawlWorkQueue.size()
-                   << "uncached /" << fastItems.size() << "total.";
-          emit crawlerProgressChanged();
+          uiSafeThis->m_crawlQueueIndex.store(0);
+          uiSafeThis->m_crawledCount.store(0);
+          uiSafeThis->m_crawlPassComplete = uiSafeThis->m_crawlWorkQueue.isEmpty();
+          uiSafeThis->m_crawlDbFull = false;
+          qDebug() << "[Crawler] Work queue ready:" << uiSafeThis->m_crawlWorkQueue.size()
+                   << "uncached /" << uiSafeThis->m_allItems.size() << "total.";
+          emit uiSafeThis->crawlerProgressChanged();
 
           // Reconcile DB against actual filesystem:
           // Only prune entries in cleanPath whose source files were deleted
-          QThreadPool::globalInstance()->start([cleanPath, fastItems, res]() {
+          QList<ImageInfo> allScannedItems = uiSafeThis->m_allItems;
+          QThreadPool::globalInstance()->start([cleanPath, items = allScannedItems, res]() {
             QSet<QString> validPaths;
-            validPaths.reserve(fastItems.size());
-            for (const auto &item : fastItems)
+            validPaths.reserve(items.size());
+            for (const auto &item : items)
               validPaths.insert(item.filePath);
             FileCacheManager::instance().pruneStaleEntries(cleanPath, validPaths, QSize(res, res));
           });
 
-          // Promote already-cached files into L1 RAM simultaneously
-          QThreadPool::globalInstance()->start([fastItems, res]() {
+          // FIX 3: Viewport-bounded L2->L1 promotion.
+          // Only warm the viewport window (±500 items) to avoid blowing out QCache
+          // with thousands of entries that get evicted before scrolling reaches them.
+          int visStart = uiSafeThis->m_visibleStartIndex;
+          int visEnd   = uiSafeThis->m_visibleEndIndex;
+          std::shared_ptr<std::atomic<bool>> promoAlive = uiAlive;
+          QThreadPool::globalInstance()->start([promoAlive, allScannedItems, res, visStart, visEnd]() {
+            if (!promoAlive->load()) return;
             QSize sz(res, res);
-            qDebug() << "[Promotion] Starting background L2 -> L1 RAM promotion for" << fastItems.size() << "items...";
-            int count = 0;
-            for (const auto &item : fastItems) {
-              AsyncImageProvider::promoteL2ToL1(item.filePath, sz);
-              count++;
+            int start = std::max(0, visStart - 500);
+            int end   = std::min((int)allScannedItems.size() - 1, visEnd + 500);
+            qDebug() << "[Promotion] Viewport-bounded L2->L1 promotion:" << (end - start + 1) << "items.";
+            for (int i = start; i <= end; ++i) {
+              if (!promoAlive->load()) return;
+              AsyncImageProvider::promoteL2ToL1(allScannedItems[i].filePath, sz);
             }
-            qDebug() << "[Promotion] Finished background RAM promotion for" << count << "items.";
           });
         }, Qt::QueuedConnection);
       },
@@ -681,7 +825,27 @@ void ImageModel::setFilterQuery(const QString &query) {
   if (m_filterQuery != query) {
     m_filterQuery = query;
     emit filterQueryChanged();
-    applyFilter();
+
+    if (m_filterQuery.isEmpty()) {
+      beginResetModel();
+      m_images = m_allItems;
+      endResetModel();
+      return;
+    }
+
+    uint64_t curGen = ++m_filterGeneration;
+    QThreadPool::globalInstance()->start([this, items = m_allItems, query = m_filterQuery, curGen]() {
+      if (m_filterGeneration.load() != curGen) return;
+      QList<ImageInfo> filtered = filterImageList(items, query);
+      if (m_filterGeneration.load() != curGen) return;
+
+      QMetaObject::invokeMethod(this, [this, filtered = std::move(filtered), curGen]() mutable {
+        if (m_filterGeneration.load() != curGen) return;
+        beginResetModel();
+        m_images = std::move(filtered);
+        endResetModel();
+      }, Qt::QueuedConnection);
+    });
   }
 }
 
@@ -690,13 +854,7 @@ void ImageModel::applyFilter() {
   if (m_filterQuery.isEmpty()) {
     m_images = m_allItems;
   } else {
-    m_images.clear();
-    QString lowerQuery = m_filterQuery.toLower();
-    for (const auto &item : m_allItems) {
-      if (item.fileName.toLower().contains(lowerQuery)) {
-        m_images.append(item);
-      }
-    }
+    m_images = filterImageList(m_allItems, m_filterQuery);
   }
   endResetModel();
 }
@@ -785,8 +943,11 @@ qint64 ImageModel::getSelectedTotalSizeBytes() const {
 
 QStringList ImageModel::getActiveDirectories() const {
   QSet<QString> dirs;
+  dirs.reserve(1024);
   for (const auto &item : m_images) {
-    QString dirPath = QFileInfo(item.filePath).absolutePath();
+    int lastSlash = item.filePath.lastIndexOf('/');
+    if (lastSlash < 0) lastSlash = item.filePath.lastIndexOf('\\');
+    QString dirPath = (lastSlash >= 0) ? item.filePath.left(lastSlash) : item.filePath;
     dirs.insert(QDir::fromNativeSeparators(dirPath).toLower());
   }
   return dirs.values();
@@ -851,22 +1012,37 @@ void ImageModel::processPrecacheTick() {
     m_crawlDbFull = false;
   }
 
+
   const QSize thumbSize(m_loadingResolution, m_loadingResolution);
 
   // Dynamic I/O Bandwidth Back-Off: Query hardware latency guard
   int maxInflight = PassiveReadLatencyGuard::instance().recommendedConcurrency();
   int throttleDelay = PassiveReadLatencyGuard::instance().throttleDelayMs();
 
-  // If the drive is congested (>150ms spike), inject a breather delay to yield bus to UI
-  static QElapsedTimer s_crawlerThrottleTimer;
+  // If the drive is congested (>150ms spike), inject a breather delay to yield bus to UI.
+  // CRITICAL: Use per-instance m_crawlerThrottleTimer — NOT a static local.
+  // A static timer would cause Window 2's viewport scroll to stall Window 1's background crawl.
   if (throttleDelay > 0) {
-    if (!s_crawlerThrottleTimer.isValid()) {
-      s_crawlerThrottleTimer.start();
-    } else if (s_crawlerThrottleTimer.elapsed() < throttleDelay) {
-      return; // Breather delay active: 100% bandwidth given to UI
+    if (!m_crawlerThrottleTimer.isValid()) {
+      m_crawlerThrottleTimer.start();
+    } else if (m_crawlerThrottleTimer.elapsed() < throttleDelay) {
+      // Emit throttled state once (not every tick) to avoid spamming the toast
+      if (!m_crawlerThrottledState) {
+        m_crawlerThrottledState = true;
+        emit crawlerThrottled(true);
+        emit crawlerStatusChanged("⏸ Background crawl paused — yielding I/O to viewport", false);
+      }
+      return;
     }
   }
-  s_crawlerThrottleTimer.restart();
+
+  // Crawler is running — clear throttled state and notify UI on transition
+  if (m_crawlerThrottledState) {
+    m_crawlerThrottledState = false;
+    emit crawlerThrottled(false);
+    emit crawlerStatusChanged("▶ Background crawl resumed", false);
+  }
+  m_crawlerThrottleTimer.restart();
 
   // ----------------------------------------------------------------
   // Mode 1 (Yellow): Lookahead window — ±50 items around viewport.
@@ -884,23 +1060,27 @@ void ImageModel::processPrecacheTick() {
       auto lvl = AsyncImageProvider::checkCacheLevel(path, thumbSize);
       if (lvl != AsyncImageProvider::NotAvailable) {
         if (lvl == AsyncImageProvider::OnDisk) {
-          AsyncImageProvider::promoteL2ToL1(path, thumbSize);
+          QSize sz = thumbSize;
+          TaskScheduler::instance().addTask([path, sz]() {
+            AsyncImageProvider::promoteL2ToL1(path, sz);
+          }, TaskScheduler::CPU_BOUND, TaskScheduler::Low);
         }
         continue;
       }
+
+      auto inflightToken = std::shared_ptr<void>(nullptr, [this](void*) {
+        this->m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
+      });
       m_crawlInflight.fetch_add(1, std::memory_order_relaxed);
       QSize sz = thumbSize;
-      bool added = TaskScheduler::instance().addTask([this, path, sz, currentGen]() {
+      bool added = TaskScheduler::instance().addTask([this, path, sz, currentGen, inflightToken]() {
         if (this->m_scanGeneration.load() != currentGen) {
-          this->m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
           return;
         }
         AsyncImageProvider::crawlDecodeToL2(path, sz);
-        this->m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
       }, TaskScheduler::CPU_BOUND, TaskScheduler::Normal);
 
       if (!added) {
-        m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
         break;
       }
     }
@@ -909,15 +1089,14 @@ void ImageModel::processPrecacheTick() {
 
   // ----------------------------------------------------------------
   // Mode 2 (Red): Aggressive full-model sequential background crawler.
-  // Routed at Low priority via TaskScheduler with starvation protection.
-  // ----------------------------------------------------------------
-  // ----------------------------------------------------------------
-  // Mode 2 (Red): Drain the mmap-backed work queue.
-  // m_crawlWorkQueue was built at scan completion: it contains ONLY the
-  // files provably absent from the database. No cursor drift possible.
+  // Drain the mmap-backed work queue.
   // ----------------------------------------------------------------
   if (m_precacheMode == 2) {
-    int queueSize = m_crawlWorkQueue.size();
+    int queueSize = 0;
+    {
+      QMutexLocker lock(&m_crawlMutex); // FIX 2: read queue size safely
+      queueSize = m_crawlWorkQueue.size();
+    }
     if (queueSize == 0) {
       // Nothing missing — queue was empty at scan time (all cached already)
       if (!m_crawlPassComplete) {
@@ -951,31 +1130,41 @@ void ImageModel::processPrecacheTick() {
       int i = m_crawlQueueIndex.fetch_add(1, std::memory_order_relaxed);
       if (i >= queueSize) break;
 
-      const QString path = m_crawlWorkQueue[i];
+      QString path;
+      {
+        QMutexLocker lock(&m_crawlMutex); // FIX 2: guard item read
+        if (i >= m_crawlWorkQueue.size()) {
+          // Queue was replaced concurrently — back off this slot
+          m_crawlQueueIndex.fetch_sub(1, std::memory_order_relaxed);
+          break;
+        }
+        path = m_crawlWorkQueue[i];
+      }
 
+      auto inflightToken = std::shared_ptr<void>(nullptr, [this](void*) {
+        this->m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
+      });
       m_crawlInflight.fetch_add(1, std::memory_order_relaxed);
       QSize sz = thumbSize;
-      bool added = TaskScheduler::instance().addTask([this, path, sz, currentGen]() {
+      bool added = TaskScheduler::instance().addTask([this, path, sz, currentGen, inflightToken]() {
         if (this->m_scanGeneration.load() != currentGen) {
-          this->m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
           return;
         }
         AsyncImageProvider::crawlDecodeToL2(path, sz);
         this->m_crawledCount.fetch_add(1, std::memory_order_relaxed);
-        this->m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
         emit this->crawlerProgressChanged();
       }, TaskScheduler::CPU_BOUND, TaskScheduler::Low);
 
       if (!added) {
         // Task rejected — back off the index so this slot is retried next tick
         m_crawlQueueIndex.fetch_sub(1, std::memory_order_relaxed);
-        m_crawlInflight.fetch_sub(1, std::memory_order_relaxed);
         break;
       }
       ++submitted;
     }
     emit crawlerProgressChanged();
   }
+
 }
 
 void ImageModel::processMetadataTick() {}
@@ -1022,7 +1211,10 @@ void ImageModel::onDirectoryChanged(const QString &path) {
 
 void ImageModel::reCrawl() {
   // Queue will be rebuilt after the next scanDirectory completes.
-  m_crawlWorkQueue.clear();
+  {
+    QMutexLocker lock(&m_crawlMutex); // FIX 2: guard queue clear
+    m_crawlWorkQueue.clear();
+  }
   m_crawlQueueIndex.store(0);
   m_crawledCount.store(0);
   m_crawlDbFull = false;

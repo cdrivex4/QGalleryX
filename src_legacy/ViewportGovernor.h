@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMutex>
+#include <QTimer>
 #include <atomic>
 
 class ViewportGovernor : public QObject {
@@ -42,7 +43,9 @@ private:
   std::atomic<int> m_lookaheadMax{0};
   std::atomic<bool> m_batterySaverMode{false};
   std::atomic<bool> m_isFastScrolling{false};
+  QTimer m_flingTimer;
   mutable QMutex m_mutex;
 };
 
 #endif // VIEWPORTGOVERNOR_H
+

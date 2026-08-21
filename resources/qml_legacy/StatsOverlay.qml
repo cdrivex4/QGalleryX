@@ -21,8 +21,10 @@ Item {
     property int crawlerTotal: 0
     property double crawlerProgress: 0.0
     property int activeJobs: 0
+    property string currentPath: ""
     
     visible: true // Visible by default for testing
+
     
     focus: true
     Keys.onPressed: (event) => {
@@ -146,8 +148,16 @@ Item {
             }
 
             Text {
-                visible: root.precacheMode !== 0 && root.crawlerTotal > 0
-                text: "Precached: " + root.crawlerIndex + " / " + root.crawlerTotal + " (" + Math.round(root.crawlerProgress * 100) + "%)" + (root.activeJobs > 0 ? " • " + root.activeJobs + " active tasks" : " • Idle")
+                visible: root.precacheMode !== 0
+                text: {
+                    if (root.crawlerTotal === 0 && root.totalCount > 0) {
+                        return "Disk Cache: 100% Complete (" + root.totalCount + " items in DB) • Idle"
+                    }
+                    var alreadyCached = Math.max(0, root.totalCount - root.crawlerTotal)
+                    var currentCached = alreadyCached + root.crawlerIndex
+                    var pct = root.totalCount > 0 ? Math.round((currentCached / root.totalCount) * 100) : Math.round(root.crawlerProgress * 100)
+                    return "Crawler Queue: " + root.crawlerIndex + " / " + root.crawlerTotal + " uncached (" + pct + "% overall in DB)" + (root.activeJobs > 0 ? " • " + root.activeJobs + " active tasks" : " • Idle")
+                }
                 color: "white"
                 font.pixelSize: 12
             }
@@ -282,6 +292,64 @@ Item {
                     }
                 }
             }
+
+            // Administrator Privilege / MFT Status Indicator
+            Rectangle {
+                width: parent.width
+                height: 26
+                radius: 4
+                color: (desktopHelper && desktopHelper.isRunningAsAdmin()) ? "#143314" : "#332200"
+                border.color: (desktopHelper && desktopHelper.isRunningAsAdmin()) ? "#2e7d32" : "#ff9800"
+                border.width: 1
+
+                RowLayout {
+                    anchors.fill: parent
+                    anchors.leftMargin: 8
+                    anchors.rightMargin: 8
+                    spacing: 6
+
+                    Text {
+                        text: (desktopHelper && desktopHelper.isRunningAsAdmin())
+                              ? "🛡️ Admin Active: Direct MFT 1-2s Scans"
+                              : "⚡ Standard Mode: Elevate for 1-2s MFT"
+                        color: (desktopHelper && desktopHelper.isRunningAsAdmin()) ? "#a5d6a7" : "#ffcc80"
+                        font.pixelSize: 10
+                        font.bold: true
+                        Layout.fillWidth: true
+                    }
+
+                    Text {
+                        visible: desktopHelper && !desktopHelper.isRunningAsAdmin()
+                        text: "[Run as Admin]"
+                        color: "#00e5ff"
+                        font.pixelSize: 10
+                        font.bold: true
+                    }
+
+                    Text {
+                        visible: desktopHelper && desktopHelper.isRunningAsAdmin()
+                        text: "[Drop Admin]"
+                        color: "#FFA500"
+                        font.pixelSize: 10
+                        font.bold: true
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: desktopHelper ? Qt.PointingHandCursor : Qt.ArrowCursor
+                    onClicked: {
+                        if (desktopHelper) {
+                            if (desktopHelper.isRunningAsAdmin()) {
+                                desktopHelper.relaunchAsStandardUser(root.currentPath)
+                            } else {
+                                desktopHelper.relaunchAsAdmin(root.currentPath)
+                            }
+                        }
+                    }
+                }
+            }
+
 
             // Thumbnail Resolution
             Text { text: "Thumb Resolution: " + appSettings.thumbnailSize + "px"; color: "#e0e0e0"; font.pixelSize: 11; font.bold: true }
@@ -511,17 +579,19 @@ Item {
                         spacing: 8
 
                         Text {
-                            text: modelData === "__total__" ? "Total Stats" : ("Drive: " + modelData)
+                            text: modelData === "__total__" ? "Total Stats:" : (modelData.startsWith("\\\\") ? modelData : ("Drive " + modelData))
                             color: modelData === "__total__" ? "#FFD700" : "white"
                             font.bold: true
                             font.pixelSize: 11
-                            Layout.preferredWidth: 80
+                            elide: Text.ElideRight
+                            Layout.preferredWidth: modelData.startsWith("\\\\") ? 110 : 60
                         }
 
                         Text {
                             text: count + " items (" + mb.toFixed(1) + " MB)"
                             color: "#aaa"
                             font.pixelSize: 11
+                            horizontalAlignment: Text.AlignRight
                             Layout.fillWidth: true
                         }
 

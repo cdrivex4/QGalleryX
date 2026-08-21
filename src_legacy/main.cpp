@@ -37,6 +37,47 @@
 #ifdef Q_OS_WIN
 #include <windows.h>
 #include <psapi.h>
+#include <dbghelp.h>
+
+static LONG WINAPI customCrashFilter(EXCEPTION_POINTERS *pExceptionPointers) {
+    DWORD code = pExceptionPointers ? pExceptionPointers->ExceptionRecord->ExceptionCode : 0;
+    void *addr = pExceptionPointers ? pExceptionPointers->ExceptionRecord->ExceptionAddress : nullptr;
+
+    FILE *f = fopen("application_crash.log", "a");
+    if (f) {
+        SYSTEMTIME st;
+        GetLocalTime(&st);
+        fprintf(f, "[%04d-%02d-%02d %02d:%02d:%02d.%03d] FATAL EXCEPTION: Code 0x%08lX at Address %p\n",
+                st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+                code, addr);
+        fflush(f);
+        fclose(f);
+    }
+
+    HMODULE hDbgHelp = LoadLibraryA("dbghelp.dll");
+    if (hDbgHelp) {
+        typedef BOOL (WINAPI *MINIDUMPWRITEDUMP)(
+            HANDLE, DWORD, HANDLE, MINIDUMP_TYPE,
+            PMINIDUMP_EXCEPTION_INFORMATION,
+            PMINIDUMP_USER_STREAM_INFORMATION,
+            PMINIDUMP_CALLBACK_INFORMATION
+        );
+        MINIDUMPWRITEDUMP pDump = (MINIDUMPWRITEDUMP)GetProcAddress(hDbgHelp, "MiniDumpWriteDump");
+        if (pDump) {
+            HANDLE hFile = CreateFileA("crash_dump.dmp", GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+            if (hFile != INVALID_HANDLE_VALUE) {
+                MINIDUMP_EXCEPTION_INFORMATION mei;
+                mei.ThreadId = GetCurrentThreadId();
+                mei.ExceptionPointers = pExceptionPointers;
+                mei.ClientPointers = FALSE;
+                pDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, MiniDumpNormal, &mei, NULL, NULL);
+                CloseHandle(hFile);
+            }
+        }
+        FreeLibrary(hDbgHelp);
+    }
+    return EXCEPTION_CONTINUE_SEARCH;
+}
 
 static void preloadAndLockAllModules() {
     HANDLE hProcess = GetCurrentProcess();
@@ -60,28 +101,27 @@ static void preloadAndLockAllModules() {
 }
 #endif
 
+#include "BuildInfo.h"
+
 int main(int argc, char *argv[]) {
+#ifdef Q_OS_WIN
+  SetUnhandledExceptionFilter(customCrashFilter);
+#endif
+  std::set_terminate([]() {
+    qCritical() << "[FATAL] std::terminate called!";
+    abort();
+  });
+  // 1. Output version banner and build details as the very first message
+  printf("====================================================\n");
+  printf("  QGalleryX v%s (Build %d)\n", BUILD_VERSION, BUILD_NUMBER);
+  printf("  Built: %s | Mode: Dynamic Release (Qt 6.9.3)\n", BUILD_TIMESTAMP);
+  printf("====================================================\n\n");
+  fflush(stdout);
+
   QCoreApplication::setOrganizationName("SamsungClone");
   QCoreApplication::setOrganizationDomain("samsungclone.com");
   QCoreApplication::setApplicationName("Gallery");
-  QCoreApplication::setApplicationVersion("2.0.0");
-
-#ifdef Q_OS_WIN
-  preloadAndLockAllModules();
-#endif
-
-  // Initialize LogManager
-  LogManager::instance().setLogFile("application.log");
-  qInstallMessageHandler(LogManager::messageHandler);
-
-  // Initialize Disk Cache
-  FileCacheManager::instance().initialize();
-
-  // Initialize RAM Image Cache capacity (default 512MB)
-  QSettings settings("SamsungClone", "Gallery");
-  int cacheSizeMB = settings.value("cacheSizeMB", 512).toInt();
-  if (cacheSizeMB <= 0) cacheSizeMB = 512;
-  AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024);
+  QCoreApplication::setApplicationVersion(BUILD_VERSION);
 
   // Set style to Basic to allow customization
   QQuickStyle::setStyle("Basic");
@@ -107,7 +147,25 @@ int main(int argc, char *argv[]) {
   // Unlocks native AV1, VP9, MKV, WebM, FLV, and TS playback out of the box
   qputenv("QT_MEDIA_BACKEND", "ffmpeg");
 
+  // Create QApplication BEFORE initializing managers that access arguments / event loops
   QApplication app(argc, argv);
+
+#ifdef Q_OS_WIN
+  preloadAndLockAllModules();
+#endif
+
+  // Initialize LogManager
+  LogManager::instance().setLogFile("application.log");
+  qInstallMessageHandler(LogManager::messageHandler);
+
+  // Initialize Disk Cache
+  FileCacheManager::instance().initialize();
+
+  // Initialize RAM Image Cache capacity (default 512MB)
+  QSettings settings("SamsungClone", "Gallery");
+  int cacheSizeMB = settings.value("cacheSizeMB", 512).toInt();
+  if (cacheSizeMB <= 0) cacheSizeMB = 512;
+  AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024);
 
   // Pre-load media DLL pages (FFmpeg, LibRaw, WIC) asynchronously into RAM at startup
   // Prevents SMB page fault stalls when running over network shares
@@ -151,6 +209,7 @@ int main(int argc, char *argv[]) {
   // Expose DesktopHelper
   qmlRegisterUncreatableType<DesktopHelper>("QGalleryX", 1, 0, "DesktopHelper", "Enums only");
   DesktopHelper desktopHelper;
+  DesktopHelper::setEngine(&engine);
   engine.rootContext()->setContextProperty("desktopHelper", &desktopHelper);
   engine.rootContext()->setContextProperty("viewportGovernor", &ViewportGovernor::instance());
 

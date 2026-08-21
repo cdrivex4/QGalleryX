@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
+#include <QVariantList>
 
 class DesktopHelper : public QObject {
   Q_OBJECT
@@ -21,6 +23,9 @@ public:
   Q_INVOKABLE void resumeBackgroundTasks();
   Q_INVOKABLE void requestRestart();
   Q_INVOKABLE bool isNetworkPath(const QString &path);
+  Q_INVOKABLE bool isRunningAsAdmin() const;
+  Q_INVOKABLE bool relaunchAsAdmin(const QString &folderToOpen = QString());
+  Q_INVOKABLE bool relaunchAsStandardUser(const QString &folderToOpen = QString());
 
   // Single Source of Truth for File Types & Supported Extensions
   static const QStringList& supportedExtensions();

@@ -12,6 +12,13 @@ Item {
     // Properties
     property real uiThumbnailSize: appSettings ? appSettings.gridResolution : 100
     property int loadingResolution: appSettings ? appSettings.thumbnailSize : 200
+    
+    // Dynamically downsample the loaded texture to match the UI grid size, saving massive VRAM
+    property int effectiveLoadingResolution: {
+        if (uiThumbnailSize <= 48) return 64
+        if (uiThumbnailSize <= 128) return 128
+        return 256
+    }
     property string folderPath: ""
     
     onFolderPathChanged: {
@@ -127,14 +134,18 @@ Item {
         cellHeight: root.uiThumbnailSize
         
         // Performance
-        cacheBuffer: 1000
+        cacheBuffer: Math.min(300, cellHeight * 3)
         
         // ScrollBar
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AlwaysOn
             active: true
         }
+
+        // Qt 6 Delegate Pooling: Recycles QML items instead of allocating/destroying on scroll
+        reuseItems: true
         
+        property real lastViewportY: 0
         function updateViewportNow() {
             var sIdx = indexAt(width / 2, contentY)
             var eIdx = indexAt(width / 2, contentY + height)
@@ -147,72 +158,51 @@ Item {
         }
 
         onContentYChanged: {
-            updateViewportNow()
-            
-            // Calculate center item index to determine current date section
-            var index = indexAt(width / 2, contentY + cellHeight / 2)
-            if (index === -1) index = indexAt(width / 2, contentY)
-            
-            if (index !== -1 && root.model) {
-                var role = 260; // Day
-                if (root.groupingMode === 3) role = 261; // Month
-                if (root.groupingMode === 4) role = 262; // Year
+            if (Math.abs(contentY - lastViewportY) >= cellHeight * 0.5) {
+                lastViewportY = contentY
+                updateViewportNow()
                 
-                var section = root.model.data(root.model.index(index, 0), role)
-                if (section !== undefined) root.currentSectionLabel = section
+                // Calculate center item index to determine current date section
+                var index = indexAt(width / 2, contentY + cellHeight / 2)
+                if (index === -1) index = indexAt(width / 2, contentY)
+                
+                if (index !== -1 && root.model) {
+                    var role = 260; // Day
+                    if (root.groupingMode === 3) role = 261; // Month
+                    if (root.groupingMode === 4) role = 262; // Year
+                    
+                    var section = root.model.data(root.model.index(index, 0), role)
+                    if (section !== undefined) root.currentSectionLabel = section
+                }
             }
-            
             root.lastContentY = contentY
         }
         
+        onMovementEnded: updateViewportNow()
+        onFlickEnded: updateViewportNow()
         onCountChanged: Qt.callLater(updateViewportNow)
         onHeightChanged: Qt.callLater(updateViewportNow)
         onWidthChanged: Qt.callLater(updateViewportNow)
-        
-        // Animations
-        add: Transition { NumberAnimation { properties: "x,y"; duration: 200 } }
-        move: Transition { NumberAnimation { properties: "x,y"; duration: 200 } }
-        displaced: Transition { NumberAnimation { properties: "x,y"; duration: 200 } }
 
         delegate: Item {
             width: gridView.cellWidth
             height: gridView.cellHeight
             
-            // Fetch data
-            property string filePath: model.filePath
-            property int fileType: desktopHelper ? desktopHelper.getFileType(filePath) : 0
-            property bool isVideo: fileType === 2 // DesktopHelper.Video
-            property bool isSelected: model.isSelected
-            
-            Component.onCompleted: {
-                if (index < 5) { // Only log first 5 to avoid spam
-                     console.log("[QML_DEBUG] Index:", index, "FilePath:", filePath, 
-                                 "Helper:", desktopHelper, "Type:", fileType, 
-                                 "IsVideo:", isVideo)
-                }
-            }
+            // Direct C++ Role Access (Zero C++ invoke or JS string splitting overhead)
+            readonly property string filePath: model.filePath
+            readonly property bool isVideo: model.isVideo !== undefined ? model.isVideo : false
+            readonly property bool isSelected: model.isSelected !== undefined ? model.isSelected : false
             
             Image {
+                id: tileImg
                 anchors.fill: parent
                 anchors.margins: 1
-                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                sourceSize: Qt.size(root.effectiveLoadingResolution, root.effectiveLoadingResolution)
                 source: filePath ? "image://async/" + filePath + "?idx=" + index : ""
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
                 cache: true
-                
-                property real startTime: 0
-                onSourceChanged: startTime = new Date().getTime()
-                
-                onStatusChanged: {
-                    if (status === Image.Ready) {
-                        var endTime = new Date().getTime()
-                        var duration = endTime - startTime
-                        if (startTime > 0) {
-                            root.imageLoaded(duration)
-                        }
-                    }
-                }
+                mipmap: false
                 
                 Rectangle {
                     anchors.fill: parent
@@ -357,7 +347,7 @@ Item {
                 
             } else {
                 var newSize = root.startPinchGridResolution * root.currentScale
-                newSize = Math.max(20, Math.min(newSize, 400))
+                newSize = Math.max(32, Math.min(newSize, 256))
                 
                 root.currentScale = 1.0
                 appSettings.gridResolution = newSize
@@ -390,9 +380,9 @@ Item {
                 var newSize = oldSize
                 
                 if (wheel.angleDelta.y > 0) {
-                    newSize = Math.min(oldSize * 1.2, 400)
+                    newSize = Math.min(oldSize * 1.2, 256)
                 } else {
-                    newSize = Math.max(oldSize / 1.2, 20)
+                    newSize = Math.max(oldSize / 1.2, 32)
                 }
                 
                 if (newSize !== oldSize) {

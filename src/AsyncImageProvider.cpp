@@ -200,9 +200,14 @@ static QString getRealLocalPath(const QString &normalizedId) {
 }
 
 static QString getDiskCachePath(const QString &id, const QSize &size) {
-  QString cacheDir =
-      QStandardPaths::writableLocation(QStandardPaths::TempLocation) +
-      "/thumbnails";
+  QString cacheDir;
+  QStringList args = QCoreApplication::arguments();
+  int tempDirIdx = args.indexOf("--temp-dir");
+  if (tempDirIdx != -1 && tempDirIdx + 1 < args.size()) {
+      cacheDir = args.at(tempDirIdx + 1) + "/thumbnails";
+  } else {
+      cacheDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/thumbnails";
+  }
   static bool dirCreated = false;
   if (!dirCreated) {
     QDir().mkpath(cacheDir);

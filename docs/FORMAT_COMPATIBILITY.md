@@ -105,7 +105,7 @@ Processed through **FFmpeg** for universal codec support.
 | **AVI** | `.avi`, `.divx` | Various (legacy) |
 | **Flash** | `.flv`, `.f4v` | H.264, VP6 |
 | **3GPP** | `.3gp`, `.3g2` | Mobile video |
-| **MPEG-TS** | `.ts`, `.mts`, `.m2ts` | Broadcast, AVCHD |
+| **MPEG-TS** | `.ts`¹, `.mts`, `.m2ts` | Broadcast, AVCHD |
 | **MPEG-PS** | `.mpg`, `.mpeg`, `.vob` | DVD Video |
 | **Windows Media** | `.wmv`, `.asf` | WMV codecs |
 | **RealMedia** | `.rm`, `.rmvb` | RealVideo |
@@ -178,6 +178,10 @@ The application automatically routes files to the optimal processor:
 ### Unsupported
 - **Encrypted Media** - DRM-protected content
 - **Exotic Codecs** - Extremely rare or proprietary formats without open decoders
+
+---
+
+> ¹ **`.ts` scan filter note:** `.ts` is excluded from the directory scanner (`supportedExtensions` / `supportedNameFilters`) to prevent TypeScript source-code files from being indexed as media on developer machines. Individual MPEG-TS `.ts` files opened directly via the file picker, adjacent navigation, or drag-and-drop are still correctly identified as video by the `0x47` MPEG-TS sync-byte check in `DesktopHelper::staticGetFileType()`.
 
 ---
 

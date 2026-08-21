@@ -16,7 +16,19 @@ New-Item -ItemType Directory -Force -Path $DIST_DIR | Out-Null
 
 # 2. Copy Executable
 Write-Host "Copying executable..."
-Copy-Item "$BUILD_DIR/QGalleryX.exe" -Destination $DIST_DIR
+$targetExe = "$DIST_DIR/QGalleryX.exe"
+if (Test-Path $targetExe) {
+    try {
+        Copy-Item "$BUILD_DIR/QGalleryX.exe" -Destination $targetExe -Force
+    } catch {
+        $oldExe = "$DIST_DIR/QGalleryX.exe.old"
+        Remove-Item $oldExe -Force -ErrorAction SilentlyContinue
+        Move-Item $targetExe $oldExe -Force -ErrorAction SilentlyContinue
+        Copy-Item "$BUILD_DIR/QGalleryX.exe" -Destination $targetExe -Force
+    }
+} else {
+    Copy-Item "$BUILD_DIR/QGalleryX.exe" -Destination $DIST_DIR -Force
+}
 
 # 3. Run windeployqt
 Write-Host "Running windeployqt..."

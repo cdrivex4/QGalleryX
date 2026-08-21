@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QProcess>
+#include <QStandardPaths>
 #include <QStorageInfo>
 #include <QUrl>
 
@@ -110,7 +111,11 @@ const QStringList& DesktopHelper::supportedExtensions() {
       // Images
       "jpg", "jpeg", "png", "webp", "heic", "heif", "tiff", "tif", "bmp", "gif", "ico", "tga", "avif", "jfif",
       // Videos & Audio
-      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogg", "ogv", "mp3", "wav", "flac", "m4a", "aac", "wma", "opus", "mts", "m2ts", "ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
+      // NOTE: "ts" is intentionally EXCLUDED from scan filters — the MFT/QDirIterator
+      // would pick up TypeScript source files (.ts) on developer machines and pollute the
+      // DB with placeholder tiles. Genuine MPEG-TS files are still handled by
+      // staticGetFileType() via 0x47 sync-byte verification when opened directly.
+      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogg", "ogv", "mp3", "wav", "flac", "m4a", "aac", "wma", "opus", "mts", "m2ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
       // RAW Formats
       "arw", "cr2", "cr3", "dng", "nef", "nrw", "orf", "rw2", "pef", "raf", "sr2", "srf", "kdc", "dcr", "raw"
   };
@@ -316,4 +321,89 @@ QVariantList DesktopHelper::getMountedDrives() {
   }
   return drives;
 }
+
+bool DesktopHelper::isRunningAsAdmin() const {
+#ifdef Q_OS_WIN
+  BOOL isAdmin = FALSE;
+  PSID adminGroup = NULL;
+  SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
+  if (AllocateAndInitializeSid(&ntAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID,
+                               DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0,
+                               &adminGroup)) {
+    CheckTokenMembership(NULL, adminGroup, &isAdmin);
+    FreeSid(adminGroup);
+  }
+  return isAdmin != FALSE;
+#else
+  return false;
+#endif
+}
+
+bool DesktopHelper::relaunchAsAdmin(const QString &folderToOpen) {
+#ifdef Q_OS_WIN
+  QString appExe = QCoreApplication::applicationFilePath();
+  QString nativeAppExe = QDir::toNativeSeparators(appExe);
+  QString argString;
+  
+  // Resolve standard user paths BEFORE elevation handoff
+  QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+  QString tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+  
+  argString = QString("--cache-dir \"%1\" --temp-dir \"%2\"")
+                  .arg(QDir::toNativeSeparators(appDataPath))
+                  .arg(QDir::toNativeSeparators(tempPath));
+
+  if (!folderToOpen.isEmpty()) {
+    argString += " \"" + QDir::toNativeSeparators(folderToOpen) + "\"";
+  }
+
+  HINSTANCE result = ShellExecuteW(
+      NULL,
+      L"runas",
+      (LPCWSTR)nativeAppExe.utf16(),
+      (LPCWSTR)argString.utf16(),
+      NULL,
+      SW_SHOWNORMAL);
+
+  if ((INT_PTR)result > 32) {
+    QCoreApplication::quit();
+    TerminateProcess(GetCurrentProcess(), 0);
+    return true;
+  }
+  return false;
+#else
+  Q_UNUSED(folderToOpen);
+  return false;
+#endif
+}
+
+bool DesktopHelper::relaunchAsStandardUser(const QString &folderToOpen) {
+#ifdef Q_OS_WIN
+  QString appExe = QCoreApplication::applicationFilePath();
+  QString nativeAppExe = QDir::toNativeSeparators(appExe);
+  QString argString = "\"" + nativeAppExe + "\"";
+  if (!folderToOpen.isEmpty()) {
+    argString += " \"" + QDir::toNativeSeparators(folderToOpen) + "\"";
+  }
+
+  HINSTANCE result = ShellExecuteW(
+      NULL,
+      L"open",
+      L"explorer.exe",
+      (LPCWSTR)argString.utf16(),
+      NULL,
+      SW_SHOWNORMAL);
+
+  if ((INT_PTR)result > 32) {
+    QCoreApplication::quit();
+    TerminateProcess(GetCurrentProcess(), 0);
+    return true;
+  }
+  return false;
+#else
+  Q_UNUSED(folderToOpen);
+  return false;
+#endif
+}
+
 

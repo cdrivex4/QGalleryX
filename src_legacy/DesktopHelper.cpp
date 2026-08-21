@@ -1,12 +1,16 @@
 #include "DesktopHelper.h"
-#include <QDebug>
-#include <QDir>
+#include <QDesktopServices>
 #include <QFileInfo>
+#include <QGuiApplication>
 #include <QProcess>
+#include <QStandardPaths>
 #include <QSettings>
 #include <QStorageInfo>
 #include <QTransform>
 #include <QUrl>
+#include <QQmlEngine>
+#include <QQmlComponent>
+#include <QWindow>
 
 
 #ifdef Q_OS_WIN
@@ -46,8 +50,8 @@ const QStringList& DesktopHelper::supportedExtensions() {
   static const QStringList s_extensions = {
       // Images
       "jpg", "jpeg", "png", "webp", "heic", "heif", "tiff", "tif", "bmp", "gif", "ico", "tga", "avif", "jfif",
-      // Videos & Audio
-      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogg", "ogv", "mp3", "wav", "flac", "m4a", "aac", "wma", "opus", "mts", "m2ts", "ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
+      // Videos
+      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogv", "mts", "m2ts", "ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
       // RAW Formats
       "arw", "cr2", "cr3", "dng", "nef", "nrw", "orf", "rw2", "pef", "raf", "sr2", "srf", "kdc", "dcr", "raw"
   };
@@ -461,4 +465,131 @@ QVariantList DesktopHelper::getMountedDrives() {
   }
   return drives;
 }
+
+bool DesktopHelper::isRunningAsAdmin() const {
+#ifdef Q_OS_WIN
+  BOOL isAdmin = FALSE;
+  PSID adminGroup = NULL;
+  SID_IDENTIFIER_AUTHORITY ntAuthority = SECURITY_NT_AUTHORITY;
+  if (AllocateAndInitializeSid(&ntAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID,
+                               DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0,
+                               &adminGroup)) {
+    CheckTokenMembership(NULL, adminGroup, &isAdmin);
+    FreeSid(adminGroup);
+  }
+  return isAdmin != FALSE;
+#else
+  return false;
+#endif
+}
+
+bool DesktopHelper::relaunchAsAdmin(const QString &folderToOpen) {
+#ifdef Q_OS_WIN
+  QString appExe = QCoreApplication::applicationFilePath();
+  QString nativeAppExe = QDir::toNativeSeparators(appExe);
+  QString argString;
+  
+  // Resolve standard user paths BEFORE elevation handoff
+  QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+  QString tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+  
+  argString = QString("--cache-dir \"%1\" --temp-dir \"%2\"")
+                  .arg(QDir::toNativeSeparators(appDataPath))
+                  .arg(QDir::toNativeSeparators(tempPath));
+
+  if (!folderToOpen.isEmpty()) {
+    argString += " \"" + QDir::toNativeSeparators(folderToOpen) + "\"";
+  }
+
+  HINSTANCE result = ShellExecuteW(
+      NULL,
+      L"runas",
+      (LPCWSTR)nativeAppExe.utf16(),
+      (LPCWSTR)argString.utf16(),
+      NULL,
+      SW_SHOWNORMAL);
+
+  if ((INT_PTR)result > 32) {
+    QCoreApplication::quit();
+    TerminateProcess(GetCurrentProcess(), 0);
+    return true;
+  }
+  return false;
+#else
+  Q_UNUSED(folderToOpen);
+  return false;
+#endif
+}
+
+bool DesktopHelper::relaunchAsStandardUser(const QString &folderToOpen) {
+#ifdef Q_OS_WIN
+  QString appExe = QCoreApplication::applicationFilePath();
+  QString nativeAppExe = QDir::toNativeSeparators(appExe);
+  QString argString = "\"" + nativeAppExe + "\"";
+  if (!folderToOpen.isEmpty()) {
+    argString += " \"" + QDir::toNativeSeparators(folderToOpen) + "\"";
+  }
+
+  // Spawning via explorer.exe forces Windows to drop High Integrity (Admin) back to Medium Integrity (Standard User)
+  HINSTANCE result = ShellExecuteW(
+      NULL,
+      L"open",
+      L"explorer.exe",
+      (LPCWSTR)argString.utf16(),
+      NULL,
+      SW_SHOWNORMAL);
+
+  if ((INT_PTR)result > 32) {
+    QCoreApplication::quit();
+    TerminateProcess(GetCurrentProcess(), 0);
+    return true;
+  }
+  return false;
+#else
+  Q_UNUSED(folderToOpen);
+  return false;
+#endif
+}
+
+QQmlEngine *DesktopHelper::s_engine = nullptr;
+
+void DesktopHelper::setEngine(QQmlEngine *engine) {
+  s_engine = engine;
+}
+
+void DesktopHelper::openNewWindow(const QString &folderPath) {
+  if (!s_engine) {
+    qWarning() << "[DesktopHelper] Cannot open new window: QQmlEngine not set!";
+    return;
+  }
+  QQmlComponent component(s_engine, QUrl("qrc:/QGalleryX/resources/qml_legacy/Main.qml"));
+  if (component.isReady()) {
+    QObject *windowObj = component.create(s_engine->rootContext());
+    if (windowObj) {
+      QQmlEngine::setObjectOwnership(windowObj, QQmlEngine::CppOwnership);
+      QWindow *win = qobject_cast<QWindow*>(windowObj);
+      if (win) {
+        // Stagger window position slightly so it doesn't overlap completely
+        static int windowOffset = 0;
+        windowOffset = (windowOffset + 35) % 200;
+        win->setX(win->x() + windowOffset);
+        win->setY(win->y() + windowOffset);
+
+        // Safely clean up all resources and child models when closed
+        connect(win, &QWindow::visibleChanged, win, [win](bool visible) {
+          if (!visible) {
+            win->deleteLater();
+          }
+        });
+      }
+      if (!folderPath.isEmpty()) {
+        windowObj->setProperty("currentPath", folderPath);
+      }
+      qDebug() << "[DesktopHelper] Spawned new top-level gallery window for path:" << folderPath;
+    }
+  } else {
+    qWarning() << "[DesktopHelper] Failed to create new window component:" << component.errorString();
+  }
+}
+
 

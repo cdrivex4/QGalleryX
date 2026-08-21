@@ -13,6 +13,13 @@ Item {
     // Properties
     property real uiThumbnailSize: appSettings ? appSettings.gridResolution : 100
     property int loadingResolution: appSettings ? appSettings.thumbnailSize : 200
+    
+    // Dynamically downsample the loaded texture to match the UI grid size, saving massive VRAM
+    property int effectiveLoadingResolution: {
+        if (uiThumbnailSize <= 48) return 64
+        if (uiThumbnailSize <= 128) return 128
+        return 256
+    }
     property string folderPath: ""
     
     onFolderPathChanged: {
@@ -277,7 +284,7 @@ Item {
             } else {
                 // Pinch Ended - Commit Zoom
                 var newSize = root.startPinchGridResolution * root.currentScale
-                newSize = Math.max(20, Math.min(newSize, 400)) // Min 20px
+                newSize = Math.max(32, Math.min(newSize, 256)) // Min 32px, Max 256px
                 
                 // Reset Scale
                 root.currentScale = 1.0
@@ -328,9 +335,9 @@ Item {
                 var newSize = oldSize
                 
                 if (wheel.angleDelta.y > 0) {
-                    newSize = Math.min(oldSize * 1.2, 400)
+                    newSize = Math.min(oldSize * 1.2, 256)
                 } else {
-                    newSize = Math.max(oldSize / 1.2, 20) // Min 20px
+                    newSize = Math.max(oldSize / 1.2, 32) // Min 32px
                 }
                 
                 if (newSize !== oldSize) {
@@ -443,7 +450,7 @@ Item {
                             id: img
                             anchors.fill: parent
                             anchors.margins: 1
-                            sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
+                            sourceSize: Qt.size(root.effectiveLoadingResolution, root.effectiveLoadingResolution)
                             source: filePath ? "image://async/" + filePath + "?idx=" + sourceIndex : ""
                             fillMode: Image.PreserveAspectCrop
                             asynchronous: true

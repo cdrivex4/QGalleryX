@@ -204,6 +204,30 @@ Key systemic bugs and low-level concurrency failures diagnosed and resolved by A
    - *Discovery*: `QImage` utilizes implicit sharing (copy-on-write). When the background RAM monitor thread called `m_cache.clear()`, the refcount of the internal image buffer dropped to zero while the QML render thread was concurrently reading the pixel scanlines.
    - *Fix*: Mandated explicit `img->copy()` deep-copy returns across all cache lookup boundaries.
 
+5. **Multi-Window Teardown & Dangling Singleton Signal Crash (`Qt6Core.dll!+0x244f2c`):**
+   - *Discovery*: When secondary windows or models were opened and subsequently closed, global singletons (`FileCacheManager::instance()`) retained lambda slot pointers connected without a context `QObject`. On the next cache clear event, the singleton dispatched signals into freed `ImageModel` instances, resulting in access violation `0xc0000005`.
+   - *Fix*: Mandated passing `this` to all singleton signal connections (`connect(&singleton, &Singleton::signal, this, [this]() { ... })`) ensuring automatic disconnection upon object destruction, and implemented `ImageModel::~ImageModel()` with active cancellation tokens (`m_aliveToken`).
+
+6. **Mmap Database Incremental Allocation (16MB) & 30% Compaction:**
+   - *Discovery*: Preallocating 512MB memory-mapped chunks caused small directories to bloat disk usage immediately, while accumulating dead entries from deleted files slowly bloated the file size.
+   - *Fix*: Reduced `MMAP_GROW_CHUNK` to 16MB and added automated defragmentation/compaction (`compact()`) whenever stale/pruned records exceed 30% of total payload.
+
+7. **Corrupt Media FFmpeg Demuxer Assertions (`oggdec.c:964` abort):**
+   - *Discovery*: Recovered audio files with invalid stream headers triggered FFmpeg internal demuxer assertions and process aborts when parsed by container probes.
+   - *Fix*: Restricted file enumeration strictly to visual media, added `err_detect=ignore_err` flags, and added procedural fallback rendering in `VideoThumbnailer`.
+
+8. **Windows SEH Forensic Black Box vs Lazy Error Handling:**
+   - *Discovery*: Using inline `__try / __except` blocks in normal code is lazy programming that masks root causes and breaks C++ RAII object destruction.
+   - *Fix*: Installed top-level `SetUnhandledExceptionFilter` and `std::set_terminate` purely as a forensic recorder at the OS level, capturing minidumps (`crash_dump.dmp`) and diagnostic logs without compromising C++ architectural guarantees.
+
+9. **Synchronous GUI Thread Decompression Stalls (L2 MMAP Hits):**
+   - *Discovery*: `AsyncImageProvider::requestImageResponse()` was synchronously executing `diskImg.loadFromData(mmapData)` inside the main event loop. While mmap pointer reads are instant ($0.02\text{ms}$), decompressing 30 JPEGs in a row during a fling froze the GUI thread for $300\text{ms}+$.
+   - *Fix*: Strict separation of concerns: only uncompressed L1 RAM hits return synchronously on the GUI thread; all L2 MMAP disk hits are dispatched to `TaskScheduler` worker threads for parallel decompression, guaranteeing $0\text{ms}$ main-thread latency.
+
+10. **Directional Trajectory Lookahead vs Discontinuous Scrubber Dragging:**
+    - *Discovery*: Touch flings followed continuous momentum allowing symmetric lookahead to pre-decode approaching tiles, whereas dragging the timeline scrubber jumped across years, flooding the task queue with abandoned requests for intermediary positions.
+    - *Fix*: Enhanced `ViewportGovernor` with trajectory-biased lookahead ($+2\times \text{count}$ forward during downward scrolls, $-2\times \text{count}$ backward during upward scrolls) and unified `DateScrubber.qml` to feed continuous delta updates into the exact same pipeline.
+
 ---
 
 ## 📋 Comprehensive Audit Checklist

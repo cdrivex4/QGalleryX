@@ -70,6 +70,11 @@ ApplicationWindow {
                 window.syncPendingFileToModel()
             }
         }
+        function onCrawlerStatusChanged(status, isWarning) {
+            if (typeof toastOverlay !== "undefined" && typeof toastOverlay.showMessage === "function") {
+                toastOverlay.showMessage(status, isWarning)
+            }
+        }
     }
 
     function syncPendingFileToModel() {
@@ -148,6 +153,15 @@ ApplicationWindow {
         }
     }
 
+    Shortcut {
+        sequence: "Ctrl+N"
+        onActivated: {
+            if (desktopHelper) {
+                desktopHelper.openNewWindow(window.currentPath)
+            }
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
@@ -178,20 +192,31 @@ ApplicationWindow {
                         radius: 8
                         border.color: searchField.activeFocus ? "#4A90E2" : "#444"
                     }
-                    onTextChanged: {
-                        if (window.activeModel) {
-                            window.activeModel.filterQuery = text
-                        }
-                        
-                        // Also filter the global image model so we can extract valid directories for Albums
-                        if (viewLoader.item && viewLoader.item.model) {
-                            viewLoader.item.model.filterQuery = text
+
+                    Timer {
+                        id: searchDebounceTimer
+                        interval: 120
+                        repeat: false
+                        onTriggered: {
+                            var query = searchField.text
+                            if (window.activeModel) {
+                                window.activeModel.filterQuery = query
+                            }
                             
-                            if (typeof viewLoader.item.model.getActiveDirectories === "function") {
-                                var dirs = viewLoader.item.model.getActiveDirectories()
-                                albumModel.applyFilterFromPaths(dirs)
+                            // Also filter the global image model so we can extract valid directories for Albums
+                            if (viewLoader.item && viewLoader.item.model) {
+                                viewLoader.item.model.filterQuery = query
+                                
+                                if (typeof viewLoader.item.model.getActiveDirectories === "function") {
+                                    var dirs = viewLoader.item.model.getActiveDirectories()
+                                    albumModel.applyFilterFromPaths(dirs)
+                                }
                             }
                         }
+                    }
+
+                    onTextChanged: {
+                        searchDebounceTimer.restart()
                     }
                     
                     Button {
@@ -210,7 +235,11 @@ ApplicationWindow {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
-                        onClicked: searchField.text = ""
+                        onClicked: {
+                            searchField.text = ""
+                            searchDebounceTimer.stop()
+                            searchDebounceTimer.triggered()
+                        }
                     }
                 }
                 
@@ -234,6 +263,32 @@ ApplicationWindow {
                     onClicked: folderDialog.open()
                     ToolTip.visible: hovered && window.currentPath !== ""
                     ToolTip.text: window.currentPath
+                }
+
+                Button {
+                    id: newWindowBtn
+                    Layout.preferredWidth: 38
+                    Layout.preferredHeight: 38
+                    background: Rectangle {
+                        color: parent.hovered ? "#444" : "#222"
+                        radius: 8
+                        border.color: "#444"
+                    }
+                    contentItem: Text {
+                        text: "⧉"
+                        color: "white"
+                        font.bold: true
+                        font.pixelSize: 18
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                    onClicked: {
+                        if (desktopHelper) {
+                            desktopHelper.openNewWindow(window.currentPath)
+                        }
+                    }
+                    ToolTip.visible: hovered
+                    ToolTip.text: "Open in New Window (Ctrl+N)"
                 }
 
                 Item {
@@ -261,21 +316,22 @@ ApplicationWindow {
                             ctx.stroke();
                             
                             // Progress arc
-                            if (imageModel && imageModel.crawlerTotal > 0) {
-                                var progress = imageModel.crawlerProgress;
+                            var modelRef = window.activeModel
+                            if (modelRef && modelRef.crawlerTotal > 0) {
+                                var progress = modelRef.crawlerProgress;
                                 var startAngle = -Math.PI / 2;
                                 var endAngle = startAngle + (progress * 2 * Math.PI);
                                 
                                 ctx.beginPath();
                                 ctx.arc(centerX, centerY, radius, startAngle, endAngle, false);
                                 ctx.lineWidth = 3;
-                                ctx.strokeStyle = imageModel.precacheMode === 1 ? "#FFD700" : "#FF4444";
+                                ctx.strokeStyle = modelRef.precacheMode === 1 ? "#FFD700" : "#FF4444";
                                 ctx.stroke();
                             }
                         }
 
                         Connections {
-                            target: imageModel ? imageModel : null
+                            target: window.activeModel ? window.activeModel : null
                             function onCrawlerProgressChanged() { progressRing.requestPaint() }
                             function onPrecacheModeChanged() { progressRing.requestPaint() }
                         }
@@ -286,7 +342,7 @@ ApplicationWindow {
                         anchors.centerIn: parent
                         width: 38
                         height: 38
-                        property int mode: imageModel ? imageModel.precacheMode : 1
+                        property int mode: window.activeModel ? window.activeModel.precacheMode : 1
                         
                         background: Rectangle {
                             color: parent.hovered ? "#444" : "#222"
@@ -299,19 +355,19 @@ ApplicationWindow {
                             anchors.centerIn: parent
                         }
                         onClicked: {
-                            if (imageModel) {
-                                var newMode = (imageModel.precacheMode + 1) % 3
-                                imageModel.precacheMode = newMode
+                            if (window.activeModel) {
+                                var newMode = (window.activeModel.precacheMode + 1) % 3
+                                window.activeModel.precacheMode = newMode
                                 viewportGovernor.batterySaverMode = (newMode === 0)
                             }
                         }
                         ToolTip.visible: hovered
                         ToolTip.text: {
-                            if (!imageModel) return ""
+                            if (!window.activeModel) return ""
                             if (mode === 0) return "Battery Saver (Offscreen Crawler Paused)"
-                            var pct = Math.round(imageModel.crawlerProgress * 100)
+                            var pct = Math.round(window.activeModel.crawlerProgress * 100)
                             var modeStr = (mode === 1) ? "Yellow (Lookahead Window)" : "Red (Aggressive Full Crawler)"
-                            return modeStr + "\nOffscreen Crawled: " + imageModel.crawlerIndex + " / " + imageModel.crawlerTotal + " (" + pct + "%)\nActive In-Flight Tasks: " + imageModel.activeJobs
+                            return modeStr + "\nOffscreen Crawled: " + window.activeModel.crawlerIndex + " / " + window.activeModel.crawlerTotal + " (" + pct + "%)\nActive In-Flight Tasks: " + window.activeModel.activeJobs
                         }
                     }
                 }
@@ -375,10 +431,11 @@ ApplicationWindow {
                 id: albumSizeSlider
                 Layout.fillWidth: true
                 from: 100
-                to: 400
-                value: 220
+                to: 250
+                value: 100
                 stepSize: 10
                 onValueChanged: albumsView.cellSize = value
+
 
                 background: Rectangle {
                     x: albumSizeSlider.leftPadding
@@ -735,6 +792,89 @@ ApplicationWindow {
                             Layout.topMargin: 10
                             Layout.bottomMargin: 10
                         }
+
+                        Text {
+                            text: "Drive Scan Performance & Privileges"
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: 16
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            color: "#1e1e1e"
+                            radius: 10
+                            border.color: (desktopHelper && desktopHelper.isRunningAsAdmin()) ? "#2e7d32" : "#555"
+                            border.width: 1
+                            implicitHeight: adminCardLayout.implicitHeight + 24
+
+                            ColumnLayout {
+                                id: adminCardLayout
+                                anchors.fill: parent
+                                anchors.margins: 12
+                                spacing: 10
+
+                                RowLayout {
+                                    Layout.fillWidth: true
+                                    spacing: 8
+
+                                    Text {
+                                        text: (desktopHelper && desktopHelper.isRunningAsAdmin()) ? "🛡️ Administrator Mode (Active)" : "⚡ Standard User Mode"
+                                        color: (desktopHelper && desktopHelper.isRunningAsAdmin()) ? "#00FF00" : "#FFA500"
+                                        font.bold: true
+                                        font.pixelSize: 14
+                                        Layout.fillWidth: true
+                                    }
+
+                                    StyledButton {
+                                        visible: desktopHelper && !desktopHelper.isRunningAsAdmin()
+                                        text: "Relaunch as Admin"
+                                        iconText: "🛡️"
+                                        Layout.preferredWidth: 165
+                                        Layout.preferredHeight: 32
+                                        fontSize: 12
+                                        onClicked: {
+                                            if (desktopHelper) {
+                                                desktopHelper.relaunchAsAdmin(window.currentPath)
+                                            }
+                                        }
+                                    }
+
+                                    StyledButton {
+                                        visible: desktopHelper && desktopHelper.isRunningAsAdmin()
+                                        text: "Relaunch as Standard"
+                                        iconText: "⚡"
+                                        Layout.preferredWidth: 175
+                                        Layout.preferredHeight: 32
+                                        fontSize: 12
+                                        onClicked: {
+                                            if (desktopHelper) {
+                                                desktopHelper.relaunchAsStandardUser(window.currentPath)
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Text {
+                                    text: (desktopHelper && desktopHelper.isRunningAsAdmin())
+                                          ? "Direct NTFS Master File Table (MFT) raw hardware scanning is ACTIVE. Entire 100K+ file drives scan in ~1–2 seconds (matching WizTree performance)."
+                                          : "ℹ️ Running as Administrator allows QGalleryX to read the raw physical NTFS Master File Table (MFT) directly from disk. This accelerates full-drive cold scans from several minutes down to 1–2 seconds (matching WizTree). Click above to relaunch with elevation."
+                                    color: "#bbb"
+                                    font.pixelSize: 12
+                                    wrapMode: Text.Wrap
+                                    Layout.fillWidth: true
+                                }
+                            }
+                        }
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 1
+                            color: "#444"
+                            Layout.topMargin: 10
+                            Layout.bottomMargin: 10
+                        }
                         
                         Text {
                             text: "Graphics API (Requires Restart)"
@@ -743,6 +883,7 @@ ApplicationWindow {
                             font.pixelSize: 16
                             Layout.alignment: Qt.AlignHCenter
                         }
+
                         
                         ComboBox {
                             Layout.fillWidth: true
@@ -854,23 +995,25 @@ ApplicationWindow {
         id: statsOverlay
         x: parent.width - width - 10
         y: 10
-        apiName: appSettings.graphicsApi
-        scanEngine: imageModel ? imageModel.scanMethod : "Idle"
-        scanDuration: imageModel ? imageModel.scanDurationMs : 0
-        isLoading: imageModel.isLoading
-        loadedCount: imageModel.totalCount === 0 ? imageModel.scanProgress : imageModel.count
-        totalCount: imageModel.totalCount
+        apiName: appSettings ? appSettings.graphicsApi : "Direct3D 11"
+        scanEngine: window.activeModel ? window.activeModel.scanMethod : "Idle"
+        scanDuration: window.activeModel ? window.activeModel.scanDurationMs : 0
+        isLoading: window.activeModel ? window.activeModel.isLoading : false
+        loadedCount: window.activeModel ? (window.activeModel.totalCount === 0 ? window.activeModel.scanProgress : window.activeModel.count) : 0
+        totalCount: window.activeModel ? window.activeModel.totalCount : 0
         activeThreadCount: appSettings ? appSettings.concurrentThreads : 0
-        precacheMode: imageModel ? imageModel.precacheMode : 1
-        crawlerIndex: imageModel ? imageModel.crawlerIndex : 0
-        crawlerTotal: imageModel ? imageModel.crawlerTotal : 0
-        crawlerProgress: imageModel ? imageModel.crawlerProgress : 0.0
-        activeJobs: imageModel ? imageModel.activeJobs : 0
+        precacheMode: window.activeModel ? window.activeModel.precacheMode : 1
+        crawlerIndex: window.activeModel ? window.activeModel.crawlerIndex : 0
+        crawlerTotal: window.activeModel ? window.activeModel.crawlerTotal : 0
+        crawlerProgress: window.activeModel ? window.activeModel.crawlerProgress : 0.0
+        activeJobs: window.activeModel ? window.activeModel.activeJobs : 0
+        currentPath: window.currentPath
         z: 100
+
         onRebuildCacheRequested: {
             if (window.currentPath !== "") {
                 console.log("OSD: Rebuilding cache for: " + window.currentPath)
-                if (imageModel) imageModel.reCrawl()
+                if (window.activeModel) window.activeModel.reCrawl()
                 if (viewLoader.item && typeof viewLoader.item.scanFolder === "function") {
                     viewLoader.item.scanFolder(window.currentPath)
                 }

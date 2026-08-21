@@ -15,6 +15,7 @@
 #include <QMutex>
 #include <QReadWriteLock>
 #include <QFileSystemWatcher>
+#include <QPointer>
 #include <queue>
 
 struct ImageInfo {
@@ -26,6 +27,7 @@ struct ImageInfo {
   QDateTime dateModified;
   qint64 size = 0; // Added size member
   bool isSelected = false;
+  bool isVideo = false;
 };
 
 class ImageModel : public QAbstractListModel {
@@ -59,11 +61,13 @@ public:
     SectionWeekRole,
     ExifRole,
     IsRawRole,
-    IsSelectedRole
+    IsSelectedRole,
+    IsVideoRole
   };
   Q_ENUM(ImageRoles)
 
   explicit ImageModel(QObject *parent = nullptr);
+  ~ImageModel() override;
 
   Q_INVOKABLE void scanDirectory(const QString &path);
   Q_INVOKABLE bool cropImage(int index, const QRectF &cropRect);
@@ -137,6 +141,8 @@ signals:
   void visibleIndicesChanged();
   void crawlerProgressChanged();
   void scanMethodChanged();
+  void crawlerStatusChanged(QString status, bool isWarning);
+  void crawlerThrottled(bool throttled);
 
 private slots:
   void processPrecacheTick();
@@ -153,6 +159,7 @@ private:
   int m_scanDurationMs = 0;
   std::atomic<uint64_t> m_scanGeneration{0}; // Cancellation token
   std::atomic<uint64_t> m_precacheGeneration{0}; // Precache Cancellation token
+  std::atomic<uint64_t> m_filterGeneration{0}; // Filter query cancellation token
   std::atomic<quint32> m_scanId{0}; // Drag-Drop Race protection
   int m_totalCount = 0;
   int m_scanProgress = 0;
@@ -162,12 +169,16 @@ private:
 
   int m_precacheMode = 1; // 0: Battery Saver, 1: Lookahead Window, 2: Aggressive Full Crawl
   // Work queue: built once from scan results. Contains ONLY files NOT in the mmap.
+  // GUARDED BY m_crawlMutex — accessed from GUI timer tick, scan worker, and cacheCleared signal.
   QList<QString> m_crawlWorkQueue;
+  QMutex m_crawlMutex; // Protects m_crawlWorkQueue
   std::atomic<int> m_crawlQueueIndex{0};  // Current position in the work queue
   std::atomic<int> m_crawledCount{0};     // Items finished (submitted + skipped)
   std::atomic<int> m_crawlInflight{0};    // Tasks currently running
   bool m_crawlDbFull = false;
   bool m_crawlPassComplete = false;
+  bool m_crawlerThrottledState = false;   // Track last throttle state to avoid repeat toasts
+  QElapsedTimer m_crawlerThrottleTimer;   // Per-instance timer (not static!) so windows don't interfere
   QHash<quint64, int> m_idToRow;
   QHash<quint64, QString> m_idToPath; // For AsyncImageProvider
   int m_loadingResolution = 200;
@@ -189,6 +200,7 @@ private:
   QMutex m_metadataMutex;
   mutable QReadWriteLock m_modelLock;
   QFileSystemWatcher m_folderWatcher;
+  std::shared_ptr<std::atomic<bool>> m_aliveToken = std::make_shared<std::atomic<bool>>(true);
 };
 
 #endif // IMAGEMODEL_H

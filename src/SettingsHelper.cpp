@@ -40,7 +40,7 @@ void SettingsHelper::setSelectedApi(int api) {
 }
 
 int SettingsHelper::snapThumbnailResolution(int rawSize) const {
-  static const int kSnapPoints[] = {64, 96, 128, 192, 256, 384};
+  static const int kSnapPoints[] = {32, 64, 96, 128, 160, 192, 224, 256};
   static const int kNumSnap = sizeof(kSnapPoints) / sizeof(kSnapPoints[0]);
   if (rawSize <= kSnapPoints[0]) return kSnapPoints[0];
   if (rawSize >= kSnapPoints[kNumSnap - 1]) return kSnapPoints[kNumSnap - 1];

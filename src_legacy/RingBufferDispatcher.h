@@ -35,8 +35,8 @@ public:
     // Lock-free push into target ring
     bool push(Task task, RingPriority priority, const QString& key = "");
 
-    // Lock-free pop from highest priority non-empty ring
-    bool pop(DispatchEntry& outEntry, int governorMode = 0);
+    // Lock-free pop from highest priority non-empty ring (Ring0 only if allowBackground is false)
+    bool pop(DispatchEntry& outEntry, int governorMode = 0, bool allowBackground = true);
 
     // Maintenance
     void clear();

@@ -36,7 +36,9 @@ bool RingBufferDispatcher::LockFreeRing::pop(DispatchEntry &item) {
   }
 
   size_t index = currentHead % capacity;
-  item = buffer[index].entry;
+  item = std::move(buffer[index].entry);
+  buffer[index].entry.task = nullptr;
+  buffer[index].entry.key.clear();
   head.store((currentHead + 1) % capacity, std::memory_order_relaxed);
 
   spinlock.clear(std::memory_order_release);
@@ -57,7 +59,9 @@ bool RingBufferDispatcher::LockFreeRing::popLifo(DispatchEntry &item) {
 
   // LIFO: Take from the tail (most recently added)
   size_t newTail = (currentTail == 0) ? (capacity - 1) : (currentTail - 1);
-  item = buffer[newTail].entry;
+  item = std::move(buffer[newTail].entry);
+  buffer[newTail].entry.task = nullptr;
+  buffer[newTail].entry.key.clear();
   tail.store(newTail, std::memory_order_relaxed);
 
   spinlock.clear(std::memory_order_release);
@@ -72,9 +76,11 @@ void RingBufferDispatcher::LockFreeRing::clear() {
   // Destroy std::functions cleanly to prevent memory leak
   for (auto &slot : buffer) {
     slot.entry.task = nullptr;
+    slot.entry.key.clear();
   }
   spinlock.clear(std::memory_order_release);
 }
+
 
 size_t RingBufferDispatcher::LockFreeRing::size() const {
   size_t currentHead = head.load(std::memory_order_relaxed);
@@ -107,7 +113,7 @@ bool RingBufferDispatcher::push(Task task, RingPriority priority,
   return false;
 }
 
-bool RingBufferDispatcher::pop(DispatchEntry &outEntry, int governorMode) {
+bool RingBufferDispatcher::pop(DispatchEntry &outEntry, int governorMode, bool allowBackground) {
   // governorMode: 0 = FIFO, 1 = LIFO, 2 = Adaptive (LIFO for Ring0, FIFO for others)
   
   // Strict Ring Priority: Ring 0 (Immediate) > Ring 1 (Lookahead) > Ring 2 (Precache)
@@ -117,6 +123,11 @@ bool RingBufferDispatcher::pop(DispatchEntry &outEntry, int governorMode) {
   } else {
     if (m_ring0.pop(outEntry))
       return true;
+  }
+
+  // If background is paused, do not touch Ring 1 or Ring 2 (leaves them safely in place)
+  if (!allowBackground) {
+    return false;
   }
 
   if (governorMode == 1) {
@@ -133,6 +144,7 @@ bool RingBufferDispatcher::pop(DispatchEntry &outEntry, int governorMode) {
 
   return false;
 }
+
 
 void RingBufferDispatcher::clear() {
   m_ring0.clear();

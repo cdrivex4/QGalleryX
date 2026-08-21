@@ -103,27 +103,35 @@ public:
     bool isMapped() const { return m_mappedData != nullptr; }
     QByteArray getRawData(const QString& key);
     void insertRawData(const QString& key, const QString& originalPath, const QString& sizeKey, const QByteArray& data);
+    
+    quint64 writeHead() const;
+    quint64 validPayloadBytes() const;
+    void compact(const QString& dbPath);
 
 private:
-    // Version 3: Append-only log. head = next write offset. No tail, no eviction.
+    // Version 4: Append-only log with persistent originalPath for drive tracking.
     struct RingHeader {
         quint32 magic;      // 0x4D4D4150 ('MMAP')
-        quint32 version;    // 3
+        quint32 version;    // 4
         quint64 head;       // Next write position
         quint64 capacity;   // Current mapped size
         quint64 entryCount; // Total records written
-        quint64 _reserved;  // Padding (was 'tail' in v2)
+        quint64 _reserved;  // Padding
     };
 
     struct RecordHeader {
         quint32 keyLen;
+        quint32 pathLen;
         quint32 dataLen;
-        // followed by key bytes
-        // followed by data bytes
+        // followed by key bytes (keyLen)
+        // followed by originalPath bytes (pathLen)
+        // followed by data bytes (dataLen)
     };
 
     QHash<QString, CacheEntry> m_index; // In-memory index
     QHash<QString, quint64> m_offsets;  // Key -> Offset in mmap
+    QHash<QString, quint64> m_dataOffsets; // Key -> Direct payload offset in mmap
+    QHash<QString, quint32> m_dataLengths; // Key -> Payload length
     
     uchar* m_mappedData = nullptr;
     QFile m_file;
@@ -191,7 +199,12 @@ private:
     QString getCoalesceKey(const QString &id, const QSize &size);
     void rebuildKeyIndex();
 
-    std::unique_ptr<ICacheDatabase> m_db;
+    MmapCacheDatabase* getDatabaseForRoot(const QString& root, bool createIfMissing = true);
+    QString rootToDbFileName(const QString& root) const;
+
+    QMap<QString, std::shared_ptr<MmapCacheDatabase>> m_dbs;
+    QMutex m_dbMutex;
+
     QString m_dbPath;
     qint64 m_maxBytes;
     QTimer* m_maintenanceTimer;

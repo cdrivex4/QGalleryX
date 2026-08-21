@@ -28,6 +28,12 @@ public:
   Q_INVOKABLE QString urlToLocalFile(const QString &url);
   Q_INVOKABLE QStringList getAdjacentFiles(const QString &filePath, int neighborWindow = 15);
   Q_INVOKABLE QVariantList getMountedDrives();
+  Q_INVOKABLE bool isRunningAsAdmin() const;
+  Q_INVOKABLE bool relaunchAsAdmin(const QString &folderToOpen = QString());
+  Q_INVOKABLE bool relaunchAsStandardUser(const QString &folderToOpen = QString());
+  Q_INVOKABLE void openNewWindow(const QString &folderPath = QString());
+
+  static void setEngine(class QQmlEngine *engine);
 
   // Single Source of Truth for File Types & Supported Extensions
   static const QStringList& supportedExtensions();
@@ -35,6 +41,9 @@ public:
   static bool isSupportedFile(const QString &filePath);
   static FileType staticGetFileType(const QString &path);
   static bool staticIsNetworkPath(const QString &path);
+
+private:
+  static class QQmlEngine *s_engine;
 };
 
 #endif // DESKTOPHELPER_H

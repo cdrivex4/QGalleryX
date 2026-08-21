@@ -103,6 +103,33 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   if (cancelled && cancelled->load())
     return QImage();
 
+  // Fast path for audio files: generate rich procedural tile directly without invoking FFmpeg
+  int dot = path.lastIndexOf('.');
+  QString ext = dot >= 0 ? path.mid(dot + 1).toLower() : QString();
+  if (ext == "mp3" || ext == "wav" || ext == "flac" || ext == "m4a" || ext == "aac" || ext == "wma" || ext == "opus" || ext == "ogg") {
+      int w = (targetSize.isValid() && targetSize.width() > 0) ? targetSize.width() : 256;
+      int h = (targetSize.isValid() && targetSize.height() > 0) ? targetSize.height() : 256;
+      QImage audioTile(w, h, QImage::Format_RGB32);
+      audioTile.fill(QColor("#181a20"));
+      QPainter p(&audioTile);
+      p.setRenderHint(QPainter::Antialiasing);
+
+      QLinearGradient grad(0, 0, w, h);
+      grad.setColorAt(0.0, QColor("#2a1b3d"));
+      grad.setColorAt(1.0, QColor("#141824"));
+      p.fillRect(audioTile.rect(), grad);
+
+      p.setPen(QColor("#c084fc"));
+      p.setFont(QFont("Segoe UI Emoji", std::max(16, w / 4), QFont::Bold));
+      p.drawText(QRect(0, h / 6, w, h / 2), Qt::AlignCenter, "🎵");
+
+      p.setPen(QColor("#e2e8f0"));
+      p.setFont(QFont("Segoe UI", std::max(9, w / 14), QFont::Bold));
+      p.drawText(QRect(0, (h * 5) / 8, w, h / 4), Qt::AlignCenter, ext.toUpper());
+
+      return audioTile;
+  }
+
   QImage resultImage;
   struct FFmpegCleanup {
     uint8_t *buffer = nullptr;
@@ -146,6 +173,8 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   AVDictionary *options = nullptr;
   av_dict_set(&options, "probesize", "5000000", 0); // 5MB limit
   av_dict_set(&options, "analyzeduration", "2000000", 0); // 2s limit
+  av_dict_set(&options, "err_detect", "ignore_err", 0); // Ignore corrupt packets
+  av_dict_set(&options, "flags", "low_delay", 0);
 
   if (avformat_open_input(&cleanup.fmtCtx, pathStr.c_str(), nullptr, &options) !=
       0) {
@@ -208,8 +237,9 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   cleanup.codecCtx = avcodec_alloc_context3(decoder);
   avcodec_parameters_to_context(cleanup.codecCtx, stream->codecpar);
   
-  // RESTRICT THREADS TO PREVENT CPU DEATH ON MULTIPLE CONCURRENT VIDEOS
-  // Hardware acceleration logic removed for legacy build
+  // Restrict threads to 1 per thumbnail to prevent worker thread starvation / CPU death
+  cleanup.codecCtx->thread_count = 1;
+  cleanup.codecCtx->thread_type = 0;
 
   if (avcodec_open2(cleanup.codecCtx, decoder, nullptr) < 0)
     return QImage();
@@ -229,6 +259,10 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   while (retryCount < 3) { // 3x retry on black frames
     if (cancelled && cancelled->load())
       return QImage();
+    if (timeoutData.timer.elapsed() > timeoutData.timeoutMs) {
+      qWarning() << "[" << timeLogStr << "][VideoThumbnailer] Timeout during decode for" << path;
+      return QImage();
+    }
 
     bool isHeic = path.endsWith(".heic", Qt::CaseInsensitive) || path.endsWith(".heif", Qt::CaseInsensitive);
     if (!isHeic) {
@@ -263,10 +297,12 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
            av_read_frame(cleanup.fmtCtx, cleanup.packet) >= 0) {
       maxPackets--;
       
-      // Periodic cancellation/pause check
+      // Periodic cancellation/timeout check
       if (maxPackets % 50 == 0) {
-        if (cancelled && cancelled->load())
-          return QImage();
+        if ((cancelled && cancelled->load()) || timeoutData.timer.elapsed() > timeoutData.timeoutMs) {
+          av_packet_unref(cleanup.packet);
+          break;
+        }
       }
 
       if (cleanup.packet->stream_index == streamIdx) {
@@ -284,6 +320,10 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
     }
 
     if (!frameFound) {
+      if (timeoutData.timer.elapsed() > timeoutData.timeoutMs) {
+        qWarning() << "[" << timeLogStr << "][VideoThumbnailer] Timeout reached for" << path;
+        break;
+      }
       qWarning() << "[" << timeLogStr
                  << "][VideoThumbnailer] Failed to find frame after 150 video packets at"
                  << timeMs << "ms for" << path;
@@ -291,6 +331,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
       timeMs += std::max(2000, (int)((cleanup.fmtCtx->duration / 1000) * 0.1));
       continue;
     }
+
 
     if (frameFound) {
       AVFrame *finalFrame = cleanup.frame;

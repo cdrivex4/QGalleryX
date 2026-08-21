@@ -123,9 +123,9 @@ void QHashCacheDatabase::clear() {
 
 // --- MmapCacheDatabase Implementation ---
 
-static constexpr quint64 MMAP_GROW_CHUNK = 512LL * 1024LL * 1024LL; // Grow by 512MB at a time
+static constexpr quint64 MMAP_GROW_CHUNK = 16LL * 1024LL * 1024LL; // Start and grow incrementally by 16MB
 static constexpr quint32 MMAP_MAGIC   = 0x4D4D4150; // 'MMAP'
-static constexpr quint32 MMAP_VERSION = 3;           // Append-only log
+static constexpr quint32 MMAP_VERSION = 4;           // Append-only log with persistent originalPath
 
 MmapCacheDatabase::MmapCacheDatabase() : m_capacity(0) {}
 
@@ -186,14 +186,18 @@ void MmapCacheDatabase::load(const QString& dbPath) {
         return;
     }
 
+    struct RecordHeaderV3 {
+        quint32 keyLen;
+        quint32 dataLen;
+    };
+
     RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
 
-    // Detect old v2 ring-buffer file or corrupt header — re-initialise cleanly.
-    // This migrates the old 1GB ring to the new append-only format.
-    if (header->magic != MMAP_MAGIC || header->version != MMAP_VERSION ||
+    // Accept both v3 and v4 append-only logs!
+    if (header->magic != MMAP_MAGIC || (header->version != 3 && header->version != 4) ||
         header->head < sizeof(RingHeader) || header->head > m_capacity) {
 
-        qInfo() << "[MmapCacheDatabase] Initialising append-only log (v3) at" << dbPath
+        qInfo() << "[MmapCacheDatabase] Initialising fresh append-only log (v4) at" << dbPath
                 << "(was version" << header->version << ")";
         header->magic      = MMAP_MAGIC;
         header->version    = MMAP_VERSION;
@@ -205,8 +209,12 @@ void MmapCacheDatabase::load(const QString& dbPath) {
             memset(m_mappedData + sizeof(RingHeader), 0, sizeof(RecordHeader));
         m_index.clear();
         m_offsets.clear();
+        m_dataOffsets.clear();
+        m_dataLengths.clear();
         return;
     }
+
+    quint32 fileVer = header->version;
 
     // Walk forward from the start of the data region to head, rebuilding the index.
     quint64 current = sizeof(RingHeader);
@@ -214,34 +222,76 @@ void MmapCacheDatabase::load(const QString& dbPath) {
     int restored = 0;
 
     while (current < writeHead) {
-        if (current + sizeof(RecordHeader) > writeHead) break;
+        if (fileVer == 3) {
+            if (current + sizeof(RecordHeaderV3) > writeHead) break;
+            RecordHeaderV3* rec = reinterpret_cast<RecordHeaderV3*>(m_mappedData + current);
+            if (rec->keyLen == 0 || rec->keyLen > 2048 ||
+                rec->dataLen == 0 || rec->dataLen > 1024*1024*50 ||
+                current + sizeof(RecordHeaderV3) + rec->keyLen + rec->dataLen > writeHead) {
+                header->head = current;
+                break;
+            }
 
-        RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + current);
-        if (rec->keyLen == 0 || rec->keyLen > 2048 ||
-            rec->dataLen == 0 || rec->dataLen > 1024*1024*50 ||
-            current + sizeof(RecordHeader) + rec->keyLen + rec->dataLen > writeHead) {
-            // Corrupt / unwritten boundary — head must have advanced past real data
-            header->head = current;
-            break;
+            QString key = QString::fromUtf8(
+                reinterpret_cast<const char*>(m_mappedData + current + sizeof(RecordHeaderV3)),
+                rec->keyLen);
+
+            quint64 dataOffset = current + sizeof(RecordHeaderV3) + rec->keyLen;
+            quint32 dataLen = rec->dataLen;
+
+            CacheEntry entry;
+            entry.fileSizeBytes = dataLen;
+            entry.lastAccessed  = QDateTime::currentMSecsSinceEpoch();
+
+            m_index.insert(key, entry);
+            m_offsets.insert(key, current);
+            m_dataOffsets.insert(key, dataOffset);
+            m_dataLengths.insert(key, dataLen);
+            restored++;
+
+            current += sizeof(RecordHeaderV3) + rec->keyLen + rec->dataLen;
+        } else { // Version 4
+            if (current + sizeof(RecordHeader) > writeHead) break;
+            RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + current);
+            if (rec->keyLen == 0 || rec->keyLen > 2048 ||
+                rec->pathLen > 4096 ||
+                rec->dataLen == 0 || rec->dataLen > 1024*1024*50 ||
+                current + sizeof(RecordHeader) + rec->keyLen + rec->pathLen + rec->dataLen > writeHead) {
+                header->head = current;
+                break;
+            }
+
+            QString key = QString::fromUtf8(
+                reinterpret_cast<const char*>(m_mappedData + current + sizeof(RecordHeader)),
+                rec->keyLen);
+
+            QString origPath;
+            if (rec->pathLen > 0) {
+                origPath = QString::fromUtf8(
+                    reinterpret_cast<const char*>(m_mappedData + current + sizeof(RecordHeader) + rec->keyLen),
+                    rec->pathLen);
+            }
+
+            quint64 dataOffset = current + sizeof(RecordHeader) + rec->keyLen + rec->pathLen;
+            quint32 dataLen = rec->dataLen;
+
+            CacheEntry entry;
+            entry.originalPath  = origPath;
+            entry.fileSizeBytes = dataLen;
+            entry.lastAccessed  = QDateTime::currentMSecsSinceEpoch();
+
+            m_index.insert(key, entry);
+            m_offsets.insert(key, current);
+            m_dataOffsets.insert(key, dataOffset);
+            m_dataLengths.insert(key, dataLen);
+            restored++;
+
+            current += sizeof(RecordHeader) + rec->keyLen + rec->pathLen + rec->dataLen;
         }
-
-        QString key = QString::fromUtf8(
-            reinterpret_cast<const char*>(m_mappedData + current + sizeof(RecordHeader)),
-            rec->keyLen);
-
-        CacheEntry entry;
-        entry.fileSizeBytes = rec->dataLen;
-        entry.lastAccessed  = QDateTime::currentMSecsSinceEpoch();
-        // Newer entry overwrites older one (deduplication at load time)
-        m_index.insert(key, entry);
-        m_offsets.insert(key, current);
-        restored++;
-
-        current += sizeof(RecordHeader) + rec->keyLen + rec->dataLen;
     }
 
     header->entryCount = restored;
-    qInfo() << "[MmapCacheDatabase] Restored" << restored << "entries from"
+    qInfo() << "[MmapCacheDatabase] Restored" << restored << "entries (Format v" << fileVer << ") from"
             << dbPath << "| Write head at" << writeHead / (1024*1024) << "MB";
 }
 
@@ -257,11 +307,19 @@ CacheEntry MmapCacheDatabase::get(const QString& key) {
     return m_index.value(key);
 }
 
-void MmapCacheDatabase::insert(const QString& key, const CacheEntry& entry) { Q_UNUSED(key); Q_UNUSED(entry); }
+void MmapCacheDatabase::insert(const QString& key, const CacheEntry& entry) {
+    QMutexLocker lock(&m_mutex);
+    if (m_index.contains(key)) {
+        m_index[key] = entry;
+    }
+}
+
 void MmapCacheDatabase::remove(const QString& key) {
     QMutexLocker lock(&m_mutex);
     m_index.remove(key);
     m_offsets.remove(key);
+    m_dataOffsets.remove(key);
+    m_dataLengths.remove(key);
 }
 
 qint64 MmapCacheDatabase::totalSizeBytes() { return 0; } // Managed by ring capacity
@@ -289,34 +347,27 @@ void MmapCacheDatabase::clearInternal() {
     }
     m_index.clear();
     m_offsets.clear();
+    m_dataOffsets.clear();
+    m_dataLengths.clear();
 }
 
 QByteArray MmapCacheDatabase::getRawData(const QString& key) {
     QMutexLocker lock(&m_mutex);
-    if (!m_mappedData || !m_offsets.contains(key)) return QByteArray();
+    if (!m_mappedData || !m_dataOffsets.contains(key)) return QByteArray();
 
-    quint64 offset = m_offsets.value(key);
-    if (offset + sizeof(RecordHeader) > m_capacity) {
-        m_offsets.remove(key);
-        m_index.remove(key);
-        return QByteArray();
-    }
-
-    RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + offset);
-    if (rec->keyLen == 0 || rec->keyLen > 2048 || rec->dataLen == 0 || rec->dataLen > 1024*1024*50 ||
-        offset + sizeof(RecordHeader) + rec->keyLen + rec->dataLen > m_capacity) {
+    quint64 dataOffset = m_dataOffsets.value(key);
+    quint32 dataLen = m_dataLengths.value(key);
+    if (dataOffset + dataLen > m_capacity) {
+        m_dataOffsets.remove(key);
+        m_dataLengths.remove(key);
         m_offsets.remove(key);
         m_index.remove(key);
         return QByteArray();
     }
 
     // Zero-copy slice directly from the mmap page. OS page cache handles RAM residency.
-    return QByteArray(reinterpret_cast<const char*>(
-        m_mappedData + offset + sizeof(RecordHeader) + rec->keyLen), rec->dataLen);
+    return QByteArray(reinterpret_cast<const char*>(m_mappedData + dataOffset), dataLen);
 }
-
-// advanceHead() removed — append-only log never evicts.
-
 
 void MmapCacheDatabase::insertRawData(const QString& key, const QString& originalPath, const QString& sizeKey, const QByteArray& data) {
     QMutexLocker lock(&m_mutex);
@@ -326,7 +377,8 @@ void MmapCacheDatabase::insertRawData(const QString& key, const QString& origina
     if (m_offsets.contains(key)) return;
 
     QByteArray keyBytes = key.toUtf8();
-    quint64 totalRequired = sizeof(RecordHeader) + keyBytes.size() + data.size();
+    QByteArray pathBytes = originalPath.toUtf8();
+    quint64 totalRequired = sizeof(RecordHeader) + keyBytes.size() + pathBytes.size() + data.size();
 
     RingHeader* header = reinterpret_cast<RingHeader*>(m_mappedData);
 
@@ -340,10 +392,16 @@ void MmapCacheDatabase::insertRawData(const QString& key, const QString& origina
     quint64 offset = header->head;
     RecordHeader* rec = reinterpret_cast<RecordHeader*>(m_mappedData + offset);
     rec->keyLen  = keyBytes.size();
+    rec->pathLen = pathBytes.size();
     rec->dataLen = data.size();
 
-    memcpy(m_mappedData + offset + sizeof(RecordHeader),                 keyBytes.constData(), rec->keyLen);
-    memcpy(m_mappedData + offset + sizeof(RecordHeader) + rec->keyLen,  data.constData(),     rec->dataLen);
+    memcpy(m_mappedData + offset + sizeof(RecordHeader),                               keyBytes.constData(),  rec->keyLen);
+    if (rec->pathLen > 0) {
+        memcpy(m_mappedData + offset + sizeof(RecordHeader) + rec->keyLen,             pathBytes.constData(), rec->pathLen);
+    }
+    memcpy(m_mappedData + offset + sizeof(RecordHeader) + rec->keyLen + rec->pathLen, data.constData(),      rec->dataLen);
+
+    quint64 dataOffset = offset + sizeof(RecordHeader) + rec->keyLen + rec->pathLen;
 
     CacheEntry entry;
     entry.originalPath  = originalPath;
@@ -353,9 +411,67 @@ void MmapCacheDatabase::insertRawData(const QString& key, const QString& origina
 
     m_index.insert(key, entry);
     m_offsets.insert(key, offset);
+    m_dataOffsets.insert(key, dataOffset);
+    m_dataLengths.insert(key, data.size());
 
     header->head += totalRequired;
     header->entryCount++;
+}
+
+quint64 MmapCacheDatabase::writeHead() const {
+    if (!m_mappedData) return 0;
+    return reinterpret_cast<const RingHeader*>(m_mappedData)->head;
+}
+
+quint64 MmapCacheDatabase::validPayloadBytes() const {
+    quint64 total = 0;
+    for (auto it = m_dataLengths.begin(); it != m_dataLengths.end(); ++it) {
+        total += it.value();
+    }
+    return total;
+}
+
+void MmapCacheDatabase::compact(const QString& dbPath) {
+    QMutexLocker lock(&m_mutex);
+    if (!m_mappedData || m_index.isEmpty()) return;
+
+    QString tmpPath = dbPath + ".compact.tmp";
+    QFile::remove(tmpPath);
+
+    quint64 neededCapacity = sizeof(RingHeader);
+    for (auto it = m_index.begin(); it != m_index.end(); ++it) {
+        neededCapacity += sizeof(RecordHeader) + it.key().toUtf8().size() + it.value().originalPath.toUtf8().size() + it.value().fileSizeBytes;
+    }
+    neededCapacity = qMax(neededCapacity + MMAP_GROW_CHUNK, MMAP_GROW_CHUNK);
+
+    auto freshDb = std::make_unique<MmapCacheDatabase>();
+    freshDb->load(tmpPath);
+
+    for (auto it = m_index.begin(); it != m_index.end(); ++it) {
+        QString key = it.key();
+        CacheEntry entry = it.value();
+        quint64 dataOffset = m_dataOffsets.value(key, 0);
+        quint32 dataLen = m_dataLengths.value(key, 0);
+        if (dataOffset > 0 && dataLen > 0 && dataOffset + dataLen <= m_capacity) {
+            QByteArray payload = QByteArray::fromRawData(reinterpret_cast<const char*>(m_mappedData + dataOffset), dataLen);
+            freshDb->insertRawData(key, entry.originalPath, entry.sizeKey, payload);
+        }
+    }
+
+    if (m_mappedData) {
+        m_file.unmap(m_mappedData);
+        m_mappedData = nullptr;
+    }
+    m_file.close();
+    freshDb.reset();
+
+    if (QFile::remove(dbPath) && QFile::rename(tmpPath, dbPath)) {
+        load(dbPath);
+        qInfo() << "[MmapCacheDatabase] Compacted" << dbPath << "successfully.";
+    } else {
+        load(dbPath);
+        QFile::remove(tmpPath);
+    }
 }
 
 // --- FileCacheManager Implementation ---
@@ -366,9 +482,16 @@ FileCacheManager& FileCacheManager::instance() {
 }
 
 QString FileCacheManager::getCacheDirectory() {
-    QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    if (cacheDir.isEmpty()) {
-        cacheDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/QGalleryX";
+    QString cacheDir;
+    QStringList args = QCoreApplication::arguments();
+    int cacheDirIdx = args.indexOf("--cache-dir");
+    if (cacheDirIdx != -1 && cacheDirIdx + 1 < args.size()) {
+        cacheDir = args.at(cacheDirIdx + 1);
+    } else {
+        cacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+        if (cacheDir.isEmpty()) {
+            cacheDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/QGalleryX";
+        }
     }
     QString thumbDir = cacheDir + "/thumbnails";
     QDir().mkpath(thumbDir);
@@ -397,19 +520,16 @@ FileCacheManager::FileCacheManager() : m_maxBytes(1024LL * 1024LL * 1024LL) /* 1
         }
     }
 
-    // Always use high-performance MmapCacheDatabase (1GB ring buffer)
-    m_db = std::make_unique<MmapCacheDatabase>();
     m_dbPath = cacheDir + "/FileCache.mmap";
-    qDebug() << "FileCacheManager: Initialized with Memory-Mapped Ring Buffer at" << m_dbPath << "(Writability:" << m_canWrite << ")";
+    qDebug() << "FileCacheManager: Initialized with Per-Location Memory-Mapped DBs at" << cacheDir << "(Writability:" << m_canWrite << ")";
 
     m_maintenanceTimer = new QTimer(this);
     connect(m_maintenanceTimer, &QTimer::timeout, this, &FileCacheManager::performMaintenance);
 }
 
 FileCacheManager::~FileCacheManager() {
-    if (m_dirty) {
-        m_db->save(m_dbPath);
-    }
+    QMutexLocker lock(&m_dbMutex);
+    m_dbs.clear();
 }
 
 QString FileCacheManager::getStatsIniPath() const {
@@ -417,43 +537,181 @@ QString FileCacheManager::getStatsIniPath() const {
     return cacheDir + "/cache_stats.ini";
 }
 
+QString FileCacheManager::rootToDbFileName(const QString& root) const {
+    if (root.isEmpty() || root == "/" || root == "__DEFAULT__") return QStringLiteral("FileCache.mmap");
+    QString safe = root;
+    safe.replace(":\\", "_");
+    safe.replace(":/", "_");
+    safe.replace(":", "_");
+    safe.replace("\\\\", "");
+    safe.replace("\\", "_");
+    safe.replace("/", "_");
+    safe.replace("*", "_");
+    safe.replace("?", "_");
+    safe.replace("\"", "_");
+    safe.replace("<", "_");
+    safe.replace(">", "_");
+    safe.replace("|", "_");
+    while (safe.startsWith("_")) safe = safe.mid(1);
+    while (safe.endsWith("_")) safe.chop(1);
+    return QString("FileCache_%1.mmap").arg(safe);
+}
+
+MmapCacheDatabase* FileCacheManager::getDatabaseForRoot(const QString& root, bool createIfMissing) {
+    QString normRoot = root.isEmpty() ? QStringLiteral("__DEFAULT__") : root.toUpper();
+    QMutexLocker lock(&m_dbMutex);
+
+    auto it = m_dbs.find(normRoot);
+    if (it != m_dbs.end()) {
+        return it.value().get();
+    }
+
+    if (!createIfMissing) {
+        return nullptr;
+    }
+
+    QString cacheDir = getCacheDirectory();
+    QString fileName = rootToDbFileName(normRoot);
+    QString dbPath = cacheDir + "/" + fileName;
+
+    auto db = std::make_shared<MmapCacheDatabase>();
+    db->load(dbPath);
+    m_dbs.insert(normRoot, db);
+    return db.get();
+}
+
 void FileCacheManager::initialize() {
-    m_db->load(m_dbPath);
-    
-    // Load persisted root stats across all cached drives from local cache_stats.ini (Zero Registry)
-    {
-        QSettings settings(getStatsIniPath(), QSettings::IniFormat);
-        QStringList groups = settings.childGroups();
-        QMutexLocker lock(&m_rootStatsMutex);
-        for (const QString& root : groups) {
-            settings.beginGroup(root);
-            qint64 c = settings.value("count", 0).toLongLong();
-            qint64 b = settings.value("bytes", 0).toLongLong();
-            settings.endGroup();
-            if (c > 0) {
-                m_rootStats[root].count = c;
-                m_rootStats[root].bytes = b;
+    QString cacheDir = getCacheDirectory();
+    QDir dir(cacheDir);
+
+    // Load any existing per-drive FileCache_*.mmap and legacy FileCache.mmap
+    QFileInfoList mmapFiles = dir.entryInfoList(QStringList() << "FileCache*.mmap", QDir::Files);
+    for (const auto& fi : mmapFiles) {
+        QString base = fi.fileName();
+        QString root;
+        if (base == "FileCache.mmap") {
+            root = "__DEFAULT__";
+        } else if (base.startsWith("FileCache_") && base.endsWith(".mmap")) {
+            // e.g. FileCache_C.mmap -> C:
+            QString name = base.mid(10, base.length() - 15);
+            if (name.length() == 1) {
+                root = name.toUpper() + ":";
+            } else if (name.contains('_')) {
+                // e.g. QUAKE2_I -> \\QUAKE2\I
+                root = "\\\\" + QString(name).replace('_', '\\');
+            } else {
+                root = name.toUpper();
             }
+        }
+        if (!root.isEmpty()) {
+            auto db = std::make_shared<MmapCacheDatabase>();
+            db->load(fi.absoluteFilePath());
+            QMutexLocker lock(&m_dbMutex);
+            m_dbs.insert(root.toUpper(), db);
         }
     }
 
     rebuildKeyIndex();
-    // Run maintenance every 60 seconds
     m_maintenanceTimer->start(60000);
 }
 
 void FileCacheManager::rebuildKeyIndex() {
     QMutexLocker lock(&m_keyMutex);
     m_knownKeys.clear();
-    if (!m_db) return;
     
-    QList<QString> keys = m_db->getAllKeys();
-    for (const QString& k : keys) {
-        m_knownKeys.insert(k);
-        CacheEntry entry = m_db->get(k);
-        if (!entry.originalPath.isEmpty()) {
-            trackRootStat(entry.originalPath, entry.fileSizeBytes);
+    QMap<QString, RootStat> freshStats;
+    bool hasMissingPaths = false;
+
+    {
+        QMutexLocker dbLock(&m_dbMutex);
+        for (auto it = m_dbs.begin(); it != m_dbs.end(); ++it) {
+            QString rootKey = it.key();
+            auto db = it.value();
+            QList<QString> keys = db->getAllKeys();
+            for (const QString& k : keys) {
+                m_knownKeys.insert(k);
+                CacheEntry entry = db->get(k);
+                QString root = !entry.originalPath.isEmpty() ? extractRoot(entry.originalPath) : rootKey;
+                if (!root.isEmpty() && root != "__DEFAULT__") {
+                    freshStats[root].count++;
+                    freshStats[root].bytes += entry.fileSizeBytes;
+                } else if (rootKey != "__DEFAULT__") {
+                    freshStats[rootKey].count++;
+                    freshStats[rootKey].bytes += entry.fileSizeBytes;
+                } else {
+                    hasMissingPaths = true;
+                }
+            }
         }
+    }
+
+    // Auto-migration & path reconciliation from folder_caches/*.bin
+    QString folderCacheDir;
+    QStringList args = QCoreApplication::arguments();
+    int cacheDirIdx = args.indexOf("--cache-dir");
+    if (cacheDirIdx != -1 && cacheDirIdx + 1 < args.size()) {
+        folderCacheDir = args.at(cacheDirIdx + 1) + "/folder_caches";
+    } else {
+        folderCacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+    }
+
+    QDir folderDir(folderCacheDir);
+    QFileInfoList binFiles = folderDir.entryInfoList(QStringList() << "*.bin", QDir::Files);
+    int matched = 0;
+    for (const auto& binInfo : binFiles) {
+        QFile bf(binInfo.absoluteFilePath());
+        if (bf.open(QIODevice::ReadOnly)) {
+            QDataStream in(&bf);
+            int count = 0;
+            in >> count;
+            for (int i = 0; i < count; ++i) {
+                QString path;
+                qint64 s;
+                QDateTime d;
+                in >> path >> s >> d;
+                QString key = getCoalesceKey(path, QSize(200, 200));
+                if (m_knownKeys.contains(key)) {
+                    QString root = extractRoot(path);
+                    if (!root.isEmpty()) {
+                        MmapCacheDatabase* targetDb = getDatabaseForRoot(root, true);
+                        if (targetDb) {
+                            MmapCacheDatabase* legacyDb = getDatabaseForRoot("__DEFAULT__", false);
+                            if (legacyDb && legacyDb->contains(key)) {
+                                QByteArray rawData = legacyDb->getRawData(key);
+                                if (!rawData.isEmpty()) {
+                                    targetDb->insertRawData(key, path, "200x200", rawData);
+                                    legacyDb->remove(key);
+                                    freshStats[root].count++;
+                                    freshStats[root].bytes += rawData.size();
+                                    matched++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (matched > 0) {
+        qInfo() << "[FileCacheManager] Migrated and split" << matched << "existing cached items into dedicated per-drive databases.";
+    }
+
+    // Clean up empty legacy FileCache.mmap
+    {
+        QMutexLocker dbLock(&m_dbMutex);
+        if (m_dbs.contains("__DEFAULT__")) {
+            if (m_dbs["__DEFAULT__"]->getAllKeys().isEmpty()) {
+                m_dbs.remove("__DEFAULT__");
+                QString cacheDir = getCacheDirectory();
+                QFile::remove(cacheDir + "/FileCache.mmap");
+            }
+        }
+    }
+
+    {
+        QMutexLocker statLock(&m_rootStatsMutex);
+        m_rootStats = std::move(freshStats);
     }
 }
 
@@ -494,8 +752,6 @@ QString FileCacheManager::getCoalesceKey(const QString &id, const QSize &size) {
     QString pathHash = QString::fromUtf8(QCryptographicHash::hash(realPath.toUtf8(), QCryptographicHash::Md5).toHex());
 
     // Single unified thumbnail bucket ONLY for grid/overview/semantic thumbnail sizes (width & height <= 512px).
-    // Full photo viewer requests (size is invalid, empty, or >512px) MUST NOT return _thumb
-    // so they decode the full-resolution original image!
     if (size.isValid() && !size.isEmpty() && size.width() <= 512 && size.height() <= 512) {
         return QString("%1_thumb").arg(pathHash);
     }
@@ -512,146 +768,130 @@ QString FileCacheManager::getCoalesceKey(const QString &id, const QSize &size) {
 }
 
 QString FileCacheManager::getCachedPath(const QString& id, const QSize& requestedSize) {
-    if (!m_canWrite || !m_db) return QString();
+    if (!m_canWrite) return QString();
+    QString root = extractRoot(id);
     QString key = getCoalesceKey(id, requestedSize);
     
     {
         QMutexLocker lock(&m_keyMutex);
         if (!m_knownKeys.isEmpty() && !m_knownKeys.contains(key)) {
-            // Fast O(1) reject — key not in DB index
             return QString();
         }
     }
 
-    if (m_db->contains(key)) {
-        CacheEntry entry = m_db->get(key);
-        // "detect and rebuild" - verify the file actually exists on OS disk before returning it
+    MmapCacheDatabase* db = getDatabaseForRoot(root, false);
+    if (db && db->contains(key)) {
+        CacheEntry entry = db->get(key);
         if (QFile::exists(entry.thumbPath)) {
-            m_dirty = true; // access time was updated
             return entry.thumbPath;
         } else {
-            // Rebuild: The file was deleted outside the app, so drop it from the index
-            m_db->remove(key);
+            db->remove(key);
             {
                 QMutexLocker lock(&m_keyMutex);
                 m_knownKeys.remove(key);
             }
-            m_dirty = true;
         }
     }
     return QString();
 }
 
 void FileCacheManager::registerCacheFile(const QString& id, const QSize& requestedSize, const QString& thumbPath, qint64 sizeBytes) {
-    if (!m_canWrite || !m_db) return;
+    if (!m_canWrite) return;
+    QString root = extractRoot(id);
     QString key = getCoalesceKey(id, requestedSize);
     
-    CacheEntry entry;
-    entry.originalPath = id;
-    entry.sizeKey = QString("%1x%2").arg(requestedSize.width()).arg(requestedSize.height());
-    entry.thumbPath = thumbPath;
-    entry.lastAccessed = QDateTime::currentMSecsSinceEpoch();
-    entry.fileSizeBytes = sizeBytes;
-    
-    m_db->insert(key, entry);
-    {
-        QMutexLocker lock(&m_keyMutex);
-        m_knownKeys.insert(key);
+    MmapCacheDatabase* db = getDatabaseForRoot(root, true);
+    if (db) {
+        CacheEntry entry;
+        entry.originalPath = id;
+        entry.sizeKey = QString("%1x%2").arg(requestedSize.width()).arg(requestedSize.height());
+        entry.thumbPath = thumbPath;
+        entry.lastAccessed = QDateTime::currentMSecsSinceEpoch();
+        entry.fileSizeBytes = sizeBytes;
+        
+        db->insert(key, entry);
+        {
+            QMutexLocker lock(&m_keyMutex);
+            m_knownKeys.insert(key);
+        }
+        trackRootStat(id, sizeBytes);
+        m_dirty = true;
     }
-    trackRootStat(id, sizeBytes);
-    m_dirty = true;
 }
 
 QByteArray FileCacheManager::getCachedData(const QString& id, const QSize& requestedSize) {
-    if (!m_canWrite || !m_db) return QByteArray();
-    
-    // Only MmapCacheDatabase supports this direct extraction
-    MmapCacheDatabase* mmapDb = dynamic_cast<MmapCacheDatabase*>(m_db.get());
-    if (mmapDb) {
-        QString key = getCoalesceKey(id, requestedSize);
-        return mmapDb->getRawData(key);
+    if (!m_canWrite) return QByteArray();
+    QString root = extractRoot(id);
+    QString key = getCoalesceKey(id, requestedSize);
+
+    MmapCacheDatabase* db = getDatabaseForRoot(root, false);
+    if (db && db->contains(key)) {
+        return db->getRawData(key);
     }
+
+    // Fallback check in default/legacy db
+    MmapCacheDatabase* defDb = getDatabaseForRoot("__DEFAULT__", false);
+    if (defDb && defDb->contains(key)) {
+        return defDb->getRawData(key);
+    }
+
     return QByteArray();
 }
 
 bool FileCacheManager::isCached(const QString& id, const QSize& requestedSize) {
-    if (!m_canWrite || !m_db) return false;
+    if (!m_canWrite) return false;
     QString key = getCoalesceKey(id, requestedSize);
-    // O(1) — just checks the in-memory index, zero disk I/O
     QMutexLocker lock(&m_keyMutex);
     return m_knownKeys.contains(key);
 }
 
 void FileCacheManager::registerCachedData(const QString& id, const QSize& requestedSize, const QByteArray& data) {
-    if (!m_canWrite || !m_db) return;
-    
-    MmapCacheDatabase* mmapDb = dynamic_cast<MmapCacheDatabase*>(m_db.get());
-    if (mmapDb) {
+    if (!m_canWrite) return;
+    QString root = extractRoot(id);
+    MmapCacheDatabase* db = getDatabaseForRoot(root, true);
+    if (db) {
         QString key = getCoalesceKey(id, requestedSize);
         QString sizeKey = QString("%1x%2").arg(requestedSize.width()).arg(requestedSize.height());
-        mmapDb->insertRawData(key, id, sizeKey, data);
-        {
-            QMutexLocker lock(&m_keyMutex);
-            m_knownKeys.insert(key);
+        if (!db->contains(key)) {
+            db->insertRawData(key, id, sizeKey, data);
+            {
+                QMutexLocker lock(&m_keyMutex);
+                m_knownKeys.insert(key);
+            }
+            trackRootStat(id, data.size());
+            m_dirty = true;
         }
-        trackRootStat(id, data.size());
-        m_dirty = true;
     }
 }
 
 void FileCacheManager::performMaintenance() {
-    if (!m_db) return;
-    
-    qint64 currentSize = m_db->totalSizeBytes();
-    if (currentSize <= m_maxBytes) return; // No pruning needed
-    
-    qint64 bytesToFree = currentSize - (m_maxBytes * 0.8); // Free down to 80%
-    QList<QString> oldKeys = m_db->getOldestKeys(100);
-    
-    for (const QString& key : oldKeys) {
-        if (bytesToFree <= 0) break;
-        CacheEntry entry = m_db->get(key);
-        if (QFile::exists(entry.thumbPath)) {
-            QFile::remove(entry.thumbPath);
-            bytesToFree -= entry.fileSizeBytes;
-            m_db->remove(key);
-            {
-                QMutexLocker lock(&m_keyMutex);
-                m_knownKeys.remove(key);
-            }
-        }
-        m_dirty = true;
-    }
-    
-    if (m_dirty) {
-        m_db->save(m_dbPath);
-    }
+    // Maintenance is now managed per-drive naturally via individual .mmap databases
 }
 
 void FileCacheManager::clearCache() {
-    if (m_db) {
-        m_db->clear();
-    }
-    {
-        QMutexLocker lock(&m_keyMutex);
-        m_knownKeys.clear();
-    }
-    {
-        QMutexLocker lock(&m_rootStatsMutex);
-        m_rootStats.clear();
-        QSettings settings(getStatsIniPath(), QSettings::IniFormat);
-        settings.clear();
-    }
-    m_dirty = false;
-    
-    emit cacheCleared();
-    qInfo() << "[FileCacheManager] Thumbnail cache cleared.";
+    nukeCache();
 }
 
 void FileCacheManager::nukeCache() {
-    qInfo() << "[FileCacheManager] NUKE CACHE requested by user. Wiping all databases, folder caches, and thumbnails...";
+    qInfo() << "[FileCacheManager] NUKE ALL CACHE requested by user. Wiping all per-drive databases, folder caches, and thumbnails...";
     
-    if (m_db) m_db->clear();
+    QString cacheDir = getCacheDirectory();
+
+    {
+        QMutexLocker lock(&m_dbMutex);
+        for (auto it = m_dbs.begin(); it != m_dbs.end(); ++it) {
+            it.value()->clear();
+        }
+        m_dbs.clear();
+    }
+
+    // Delete all FileCache*.mmap files from disk
+    QDir dir(cacheDir);
+    QFileInfoList mmapFiles = dir.entryInfoList(QStringList() << "FileCache*.mmap", QDir::Files);
+    for (const auto& fi : mmapFiles) {
+        QFile::remove(fi.absoluteFilePath());
+    }
+
     {
         QMutexLocker lock(&m_keyMutex);
         m_knownKeys.clear();
@@ -665,7 +905,14 @@ void FileCacheManager::nukeCache() {
     m_dirty = false;
 
     // Wipe serialized folder metadata databases (.bin)
-    QString folderCacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+    QString folderCacheDir;
+    QStringList args = QCoreApplication::arguments();
+    int cacheDirIdx = args.indexOf("--cache-dir");
+    if (cacheDirIdx != -1 && cacheDirIdx + 1 < args.size()) {
+        folderCacheDir = args.at(cacheDirIdx + 1) + "/folder_caches";
+    } else {
+        folderCacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+    }
     QDir folderDir(folderCacheDir);
     if (folderDir.exists()) {
         folderDir.removeRecursively();
@@ -699,12 +946,6 @@ void FileCacheManager::trackRootStat(const QString& originalPath, qint64 bytes) 
     QMutexLocker lock(&m_rootStatsMutex);
     m_rootStats[root].count++;
     m_rootStats[root].bytes += bytes;
-
-    QSettings settings(getStatsIniPath(), QSettings::IniFormat);
-    settings.beginGroup(root);
-    settings.setValue("count", m_rootStats[root].count);
-    settings.setValue("bytes", m_rootStats[root].bytes);
-    settings.endGroup();
 }
 
 QStringList FileCacheManager::getTrackedRootPaths() {
@@ -717,70 +958,88 @@ QVariantMap FileCacheManager::getTrackedRootPathStats() {
     qint64 totalCount = 0;
     qint64 totalBytes = 0;
 
-    QSettings settings(getStatsIniPath(), QSettings::IniFormat);
-    QStringList groups = settings.childGroups();
+    QString cacheDir = getCacheDirectory();
 
     {
         QMutexLocker lock(&m_rootStatsMutex);
-        for (const QString& root : groups) {
-            settings.beginGroup(root);
-            qint64 c = settings.value("count", 0).toLongLong();
-            qint64 b = settings.value("bytes", 0).toLongLong();
-            settings.endGroup();
-            if (c > 0) {
-                m_rootStats[root].count = std::max(m_rootStats[root].count, c);
-                m_rootStats[root].bytes = std::max(m_rootStats[root].bytes, b);
-            }
-        }
-
         for (auto it = m_rootStats.begin(); it != m_rootStats.end(); ++it) {
             if (it.value().count > 0 || it.key() != "__total__") {
                 QVariantMap sub;
                 sub["count"] = it.value().count;
-                sub["bytes"] = it.value().bytes;
+                
+                // Show the exact actual payload data size in MB for each drive
+                qint64 driveBytes = it.value().bytes;
+                if (driveBytes == 0) {
+                    QString dbFile = cacheDir + "/" + rootToDbFileName(it.key());
+                    driveBytes = QFileInfo(dbFile).size();
+                }
+                sub["bytes"] = driveBytes;
+
                 map[it.key()] = sub;
                 totalCount += it.value().count;
-                totalBytes += it.value().bytes;
+                totalBytes += driveBytes;
             }
+        }
+    }
+
+    // Discover any other per-drive FileCache_*.mmap on disk
+    QDir dir(cacheDir);
+    QFileInfoList mmapFiles = dir.entryInfoList(QStringList() << "FileCache_*.mmap", QDir::Files);
+    for (const auto& fi : mmapFiles) {
+        QString base = fi.fileName();
+        QString root;
+        QString name = base.mid(10, base.length() - 15);
+        if (name.length() == 1) {
+            root = name.toUpper() + ":";
+        } else if (name.contains('_')) {
+            root = "\\\\" + QString(name).replace('_', '\\');
+        } else {
+            root = name.toUpper();
+        }
+
+        if (!root.isEmpty() && !map.contains(root)) {
+            QVariantMap sub;
+            sub["count"] = 0;
+            sub["bytes"] = fi.size();
+            map[root] = sub;
+            totalBytes += fi.size();
         }
     }
 
     QVariantMap total;
     total["count"] = totalCount;
     total["bytes"] = totalBytes;
-    if (m_db) {
-        qint64 dbBytes = m_db->totalSizeBytes();
-        if (dbBytes > 0) {
-            total["bytes"] = dbBytes;
-        }
-    }
     map["__total__"] = total;
     return map;
 }
 
 void FileCacheManager::nukeCacheForPrefix(const QString& pathPrefix) {
-    if (pathPrefix.isEmpty() || !m_db) return;
+    if (pathPrefix.isEmpty()) return;
     qInfo() << "[FileCacheManager] Nuking cache for path prefix:" << pathPrefix;
 
     QString root = extractRoot(pathPrefix);
-    QList<QString> allKeys = m_db->getAllKeys();
-    int removed = 0;
+    if (root.isEmpty()) return;
 
-    for (const QString& key : allKeys) {
-        CacheEntry entry = m_db->get(key);
-        if (extractRoot(entry.originalPath) == root) {
-            if (!entry.thumbPath.isEmpty() && QFile::exists(entry.thumbPath)) {
-                QFile::remove(entry.thumbPath);
-            }
-            m_db->remove(key);
-            {
-                QMutexLocker lock(&m_keyMutex);
-                m_knownKeys.remove(key);
-            }
-            removed++;
+    QString cacheDir = getCacheDirectory();
+    QString fileName = rootToDbFileName(root);
+    QString filePath = cacheDir + "/" + fileName;
+
+    // 1. Close and remove the database instance from memory
+    {
+        QMutexLocker lock(&m_dbMutex);
+        if (m_dbs.contains(root)) {
+            m_dbs[root]->clear();
+            m_dbs.remove(root);
         }
     }
 
+    // 2. Delete the physical .mmap file from disk to reclaim 100% disk space immediately
+    if (QFile::exists(filePath)) {
+        QFile::remove(filePath);
+        qInfo() << "[FileCacheManager] Deleted per-drive cache file:" << filePath;
+    }
+
+    // 3. Clear keys and stats for this drive
     {
         QMutexLocker lock(&m_rootStatsMutex);
         m_rootStats.remove(root);
@@ -788,8 +1047,15 @@ void FileCacheManager::nukeCacheForPrefix(const QString& pathPrefix) {
         settings.remove(root);
     }
 
-    // Wipe serialized folder metadata databases (.bin) that match this root prefix
-    QString folderCacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+    // 4. Wipe serialized folder metadata databases (.bin) that match this root prefix
+    QString folderCacheDir;
+    QStringList args = QCoreApplication::arguments();
+    int cacheDirIdx = args.indexOf("--cache-dir");
+    if (cacheDirIdx != -1 && cacheDirIdx + 1 < args.size()) {
+        folderCacheDir = args.at(cacheDirIdx + 1) + "/folder_caches";
+    } else {
+        folderCacheDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/folder_caches";
+    }
     QDir folderDir(folderCacheDir);
     if (folderDir.exists()) {
         QFileInfoList binFiles = folderDir.entryInfoList(QStringList() << "*.bin", QDir::Files);
@@ -815,18 +1081,21 @@ void FileCacheManager::nukeCacheForPrefix(const QString& pathPrefix) {
         }
     }
 
-    m_dirty = true;
-    m_db->save(m_dbPath);
+    rebuildKeyIndex();
     emit cacheCleared();
-    qInfo() << "[FileCacheManager] Nuked" << removed << "entries for prefix:" << pathPrefix;
+    qInfo() << "[FileCacheManager] Nuke completed for drive:" << root;
 }
 
 int FileCacheManager::pruneStaleEntries(const QString& folderPrefix, const QSet<QString>& validFilePaths, const QSize& thumbSize) {
-    if (!m_canWrite || !m_db || folderPrefix.isEmpty()) return 0;
+    if (!m_canWrite || folderPrefix.isEmpty()) return 0;
 
     QString cleanPrefix = QDir::cleanPath(folderPrefix);
     cleanPrefix = QDir::toNativeSeparators(cleanPrefix);
     if (!cleanPrefix.endsWith('\\')) cleanPrefix += "\\";
+
+    QString root = extractRoot(folderPrefix);
+    MmapCacheDatabase* db = getDatabaseForRoot(root, false);
+    if (!db) return 0;
 
     // Build the set of valid keys from the current file list for fast lookup
     QSet<QString> validKeys;
@@ -834,27 +1103,19 @@ int FileCacheManager::pruneStaleEntries(const QString& folderPrefix, const QSet<
     for (const QString& path : validFilePaths)
         validKeys.insert(getCoalesceKey(path, thumbSize));
 
-    // Walk the in-memory index — only examine entries matching cleanPrefix
-    QList<QString> allKeys;
-    {
-        QMutexLocker lock(&m_keyMutex);
-        allKeys = m_knownKeys.values();
-    }
-
+    QList<QString> allKeys = db->getAllKeys();
     int pruned = 0;
     qint64 orphanedBytes = 0;
 
     for (const QString& key : allKeys) {
-        CacheEntry entry = m_db->get(key);
+        CacheEntry entry = db->get(key);
         if (entry.originalPath.isEmpty()) continue;
 
         QString entryPath = QDir::toNativeSeparators(entry.originalPath);
-        // CRITICAL GUARD: Only evaluate entries that strictly belong to the scanned folder prefix!
-        // Entries from other folders, other drives (C:, D:, I:, etc.) are NEVER touched!
         if (entryPath.startsWith(cleanPrefix, Qt::CaseInsensitive)) {
             if (!validKeys.contains(key) && !QFile::exists(entry.originalPath)) {
                 orphanedBytes += entry.fileSizeBytes;
-                m_db->remove(key);
+                db->remove(key);
                 {
                     QMutexLocker lock(&m_keyMutex);
                     m_knownKeys.remove(key);
@@ -868,57 +1129,28 @@ int FileCacheManager::pruneStaleEntries(const QString& folderPrefix, const QSet<
         qInfo() << "[FileCacheManager] Safely pruned" << pruned << "deleted entries from" << cleanPrefix
                 << "(" << orphanedBytes / 1024 << "KB orphaned).";
         m_dirty = true;
+
+        // Auto-Compaction on 30% deviation:
+        // If orphaned/dead bytes exceed 30% of the active database size, compact immediately
+        quint64 head = db->writeHead();
+        quint64 validBytes = db->validPayloadBytes();
+        if (head > 5LL * 1024LL * 1024LL && (head - validBytes) > (0.30 * head)) {
+            QString cacheDir = getCacheDirectory();
+            QString dbPath = cacheDir + "/" + rootToDbFileName(root);
+            qInfo() << "[FileCacheManager] Dead space exceeds 30% deviation (" << (head - validBytes)/(1024*1024) << "MB dead /" << head/(1024*1024) << "MB total). Auto-compacting" << root << "...";
+            db->compact(dbPath);
+        }
     }
     return pruned;
 }
 
 void FileCacheManager::compact() {
-    if (!m_canWrite || !m_db) return;
-
-    MmapCacheDatabase* mmapDb = dynamic_cast<MmapCacheDatabase*>(m_db.get());
-    if (!mmapDb) return;
-
-    QString tmpPath = m_dbPath + ".compact.tmp";
-    QFile::remove(tmpPath);
-
-    // Create a fresh database for compaction output
-    auto freshDb = std::make_unique<MmapCacheDatabase>();
-    freshDb->load(tmpPath);
-
-    // Copy all currently-indexed (valid) entries from the live mmap to the fresh one
-    QList<QString> validKeys;
-    {
-        QMutexLocker lock(&m_keyMutex);
-        validKeys = m_knownKeys.values();
+    QString cacheDir = getCacheDirectory();
+    QMutexLocker lock(&m_dbMutex);
+    for (auto it = m_dbs.begin(); it != m_dbs.end(); ++it) {
+        QString dbPath = cacheDir + "/" + rootToDbFileName(it.key());
+        it.value()->compact(dbPath);
     }
-
-    int copied = 0;
-    for (const QString& key : validKeys) {
-        CacheEntry entry = m_db->get(key);
-        QByteArray data = mmapDb->getRawData(key);
-        if (!data.isEmpty()) {
-            freshDb->insertRawData(key, entry.originalPath, entry.sizeKey, data);
-            copied++;
-        }
-    }
-
-    // Swap: unmap current, replace file, reload
-    m_db.reset();   // Closes and unmaps current mmap
-    freshDb.reset(); // Flushes the tmp mmap
-
-    if (QFile::remove(m_dbPath) && QFile::rename(tmpPath, m_dbPath)) {
-        m_db = std::make_unique<MmapCacheDatabase>();
-        m_db->load(m_dbPath);
-        rebuildKeyIndex();
-        qInfo() << "[FileCacheManager] Compaction complete. Kept" << copied << "entries. New size:"
-                << QFileInfo(m_dbPath).size() / (1024 * 1024) << "MB";
-    } else {
-        // Rollback: reload original
-        qWarning() << "[FileCacheManager] Compaction swap failed — reloading original.";
-        m_db = std::make_unique<MmapCacheDatabase>();
-        m_db->load(m_dbPath);
-        rebuildKeyIndex();
-        QFile::remove(tmpPath);
-    }
+    rebuildKeyIndex();
 }
 

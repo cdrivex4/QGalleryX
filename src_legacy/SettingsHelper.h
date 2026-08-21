@@ -32,9 +32,17 @@ class SettingsHelper : public QObject {
                  NOTIFY showLatencyToastsChanged)
   Q_PROPERTY(int scanEngineMode READ scanEngineMode WRITE setScanEngineMode
                  NOTIFY scanEngineModeChanged)
+  Q_PROPERTY(bool mediaMuted READ mediaMuted WRITE setMediaMuted NOTIFY mediaMutedChanged)
+  Q_PROPERTY(qreal mediaVolume READ mediaVolume WRITE setMediaVolume NOTIFY mediaVolumeChanged)
 
 public:
   explicit SettingsHelper(QObject *parent = nullptr);
+
+  bool mediaMuted() const;
+  void setMediaMuted(bool muted);
+
+  qreal mediaVolume() const;
+  void setMediaVolume(qreal volume);
 
   int scanEngineMode() const;
   void setScanEngineMode(int mode);
@@ -102,6 +110,8 @@ signals:
   void rawAccelerationChanged();
   void showLatencyToastsChanged();
   void scanEngineModeChanged();
+  void mediaMutedChanged();
+  void mediaVolumeChanged();
 
 private:
   QString m_graphicsApi;

@@ -31,7 +31,7 @@ void SettingsHelper::setSelectedApi(int api) {
 }
 
 int SettingsHelper::snapThumbnailResolution(int rawSize) const {
-  static const int kSnapPoints[] = {64, 96, 128, 192, 256, 384};
+  static const int kSnapPoints[] = {32, 64, 96, 128, 160, 192, 224, 256};
   static const int kNumSnap = sizeof(kSnapPoints) / sizeof(kSnapPoints[0]);
   if (rawSize <= kSnapPoints[0]) return kSnapPoints[0];
   if (rawSize >= kSnapPoints[kNumSnap - 1]) return kSnapPoints[kNumSnap - 1];
@@ -155,6 +155,26 @@ void SettingsHelper::setShowLatencyToasts(bool show) {
   QSettings settings("SamsungClone", "Gallery");
   settings.setValue("showLatencyToasts", show);
   emit showLatencyToastsChanged();
+}
+
+bool SettingsHelper::mediaMuted() const {
+  return m_settings.value("mediaMuted", false).toBool();
+}
+
+void SettingsHelper::setMediaMuted(bool muted) {
+  if (mediaMuted() == muted) return;
+  m_settings.setValue("mediaMuted", muted);
+  emit mediaMutedChanged();
+}
+
+qreal SettingsHelper::mediaVolume() const {
+  return m_settings.value("mediaVolume", 1.0).toReal();
+}
+
+void SettingsHelper::setMediaVolume(qreal volume) {
+  if (qFuzzyCompare(mediaVolume(), volume)) return;
+  m_settings.setValue("mediaVolume", volume);
+  emit mediaVolumeChanged();
 }
 
 void SettingsHelper::restartApp() {

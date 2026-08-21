@@ -11,7 +11,7 @@ StackView {
     signal imageClicked(int index, var model)
     
     property var model
-    property real cellSize: 220 // Controllable from outside via slider
+    property real cellSize: 100 // Controllable from outside via slider
     property var activeModel: stack.depth === 1 ? model : (stack.currentItem ? stack.currentItem.activeModel : null)
     property var activeGrid: stack.currentItem ? (stack.currentItem.grid || stack.currentItem.activeGrid) : null
     

@@ -90,4 +90,33 @@ Pass 2 should **never** touch `m_allItems` directly, and it should **never** tri
 - The current spin lock uses a manual `QThread::msleep()` loop. This burns CPU on battery and gets dramatically worse on network paths. 
 - Replace the `QThread::msleep()` spin lock with a proper `std::condition_variable` in `TaskScheduler` that Pass 2 can block on cleanly.
 
-Examine `ImageModel.cpp`, `TaskScheduler.cpp`, and `AsyncImageProvider.cpp` and build this exact blueprint.
+## 8. Zero-Crash Architecture & Mmap Hardening (Completed v2.3.3)
+
+1. **Deterministic Lifecycle RAII (`ImageModel::~ImageModel()`)**:
+   - Background tasks and UI dispatches are guarded by `std::shared_ptr<std::atomic<bool>> m_aliveToken` and `QPointer<ImageModel> safeThis`.
+   - On model destruction, `m_aliveToken` is set to `false`, `m_scanGeneration++` and `m_precacheGeneration++` are incremented, timers are stopped, and `m_folderWatcher` is unhooked.
+2. **Context-Bound Singleton Signals**:
+   - `connect(&FileCacheManager::instance(), &FileCacheManager::cacheCleared, this, ...)` passes `this` as the context receiver, ensuring Qt auto-unregisters the connection on model destruction.
+3. **Multi-Window Lifecycle (`DesktopHelper::openNewWindow()`)**:
+   - Stack-allocates `QQmlComponent`, assigns `QQmlEngine::CppOwnership`, and binds `visibleChanged` to `win->deleteLater()` for leak-free secondary windows.
+4. **16MB Mmap Incremental Allocation & 30% Compaction**:
+   - `MMAP_GROW_CHUNK` resized from 512MB to 16MB.
+   - `MmapCacheDatabase::compact()` automatically defragments the binary cache when dead records exceed 30%.
+5. **NTFS MFT Recursion Safety**:
+   - Guarded `FastVolumeScanner::resolvePath()` with `depth > 64` ceiling and string pool boundary validation.
+6. **Forensic Black Box Recorder**:
+   - Installed `SetUnhandledExceptionFilter` and `std::set_terminate` in `main.cpp` generating minidumps (`crash_dump.dmp`) and diagnostic logs (`application_crash.log`).
+
+## 9. Zero-Latency GUI Thread & Directional Lookahead (Completed v2.3.4)
+
+1. **Asynchronous L2 MMAP Decompression**:
+   - Removed synchronous `diskImg.loadFromData(mmapData)` from `AsyncImageProvider::requestImageResponse()`.
+   - All L2 disk cache hits now decompress in parallel on `TaskScheduler` background worker threads. The GUI thread has $0\text{ms}$ decompression latency.
+2. **Trajectory-Biased Directional Lookahead**:
+   - `ViewportGovernor::updateViewport()` shifts lookahead windows ($+2\times \text{count}$ forward during downward scrolls, $-2\times \text{count}$ backward during upward scrolls).
+   - Unified `DateScrubber.qml` to calculate continuous delta movements and feed into the exact same lookahead prefetching pipeline as touch flings.
+3. **QML Delegate Pooling & Precomputed Roles**:
+   - Enabled `reuseItems: true` on `GridView` in `GalleryView.qml` and `GalleryViewTiles.qml`.
+   - Added precomputed `IsVideoRole` in `ImageModel`, eliminating thousands of JavaScript string splitting operations per second.
+4. **Dynamic Low-Core Worker Scaling**:
+   - Tuned `TaskScheduler` on $\le 4$ thread CPUs to dedicate 2 threads to the UI event loop, Scene Graph, and OS compositor.

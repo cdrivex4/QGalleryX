@@ -93,9 +93,14 @@ Item {
             drag.minimumY: 0
             drag.maximumY: root.height - scrubber.height
             
+            property real lastScrubContentY: 0
+            
             onPressed: {
                 scrubber.isDragging = true
-                if (listView) listView.interactive = false
+                if (listView) {
+                    lastScrubContentY = listView.contentY
+                    listView.interactive = false
+                }
             }
             
             onReleased: {
@@ -103,6 +108,14 @@ Item {
                 if (listView) {
                     listView.interactive = true
                     listView.returnToBounds()
+                    if (typeof viewportGovernor !== "undefined" && listView.indexAt) {
+                        var sIdx = listView.indexAt(listView.width / 2, listView.contentY)
+                        var eIdx = listView.indexAt(listView.width / 2, listView.contentY + listView.height)
+                        var modelCount = (proxyModel ? proxyModel.rowCount() : (listView.model ? (listView.model.count !== undefined ? listView.model.count : listView.model.rowCount()) : 0))
+                        if (sIdx !== -1 && eIdx !== -1 && modelCount > 0) {
+                            viewportGovernor.updateViewport(sIdx, eIdx, modelCount, 0)
+                        }
+                    }
                 }
             }
             
@@ -111,7 +124,25 @@ Item {
                     var trackHeight = Math.max(1, root.height - scrubber.height)
                     var progress = Math.max(0.0, Math.min(1.0, scrubber.y / trackHeight))
                     var maxScroll = Math.max(0, listView.contentHeight - listView.height)
-                    listView.contentY = progress * maxScroll
+                    var newContentY = progress * maxScroll
+                    var deltaY = newContentY - lastScrubContentY
+                    lastScrubContentY = newContentY
+                    listView.contentY = newContentY
+                    
+                    // Unified Viewport Governor update
+                    if (typeof viewportGovernor !== "undefined" && listView.indexAt) {
+                        var sIdx = listView.indexAt(listView.width / 2, newContentY)
+                        var eIdx = listView.indexAt(listView.width / 2, newContentY + listView.height)
+                        var modelCount = (proxyModel ? proxyModel.rowCount() : (listView.model ? (listView.model.count !== undefined ? listView.model.count : listView.model.rowCount()) : 0))
+                        if (sIdx !== -1 && eIdx !== -1 && modelCount > 0) {
+                            viewportGovernor.updateViewport(sIdx, eIdx, modelCount, deltaY)
+                            if (listView.model && listView.model.visibleStartIndex !== undefined) {
+                                listView.model.visibleStartIndex = sIdx
+                                listView.model.visibleEndIndex = eIdx
+                            }
+                        }
+                    }
+                    
                     root.updateLabelFromScroll()
                 }
             }
