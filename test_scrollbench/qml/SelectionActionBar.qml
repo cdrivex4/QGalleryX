@@ -11,10 +11,11 @@ Rectangle {
     signal shareClicked()
     signal clearClicked()
     signal rotateClicked()
+    signal resizeClicked()
     
     // Model binding
     property var model: null
-    property int selectedCount: (model !== null && model.selectedCount !== undefined) ? model.selectedCount : 0
+    property int selectedCount: (model && model.selectedCount !== undefined) ? model.selectedCount : 0
     
     // Animation properties
     Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.InOutQuad } }
@@ -85,6 +86,15 @@ Rectangle {
             flat: true
             onClicked: root.rotateClicked()
             contentItem: Text { text: "Rotate"; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+            background: Rectangle { color: parent.pressed ? "#22FFFFFF" : "transparent"; radius: 4 }
+        }
+
+        Button {
+            id: resizeBtn
+            text: "Resize/Crop"
+            flat: true
+            onClicked: root.resizeClicked()
+            contentItem: Text { text: "Resize"; color: "white"; font.bold: true; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
             background: Rectangle { color: parent.pressed ? "#22FFFFFF" : "transparent"; radius: 4 }
         }
         

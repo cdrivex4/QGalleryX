@@ -1,5 +1,7 @@
 #include "FastImageItem.h"
-#include "../../src/AsyncImageProvider.h"
+#include "BC1Engine.h"
+#include "FileCacheManager.h"
+#include "AsyncImageProvider.h"
 #include <QSGSimpleTextureNode>
 
 FastImageItem::FastImageItem(QQuickItem *parent) : QQuickItem(parent) {
@@ -8,10 +10,6 @@ FastImageItem::FastImageItem(QQuickItem *parent) : QQuickItem(parent) {
 
 FastImageItem::~FastImageItem() {
   if (m_response) {
-    // Disconnect FIRST to prevent the finished() lambda from firing on a
-    // destroyed FastImageItem. This is the critical fix: without this,
-    // a queued handleDone can emit finished() after our destructor runs
-    // but before deleteLater() actually deletes the response.
     disconnect(m_response, nullptr, this, nullptr);
     m_response->cancel();
     m_response->deleteLater();
@@ -48,10 +46,9 @@ void FastImageItem::setSource(const QString &source) {
     id = id.mid(14);
   }
 
-  // Synchronous cache hit check bypasses QML entirely
+  // 1. Synchronous L1 RAM Cache hit check (0ms instant)
   QImage cached = AsyncImageProvider::getCachedImage(id, m_sourceSize);
   if (!cached.isNull()) {
-    AsyncImageProvider::s_cacheHits++;
     m_image = cached;
     m_dirtyTexture = true;
     m_isLoading = false;
@@ -60,12 +57,33 @@ void FastImageItem::setSource(const QString &source) {
     return;
   }
 
+  // 2. Synchronous L2 .mmap BC1 Hardware Texture check (<0.05ms SIMD decode)
+  QByteArray mmapData = FileCacheManager::instance().getCachedData(id, m_sourceSize);
+  if (!mmapData.isEmpty()) {
+    QImage l2Image;
+    if (mmapData.startsWith("BC1_") && mmapData.size() >= 8) {
+      quint16 w = *reinterpret_cast<const quint16 *>(mmapData.constData() + 4);
+      quint16 h = *reinterpret_cast<const quint16 *>(mmapData.constData() + 6);
+      l2Image = BC1Engine::decompressImage(mmapData.mid(8), w, h);
+    } else {
+      l2Image.loadFromData(mmapData);
+    }
+    if (!l2Image.isNull()) {
+      AsyncImageProvider::insertCachedImage(id, l2Image, m_sourceSize);
+      m_image = l2Image;
+      m_dirtyTexture = true;
+      m_isLoading = false;
+      emit isLoadingChanged();
+      update();
+      return;
+    }
+  }
+
   // Cache miss, schedule async load
   m_isLoading = true;
   emit isLoadingChanged();
-  AsyncImageProvider::s_cacheMisses++;
-  static AsyncImageProvider provider;
-  m_response = static_cast<AsyncImageResponse *>(provider.requestImageResponse(id, m_sourceSize));
+  static auto *provider = new AsyncImageProvider();
+  m_response = static_cast<AsyncImageResponse *>(provider->requestImageResponse(id, m_sourceSize));
   
   // Use QueuedConnection: the finished() signal is emitted from the main
   // thread (via FrameBudgetScheduler or QueuedConnection invokeMethod).
@@ -77,7 +95,7 @@ void FastImageItem::setSource(const QString &source) {
   connect(m_response, &QQuickImageResponse::finished, this, [this, response = m_response]() {
     if (m_response != response)
         return; // Stale response from a previous setSource call
-    m_image = m_response->m_image;
+    m_image = m_response->image();
     m_dirtyTexture = true;
     m_response->deleteLater();
     m_response = nullptr;

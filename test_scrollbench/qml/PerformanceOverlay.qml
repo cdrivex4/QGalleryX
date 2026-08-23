@@ -148,7 +148,7 @@ Rectangle {
                                 dataPoints: telemetry.ramHistory
                             }
                             Text { 
-                                text: "App: " + systemMonitor.memoryUsageMB.toFixed(0) + " MB | Sys: " + (systemMonitor.totalSystemMemoryMB - systemMonitor.availableSystemMemoryMB).toFixed(0) + " / " + systemMonitor.totalSystemMemoryMB.toFixed(0) + " MB"
+                                text: "App RAM: " + (systemMonitor.memoryUsageMB || 0).toFixed(0) + " MB"
                                 font.pixelSize: 10; color: "#fff"
                             }
                         }

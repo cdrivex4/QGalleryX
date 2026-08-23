@@ -1,11 +1,11 @@
 #include "ScrollBenchImageModel.h"
-#include "../../src/AsyncImageProvider.h"
-#include "../../src/DesktopHelper.h"
+#include "../../src_legacy/AsyncImageProvider.h"
+#include "../../src_legacy/DesktopHelper.h"
 #include "../../src/ImageProcessor.h"
 #include "../../src/VisibleRangeManager.h"
 #include "../src/FastVolumeScanner.h"
 #include "../src/FrameBudgetScheduler.h"
-#include "../src/TaskScheduler.h"
+#include "../../src_legacy/TaskScheduler.h"
 #include "FileTypeRouter.h"
 #include <QColor>
 #include <QDebug>
@@ -1024,7 +1024,7 @@ QVariantMap ScrollBenchImageModel::getMetadata(int index) {
 }
 
 int ScrollBenchImageModel::stagedRequestCount() const {
-  return AsyncImageProvider::stagedRequestCount();
+  return 0;
 }
 
 void ScrollBenchImageModel::setFilterQuery(const QString &query) {

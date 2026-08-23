@@ -7,29 +7,28 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     qt_standard_project_setup()
 endif()
 
-# ScrollBench Test Application  
+# QGalleryXBench Application (Direct Clone of QGalleryX + SIMD & Benchmark Engine)
 qt_add_executable(QGalleryXBench
     src/main_scrollbench.cpp
-    src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
-    src/FileTypeRouter.cpp src/FileTypeRouter.h
-    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
-    src/TelemetryMonitor.cpp src/TelemetryMonitor.h
+    src/BC1Engine.cpp src/BC1Engine.h
+    src/BenchmarkRunner.cpp src/BenchmarkRunner.h
     src/FastImageItem.cpp src/FastImageItem.h
-    # Reuse from main project
-    ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
-    ../src/FileCacheManager.cpp ../src/FileCacheManager.h
-    ../src/TaskScheduler.cpp ../src/TaskScheduler.h
-    ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
-    ../src/DesktopHelper.cpp ../src/DesktopHelper.h
-    ../src/SystemMonitor.cpp ../src/SystemMonitor.h
-    ../src/LogManager.cpp ../src/LogManager.h
-    ../src/SettingsHelper.cpp ../src/SettingsHelper.h
-    ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
-    ../src/AlbumModel.cpp ../src/AlbumModel.h
-    ../src/ImageProcessor.cpp ../src/ImageProcessor.h
-    ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
-    ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
-    src/DiagnosticsMonitor.cpp src/DiagnosticsMonitor.h
+    src/ImageModel.cpp src/ImageModel.h
+    src/AlbumModel.cpp src/AlbumModel.h
+    src/SettingsHelper.cpp src/SettingsHelper.h
+    src/SystemMonitor.cpp src/SystemMonitor.h
+    src/AsyncImageProvider.cpp src/AsyncImageProvider.h
+    src/GroupedProxyModel.cpp src/GroupedProxyModel.h
+    src/DesktopHelper.cpp src/DesktopHelper.h
+    src/VideoThumbnailer.cpp src/VideoThumbnailer.h
+    src/LogManager.cpp src/LogManager.h
+    src/TaskScheduler.cpp src/TaskScheduler.h
+    src/RingBufferDispatcher.cpp src/RingBufferDispatcher.h
+    src/ViewportGovernor.cpp src/ViewportGovernor.h
+    src/ImageProcessor.cpp src/ImageProcessor.h
+    src/FileCacheManager.cpp src/FileCacheManager.h
+    src/PassiveReadLatencyGuard.cpp src/PassiveReadLatencyGuard.h
+    src/FastVolumeScanner.cpp src/FastVolumeScanner.h
 )
 
 set_target_properties(QGalleryXBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
@@ -37,34 +36,34 @@ set_target_properties(QGalleryXBench PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAK
 # appScrollBenchNet - Network Diagnostic Watchdog
 add_executable(QGalleryXBenchNet src/main_net_watchdog.cpp)
 set_target_properties(QGalleryXBenchNet PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
-# No Qt needed for the watchdog to ensure it runs even if Qt is broken
 target_link_libraries(QGalleryXBenchNet PRIVATE kernel32 user32)
-
 
 qt_add_qml_module(QGalleryXBench
     URI ScrollBench
     VERSION 1.0
     QML_FILES
-        qml/MainScrollBench.qml
-        qml/GalleryViewScrollBench.qml
-        qml/GalleryViewSemanticScrollBench.qml
-        qml/PhotoViewerScrollBench.qml
-        qml/AlbumsViewScrollBench.qml
-        qml/PerformanceOverlay.qml
+        qml/Main.qml
+        qml/GalleryView.qml
+        qml/GalleryViewSemantic.qml
+        qml/GalleryViewTiles.qml
         qml/DateScrubber.qml
+        qml/PhotoViewer.qml
+        qml/AlbumsView.qml
+        qml/BottomBar.qml
+        qml/StatsOverlay.qml
         qml/UsageGraph.qml
+        qml/SelectionActionBar.qml
         qml/ShareDialog.qml
         qml/ResizeEditor.qml
-        qml/SelectionActionBar.qml
-        qml/VideoFeedbackOverlay.qml
+        qml/ToastOverlay.qml
+        qml/StyledButton.qml
+        qml/MediaIcon.qml
+        qml/SvgIcon.qml
+        qml/PerformanceOverlay.qml
         qml/BenchmarkRunner.qml
-        qml/DiagnosticsOverlay.qml
-        qml/DiagnosticRow.qml
-        qml/DebugTuner.qml
 )
 
-# --- LibRaw (copy from main project) ---
-# Only add if not already defined by parent
+# --- LibRaw ---
 if(NOT TARGET libraw_static)
     set(LIBRAW_PATH "../3rdparty/LibRaw")
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${LIBRAW_PATH}/CMakeLists.txt")
@@ -75,13 +74,12 @@ if(NOT TARGET libraw_static)
     endif()
 endif()
 
-# --- FFmpeg (copy from main project) ---
+# --- FFmpeg ---
 set(FFMPEG_PATH "../3rdparty/ffmpeg")
 set(FFMPEG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/include")
 set(FFMPEG_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/lib")
 set(FFMPEG_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/${FFMPEG_PATH}/bin")
 
-# Link everything at once!
 target_link_libraries(QGalleryXBench
     PRIVATE 
     Qt6::Quick Qt6::Concurrent Qt6::Multimedia Qt6::Gui Qt6::QuickControls2 Qt6::Widgets 
@@ -94,7 +92,7 @@ target_link_libraries(QGalleryXBench
 )
 
 target_include_directories(QGalleryXBench PRIVATE 
-    ../src 
+    src
     ${LIBRAW_PATH} 
     ${FFMPEG_INCLUDE_DIR}
 )
@@ -108,63 +106,3 @@ if (FFMPEG_DLLS)
         $<TARGET_FILE_DIR:QGalleryXBench>
     )
 endif()
-# --- Verification & Automation Tools ---
-qt_add_executable(tst_linkage src/tst_linkage.cpp
-    src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
-    src/FileTypeRouter.cpp src/FileTypeRouter.h
-    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
-    ../src/TaskScheduler.cpp ../src/TaskScheduler.h
-    ../src/DesktopHelper.cpp ../src/DesktopHelper.h
-    ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
-    ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
-    ../src/FileCacheManager.cpp ../src/FileCacheManager.h
-    ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
-    ../src/SystemMonitor.cpp ../src/SystemMonitor.h
-    ../src/SettingsHelper.cpp ../src/SettingsHelper.h
-    ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
-    ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
-    ../src/ImageProcessor.cpp ../src/ImageProcessor.h
-    ../src/LogManager.cpp ../src/LogManager.h
-)
-
-qt_add_executable(tst_automation src/tst_automation.cpp
-    src/ScrollBenchImageModel.cpp src/ScrollBenchImageModel.h
-    src/FileTypeRouter.cpp src/FileTypeRouter.h
-    src/FrameBudgetScheduler.cpp src/FrameBudgetScheduler.h
-    ../src/TaskScheduler.cpp ../src/TaskScheduler.h
-    ../src/DesktopHelper.cpp ../src/DesktopHelper.h
-    ../src/GroupedProxyModel.cpp ../src/GroupedProxyModel.h
-    ../src/AsyncImageProvider.cpp ../src/AsyncImageProvider.h
-    ../src/FileCacheManager.cpp ../src/FileCacheManager.h
-    ../src/VideoThumbnailer.cpp ../src/VideoThumbnailer.h
-    ../src/SystemMonitor.cpp ../src/SystemMonitor.h
-    ../src/SettingsHelper.cpp ../src/SettingsHelper.h
-    ../src/HardwareAccelerationManager.cpp ../src/HardwareAccelerationManager.h
-    ../src/FastVolumeScanner.cpp ../src/FastVolumeScanner.h
-    ../src/ImageProcessor.cpp ../src/ImageProcessor.h
-    ../src/LogManager.cpp ../src/LogManager.h
-)
-
-target_link_libraries(tst_linkage PRIVATE 
-    Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Quick Qt6::Concurrent Qt6::Multimedia 
-    libraw_static
-    pdh
-    ${FFMPEG_LIB_DIR}/avcodec.lib
-    ${FFMPEG_LIB_DIR}/avformat.lib
-    ${FFMPEG_LIB_DIR}/swscale.lib
-    ${FFMPEG_LIB_DIR}/avutil.lib
-)
-target_include_directories(tst_linkage PRIVATE ../src ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
-set_target_properties(tst_linkage PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")
-
-target_link_libraries(tst_automation PRIVATE 
-    Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Quick Qt6::Concurrent Qt6::Multimedia 
-    libraw_static
-    pdh
-    ${FFMPEG_LIB_DIR}/avcodec.lib
-    ${FFMPEG_LIB_DIR}/avformat.lib
-    ${FFMPEG_LIB_DIR}/swscale.lib
-    ${FFMPEG_LIB_DIR}/avutil.lib
-)
-target_include_directories(tst_automation PRIVATE ../src ${LIBRAW_PATH} ${FFMPEG_INCLUDE_DIR})
-set_target_properties(tst_automation PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/deploy")

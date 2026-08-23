@@ -55,6 +55,8 @@ $headerPath = "$PSScriptRoot\src\BuildInfo.h"
 $headerContent | Out-File -FilePath $headerPath -Encoding UTF8
 $headerPathLegacy = "$PSScriptRoot\src_legacy\BuildInfo.h"
 $headerContent | Out-File -FilePath $headerPathLegacy -Encoding UTF8
+$headerPathBench = "$PSScriptRoot\test_scrollbench\src\BuildInfo.h"
+$headerContent | Out-File -FilePath $headerPathBench -Encoding UTF8
 
 # Generate BuildInfo.qml singleton
 $qmlContent = @"

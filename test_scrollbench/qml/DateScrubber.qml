@@ -3,139 +3,179 @@ import QtQuick.Controls
 
 Item {
     id: root
-    width: 150
+    width: 200 // Width to contain bubble and markers
     
     property var listView
     property var proxyModel
-    property var rawModel 
     
+    // Year Distribution Data
     property var yearData: []
     
     function updateYearData() {
         if (proxyModel) {
             yearData = proxyModel.getYearDistribution()
-        } else if (rawModel && rawModel.rowCount() > 0) {
-            var list = []
-            var count = rawModel.rowCount()
-            // Sample start, mid, end
-            var firstYear = rawModel.data(rawModel.index(0, 0), 262) // SectionYearRole
-            if (firstYear) list.push({ year: firstYear, proxyIndex: 0 })
-            
-            if (count > 1000) {
-                var midIdx = Math.floor(count / 2)
-                var midYear = rawModel.data(rawModel.index(midIdx, 0), 262)
-                if (midYear && midYear !== firstYear) list.push({ year: midYear, proxyIndex: midIdx })
-            }
-            
-            var lastIdx = count - 1
-            var lastYear = rawModel.data(rawModel.index(lastIdx, 0), 262)
-            if (lastYear && lastYear !== firstYear) list.push({ year: lastYear, proxyIndex: lastIdx })
-            yearData = list
         }
     }
+    
+    Connections {
+        target: proxyModel
+        function onModelReset() { updateYearData() }
+        function onLayoutChanged() { updateYearData() }
+    }
+    
+    Component.onCompleted: updateYearData()
+    
+    // Year Markers (Timeline)
+    Repeater {
+        model: yearData
+        delegate: Rectangle {
+            width: 50
+            height: 24
+            radius: 12
+            color: "#333"
+            opacity: 0.8
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            
+            // Calculate Y position
+            // Approximation: (proxyIndex / rowCount) * height
+            y: (modelData.proxyIndex / Math.max(1, proxyModel.rowCount())) * root.height - (height / 2)
+            
+            Text {
+                anchors.centerIn: parent
+                text: modelData.year
+                color: "#ccc"
+                font.pixelSize: 12
+                font.bold: true
+            }
+        }
+    }
+    
+    // Current Date Bubble (Scrubber Thumb)
+    Rectangle {
+        id: scrubber
+        width: 120
+        height: 40
+        radius: 20
+        color: "#2196F3" // Blue
+        anchors.right: parent.right
+        anchors.rightMargin: 70 // To the left of year markers
+        
+        // Position based on scroll
+        // We use visibleArea.yPosition which is 0.0 to 1.0
+        // We need to sync this.
+        // If not dragging, update from listView
+        property bool isDragging: false
+        
+        y: isDragging ? y : (listView.visibleArea.yPosition * root.height)
+        
+        // Clamp y
+        onYChanged: {
+            if (y < 0) y = 0
+            if (y > root.height - height) y = root.height - height
+        }
+        
+        visible: listView.visibleArea.heightRatio < 1.0 // Hide if all content fits
+        
+        Text {
+            anchors.centerIn: parent
+            text: root.currentDateString
+            color: "white"
+            font.bold: true
+            font.pixelSize: 14
+        }
+        
+        // Drag Logic
+        MouseArea {
+            anchors.fill: parent
+            drag.target: scrubber
+            drag.axis: Drag.YAxis
+            drag.minimumY: 0
+            drag.maximumY: root.height - scrubber.height
+            
+            property real lastScrubContentY: 0
+            
+            onPressed: {
+                scrubber.isDragging = true
+                if (listView) {
+                    lastScrubContentY = listView.contentY
+                    listView.interactive = false
+                }
+            }
+            
+            onReleased: {
+                scrubber.isDragging = false
+                if (listView) {
+                    listView.interactive = true
+                    listView.returnToBounds()
+                    if (typeof viewportGovernor !== "undefined" && listView.indexAt) {
+                        var sIdx = listView.indexAt(listView.width / 2, listView.contentY)
+                        var eIdx = listView.indexAt(listView.width / 2, listView.contentY + listView.height)
+                        var modelCount = (proxyModel ? proxyModel.rowCount() : (listView.model ? (listView.model.count !== undefined ? listView.model.count : listView.model.rowCount()) : 0))
+                        if (sIdx !== -1 && eIdx !== -1 && modelCount > 0) {
+                            viewportGovernor.updateViewport(sIdx, eIdx, modelCount, 0)
+                        }
+                    }
+                }
+            }
+            
+            onPositionChanged: {
+                if (drag.active && listView) {
+                    var trackHeight = Math.max(1, root.height - scrubber.height)
+                    var progress = Math.max(0.0, Math.min(1.0, scrubber.y / trackHeight))
+                    var maxScroll = Math.max(0, listView.contentHeight - listView.height)
+                    var newContentY = progress * maxScroll
+                    var deltaY = newContentY - lastScrubContentY
+                    lastScrubContentY = newContentY
+                    listView.contentY = newContentY
+                    
+                    // Unified Viewport Governor update
+                    if (typeof viewportGovernor !== "undefined" && listView.indexAt) {
+                        var sIdx = listView.indexAt(listView.width / 2, newContentY)
+                        var eIdx = listView.indexAt(listView.width / 2, newContentY + listView.height)
+                        var modelCount = (proxyModel ? proxyModel.rowCount() : (listView.model ? (listView.model.count !== undefined ? listView.model.count : listView.model.rowCount()) : 0))
+                        if (sIdx !== -1 && eIdx !== -1 && modelCount > 0) {
+                            viewportGovernor.updateViewport(sIdx, eIdx, modelCount, deltaY)
+                            if (listView.model && listView.model.visibleStartIndex !== undefined) {
+                                listView.model.visibleStartIndex = sIdx
+                                listView.model.visibleEndIndex = eIdx
+                            }
+                        }
+                    }
+                    
+                    root.updateLabelFromScroll()
+                }
+            }
+        }
+    }
+    
+    // Current Date Logic
+    property string currentDateString: ""
     
     function updateLabelFromScroll() {
         if (!listView) return
         var idx = -1
         if (listView.indexAt) {
-            // Find item at center of viewport
             idx = listView.indexAt(listView.width / 2, listView.contentY + (listView.height / 2))
             if (idx === -1) idx = listView.indexAt(10, listView.contentY + 50)
         }
-        
         if (idx !== -1) {
-            if (proxyModel) {
+            if (proxyModel && typeof proxyModel.getLabelForProxyIndex === "function") {
                 root.currentDateString = proxyModel.getLabelForProxyIndex(idx)
-            } else if (rawModel) {
-                root.currentDateString = rawModel.data(rawModel.index(idx, 0), 260) // SectionDayRole
-            }
-        }
-    }
-
-    Connections {
-        target: proxyModel ? proxyModel : (rawModel ? rawModel : null)
-        function onModelReset() { updateYearData() }
-        function onRowsInserted() { updateYearData() }
-    }
-    
-    Component.onCompleted: updateYearData()
-    
-    // Year Markers
-    Repeater {
-        model: yearData
-        delegate: Rectangle {
-            width: 45; height: 20; radius: 10
-            color: "#333"; opacity: 0.7
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            y: {
-                var total = proxyModel ? proxyModel.rowCount() : (rawModel ? rawModel.rowCount() : 1)
-                return (modelData.proxyIndex / Math.max(1, total)) * root.height - (height / 2)
-            }
-            Text {
-                anchors.centerIn: parent; text: modelData.year
-                color: "white"; font.pixelSize: 10; font.bold: true
-            }
-        }
-    }
-    
-    // Bubble
-    Rectangle {
-        id: bubble
-        width: 110; height: 40; radius: 20
-        color: "#2196F3"
-        anchors.right: parent.right
-        anchors.rightMargin: 55
-        z: 10
-        
-        property bool isDragging: false
-        
-        y: {
-            if (isDragging) return y;
-            if (!listView || listView.contentHeight <= 0) return 0;
-            // Map contentY to track height
-            var trackHeight = root.height - bubble.height
-            var progress = listView.contentY / (listView.contentHeight - listView.height)
-            return Math.max(0, Math.min(progress * trackHeight, trackHeight))
-        }
-        
-        Text {
-            anchors.centerIn: parent
-            text: root.currentDateString
-            color: "white"; font.bold: true; font.pixelSize: 13
-        }
-        
-        MouseArea {
-            anchors.fill: parent
-            drag.target: bubble; drag.axis: Drag.YAxis
-            drag.minimumY: 0; drag.maximumY: root.height - bubble.height
-            
-            onPressed: {
-                bubble.isDragging = true
-                if (listView) listView.interactive = false
-            }
-            onReleased: {
-                bubble.isDragging = false
-                if (listView) {
-                    listView.interactive = true
-                    listView.returnToBounds()
+            } else if (listView.model) {
+                var nameVal = ""
+                if (typeof listView.model.data === "function") {
+                    nameVal = listView.model.data(listView.model.index(idx, 0), Qt.UserRole + 1) // NameRole
                 }
-            }
-            onPositionChanged: {
-                if (drag.active && listView) {
-                    var trackHeight = root.height - bubble.height
-                    var progress = bubble.y / trackHeight
-                    listView.contentY = progress * (listView.contentHeight - listView.height)
-                    root.updateLabelFromScroll() // Instant feedback
-                }
+                if (nameVal) root.currentDateString = nameVal.toString()
             }
         }
     }
-    
-    property string currentDateString: "---"
     
     Timer {
-        interval: 200; running: !bubble.isDragging; repeat: true
+        interval: 100
+        running: !scrubber.isDragging
+        repeat: true
         onTriggered: root.updateLabelFromScroll()
     }
 }

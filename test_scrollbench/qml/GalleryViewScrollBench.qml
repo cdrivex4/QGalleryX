@@ -161,6 +161,8 @@ Item {
         cellHeight: settings.gridResolution
         model: imageModel
         clip: true
+        cacheBuffer: 500
+        reuseItems: true
         interactive: !dragSelect.active
         
         onMovingChanged: if (!moving) updateTimer.restart()
@@ -189,8 +191,6 @@ Item {
             model.visibleStartIndex = Math.max(0, firstVisible);
             model.visibleEndIndex = Math.min(grid.count - 1, lastVisible);
             root.lastRequestedY = grid.contentY
-            
-            console.log("Viewport settled at:", model.visibleStartIndex, "-", model.visibleEndIndex);
         }
 
         // Trigger debounce timer on movement or size change
@@ -253,34 +253,15 @@ Item {
                 id: imgFast
                 anchors.fill: parent
                 anchors.margins: 1
-                visible: settings.useFastImage
-                source: {
-                    if (!settings.useFastImage) return "";
-                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
-                }
+                source: "image://async/" + model.filePath + "?idx=" + model.imageIndex
                 sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
                 fillMode: 1 // PreserveAspectCrop
             }
             
-            Image {
-                id: imgStd
-                anchors.fill: parent
-                anchors.margins: 1
-                visible: !settings.useFastImage
-                source: {
-                    if (settings.useFastImage) return "";
-                    return "image://async/" + model.filePath + "?idx=" + model.imageIndex;
-                }
-                sourceSize: Qt.size(root.loadingResolution, root.loadingResolution)
-                fillMode: Image.PreserveAspectCrop
-                mipmap: true 
-                asynchronous: true
-                cache: true
-            }
-            
             // Unified property for fallback logic
-            property bool isLoading: settings.useFastImage ? imgFast.isLoading : (imgStd.status === Image.Loading)
-            property string activeSource: settings.useFastImage ? imgFast.source : imgStd.source                
+            property bool isLoading: imgFast.isLoading
+            property string activeSource: imgFast.source
+                
                 // Video Play Icon
                 Item {
                     anchors.fill: parent
@@ -314,26 +295,13 @@ Item {
                     anchors.fill: parent; color: "#1a1a1a"
                     visible: activeSource === "" || isLoading // Fallback for unloaded
                     
-                    BusyIndicator { 
-                        anchors.centerIn: parent
-                        width: parent.width * 0.4; height: width
-                        opacity: 0.5
-                        visible: isLoading && !isRaw
-                    }
-                    
                     Text {
                         anchors.centerIn: parent
-                        text: "Decoding RAW..."
+                        text: "RAW"
                         color: "#FF9800"
                         font.pixelSize: 10
                         font.bold: true
                         visible: isRaw && isLoading
-                    }
-                    Text { 
-                        anchors.centerIn: parent
-                        text: "⚠️"
-                        visible: !settings.useFastImage && imgStd.status === Image.Error
-                        color: "#ff4444"
                     }
                 }
                 

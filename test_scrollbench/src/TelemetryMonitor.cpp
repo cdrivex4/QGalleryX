@@ -41,27 +41,23 @@ TelemetryMonitor::TelemetryMonitor(QObject *parent) : QObject(parent) {
     m_ramHistory.append(0.0);
   }
 
-  // Synchronize with SystemMonitor updates
-  if (SystemMonitor *sys = SystemMonitor::instance()) {
-    connect(sys, &SystemMonitor::systemCpuUsageChanged, this, [this, sys]() {
-      double cpu = sys->systemCpuUsage();
-      m_cpuHistory.append(cpu);
-      if (m_cpuHistory.size() > 50)
-        m_cpuHistory.removeFirst();
-      emit historyChanged();
-    });
+  QTimer *timer = new QTimer(this);
+  connect(timer, &QTimer::timeout, this, [this]() {
+    SystemMonitor sys;
+    double cpu = sys.getCpuUsage();
+    m_cpuHistory.append(cpu);
+    if (m_cpuHistory.size() > 50)
+      m_cpuHistory.removeFirst();
 
-    connect(sys, &SystemMonitor::gpuUsageChanged, this, [this, sys]() {
-      double gpu = sys->gpuUsage();
-      m_gpuHistory.append(gpu);
-      if (m_gpuHistory.size() > 50)
-        m_gpuHistory.removeFirst();
-      emit historyChanged();
-    });
+    double gpu = sys.getGpuUsage();
+    m_gpuHistory.append(gpu);
+    if (m_gpuHistory.size() > 50)
+      m_gpuHistory.removeFirst();
 
-    connect(sys, &SystemMonitor::systemMemoryChanged, this,
-            &TelemetryMonitor::updateMemoryUsage);
-  }
+    updateMemoryUsage();
+    emit historyChanged();
+  });
+  timer->start(1000);
 }
 
 TelemetryMonitor::~TelemetryMonitor() { stopBenchmarking(); }
@@ -180,25 +176,17 @@ void TelemetryMonitor::recordCacheMiss() {
 }
 
 void TelemetryMonitor::updateMemoryUsage() {
-  if (SystemMonitor *sys = SystemMonitor::instance()) {
-    double processMB = sys->memoryUsageMB();
-    if (m_memoryUsageMB != static_cast<qint64>(processMB)) {
-      m_memoryUsageMB = static_cast<qint64>(processMB);
-      emit memoryUsageMBChanged();
-    }
-
-    // Calculate System RAM Usage % for the graph
-    double total = sys->totalSystemMemoryMB();
-    double available = sys->availableSystemMemoryMB();
-    double usagePercent =
-        (total > 0) ? ((total - available) / total * 100.0) : 0.0;
-
-    m_ramHistory.append(usagePercent);
-    if (m_ramHistory.size() > 50)
-      m_ramHistory.removeFirst();
-
-    emit historyChanged();
+  double processMB = SystemMonitor::getMemoryUsageMB();
+  if (m_memoryUsageMB != static_cast<qint64>(processMB)) {
+    m_memoryUsageMB = static_cast<qint64>(processMB);
+    emit memoryUsageMBChanged();
   }
+
+  m_ramHistory.append(processMB);
+  if (m_ramHistory.size() > 50)
+    m_ramHistory.removeFirst();
+
+  emit historyChanged();
 }
 
 void TelemetryMonitor::updateFps() {
@@ -209,21 +197,6 @@ void TelemetryMonitor::updateFps() {
       emit fpsChanged();
       emit averageFpsChanged();
     }
-  }
-
-  int hits = AsyncImageProvider::s_cacheHits.exchange(0);
-  int misses = AsyncImageProvider::s_cacheMisses.exchange(0);
-  if (hits > 0 || misses > 0) {
-    m_cacheHits += hits;
-    m_cacheMisses += misses;
-    updateCacheHitRate();
-  }
-  
-  int durationSum = AsyncImageProvider::s_totalWorkDuration.exchange(0);
-  int count = AsyncImageProvider::s_workCount.exchange(0);
-  if (count > 0) {
-    int avgFetch = durationSum / count;
-    reportLoadTime(avgFetch);
   }
 }
 
@@ -275,17 +248,17 @@ void TelemetryMonitor::logStats() {
   QFile file(m_benchmarkFile);
   if (file.open(QIODevice::Append | QIODevice::Text)) {
     QTextStream out(&file);
-    SystemMonitor *sys = SystemMonitor::instance();
+    SystemMonitor sys;
 
     out << QDateTime::currentDateTime().toString("HH:mm:ss") << ","
         << m_currentFps << "," << averageFps() << ","
-        << (sys ? sys->systemCpuUsage() : 0.0) << ","
-        << (sys ? sys->memoryUsageMB() : 0.0) << ","
-        << (sys ? sys->gpuUsage() : 0.0) << ","
-        << (sys ? sys->gpuVramUsedMB() : 0.0) << "," << m_cacheHitRate << ","
+        << sys.cpuUsage() << ","
+        << sys.memoryUsageMB() << ","
+        << sys.gpuUsage() << ","
+        << sys.gpuVramUsedMB() << "," << m_cacheHitRate << ","
         << m_pendingDecodes << "," << m_lastLoadTime << ","
         << m_lastWorkDuration << ","
-        << (TaskScheduler::instance().activeTaskCount()) << "\n";
+        << (TaskScheduler::instance().getQueueSize(TaskScheduler::Immediate)) << "\n";
 
     file.close();
   }

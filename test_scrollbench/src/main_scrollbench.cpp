@@ -1,173 +1,195 @@
-#include "AlbumModel.h"
-#include "AsyncImageProvider.h"
-#include "DesktopHelper.h"
-#include "DiagnosticsMonitor.h"
-#include "FrameBudgetScheduler.h"
-#include "GroupedProxyModel.h"
-#include "HardwareAccelerationManager.h"
-#include "ImageProcessor.h"
-#include "ScrollBenchImageModel.h"
-#include "SettingsHelper.h"
-#include "SystemMonitor.h"
-#include "TaskScheduler.h"
-#include "TelemetryMonitor.h"
-#include "FastImageItem.h"
-#include <QDateTime>
-#include <QDir>
-#include <QGuiApplication>
+#include <QApplication>
+#include <QLoggingCategory>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
-#include <QString>
+#include <QQuickWindow>
+#include <QSGRendererInterface>
+#include <QUrl>
+
+#include <QDateTime>
+#include <QThread>
+#include <iostream>
+
+#ifdef Q_OS_WIN
+#include <Windows.h>
+#endif
+
+#include "AlbumModel.h"
+#include "AsyncImageProvider.h"
+#include "DesktopHelper.h"
+#include "GroupedProxyModel.h"
+#include "ImageModel.h"
+#include "SettingsHelper.h"
+#include "SystemMonitor.h"
+#include "TaskScheduler.h"
+#include "VideoThumbnailer.h"
+#include "ViewportGovernor.h"
+#include "BenchmarkRunner.h"
+#include "BC1Engine.h"
+
+#include <QFile>
 #include <QTextStream>
-#include <QTimer>
-#include <QtGlobal>
-#include <csignal>
-#include <cstdio>
+
+#include "LogManager.h"
+#include "ImageProcessor.h"
+#include "FileCacheManager.h"
+#include "PassiveReadLatencyGuard.h"
 
 #ifdef Q_OS_WIN
 #include <windows.h>
+#include <psapi.h>
+#include <dbghelp.h>
 
-LONG WINAPI GlobalExceptionHandler(EXCEPTION_POINTERS *ExceptionInfo) {
-  QString errorMsg =
-      QString("CRITICAL CRASH: Exception Code 0x%1")
-          .arg(ExceptionInfo->ExceptionRecord->ExceptionCode, 0, 16);
-  MessageBoxA(NULL, errorMsg.toUtf8().constData(),
-              "ScrollBench - Crash Detected", MB_ICONERROR | MB_OK);
-  return EXCEPTION_CONTINUE_SEARCH;
-}
-#endif
+static LONG WINAPI customCrashFilter(EXCEPTION_POINTERS *pExceptionPointers) {
+    DWORD code = pExceptionPointers ? pExceptionPointers->ExceptionRecord->ExceptionCode : 0;
+    void *addr = pExceptionPointers ? pExceptionPointers->ExceptionRecord->ExceptionAddress : nullptr;
 
-void signalHandler(int signum) {
-  QString msg =
-      QString("FATAL SIGNAL %1 (SIGSEGV/SIGABRT) received.").arg(signum);
-#ifdef Q_OS_WIN
-  MessageBoxA(NULL, msg.toUtf8().constData(), "ScrollBench - Crash Detected",
-              MB_ICONERROR | MB_OK);
-#endif
-  qFatal("%s", msg.toUtf8().constData());
-}
-
-void crashHandler(QtMsgType type, const QMessageLogContext &context,
-                  const QString &msg) {
-  QTextStream ts(stderr);
-  ts << msg << "\n";
-
-  // Force flush relevant performance logs to disk
-  if (type == QtFatalMsg || type == QtCriticalMsg ||
-      msg.contains("[AdaptiveIO]") || msg.contains("[Performance]")) {
-    QDir().mkpath("logs");
-    FILE *f = fopen("logs/crash.log", "a");
+    FILE *f = fopen("scrollbench_crash.log", "a");
     if (f) {
-      fprintf(f, "%s\n", msg.toUtf8().constData());
-      fflush(f);
-      fclose(f);
+        SYSTEMTIME st;
+        GetLocalTime(&st);
+        fprintf(f, "[%04d-%02d-%02d %02d:%02d:%02d.%03d] FATAL EXCEPTION: Code 0x%08lX at Address %p\n",
+                st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, st.wMilliseconds,
+                code, addr);
+        fflush(f);
+        fclose(f);
     }
-  }
+    return EXCEPTION_CONTINUE_SEARCH;
 }
+
+static void preloadAndLockAllModules() {
+    HANDLE hProcess = GetCurrentProcess();
+    HMODULE hMods[1024];
+    DWORD cbNeeded = 0;
+    if (EnumProcessModules(hProcess, hMods, sizeof(hMods), &cbNeeded)) {
+        DWORD count = cbNeeded / sizeof(HMODULE);
+        for (DWORD i = 0; i < count; i++) {
+            MODULEINFO modInfo;
+            if (GetModuleInformation(hProcess, hMods[i], &modInfo, sizeof(modInfo))) {
+                volatile const char *base = (volatile const char *)modInfo.lpBaseOfDll;
+                size_t size = modInfo.SizeOfImage;
+                for (size_t offset = 0; offset < size; offset += 4096) {
+                    char dummy = base[offset];
+                    Q_UNUSED(dummy);
+                }
+            }
+        }
+    }
+    qDebug() << "[main_scrollbench] Pre-faulted and cached 100% of executable and DLL pages into local RAM.";
+}
+#endif
+
+#include "BuildInfo.h"
 
 int main(int argc, char *argv[]) {
 #ifdef Q_OS_WIN
-  SetUnhandledExceptionFilter(GlobalExceptionHandler);
+  SetUnhandledExceptionFilter(customCrashFilter);
 #endif
-  std::signal(SIGSEGV, signalHandler);
-  std::signal(SIGABRT, signalHandler);
+  std::set_terminate([]() {
+    qCritical() << "[FATAL] std::terminate called in QGalleryXBench!";
+    abort();
+  });
 
-  qInstallMessageHandler(crashHandler);
-  // Clear previous log
-  QDir().mkpath("logs");
-  FILE *f = fopen("logs/crash.log", "w");
-  if (f)
-    fclose(f);
+  // 1. Output version banner and build details
+  printf("====================================================\n");
+  printf("  QGalleryXBench v%s (Build %d)\n", BUILD_VERSION, BUILD_NUMBER);
+  printf("  Derived from QGalleryX | SIMD: %s\n", BC1Engine::simdLevelString(BC1Engine::detectSimdLevel()));
+  printf("  Built: %s | Mode: Dynamic Release (Qt 6.9.3)\n", BUILD_TIMESTAMP);
+  printf("====================================================\n\n");
+  fflush(stdout);
 
-  QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+  QCoreApplication::setOrganizationName("SamsungClone");
+  QCoreApplication::setOrganizationDomain("samsungclone.com");
+  QCoreApplication::setApplicationName("GalleryBench");
+  QCoreApplication::setApplicationVersion(BUILD_VERSION);
 
-  qputenv("QT_QUICK_CONTROLS_MATERIAL_THEME", "Dark");
-  qputenv("QT_QUICK_CONTROLS_MATERIAL_ACCENT", "Blue");
+  // Set style to Basic to match QGalleryX
+  QQuickStyle::setStyle("Basic");
 
-  QGuiApplication app(argc, argv);
+  // Set up graphics API before creating QGuiApplication
+  SettingsHelper tempHelper;
+  int api = tempHelper.selectedApi();
 
-  // Use Material style for better visual feedback on toggles/sliders
-  QQuickStyle::setStyle("Material");
+  if (api == 1)
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::Direct3D11);
+  else if (api == 2)
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::Vulkan);
+  else if (api == 3)
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
+  else if (api == 4)
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
+
+  qputenv("QML_IMAGE_CACHE_SIZE", "1024");
+  qputenv("QT_MEDIA_BACKEND", "ffmpeg");
+
+  QApplication app(argc, argv);
+
+#ifdef Q_OS_WIN
+  preloadAndLockAllModules();
+#endif
+
+  LogManager::instance().setLogFile("scrollbench.log");
+  qInstallMessageHandler(LogManager::messageHandler);
+
+  FileCacheManager::instance().initialize();
+
+  QSettings settings("SamsungClone", "Gallery");
+  int cacheSizeMB = settings.value("cacheSizeMB", 512).toInt();
+  if (cacheSizeMB <= 0) cacheSizeMB = 512;
+  AsyncImageProvider::setCacheMaxCost(cacheSizeMB * 1024);
+
+  TaskScheduler::instance().addTask([]() {
+#ifdef Q_OS_WIN
+      CoInitialize(NULL);
+#endif
+      VideoThumbnailer::warmup();
+#ifdef Q_OS_WIN
+      CoUninitialize();
+#endif
+  }, TaskScheduler::IO_BOUND, TaskScheduler::Low, "WarmupMediaDLLs");
+
+  // Register all QGalleryX Types
+  qmlRegisterType<ImageModel>("QGalleryX", 1, 0, "ImageModel");
+  qmlRegisterType<AlbumModel>("QGalleryX", 1, 0, "AlbumModel");
+  qmlRegisterType<GroupedProxyModel>("QGalleryX", 1, 0, "GroupedProxyModel");
+  qmlRegisterType<SettingsHelper>("QGalleryX", 1, 0, "SettingsHelper");
+  qmlRegisterType<SystemMonitor>("QGalleryX", 1, 0, "SystemMonitor");
+  qmlRegisterType<BenchmarkRunner>("QGalleryX", 1, 0, "BenchmarkRunner");
+
   QQmlApplicationEngine engine;
 
-  // Register types for QML
-  qmlRegisterType<GroupedProxyModel>("ScrollBenchBackend", 1, 0,
-                                     "GroupedProxyModel");
-  qmlRegisterType<ScrollBenchImageModel>("ScrollBenchBackend", 1, 0,
-                                         "ScrollBenchImageModel");
-  qmlRegisterType<FastImageItem>("ScrollBenchBackend", 1, 0, "FastImage");
+  engine.addImageProvider("async", new AsyncImageProvider);
+  AsyncImageProvider::s_logLevel.store(2);
 
-  // Register async image provider for real images
-  engine.addImageProvider(QLatin1String("async"), new AsyncImageProvider());
-  AsyncImageProvider::s_logLevel.store(2); // MAXIMUM DEBUG LOGGING
+  SettingsHelper settingsHelper;
+  engine.rootContext()->setContextProperty("appSettings", &settingsHelper);
 
-  // Create core components on heap for safer destruction
-  auto *imageModel = new ScrollBenchImageModel();
-  auto *frameBudget = new FrameBudgetScheduler();
-  auto *systemMonitor = new SystemMonitor();
-  auto *telemetry = new TelemetryMonitor();
-  auto *settings = new SettingsHelper();
-  auto *desktopHelper = new DesktopHelper();
-  auto *albumModel = new AlbumModel();
-  auto *imageProcessor = new ImageProcessor(); // Create ImageProcessor instance
-  auto *diagnostics = new DiagnosticsMonitor(); // Create diagnostics monitor
-  systemMonitor->startMonitoring(1000);
+  SystemMonitor systemMonitor;
+  systemMonitor.startMonitoring(1000);
+  engine.rootContext()->setContextProperty("systemMonitor", &systemMonitor);
 
-  // Connect model and frame budget
-  imageModel->setFrameScheduler(frameBudget);
+  qmlRegisterUncreatableType<DesktopHelper>("QGalleryX", 1, 0, "DesktopHelper", "Enums only");
+  DesktopHelper desktopHelper;
+  DesktopHelper::setEngine(&engine);
+  engine.rootContext()->setContextProperty("desktopHelper", &desktopHelper);
+  engine.rootContext()->setContextProperty("viewportGovernor", &ViewportGovernor::instance());
 
-  // Attach diagnostics to components for monitoring
-  diagnostics->attachModel(imageModel);
-  diagnostics->attachSettings(settings);
+  ImageProcessor imageProcessor;
+  engine.rootContext()->setContextProperty("imageProcessor", &imageProcessor);
 
-  // Generate 10,000 test items by default
-  // imageModel->generateTestData(10000); // Disabled for clean performance
-  // monitoring
+  engine.rootContext()->setContextProperty("latencyGuard", &PassiveReadLatencyGuard::instance());
+  engine.rootContext()->setContextProperty("taskScheduler", &TaskScheduler::instance());
+  engine.rootContext()->setContextProperty("fileCacheManager", &FileCacheManager::instance());
 
-  // Connect model to telemetry
-  QObject::connect(
-      imageModel, &ScrollBenchImageModel::pendingDecodeCountChanged, telemetry,
-      [telemetry, imageModel]() {
-        telemetry->setPendingDecodes(imageModel->pendingDecodeCount());
-      });
+  BenchmarkRunner benchmarkRunner;
+  engine.rootContext()->setContextProperty("benchmarkRunner", &benchmarkRunner);
 
-  // Connect FrameBudget completions to Telemetry
-  QObject::connect(
-      frameBudget, &FrameBudgetScheduler::completionsThisFrameChanged,
-      telemetry, [telemetry, frameBudget]() {
-        telemetry->setCompletionsThisFrame(frameBudget->completionsThisFrame());
-      });
-
-  // Expose to QML
-  engine.rootContext()->setContextProperty("imageModel", imageModel);
-  engine.rootContext()->setContextProperty("frameBudget", frameBudget);
-  engine.rootContext()->setContextProperty("telemetry", telemetry);
-  engine.rootContext()->setContextProperty("settings", settings);
-  engine.rootContext()->setContextProperty("desktopHelper", desktopHelper);
-  engine.rootContext()->setContextProperty("albumModel", albumModel);
-  engine.rootContext()->setContextProperty("systemMonitor", systemMonitor);
-  engine.rootContext()->setContextProperty("diagnostics",
-                                           diagnostics); // Expose diagnostics
-  engine.rootContext()->setContextProperty("taskScheduler",
-                                           &TaskScheduler::instance());
-  engine.rootContext()->setContextProperty(
-      "hwAccel", &HardwareAccelerationManager::instance());
-  engine.rootContext()->setContextProperty("imageProcessor",
-                                           imageProcessor); // Expose to QML
-
-  // Initialize Telemetry
-  telemetry->setPendingDecodes(imageModel->pendingDecodeCount());
-  telemetry->updateMemoryUsage();
-
-  // Load QML
-  const QUrl url(QStringLiteral("qrc:/ScrollBench/qml/MainScrollBench.qml"));
-
-  // Exit if QML fails to load
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreationFailed, &app,
       []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
 
+  const QUrl url("qrc:/ScrollBench/qml/Main.qml");
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,
       [url](QObject *obj, const QUrl &objUrl) {
@@ -175,16 +197,34 @@ int main(int argc, char *argv[]) {
           QCoreApplication::exit(-1);
       },
       Qt::QueuedConnection);
-
   engine.load(url);
 
-  // Handle auto-scan if path provided in CLI arguments
+#ifdef Q_OS_WIN
+  ChangeWindowMessageFilter(WM_DROPFILES, MSGFLT_ADD);
+  ChangeWindowMessageFilter(WM_COPYDATA, MSGFLT_ADD);
+  ChangeWindowMessageFilter(0x0049, MSGFLT_ADD);
+#endif
+
+  // Handle automated CLI benchmark
   QStringList args = QCoreApplication::arguments();
-  if (args.count() >= 3 && args.at(1) == "--scan") {
-    QString scanPath = args.at(2);
-    qDebug() << "[AUTO-SCAN] Triggering for:" << scanPath;
-    imageModel->scanDirectory(scanPath);
+  if (args.contains("--benchmark")) {
+    QString benchPath = "C:/";
+    int targetSet = 4840;
+    int pathIdx = args.indexOf("--path");
+    if (pathIdx != -1 && pathIdx + 1 < args.size()) {
+      benchPath = args[pathIdx + 1];
+    }
+    int setIdx = args.indexOf("--target-set");
+    if (setIdx != -1 && setIdx + 1 < args.size()) {
+      targetSet = args[setIdx + 1].toInt();
+    }
+    qDebug() << "[BENCHMARK] Automated drive benchmark scheduled on" << benchPath;
+    QTimer::singleShot(500, [&benchmarkRunner, benchPath, targetSet]() {
+      benchmarkRunner.runDriveBenchmark(benchPath, targetSet);
+    });
   }
 
-  return app.exec();
+  int ret = app.exec();
+  TaskScheduler::instance().stop();
+  return ret;
 }

@@ -7,6 +7,8 @@ Dialog {
     // List of images to resize
     property var targetPaths: []
     
+    parent: Overlay.overlay
+    
     title: "Resize " + (targetPaths.length === 1 ? "Image" : targetPaths.length + " Images")
     modal: true
     width: parent ? parent.width * 0.9 : 1000
@@ -24,18 +26,23 @@ Dialog {
     property real originalSizeMB: originalSizeBytes / (1024 * 1024)
     property real newSizeMB: 0.0
     
+    onOpened: {
+        if (targetPaths.length > 0) {
+            let path = targetPaths[0]
+            currentImagePath = path.replace("file:///", "").replace("file:", "")
+            originalSizeBytes = desktopHelper.getFileSize ? desktopHelper.getFileSize(currentImagePath) : 5000000
+            updateSizeEstimate()
+        }
+    }
+
     // Helper function to estimate new file size
     function updateSizeEstimate() {
-        // Rough estimation: size scales with resolution and quality
-        // This will be replaced with actual backend calculation in Phase 3.4
-        let baseWidth = 1920
-        let baseHeight = 1080
-        
-        let qualityFactor = quality / 100.0
-        let compressionFactor = 1.0 - (compression / 15.0) // 0-9 scale, mild effect
-        
-        // Mock math to show *change*:
-        newSizeMB = originalSizeMB * qualityFactor * compressionFactor
+        if (!currentImagePath || currentImagePath === "") return;
+        var res = desktopHelper.generateResizePreview(currentImagePath, targetWidth, targetHeight, quality, compression);
+        if (res && res.path) {
+            previewImage.source = res.path + "?cache_buster=" + Math.random()
+            newSizeMB = res.size / (1024 * 1024)
+        }
     }
     
     contentItem: Rectangle {
@@ -49,30 +56,65 @@ Dialog {
             spacing: 20
             
             // Left: Preview
-            Rectangle {
+            RowLayout {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.preferredWidth: 2
-                color: "#1a1a1a"
-                border.color: "#3d3d3d"
-                radius: 4
+                spacing: 10
                 
-                Image {
-                    id: previewImage
-                    anchors.fill: parent
-                    anchors.margins: 2
-                    fillMode: Image.PreserveAspectFit
-                    source: resizeEditor.currentImagePath
-                    asynchronous: true
+                // Original View
+                Rectangle {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    color: "#1a1a1a"
+                    border.color: "#3d3d3d"
+                    radius: 4
+                    
+                    Image {
+                        anchors.fill: parent
+                        anchors.margins: 2
+                        fillMode: Image.PreserveAspectFit
+                        source: "image://async/" + resizeEditor.currentImagePath
+                        asynchronous: true
+                    }
+                    
+                    Text {
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 10
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "Before"
+                        color: "#888"
+                        font.pixelSize: 12
+                        font.bold: true
+                    }
                 }
                 
-                Text {
-                    anchors.bottom: parent.bottom
-                    anchors.margins: 10
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: resizeEditor.currentImagePath ? resizeEditor.currentImagePath.substring(resizeEditor.currentImagePath.lastIndexOf('/') + 1) : "No Selection"
-                    color: "#888"
-                    font.pixelSize: 12
+                // Preview View
+                Rectangle {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    color: "#1a1a1a"
+                    border.color: "#3d3d3d"
+                    radius: 4
+                    
+                    Image {
+                        id: previewImage
+                        anchors.fill: parent
+                        anchors.margins: 2
+                        fillMode: Image.PreserveAspectFit
+                        source: resizeEditor.currentImagePath
+                        asynchronous: true
+                    }
+                    
+                    Text {
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 10
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: "After Preview"
+                        color: "#888"
+                        font.pixelSize: 12
+                        font.bold: true
+                    }
                 }
             }
             
@@ -151,17 +193,32 @@ Dialog {
                     ColumnLayout {
                         width: parent.width
                         
-                        Text { text: "Quality: " + resizeEditor.quality + "%"; color: "white" }
+                        Text { text: resizeEditor.quality === 101 ? "Quality: Lossless (PNG)" : "Quality: " + resizeEditor.quality + "%"; color: "white" }
                         Slider {
                             id: qualitySlider
                             from: 10; to: 100
                             value: resizeEditor.quality
                             stepSize: 5
                             Layout.fillWidth: true
+                            enabled: !losslessCheck.checked
                             onMoved: {
                                 resizeEditor.quality = value
                                 updateSizeEstimate()
                             }
+                        }
+                        CheckBox {
+                            id: losslessCheck
+                            text: "Lossless Output (No Degradation)"
+                            checked: resizeEditor.quality === 101
+                            onCheckedChanged: {
+                                if (checked) {
+                                    resizeEditor.quality = 101
+                                } else {
+                                    resizeEditor.quality = qualitySlider.value
+                                }
+                                updateSizeEstimate()
+                            }
+                            contentItem: Text { text: parent.text; color: "#aaa"; leftPadding: 26; verticalAlignment: Text.AlignVCenter }
                         }
                     }
                 }
@@ -204,26 +261,12 @@ Dialog {
         onAccepted: {
             // "Save" button clicked - Batch or Single
             if (resizeEditor.targetPaths.length > 0) {
-                let size = Qt.size(resizeEditor.targetWidth, resizeEditor.targetHeight);
-                
+                var desktopPath = Qt.platform.homePath + "/Desktop/"
+                var cleanPaths = []
                 for (let i = 0; i < resizeEditor.targetPaths.length; i++) {
-                    let sourcePath = resizeEditor.targetPaths[i];
-                    // Strip file:/// if present for backend
-                    let cleanPath = sourcePath.replace("file:///", "").replace("file:", "");
-                    
-                    let fileName = cleanPath.substring(cleanPath.lastIndexOf('/') + 1);
-                    if (fileName === "") fileName = cleanPath.substring(cleanPath.lastIndexOf('\\') + 1);
-                    
-                    let lastDot = fileName.lastIndexOf('.');
-                    let fileExtension = lastDot !== -1 ? fileName.substring(lastDot + 1) : "jpg";
-                    let baseName = lastDot !== -1 ? fileName.substring(0, lastDot) : fileName;
-                    
-                    let desktopPath = Qt.platform.homePath + "/Desktop/" + baseName + "_resized." + fileExtension;
-                    
-                    console.log("[RESIZE] Processing (" + (i+1) + "/" + resizeEditor.targetPaths.length + "):", cleanPath);
-                    imageProcessor.resizeImage(cleanPath, desktopPath, size);
+                    cleanPaths.push(resizeEditor.targetPaths[i].replace("file:///", "").replace("file:", ""))
                 }
-                
+                desktopHelper.exportImages(cleanPaths, desktopPath, resizeEditor.targetWidth, resizeEditor.targetHeight, resizeEditor.quality, resizeEditor.compression)
                 resizeEditor.close();
             } else {
                 console.warn("No images in targetPaths for resizing.");
@@ -234,12 +277,5 @@ Dialog {
             // "Cancel" button clicked
             resizeEditor.close();
         }
-    }
-
-    Component.onCompleted: {
-        imageProcessor.imageProcessingError.connect(function(message) {
-            console.error("Image processing error:", message);
-            // Optionally show a QMessageBox or similar to the user
-        });
     }
 }

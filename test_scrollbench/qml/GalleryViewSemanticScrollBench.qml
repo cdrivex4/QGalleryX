@@ -147,9 +147,6 @@ Item {
             sourceEnd = sourceStart + 800;
         }
         
-        console.log("[QML ViewportRange] Precise detected range:", sourceStart, "to", sourceEnd, 
-                    "(" + (sourceEnd - sourceStart + 1) + " items)");
-        
         if (sourceStart !== -1 && sourceEnd !== -1) {
             model.visibleStartIndex = Math.max(0, sourceStart);
             model.visibleEndIndex = Math.min(model.totalItems - 1, sourceEnd);
@@ -162,7 +159,8 @@ Item {
         model: proxyModel
         clip: true
         spacing: 12
-        cacheBuffer: 1500
+        cacheBuffer: 500
+        reuseItems: true
         z: 1
         interactive: !dragSelect.active
         
@@ -219,9 +217,7 @@ Item {
                         FastImage {
                             id: thumbFast
                             anchors.fill: parent
-                            visible: settings.useFastImage
                             source: {
-                                if (!settings.useFastImage) return "";
                                 var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
                                 return path ? "image://async/" + path : ""
                             }
@@ -229,27 +225,11 @@ Item {
                             fillMode: 1 // PreserveAspectCrop
                         }
                         
-                        Image {
-                            id: thumbStd
-                            anchors.fill: parent
-                            visible: !settings.useFastImage
-                            source: {
-                                if (settings.useFastImage) return "";
-                                var path = semanticRoot.model.data(semanticRoot.model.index(sourceIdx, 0), 257)
-                                return path ? "image://async/" + path : ""
-                            }
-                            sourceSize: Qt.size(semanticRoot.loadingResolution, semanticRoot.loadingResolution)
-                            fillMode: Image.PreserveAspectCrop
-                            asynchronous: true
-                            cache: true
-                        }
-                        
-                        property bool isLoading: settings.useFastImage ? thumbFast.isLoading : (thumbStd.status === Image.Loading)
-                        property string activeSource: settings.useFastImage ? thumbFast.source : thumbStd.source    
+                        property bool isLoading: thumbFast.isLoading
+                        property string activeSource: thumbFast.source    
                         Rectangle {
                             anchors.fill: parent; color: "#222"
                             visible: activeSource === "" || isLoading
-                            BusyIndicator { anchors.centerIn: parent; width: parent.width * 0.4; height: width; opacity: 0.5 }
                         }
 
                         // Video Icon Overlay

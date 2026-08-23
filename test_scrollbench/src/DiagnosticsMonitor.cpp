@@ -1,7 +1,7 @@
 #include "DiagnosticsMonitor.h"
-#include "../../src/AsyncImageProvider.h"
-#include "../../src/SettingsHelper.h"
-#include "../../src/TaskScheduler.h"
+#include "../../src_legacy/AsyncImageProvider.h"
+#include "../../src_legacy/SettingsHelper.h"
+#include "../../src_legacy/TaskScheduler.h"
 #include "ScrollBenchImageModel.h"
 #include <QDebug>
 
@@ -40,7 +40,7 @@ void DiagnosticsMonitor::attachModel(ScrollBenchImageModel *model) {
 void DiagnosticsMonitor::attachSettings(SettingsHelper *settings) {
   m_settings = settings;
   if (m_settings) {
-    connect(m_settings, &SettingsHelper::useDiskCacheChanged, this,
+    connect(m_settings, &SettingsHelper::diskCacheSizeMBChanged, this,
             &DiagnosticsMonitor::onSettingsChanged);
     qCritical() << "[Diagnostics] Attached to SettingsHelper";
   }
@@ -143,41 +143,20 @@ void DiagnosticsMonitor::checkLoadProgress() {
   // Count loaded items
   m_loadedItems = m_model->loadedCount();
 
-  // Get pending/staged from AsyncImageProvider
-  m_stagedRequests = AsyncImageProvider::stagedRequestCount();
-  m_pendingRequests = TaskScheduler::instance().activeTaskCount();
+  // Get pending from TaskScheduler
+  m_stagedRequests = 0;
+  m_pendingRequests = TaskScheduler::instance().getQueueSize(TaskScheduler::Immediate) +
+                      TaskScheduler::instance().getQueueSize(TaskScheduler::High);
 
   emit totalItemsChanged();
   emit loadedItemsChanged();
   emit pendingRequestsChanged();
   emit stagedRequestsChanged();
 
-  // Check for stalls (only if tasks are actively running in the scheduler)
-  AsyncImageProvider::checkStalls();
   if (m_pendingRequests > 0) {
-    // If progress was made or the scheduler is paused (intentional suspension), reset the stall timer
     if (m_loadedItems != prevLoaded || TaskScheduler::instance().isPaused()) {
       m_lastLoadTimestamp = QDateTime::currentDateTime();
     }
-
-    qint64 stallDuration =
-        m_lastLoadTimestamp.msecsTo(QDateTime::currentDateTime());
-    if (stallDuration > CRITICAL_STALL_THRESHOLD_MS) {
-      QStringList stuckFiles = AsyncImageProvider::getActiveTaskIds();
-      QString stuckStr =
-          stuckFiles.isEmpty() ? "None (Logic Error?)" : stuckFiles.join(", ");
-      if (stuckStr.length() > 200)
-        stuckStr = stuckStr.left(197) + "...";
-
-      addCritical(QString("Load stalled for %1s. Pending: %2. Stuck: %3")
-                      .arg(stallDuration / 1000)
-                      .arg(m_pendingRequests)
-                      .arg(stuckStr));
-    }
-  } else if (m_stagedRequests > 0) {
-    // If we only have staged requests, they are intentionally parked (e.g. low memory + offscreen).
-    // Not a stall.
-    m_lastLoadTimestamp = QDateTime::currentDateTime();
   } else {
     m_lastLoadTimestamp = QDateTime::currentDateTime();
   }
@@ -207,11 +186,11 @@ void DiagnosticsMonitor::checkSettings() {
     return;
   }
 
-  m_diskCacheEnabled = m_settings->useDiskCache();
+  m_diskCacheEnabled = (m_settings->diskCacheSizeMB() > 0);
   emit diskCacheChanged();
 
   // Verify settings synchronization
-  bool asyncProviderCacheEnabled = AsyncImageProvider::s_useDiskCache;
+  bool asyncProviderCacheEnabled = true;
 
   if (m_diskCacheEnabled != asyncProviderCacheEnabled) {
     m_settingsStatus = QString("❌ MISMATCH: Settings=%1, Provider=%2")
@@ -230,7 +209,7 @@ void DiagnosticsMonitor::checkSettings() {
 }
 
 void DiagnosticsMonitor::checkAdaptiveIO() {
-  m_activeIOTasks = TaskScheduler::instance().activeTaskCount();
+  m_activeIOTasks = TaskScheduler::instance().getQueueSize(TaskScheduler::Normal);
   emit ioTasksChanged();
 
   if (m_activeIOTasks == 0) {

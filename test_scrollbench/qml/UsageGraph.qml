@@ -49,7 +49,7 @@ Item {
             var ctx = getContext("2d")
             ctx.clearRect(0, 0, width, height)
             
-            if (!root.dataPoints || root.dataPoints.length < 2) return
+            if (root.dataPoints.length < 2) return
             
             ctx.beginPath()
             ctx.lineWidth = 1
@@ -99,7 +99,7 @@ Item {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: 4
-        text: (root.dataPoints && root.dataPoints.length > 0 ? root.dataPoints[root.dataPoints.length - 1].toFixed(1) : "0") + root.suffix
+        text: (root.dataPoints.length > 0 ? root.dataPoints[root.dataPoints.length - 1].toFixed(1) : "0") + root.suffix
         color: "white"
         font.bold: true
         font.pixelSize: 10
@@ -111,7 +111,6 @@ Item {
         hoverEnabled: true
         
         onPositionChanged: (mouse) => {
-            if (!root.dataPoints || root.dataPoints.length < 2) return
             var index = Math.round((mouse.x / width) * (root.dataPoints.length - 1))
             if (index >= 0 && index < root.dataPoints.length) {
                 var val = root.dataPoints[index]
