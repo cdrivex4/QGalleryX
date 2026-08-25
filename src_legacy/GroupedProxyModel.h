@@ -54,6 +54,8 @@ public:
 
   Q_INVOKABLE QModelIndex getProxyIndexForSourceIndex(int sourceIndex) const;
   Q_INVOKABLE int getProxyRowForSourceIndex(int sourceIndex) const;
+  Q_INVOKABLE int getSourceIndexAbove(int sourceIndex) const;
+  Q_INVOKABLE int getSourceIndexBelow(int sourceIndex) const;
   Q_INVOKABLE QVariantList getYearDistribution() const;
   Q_INVOKABLE QString getLabelForProxyIndex(int proxyIndex) const;
   Q_INVOKABLE int indexOfPath(const QString &path) const;

@@ -34,9 +34,16 @@ if (Test-Path $targetExe) {
 Write-Host "Running windeployqt..."
 & $WINDEPLOYQT --qmldir "resources/qml_legacy" --dir $DIST_DIR "$DIST_DIR/QGalleryX.exe" --release --no-translations --compiler-runtime
 
-# 4. Copy FFmpeg DLLs
+# 4. Copy FFmpeg DLLs (Application decoders + Qt Multimedia playback engine)
 Write-Host "Copying FFmpeg DLLs..."
-Get-ChildItem "$FFMPEG_BIN/*.dll" | Copy-Item -Destination $DIST_DIR
+Get-ChildItem "$FFMPEG_BIN/*.dll" | Copy-Item -Destination $DIST_DIR -Force
+$qtFfmpegDlls = @("avcodec-61.dll", "avformat-61.dll", "avutil-59.dll", "swresample-5.dll", "swscale-8.dll")
+foreach ($dll in $qtFfmpegDlls) {
+    $dllPath = Join-Path $QT_BIN_DIR $dll
+    if (Test-Path $dllPath) {
+        Copy-Item $dllPath -Destination $DIST_DIR -Force
+    }
+}
 
 # 5. Copy LibRaw DLLs? (Static, so no)
 

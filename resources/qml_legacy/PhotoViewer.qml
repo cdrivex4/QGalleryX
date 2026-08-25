@@ -11,6 +11,14 @@ Item {
     property bool isEditing: false
     property bool controlsVisible: true
     
+    // Media Decoder HUD & Debug Overrides
+    property int forcedDecoderEngine: 0 // 0=Auto, 1=Qt Native, 2=FFmpeg, 3=LibRaw
+    property var reloadNonce: 0
+    property bool decoderHudVisible: false
+    property int lastDecodeTimeMs: 0
+    property string lastDecodeStatus: "Ready"
+    property string lastDecodeDimensions: ""
+    
     signal backClicked()
     signal imageLoaded(int timeMs)
     
@@ -130,6 +138,12 @@ Item {
         return m;
     }
     
+    function stopPlayback() {
+        if (listView.currentItem && typeof listView.currentItem.stopPlayback === "function") {
+            listView.currentItem.stopPlayback();
+        }
+    }
+    
     onVisibleChanged: {
         if (visible) {
             forceActiveFocus()
@@ -139,6 +153,7 @@ Item {
             }
         } else {
             taskScheduler.pauseBackground(false)
+            stopPlayback()
         }
     }
 
@@ -200,13 +215,19 @@ Item {
                                      fileExt === "mts" || fileExt === "3gp" || fileExt === "wmv" || fileExt === "vob" || 
                                      fileExt === "ogv" || fileExt === "ogg" || fileExt === "mp3" || fileExt === "wav" || 
                                      fileExt === "flac" || fileExt === "m4a" || fileExt === "aac" || fileExt === "wma" || fileExt === "opus")
-            property bool isCurrent: index === ListView.view.currentIndex
+            property bool isCurrent: (index === ListView.view.currentIndex) && root.visible
             onIsCurrentChanged: {
                 if (!isCurrent && isVideo) {
                     console.log("Stopping background video:", filePath)
                     player.stop()
                 } else if (isCurrent && isVideo) {
                     console.log("Starting video (isCurrent):", filePath)
+                }
+            }
+
+            function stopPlayback() {
+                if (player) {
+                    player.stop()
                 }
             }
             
@@ -253,7 +274,7 @@ Item {
                 contentWidth: contentItem.width
                 contentHeight: contentItem.height
                 clip: true
-                visible: !isVideo
+                visible: !isVideo || root.forcedDecoderEngine > 0
                 
                 property real zoom: 1.0
                 
@@ -298,7 +319,14 @@ Item {
 
                     Image {
                         id: img
-                        source: (!isVideo && filePath && isCurrent) ? "image://async/" + filePath : ""
+                        source: {
+                            if (!isCurrent || !filePath) return ""
+                            if (root.forcedDecoderEngine > 0) {
+                                return "image://async/" + filePath + "?engine=" + root.forcedDecoderEngine + "&req=" + root.reloadNonce
+                            }
+                            if (isVideo) return ""
+                            return "image://async/" + filePath
+                        }
                         
                         // Bind size to zoom
                         width: flickable.width * flickable.zoom
@@ -312,11 +340,20 @@ Item {
                         autoTransform: true
                         
                         property real startTime: 0
-                        onSourceChanged: startTime = new Date().getTime()
+                        onSourceChanged: {
+                            startTime = new Date().getTime()
+                            root.lastDecodeStatus = "Decoding..."
+                        }
                         onStatusChanged: {
                             if (status === Image.Ready) {
                                 var endTime = new Date().getTime()
-                                root.imageLoaded(endTime - startTime)
+                                var elapsed = Math.max(1, endTime - startTime)
+                                root.lastDecodeTimeMs = elapsed
+                                root.lastDecodeDimensions = img.implicitWidth + "x" + img.implicitHeight
+                                root.lastDecodeStatus = "SUCCESS (" + root.lastDecodeDimensions + " in " + elapsed + "ms)"
+                                root.imageLoaded(elapsed)
+                            } else if (status === Image.Error) {
+                                root.lastDecodeStatus = "FAILED (Decoder returned null)"
                             }
                         }
                     }
@@ -325,7 +362,7 @@ Item {
                         anchors.centerIn: parent
                         width: 64
                         height: 64
-                        running: img.status === Image.Loading && !isVideo
+                        running: img.status === Image.Loading && (!isVideo || root.forcedDecoderEngine > 0)
                         visible: running
                     }
                 }
@@ -387,51 +424,23 @@ Item {
             Item {
                 id: videoContainer
                 anchors.fill: parent
-                visible: isVideo
+                visible: isVideo && root.forcedDecoderEngine === 0
                 property int currentRotation: filePath ? imageProcessor.getVirtualRotation(filePath) : 0
                 
                 MediaPlayer {
                     id: player
-                    source: {
-                        if (!isCurrent || !visible || !filePath) return ""
-                        if (isVideo) {
-                            console.log("PhotoViewer: Loading Video", filePath)
-                            // Convert native path to proper QML file URL
-                            var path = filePath.split('\\').join('/')
-                            if (path.startsWith("//")) {
-                                // Network UNC path: file://server/share/file.mp4
-                                return "file:" + path
-                            } else {
-                                // Local drive path: file:///C:/folder/file.mp4
-                                if (!path.startsWith("/")) path = "/" + path
-                                return "file://" + path
-                            }
-                        }
-                        return ""
-                    }
+                    source: (root.visible && isVideo && isCurrent) ? (filePath.startsWith("file:") ? filePath : ("file:///" + filePath.replace(/\\/g, "/"))) : ""
+                    videoOutput: videoOutput
                     audioOutput: AudioOutput {
-                        id: audioOutput
+                        id: audioOut
                         volume: (typeof appSettings !== "undefined") ? appSettings.mediaVolume : 1.0
                         muted: (typeof appSettings !== "undefined") ? appSettings.mediaMuted : false
+                    }
 
-                        onVolumeChanged: {
-                            if (typeof appSettings !== "undefined" && appSettings.mediaVolume !== volume) {
-                                appSettings.mediaVolume = volume
-                            }
-                        }
-                        onMutedChanged: {
-                            if (typeof appSettings !== "undefined" && appSettings.mediaMuted !== muted) {
-                                appSettings.mediaMuted = muted
-                            }
-                        }
-                    }
-                    videoOutput: videoOutput
-                    autoPlay: false
-                    
-                    onErrorOccurred: (error, errorString) => {
-                        console.log("MediaPlayer Error: " + errorString + " (" + error + ")")
-                    }
-                    
+                    property alias volume: audioOut.volume
+                    property alias muted: audioOut.muted
+                    function setPosition(pos) { player.position = pos }
+
                     onPlaybackStateChanged: {
                         if (playbackState === MediaPlayer.PlayingState) {
                             taskScheduler.pauseBackground(true)
@@ -579,15 +588,15 @@ Item {
                                 id: speakerBtn
                                 anchors.fill: parent
                                 flatStyle: true
-                                onClicked: audioOutput.muted = !audioOutput.muted
+                                onClicked: player.muted = !player.muted
                                 ToolTip.visible: speakerBtn.hovered
-                                ToolTip.text: audioOutput.muted ? "Unmute" : "Mute"
+                                ToolTip.text: player.muted ? "Unmute" : "Mute"
 
                                 MediaIcon {
                                     anchors.centerIn: parent
                                     width: 22
                                     height: 22
-                                    iconType: (audioOutput.muted || audioOutput.volume === 0) ? "mute" : "speaker"
+                                    iconType: (player.muted || player.volume === 0) ? "mute" : "speaker"
                                 }
                             }
 
@@ -612,7 +621,7 @@ Item {
                                     spacing: 6
 
                                     Text {
-                                        text: audioOutput.muted ? "MUTE" : Math.round(audioOutput.volume * 100) + "%"
+                                        text: player.muted ? "MUTE" : Math.round(player.volume * 100) + "%"
                                         color: "#ffffff"
                                         font.pixelSize: 11
                                         font.bold: true
@@ -627,13 +636,13 @@ Item {
                                         implicitWidth: 26
                                         from: 0.0
                                         to: 1.0
-                                        value: audioOutput.muted ? 0.0 : audioOutput.volume
+                                        value: player.muted ? 0.0 : player.volume
                                         onMoved: {
-                                            audioOutput.volume = value
+                                            player.volume = value
                                             if (value === 0.0) {
-                                                audioOutput.muted = true
-                                            } else if (audioOutput.muted) {
-                                                audioOutput.muted = false
+                                                player.muted = true
+                                            } else if (player.muted) {
+                                                player.muted = false
                                             }
                                         }
 
@@ -763,56 +772,25 @@ Item {
         }
     }
     
-    // Edit Overlay
-    Rectangle {
-        id: editOverlay
-        anchors.fill: parent
-        color: "#AA000000"
+    // New Comprehensive Image Editing Suite
+    EditWorkspace {
+        id: editWorkspace
+        sourcePath: (listView.currentItem && listView.currentItem.filePath) ? listView.currentItem.filePath : root.getCurrentFilePath()
+        currentIndex: root.currentIndex
+        model: root.model
         visible: root.isEditing
-        z: 20
-        
-        Image {
-            id: editImg
-            anchors.centerIn: parent
-            width: parent.width * 0.8
-            height: parent.height * 0.8
-            fillMode: Image.PreserveAspectFit
-            source: (root.model && root.currentIndex >= 0 && root.model.data(root.model.index(root.currentIndex, 0), 257).toLowerCase().indexOf(".mp4") === -1) ? "image://async/" + root.model.data(root.model.index(root.currentIndex, 0), 257) : "" // FilePathRole
+        onClosed: {
+            root.isEditing = false
         }
-        
-        // Crop Handles (Visual)
-        Rectangle {
-            anchors.fill: editImg
-            border.color: "white"
-            border.width: 2
-            color: "transparent"
-            
-            Rectangle { width: 20; height: 20; color: "white"; anchors.left: parent.left; anchors.top: parent.top }
-            Rectangle { width: 20; height: 20; color: "white"; anchors.right: parent.right; anchors.top: parent.top }
-            Rectangle { width: 20; height: 20; color: "white"; anchors.left: parent.left; anchors.bottom: parent.bottom }
-            Rectangle { width: 20; height: 20; color: "white"; anchors.right: parent.right; anchors.bottom: parent.bottom }
-        }
-        
-        RowLayout {
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.margins: 20
-            spacing: 20
-            
-            StyledButton { 
-                text: "Save"
-                isAccent: true
-                onClicked: {
-                    var rect = Qt.rect(0.25, 0.25, 0.5, 0.5) 
-                    if (root.model.cropImage(root.currentIndex, rect)) {
-                        root.isEditing = false
-                        console.log("Image cropped and saved")
-                    } else {
-                        console.log("Failed to crop image")
-                    }
-                }
+        onSaved: (newPath) => {
+            root.isEditing = false
+            if (listView.currentItem && typeof listView.currentItem.reloadImage === "function") {
+                listView.currentItem.reloadImage()
             }
-            StyledButton { text: "Cancel"; onClicked: root.isEditing = false }
+            var fileName = newPath.split(/[\/\\]/).pop()
+            if (typeof toastOverlay !== "undefined") {
+                toastOverlay.showToast("✓ Image saved: " + fileName)
+            }
         }
     }
 
@@ -855,21 +833,70 @@ Item {
         MouseArea { anchors.fill: parent; onClicked: root.currentIndex++ }
     }
 
-    // Keyboard Navigation
+    // Keyboard Navigation & Fullscreen Controls
     focus: true
     Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Space) {
-             if (listView.currentItem && listView.currentItem.togglePlay) {
-                 listView.currentItem.togglePlay()
-             }
-             event.accepted = true
+            if (listView.currentItem && listView.currentItem.isVideo) {
+                if (listView.currentItem.togglePlay) listView.currentItem.togglePlay()
+            } else if (listView.currentItem) {
+                // Toggle zoom between 1.0 and 2.5
+                var f = listView.currentItem.children[0]
+                if (f && f.zoom > 1.0) f.zoom = 1.0
+                else if (listView.currentItem.zoomAt) listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), 1.5)
+            }
+            event.accepted = true
         } else if (event.key === Qt.Key_Left) {
             if (currentIndex > 0) currentIndex--
             event.accepted = true
         } else if (event.key === Qt.Key_Right) {
             if (currentIndex < root.getModelCount() - 1) currentIndex++
             event.accepted = true
-        } else if (event.key === Qt.Key_Escape) {
+        } else if (event.key === Qt.Key_Up) {
+            if (listView.currentItem && listView.currentItem.isVideo) {
+                if (typeof appSettings !== "undefined") {
+                    appSettings.mediaVolume = Math.min(1.0, (appSettings.mediaVolume || 1.0) + 0.1)
+                }
+            } else if (listView.currentItem && listView.currentItem.zoomAt) {
+                listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), 0.5)
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_Down) {
+            if (listView.currentItem && listView.currentItem.isVideo) {
+                if (typeof appSettings !== "undefined") {
+                    appSettings.mediaVolume = Math.max(0.0, (appSettings.mediaVolume || 1.0) - 0.1)
+                }
+            } else if (listView.currentItem && listView.currentItem.zoomAt) {
+                listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), -0.5)
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_M) {
+            if (typeof appSettings !== "undefined") {
+                appSettings.mediaMuted = !appSettings.mediaMuted
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_E) {
+            if (listView.currentItem && !listView.currentItem.isVideo && !root.isEditing) {
+                var p = (listView.currentItem && listView.currentItem.filePath) ? listView.currentItem.filePath : root.getCurrentFilePath()
+                root.isEditing = true
+                editWorkspace.openEditor(p, root.currentIndex)
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_R) {
+            var curP = root.getCurrentFilePath()
+            if (curP) {
+                imageProcessor.rotateImageVirtual(curP, 90)
+                root.rotationChanged(root.currentIndex)
+            }
+            event.accepted = true
+        } else if (event.key === Qt.Key_I) {
+            infoOverlay.meta = root.getMetadataForIndex(root.currentIndex)
+            infoOverlay.visible = !infoOverlay.visible
+            event.accepted = true
+        } else if (event.key === Qt.Key_Delete) {
+            root.deleteClicked()
+            event.accepted = true
+        } else if (event.key === Qt.Key_Escape || event.key === Qt.Key_Backspace) {
             if (root.isEditing) {
                 root.isEditing = false
             } else {
@@ -877,17 +904,15 @@ Item {
             }
             event.accepted = true
         } else if (event.key === Qt.Key_Plus || event.key === Qt.Key_Equal) {
-             // Zoom In (Center)
-             if (listView.currentItem) {
-                 listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), 0.5)
-             }
-             event.accepted = true
+            if (listView.currentItem && listView.currentItem.zoomAt) {
+                listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), 0.5)
+            }
+            event.accepted = true
         } else if (event.key === Qt.Key_Minus) {
-             // Zoom Out (Center)
-             if (listView.currentItem) {
-                 listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), -0.5)
-             }
-             event.accepted = true
+            if (listView.currentItem && listView.currentItem.zoomAt) {
+                listView.currentItem.zoomAt(Qt.point(listView.width/2, listView.height/2), -0.5)
+            }
+            event.accepted = true
         }
     }
 
@@ -1000,8 +1025,6 @@ Item {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             anchors.rightMargin: 15
-            spacing: 10
-            
             StyledButton {
                 text: "Rotate"
                 iconText: "↻"
@@ -1036,7 +1059,11 @@ Item {
                 iconText: "✏"
                 fontSize: 14
                 visible: listView.currentItem && !listView.currentItem.isVideo
-                onClicked: root.isEditing = true
+                onClicked: {
+                    var p = (listView.currentItem && listView.currentItem.filePath) ? listView.currentItem.filePath : root.getCurrentFilePath()
+                    root.isEditing = true
+                    editWorkspace.openEditor(p, root.currentIndex)
+                }
             }
         }
     }

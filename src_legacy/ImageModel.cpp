@@ -180,6 +180,23 @@ QHash<int, QByteArray> ImageModel::roleNames() const {
   return roles;
 }
 
+qint64 ImageModel::getGroupKey(int index, int role) const {
+  if (index < 0 || index >= m_images.size()) return -1;
+  const QDate &d = m_images[index].date.date();
+  switch (role) {
+    case SectionYearRole:
+      return d.year();
+    case SectionMonthRole:
+      return (qint64)d.year() * 100 + d.month();
+    case SectionWeekRole:
+      return (qint64)d.year() * 100 + d.weekNumber();
+    case SectionDayRole:
+    case DateSectionRole:
+    default:
+      return d.toJulianDay();
+  }
+}
+
 #include "../src/FileCacheManager.h"
 
 void ImageModel::scanDirectory(const QString &path) {
@@ -353,13 +370,14 @@ void ImageModel::scanDirectory(const QString &path) {
     m_crawlPassComplete = false;
   }
 
+  bool wasCached = !instantCachedItems.isEmpty();
 
   // Clear previous pending worker tasks (keep RAM cache warm)
   TaskScheduler::instance().clear();
 
   // Run live MFT / filesystem scanning via TaskScheduler
   TaskScheduler::instance().addTask(
-      [alive, safeThis, cleanPath, currentGen, cachePath]() mutable {
+      [alive, safeThis, cleanPath, currentGen, cachePath, wasCached]() mutable {
         if (!alive->load() || !safeThis) return;
         QElapsedTimer timer;
         timer.start();
@@ -433,14 +451,16 @@ void ImageModel::scanDirectory(const QString &path) {
                 }
               }
             }
-            fastScanSuccess = true;
+            if (!fastItems.isEmpty()) {
+              fastScanSuccess = true;
+            }
             qDebug() << "[FastScanner] MFT populated" << fastItems.size() << "items in" << timer.elapsed() << "ms";
           }
         }
 
         // === Fallback to QDirIterator if MFT unavailable ===
         if (!fastScanSuccess) {
-          QDirIterator it(cleanPath, nameFilters, QDir::Files, QDirIterator::Subdirectories);
+          QDirIterator it(cleanPath, nameFilters, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories);
 
           int localScanCount = 0;
           int nextBatchThreshold = 40;
@@ -452,24 +472,34 @@ void ImageModel::scanDirectory(const QString &path) {
             it.next();
 
             QString filePath = it.filePath();
-            // Filter out developer / package manager non-media folders
-            if (filePath.contains("/node_modules/") || filePath.contains("\\node_modules\\") ||
-                filePath.contains("/.git/") || filePath.contains("\\.git\\") ||
-                filePath.contains("/.vscode/") || filePath.contains("\\.vscode\\") ||
-                filePath.contains("/build/") || filePath.contains("\\build\\")) {
+            // Filter out developer / package manager / OS system non-media folders
+            if (filePath.contains("/node_modules/", Qt::CaseInsensitive) || filePath.contains("\\node_modules\\", Qt::CaseInsensitive) ||
+                filePath.contains("/.git/", Qt::CaseInsensitive) || filePath.contains("\\.git\\", Qt::CaseInsensitive) ||
+                filePath.contains("/.vscode/", Qt::CaseInsensitive) || filePath.contains("\\.vscode\\", Qt::CaseInsensitive) ||
+                filePath.contains("/build/", Qt::CaseInsensitive) || filePath.contains("\\build\\", Qt::CaseInsensitive) ||
+                filePath.contains("/AppData/Local/Packages/", Qt::CaseInsensitive) || filePath.contains("\\AppData\\Local\\Packages\\", Qt::CaseInsensitive) ||
+                filePath.contains("/AppData/Local/Temp/", Qt::CaseInsensitive) || filePath.contains("\\AppData\\Local\\Temp\\", Qt::CaseInsensitive) ||
+                filePath.contains("/Windows/WinSxS/", Qt::CaseInsensitive) || filePath.contains("\\Windows\\WinSxS\\", Qt::CaseInsensitive) ||
+                filePath.contains("/Windows/System32/", Qt::CaseInsensitive) || filePath.contains("\\Windows\\System32\\", Qt::CaseInsensitive)) {
+              continue;
+            }
+
+            auto fileType = DesktopHelper::staticGetFileType(filePath);
+            if (fileType == DesktopHelper::Unknown) {
               continue;
             }
 
             localScanCount++;
 
+            QFileInfo fi = it.fileInfo();
             ImageInfo info;
             info.filePath = QDir::toNativeSeparators(filePath);
             info.fileName = it.fileName();
-            info.size = 0; // Deferred
-            info.date = QDateTime(); // Deferred if regex fails
-            info.isVideo = (DesktopHelper::staticGetFileType(info.filePath) == DesktopHelper::Video);
+            info.size = fi.size();
+            info.date = fi.lastModified();
+            info.isVideo = (fileType == DesktopHelper::Video);
 
-            // Optimize: Try parsing filename for date (instant CPU task)
+            // Optimize: Prefer camera filename timestamp (e.g. 20240101_120000) if present
             QRegularExpressionMatch match = dateRegex.match(info.fileName);
             if (match.hasMatch()) {
               QString dateStr = match.captured(1) + match.captured(2);
@@ -480,13 +510,12 @@ void ImageModel::scanDirectory(const QString &path) {
             fastItems.append(info);
 
             // Stream items to UI as discovered
-            if (localScanCount >= nextBatchThreshold) {
+            if (!wasCached && localScanCount >= nextBatchThreshold) {
                 if (nextBatchThreshold == 40) nextBatchThreshold = 150;
                 else if (nextBatchThreshold == 150) nextBatchThreshold = 500;
                 else if (nextBatchThreshold == 500) nextBatchThreshold = 1500;
                 else if (nextBatchThreshold == 1500) nextBatchThreshold = 5000;
-                else if (nextBatchThreshold == 5000) nextBatchThreshold = 15000;
-                else nextBatchThreshold += 20000;
+                else nextBatchThreshold += 5000;
 
                 QList<ImageInfo> batchItems = fastItems;
                 QMetaObject::invokeMethod(safeThis, [alive, safeThis, batchItems, localScanCount, currentGen]() {
@@ -575,15 +604,17 @@ void ImageModel::scanDirectory(const QString &path) {
         QString filter = safeThis ? safeThis->m_filterQuery : QString();
         QList<ImageInfo> filteredSkeleton = filterImageList(fastItems, filter);
 
-        // Send skeleton grid to UI instantly
+        // Send skeleton grid to UI instantly (only reset model if cold uncached scan)
         std::shared_ptr<std::atomic<bool>> skelAlive = alive;
         QPointer<ImageModel> skelSafeThis = safeThis;
-        QMetaObject::invokeMethod(skelSafeThis, [skelAlive, skelSafeThis, fastItems, filteredSkeleton = std::move(filteredSkeleton), currentGen, method, scanDuration]() mutable {
+        QMetaObject::invokeMethod(skelSafeThis, [skelAlive, skelSafeThis, fastItems, filteredSkeleton = std::move(filteredSkeleton), currentGen, method, scanDuration, wasCached]() mutable {
           if (!skelAlive->load() || !skelSafeThis || skelSafeThis->m_scanGeneration != currentGen) return;
-          skelSafeThis->beginResetModel();
-          skelSafeThis->m_allItems = std::move(fastItems);
-          skelSafeThis->m_images = std::move(filteredSkeleton);
-          skelSafeThis->endResetModel();
+          if (!wasCached) {
+            skelSafeThis->beginResetModel();
+            skelSafeThis->m_allItems = std::move(fastItems);
+            skelSafeThis->m_images = std::move(filteredSkeleton);
+            skelSafeThis->endResetModel();
+          }
 
           skelSafeThis->m_totalCount = skelSafeThis->m_allItems.size();
           skelSafeThis->m_scanProgress = skelSafeThis->m_allItems.size();
@@ -905,6 +936,33 @@ void ImageModel::selectItems(const QList<int> &indices) {
 
   if (changed) {
     emit dataChanged(createIndex(minIndex, 0), createIndex(maxIndex, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ImageModel::selectRange(int fromIndex, int toIndex, bool isSelected) {
+  int total = static_cast<int>(m_images.count());
+  int start = std::max(0, std::min(fromIndex, toIndex));
+  int end = std::min(total - 1, std::max(fromIndex, toIndex));
+  bool changed = false;
+
+  for (int i = start; i <= end; ++i) {
+    if (m_images[i].isSelected != isSelected) {
+      m_images[i].isSelected = isSelected;
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    emit dataChanged(createIndex(start, 0), createIndex(end, 0), {IsSelectedRole});
+    emit selectedCountChanged();
+  }
+}
+
+void ImageModel::toggleSelection(int index) {
+  if (index >= 0 && index < m_images.count()) {
+    m_images[index].isSelected = !m_images[index].isSelected;
+    emit dataChanged(createIndex(index, 0), createIndex(index, 0), {IsSelectedRole});
     emit selectedCountChanged();
   }
 }

@@ -30,8 +30,20 @@ Button {
             return control.isAccent ? control.accentColor : control.backgroundColor
         }
         radius: control.cornerRadius
-        border.color: flatStyle ? "transparent" : (control.hovered ? "#40ffffff" : "#20ffffff")
-        border.width: flatStyle ? 0 : 1
+        border.color: control.activeFocus ? "#38BDF8" : (control.hovered ? "#60A5FA" : (flatStyle ? "transparent" : "#20ffffff"))
+        border.width: control.activeFocus ? 2 : (flatStyle ? 0 : 1)
+
+        // Windows Explorer / Samsung Gallery Blue Focus Halo
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: -3
+            color: "transparent"
+            border.color: "#38BDF8"
+            border.width: 1.5
+            radius: control.cornerRadius + 3
+            opacity: 0.85
+            visible: control.activeFocus
+        }
 
         Behavior on color { ColorAnimation { duration: 120 } }
     }

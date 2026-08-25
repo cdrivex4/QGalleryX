@@ -17,8 +17,10 @@ class AsyncImageResponse : public QQuickImageResponse {
   Q_OBJECT
 public:
   AsyncImageResponse(const QString &id, const QSize &requestedSize);
+  ~AsyncImageResponse() override;
   QQuickTextureFactory *textureFactory() const override;
   void cancel() override;
+  QImage image() const { return m_image; }
 
 public slots:
   void handleDone(QImage image);
@@ -36,6 +38,8 @@ class AsyncImageProvider : public QQuickAsyncImageProvider {
 public:
   QQuickImageResponse *
   requestImageResponse(const QString &id, const QSize &requestedSize) override;
+
+  static void unregisterResponse(AsyncImageResponse *response);
 
   enum CacheLevel { 
       NotCached = 0, 

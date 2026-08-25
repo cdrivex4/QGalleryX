@@ -15,11 +15,14 @@ public:
   Q_INVOKABLE void openInExplorer(const QString &path);
   Q_INVOKABLE int getFileType(const QString &path);
 
-  // Generates a preview image to a temp file and returns { "path": tempFilePath, "size": bytes }
-  Q_INVOKABLE QVariantMap generateResizePreview(const QString &sourcePath, int width, int height, int quality, int compression);
+  // Generates a preview image to a temp file and returns { "path": tempFilePath, "size": bytes, "origW": w, "origH": h, "newW": nw, "newH": nh, "origDpi": dpi }
+  Q_INVOKABLE QVariantMap generateResizePreview(const QString &sourcePath, int width, int height, int quality, int compression, int dpi = 0);
+  Q_INVOKABLE qint64 getTotalSize(const QStringList &paths);
+  Q_INVOKABLE QVariantMap getImageDimensions(const QString &path);
+  Q_INVOKABLE qint64 estimateBatchSize(const QStringList &paths, int width, int height, int quality, int compression, qint64 previewSingleBytes = 0, int previewOrigW = 0, int previewOrigH = 0);
   
   // Batch process or copy
-  Q_INVOKABLE void exportImages(const QStringList &paths, const QString &destinationDir, int width, int height, int quality, int compression);
+  Q_INVOKABLE int exportImages(const QStringList &paths, const QString &destinationDir, int width, int height, int quality, int compression, const QString &suffix = QString(), int dpi = 0);
   Q_INVOKABLE void copyFiles(const QStringList &paths, const QString &destinationDir);
 
   Q_INVOKABLE bool isNetworkPath(const QString &path);
@@ -32,6 +35,9 @@ public:
   Q_INVOKABLE bool relaunchAsAdmin(const QString &folderToOpen = QString());
   Q_INVOKABLE bool relaunchAsStandardUser(const QString &folderToOpen = QString());
   Q_INVOKABLE void openNewWindow(const QString &folderPath = QString());
+  Q_INVOKABLE void setFormatEngineOverride(const QString &extension, int engine);
+  Q_INVOKABLE int getFormatEngineOverride(const QString &extension) const;
+  Q_INVOKABLE QVariantMap getAllFormatOverrides() const;
 
   static void setEngine(class QQmlEngine *engine);
 
@@ -41,6 +47,8 @@ public:
   static bool isSupportedFile(const QString &filePath);
   static FileType staticGetFileType(const QString &path);
   static bool staticIsNetworkPath(const QString &path);
+  static int staticGetFormatEngineOverride(const QString &pathOrExt);
+  static void staticSetFormatEngineOverride(const QString &ext, int engine);
 
 private:
   static class QQmlEngine *s_engine;

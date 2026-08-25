@@ -164,7 +164,7 @@ try {
     Write-Host "  -> Configuring..." -ForegroundColor Gray
     
     # Build CMake arguments
-    $cmakeConfigArgs = @("-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-S", ".", "-B", $BuildDir)
+    $cmakeConfigArgs = @("-G", "Ninja", "-DCMAKE_BUILD_TYPE=Release", "-Wno-dev", "-S", ".", "-B", $BuildDir)
     
     # Add single exe flag if requested
     if ($BuildSingleExe) {

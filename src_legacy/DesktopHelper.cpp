@@ -51,7 +51,7 @@ const QStringList& DesktopHelper::supportedExtensions() {
       // Images
       "jpg", "jpeg", "png", "webp", "heic", "heif", "tiff", "tif", "bmp", "gif", "ico", "tga", "avif", "jfif",
       // Videos
-      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogv", "mts", "m2ts", "ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
+      "mp4", "mkv", "avi", "mov", "webm", "flv", "vob", "ogv", "mts", "m2ts", "3gp", "wmv", "m4v", "mpg", "mpeg",
       // RAW Formats
       "arw", "cr2", "cr3", "dng", "nef", "nrw", "orf", "rw2", "pef", "raf", "sr2", "srf", "kdc", "dcr", "raw"
   };
@@ -166,38 +166,102 @@ DesktopHelper::FileType DesktopHelper::staticGetFileType(const QString &path) {
 #include <QTemporaryFile>
 
 
+QVariantMap DesktopHelper::getImageDimensions(const QString &path) {
+  QVariantMap result;
+  result["width"] = 0;
+  result["height"] = 0;
+  result["dpi"] = 72;
+  QString clean = path;
+  if (clean.startsWith("file:///")) clean = clean.mid(8);
+  else if (clean.startsWith("file://")) clean = clean.mid(7);
+  else if (clean.startsWith("file:")) clean = clean.mid(5);
+  clean = QDir::fromNativeSeparators(clean);
+
+  QImageReader reader(clean);
+  QSize sz = reader.size();
+  if (sz.isValid()) {
+    result["width"] = sz.width();
+    result["height"] = sz.height();
+  }
+  QImage img = reader.read();
+  if (!img.isNull()) {
+    int dpmX = img.dotsPerMeterX();
+    if (dpmX > 0) {
+      result["dpi"] = qRound(dpmX / 39.3701);
+    }
+  }
+  return result;
+}
+
+qint64 DesktopHelper::getTotalSize(const QStringList &paths) {
+  qint64 total = 0;
+  for (const QString &p : paths) {
+    total += getFileSize(p);
+  }
+  return total;
+}
+
 QVariantMap DesktopHelper::generateResizePreview(const QString &sourcePath,
                                                  int width, int height,
-                                                 int quality, int compression) {
+                                                 int quality, int compression,
+                                                 int dpi) {
   QVariantMap result;
   result["path"] = "";
   result["size"] = 0;
+  result["origW"] = 0;
+  result["origH"] = 0;
+  result["newW"] = 0;
+  result["newH"] = 0;
+  result["origDpi"] = 72;
 
-  QImageReader reader(sourcePath);
+  QString cleanPath = sourcePath;
+  if (cleanPath.startsWith("file:///")) cleanPath = cleanPath.mid(8);
+  else if (cleanPath.startsWith("file://")) cleanPath = cleanPath.mid(7);
+  else if (cleanPath.startsWith("file:")) cleanPath = cleanPath.mid(5);
+  cleanPath = QDir::fromNativeSeparators(cleanPath);
+
+  QImageReader reader(cleanPath);
+  reader.setAutoTransform(true);
   if (!reader.canRead())
     return result;
 
   QSize originalSize = reader.size();
+  result["origW"] = originalSize.width();
+  result["origH"] = originalSize.height();
+
   QSize targetSize = originalSize;
   if (width > 0 && height > 0) {
     targetSize.scale(width, height, Qt::KeepAspectRatio);
     reader.setScaledSize(targetSize);
   }
+  result["newW"] = targetSize.width();
+  result["newH"] = targetSize.height();
 
   QImage img = reader.read();
   if (img.isNull())
     return result;
 
+  int dpmX = img.dotsPerMeterX();
+  if (dpmX > 0) {
+    result["origDpi"] = qRound(dpmX / 39.3701);
+  }
+
   QSettings settings("SamsungClone", "VirtualRotations");
-  int virtualRot = settings.value(sourcePath, 0).toInt();
+  int virtualRot = settings.value(cleanPath, 0).toInt();
   if (virtualRot != 0) {
     QTransform t;
     t.rotate(virtualRot);
     img = img.transformed(t, Qt::SmoothTransformation);
   }
 
-  QString tempPath = QDir::tempPath() + "/preview_cache_" +
-                     QString::number(qHash(sourcePath)) +
+  if (dpi > 0) {
+    int dpm = qRound(dpi * 39.3701);
+    img.setDotsPerMeterX(dpm);
+    img.setDotsPerMeterY(dpm);
+  }
+
+  QString tempPath = QDir::tempPath() + "/preview_resize_" +
+                     QString::number(qHash(cleanPath)) +
                      (quality == 101 ? ".png" : ".jpg");
   QImageWriter writer(tempPath);
   if (quality == 101) {
@@ -205,34 +269,84 @@ QVariantMap DesktopHelper::generateResizePreview(const QString &sourcePath,
     writer.setQuality(100);
   } else {
     writer.setFormat("jpg");
-    writer.setQuality(quality);
+    writer.setQuality(std::clamp(quality, 1, 100));
   }
   if (compression >= 0) {
     writer.setCompression(compression);
   }
 
   if (writer.write(img)) {
-    result["path"] = "file:///" + tempPath;
+    result["path"] = "file:///" + QDir::fromNativeSeparators(tempPath);
     result["size"] = QFileInfo(tempPath).size();
   }
   return result;
 }
 
-void DesktopHelper::exportImages(const QStringList &paths,
-                                 const QString &destinationDir, int width,
-                                 int height, int quality, int compression) {
+qint64 DesktopHelper::estimateBatchSize(const QStringList &paths, int width, int height,
+                                         int quality, int compression,
+                                         qint64 previewSingleBytes,
+                                         int previewOrigW, int previewOrigH) {
+  if (paths.isEmpty()) return 0;
+  
+  double bpp = 0.09; // Default ~0.72 bits/pixel for standard JPEG Q=75-80
+  if (previewSingleBytes > 0 && previewOrigW > 0 && previewOrigH > 0) {
+    QSize scaledPrev(previewOrigW, previewOrigH);
+    if (width > 0 && height > 0) scaledPrev.scale(width, height, Qt::KeepAspectRatio);
+    double prevPixels = std::max(1, scaledPrev.width() * scaledPrev.height());
+    bpp = (double)previewSingleBytes / prevPixels;
+  } else {
+    if (quality == 101) bpp = 0.65; // Lossless PNG
+    else bpp = std::max(0.03, (quality / 100.0) * 0.14);
+  }
+
+  qint64 totalEst = 0;
+  for (const QString &rawPath : paths) {
+    QString p = rawPath;
+    if (p.startsWith("file:///")) p = p.mid(8);
+    else if (p.startsWith("file://")) p = p.mid(7);
+    else if (p.startsWith("file:")) p = p.mid(5);
+    p = QDir::fromNativeSeparators(p);
+
+    QImageReader reader(p);
+    QSize origSz = reader.size();
+    if (origSz.isValid() && origSz.width() > 0 && origSz.height() > 0) {
+      QSize targetSz = origSz;
+      if (width > 0 && height > 0) targetSz.scale(width, height, Qt::KeepAspectRatio);
+      qint64 imgBytes = std::max((qint64)10240, (qint64)std::round(targetSz.width() * targetSz.height() * bpp));
+      totalEst += imgBytes;
+    } else {
+      totalEst += std::max((qint64)15000, (qint64)(getFileSize(p) * 0.3));
+    }
+  }
+  return totalEst;
+}
+
+int DesktopHelper::exportImages(const QStringList &paths,
+                                const QString &destinationDir, int width,
+                                int height, int quality, int compression,
+                                const QString &suffix, int dpi) {
   QDir dir(destinationDir);
   if (!dir.exists())
     dir.mkpath(".");
 
-  for (const QString &path : paths) {
+  int count = 0;
+  for (const QString &rawPath : paths) {
+    QString path = rawPath;
+    if (path.startsWith("file:///")) path = path.mid(8);
+    else if (path.startsWith("file://")) path = path.mid(7);
+    else if (path.startsWith("file:")) path = path.mid(5);
+    path = QDir::fromNativeSeparators(path);
+
     QFileInfo fi(path);
-    QString destPath = dir.absoluteFilePath(fi.fileName());
-    if (quality == 101) {
-      destPath = dir.absoluteFilePath(fi.baseName() + ".png");
-    }
+    QString baseName = fi.baseName();
+    // When compressing/resizing, output real JPEG (.jpg) unless lossless PNG is explicitly chosen
+    QString ext = (quality == 101) ? "png" : "jpg";
+
+    QString fileName = baseName + (suffix.isEmpty() ? "" : suffix) + "." + ext;
+    QString destPath = dir.absoluteFilePath(fileName);
 
     QImageReader reader(path);
+    reader.setAutoTransform(true);
     if (reader.canRead()) {
       QSize originalSize = reader.size();
       QSize targetSize = originalSize;
@@ -251,19 +365,29 @@ void DesktopHelper::exportImages(const QStringList &paths,
           img = img.transformed(t, Qt::SmoothTransformation);
         }
 
+        if (dpi > 0) {
+          int dpm = qRound(dpi * 39.3701);
+          img.setDotsPerMeterX(dpm);
+          img.setDotsPerMeterY(dpm);
+        }
+
         QImageWriter writer(destPath);
         if (quality == 101) {
           writer.setFormat("png");
           writer.setQuality(100);
         } else {
-          writer.setQuality(quality);
+          writer.setFormat("jpg");
+          writer.setQuality(std::clamp(quality, 1, 100));
         }
         if (compression >= 0)
           writer.setCompression(compression);
-        writer.write(img);
+        if (writer.write(img)) {
+          count++;
+        }
       }
     }
   }
+  return count;
 }
 
 void DesktopHelper::copyFiles(const QStringList &paths,
@@ -562,7 +686,15 @@ void DesktopHelper::openNewWindow(const QString &folderPath) {
     qWarning() << "[DesktopHelper] Cannot open new window: QQmlEngine not set!";
     return;
   }
-  QQmlComponent component(s_engine, QUrl("qrc:/QGalleryX/resources/qml_legacy/Main.qml"));
+
+  QUrl qmlUrl;
+  if (QFile::exists(":/ScrollBench/qml/Main.qml")) {
+    qmlUrl = QUrl("qrc:/ScrollBench/qml/Main.qml");
+  } else {
+    qmlUrl = QUrl("qrc:/QGalleryX/resources/qml_legacy/Main.qml");
+  }
+
+  QQmlComponent component(s_engine, qmlUrl);
   if (component.isReady()) {
     QObject *windowObj = component.create(s_engine->rootContext());
     if (windowObj) {
@@ -591,5 +723,49 @@ void DesktopHelper::openNewWindow(const QString &folderPath) {
     qWarning() << "[DesktopHelper] Failed to create new window component:" << component.errorString();
   }
 }
+
+void DesktopHelper::setFormatEngineOverride(const QString &extension, int engine) {
+  staticSetFormatEngineOverride(extension, engine);
+}
+
+int DesktopHelper::getFormatEngineOverride(const QString &extension) const {
+  return staticGetFormatEngineOverride(extension);
+}
+
+QVariantMap DesktopHelper::getAllFormatOverrides() const {
+  QSettings settings("SamsungClone", "FormatOverrides");
+  QVariantMap map;
+  for (const QString &key : settings.allKeys()) {
+    map[key] = settings.value(key).toInt();
+  }
+  return map;
+}
+
+int DesktopHelper::staticGetFormatEngineOverride(const QString &pathOrExt) {
+  QString ext = pathOrExt;
+  int dot = ext.lastIndexOf('.');
+  if (dot >= 0) ext = ext.mid(dot + 1);
+  ext = ext.trimmed().toLower();
+  if (ext.isEmpty()) return 0;
+  QSettings settings("SamsungClone", "FormatOverrides");
+  return settings.value(ext, 0).toInt();
+}
+
+void DesktopHelper::staticSetFormatEngineOverride(const QString &pathOrExt, int engine) {
+  QString ext = pathOrExt;
+  int dot = ext.lastIndexOf('.');
+  if (dot >= 0) ext = ext.mid(dot + 1);
+  ext = ext.trimmed().toLower();
+  if (ext.isEmpty()) return;
+  QSettings settings("SamsungClone", "FormatOverrides");
+  if (engine <= 0) {
+    settings.remove(ext);
+    qDebug() << "[FormatOverrides] Cleared override for extension:" << ext;
+  } else {
+    settings.setValue(ext, engine);
+    qDebug() << "[FormatOverrides] Set override for extension:" << ext << "-> Engine:" << engine;
+  }
+}
+
 
 

@@ -1,4 +1,5 @@
 #include "AsyncImageProvider.h"
+#include "BC1Engine.h"
 #include "../src/FileCacheManager.h"
 #include "../src/PassiveReadLatencyGuard.h"
 #include "DesktopHelper.h"
@@ -68,15 +69,38 @@ AsyncImageResponse::AsyncImageResponse(const QString &id,
   }
 }
 
+AsyncImageResponse::~AsyncImageResponse() {
+  if (m_cancelled) {
+    m_cancelled->store(true);
+  }
+  AsyncImageProvider::unregisterResponse(this);
+}
+
 QQuickTextureFactory *AsyncImageResponse::textureFactory() const {
   return QQuickTextureFactory::textureFactoryForImage(m_image);
 }
 
-void AsyncImageResponse::cancel() { *m_cancelled = true; }
+void AsyncImageResponse::cancel() { 
+  if (m_cancelled) {
+    m_cancelled->store(true); 
+  }
+}
 
 void AsyncImageResponse::handleDone(QImage image) {
   m_image = image;
   emit finished();
+}
+
+void AsyncImageProvider::unregisterResponse(AsyncImageResponse *response) {
+  QMutexLocker locker(&m_mutex);
+  for (auto it = m_pendingTasks.begin(); it != m_pendingTasks.end(); ) {
+    it.value().removeAll(response);
+    if (it.value().isEmpty()) {
+      it = m_pendingTasks.erase(it);
+    } else {
+      ++it;
+    }
+  }
 }
 
 void AsyncImageProvider::crawlDecodeToL2(const QString &path,
@@ -145,21 +169,21 @@ void AsyncImageProvider::crawlDecodeToL2(const QString &path,
     }
     if (reader.canRead()) image = reader.read();
     if (image.isNull()) {
+      // Fallback: Certain PNGs, indexed/palette images fail when setScaledSize is pre-configured.
+      QImageReader fallbackReader(path);
+      fallbackReader.setAutoTransform(true);
+      if (fallbackReader.canRead()) image = fallbackReader.read();
+    }
+    if (image.isNull()) {
       // Fallback: FFmpeg can decode formats that QImageReader cannot (e.g. old-style JPEG, TIFF embedded)
       VideoThumbnailer thumbnailer;
       image = thumbnailer.extractFrame(path, 0, requestedSize, nullptr);
     }
   }
 
-  // Fallback for null/failed extractions — create placeholder tile so L2 persists it
+  // Never write failed/null placeholders into L2 disk cache!
   if (image.isNull()) {
-    QSize sz = requestedSize.isValid() ? requestedSize : QSize(200, 200);
-    image = QImage(sz, QImage::Format_RGB32);
-    image.fill(QColor("#222222"));
-    QPainter p(&image);
-    p.setPen(QColor("#888888"));
-    p.setFont(QFont("Segoe UI", 10, QFont::Bold));
-    p.drawText(image.rect(), Qt::AlignCenter, isVideo ? "▶ VID" : "ERR");
+    return;
   }
 
   if (!image.isNull()) {
@@ -191,11 +215,17 @@ AsyncImageProvider::requestImageResponse(const QString &id,
   cleanId = QUrl::fromPercentEncoding(cleanId.toUtf8());
 
   int modelIdx = -1;
+  int engineOverride = 0;
   int qIdx = cleanId.indexOf('?');
   if (qIdx != -1) {
-    int idxPos = cleanId.indexOf("idx=");
+    QString query = cleanId.mid(qIdx + 1);
+    int idxPos = query.indexOf("idx=");
     if (idxPos != -1) {
-      modelIdx = cleanId.mid(idxPos + 4).toInt();
+      modelIdx = query.mid(idxPos + 4).split('&').first().toInt();
+    }
+    int engPos = query.indexOf("engine=");
+    if (engPos != -1) {
+      engineOverride = query.mid(engPos + 7).split('&').first().toInt();
     }
     cleanId = cleanId.left(qIdx);
   }
@@ -229,23 +259,26 @@ AsyncImageProvider::requestImageResponse(const QString &id,
 
   auto *response = new AsyncImageResponse(cleanId, requestedSize);
 
-  // 1. Check L1 RAM Cache Synchronously (0ms instant hit)
-  QImage cached = getCachedImage(cleanId, requestedSize);
-  if (!cached.isNull()) {
-    int hits = s_l1Hits.fetch_add(1, std::memory_order_relaxed) + 1;
-    if (s_logLevel > 1 || hits % 50 == 0 || hits <= 5) {
-      qDebug() << "[Cache] L1 RAM HIT (" << hits << "hits)" << QFileInfo(cleanId).fileName();
+  // 1. Check L1 RAM Cache Synchronously (0ms instant hit) — skip when user explicitly forces an engine override
+  if (engineOverride == 0) {
+    QImage cached = getCachedImage(cleanId, requestedSize);
+    if (!cached.isNull()) {
+      int hits = s_l1Hits.fetch_add(1, std::memory_order_relaxed) + 1;
+      if (s_logLevel > 1 || hits % 50 == 0 || hits <= 5) {
+        qDebug() << "[Cache] L1 RAM HIT (" << hits << "hits)" << QFileInfo(cleanId).fileName();
+      }
+      // Individual, unbatched delivery to Qt Quick render engine
+      QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
+                                Q_ARG(QImage, cached));
+      return response;
     }
-    // Individual, unbatched delivery to Qt Quick render engine
-    QMetaObject::invokeMethod(response, "handleDone", Qt::QueuedConnection,
-                              Q_ARG(QImage, cached));
-    return response;
   }
 
   // 2. L2 Memory-Mapped Disk Cache and RAW/Video/Image Decoding are strictly offloaded
   // to TaskScheduler worker threads to guarantee 0ms main GUI thread decompression latency.
 
-  QString key = cleanId + "_" + QString::number(requestedSize.width()) + "x" +
+  QString key = cleanId + (engineOverride > 0 ? ("_eng" + QString::number(engineOverride)) : "") +
+                "_" + QString::number(requestedSize.width()) + "x" +
                 QString::number(requestedSize.height());
   {
     QMutexLocker locker(&m_mutex);
@@ -339,7 +372,7 @@ QImage AsyncImageProvider::getCachedImage(const QString &id,
   if (m_cache.contains(key)) {
     QImage *img = m_cache.object(key);
     if (img && !img->isNull()) {
-      return img->copy(); // Deep copy prevents crash if m_cache is cleared on another thread
+      return *img; // Zero-copy implicit sharing
     }
   }
   return QImage();
@@ -381,7 +414,12 @@ void AsyncImageProvider::promoteL2ToL1(const QString &path,
       FileCacheManager::instance().getCachedData(path, requestedSize);
   if (!mmapData.isEmpty()) {
     QImage diskImg;
-    if (diskImg.loadFromData(mmapData)) {
+    if (mmapData.startsWith("BC1_") && requestedSize.isValid()) {
+      diskImg = BC1Engine::decompressImage(mmapData.mid(4), requestedSize.width(), requestedSize.height());
+    } else {
+      diskImg.loadFromData(mmapData);
+    }
+    if (!diskImg.isNull()) {
       insertCachedImage(path, diskImg, requestedSize);
     }
   }
@@ -443,9 +481,19 @@ void AsyncImageProvider::processImageTask(
 
   // Clean UNC network paths and file:/// URIs
   QString path = id;
+  int engineOverride = 0;
   int qIdx = path.indexOf('?');
   if (qIdx != -1) {
+    QString query = path.mid(qIdx + 1);
+    int engPos = query.indexOf("engine=");
+    if (engPos != -1) {
+      engineOverride = query.mid(engPos + 7).split('&').first().toInt();
+    }
     path = path.left(qIdx);
+  }
+
+  if (engineOverride == 0) {
+    engineOverride = DesktopHelper::staticGetFormatEngineOverride(path);
   }
 
   if (path.startsWith("file:", Qt::CaseInsensitive)) {
@@ -463,7 +511,8 @@ void AsyncImageProvider::processImageTask(
   path = QDir::cleanPath(path);
   path = QDir::toNativeSeparators(path);
 
-  QString taskKey = path + "_" + QString::number(requestedSize.width()) + "x" +
+  QString taskKey = path + (engineOverride > 0 ? ("_eng" + QString::number(engineOverride)) : "") +
+                    "_" + QString::number(requestedSize.width()) + "x" +
                     QString::number(requestedSize.height());
 
   if (cancelled && cancelled->load() && !isLowPriority) {
@@ -510,21 +559,28 @@ void AsyncImageProvider::processImageTask(
   CoInitialize(NULL);
 #endif
 
-  // --- Disk Cache Hit Check ---
-  QByteArray mmapData =
-      FileCacheManager::instance().getCachedData(path, requestedSize);
-  if (!mmapData.isEmpty()) {
-    QImage cachedImg;
-    if (cachedImg.loadFromData(mmapData)) {
-      s_l2Hits.fetch_add(1, std::memory_order_relaxed);
-      qDebug() << "[Cache] L2 HIT" << QFileInfo(path).fileName() << "("
-               << mmapData.size() / 1024 << "KB disk)";
-      insertCachedImage(id, cachedImg, requestedSize);
-      deliverResult(cachedImg);
+  // --- Disk Cache Hit Check (only when not explicitly forcing an engine override) ---
+  if (engineOverride == 0) {
+    QByteArray mmapData =
+        FileCacheManager::instance().getCachedData(path, requestedSize);
+    if (!mmapData.isEmpty()) {
+      QImage cachedImg;
+      if (mmapData.startsWith("BC1_") && requestedSize.isValid()) {
+        cachedImg = BC1Engine::decompressImage(mmapData.mid(4), requestedSize.width(), requestedSize.height());
+      } else {
+        cachedImg.loadFromData(mmapData);
+      }
+      if (!cachedImg.isNull()) {
+        s_l2Hits.fetch_add(1, std::memory_order_relaxed);
+        qDebug() << "[Cache] L2 HIT" << QFileInfo(path).fileName() << "("
+                 << mmapData.size() / 1024 << "KB disk" << (mmapData.startsWith("BC1_") ? "BC1-SIMD)" : "JPG)");
+        insertCachedImage(id, cachedImg, requestedSize);
+        deliverResult(cachedImg);
 #ifdef Q_OS_WIN
-      CoUninitialize();
+        CoUninitialize();
 #endif
-      return;
+        return;
+      }
     }
   }
 
@@ -546,14 +602,63 @@ void AsyncImageProvider::processImageTask(
   bool isRaw = (type == DesktopHelper::Raw);
 
   s_misses.fetch_add(1, std::memory_order_relaxed);
-  qDebug() << "[Cache] MISS - decoding"
+  qDebug() << "[Cache] MISS - decoding [Engine:" << engineOverride << "]"
            << (isRaw     ? "RAW"
                : isVideo ? "Video/HEIC"
                          : "JPEG")
            << QFileInfo(path).fileName();
 
   // --- Loading Logic ---
-  if (isRaw) {
+  if (engineOverride == 1) {
+    // Forced Qt Native (QImageReader)
+    QImageReader reader(path);
+    reader.setAutoTransform(true);
+    if (requestedSize.isValid() && requestedSize.width() > 0) {
+      reader.setScaledSize(requestedSize);
+    }
+    if (reader.canRead()) {
+      image = reader.read();
+    }
+  } else if (engineOverride == 2) {
+    // Forced FFmpeg (VideoThumbnailer)
+    s_videoSemaphore.acquire(1);
+    QSemaphoreReleaser releaser(s_videoSemaphore);
+    VideoThumbnailer thumbnailer;
+    image = thumbnailer.extractFrame(path, 0, requestedSize, cancelled.get());
+  } else if (engineOverride == 3) {
+    // Forced LibRaw
+    s_rawSemaphore.acquire(1);
+    QSemaphoreReleaser releaser(s_rawSemaphore);
+    try {
+      LibRaw RawProcessor;
+      struct RawCleanup { LibRaw &p; ~RawCleanup() { p.recycle(); } } cleanup{RawProcessor};
+      if (RawProcessor.open_file(path.toLocal8Bit().constData()) == LIBRAW_SUCCESS) {
+        if (RawProcessor.unpack_thumb() == LIBRAW_SUCCESS) {
+          libraw_processed_image_t *thumb = RawProcessor.dcraw_make_mem_thumb();
+          if (thumb) {
+            struct ThumbCleanup { libraw_processed_image_t *t; ~ThumbCleanup() { if (t) LibRaw::dcraw_clear_mem(t); } } tc{thumb};
+            if (thumb->type == LIBRAW_IMAGE_JPEG)
+              image.loadFromData((const uchar *)thumb->data, thumb->data_size, "JPEG");
+            else if (thumb->type == LIBRAW_IMAGE_BITMAP) {
+              QImage rawImg((const uchar *)thumb->data, thumb->width, thumb->height, thumb->width * 3, QImage::Format_RGB888);
+              image = rawImg.convertToFormat(QImage::Format_RGB32);
+            }
+          }
+        }
+        if (image.isNull() && RawProcessor.unpack() == LIBRAW_SUCCESS) {
+          RawProcessor.dcraw_process();
+          libraw_processed_image_t *img = RawProcessor.dcraw_make_mem_image();
+          if (img) {
+            if (img->type == LIBRAW_IMAGE_BITMAP) {
+              QImage rawImg((const uchar *)img->data, img->width, img->height, img->width * 3, QImage::Format_RGB888);
+              image = rawImg.convertToFormat(QImage::Format_RGB32);
+            }
+            LibRaw::dcraw_clear_mem(img);
+          }
+        }
+      }
+    } catch (...) {}
+  } else if (isRaw) {
     s_rawSemaphore.acquire(1);
     QSemaphoreReleaser releaser(s_rawSemaphore);
 
@@ -734,7 +839,7 @@ void AsyncImageProvider::processImageTask(
     p.setPen(QColor("#888888"));
     p.setFont(QFont("Segoe UI", 10, QFont::Bold));
     p.drawText(image.rect(), Qt::AlignCenter, isVideo ? "▶ VID" : "ERR");
-    cacheable = true;
+    cacheable = false; // Do not poison permanent disk cache with unreadable/permission-denied files
   }
 
   QSettings settings("SamsungClone", "VirtualRotations");
@@ -767,7 +872,7 @@ void AsyncImageProvider::processImageTask(
     QByteArray ba;
     QBuffer buffer(&ba);
     buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "JPG", 85);
+    image.save(&buffer, "JPG", 82);
     FileCacheManager::instance().registerCachedData(path, requestedSize, ba);
   }
 

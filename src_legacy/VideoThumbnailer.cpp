@@ -55,7 +55,17 @@ static void ffmpegLogCallback(void *ptr, int level, const char *fmt,
 
 static enum AVPixelFormat get_hw_format(AVCodecContext *ctx,
                                         const enum AVPixelFormat *pix_fmts) {
-  return AV_PIX_FMT_NONE;
+  const enum AVPixelFormat *p;
+  // Software Fallback: seamlessly decode on CPU when GPU lacks ASIC or hw fails
+  for (p = pix_fmts; *p != -1; p++) {
+    if (*p != AV_PIX_FMT_D3D11 && *p != AV_PIX_FMT_DXVA2_VLD &&
+        *p != AV_PIX_FMT_CUDA && *p != AV_PIX_FMT_VAAPI &&
+        *p != AV_PIX_FMT_VIDEOTOOLBOX && *p != AV_PIX_FMT_QSV &&
+        *p != AV_PIX_FMT_D3D12) {
+      return *p;
+    }
+  }
+  return pix_fmts[0];
 }
 
 struct TimeoutData {
@@ -163,7 +173,7 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
 
   std::string pathStr = path.toStdString();
 
-  TimeoutData timeoutData = {QElapsedTimer(), cancelled, 1000}; // 1s timeout
+  TimeoutData timeoutData = {QElapsedTimer(), cancelled, 5000}; // 5s timeout
   timeoutData.timer.start();
 
   cleanup.fmtCtx = avformat_alloc_context();
@@ -237,9 +247,9 @@ QImage VideoThumbnailer::extractFrame(const QString &path, int timeMs,
   cleanup.codecCtx = avcodec_alloc_context3(decoder);
   avcodec_parameters_to_context(cleanup.codecCtx, stream->codecpar);
   
-  // Restrict threads to 1 per thumbnail to prevent worker thread starvation / CPU death
-  cleanup.codecCtx->thread_count = 1;
-  cleanup.codecCtx->thread_type = 0;
+  // Use up to 2 threads with slice threading to allow AV1 (libdav1d) and HEVC decoders to decode frames reliably
+  cleanup.codecCtx->thread_count = 2;
+  cleanup.codecCtx->thread_type = FF_THREAD_SLICE;
 
   if (avcodec_open2(cleanup.codecCtx, decoder, nullptr) < 0)
     return QImage();

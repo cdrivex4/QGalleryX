@@ -11,7 +11,7 @@ QVariantList GroupedProxyModel::getYearDistribution() const {
     return list;
 
   int lastYear = -1;
-  int yearRole = ImageModel::SectionYearRole;
+  ImageModel *im = qobject_cast<ImageModel *>(m_sourceModel);
 
   for (int i = 0; i < m_index.count(); ++i) {
     const IndexItem &item = m_index[i];
@@ -19,11 +19,15 @@ QVariantList GroupedProxyModel::getYearDistribution() const {
     if (item.type == RowItem) {
       int sourceIndex = item.sourceStartIndex;
       if (sourceIndex >= 0 && sourceIndex < m_sourceModel->rowCount()) {
-        QModelIndex srcIdx = m_sourceModel->index(sourceIndex, 0);
-        QVariant yearData = m_sourceModel->data(srcIdx, yearRole);
-        int year = yearData.toInt();
+        int year = 0;
+        if (im) {
+          year = static_cast<int>(im->getGroupKey(sourceIndex, ImageModel::SectionYearRole));
+        } else {
+          QModelIndex srcIdx = m_sourceModel->index(sourceIndex, 0);
+          year = m_sourceModel->data(srcIdx, ImageModel::SectionYearRole).toInt();
+        }
 
-        if (year != lastYear && year != 0) {
+        if (year != lastYear && year > 1900) {
           QVariantMap map;
           map["year"] = year;
           map["proxyIndex"] = i;
@@ -227,6 +231,44 @@ int GroupedProxyModel::getProxyRowForSourceIndex(int sourceIndex) const {
     }
   }
   return -1;
+}
+
+int GroupedProxyModel::getSourceIndexAbove(int sourceIndex) const {
+  int currentRow = getProxyRowForSourceIndex(sourceIndex);
+  if (currentRow < 0) return std::max(0, sourceIndex - m_columns);
+
+  const IndexItem &curItem = m_index[currentRow];
+  int col = sourceIndex - curItem.sourceStartIndex;
+
+  // Search backwards for previous RowItem
+  for (int r = currentRow - 1; r >= 0; --r) {
+    if (m_index[r].type == RowItem) {
+      const IndexItem &prevRow = m_index[r];
+      int targetCol = std::min(col, prevRow.count - 1);
+      return prevRow.sourceStartIndex + std::max(0, targetCol);
+    }
+  }
+  return 0; // Already at the top
+}
+
+int GroupedProxyModel::getSourceIndexBelow(int sourceIndex) const {
+  if (!m_sourceModel) return sourceIndex;
+  int totalCount = m_sourceModel->rowCount();
+  int currentRow = getProxyRowForSourceIndex(sourceIndex);
+  if (currentRow < 0) return std::min(totalCount - 1, sourceIndex + m_columns);
+
+  const IndexItem &curItem = m_index[currentRow];
+  int col = sourceIndex - curItem.sourceStartIndex;
+
+  // Search forwards for next RowItem
+  for (int r = currentRow + 1; r < m_index.count(); ++r) {
+    if (m_index[r].type == RowItem) {
+      const IndexItem &nextRow = m_index[r];
+      int targetCol = std::min(col, nextRow.count - 1);
+      return nextRow.sourceStartIndex + std::max(0, targetCol);
+    }
+  }
+  return std::max(0, totalCount - 1); // Already at the bottom
 }
 
 void GroupedProxyModel::onSourceModelReset() { rebuildIndex(); }

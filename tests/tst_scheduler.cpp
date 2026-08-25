@@ -1,4 +1,4 @@
-#include "../src/TaskScheduler.h"
+#include "../src_legacy/TaskScheduler.h"
 #include <QSignalSpy>
 #include <QThread>
 #include <QtTest>

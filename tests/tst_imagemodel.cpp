@@ -1,4 +1,5 @@
-#include "../src/ImageModel.h"
+#include "../src_legacy/ImageModel.h"
+#include "../src_legacy/VideoThumbnailer.h"
 #include <QSignalSpy>
 #include <QtTest>
 
@@ -68,6 +69,63 @@ private slots:
 
     QVERIFY(path0.contains("test"));
     QVERIFY(path1.contains("test"));
+  }
+
+  void testAv1ThumbnailExtraction() {
+    VideoThumbnailer thumbnailer;
+    QString path = "d:/Dev/QGalleryX/test_av1.mp4";
+    QVERIFY(QFile::exists(path));
+
+    QImage frame = thumbnailer.extractFrame(path, 0, QSize(256, 256));
+    QVERIFY(!frame.isNull());
+    QVERIFY(frame.width() > 0);
+    QVERIFY(frame.height() > 0);
+    fprintf(stderr, "[VERIFY] AV1 Decode: SUCCESS (%dx%d)\n", frame.width(), frame.height());
+  }
+
+  void testH264ThumbnailExtraction() {
+    VideoThumbnailer thumbnailer;
+    QString path = "d:/Dev/QGalleryX/test_h264.mp4";
+    QVERIFY(QFile::exists(path));
+
+    QImage frame = thumbnailer.extractFrame(path, 0, QSize(256, 256));
+    QVERIFY(!frame.isNull());
+    QVERIFY(frame.width() > 0);
+    fprintf(stderr, "[VERIFY] H.264/AVC Decode: SUCCESS (%dx%d)\n", frame.width(), frame.height());
+  }
+
+  void testVp9ThumbnailExtraction() {
+    VideoThumbnailer thumbnailer;
+    QString path = "d:/Dev/QGalleryX/test_vp9.webm";
+    QVERIFY(QFile::exists(path));
+
+    QImage frame = thumbnailer.extractFrame(path, 0, QSize(256, 256));
+    QVERIFY(!frame.isNull());
+    QVERIFY(frame.width() > 0);
+    fprintf(stderr, "[VERIFY] VP9 (WebM) Decode: SUCCESS (%dx%d)\n", frame.width(), frame.height());
+  }
+
+  void testHevcThumbnailExtraction() {
+    VideoThumbnailer thumbnailer;
+    QString path = "d:/Dev/QGalleryX/test_hevc.mp4";
+    QVERIFY(QFile::exists(path));
+
+    QImage frame = thumbnailer.extractFrame(path, 0, QSize(256, 256));
+    QVERIFY(!frame.isNull());
+    QVERIFY(frame.width() > 0);
+    fprintf(stderr, "[VERIFY] HEVC/H.265 Decode: SUCCESS (%dx%d)\n", frame.width(), frame.height());
+  }
+
+  void testUserAv1File() {
+    QString path = "C:/Users/curtis/Desktop/numpsy/files/jackerman/Random file.mp4";
+    if (QFile::exists(path)) {
+      VideoThumbnailer thumbnailer;
+      QImage frame = thumbnailer.extractFrame(path, 0, QSize(256, 256));
+      QVERIFY(!frame.isNull());
+      QVERIFY(frame.width() > 0);
+      QVERIFY(frame.height() > 0);
+      fprintf(stderr, "[VERIFY] User File (jackerman/Random file.mp4): SUCCESS (%dx%d)\n", frame.width(), frame.height());
+    }
   }
 };
 

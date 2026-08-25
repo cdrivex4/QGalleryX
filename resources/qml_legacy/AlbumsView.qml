@@ -7,18 +7,31 @@ StackView {
     id: stack
     initialItem: albumGridComponent
     clip: true
+    focus: true
+    activeFocusOnTab: true
+
+    onVisibleChanged: {
+        if (visible && activeGrid) {
+            activeGrid.forceActiveFocus()
+        }
+    }
     
     signal imageClicked(int index, var model)
     
     property var model
     property real cellSize: 100 // Controllable from outside via slider
     property var activeModel: stack.depth === 1 ? model : (stack.currentItem ? stack.currentItem.activeModel : null)
-    property var activeGrid: stack.currentItem ? (stack.currentItem.grid || stack.currentItem.activeGrid) : null
+    property var activeGrid: (stack.depth === 1 && stack.currentItem) ? stack.currentItem.grid : (stack.currentItem ? (stack.currentItem.grid || stack.currentItem.activeGrid) : null)
     
     Component {
         id: albumGridComponent
         Item {
             property alias grid: grid
+            focus: true
+            onVisibleChanged: {
+                if (visible) grid.forceActiveFocus()
+            }
+
             GridView {
                 id: grid
                 anchors.fill: parent
@@ -28,7 +41,10 @@ StackView {
                 focus: true
                 keyNavigationEnabled: false
 
-                Component.onCompleted: grid.forceActiveFocus()
+                Component.onCompleted: {
+                    if (grid.currentIndex < 0) grid.currentIndex = 0
+                    grid.forceActiveFocus()
+                }
 
                 Keys.onPressed: (event) => {
                     var cols = Math.max(1, Math.floor(grid.width / grid.cellWidth))
@@ -102,7 +118,7 @@ StackView {
                         anchors.margins: 10
                         color: index === grid.currentIndex ? "#2A3B55" : "#222"
                         radius: 8
-                        border.color: index === grid.currentIndex ? "#38BDF8" : "transparent"
+                        border.color: index === grid.currentIndex ? "#00E5FF" : "transparent"
                         border.width: index === grid.currentIndex ? 3 : 0
 
                         Rectangle {
@@ -112,7 +128,7 @@ StackView {
                             border.color: "#FFFFFF"
                             border.width: 1
                             radius: 10
-                            opacity: 0.6
+                            opacity: 0.85
                             visible: index === grid.currentIndex
                         }
 
@@ -190,6 +206,28 @@ StackView {
                         }
                     }
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    propagateComposedEvents: true
+
+                    onWheel: (wheel) => {
+                        if (wheel.modifiers & Qt.ControlModifier) {
+                            if (wheel.angleDelta.y > 0) {
+                                stack.cellSize = Math.min(250, stack.cellSize + 15)
+                            } else {
+                                stack.cellSize = Math.max(80, stack.cellSize - 15)
+                            }
+                            if (typeof albumSizeSlider !== "undefined") {
+                                albumSizeSlider.value = stack.cellSize
+                            }
+                            wheel.accepted = true
+                        } else {
+                            wheel.accepted = false
+                        }
+                    }
+                }
             }
             
             DateScrubber {
@@ -218,7 +256,19 @@ StackView {
             property string folderPath
             property string albumName
             property var activeModel: innerGalleryLoader.item ? innerGalleryLoader.item.model : null
-            property var activeGrid: innerGalleryLoader.item ? (innerGalleryLoader.item.grid || innerGalleryLoader.item.gridView) : null
+            property var activeGrid: innerGalleryLoader.item ? (innerGalleryLoader.item.grid || innerGalleryLoader.item.gridView || innerGalleryLoader.item) : null
+            focus: true
+
+            Keys.onPressed: (event) => {
+                if (event.key === Qt.Key_Escape || event.key === Qt.Key_Backspace) {
+                    if (detailRoot.activeModel && detailRoot.activeModel.selectedCount > 0) {
+                        detailRoot.activeModel.clearSelection()
+                    } else {
+                        stack.pop()
+                    }
+                    event.accepted = true
+                }
+            }
             
             ColumnLayout {
                 anchors.fill: parent
@@ -259,7 +309,13 @@ StackView {
                     Loader {
                         id: innerGalleryLoader
                         anchors.fill: parent
+                        focus: true
                         source: window.useTiles ? "GalleryViewTiles.qml" : "GalleryViewSemantic.qml"
+
+                        onLoaded: {
+                            if (item && item.grid) item.grid.forceActiveFocus()
+                            else if (item && item.gridView) item.gridView.forceActiveFocus()
+                        }
                         
                         Binding {
                             target: innerGalleryLoader.item

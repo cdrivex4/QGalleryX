@@ -150,11 +150,23 @@ Dialog {
         Button {
             text: "Cancel"
             Layout.fillWidth: true
-            Layout.preferredHeight: 40
-            flat: true
-            background: Rectangle { color: parent.hovered ? "#2a2a2a" : "transparent"; radius: 6 }
-            contentItem: Text { text: parent.text; color: "#aaa"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+            Layout.preferredHeight: 42
+            background: Rectangle {
+                color: parent.hovered ? "#383838" : "#282828"
+                border.color: parent.hovered ? "#555555" : "#3d3d3d"
+                border.width: 1
+                radius: 6
+            }
+            contentItem: Text {
+                text: parent.text
+                color: "#e0e0e0"
+                font.pixelSize: 13
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
             onClicked: shareDialog.close()
         }
     }
 }
+

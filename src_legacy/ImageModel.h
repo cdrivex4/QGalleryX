@@ -77,6 +77,8 @@ public:
   Q_INVOKABLE void selectAll();
   Q_INVOKABLE void invertSelection();
   Q_INVOKABLE void selectItems(const QList<int> &indices);
+  Q_INVOKABLE void selectRange(int fromIndex, int toIndex, bool isSelected = true);
+  Q_INVOKABLE void toggleSelection(int index);
   Q_INVOKABLE void deleteSelected();
   Q_INVOKABLE QStringList getSelectedPaths() const;
   Q_INVOKABLE qint64 getSelectedTotalSizeBytes() const;
@@ -95,6 +97,8 @@ public:
   bool setData(const QModelIndex &index, const QVariant &value,
                int role = Qt::EditRole) override;
   QHash<int, QByteArray> roleNames() const override;
+
+  qint64 getGroupKey(int index, int role) const;
 
   bool isLoading() const { return m_isLoading; }
   int selectedCount() const;

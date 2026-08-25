@@ -43,6 +43,8 @@ Item {
     property alias gridView: listView
     property int caretIndex: 0
 
+    property int selectionAnchor: -1
+
     function ensureCaretVisible() {
         if (proxyModel && root.model && root.model.count > 0) {
             var proxyRow = proxyModel.getProxyRowForSourceIndex(root.caretIndex)
@@ -119,45 +121,73 @@ Item {
             Component.onCompleted: listView.forceActiveFocus()
 
             Keys.onPressed: (event) => {
-                var cols = Math.max(1, proxyModel.columns)
-                var rowsPerPage = Math.max(1, Math.floor(listView.height / (listView.width / cols)))
-                var pageStep = rowsPerPage * cols
                 var count = root.model ? root.model.count : 0
-
                 if (count === 0) return
                 if (root.caretIndex < 0) root.caretIndex = 0
+                if (root.selectionAnchor < 0) root.selectionAnchor = root.caretIndex
+
+                var cols = Math.max(1, proxyModel.columns)
+                var rowsPerPage = Math.max(1, Math.floor(listView.height / (listView.width / cols)))
+                var isShift = (event.modifiers & Qt.ShiftModifier)
+                var isCtrl = (event.modifiers & Qt.ControlModifier)
+
+                if (isCtrl && event.key === Qt.Key_A) {
+                    root.model.selectAll()
+                    event.accepted = true
+                    return
+                }
 
                 if (event.key === Qt.Key_Left) {
-                    root.caretIndex = Math.max(0, root.caretIndex - 1)
+                    var next = Math.max(0, root.caretIndex - 1)
+                    root.caretIndex = next
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = root.caretIndex
                     event.accepted = true
                 } else if (event.key === Qt.Key_Right) {
-                    root.caretIndex = Math.min(count - 1, root.caretIndex + 1)
+                    var next = Math.min(count - 1, root.caretIndex + 1)
+                    root.caretIndex = next
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = root.caretIndex
                     event.accepted = true
                 } else if (event.key === Qt.Key_Up) {
-                    if (root.caretIndex < cols) {
-                        searchField.forceActiveFocus()
-                    } else {
-                        root.caretIndex = Math.max(0, root.caretIndex - cols)
-                    }
+                    var next = proxyModel.getSourceIndexAbove(root.caretIndex)
+                    root.caretIndex = next
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = root.caretIndex
                     event.accepted = true
                 } else if (event.key === Qt.Key_Down) {
-                    if (root.caretIndex >= count - cols) {
-                        bottomBar.focusTab(0)
-                    } else {
-                        root.caretIndex = Math.min(count - 1, root.caretIndex + cols)
-                    }
+                    var next = proxyModel.getSourceIndexBelow(root.caretIndex)
+                    root.caretIndex = next
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = root.caretIndex
                     event.accepted = true
                 } else if (event.key === Qt.Key_PageUp) {
-                    root.caretIndex = Math.max(0, root.caretIndex - pageStep)
+                    var cur = root.caretIndex
+                    for (var r = 0; r < rowsPerPage; ++r) {
+                        cur = proxyModel.getSourceIndexAbove(cur)
+                    }
+                    root.caretIndex = cur
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = root.caretIndex
                     event.accepted = true
                 } else if (event.key === Qt.Key_PageDown) {
-                    root.caretIndex = Math.min(count - 1, root.caretIndex + pageStep)
+                    var cur = root.caretIndex
+                    for (var r = 0; r < rowsPerPage; ++r) {
+                        cur = proxyModel.getSourceIndexBelow(cur)
+                    }
+                    root.caretIndex = cur
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = root.caretIndex
                     event.accepted = true
                 } else if (event.key === Qt.Key_Home) {
                     root.caretIndex = 0
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = 0
                     event.accepted = true
                 } else if (event.key === Qt.Key_End) {
                     root.caretIndex = count - 1
+                    if (isShift) root.model.selectRange(root.selectionAnchor, root.caretIndex)
+                    else root.selectionAnchor = count - 1
                     event.accepted = true
                 } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                     if (root.caretIndex >= 0 && root.caretIndex < count) {
@@ -167,15 +197,14 @@ Item {
                 } else if (event.key === Qt.Key_Space) {
                     if (root.model && typeof root.model.toggleSelection === "function") {
                         root.model.toggleSelection(root.caretIndex)
+                        root.selectionAnchor = root.caretIndex
                     }
                     event.accepted = true
-                } else if (event.key === Qt.Key_Tab) {
-                    bottomBar.focusTab(0)
-                    event.accepted = true
-                } else if (event.key === Qt.Key_Backtab) {
-                    if (groupCombo.visible) groupCombo.forceActiveFocus()
-                    else viewModeBtn.forceActiveFocus()
-                    event.accepted = true
+                } else if (event.key === Qt.Key_Escape) {
+                    if (root.model && root.model.selectedCount > 0) {
+                        root.model.clearSelection()
+                        event.accepted = true
+                    }
                 }
             }
             
@@ -183,11 +212,38 @@ Item {
             scale: root.currentScale
             transformOrigin: Item.Center
             
-            // Dynamic cacheBuffer optimized for 100k+ items
-            cacheBuffer: Math.min(viewport.height * 2, 500)
+            // Lightweight bounded cacheBuffer for smooth 120 FPS scrolling without overloading GUI thread
+            cacheBuffer: Math.min(viewport.height, 400)
 
             property real lastContentY: 0
             property real cellHeight: root.width / proxyModel.columns
+            property real savedScrollRatio: 0
+            property int savedAnchorIndex: -1
+
+            Connections {
+                target: proxyModel
+                function onModelAboutToBeReset() {
+                    if (listView.contentHeight > 0 && listView.contentY > 0) {
+                        listView.savedScrollRatio = listView.contentY / listView.contentHeight
+                        listView.savedAnchorIndex = listView.indexAt(listView.width / 2, listView.contentY + 50)
+                    }
+                }
+                function onModelReset() {
+                    if (listView.savedScrollRatio > 0 || listView.savedAnchorIndex >= 0) {
+                        var targetIdx = listView.savedAnchorIndex
+                        var targetRatio = listView.savedScrollRatio
+                        Qt.callLater(function() {
+                            if (targetIdx >= 0 && targetIdx < proxyModel.rowCount()) {
+                                listView.positionViewAtIndex(targetIdx, ListView.Beginning)
+                            } else if (targetRatio > 0 && listView.contentHeight > 0) {
+                                listView.contentY = targetRatio * listView.contentHeight
+                            }
+                            listView.savedScrollRatio = 0
+                            listView.savedAnchorIndex = -1
+                        })
+                    }
+                }
+            }
 
             function updateViewportNow() {
                 var sIdx = indexAt(width / 2, contentY)
@@ -560,6 +616,7 @@ Item {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    listView.forceActiveFocus()
                                     root.caretIndex = sourceIndex
                                     if (root.model.selectedCount > 0) {
                                         root.model.setData(root.model.index(sourceIndex, 0), !isSelected, ImageModel.IsSelectedRole)
@@ -568,6 +625,7 @@ Item {
                                     }
                                 }
                                 onPressAndHold: {
+                                    listView.forceActiveFocus()
                                     root.caretIndex = sourceIndex
                                     if (!isSelected) {
                                         root.model.setData(root.model.index(sourceIndex, 0), true, ImageModel.IsSelectedRole)

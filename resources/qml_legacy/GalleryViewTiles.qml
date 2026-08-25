@@ -60,54 +60,99 @@ Item {
 
         Component.onCompleted: gridView.forceActiveFocus()
 
+        property int selectionAnchor: -1
+
         Keys.onPressed: (event) => {
+            var count = gridView.count
+            if (count === 0) return
+            if (gridView.currentIndex < 0) gridView.currentIndex = 0
+            if (selectionAnchor < 0) selectionAnchor = gridView.currentIndex
+
             var cols = Math.max(1, Math.floor(gridView.width / gridView.cellWidth))
             var rowsPerPage = Math.max(1, Math.floor(gridView.height / gridView.cellHeight))
             var pageStep = rowsPerPage * cols
-            var count = gridView.count
+            var isShift = (event.modifiers & Qt.ShiftModifier)
+            var isCtrl = (event.modifiers & Qt.ControlModifier)
 
-            if (count === 0) return
-            if (gridView.currentIndex < 0) gridView.currentIndex = 0
+            if (isCtrl && event.key === Qt.Key_A) {
+                if (root.model && typeof root.model.selectAll === "function") {
+                    root.model.selectAll()
+                }
+                event.accepted = true
+                return
+            }
 
             if (event.key === Qt.Key_Left) {
                 gridView.currentIndex = Math.max(0, gridView.currentIndex - 1)
                 gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
+                } else {
+                    selectionAnchor = gridView.currentIndex
+                }
                 event.accepted = true
             } else if (event.key === Qt.Key_Right) {
                 gridView.currentIndex = Math.min(count - 1, gridView.currentIndex + 1)
                 gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
+                } else {
+                    selectionAnchor = gridView.currentIndex
+                }
                 event.accepted = true
             } else if (event.key === Qt.Key_Up) {
-                if (gridView.currentIndex < cols) {
-                    searchField.forceActiveFocus()
+                gridView.currentIndex = Math.max(0, gridView.currentIndex - cols)
+                gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
                 } else {
-                    gridView.currentIndex = Math.max(0, gridView.currentIndex - cols)
-                    gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                    selectionAnchor = gridView.currentIndex
                 }
                 event.accepted = true
             } else if (event.key === Qt.Key_Down) {
-                if (gridView.currentIndex >= count - cols) {
-                    bottomBar.focusTab(0)
+                gridView.currentIndex = Math.min(count - 1, gridView.currentIndex + cols)
+                gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
                 } else {
-                    gridView.currentIndex = Math.min(count - 1, gridView.currentIndex + cols)
-                    gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                    selectionAnchor = gridView.currentIndex
                 }
                 event.accepted = true
             } else if (event.key === Qt.Key_PageUp) {
                 gridView.currentIndex = Math.max(0, gridView.currentIndex - pageStep)
                 gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
+                } else {
+                    selectionAnchor = gridView.currentIndex
+                }
                 event.accepted = true
             } else if (event.key === Qt.Key_PageDown) {
                 gridView.currentIndex = Math.min(count - 1, gridView.currentIndex + pageStep)
                 gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
+                } else {
+                    selectionAnchor = gridView.currentIndex
+                }
                 event.accepted = true
             } else if (event.key === Qt.Key_Home) {
                 gridView.currentIndex = 0
                 gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
+                } else {
+                    selectionAnchor = 0
+                }
                 event.accepted = true
             } else if (event.key === Qt.Key_End) {
                 gridView.currentIndex = count - 1
                 gridView.positionViewAtIndex(gridView.currentIndex, GridView.Contain)
+                if (isShift && root.model && typeof root.model.selectRange === "function") {
+                    root.model.selectRange(selectionAnchor, gridView.currentIndex)
+                } else {
+                    selectionAnchor = count - 1
+                }
                 event.accepted = true
             } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                 if (gridView.currentIndex >= 0 && gridView.currentIndex < count) {
@@ -117,14 +162,14 @@ Item {
             } else if (event.key === Qt.Key_Space) {
                 if (root.model && typeof root.model.toggleSelection === "function") {
                     root.model.toggleSelection(gridView.currentIndex)
+                    selectionAnchor = gridView.currentIndex
                 }
                 event.accepted = true
-            } else if (event.key === Qt.Key_Tab) {
-                bottomBar.focusTab(0)
-                event.accepted = true
-            } else if (event.key === Qt.Key_Backtab) {
-                viewModeBtn.forceActiveFocus()
-                event.accepted = true
+            } else if (event.key === Qt.Key_Escape) {
+                if (root.model && root.model.selectedCount > 0) {
+                    root.model.clearSelection()
+                    event.accepted = true
+                }
             }
         }
         
@@ -133,8 +178,8 @@ Item {
         cellWidth: root.uiThumbnailSize
         cellHeight: root.uiThumbnailSize
         
-        // Performance
-        cacheBuffer: Math.min(300, cellHeight * 3)
+        // Lightweight bounded cacheBuffer for smooth scrolling
+        cacheBuffer: Math.min(height, 400)
         
         // ScrollBar
         ScrollBar.vertical: ScrollBar {
@@ -307,6 +352,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        gridView.forceActiveFocus()
                         gridView.currentIndex = index
                         if (root.model.selectedCount > 0) {
                             model.isSelected = !isSelected
@@ -315,6 +361,7 @@ Item {
                         }
                     }
                     onPressAndHold: {
+                        gridView.forceActiveFocus()
                         gridView.currentIndex = index
                         if (!isSelected) {
                             model.isSelected = true

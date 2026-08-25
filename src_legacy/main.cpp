@@ -25,6 +25,7 @@
 #include "TaskScheduler.h"
 #include "VideoThumbnailer.h"
 #include "ViewportGovernor.h"
+#include "NativeMediaPlayer.h"
 
 #include <QFile>
 #include <QTextStream>
@@ -146,6 +147,9 @@ int main(int argc, char *argv[]) {
   // Force Qt Multimedia to use bundled FFmpeg backend for video playback
   // Unlocks native AV1, VP9, MKV, WebM, FLV, and TS playback out of the box
   qputenv("QT_MEDIA_BACKEND", "ffmpeg");
+  // Disable D3D11 hwaccel in Qt FFmpeg plugin so GPUs lacking native AV1 ASICs
+  // seamlessly decode via high-performance libdav1d without D3D11 setup failure errors
+  qputenv("QT_FFMPEG_DECODING_HW_DEVICE_TYPES", "none");
 
   // Create QApplication BEFORE initializing managers that access arguments / event loops
   QApplication app(argc, argv);
@@ -186,6 +190,7 @@ int main(int argc, char *argv[]) {
                                      "GroupedProxyModel");
   qmlRegisterType<SettingsHelper>("QGalleryX", 1, 0, "SettingsHelper");
   qmlRegisterType<SystemMonitor>("QGalleryX", 1, 0, "SystemMonitor");
+  qmlRegisterType<NativeMediaPlayer>("QGalleryX", 1, 0, "NativeMediaPlayer");
 
   QQmlApplicationEngine engine;
 
@@ -249,5 +254,7 @@ int main(int argc, char *argv[]) {
   ChangeWindowMessageFilter(0x0049 /* WM_COPYGLOBALDATA */, MSGFLT_ADD);
 #endif
 
-  return app.exec();
+  int result = app.exec();
+  TaskScheduler::instance().stop();
+  return result;
 }

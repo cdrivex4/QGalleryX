@@ -15,10 +15,75 @@ ApplicationWindow {
     property string currentPath: ""
     property int previousTab: 0
     property bool openedViaDrop: false
+    property string pendingFileToOpen: ""
     property var activeModel: (mainLayout.currentIndex === 0 && viewLoader.item) ? viewLoader.item.model : (mainLayout.currentIndex === 1 ? albumsView.activeModel : null)
     
+    // Active Grid Reference across Tabs & Views
+    readonly property var activeGrid: {
+        if (photoViewer.visible) return photoViewer
+        if (mainLayout.currentIndex === 0) {
+            return (viewLoader && viewLoader.item) ? (viewLoader.item.grid || viewLoader.item.gridView || viewLoader.item) : null
+        } else if (mainLayout.currentIndex === 1) {
+            return (albumsView && albumsView.activeGrid) ? albumsView.activeGrid : albumsView
+        }
+        return null
+    }
+
     // Global keyboard handling for seamless Windows Explorer style caret navigation
-    Keys.forwardTo: [photoViewer.visible ? photoViewer : (window.activeGrid ? window.activeGrid : searchField)]
+    Keys.forwardTo: [photoViewer.visible ? photoViewer : (searchField.activeFocus ? searchField : (window.activeGrid ? window.activeGrid : window))]
+
+    // Zoom In / Out / Reset Logic
+    function zoomIn() {
+        if (mainLayout.currentIndex === 0 || (mainLayout.currentIndex === 1 && albumsView && albumsView.depth > 1)) {
+            if (typeof appSettings !== "undefined") {
+                appSettings.gridResolution = Math.min(320, appSettings.gridResolution + 24)
+            }
+        } else if (mainLayout.currentIndex === 1 && albumsView && albumsView.depth === 1) {
+            albumSizeSlider.value = Math.min(albumSizeSlider.to, albumSizeSlider.value + 20)
+            if (albumsView) albumsView.cellSize = albumSizeSlider.value
+        }
+    }
+
+    function zoomOut() {
+        if (mainLayout.currentIndex === 0 || (mainLayout.currentIndex === 1 && albumsView && albumsView.depth > 1)) {
+            if (typeof appSettings !== "undefined") {
+                appSettings.gridResolution = Math.max(48, appSettings.gridResolution - 24)
+            }
+        } else if (mainLayout.currentIndex === 1 && albumsView && albumsView.depth === 1) {
+            albumSizeSlider.value = Math.max(albumSizeSlider.from, albumSizeSlider.value - 20)
+            if (albumsView) albumsView.cellSize = albumSizeSlider.value
+        }
+    }
+
+    function zoomReset() {
+        if (mainLayout.currentIndex === 0 || (mainLayout.currentIndex === 1 && albumsView && albumsView.depth > 1)) {
+            if (typeof appSettings !== "undefined") {
+                appSettings.gridResolution = 100
+            }
+        } else if (mainLayout.currentIndex === 1 && albumsView && albumsView.depth === 1) {
+            albumSizeSlider.value = 100
+            if (albumsView) albumsView.cellSize = 100
+        }
+    }
+
+    Shortcut {
+        sequences: ["Ctrl++", "Ctrl+=", "Ctrl+Shift+="]
+        onActivated: window.zoomIn()
+    }
+    Shortcut {
+        sequences: ["Ctrl+-", "Ctrl+_"]
+        onActivated: window.zoomOut()
+    }
+    Shortcut {
+        sequences: ["Ctrl+0"]
+        onActivated: window.zoomReset()
+    }
+
+    onActiveFocusItemChanged: {
+        if (mainLayout.currentIndex === 2 && activeFocusItem && menuTabItem.visible && typeof menuScrollView !== "undefined") {
+            menuScrollView.ensureVisible(activeFocusItem)
+        }
+    }
 
     // Global view preferences
     property bool useTiles: false
@@ -193,6 +258,15 @@ ApplicationWindow {
                         border.color: searchField.activeFocus ? "#4A90E2" : "#444"
                     }
 
+                    Keys.onPressed: (event) => {
+                        if (event.key === Qt.Key_Down || event.key === Qt.Key_Escape || event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                            if (window.activeGrid) {
+                                window.activeGrid.forceActiveFocus()
+                                event.accepted = true
+                            }
+                        }
+                    }
+
                     Timer {
                         id: searchDebounceTimer
                         interval: 120
@@ -248,8 +322,21 @@ ApplicationWindow {
                     Layout.preferredWidth: 180
                     Layout.maximumWidth: 200
                     background: Rectangle {
-                        color: parent.hovered ? "#444" : "#333"
+                        color: parent.pressed ? "#222" : (parent.hovered ? "#444" : "#333")
                         radius: 8
+                        border.color: parent.activeFocus ? "#00E5FF" : (parent.hovered ? "#60A5FA" : "#444")
+                        border.width: parent.activeFocus ? 2 : 1
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -3
+                            color: "transparent"
+                            border.color: "#38BDF8"
+                            border.width: 1.5
+                            radius: 11
+                            opacity: 0.85
+                            visible: scanBtn.activeFocus
+                        }
                     }
                     contentItem: Text {
                         text: "📁 " + window.formatScanPath(window.currentPath)
@@ -270,9 +357,21 @@ ApplicationWindow {
                     Layout.preferredWidth: 38
                     Layout.preferredHeight: 38
                     background: Rectangle {
-                        color: parent.hovered ? "#444" : "#222"
+                        color: parent.pressed ? "#111" : (parent.hovered ? "#444" : "#222")
                         radius: 8
-                        border.color: "#444"
+                        border.color: parent.activeFocus ? "#00E5FF" : (parent.hovered ? "#60A5FA" : "#444")
+                        border.width: parent.activeFocus ? 2 : 1
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -3
+                            color: "transparent"
+                            border.color: "#38BDF8"
+                            border.width: 1.5
+                            radius: 11
+                            opacity: 0.85
+                            visible: newWindowBtn.activeFocus
+                        }
                     }
                     contentItem: Text {
                         text: "⧉"
@@ -345,8 +444,21 @@ ApplicationWindow {
                         property int mode: window.activeModel ? window.activeModel.precacheMode : 1
                         
                         background: Rectangle {
-                            color: parent.hovered ? "#444" : "#222"
+                            color: parent.pressed ? "#111" : (parent.hovered ? "#444" : "#222")
                             radius: 19
+                            border.color: parent.activeFocus ? "#00E5FF" : (parent.hovered ? "#60A5FA" : "transparent")
+                            border.width: parent.activeFocus ? 2 : 0
+
+                            Rectangle {
+                                anchors.fill: parent
+                                anchors.margins: -3
+                                color: "transparent"
+                                border.color: "#38BDF8"
+                                border.width: 1.5
+                                radius: 22
+                                opacity: 0.85
+                                visible: snailButton.activeFocus
+                            }
                         }
                         contentItem: SvgIcon {
                             iconName: "snail"
@@ -373,10 +485,27 @@ ApplicationWindow {
                 }
                 
                 Button {
+                    id: viewModeBtn
                     text: window.useTiles ? "View: Tiles" : "View: Semantic"
                     onClicked: window.useTiles = !window.useTiles
                     Layout.preferredWidth: 120
-                    background: Rectangle { color: parent.hovered ? "#444" : "#333"; radius: 8 }
+                    background: Rectangle {
+                        color: parent.pressed ? "#222" : (parent.hovered ? "#444" : "#333")
+                        radius: 8
+                        border.color: parent.activeFocus ? "#00E5FF" : (parent.hovered ? "#60A5FA" : "#444")
+                        border.width: parent.activeFocus ? 2 : 1
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -3
+                            color: "transparent"
+                            border.color: "#38BDF8"
+                            border.width: 1.5
+                            radius: 11
+                            opacity: 0.85
+                            visible: viewModeBtn.activeFocus
+                        }
+                    }
                     contentItem: Text {
                         text: parent.text
                         color: "white"
@@ -387,6 +516,7 @@ ApplicationWindow {
                 }
                 
                 ComboBox {
+                    id: groupingCombo
                     Layout.preferredWidth: 120
                     model: ["Auto", "Day", "Week", "Month", "Year"]
                     currentIndex: window.groupingMode
@@ -394,7 +524,23 @@ ApplicationWindow {
                     onCurrentIndexChanged: {
                         window.groupingMode = currentIndex
                     }
-                    background: Rectangle { color: "#333"; radius: 8; border.color: "#444" }
+                    background: Rectangle {
+                        color: parent.hovered ? "#444" : "#333"
+                        radius: 8
+                        border.color: parent.activeFocus ? "#00E5FF" : (parent.hovered ? "#60A5FA" : "#444")
+                        border.width: parent.activeFocus ? 2 : 1
+
+                        Rectangle {
+                            anchors.fill: parent
+                            anchors.margins: -3
+                            color: "transparent"
+                            border.color: "#38BDF8"
+                            border.width: 1.5
+                            radius: 11
+                            opacity: 0.85
+                            visible: groupingCombo.activeFocus
+                        }
+                    }
                     contentItem: Text {
                         text: "Group: " + parent.displayText
                         color: "white"
@@ -418,7 +564,7 @@ ApplicationWindow {
             Layout.leftMargin: 20
             Layout.rightMargin: 20
             Layout.bottomMargin: 4
-            visible: !photoViewer.visible && mainLayout.currentIndex === 1
+            visible: !photoViewer.visible && mainLayout.currentIndex === 1 && (!albumsView || albumsView.depth === 1)
             spacing: 10
 
             Text {
@@ -490,8 +636,14 @@ ApplicationWindow {
                 Loader {
                     id: viewLoader
                     anchors.fill: parent
+                    focus: true
                     sourceComponent: window.useTiles ? tilesViewComponent : semanticViewComponent
                     
+                    onLoaded: {
+                        if (item && item.grid) item.grid.forceActiveFocus()
+                        else if (item && item.gridView) item.gridView.forceActiveFocus()
+                    }
+
                     Binding {
                         target: viewLoader.item
                         property: "folderPath"
@@ -556,12 +708,29 @@ ApplicationWindow {
                 }
 
                 ScrollView {
+                    id: menuScrollView
                     anchors.fill: parent
                     anchors.margins: 20
                     contentWidth: availableWidth
                     clip: true
 
+                    function ensureVisible(item) {
+                        if (!item || !menuCol) return
+                        var mapped = item.mapToItem(menuCol, 0, 0)
+                        var itemY = mapped.y
+                        var itemH = item.height || 40
+                        var flick = menuScrollView.contentItem
+                        if (flick && typeof flick.contentY !== "undefined") {
+                            if (itemY < flick.contentY) {
+                                flick.contentY = Math.max(0, itemY - 20)
+                            } else if (itemY + itemH > flick.contentY + menuScrollView.height) {
+                                flick.contentY = Math.min(flick.contentHeight - menuScrollView.height, itemY + itemH - menuScrollView.height + 40)
+                            }
+                        }
+                    }
+
                     ColumnLayout {
+                        id: menuCol
                         width: Math.min(parent.width, 400)
                         anchors.horizontalCenter: parent.horizontalCenter
                         spacing: 20

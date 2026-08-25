@@ -147,8 +147,8 @@ Item {
         // Qt 6 Delegate Pooling: Recycles QML items instead of allocating/destroying on scroll
         reuseItems: true
         
-        // Bounded cacheBuffer to prevent thousands of off-screen items when zoomed out
-        cacheBuffer: Math.min(300, cellHeight * 3)
+        // Lightweight bounded cacheBuffer for smooth scrolling
+        cacheBuffer: Math.min(height, 400)
         
         ScrollBar.vertical: ScrollBar {
             policy: ScrollBar.AlwaysOn

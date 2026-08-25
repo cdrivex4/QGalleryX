@@ -99,15 +99,12 @@ Item {
                 scrubber.isDragging = true
                 if (listView) {
                     lastScrubContentY = listView.contentY
-                    listView.interactive = false
                 }
             }
             
             onReleased: {
                 scrubber.isDragging = false
                 if (listView) {
-                    listView.interactive = true
-                    listView.returnToBounds()
                     if (typeof viewportGovernor !== "undefined" && listView.indexAt) {
                         var sIdx = listView.indexAt(listView.width / 2, listView.contentY)
                         var eIdx = listView.indexAt(listView.width / 2, listView.contentY + listView.height)
