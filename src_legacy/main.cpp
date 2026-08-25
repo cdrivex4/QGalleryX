@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
   SettingsHelper tempHelper;
   int api = tempHelper.selectedApi();
 
-  if (api == 1)
+  if (api == 1 || api == 0)
     QQuickWindow::setGraphicsApi(QSGRendererInterface::Direct3D11);
   else if (api == 2)
     QQuickWindow::setGraphicsApi(QSGRendererInterface::Vulkan);
@@ -140,16 +140,12 @@ int main(int argc, char *argv[]) {
   else if (api == 4)
     QQuickWindow::setGraphicsApi(QSGRendererInterface::Software);
 
-  // Increase QML's internal Image Cache to 1024MB so it can hold ~15 full 4K images
-  // without evicting them constantly while swiping.
-  qputenv("QML_IMAGE_CACHE_SIZE", "1024");
+  // Set QML's internal Image Cache to 256MB to balance fast navigation with minimal DDR4 bandwidth pressure on iGPUs
+  qputenv("QML_IMAGE_CACHE_SIZE", "256");
 
-  // Force Qt Multimedia to use bundled FFmpeg backend for video playback
-  // Unlocks native AV1, VP9, MKV, WebM, FLV, and TS playback out of the box
+  // Allow Qt Multimedia to use Direct3D 11 hardware video decoding on Intel QuickSync / NVIDIA NVDEC
   qputenv("QT_MEDIA_BACKEND", "ffmpeg");
-  // Disable D3D11 hwaccel in Qt FFmpeg plugin so GPUs lacking native AV1 ASICs
-  // seamlessly decode via high-performance libdav1d without D3D11 setup failure errors
-  qputenv("QT_FFMPEG_DECODING_HW_DEVICE_TYPES", "none");
+  qputenv("QT_FFMPEG_DECODING_HW_DEVICE_TYPES", "d3d11va");
 
   // Create QApplication BEFORE initializing managers that access arguments / event loops
   QApplication app(argc, argv);

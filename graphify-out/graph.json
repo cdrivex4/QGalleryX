@@ -430,7 +430,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qobject",
-      "community": 51,
+      "community": 81,
       "norm_label": "qobject"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_filecachemanager_h_src_filecachemanager",
-      "community": 51,
+      "community": 81,
       "norm_label": "filecachemanager.h"
     },
     {
@@ -1070,7 +1070,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qhash",
-      "community": 51,
+      "community": 81,
       "norm_label": "qhash"
     },
     {
@@ -1100,7 +1100,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_filecachemanager_h_qmutex",
-      "community": 40,
+      "community": 81,
       "norm_label": "qmutex"
     },
     {
@@ -1980,7 +1980,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_imageprocessor_h_src_imageprocessor",
-      "community": 81,
+      "community": 3,
       "norm_label": "imageprocessor.h"
     },
     {
@@ -2190,7 +2190,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_passivereadlatencyguard_h_src_passivereadlatencyguard",
-      "community": 40,
+      "community": 81,
       "norm_label": "passivereadlatencyguard.h"
     },
     {
@@ -3060,7 +3060,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_h_src_legacy_asyncimageprovider",
-      "community": 40,
+      "community": 81,
       "norm_label": "asyncimageprovider.h"
     },
     {
@@ -3140,7 +3140,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_h_qimage",
-      "community": 81,
+      "community": 3,
       "norm_label": "qimage"
     },
     {
@@ -3180,7 +3180,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_h_qsize",
-      "community": 51,
+      "community": 81,
       "norm_label": "qsize"
     },
     {
@@ -3250,7 +3250,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "qquickasyncimageprovider",
-      "community": 40,
+      "community": 81,
       "norm_label": "qquickasyncimageprovider"
     },
     {
@@ -3420,7 +3420,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_asyncimageprovider_h_qcache",
-      "community": 40,
+      "community": 81,
       "norm_label": "qcache"
     },
     {
@@ -3590,7 +3590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_bc1engine_h_src_legacy_bc1engine",
-      "community": 81,
+      "community": 3,
       "norm_label": "bc1engine.h"
     },
     {
@@ -4970,7 +4970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_h_qdatetime",
-      "community": 51,
+      "community": 81,
       "norm_label": "qdatetime"
     },
     {
@@ -5970,7 +5970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_imagemodel_h_qelapsedtimer",
-      "community": 40,
+      "community": 81,
       "norm_label": "qelapsedtimer"
     },
     {
@@ -7870,7 +7870,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_settingshelper_h_src_legacy_settingshelper",
-      "community": 81,
+      "community": 3,
       "norm_label": "settingshelper.h"
     },
     {
@@ -8480,7 +8480,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_settingshelper_h_qsettings",
-      "community": 81,
+      "community": 3,
       "norm_label": "qsettings"
     },
     {
@@ -8690,7 +8690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_systemmonitor_h_src_legacy_systemmonitor",
-      "community": 51,
+      "community": 81,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -9730,7 +9730,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_videothumbnailer_h_src_legacy_videothumbnailer",
-      "community": 81,
+      "community": 28,
       "norm_label": "videothumbnailer.h"
     },
     {
@@ -9810,7 +9810,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_legacy_viewportgovernor_h_src_legacy_viewportgovernor",
-      "community": 51,
+      "community": 81,
       "norm_label": "viewportgovernor.h"
     },
     {
@@ -10370,7 +10370,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "src_legacy_main_customcrashfilter",
-      "community": 81,
+      "community": 89,
       "norm_label": "customcrashfilter()"
     },
     {
@@ -10380,7 +10380,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_main_cpp_long",
-      "community": 81,
+      "community": 89,
       "norm_label": "long"
     },
     {
@@ -10390,7 +10390,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_legacy_main_cpp_exception_pointers",
-      "community": 81,
+      "community": 89,
       "norm_label": "exception_pointers"
     },
     {
@@ -11050,7 +11050,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_asyncimageprovider_h_test_scrollbench_src_asyncimageprovider",
-      "community": 40,
+      "community": 81,
       "norm_label": "asyncimageprovider.h"
     },
     {
@@ -11560,7 +11560,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_bc1engine_h_test_scrollbench_src_bc1engine",
-      "community": 81,
+      "community": 3,
       "norm_label": "bc1engine.h"
     },
     {
@@ -14180,7 +14180,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_filecachemanager_h_test_scrollbench_src_filecachemanager",
-      "community": 51,
+      "community": 81,
       "norm_label": "filecachemanager.h"
     },
     {
@@ -15460,7 +15460,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_framebudgetscheduler_framebudgetscheduler",
-      "community": 51,
+      "community": 81,
       "norm_label": "framebudgetscheduler::framebudgetscheduler()"
     },
     {
@@ -15490,7 +15490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_framebudgetscheduler_h",
-      "community": 40,
+      "community": 39,
       "norm_label": "framebudgetscheduler.h"
     },
     {
@@ -18380,7 +18380,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_passivereadlatencyguard_h_test_scrollbench_src_passivereadlatencyguard",
-      "community": 40,
+      "community": 81,
       "norm_label": "passivereadlatencyguard.h"
     },
     {
@@ -19440,7 +19440,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_scrollbenchimagemodel_qtimer",
-      "community": 51,
+      "community": 81,
       "norm_label": "qtimer"
     },
     {
@@ -20530,7 +20530,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_settingshelper_h_test_scrollbench_src_settingshelper",
-      "community": 125,
+      "community": 3,
       "norm_label": "settingshelper.h"
     },
     {
@@ -21350,7 +21350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_systemmonitor_h_test_scrollbench_src_systemmonitor",
-      "community": 51,
+      "community": 81,
       "norm_label": "systemmonitor.h"
     },
     {
@@ -22450,7 +22450,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "test_scrollbench_src_telemetrymonitor_telemetrymonitor_recordframe",
-      "community": 124,
+      "community": 35,
       "norm_label": "telemetrymonitor::recordframe()"
     },
     {
@@ -22490,7 +22490,7 @@
       "source_location": "L192",
       "_origin": "ast",
       "id": "test_scrollbench_src_telemetrymonitor_telemetrymonitor_updatefps",
-      "community": 78,
+      "community": 35,
       "norm_label": "telemetrymonitor::updatefps()"
     },
     {
@@ -22530,7 +22530,7 @@
       "source_location": "L244",
       "_origin": "ast",
       "id": "test_scrollbench_src_telemetrymonitor_telemetrymonitor_logstats",
-      "community": 78,
+      "community": 35,
       "norm_label": "telemetrymonitor::logstats()"
     },
     {
@@ -22590,7 +22590,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_telemetrymonitor_averagefps",
-      "community": 78,
+      "community": 35,
       "norm_label": "averagefps"
     },
     {
@@ -22740,7 +22740,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_h_qvariantlist",
-      "community": 81,
+      "community": 3,
       "norm_label": "qvariantlist"
     },
     {
@@ -22800,7 +22800,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_telemetrymonitor_reportloadtime",
-      "community": 124,
+      "community": 35,
       "norm_label": "reportloadtime"
     },
     {
@@ -22860,7 +22860,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_telemetrymonitor_recordframe",
-      "community": 124,
+      "community": 35,
       "norm_label": "recordframe"
     },
     {
@@ -23010,7 +23010,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_telemetrymonitor_updatefps",
-      "community": 124,
+      "community": 35,
       "norm_label": "updatefps"
     },
     {
@@ -23300,7 +23300,7 @@
       "source_location": "L130",
       "_origin": "ast",
       "id": "d_dev_antigravity_test_scrollbench_src_telemetrymonitor_telemetrymonitor_logstats",
-      "community": 78,
+      "community": 35,
       "norm_label": "logstats"
     },
     {
@@ -23490,7 +23490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_videothumbnailer_h_test_scrollbench_src_videothumbnailer",
-      "community": 125,
+      "community": 3,
       "norm_label": "videothumbnailer.h"
     },
     {
@@ -23570,7 +23570,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "test_scrollbench_src_viewportgovernor_h_test_scrollbench_src_viewportgovernor",
-      "community": 51,
+      "community": 81,
       "norm_label": "viewportgovernor.h"
     },
     {
@@ -24100,7 +24100,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tests_tst_imagemodel",
-      "community": 81,
+      "community": 28,
       "norm_label": "tst_imagemodel.cpp"
     },
     {
@@ -24190,7 +24190,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tests_tst_mft",
-      "community": 40,
+      "community": 51,
       "norm_label": "tst_mft.cpp"
     },
     {
@@ -24200,7 +24200,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "tests_tst_mft_main",
-      "community": 40,
+      "community": 51,
       "norm_label": "main()"
     },
     {
@@ -24220,7 +24220,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "tests_tst_scheduler_testtaskscheduler",
-      "community": 94,
+      "community": 40,
       "norm_label": "testtaskscheduler"
     },
     {
@@ -24230,7 +24230,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "tests_tst_scheduler_testtaskscheduler_private",
-      "community": 94,
+      "community": 40,
       "norm_label": ".private()"
     },
     {
@@ -24240,7 +24240,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "tests_tst_scheduler_cpp_q_object",
-      "community": 94,
+      "community": 40,
       "norm_label": "q_object"
     },
     {
@@ -24250,7 +24250,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "tests_tst_scheduler_testtaskscheduler_testexecution",
-      "community": 94,
+      "community": 40,
       "norm_label": ".testexecution()"
     },
     {
@@ -24260,7 +24260,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "tests_tst_scheduler_testtaskscheduler_testpriority",
-      "community": 94,
+      "community": 40,
       "norm_label": ".testpriority()"
     }
   ],
@@ -45810,7 +45810,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src_legacy/main.cpp",
-      "source_location": "L158",
+      "source_location": "L154",
       "weight": 1.0,
       "source": "src_legacy_main_main",
       "target": "src_legacy_main_preloadandlockallmodules",
@@ -67501,7 +67501,7 @@
       "source_location": "L175",
       "weight": 1.0,
       "source": "d_dev_antigravity_test_scrollbench_src_tst_automation_cpp",
-      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_testscenario_diskcache",
+      "target": "d_dev_antigravity_test_scrollbench_src_tst_automation_matrixrunner_runscenario",
       "confidence_score": 1.0
     },
     {
@@ -67830,5 +67830,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "74bf07ff1032e258e1b524bd4a0dc57846dfa35a"
+  "built_at_commit": "b61c665b5151c7e12df15d2a2599a7c3dfa8ecc6"
 }
