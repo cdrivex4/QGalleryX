@@ -1,16 +1,16 @@
-# Graph Report - QGalleryX  (2026-08-26)
+# Graph Report - QGalleryX  (2026-09-03)
 
 ## Corpus Check
-- 112 files · ~78,046 words
+- 112 files · ~78,317 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2426 nodes · 4052 edges · 166 communities (118 shown, 48 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 272 edges (avg confidence: 0.8)
+- 2426 nodes · 4052 edges · 167 communities (117 shown, 50 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 271 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b61c665b`
+- Built from commit: `4191da79`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -102,6 +102,7 @@
 - [[_COMMUNITY_Community 91|Community 91]]
 - [[_COMMUNITY_Community 92|Community 92]]
 - [[_COMMUNITY_Community 93|Community 93]]
+- [[_COMMUNITY_Community 94|Community 94]]
 - [[_COMMUNITY_Community 98|Community 98]]
 - [[_COMMUNITY_Community 99|Community 99]]
 - [[_COMMUNITY_Community 103|Community 103]]
@@ -183,8 +184,6 @@
 10. `FileCacheManager` - 50 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `onDirectoryChanged` --references--> `QTimer`  [INFERRED]
-  src_legacy/ImageModel.h → test_scrollbench/src/ScrollBenchImageModel.h
 - `FileCacheManager::FileCacheManager()` --calls--> `getCacheDirectory`  [INFERRED]
   src/FileCacheManager.cpp → src/FileCacheManager.h
 - `FileCacheManager` --references--> `QTimer`  [EXTRACTED]
@@ -193,11 +192,13 @@
   src_legacy/ImageModel.h → test_scrollbench/src/ScrollBenchImageModel.h
 - `SystemMonitor` --references--> `QTimer`  [EXTRACTED]
   src_legacy/SystemMonitor.h → test_scrollbench/src/ScrollBenchImageModel.h
+- `ViewportGovernor` --references--> `QTimer`  [EXTRACTED]
+  src_legacy/ViewportGovernor.h → test_scrollbench/src/ScrollBenchImageModel.h
 
 ## Import Cycles
 - None detected.
 
-## Communities (166 total, 48 thin omitted)
+## Communities (167 total, 50 thin omitted)
 
 ### Community 0 - "Component 0"
 Cohesion: 0.06
@@ -212,8 +213,8 @@ Cohesion: 0.03
 Nodes (47): DiagnosticsMonitor, attachModel, attachSettings, CRITICAL_STALL_THRESHOLD_MS, criticalIssueDetected, criticalsChanged, diskCacheChanged, EXPECTED_MIN_RANGE_SIZE (+39 more)
 
 ### Community 3 - "Component 3"
-Cohesion: 0.09
-Nodes (18): QVariantList, QImage, QSettings, BenchmarkRunner, benchmarkCompleted, BenchmarkRunner::BenchmarkRunner(), isRunningChanged, m_isRunning (+10 more)
+Cohesion: 0.08
+Nodes (22): QFile, QSettings, BenchmarkRunner, benchmarkCompleted, BenchmarkRunner::BenchmarkRunner(), isRunningChanged, m_isRunning, m_results (+14 more)
 
 ### Community 4 - "Component 4"
 Cohesion: 0.08
@@ -225,7 +226,7 @@ Nodes (43): TelemetryMonitor, averageFpsChanged, cacheHitRateChanged, completion
 
 ### Community 6 - "Component 6"
 Cohesion: 0.03
-Nodes (66): atomic, MetadataUpdate, Q_ENUM, Q_INVOKABLE, QHash, QList, QMutex, quint32 (+58 more)
+Nodes (65): atomic, MetadataUpdate, Q_ENUM, Q_INVOKABLE, QHash, QList, QMutex, quint32 (+57 more)
 
 ### Community 7 - "Component 7"
 Cohesion: 0.13
@@ -284,8 +285,8 @@ Cohesion: 0.67
 Nodes (3): QVariantMap, SettingsHelper::getCacheStats(), SettingsHelper::getTrackedRootPathStats()
 
 ### Community 23 - "Community 23"
-Cohesion: 0.16
-Nodes (11): dumpCrashLog(), main(), main(), MatrixRunner, m_targetFolder, TestScenario, diskCache, name (+3 more)
+Cohesion: 0.12
+Nodes (14): dumpCrashLog(), main(), QVariantList, main(), MatrixRunner, m_targetFolder, TestScenario, diskCache (+6 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.12
@@ -348,20 +349,16 @@ Cohesion: 0.14
 Nodes (16): mutex, AVCodecContext, get_player_hw_format(), cleanupWorker, hasAudio, hasVideo, muted, NativeMediaPlayer::NativeMediaPlayer() (+8 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.16
-Nodes (12): condition_variable, QQueue, QTextStream, thread, QFile, EXCEPTION_POINTERS, LONG, customCrashFilter() (+4 more)
-
-### Community 40 - "Community 40"
-Cohesion: 0.23
-Nodes (7): QThread, vector, QMap, QWaitCondition, atomic, Q_OBJECT, TestTaskScheduler
+Cohesion: 0.14
+Nodes (17): condition_variable, QQueue, FrameBudgetScheduler::FrameBudgetScheduler(), QTimer, QObject, QQuickAsyncImageProvider, QThread, QMap (+9 more)
 
 ### Community 41 - "Community 41"
 Cohesion: 0.06
 Nodes (45): DWORD, FILETIME, QObject, QString, SIZE_T, fileTimeToInt64(), QString, _PROCESS_MEMORY_COUNTERS (+37 more)
 
 ### Community 42 - "Community 42"
-Cohesion: 0.27
-Nodes (10): ImageInfo, QList, QString, filterImageList(), applyFilter, indexOfPath, onDirectoryChanged, scanDirectory (+2 more)
+Cohesion: 0.40
+Nodes (5): qint64, crawlerProgressChanged, getGroupKey, getSelectedTotalSizeBytes, processPrecacheTick
 
 ### Community 43 - "Community 43"
 Cohesion: 0.09
@@ -393,7 +390,7 @@ Nodes (4): Assert-DiskSpace(), Log-Me(), Run-Exec(), Setup-Module()
 
 ### Community 51 - "Community 51"
 Cohesion: 0.21
-Nodes (9): QAbstractListModel, QString, QVector, unordered_map, QList, QPointer, QFileSystemWatcher, QReadWriteLock (+1 more)
+Nodes (10): QAbstractListModel, QString, QVector, unordered_map, QHash, QList, QPointer, QFileSystemWatcher (+2 more)
 
 ### Community 52 - "Community 52"
 Cohesion: 0.10
@@ -409,7 +406,7 @@ Nodes (6): QObject, logLevel, rawAcceleration, refreshGraphicsInfo, setLogLevel,
 
 ### Community 55 - "Community 55"
 Cohesion: 0.33
-Nodes (3): FrameBudgetScheduler, ImageProcessor, QSet
+Nodes (4): QTextStream, thread, QObject, PassiveReadLatencyGuard::PassiveReadLatencyGuard()
 
 ### Community 56 - "Community 56"
 Cohesion: 0.22
@@ -461,7 +458,7 @@ Nodes (6): HWND, LPARAM, LRESULT, NativeSubclassProc(), UINT, WPARAM
 
 ### Community 72 - "Community 72"
 Cohesion: 0.08
-Nodes (28): qint64, QObject, QRectF, QStringList, QVariantMap, clearSelection, cropImage, ImageModel::getActiveDirectories() (+20 more)
+Nodes (32): ImageInfo, QList, QObject, QString, QStringList, QVariantMap, filterImageList(), applyFilter (+24 more)
 
 ### Community 74 - "Community 74"
 Cohesion: 0.08
@@ -484,8 +481,8 @@ Cohesion: 0.09
 Nodes (30): ImageInfo, QList, QObject, QString, QStringList, QVariantMap, filterImageList(), applyFilter (+22 more)
 
 ### Community 81 - "Community 81"
-Cohesion: 0.17
-Nodes (12): FrameBudgetScheduler::FrameBudgetScheduler(), QTimer, QObject, QQuickAsyncImageProvider, QHash, QMutex, QCache, QSize (+4 more)
+Cohesion: 0.33
+Nodes (3): FrameBudgetScheduler, ImageProcessor, QSet
 
 ### Community 82 - "Community 82"
 Cohesion: 0.40
@@ -624,21 +621,21 @@ Cohesion: 1.00
 Nodes (3): setThumbnailSize, snapThumbnailResolution, thumbnailSize
 
 ## Knowledge Gaps
-- **807 isolated node(s):** `frns`, `parentFrns`, `fileSizes`, `creationTimes`, `nameOffsets` (+802 more)
+- **806 isolated node(s):** `frns`, `parentFrns`, `fileSizes`, `creationTimes`, `nameOffsets` (+801 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **48 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **50 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `QTimer` connect `Community 81` to `Component 1`, `Component 6`, `Component 10`, `Component 12`, `Community 15`, `Community 23`, `Community 27`, `Community 34`, `Community 36`, `Community 39`, `Community 41`, `Community 42`, `Community 43`, `Community 51`, `Community 55`, `Community 78`, `Community 80`, `Community 91`, `Community 104`, `Community 106`, `Community 108`, `Community 126`?**
+- **Why does `QTimer` connect `Community 39` to `Component 1`, `Component 3`, `Component 6`, `Component 10`, `Component 12`, `Community 15`, `Community 23`, `Community 27`, `Community 34`, `Community 36`, `Community 41`, `Community 43`, `Community 51`, `Community 78`, `Community 80`, `Community 81`, `Community 91`, `Community 104`, `Community 106`, `Community 108`, `Community 126`?**
   _High betweenness centrality (0.149) - this node is a cross-community bridge._
-- **Why does `ImageModel` connect `Community 15` to `Community 130`, `Community 143`, `Community 80`, `Community 81`, `Community 79`, `Community 51`, `Community 149`, `Community 152`?**
+- **Why does `ImageModel` connect `Community 15` to `Community 130`, `Community 39`, `Community 143`, `Community 80`, `Community 79`, `Community 51`, `Community 149`, `Community 152`?**
   _High betweenness centrality (0.081) - this node is a cross-community bridge._
-- **Why does `TelemetryMonitor` connect `Component 5` to `Community 35`, `Community 81`, `Community 51`, `Community 124`, `Community 126`?**
+- **Why does `TelemetryMonitor` connect `Component 5` to `Community 35`, `Community 124`, `Community 126`, `Community 39`?**
   _High betweenness centrality (0.075) - this node is a cross-community bridge._
 - **What connects `frns`, `parentFrns`, `fileSizes` to the rest of the system?**
-  _807 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _806 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Component 0` be split into smaller, more focused modules?**
   _Cohesion score 0.05639097744360902 - nodes in this community are weakly interconnected._
 - **Should `Component 1` be split into smaller, more focused modules?**

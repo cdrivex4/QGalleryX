@@ -15,10 +15,6 @@ Item {
         toastAnim.restart()
     }
 
-    function showToast(msg) {
-        showMessage(msg, false)
-    }
-
     Rectangle {
         id: toastRect
         property color borderColor: "#555555"

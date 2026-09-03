@@ -574,7 +574,10 @@ void AsyncImageProvider::processImageTask(
         s_l2Hits.fetch_add(1, std::memory_order_relaxed);
         qDebug() << "[Cache] L2 HIT" << QFileInfo(path).fileName() << "("
                  << mmapData.size() / 1024 << "KB disk" << (mmapData.startsWith("BC1_") ? "BC1-SIMD)" : "JPG)");
-        insertCachedImage(id, cachedImg, requestedSize);
+        // BUG FIX L8: Use 'path' (normalized) not 'id' (may have file:/// or forward slashes).
+        // Using 'id' created a second QCache entry that normalizeRamKey() could never match,
+        // causing spurious L1 misses and redundant re-decoding on every subsequent access.
+        insertCachedImage(path, cachedImg, requestedSize);
         deliverResult(cachedImg);
 #ifdef Q_OS_WIN
         CoUninitialize();

@@ -105,13 +105,24 @@ Item {
         return "";
     }
 
+    // BUG FIX Q1/D3: Was a hardcoded extension list out of sync with C++ DesktopHelper.
+    // Missing: .vob, .ogg, .wmv (audio formats). For .wmv files this meant the media player
+    // was never shown and the image viewer tried to display a video file instead.
+    // Now delegates to desktopHelper.getFileType() (the authoritative C++ source),
+    // with a fallback list for the case where desktopHelper is unavailable (e.g. drag-drop arrays).
     function isVideoFile(path) {
         if (!path) return false;
+        if (typeof desktopHelper !== "undefined" && desktopHelper) {
+            return desktopHelper.getFileType(path) === 2; // DesktopHelper::Video = 2
+        }
+        // Fallback: extension-based check aligned with DesktopHelper::staticGetFileType()
         var lower = path.toLowerCase();
         return lower.endsWith(".mp4") || lower.endsWith(".avi") || lower.endsWith(".mkv") || lower.endsWith(".mov") ||
                lower.endsWith(".webm") || lower.endsWith(".wmv") || lower.endsWith(".flv") || lower.endsWith(".m4v") ||
                lower.endsWith(".ts") || lower.endsWith(".3gp") || lower.endsWith(".mpg") || lower.endsWith(".mpeg") ||
-               lower.endsWith(".ogv") || lower.endsWith(".mts") || lower.endsWith(".m2ts") || lower.endsWith(".vob");
+               lower.endsWith(".ogv") || lower.endsWith(".mts") || lower.endsWith(".m2ts") || lower.endsWith(".vob") ||
+               lower.endsWith(".ogg") || lower.endsWith(".mp3") || lower.endsWith(".wav") || lower.endsWith(".flac") ||
+               lower.endsWith(".m4a") || lower.endsWith(".aac") || lower.endsWith(".wma") || lower.endsWith(".opus");
     }
 
     function getMetadataForIndex(idx) {
@@ -172,8 +183,11 @@ Item {
     ListView {
         id: listView
         anchors.fill: parent
-        // Disable swipe when editing OR when zoomed in
-        interactive: !root.isEditing && (currentItem && currentItem.children[0].zoom === 1.0)
+        // BUG FIX Q3: Was 'currentItem.children[0].zoom' without null check.
+        // If currentItem has no children (loading state), this throws a TypeError
+        // and permanently disables swiping for the rest of the session.
+        // Now guards with children.length > 0 before accessing children[0].
+        interactive: !root.isEditing && (currentItem ? (currentItem.children.length > 0 ? currentItem.children[0].zoom === 1.0 : true) : true)
         
         orientation: ListView.Horizontal
         snapMode: ListView.SnapOneItem

@@ -228,6 +228,54 @@ Key systemic bugs and low-level concurrency failures diagnosed and resolved by A
     - *Discovery*: Touch flings followed continuous momentum allowing symmetric lookahead to pre-decode approaching tiles, whereas dragging the timeline scrubber jumped across years, flooding the task queue with abandoned requests for intermediary positions.
     - *Fix*: Enhanced `ViewportGovernor` with trajectory-biased lookahead ($+2\times \text{count}$ forward during downward scrolls, $-2\times \text{count}$ backward during upward scrolls) and unified `DateScrubber.qml` to feed continuous delta updates into the exact same pipeline.
 
+11. **Direct3D 11 Zero-Copy Video Swapchain vs CPU-Bound Frame Transfers:**
+    - *Discovery*: A custom FFmpeg media player decoded frames on GPU but used `av_hwframe_transfer_data()` to copy decoded 4K/1080p frames back to CPU RAM, ran software `sws_scale` pixel conversion, and re-uploaded them to GPU for `QVideoSink`. This GPU $\rightarrow$ CPU RAM $\rightarrow$ Software Scaler $\rightarrow$ GPU roundtrip pegged CPU usage at 100%, starved the audio clock, and caused micro-stuttering. Furthermore, setting `QT_FFMPEG_DECODING_HW_DEVICE_TYPES = "none"` in `main.cpp` crippled hardware video decoding on iGPUs like Intel HD 630 (QuickSync).
+    - *Fix*: Upgraded to Qt 6's native `MediaPlayer` + `AudioOutput` + `VideoOutput` with `Direct3D11` / WMF hardware acceleration. Decoded video frames remain in GPU VRAM and blit directly into the Direct3D 11 swapchain with zero CPU copies and hardware-synced audio clocks.
+
+12. **Deterministic Single-Pass Metadata Sorting vs Date Migration Snapping:**
+    - *Discovery*: When scanning large folders/drives, files without embedded filename dates were initially assigned fallback timestamps, causing them to migrate to their real dates during Pass 2 EXIF extraction. This date shift forced a second `std::sort` and multiple `beginResetModel()` calls that scrambled the visible grid, destroyed delegate layouts, and reset scroll positions.
+    - *Fix*: Captured exact `lastModified()` timestamps directly from `QDirIterator`'s native `WIN32_FIND_DATA` during the initial discovery pass (Pass 1). Suppressed all `modelReset` signals in Pass 1 and Pass 2 for cached directories, ensuring the grid layout is 100% stable on Frame 1.
+
+13. **QML Off-Screen Delegate Allocation Limits (`displayMargin` Overload):**
+    - *Discovery*: Adding additive `displayMarginBeginning: 400` + `displayMarginEnd: 800` + `cacheBuffer: 1200` to `ListView` forced Qt Quick to instantiate over 800 active off-screen QML row items and timers. Frame layout times jumped from 8ms to 35ms, causing heavy UI sluggishness.
+    - *Fix*: Reduced `cacheBuffer` to a bounded `400px` and removed `displayMargin` overrides, dropping active QML delegate count by 70% and restoring a solid 120 FPS frame rate.
+
+14. **TypeScript (`.ts`) Extension Filter Trap:**
+    - *Discovery*: Media file filters included `"*.ts"` for MPEG Transport Stream video containers. On development machines, this caused the scanner on `C:\` to index over 50,000 `.ts` TypeScript source code files across `node_modules` and `.git`, which failed image decode and stalled the pipeline.
+    - *Fix*: Removed `"ts"` from default media extension filters, added `DesktopHelper::isSupportedFile()` validation, and added directory skip filters for `.git`, `node_modules`, `AppData/Local/Packages`, and `Windows/WinSxS`.
+
+15. **Integrated GPU (iGPU) Shared Memory Bandwidth Conservation:**
+    - *Discovery*: Integrated GPUs (e.g. Intel HD Graphics 630 on i3-7100) have no dedicated VRAM and share system DDR4 bandwidth ($\sim 19\text{ GB/s}$). Setting `QML_IMAGE_CACHE_SIZE = "1024"` (1 GB) and running scalar software BC1 compression on CPU worker threads saturated memory bus bandwidth, starving the iGPU display controller.
+    - *Fix*: Set `QML_IMAGE_CACHE_SIZE = "256"`, used fast SIMD JPEG writes ($<10\%$ CPU) for disk caching, and assigned `THREAD_PRIORITY_BELOW_NORMAL` to CPU worker threads.
+
+16. **Dynamic Drop Model Promotion & Explicit Window Scope:**
+    - *Discovery*: Drag-and-drop opened a 15-neighbor file slice for 0ms initial navigation, but a missing `pendingFileToOpen` property on `ApplicationWindow` threw a JavaScript TypeError that prevented scanning the parent folder.
+    - *Fix*: Declared `pendingFileToOpen` explicitly on `ApplicationWindow` and enabled dynamic model promotion so `PhotoViewer` seamlessly switches to the full folder dataset once background scanning completes.
+
+17. **Never Use `static` Local Variables for Per-Instance State (C1):**
+    - *Discovery*: `onDirectoryChanged()` used `static QTimer *debounceTimer = nullptr` — a function-level static shared across ALL `ImageModel` instances. In multi-window mode, the second window reused the first window's heap-allocated timer. After the first window closed, the timer callback fired into a destroyed `ImageModel`, causing a use-after-free crash.
+    - *Fix*: Replaced the `static QTimer*` with a value-type member `QTimer m_debounceTimer` in the header, initialized with `setSingleShot(true)` in the constructor. Rule: **never use static local variables for state that belongs to an instance.**
+
+18. **Qt Signals Must Always Be Emitted from the GUI Thread (R1):**
+    - *Discovery*: `emit this->crawlerProgressChanged()` was called directly from inside a `TaskScheduler` CPU worker thread lambda. Qt QML property bindings connected to this signal were then evaluated on the wrong thread, causing undefined behaviour and potential UI corruption.
+    - *Fix*: Wrapped the emit in `QMetaObject::invokeMethod(this, [...]() { emit crawlerProgressChanged(); }, Qt::QueuedConnection)`. Rule: **any signal connected to QML properties must be emitted from the GUI thread.**
+
+19. **Keep All Parallel Lists in Sync on Mutation (C4):**
+    - *Discovery*: `ImageModel` maintains two parallel lists: `m_images` (the filtered/displayed list) and `m_allItems` (the unfiltered master). `deleteSelected()` only removed items from `m_images` but not `m_allItems`. After the next filter query change, `applyFilter()` re-populated `m_images` from `m_allItems`, causing deleted images to "reappear".
+    - *Fix*: `deleteSelected()` now removes from both lists using a `QSet<QString>` of deleted paths. Rule: **any mutation of a derived/filtered list must also update the source-of-truth list.**
+
+20. **All Async Lambdas Capturing `this` Must Have a Lifetime Guard (C2):**
+    - *Discovery*: `setFilterQuery()` dispatched a `QThreadPool` task that captured `this` directly. If the `ImageModel` was destroyed (e.g. closing a folder window while filtering), the background lambda or its inner `QueuedConnection` callback would dereference a dangling pointer.
+    - *Fix*: Applied the established `alive = m_aliveToken` + `QPointer<ImageModel> safeThis(this)` pattern consistently. Rule: **every async lambda that touches `this` must guard with both the alive token and a `QPointer`.**
+
+21. **Normalize Cache Keys Before Insert (L8):**
+    - *Discovery*: On L2 disk cache hits, the decoded image was inserted into L1 RAM cache using the original `id` parameter (which may still contain `file:///` prefix or forward slashes). The key inserted by `insertCachedImage(id, ...)` differed from the key `normalizeRamKey()` would produce on lookup — creating a second, never-matchable entry in `QCache`, causing every L2 hit to also become an L1 miss.
+    - *Fix*: Changed to `insertCachedImage(path, ...)` where `path` is the fully-normalized native-separator form. Rule: **always use the fully-normalized path when writing to a cache; raw QML-side paths must never be used as cache keys.**
+
+22. **QML Type Detection Must Delegate to C++ (Q1/D3):**
+    - *Discovery*: `PhotoViewer.qml` had a `isVideoFile()` function with a hardcoded extension list that diverged from `DesktopHelper::staticGetFileType()`. It was missing `.vob`, `.wmv`, `.ogg`, `.mp3`, and other audio/video formats. Files with these extensions showed the image viewer instead of the media player.
+    - *Fix*: Changed `isVideoFile()` to call `desktopHelper.getFileType(path) === 2` (the authoritative C++ source), with the extension list as a fallback only when `desktopHelper` is unavailable. Rule: **never duplicate file-type or format logic in QML — always delegate to the C++ helper.**
+
 ---
 
 ## 📋 Comprehensive Audit Checklist
@@ -238,7 +286,11 @@ Key systemic bugs and low-level concurrency failures diagnosed and resolved by A
 | **RAII** | C-Libraries (FFmpeg, LibRaw, COM) | Encapsulate contexts in stack-allocated cleanup structs (`FFmpegCleanup`, `RawCleanup`). |
 | **Modular Design** | Decoupled Infrastructure | Keep `TaskScheduler`, `AsyncImageProvider`, and `FileCacheManager` free of UI/model dependencies. |
 | **Library Re-Use** | 3rd-Party API Wrappers | Centralize FFmpeg in `VideoThumbnailer` and OS functions in `DesktopHelper`. |
-| **Thread Safety** | Concurrency & Worker Queues | Rate-limit heavy tasks via Semaphores; iterate fixed priority arrays under mutex lock when dequeuing. |
+| **Thread Safety** | Concurrency & Worker Queues | Rate-limit heavy tasks via Semaphores; iterate fixed priority arrays under mutex lock when dequeuing. Signals to QML always via `QueuedConnection`. |
 | **Mmap DB & Caching** | Persistent Storage & Zero-Copy | Auto-expanding append-only mmap log (v3). Zero ring-buffer evictions. Background filesystem reconciliation and compaction. |
 | **Codec Independence**| Qt 6 Multimedia | Set `qputenv("QT_MEDIA_BACKEND", "ffmpeg")` at startup. |
 | **Defensive Memory** | RAM Caching & Decoders | Return `img->copy()` from cache lookups. Validate `dstW/dstH` and wrap OS Shell calls in `try/catch`. |
+| **No Static Instance State** | Multi-Window Safety | Never use `static` local variables for per-instance data. Use member variables or `QPointer` guards. |
+| **Parallel List Sync** | Model Mutations | Any delete/add to a filtered list must also mutate the master (`m_allItems`) list. |
+| **Async Lifetime Guards** | Thread Safety | All `QThreadPool`/`TaskScheduler` lambdas that touch `this` must capture `alive` + `QPointer<T> safeThis`. |
+| **QML Delegation** | Type Detection | QML must never duplicate C++ logic. Use `desktopHelper.getFileType()` not hardcoded extension lists. |

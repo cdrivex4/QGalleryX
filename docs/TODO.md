@@ -1,5 +1,59 @@
 # QGalleryX / Antigravity — Session Log
 
+## Session Date: 2026-09-03
+
+## Status: Forensic Code Audit — 7 Critical/High Bugs Fixed ✅
+
+---
+
+### What Was Implemented This Session (2026-09-03)
+
+#### 1. Live Directory Watcher Fix (L1)
+- **File**: `src_legacy/ImageModel.cpp`
+- **Problem**: `m_currentPath` was never assigned → `onDirectoryChanged()` always returned early → live watcher completely non-functional.
+- **Fix**: Assigned `m_currentPath = cleanPath` after normalization in `scanDirectory()`.
+
+#### 2. Worker Thread Signal Emit Fix (R1)
+- **File**: `src_legacy/ImageModel.cpp` — Mode 2 crawler task
+- **Problem**: `emit crawlerProgressChanged()` directly from `TaskScheduler` CPU worker thread — undefined behaviour with QML bindings.
+- **Fix**: Wrapped in `QMetaObject::invokeMethod(..., Qt::QueuedConnection)` with `alive` token guard.
+
+#### 3. deleteSelected() m_allItems Sync Fix (C4)
+- **File**: `src_legacy/ImageModel.cpp`
+- **Problem**: `deleteSelected()` removed from `m_images` but not `m_allItems`. Deleted items reappeared after any filter change.
+- **Fix**: Added `QSet<QString>` of deleted paths, removes from both lists.
+
+#### 4. Static Debounce Timer Multi-Window Crash Fix (C1)
+- **Files**: `src_legacy/ImageModel.cpp`, `src_legacy/ImageModel.h`
+- **Problem**: `static QTimer* debounceTimer` shared across all instances → multi-window use-after-free.
+- **Fix**: Replaced with `QTimer m_debounceTimer` member, initialized as `setSingleShot(true)` in constructor.
+
+#### 5. setFilterQuery Lambda Lifetime Fix (C2)
+- **File**: `src_legacy/ImageModel.cpp`
+- **Problem**: `QThreadPool` lambda captured raw `this` → use-after-free if model destroyed before lambda runs.
+- **Fix**: Added `alive = m_aliveToken` + `QPointer<ImageModel> safeThis(this)` guards.
+
+#### 6. L2 Cache Key Normalization Fix (L8)
+- **File**: `src_legacy/AsyncImageProvider.cpp`
+- **Problem**: `insertCachedImage(id, ...)` used non-normalized `id` → every L2 hit also became an L1 miss.
+- **Fix**: Changed to `insertCachedImage(path, ...)` using normalized native-separator path.
+
+#### 7. QML isVideoFile() + Null-Crash Fix (Q1/D3, Q3)
+- **File**: `resources/qml_legacy/PhotoViewer.qml`
+- **Problems**: (a) `isVideoFile()` missing many video formats vs C++ DesktopHelper, (b) `currentItem.children[0].zoom` without null-check permanently disabled swiping.
+- **Fixes**: (a) Delegate to `desktopHelper.getFileType(path) === 2`, (b) Added `children.length > 0` guard.
+
+---
+
+## Open Issues from Audit (Medium priority — not yet fixed)
+
+- **P1/P3**: `QSettings` constructed on every `processPrecacheTick()` tick (10 Hz) + `GroupedProxyModel::rebuildIndex()` O(N) on every `rowsInserted`.
+- **L6**: `GroupedProxyModel::rebuildIndex()` should debounce streaming `rowsInserted` batch inserts.
+- **A1/A2**: `scanDirectory()` (583 lines) and `processImageTask()` (408 lines) should be decomposed.
+- **R2**: `crawlerProgress()` / `crawlerTotal()` read `m_crawlWorkQueue.size()` without mutex.
+
+---
+
 ## Session Date: 2026-08-25 / 2026-08-26
 
 ## Status: Grid Stability, Video Hardware Acceleration, SIMD BC1 Engine & UI Optimization ✅

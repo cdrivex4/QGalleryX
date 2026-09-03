@@ -45,6 +45,8 @@ ImageModel::ImageModel(QObject *parent) : QAbstractListModel(parent) {
   connect(m_precacheTimer, &QTimer::timeout, this, &ImageModel::processPrecacheTick);
   m_precacheTimer->start(100);
 
+  m_debounceTimer.setSingleShot(true); // BUG FIX C1: per-instance debounce for onDirectoryChanged
+
   connect(&m_folderWatcher, &QFileSystemWatcher::directoryChanged, this, &ImageModel::onDirectoryChanged);
 
   // Pass 'this' as context object so Qt automatically unregisters connection on destruction
@@ -234,6 +236,11 @@ void ImageModel::scanDirectory(const QString &path) {
   } else if (cleanPath.length() > 3 && cleanPath.endsWith('\\')) {
     cleanPath.chop(1);
   }
+
+  // BUG FIX L1: Assign m_currentPath so onDirectoryChanged() can trigger re-scans.
+  // Without this, the live QFileSystemWatcher fires but the handler immediately returns
+  // because m_currentPath.isEmpty() was always true.
+  m_currentPath = cleanPath;
 
   // --- STEP 1: INSTANT CACHED LOAD FROM FOLDER DB (0ms UI Display) ---
   QString cacheDir;
@@ -865,16 +872,23 @@ void ImageModel::setFilterQuery(const QString &query) {
     }
 
     uint64_t curGen = ++m_filterGeneration;
-    QThreadPool::globalInstance()->start([this, items = m_allItems, query = m_filterQuery, curGen]() {
-      if (m_filterGeneration.load() != curGen) return;
+    // BUG FIX C2: Capture alive token + QPointer to guard against model destruction
+    // before the threadpool task or inner QueuedConnection callback execute.
+    auto alive = m_aliveToken;
+    QPointer<ImageModel> safeThis(this);
+    QThreadPool::globalInstance()->start([alive, safeThis, items = m_allItems, query = m_filterQuery, curGen]() {
+      if (!alive->load() || !safeThis) return;
+      if (safeThis->m_filterGeneration.load() != curGen) return;
       QList<ImageInfo> filtered = filterImageList(items, query);
-      if (m_filterGeneration.load() != curGen) return;
+      if (!alive->load() || !safeThis) return;
+      if (safeThis->m_filterGeneration.load() != curGen) return;
 
-      QMetaObject::invokeMethod(this, [this, filtered = std::move(filtered), curGen]() mutable {
-        if (m_filterGeneration.load() != curGen) return;
-        beginResetModel();
-        m_images = std::move(filtered);
-        endResetModel();
+      QMetaObject::invokeMethod(safeThis, [alive, safeThis, filtered = std::move(filtered), curGen]() mutable {
+        if (!alive->load() || !safeThis) return;
+        if (safeThis->m_filterGeneration.load() != curGen) return;
+        safeThis->beginResetModel();
+        safeThis->m_images = std::move(filtered);
+        safeThis->endResetModel();
       }, Qt::QueuedConnection);
     });
   }
@@ -968,13 +982,29 @@ void ImageModel::toggleSelection(int index) {
 }
 
 void ImageModel::deleteSelected() {
+  // BUG FIX C4: Must remove from BOTH m_images AND m_allItems.
+  // Previously only m_images was updated, so deleted items reappeared after
+  // any subsequent applyFilter() or filter query change.
+  QSet<QString> deletedPaths;
+
   for (int i = m_images.count() - 1; i >= 0; --i) {
     if (m_images[i].isSelected) {
+      deletedPaths.insert(m_images[i].filePath);
       beginRemoveRows(QModelIndex(), i, i);
       m_images.removeAt(i);
       endRemoveRows();
     }
   }
+
+  // Remove matching entries from m_allItems too (the unfiltered master list)
+  if (!deletedPaths.isEmpty()) {
+    for (int i = m_allItems.count() - 1; i >= 0; --i) {
+      if (deletedPaths.contains(m_allItems[i].filePath)) {
+        m_allItems.removeAt(i);
+      }
+    }
+  }
+
   emit selectedCountChanged();
 }
 
@@ -1204,13 +1234,18 @@ void ImageModel::processPrecacheTick() {
       });
       m_crawlInflight.fetch_add(1, std::memory_order_relaxed);
       QSize sz = thumbSize;
-      bool added = TaskScheduler::instance().addTask([this, path, sz, currentGen, inflightToken]() {
-        if (this->m_scanGeneration.load() != currentGen) {
+      auto alive = m_aliveToken;
+      bool added = TaskScheduler::instance().addTask([this, alive, path, sz, currentGen, inflightToken]() {
+        if (!alive->load() || this->m_scanGeneration.load() != currentGen) {
           return;
         }
         AsyncImageProvider::crawlDecodeToL2(path, sz);
         this->m_crawledCount.fetch_add(1, std::memory_order_relaxed);
-        emit this->crawlerProgressChanged();
+        // BUG FIX R1: emit must happen on the GUI thread. Direct emit from a worker
+        // thread is undefined behaviour — it can corrupt QML property bindings.
+        QMetaObject::invokeMethod(this, [this, alive]() {
+          if (alive->load()) emit this->crawlerProgressChanged();
+        }, Qt::QueuedConnection);
       }, TaskScheduler::CPU_BOUND, TaskScheduler::Low);
 
       if (!added) {
@@ -1251,20 +1286,17 @@ void ImageModel::onDirectoryChanged(const QString &path) {
   Q_UNUSED(path);
   if (m_isLoading || m_currentPath.isEmpty()) return;
 
-  // Single-shot debounced scan to prevent recursive re-scans during batch file drops
-  static QTimer *debounceTimer = nullptr;
-  if (!debounceTimer) {
-    debounceTimer = new QTimer(this);
-    debounceTimer->setSingleShot(true);
-  }
-  debounceTimer->disconnect();
-  connect(debounceTimer, &QTimer::timeout, this, [this]() {
+  // BUG FIX C1: Was using 'static QTimer*' shared across ALL ImageModel instances.
+  // In multi-window mode this caused the second window to fire callbacks into the
+  // first window's destroyed ImageModel (use-after-free). Now uses per-instance member.
+  m_debounceTimer.disconnect();
+  connect(&m_debounceTimer, &QTimer::timeout, this, [this]() {
     if (!m_isLoading && !m_currentPath.isEmpty()) {
       qDebug() << "[DifferentialScan] Debounced live directory update for:" << m_currentPath;
       scanDirectory(m_currentPath);
     }
   });
-  debounceTimer->start(500); // 500ms debounce
+  m_debounceTimer.start(500); // 500ms debounce
 }
 
 void ImageModel::reCrawl() {

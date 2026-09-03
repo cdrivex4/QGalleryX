@@ -187,8 +187,10 @@ private:
   QHash<quint64, QString> m_idToPath; // For AsyncImageProvider
   int m_loadingResolution = 200;
   QTimer* m_precacheTimer;
-  QTimer* m_metadataTimer;
-  
+  // BUG FIX C1: Member timer (replaces 'static QTimer*' in onDirectoryChanged).
+  // Per-instance so multi-window mode cannot fire callbacks into a destroyed model.
+  QTimer m_debounceTimer;
+
   int m_visibleStartIndex = 0;
   int m_visibleEndIndex = 0;
   
