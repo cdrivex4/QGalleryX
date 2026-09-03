@@ -443,7 +443,22 @@ Item {
                 
                 MediaPlayer {
                     id: player
-                    source: (root.visible && isVideo && isCurrent) ? (filePath.startsWith("file:") ? filePath : ("file:///" + filePath.replace(/\\/g, "/"))) : ""
+                    // BUG FIX: Paths with spaces (e.g. "Random file 4719182.mp4") were not
+                    // percent-encoded. MediaPlayer requires a proper file:/// URL with %20 for
+                    // spaces. FFmpeg thumbnailing uses raw paths so it works fine, but WMF/
+                    // Qt MediaPlayer silently fails on un-encoded spaces in the URL.
+                    // encodeURIComponent encodes everything; we then restore the drive colon
+                    // and slashes so it forms a valid file URL.
+                    source: (root.visible && isVideo && isCurrent && filePath) ? (function() {
+                        var p = filePath.replace(/\\/g, "/");
+                        if (p.startsWith("file:///")) return p;
+                        // Re-encode each path segment (preserves : and / separators)
+                        var encoded = p.split("/").map(function(seg, idx) {
+                            // First segment is drive letter like "C:" — don't encode the colon
+                            return idx === 0 ? seg : encodeURIComponent(seg);
+                        }).join("/");
+                        return "file:///" + encoded;
+                    })() : ""
                     videoOutput: videoOutput
                     audioOutput: AudioOutput {
                         id: audioOut
