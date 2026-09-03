@@ -443,22 +443,14 @@ Item {
                 
                 MediaPlayer {
                     id: player
-                    // BUG FIX: Paths with spaces (e.g. "Random file 4719182.mp4") were not
-                    // percent-encoded. MediaPlayer requires a proper file:/// URL with %20 for
-                    // spaces. FFmpeg thumbnailing uses raw paths so it works fine, but WMF/
-                    // Qt MediaPlayer silently fails on un-encoded spaces in the URL.
-                    // encodeURIComponent encodes everything; we then restore the drive colon
-                    // and slashes so it forms a valid file URL.
-                    source: (root.visible && isVideo && isCurrent && filePath) ? (function() {
-                        var p = filePath.replace(/\\/g, "/");
-                        if (p.startsWith("file:///")) return p;
-                        // Re-encode each path segment (preserves : and / separators)
-                        var encoded = p.split("/").map(function(seg, idx) {
-                            // First segment is drive letter like "C:" — don't encode the colon
-                            return idx === 0 ? seg : encodeURIComponent(seg);
-                        }).join("/");
-                        return "file:///" + encoded;
-                    })() : ""
+                    // Path-to-URL normalization goes through the C++ authoritative converter
+                    // (DesktopHelper::toMediaUrl → QUrl::fromLocalFile) — the same pipeline
+                    // used by the rest of the app. This correctly handles spaces, #, &, Unicode,
+                    // UNC paths etc. Previously used ad-hoc QML string manipulation which
+                    // missed many edge cases.
+                    source: (root.visible && isVideo && isCurrent && filePath)
+                            ? desktopHelper.toMediaUrl(filePath)
+                            : ""
                     videoOutput: videoOutput
                     audioOutput: AudioOutput {
                         id: audioOut

@@ -143,9 +143,13 @@ int main(int argc, char *argv[]) {
   // Set QML's internal Image Cache to 256MB to balance fast navigation with minimal DDR4 bandwidth pressure on iGPUs
   qputenv("QML_IMAGE_CACHE_SIZE", "256");
 
-  // Allow Qt Multimedia to use Direct3D 11 hardware video decoding on Intel QuickSync / NVIDIA NVDEC
+  // Use Qt Multimedia's FFmpeg backend — supports far more codecs than Windows
+  // Media Foundation (WMF). Hardware acceleration (D3D11VA / DXVA2) is
+  // auto-detected by Qt 6's FFmpeg backend — do NOT force a specific HW device
+  // type via QT_FFMPEG_DECODING_HW_DEVICE_TYPES. Forcing "d3d11va" causes FFmpeg
+  // to spam error messages on every frame for codecs D3D11VA doesn't support
+  // (old AVI, DivX, Xvid, MJPEG, etc.) even though it falls back to software.
   qputenv("QT_MEDIA_BACKEND", "ffmpeg");
-  qputenv("QT_FFMPEG_DECODING_HW_DEVICE_TYPES", "d3d11va");
 
   // Create QApplication BEFORE initializing managers that access arguments / event loops
   QApplication app(argc, argv);

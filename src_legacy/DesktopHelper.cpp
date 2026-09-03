@@ -19,6 +19,29 @@
 
 DesktopHelper::DesktopHelper(QObject *parent) : QObject(parent) {}
 
+QString DesktopHelper::toMediaUrl(const QString &filePath) {
+  if (filePath.isEmpty()) return QString();
+
+  // If it's already a properly-formed URL, return as-is
+  if (filePath.startsWith("file:///") || filePath.startsWith("http://") ||
+      filePath.startsWith("https://") || filePath.startsWith("qrc:")) {
+    return filePath;
+  }
+
+  // Normalize path separators and strip leading slash before drive letter
+  // e.g. /C:/Users → C:/Users (QUrl artefact from some QML drop events)
+  QString normalized = filePath;
+  normalized.replace('\\', '/');
+  if (normalized.startsWith("/") && normalized.length() > 2 && normalized[2] == ':') {
+    normalized = normalized.mid(1);
+  }
+
+  // QUrl::fromLocalFile() is the authoritative Qt encoder — correctly handles
+  // spaces → %20, # → %23, & → %26, Unicode, UNC paths (\\server\share),
+  // and all other characters that would break a raw file:/// string.
+  return QUrl::fromLocalFile(normalized).toString();
+}
+
 void DesktopHelper::openInExplorer(const QString &path) {
   if (path.isEmpty())
     return;

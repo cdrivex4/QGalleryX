@@ -50,6 +50,11 @@ public:
   static int staticGetFormatEngineOverride(const QString &pathOrExt);
   static void staticSetFormatEngineOverride(const QString &ext, int engine);
 
+  // Path-to-URL normalization for Qt MediaPlayer.source
+  // Uses QUrl::fromLocalFile() which correctly percent-encodes spaces, #, &,
+  // Unicode etc. — the single authoritative converter for all video URLs in QML.
+  Q_INVOKABLE static QString toMediaUrl(const QString &filePath);
+
 private:
   static class QQmlEngine *s_engine;
 };
