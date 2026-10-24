@@ -116,17 +116,6 @@ private slots:
     fprintf(stderr, "[VERIFY] HEVC/H.265 Decode: SUCCESS (%dx%d)\n", frame.width(), frame.height());
   }
 
-  void testUserAv1File() {
-    QString path = "C:/Users/curtis/Desktop/numpsy/files/jackerman/Random file.mp4";
-    if (QFile::exists(path)) {
-      VideoThumbnailer thumbnailer;
-      QImage frame = thumbnailer.extractFrame(path, 0, QSize(256, 256));
-      QVERIFY(!frame.isNull());
-      QVERIFY(frame.width() > 0);
-      QVERIFY(frame.height() > 0);
-      fprintf(stderr, "[VERIFY] User File (jackerman/Random file.mp4): SUCCESS (%dx%d)\n", frame.width(), frame.height());
-    }
-  }
 };
 
 QTEST_MAIN(TestImageModel)
